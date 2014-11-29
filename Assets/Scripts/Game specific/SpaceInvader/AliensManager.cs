@@ -3,6 +3,13 @@ using System.Collections;
 
 public class AliensManager : MonoBehaviour {
 
+
+    [SerializeField]
+    Player player;
+
+    [SerializeField]
+    GameObject ball;
+
     [SerializeField]
     private GameObject alien1;
 
@@ -33,6 +40,8 @@ public class AliensManager : MonoBehaviour {
     private int direction;
     private bool changeDirection;
 
+    private bool breakOutMode;
+
     private float lastMoveTime;
 
 	// Use this for initialization
@@ -45,6 +54,7 @@ public class AliensManager : MonoBehaviour {
 
         direction = 1;
         changeDirection = false;
+        breakOutMode = false;
 
         dummyMin.transform.position = new Vector3(startX - spaceBetweenAliens, 0, startZ);
         dummyMax.transform.position = new Vector3(startX + spaceBetweenAliens * (aliensPerLine + 1), 0, startZ);
@@ -93,11 +103,21 @@ public class AliensManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Time.time - lastMoveTime > coolDown)
+        if (!breakOutMode && Time.time - lastMoveTime > coolDown)
         {
-            moveAliens();
+            //moveAliens();
             fire();
             lastMoveTime = Time.time;
         }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+            switchToBreakout();
 	}
+
+    void switchToBreakout()
+    {
+        breakOutMode = true;
+        ball.gameObject.SetActive(true);
+        ball.GetComponent<Ball>().switchToBreakOut();
+    }
 }

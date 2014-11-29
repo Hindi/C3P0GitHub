@@ -26,7 +26,7 @@ public class Invader : MonoBehaviour {
         if (destroying && Time.time - startTime > cooldown)
         {
             Destroy(animated);
-            Destroy(this);
+            Destroy(gameObject);
         }
 	}
 
@@ -35,7 +35,7 @@ public class Invader : MonoBehaviour {
         destroying = true;
         animated.animation.Play();
         startTime = Time.time;
-
+        collider.enabled = false;
         foreach (GameObject e in eyes)
             Destroy(e);
     }

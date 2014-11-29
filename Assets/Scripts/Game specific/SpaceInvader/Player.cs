@@ -71,4 +71,19 @@ public class Player : MonoBehaviour {
 
         }
 	}
+
+    float calcBouncingForce(float delta)
+    {
+        return - Mathf.Sign(delta) * Mathf.Pow(delta / 3, 2);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            float delta = transform.position.x - collision.transform.position.x;
+            collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
+        }
+    }
+
 }
