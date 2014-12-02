@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject projectile_;
@@ -12,13 +13,20 @@ public class Player : MonoBehaviour {
     [SerializeField]
     int projectileMaxDistance_;
 
+    [SerializeField]
+    float changeSizeCooldown;
+    float lastTimeChangeSize;
+    float goalScale;
+
     private int currentSpeed;
 
-	// Use this for initialization
+    // Use this for initialization
     void Start()
     {
+        lastTimeChangeSize = Time.time;
+        goalScale = transform.localScale.x;
         projectile_.SetActive(false);
-	}
+    }
 
     public void setDirection(bool right)
     {
@@ -58,9 +66,10 @@ public class Player : MonoBehaviour {
         projectile_.transform.position = transform.position;
         projectile_.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         move();
         if (Input.GetKey(KeyCode.Space))
             fire();
@@ -68,22 +77,12 @@ public class Player : MonoBehaviour {
         {
             if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)
                 recallProjectile();
-
         }
-	}
-
-    float calcBouncingForce(float delta)
-    {
-        return - Mathf.Sign(delta) * Mathf.Pow(delta / 3, 2);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ball")
+        if (Time.time - lastTimeChangeSize > changeSizeCooldown)
         {
-            float delta = transform.position.x - collision.transform.position.x;
-            collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
+            goalScale = Random.Range(2, 14);
+            lastTimeChangeSize = Time.time;
         }
+        transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
-
 }
