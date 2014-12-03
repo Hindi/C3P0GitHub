@@ -85,4 +85,9 @@ public class Player : MonoBehaviour
         }
         transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
+
+    public void hit()
+    {
+        Debug.Log("hit");
+    }
 }
