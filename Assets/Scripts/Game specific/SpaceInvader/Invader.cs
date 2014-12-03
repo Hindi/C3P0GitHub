@@ -23,9 +23,12 @@ public class Invader : MonoBehaviour {
     private float fireCooldown;
     private float lastFireTime;
 
+    bool stopFire;
+
 	// Use this for initialization
 	void Start () {
         destroying = false;
+        stopFire = true;
         projectile_.SetActive(false);
         projectile_.transform.Rotate(new Vector3(1, 0, 0), 90);
 	}
@@ -38,7 +41,7 @@ public class Invader : MonoBehaviour {
 
     bool canFire()
     {
-        return (Time.time - lastFireTime > fireCooldown);
+        return (Time.time - lastFireTime > fireCooldown && !stopFire);
     }
 	
 	// Update is called once per frame

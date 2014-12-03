@@ -80,10 +80,24 @@ public class Player : MonoBehaviour
         }
         if (Time.time - lastTimeChangeSize > changeSizeCooldown)
         {
-            goalScale = Random.Range(2, 14);
+            goalScale = Random.Range(4, 14);
             lastTimeChangeSize = Time.time;
         }
         transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
+    }
+
+    float calcBouncingForce(float delta)
+    {
+        return - Mathf.Sign(delta) * Mathf.Pow(delta / 3, 2);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            float delta = transform.position.x - collision.transform.position.x;
+            collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
+        }
     }
 
     public void hit()
