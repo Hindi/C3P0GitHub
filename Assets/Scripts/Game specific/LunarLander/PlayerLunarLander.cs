@@ -95,12 +95,12 @@ public class PlayerLunarLander : MonoBehaviour {
                 decreaseReactorState();
             if (Input.GetKey(KeyCode.LeftArrow) && transform.rotation.z > -0.7f)
             {
-                transform.Rotate(new Vector3(0, 0, -rotationSpeed) * Time.deltaTime);
+                transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
                 useFuel();
             }
             if (Input.GetKey(KeyCode.RightArrow) && transform.rotation.z < 0.7f )
             {
-                transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
+                transform.Rotate(new Vector3(0, 0, -rotationSpeed) * Time.deltaTime);
                 useFuel();
             }
         }

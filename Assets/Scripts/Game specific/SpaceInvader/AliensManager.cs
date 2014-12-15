@@ -81,7 +81,6 @@ public class AliensManager : MonoBehaviour {
     {
         Vector3 deltaPos = new Vector3(direction * spaceBetweenAliens / 3, 0, 0);
         coolDown = 0.8f + (float)transform.childCount / 50;
-
         if(changeDirection)
         {
             direction = -direction;
@@ -102,10 +101,11 @@ public class AliensManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (!breakOutMode && Time.time - lastMoveTime > coolDown)
         {
-            //moveAliens();
+            moveAliens();
             fire();
             lastMoveTime = Time.time;
         }
