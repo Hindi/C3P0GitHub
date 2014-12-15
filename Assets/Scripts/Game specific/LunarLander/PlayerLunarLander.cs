@@ -18,11 +18,17 @@ public class PlayerLunarLander : MonoBehaviour {
     GameObject propulsor;
 
     [SerializeField]
+    GUIStyle guiStyle;
+
+    [SerializeField]
     int fuel;
     float consumCooldown;
     float lastConsumTime;
 
     int reactorState;
+
+    const int baseWidth = 1024;
+    const int baseFontSize = 18;
 
     private Rect labelRectHorizontal;
     private Rect labelRectVertical;
@@ -31,12 +37,15 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private Vector3 currentVelocity;
 
+    private int fontSize;
+
 	// Use this for initialization
 	void Start () {
-        labelRectHorizontal = new Rect(Screen.width - 200, 20, 200, 20);
-        labelRectVertical = new Rect(Screen.width - 200,40, 200, 20);
-        labelRectAltitude = new Rect(Screen.width - 200, 60, 200, 20);
-        labelRectFuel = new Rect(10, 20, 200, 20);
+        labelRectHorizontal = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25, Screen.width / 4, Screen.height / 20);
+        labelRectVertical = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25 * 2, Screen.width / 4, Screen.height / 20);
+        labelRectAltitude = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25 * 3, Screen.width / 4, Screen.height / 20);
+        labelRectFuel = new Rect(5, Screen.height / 25, Screen.width / 4, Screen.height / 20);
+        fontSize = 1;
         consumCooldown = 0.1f;
         lastConsumTime = Time.time;
         reactorState = 0;
@@ -45,11 +54,11 @@ public class PlayerLunarLander : MonoBehaviour {
 
     void start()
     {
-        transform.position = new Vector3(-10, 6, 5);
-        rigidbody.isKinematic = true;
-        rigidbody.isKinematic = false;
-        Physics.gravity = new Vector3(-horizontalForce, -gravityForce, 0);
-        rigidbody.AddForce(new Vector3(80000, -100, 0));
+        transform.position = new Vector3(-10, 6, 0);
+        rigidbody2D.isKinematic = true;
+        rigidbody2D.isKinematic = false;
+        Physics2D.gravity = new Vector3(-horizontalForce, -gravityForce, 0);
+        rigidbody2D.AddForce(new Vector3(80000, -100, 0));
     }
 
     void useFuel()
@@ -81,12 +90,12 @@ public class PlayerLunarLander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        guiStyle.fontSize = Mathf.RoundToInt(baseFontSize * Screen.width / baseWidth);
         if (fuel > 0)
         {
             if(reactorState > 0 )
             {
-                rigidbody.AddRelativeForce(new Vector3(0, propulsorForce * reactorState, 0));
+                rigidbody2D.AddRelativeForce(new Vector3(0, propulsorForce * reactorState, 0));
                 useFuel();
             }
             if(Input.GetKeyDown(KeyCode.UpArrow))
@@ -111,7 +120,7 @@ public class PlayerLunarLander : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Platform")
         {
@@ -125,11 +134,11 @@ public class PlayerLunarLander : MonoBehaviour {
 
     void OnGUI()
     {
-        currentVelocity = rigidbody.velocity * 10;
-        GUI.Label(labelRectHorizontal, "Horizontal Speed " + currentVelocity.x.ToString("F2"));
-        GUI.Label(labelRectVertical, "Vertical Speed " + currentVelocity.y.ToString("F2"));
-        GUI.Label(labelRectAltitude, "Altitude " + (transform.position.y * 10).ToString("F2"));
-        GUI.Label(labelRectFuel, "Fuel " + fuel.ToString());
+        currentVelocity = rigidbody2D.velocity * 10;
+        GUI.Label(labelRectHorizontal, "Horizontal Speed " + currentVelocity.x.ToString("F2"), guiStyle);
+        GUI.Label(labelRectVertical, "Vertical Speed " + currentVelocity.y.ToString("F2"), guiStyle);
+        GUI.Label(labelRectAltitude, "Altitude " + (transform.position.y * 10).ToString("F2"), guiStyle);
+        GUI.Label(labelRectFuel, "Fuel " + fuel.ToString(), guiStyle);
     }
 
 }
