@@ -18,6 +18,9 @@ public class WallScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        alienManager.reverseDirection();
+		if (other.tag == "Enemy") 
+		{
+			alienManager.reverseDirection ();
+		}
     }
 }

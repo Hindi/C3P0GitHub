@@ -25,8 +25,20 @@ public class EnnemyProjectile : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            InvaderScript_.recallProjectile();
             collider.gameObject.GetComponent<Player>().hit();
-        }
+            recall();
+		}
+		else if (collider.gameObject.tag == "Wall")
+		{
+            recall();
+		}
+    }
+
+    void recall()
+    {
+        if (InvaderScript_)
+            InvaderScript_.recallProjectile();
+        else
+            Destroy(gameObject);
     }
 }

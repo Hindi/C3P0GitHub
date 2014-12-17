@@ -20,13 +20,18 @@ public class Player : MonoBehaviour
 
     private int currentSpeed;
 
+	[SerializeField]
+	float fireCooldown;
+	float lastShotTime;
+
     // Use this for initialization
     void Start()
-    {
+	{
         lastTimeChangeSize = Time.time;
         goalScale = transform.localScale.x;
         projectile_.SetActive(false);
-    }
+		lastShotTime = Time.time;
+	}
 
     public void setDirection(bool right)
     {
@@ -41,14 +46,25 @@ public class Player : MonoBehaviour
         currentSpeed = 0;
     }
 
-    private void fire()
+	private bool canFire()
+	{
+		return (Time.time - lastShotTime > fireCooldown && !projectile_.activeSelf);
+	}
+
+    public void fire()
     {
-        if (!projectile_.activeSelf)
+		if (canFire ())
         {
+			lastShotTime = Time.time;
             projectile_.SetActive(true);
             projectile_.transform.position = transform.position;
         }
     }
+
+	public void hit()
+	{
+		EventManager<bool>.Raise (EnumEvent.GAMEOVER, false);
+	}
 
     void move()
     {
@@ -70,20 +86,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move();
-        if (Input.GetKey(KeyCode.Space))
-            fire();
-        if (projectile_.activeSelf)
-        {
-            if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)
-                recallProjectile();
-        }
-        if (Time.time - lastTimeChangeSize > changeSizeCooldown)
-        {
-            goalScale = Random.Range(4, 14);
-            lastTimeChangeSize = Time.time;
-        }
-        transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
+		move();
+		if (projectile_.activeSelf)
+		{
+			if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)
+				recallProjectile();
+		}
+		if (Time.time - lastTimeChangeSize > changeSizeCooldown)
+		{
+			goalScale = Random.Range(4, 14);
+			lastTimeChangeSize = Time.time;
+		}
+		transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
 
     float calcBouncingForce(float delta)
@@ -98,10 +112,5 @@ public class Player : MonoBehaviour
             float delta = transform.position.x - collision.transform.position.x;
             collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
         }
-    }
-
-    public void hit()
-    {
-        Debug.Log("hit");
     }
 }

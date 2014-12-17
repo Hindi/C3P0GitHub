@@ -28,6 +28,11 @@ public abstract class State {
 
     }
 
+	public virtual void onLevelWasLoaded(int lvl)
+	{
+
+	}
+
 	// Use this for initialization
     public State(StateManager stateManager)
     {

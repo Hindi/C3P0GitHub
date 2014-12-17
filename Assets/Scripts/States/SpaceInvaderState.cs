@@ -2,23 +2,31 @@
 using System.Collections;
 
 
-class SpaceInvaderState : State
+class SpaceInvaderState : GameState
 {
     [SerializeField]
     private GameObject player_;
     private Player playerScript_;
+	private bool loaded;
 
     public SpaceInvaderState(StateManager stateManager)
         : base(stateManager)
     {
     }
 
+	public override void onLevelWasLoaded(int lvl)
+	{
+		loaded = true;
+		player_ = GameObject.FindGameObjectWithTag("Player");
+		playerScript_ = player_.GetComponent<Player>();
+	}
+
     // Use this for initialization
     public override void start()
-    {
-        player_ = GameObject.FindGameObjectWithTag("Player");
-        playerScript_ = player_.GetComponent<Player>();
+	{
+
     }
+
 
     // Use this for state transition
     public override void end()
@@ -34,19 +42,16 @@ class SpaceInvaderState : State
 
     public override void noticeInput(KeyCode key)
     {
-        /* if (key == KeyCode.LeftArrow)
-             playerScript_.setDirection(false);
-         else if (key == KeyCode.RightArrow)
-             playerScript_.setDirection(true);
-         else
-             playerScript_.stop();*/
+       	if (loaded) 
+		{
+			if(key == KeyCode.Escape)
+				togglePauseGame ();
+			if (key == KeyCode.Space)
+				playerScript_.fire ();
+			if (key == KeyCode.Return)
+			{
 
-        if (key == KeyCode.Space)
-            Debug.Log("It's me, GAME");
-        if (key == KeyCode.Return)
-        {
-            EventManager<string>.Raise(EnumEvent.LOADLEVEL, "StudMenu");
-            stateManager_.changeState(StateEnum.MENU);
-        }
+			}
+		}
     }
 }

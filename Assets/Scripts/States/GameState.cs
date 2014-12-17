@@ -9,18 +9,44 @@ using System.Collections;
 public class GameState : State
 {
 
-    private GameObject cube_;
+	private bool paused;
+	private float timeScale = Time.timeScale;
 
     public GameState(StateManager stateManager) : base(stateManager)
     {
-        cube_ = GameObject.FindGameObjectWithTag("Cube");
+		paused = false;
+		EventManager<bool>.AddListener (EnumEvent.PAUSEGAME, onGamePaused);
     }
+
+	public void onGamePaused(bool b)
+	{
+		paused = b;
+		applyPause ();
+	}
 
     // Use this for initialization
     public override void start()
     {
-        Debug.Log("It's me, GAME");
+
     }
+
+	public virtual void pauseGame(bool b)
+	{
+		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, paused);
+	}
+
+	public virtual void togglePauseGame()
+	{
+		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, !paused);
+	}
+
+	private void applyPause()
+	{
+		if (paused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = timeScale;
+	}
 
     // Use this for state transition
     public override void end()
@@ -36,12 +62,6 @@ public class GameState : State
 
     public override void noticeInput(KeyCode key)
     {
-        if (key == KeyCode.Space)
-            cube_.renderer.material.color = Color.red;
-        if (key == KeyCode.Return)
-        {
-            EventManager<string>.Raise(EnumEvent.LOADLEVEL, "StudMenu");
-            stateManager_.changeState(StateEnum.MENU);
-        }
+
     }
 }

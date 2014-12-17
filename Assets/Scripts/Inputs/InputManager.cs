@@ -27,5 +27,8 @@ public class InputManager : MonoBehaviour {
             stateManager.noticeInput(KeyCode.Space);
         if (Input.GetKeyDown(KeyCode.Return))
             stateManager.noticeInput(KeyCode.Return);
+		if(Input.GetKeyDown(KeyCode.Escape))
+			stateManager.noticeInput(KeyCode.Escape);
+
 	}
 }

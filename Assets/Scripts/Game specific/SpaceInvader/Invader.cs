@@ -19,16 +19,10 @@ public class Invader : MonoBehaviour {
     [SerializeField]
     private GameObject[] eyes;
 
-    [SerializeField]
-    private float fireCooldown;
-    private float lastFireTime;
-
-    bool stopFire;
-
 	// Use this for initialization
 	void Start () {
+		projectile_.transform.parent = null;
         destroying = false;
-        stopFire = true;
         projectile_.SetActive(false);
         projectile_.transform.Rotate(new Vector3(1, 0, 0), 90);
 	}
@@ -38,28 +32,15 @@ public class Invader : MonoBehaviour {
         projectile_.transform.position = transform.position;
         projectile_.SetActive(false);
     }
-
-    bool canFire()
-    {
-        return (Time.time - lastFireTime > fireCooldown && !stopFire);
-    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector3.Distance(projectile_.transform.position, transform.position) > 50)
-        {
-            projectile_.transform.position = transform.position;
-            projectile_.SetActive(false);
-        }
-        if (canFire())
-        {
-            fire();
-            lastFireTime = Time.time;
-        }
+
         if (destroying && Time.time - startTime > cooldown)
         {
             Destroy(animated);
             Destroy(gameObject);
+			EventManager.Raise(EnumEvent.ENEMYDEATH);
         }
 	}
 
@@ -73,12 +54,17 @@ public class Invader : MonoBehaviour {
             Destroy(e);
     }
 
-    private void fire()
+    public void fire()
     {
-        if (!projectile_.activeSelf)
-        {
+		if (!projectile_.activeSelf && !destroying)
+		{
             projectile_.SetActive(true);
-            projectile_.transform.position = new Vector3(transform.position.x, transform.position.y+2.8f, transform.position.z);
+            projectile_.transform.position = new Vector3(transform.position.x, transform.position.y+2.5f, transform.position.z);
         }
+    }
+
+    public void destroy()
+    {
+        Destroy(projectile_);
     }
 }

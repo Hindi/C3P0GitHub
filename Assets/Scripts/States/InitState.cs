@@ -27,9 +27,9 @@ class InitState : State {
     public override void update()
     {
         if (Time.time - startTime > 0.1)
-        {
-            EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
-            stateManager_.changeState(StateEnum.SPACEINVADER);
+		{
+			stateManager_.changeState(StateEnum.SPACEINVADER);
+			EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
         }
 	}
 

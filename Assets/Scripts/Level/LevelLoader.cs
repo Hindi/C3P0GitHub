@@ -48,9 +48,12 @@ public class LevelLoader : MonoBehaviour {
     private IEnumerator loadLevelCoroutine(string levelName)
     {
         Application.LoadLevel(levelName);
-        while (!levelLoaded)
+		while(Application.isLoadingLevel)
+			yield return 1;
+
+        /*while (!levelLoaded)
             yield return 1;
-        levelLoaded = false;
+        levelLoaded = false;*/
     }
 
     private IEnumerator cloadLevel(string levelName, int levelPrefix)

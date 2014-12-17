@@ -20,11 +20,6 @@ public class AliensManager : MonoBehaviour {
     private GameObject alien3;
 
     [SerializeField]
-    private GameObject dummyMax;
-    [SerializeField]
-    private GameObject dummyMin;
-
-    [SerializeField]
     private float coolDown;
     [SerializeField]
     private int startX;
@@ -35,8 +30,10 @@ public class AliensManager : MonoBehaviour {
     [SerializeField]
     private int spaceBetweenLines;
     [SerializeField]
-    private int aliensPerLine;
-
+	private int aliensPerLine;
+	[SerializeField]
+	private float fireCooldown;
+	
     private int direction;
     private bool changeDirection;
 
@@ -44,22 +41,75 @@ public class AliensManager : MonoBehaviour {
 
     private float lastMoveTime;
 
+	private int deathCount;
+	private int alienCount;
+	private int victoryCount;
+	private float lastFireTime;
+	
 	// Use this for initialization
 	void Start () {
-        summonLine(0, alien1);
-        summonLine(spaceBetweenLines, alien1);
-        summonLine(spaceBetweenLines * 2, alien2);
-        summonLine(spaceBetweenLines * 3, alien2);
-        summonLine(spaceBetweenLines * 4, alien3);
+        start();
+        EventManager.AddListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.AddListener (EnumEvent.GAMEOVER, onGameOver);
+	}
 
+    void start()
+    {
+        spawnAliens();
+        alienCount = transform.childCount;
+        deathCount = 0;
+        victoryCount = 1;
         direction = 1;
         changeDirection = false;
         breakOutMode = false;
-
-        dummyMin.transform.position = new Vector3(startX - spaceBetweenAliens, 0, startZ);
-        dummyMax.transform.position = new Vector3(startX + spaceBetweenAliens * (aliensPerLine + 1), 0, startZ);
+        lastFireTime = Time.time;
 
         lastMoveTime = Time.time;
+    }
+
+    void end()
+    {
+        switchBackToNormal();
+        foreach (Transform o in transform)
+        {
+            o.GetComponent<Invader>().destroy();
+            Destroy(o.gameObject);
+        }
+    }
+	
+	bool canFire()
+	{
+		return (Time.time - lastFireTime > fireCooldown / victoryCount && !breakOutMode);
+	}
+	
+	private void spawnAliens()
+	{
+		summonLine(0, alien1);
+		summonLine(spaceBetweenLines, alien1);
+		summonLine(spaceBetweenLines * 2, alien2);
+		summonLine(spaceBetweenLines * 3, alien2);
+		summonLine(spaceBetweenLines * 4, alien3);
+	}
+	
+	public void onEnemyDeath()
+	{
+		deathCount++;
+		if (deathCount == alienCount)
+			EventManager<bool>.Raise (EnumEvent.GAMEOVER, true);
+	}
+
+    public void onRestartGame()
+    {
+        end();
+        start();
+    }
+	
+	public void onGameOver(bool b)
+	{
+		if (b == true)
+			spawnAliens ();
+		victoryCount++;
 	}
 
     private void summonLine(int z, GameObject prefab)
@@ -67,7 +117,7 @@ public class AliensManager : MonoBehaviour {
         GameObject temp;
         for (int i = 0; i <= aliensPerLine; ++i)
         {
-            temp = (GameObject)Instantiate(prefab, new Vector3(startX + i * spaceBetweenAliens, 0, startZ + z), Quaternion.identity);
+            temp = (GameObject)Instantiate(prefab, new Vector3(startX + i * spaceBetweenAliens, 1, startZ + z), Quaternion.identity);
             temp.transform.parent = transform;
         }
     }
@@ -97,27 +147,37 @@ public class AliensManager : MonoBehaviour {
 
     private void fire()
     {
-
+		if (canFire()) 
+		{
+			transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<Invader>().fire();
+			lastFireTime = Time.time;
+		}
     }
 	
 	// Update is called once per frame
     void Update()
-    {
-        if (!breakOutMode && Time.time - lastMoveTime > coolDown)
-        {
-            moveAliens();
-            fire();
-            lastMoveTime = Time.time;
-        }
+	{
+		fire ();
+		if (!breakOutMode && Time.time - lastMoveTime > coolDown) {
+				moveAliens ();
+				lastMoveTime = Time.time;
+		}
 
-        if (Input.GetKeyDown(KeyCode.Return))
-            switchToBreakout();
+		if (Input.GetKeyDown (KeyCode.Return))
+				switchToBreakout ();
 	}
-
-    void switchToBreakout()
+	
+	void switchToBreakout()
     {
         breakOutMode = true;
         ball.gameObject.SetActive(true);
         ball.GetComponent<Ball>().switchToBreakOut();
+    }
+
+    void switchBackToNormal()
+    {
+        breakOutMode = false;
+        ball.gameObject.SetActive(false);
+        ball.GetComponent<Ball>().switchToNormal();
     }
 }

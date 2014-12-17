@@ -31,6 +31,12 @@ public class StateManager : MonoBehaviour {
         currentState.update();
 	}
 
+	
+	public void OnLevelWasLoaded(int lvl)
+	{
+		currentState.onLevelWasLoaded (lvl);
+	}
+
     public void noticeInput(KeyCode key)
     {
         currentState.noticeInput(key);
