@@ -13,6 +13,7 @@ public class UI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EventManager<bool>.AddListener (EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
 	}
 
 	public void onGamePaused(bool b)
@@ -22,6 +23,11 @@ public class UI : MonoBehaviour {
         else
             closeMenus();
 	}
+
+    public void onChangeParam()
+    {
+        updateCurrentCanvas(paramMenu);
+    }
 
     public void switchToParam()
     {

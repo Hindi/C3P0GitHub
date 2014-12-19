@@ -29,20 +29,20 @@ class SpaceInvaderState : GameState
     // Use this for initialization
     public override void start()
 	{
-
+        base.start();
     }
 
 
     // Use this for state transition
     public override void end()
     {
-
+        base.end();
     }
 
     // Update is called once per frame
     public override void update()
     {
-
+        base.update();
     }
 
     public override void noticeInput(KeyCode key)

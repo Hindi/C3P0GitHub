@@ -27,7 +27,7 @@ public class GameState : State
     // Use this for initialization
     public override void start()
     {
-
+        changeParam();
     }
 
     public virtual void setParameter(Parameter param)
@@ -44,6 +44,18 @@ public class GameState : State
 	{
 		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, !paused);
 	}
+
+    public virtual void changeParam()
+    {
+        applyPause(true);
+        EventManager.Raise(EnumEvent.CHANGEPARAM);
+    }
+
+    private void applyPause(bool b)
+    {
+        paused = b;
+        applyPause();
+    }
 
 	private void applyPause()
 	{
