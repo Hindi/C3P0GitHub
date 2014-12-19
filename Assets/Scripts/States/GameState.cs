@@ -30,6 +30,11 @@ public class GameState : State
 
     }
 
+    public virtual void setParameter(Parameter param)
+    {
+        Debug.Log(param.id);
+    }
+
 	public virtual void pauseGame(bool b)
 	{
 		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, paused);

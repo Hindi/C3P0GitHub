@@ -30,8 +30,14 @@ public class Player : MonoBehaviour
         lastTimeChangeSize = Time.time;
         goalScale = transform.localScale.x;
         projectile_.SetActive(false);
-		lastShotTime = Time.time;
+        lastShotTime = Time.time;
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
 	}
+
+    public void onGameRestart()
+    {
+        recallProjectile();
+    }
 
     public void setDirection(bool right)
     {

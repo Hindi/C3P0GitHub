@@ -48,4 +48,11 @@ public class StateManager : MonoBehaviour {
         currentState = stateList[state];
         currentState.start();
     }
+
+    public void setParameter(Parameter param)
+    {
+        //On s'assure avant qu'on a bien un GameState
+        if (typeof(GameState).IsAssignableFrom(currentState.GetType()))
+            ((GameState)currentState).setParameter(param);
+    }
 }

@@ -4,7 +4,11 @@ using System.Collections;
 public class UI : MonoBehaviour {
 
 	[SerializeField]
-	private Canvas pauseMenu;
+    private Canvas pauseMenu;
+    [SerializeField]
+    private Canvas paramMenu;
+
+    private Canvas currentCanvas;
 
 	// Use this for initialization
 	void Start () {
@@ -13,11 +17,30 @@ public class UI : MonoBehaviour {
 
 	public void onGamePaused(bool b)
 	{
-		if(b)
-			pauseMenu.gameObject.SetActive(true);
-		else
-			pauseMenu.gameObject.SetActive(false);
+        if (b)
+            updateCurrentCanvas(pauseMenu);
+        else
+            closeMenus();
 	}
+
+    public void switchToParam()
+    {
+        updateCurrentCanvas(paramMenu);
+    }
+
+    private void updateCurrentCanvas(Canvas newCanvas)
+    {
+        if (currentCanvas)
+            currentCanvas.gameObject.SetActive(false);
+        currentCanvas = newCanvas;
+        currentCanvas.gameObject.SetActive(true);
+    }
+
+    private void closeMenus()
+    {
+        pauseMenu.gameObject.SetActive(false);
+        paramMenu.gameObject.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {

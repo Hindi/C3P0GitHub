@@ -14,6 +14,11 @@ class SpaceInvaderState : GameState
     {
     }
 
+    public override void setParameter(Parameter param)
+    {
+        Debug.Log(param.id);
+    }
+
 	public override void onLevelWasLoaded(int lvl)
 	{
 		loaded = true;

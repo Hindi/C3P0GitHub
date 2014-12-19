@@ -3,7 +3,11 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 
-	// Use this for initialization
+
+    [SerializeField]
+    private UI ui;
+	
+    // Use this for initialization
 	void Start () {
 	
 	}
@@ -23,4 +27,10 @@ public class PauseMenu : MonoBehaviour {
         EventManager.Raise(EnumEvent.RESTARTGAME);
         onResumeClick();
     }
+
+    public void onParamChangeClick()
+    {
+        ui.switchToParam();
+    }
+
 }
