@@ -7,20 +7,26 @@ class SpaceInvaderState : GameState
     [SerializeField]
     private GameObject player_;
     private Player playerScript_;
-	private bool loaded;
 
     public SpaceInvaderState(StateManager stateManager)
         : base(stateManager)
     {
     }
 
-    public override void setParameter(Parameter param)
+    public override void onGameRestart()
     {
-        Debug.Log(param.id);
+        if(loaded)
+            playerScript_.onGameRestart();
+    }
+
+    public override void setParameter(Parameter param)
+        {
+            player_.GetComponent<Player>().setParamId(param.id);
     }
 
 	public override void onLevelWasLoaded(int lvl)
 	{
+        base.onLevelWasLoaded(lvl);
 		loaded = true;
 		player_ = GameObject.FindGameObjectWithTag("Player");
 		playerScript_ = player_.GetComponent<Player>();
@@ -47,10 +53,9 @@ class SpaceInvaderState : GameState
 
     public override void noticeInput(KeyCode key)
     {
-       	if (loaded) 
-		{
-			if(key == KeyCode.Escape)
-				togglePauseGame ();
+       	if (loaded)
+        {
+            base.noticeInput(key);
 			if (key == KeyCode.Space)
 				playerScript_.fire ();
 			if (key == KeyCode.Return)

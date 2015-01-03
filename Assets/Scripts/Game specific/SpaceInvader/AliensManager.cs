@@ -33,6 +33,11 @@ public class AliensManager : MonoBehaviour {
 	private int aliensPerLine;
 	[SerializeField]
 	private float fireCooldown;
+
+    [SerializeField]
+    private float breakOutStartTime;
+    private float gameStartTime;
+
 	
     private int direction;
     private bool changeDirection;
@@ -49,6 +54,9 @@ public class AliensManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         start();
+
+        gameStartTime = Time.time;
+
         EventManager.AddListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
 		EventManager<bool>.AddListener (EnumEvent.GAMEOVER, onGameOver);
@@ -82,6 +90,11 @@ public class AliensManager : MonoBehaviour {
 	{
 		return (Time.time - lastFireTime > fireCooldown / victoryCount && !breakOutMode);
 	}
+
+    bool isBreakOutTime()
+    {
+        return (Time.time - gameStartTime > breakOutStartTime && !breakOutMode);
+    }
 	
 	private void spawnAliens()
 	{
@@ -108,8 +121,7 @@ public class AliensManager : MonoBehaviour {
 	public void onGameOver(bool b)
 	{
 		if (b == true)
-			spawnAliens ();
-		victoryCount++;
+		    victoryCount++;
 	}
 
     private void summonLine(int z, GameObject prefab)
@@ -148,23 +160,29 @@ public class AliensManager : MonoBehaviour {
     private void fire()
     {
 		if (canFire()) 
-		{
-			transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<Invader>().fire();
-			lastFireTime = Time.time;
-		}
+            if(transform.childCount > 0)
+            {
+                transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<Invader>().fire();
+                lastFireTime = Time.time;
+            }
     }
 	
 	// Update is called once per frame
     void Update()
 	{
 		fire ();
+        if (transform.childCount == 0)
+        {
+            spawnAliens();
+            victoryCount++;
+        }
 		if (!breakOutMode && Time.time - lastMoveTime > coolDown) {
 				moveAliens ();
 				lastMoveTime = Time.time;
 		}
 
-		if (Input.GetKeyDown (KeyCode.Return))
-				switchToBreakout ();
+        if (isBreakOutTime())
+            switchToBreakout();
 	}
 	
 	void switchToBreakout()

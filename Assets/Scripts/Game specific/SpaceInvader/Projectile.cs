@@ -23,6 +23,7 @@ public class Projectile : MonoBehaviour {
     {
         if (collider.gameObject.tag == "Enemy")
         {
+            playerScript_.enemyDestroyed();
             playerScript_.recallProjectile();
             collider.gameObject.GetComponent<Invader>().startDestruction();
         }

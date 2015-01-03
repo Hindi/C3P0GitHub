@@ -7,6 +7,8 @@ public class UI : MonoBehaviour {
     private Canvas pauseMenu;
     [SerializeField]
     private Canvas paramMenu;
+    [SerializeField]
+    private Canvas gameOverMenu;
 
     private Canvas currentCanvas;
 
@@ -14,7 +16,14 @@ public class UI : MonoBehaviour {
 	void Start () {
 		EventManager<bool>.AddListener (EnumEvent.PAUSEGAME, onGamePaused);
         EventManager.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
+        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
+
+
+    public void onGameOver(bool b)
+    {
+        updateCurrentCanvas(gameOverMenu);
+    }
 
 	public void onGamePaused(bool b)
 	{
@@ -44,6 +53,7 @@ public class UI : MonoBehaviour {
 
     private void closeMenus()
     {
+        gameOverMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         paramMenu.gameObject.SetActive(false);
     }

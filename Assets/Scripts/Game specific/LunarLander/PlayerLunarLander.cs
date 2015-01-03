@@ -27,9 +27,6 @@ public class PlayerLunarLander : MonoBehaviour {
 
     int reactorState;
 
-    const int baseWidth = 1024;
-    const int baseFontSize = 18;
-
     private Rect labelRectHorizontal;
     private Rect labelRectVertical;
     private Rect labelRectAltitude;
@@ -49,10 +46,9 @@ public class PlayerLunarLander : MonoBehaviour {
         consumCooldown = 0.1f;
         lastConsumTime = Time.time;
         reactorState = 0;
-        start();
 	}
 
-    void start()
+    public void onGameRestart()
     {
         transform.position = new Vector3(-10, 6, 0);
         rigidbody2D.isKinematic = true;
@@ -70,7 +66,7 @@ public class PlayerLunarLander : MonoBehaviour {
         }
     }
 
-    void increaseReactorState()
+    public void increaseReactorState()
     {
         if(reactorState < 3)
         {
@@ -79,7 +75,7 @@ public class PlayerLunarLander : MonoBehaviour {
         }
     }
 
-    void decreaseReactorState()
+    public void decreaseReactorState()
     {
         if (reactorState > 0)
         {
@@ -87,10 +83,16 @@ public class PlayerLunarLander : MonoBehaviour {
             propulsor.transform.localScale = new Vector3(0.5f, propulsor.transform.localScale.y - 1, 0.5f);
         }
     }
+
+    public void rotate(float speedFactor)
+    {
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
+        useFuel();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        guiStyle.fontSize = Mathf.RoundToInt(baseFontSize * Screen.width / baseWidth);
+        guiStyle.fontSize = Mathf.RoundToInt(Responsive.baseFontSize * Screen.width / Responsive.baseWidth);
         if (fuel > 0)
         {
             if(reactorState > 0 )

@@ -1,5 +1,5 @@
-﻿//#define C3POStudent
-#define C3POTeacher
+﻿#define C3POStudent
+//#define C3POTeacher
 
 using UnityEngine;
 using System.Collections;
@@ -63,46 +63,20 @@ public class NetworkTestScript : MonoBehaviour {
 		float height = Screen.height;
 		
 		#if C3POTeacher
-		questionBuffer = GUI.TextArea(new Rect(width/2 - width /6, 100.0f,
-												width * 2/6, height * 2/50),
-											questionBuffer, 50);
-		rep1Buffer = GUI.TextArea(new Rect(width/2 - width /6, 200,
-												width * 2/6, height * 2/50),
-											rep1Buffer, 50);
-		rep2Buffer = GUI.TextArea(new Rect(width/2 - width /6, 300,
-												width * 2/6, height * 2/50),
-											rep2Buffer, 50);
 		if(GUI.Button(new Rect(width/2 - width /6, 400,
-												width * 2/6, height * 2/50), "GO"))
+												width * 2/6, height * 2/50), "Server Started!"))
 		{
-			QuestionManager.Instance.sendQuestion(questionBuffer, rep1Buffer, rep2Buffer);
-		}
-		
-		if(isThereAnAnswer)
-		{
-			GUI.TextArea(new Rect(width/2 - width /6, 600,
-												width * 2/6, height * 2/50),
-											((lastAnswer.intRep == 1) ? rep1Buffer : rep2Buffer), 50);
 		}
 		#endif
 		
 		#if C3POStudent
-		if(isThereAQuestion)
+		if(netm.isConnectedApp)
 		{
-			GUI.TextArea(new Rect(width/2 - width /6, 100.0f,
-													width * 2/6, height * 2/50),
-												netm.questionBuffer.question);
 			if(GUI.Button(new Rect(width/2 - width /6, 200,
 													width * 2/6, height * 2/50),
-												netm.questionBuffer.rep1))
+												"I am connected YAY!"))
 			{
 				netm.sendAnswer(1);
-			}
-			if(GUI.Button(new Rect(width/2 - width /6, 300,
-													width * 2/6, height * 2/50),
-												netm.questionBuffer.rep2))
-			{
-				netm.sendAnswer(2);
 			}
 		}
 		#endif

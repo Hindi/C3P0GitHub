@@ -20,22 +20,32 @@ public class Player : MonoBehaviour
 
     private int currentSpeed;
 
+    [SerializeField]
+    GUIStyle guiStyle;
+
 	[SerializeField]
 	float fireCooldown;
 	float lastShotTime;
 
+    private int paramId;
+
+    private Rect labelRectScore;
+    private int score;
+
     // Use this for initialization
     void Start()
-	{
+    {
+        labelRectScore = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25, Screen.width / 4, Screen.height / 20);
+        paramId = 0;
         lastTimeChangeSize = Time.time;
         goalScale = transform.localScale.x;
         projectile_.SetActive(false);
         lastShotTime = Time.time;
-        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
 	}
 
     public void onGameRestart()
     {
+        score = 0;
         recallProjectile();
     }
 
@@ -45,6 +55,11 @@ public class Player : MonoBehaviour
             currentSpeed = speed;
         else
             currentSpeed = -speed;
+    }
+
+    public void setParamId(int id)
+    {
+        paramId = id;
     }
 
     public void stop()
@@ -83,6 +98,11 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(transform.position.x + currentSpeed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
+    public void enemyDestroyed()
+    {
+        score++;
+    }
+
     public void recallProjectile()
     {
         projectile_.transform.position = transform.position;
@@ -92,17 +112,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        guiStyle.fontSize = Mathf.RoundToInt(Responsive.baseFontSize * Screen.width / Responsive.baseWidth);
 		move();
 		if (projectile_.activeSelf)
 		{
 			if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)
 				recallProjectile();
 		}
-		if (Time.time - lastTimeChangeSize > changeSizeCooldown)
+		//if (Time.time - lastTimeChangeSize > changeSizeCooldown)
 		{
-			goalScale = Random.Range(4, 14);
+            switch(paramId)
+            {
+                case 0:
+                    goalScale = Laws.uniforme();
+                    break;
+                case 1:
+                    goalScale = Laws.sin();
+                    break;
+                case 2:
+                    goalScale = Random.Range(0, 1);
+                    break;
+            }
 			lastTimeChangeSize = Time.time;
 		}
+        transform.localScale = new Vector3(goalScale, 1, 1);
 		transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
 
@@ -118,5 +151,10 @@ public class Player : MonoBehaviour
             float delta = transform.position.x - collision.transform.position.x;
             collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(labelRectScore, "Score : " + score.ToString(), guiStyle);
     }
 }

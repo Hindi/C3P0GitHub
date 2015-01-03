@@ -5,6 +5,9 @@ public class Ball : MonoBehaviour {
 
     private Vector3 initPos;
 
+    [SerializeField]
+    private Player playerScript_;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -30,6 +33,7 @@ public class Ball : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            playerScript_.enemyDestroyed();
             collision.gameObject.GetComponent<Invader>().startDestruction();
         }
     }

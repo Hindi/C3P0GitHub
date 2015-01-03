@@ -11,11 +11,29 @@ public class GameState : State
 
 	private bool paused;
 	private float timeScale = Time.timeScale;
+    protected bool loaded;
 
     public GameState(StateManager stateManager) : base(stateManager)
     {
 		paused = false;
-		EventManager<bool>.AddListener (EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    public override void onLevelWasLoaded(int lvl)
+    {
+        loaded = true;
+    }
+
+    public virtual void onGameRestart()
+    {
+
+    }
+
+    public void onGameOver(bool b)
+    {
+        onGamePaused(true);
     }
 
 	public void onGamePaused(bool b)
@@ -68,7 +86,7 @@ public class GameState : State
     // Use this for state transition
     public override void end()
     {
-
+        loaded = false;
     }
 
     // Update is called once per frame
@@ -79,6 +97,7 @@ public class GameState : State
 
     public override void noticeInput(KeyCode key)
     {
-
+        if (key == KeyCode.Escape)
+            togglePauseGame();
     }
 }

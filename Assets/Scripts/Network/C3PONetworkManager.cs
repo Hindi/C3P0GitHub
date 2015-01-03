@@ -1,7 +1,8 @@
 ﻿/**************************************************************************************
  * Defines                                                                            *
  **************************************************************************************/
-#define C3POTeacher
+//#define C3POTeacher
+#define C3POStudent
 
 using UnityEngine;
 using System.Collections;
@@ -88,7 +89,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	/**
 	 * Functions used to send a question by the server 
 	 **/
-	#if C3POTeacher
 	public void sendQuestion(QuestionManager.QuestionKeeper question)
 	{
 		switch(question.qType)
@@ -112,7 +112,6 @@ public class C3PONetworkManager : MonoBehaviour {
                 break;
         }
 	}
-	#endif
 	
 	/**
 	 * Functions used to send an answer to the server

@@ -15,5 +15,6 @@ public enum StateEnum
     INIT,
     MENU,
     GAME,
-    SPACEINVADER
+    SPACEINVADER,
+    LUNARLANDER
 };

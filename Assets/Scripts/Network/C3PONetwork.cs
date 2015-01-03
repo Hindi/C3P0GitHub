@@ -1,10 +1,14 @@
 ﻿/**************************************************************************************
  * Defines                                                                            *
  **************************************************************************************/
-#define C3POTeacher
+//#define C3POTeacher
+#define C3POStudent
 
 using UnityEngine;
 using System.Collections;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 /**
  * C3PONetwork is a class facilitating network communication for the C3PO project.
@@ -53,6 +57,14 @@ public class C3PONetwork : MonoBehaviour {
 	private int gamePort = 25000;
 	// Server lists received from MasterServer for both Teacher Server and match making
 	private HostData[] hostList = null;
+
+    // Used in the discovery
+#if C3POTeacher
+    UdpClient sender;
+#endif
+    UdpClient receiver;
+    int remotePort = 19784;
+
 	
 	/**************************************************************************************
 	 * Public functions                                                                   *
@@ -146,8 +158,44 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	private bool discovery()
 	{
-		return false;
+        try
+        {
+            if (receiver == null)
+            {
+                receiver = new UdpClient(remotePort);
+                receiver.BeginReceive(new System.AsyncCallback(ReceiveData), null);
+            }
+        }
+        catch(SocketException e)
+        {
+            return false;
+        }
+		return true;
 	}
+
+    private void ReceiveData(System.IAsyncResult result)
+    {
+        IPEndPoint receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
+        byte[] received;
+        if (receiver != null)
+        {
+            received = receiver.EndReceive(result, ref receiveIPGroup);
+        }
+        else
+        {
+            return;
+        }
+        receiver.BeginReceive(new System.AsyncCallback(ReceiveData), null);
+        masterHostname = Encoding.ASCII.GetString(received);
+    }
+
+#if C3POTeacher
+    private void SendData()
+    {
+        string customMessage = "10.42.5.244";
+        sender.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length);
+    }
+#endif
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -169,7 +217,13 @@ public class C3PONetwork : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+#if C3POTeacher
+        sender = new UdpClient(remotePort, AddressFamily.InterNetwork);
+        IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
+        sender.Connect(groupEP);
+
+        InvokeRepeating("SendData", 0, 5f);
+#endif
 	}
 	
 	// Update is called once per frame
