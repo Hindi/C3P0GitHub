@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpaceWar : MonoBehaviour {
+public class EnemySpaceWar : Spaceship {
 
 	// Use this for initialization
 	void Start () {

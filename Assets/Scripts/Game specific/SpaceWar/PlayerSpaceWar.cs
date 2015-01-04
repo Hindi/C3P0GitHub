@@ -1,18 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerSpaceWar : MonoBehaviour {
-
-    [SerializeField]
-    private float rotationSpeed;
-
-    [SerializeField]
-    private float linearSpeed;
-
-    public void rotate(float speedFactor)
-    {
-        transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
-    }
+public class PlayerSpaceWar : Spaceship {
 
 	// Use this for initialization
     void Start()
@@ -27,5 +16,7 @@ public class PlayerSpaceWar : MonoBehaviour {
             rotate(-1);
         if (Input.GetKey(KeyCode.UpArrow))
             rigidbody2D.AddRelativeForce(new Vector3(0, linearSpeed * Time.deltaTime, 0));
+        if (Input.GetKeyDown(KeyCode.Space))
+            fire();
 	}
 }

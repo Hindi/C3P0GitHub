@@ -28,14 +28,17 @@ public class Spiral : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if(collider.tag == "Player" || collider.tag == "Enemy" || collider.tag == "Projectile")
-        {
+        if(collider.tag == "Player" || collider.tag == "Enemy")
             collider.rigidbody2D.velocity += (Vector2)((transform.position - collider.transform.position) * gravityAcceleration);
-        }
+        else if (collider.tag == "Projectile")
+            collider.rigidbody2D.velocity += (Vector2)((transform.position - collider.transform.position) * gravityAcceleration * 20);
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-
+        if (collider.tag == "Player" || collider.tag == "Enemy")
+            collider.GetComponent<Spaceship>().exitZone();
+        else if (collider.tag == "Projectile")
+            collider.GetComponent<ProjectileSpaceWar>().exitZone();
     }
 }
