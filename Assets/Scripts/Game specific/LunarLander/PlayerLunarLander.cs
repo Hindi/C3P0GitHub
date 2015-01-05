@@ -25,6 +25,9 @@ public class PlayerLunarLander : MonoBehaviour {
     float consumCooldown;
     float lastConsumTime;
 
+    [SerializeField]
+    private ProgressBar altitudeBar;
+
     int reactorState;
 
     private Rect labelRectHorizontal;
@@ -38,6 +41,8 @@ public class PlayerLunarLander : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        altitudeBar.init(10, new Vector2(Screen.width - (Screen.width / 4), Screen.height / 25 * 3), new Vector2(Screen.width / 4, Screen.height / 20));
+
         labelRectHorizontal = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25, Screen.width / 4, Screen.height / 20);
         labelRectVertical = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25 * 2, Screen.width / 4, Screen.height / 20);
         labelRectAltitude = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25 * 3, Screen.width / 4, Screen.height / 20);
@@ -93,6 +98,7 @@ public class PlayerLunarLander : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         guiStyle.fontSize = Mathf.RoundToInt(Responsive.baseFontSize * Screen.width / Responsive.baseWidth);
+        altitudeBar.updateValue(transform.position.y);
         if (fuel > 0)
         {
             if(reactorState > 0 )
