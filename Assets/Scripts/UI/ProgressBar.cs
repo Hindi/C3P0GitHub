@@ -5,24 +5,29 @@ public class ProgressBar : MonoBehaviour
 {
     private float currentValue; //current progress
     private float maximumValue; //current progress
-    [SerializeField]
+
     private Vector2 pos;
-    [SerializeField]
     private Vector2 size;
+
     [SerializeField]
     private Texture2D emptyTex;
     [SerializeField]
     private Texture2D fullTex;
 
+    private Rect barRect;
+    private Rect backTextRect;
+    private Rect frontTextRect;
+    private float factor;
     void OnGUI()
     {
         //draw the background:
-        GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-        GUI.Box(new Rect(0, 0, size.x, size.y), emptyTex);
+        GUI.BeginGroup(barRect);
+        GUI.Box(backTextRect, emptyTex);
 
         //draw the filled-in part:
-        GUI.BeginGroup(new Rect(0, 0, size.x * fillFactor(), size.y));
-        GUI.Box(new Rect(0, 0, size.x, size.y), fullTex);
+        GUI.BeginGroup(new Rect(0, 0, size.x * fillFactor() * factor, size.y * factor));
+        GUI.Box(frontTextRect, fullTex);
+
         GUI.EndGroup();
         GUI.EndGroup();
     }
@@ -32,6 +37,14 @@ public class ProgressBar : MonoBehaviour
         maximumValue = maxValue;
         pos = position;
         this.size = size;
+        factor = Responsive.responsiveFactor();
+
+        Debug.Log(pos.x + " " + pos.y);
+        barRect = new Rect(pos.x, pos.y, size.x * factor, size.y * factor);
+        backTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
+        frontTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
+
+
     }
 
     private float fillFactor()
@@ -46,6 +59,6 @@ public class ProgressBar : MonoBehaviour
 
     void Update()
     {
-
+        Debug.Log(size.x * fillFactor() * factor);
     }
 }

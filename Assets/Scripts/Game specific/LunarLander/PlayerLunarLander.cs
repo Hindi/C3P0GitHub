@@ -27,6 +27,10 @@ public class PlayerLunarLander : MonoBehaviour {
 
     [SerializeField]
     private ProgressBar altitudeBar;
+    [SerializeField]
+    private ProgressBar horizontalBar;
+    [SerializeField]
+    private ProgressBar verticalBar;
 
     int reactorState;
 
@@ -40,8 +44,11 @@ public class PlayerLunarLander : MonoBehaviour {
     private int fontSize;
 
 	// Use this for initialization
-	void Start () {
-        altitudeBar.init(10, new Vector2(Screen.width - (Screen.width / 4), Screen.height / 25 * 3), new Vector2(Screen.width / 4, Screen.height / 20));
+    void Start()
+    {
+        horizontalBar.init(10, new Vector2(Screen.width - (Screen.width / 4), Screen.height / 25), new Vector2(150, 20));
+        verticalBar.init(10, new Vector2(Screen.width - (Screen.width / 4), Screen.height / 25 * 2), new Vector2(150, 20));
+        altitudeBar.init(10, new Vector2(Screen.width - (Screen.width / 5), Screen.height / 25 * 3), new Vector2(150, 20));
 
         labelRectHorizontal = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25, Screen.width / 4, Screen.height / 20);
         labelRectVertical = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25 * 2, Screen.width / 4, Screen.height / 20);
@@ -111,15 +118,9 @@ public class PlayerLunarLander : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.DownArrow))
                 decreaseReactorState();
             if (Input.GetKey(KeyCode.LeftArrow) && transform.rotation.z > -0.7f)
-            {
-                transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
-                useFuel();
-            }
+                rotate(1);
             if (Input.GetKey(KeyCode.RightArrow) && transform.rotation.z < 0.7f )
-            {
-                transform.Rotate(new Vector3(0, 0, -rotationSpeed) * Time.deltaTime);
-                useFuel();
-            }
+                rotate(-1);
         }
         else
         {
@@ -145,7 +146,7 @@ public class PlayerLunarLander : MonoBehaviour {
         currentVelocity = rigidbody2D.velocity * 10;
         GUI.Label(labelRectHorizontal, "Horizontal Speed " + currentVelocity.x.ToString("F2"), guiStyle);
         GUI.Label(labelRectVertical, "Vertical Speed " + currentVelocity.y.ToString("F2"), guiStyle);
-        GUI.Label(labelRectAltitude, "Altitude " + (transform.position.y * 10).ToString("F2"), guiStyle);
+        GUI.Label(labelRectAltitude, "Altitude ", guiStyle);
         GUI.Label(labelRectFuel, "Fuel " + fuel.ToString(), guiStyle);
     }
 
