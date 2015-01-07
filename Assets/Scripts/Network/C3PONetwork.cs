@@ -41,6 +41,13 @@ public class C3PONetwork : MonoBehaviour {
 			instance = value;
 		}
 	}
+
+    /**
+     * 
+     **/
+    [SerializeField]
+    public bool IS_SERVER;
+
 	// The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer)
 	private string masterHostname = null;
 	// askHostnameGUI allows to know when to ask the user to enter the IP/Hostname of the MasterServer
@@ -59,9 +66,7 @@ public class C3PONetwork : MonoBehaviour {
 	private HostData[] hostList = null;
 
     // Used in the discovery
-#if C3POTeacher
     UdpClient sender;
-#endif
     UdpClient receiver;
     int remotePort = 19784;
 
@@ -70,7 +75,6 @@ public class C3PONetwork : MonoBehaviour {
 	 * Public functions                                                                   *
 	 **************************************************************************************/
 	
-#if C3POTeacher
 	/**
 	 * Function to be called on the teacher version of the C3PO program.
 	 * Launches a Unity MasterServer locally, and creates the main game server
@@ -87,7 +91,6 @@ public class C3PONetwork : MonoBehaviour {
 		Network.InitializeServer(1000,gamePort,false);
 		MasterServer.RegisterHost("C3PO", "TeacherServer");
 	}
-#endif
 
 	/**
 	 * Connects to the MasterServer to find the teacher's game server and connects to it.
@@ -189,13 +192,11 @@ public class C3PONetwork : MonoBehaviour {
         masterHostname = Encoding.ASCII.GetString(received);
     }
 
-#if C3POTeacher
     private void SendData()
     {
         string customMessage = "10.42.5.244";
         sender.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length);
     }
-#endif
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -217,13 +218,14 @@ public class C3PONetwork : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-#if C3POTeacher
-        sender = new UdpClient(remotePort, AddressFamily.InterNetwork);
-        IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
-        sender.Connect(groupEP);
+        if(IS_SERVER)
+        {
+            sender = new UdpClient(remotePort, AddressFamily.InterNetwork);
+            IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
+            sender.Connect(groupEP);
 
-        InvokeRepeating("SendData", 0, 5f);
-#endif
+            InvokeRepeating("SendData", 0, 5f);
+        }
 	}
 	
 	// Update is called once per frame
