@@ -8,7 +8,7 @@ public class ConnectionMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
@@ -16,13 +16,13 @@ public class ConnectionMenu : MonoBehaviour {
 	
 	}
 
-    void onConnectionClick()
+    public void onConnectionClick()
     {
-
+        Debug.Log("abwabwa");
     }
 
-    void onSingleClick()
+    public void onSingleClick()
     {
-
+        Debug.Log("huk");
     }
 }
