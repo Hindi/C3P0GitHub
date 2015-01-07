@@ -20,7 +20,7 @@ class SpaceInvaderState : GameState
     }
 
     public override void setParameter(Parameter param)
-        {
+    {
             player_.GetComponent<Player>().setParamId(param.id);
     }
 

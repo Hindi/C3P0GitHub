@@ -22,6 +22,7 @@ public class StateManager : MonoBehaviour {
 
         stateList.Add(StateEnum.LUNARLANDER, new LunarLanderState(this));
         stateList.Add(StateEnum.SPACEINVADER, new SpaceInvaderState(this));
+        stateList.Add(StateEnum.CONNECTION, new ConnectionState(this));
         stateList.Add(StateEnum.MENU, new MainMenuState(this));
         stateList.Add(StateEnum.GAME, new GameState(this));
         currentState.start();

@@ -28,8 +28,8 @@ class InitState : State {
     {
         if (Time.time - startTime > 0.1)
 		{
-			stateManager_.changeState(StateEnum.LUNARLANDER);
-			EventManager<string>.Raise(EnumEvent.LOADLEVEL, "LunarLander");
+			stateManager_.changeState(StateEnum.CONNECTION);
+			EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
         }
 	}
 
