@@ -28,8 +28,16 @@ class InitState : State {
     {
         if (Time.time - startTime > 0.1)
 		{
-			stateManager_.changeState(StateEnum.CONNECTION);
-			EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+            if (C3PONetwork.Instance.IS_SERVER)
+            {
+                stateManager_.changeState(StateEnum.SERVERCONNECTION);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Lobby");
+            }
+            else
+            {
+                stateManager_.changeState(StateEnum.CONNECTION);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+            }
         }
 	}
 

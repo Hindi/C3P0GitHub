@@ -17,5 +17,6 @@ public enum StateEnum
     GAME,
     SPACEINVADER,
     LUNARLANDER,
-    CONNECTION
+    CONNECTION,
+    SERVERCONNECTION
 };

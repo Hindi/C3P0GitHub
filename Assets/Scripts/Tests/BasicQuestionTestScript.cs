@@ -1,10 +1,9 @@
-﻿//#define C3POStudent
-#define C3POTeacher
+﻿/*
 
 using UnityEngine;
 using System.Collections;
 
-public class NetworkTestScript : MonoBehaviour {
+public class BasicNetworkTestScript : MonoBehaviour {
 
 	public C3PONetwork net;
 	public C3PONetworkManager netm;
@@ -121,3 +120,5 @@ public class NetworkTestScript : MonoBehaviour {
 	
 	
 }
+
+*/

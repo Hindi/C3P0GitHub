@@ -25,6 +25,7 @@ public class StateManager : MonoBehaviour {
         stateList.Add(StateEnum.CONNECTION, new ConnectionState(this));
         stateList.Add(StateEnum.MENU, new MainMenuState(this));
         stateList.Add(StateEnum.GAME, new GameState(this));
+        stateList.Add(StateEnum.SERVERCONNECTION, new LobbyState(this));
         currentState.start();
 	}
 	
