@@ -8,18 +8,33 @@ public class LobbyState : State {
 
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     public override void noticeInput(KeyCode key)
     {
 
     }
+
+    public void start()
+    {
+        C3PONetwork.Instance.createTeacherServer();
+        EventManager.Raise(EnumEvent.SERVERUI);
+    }
+
+    public void onLevelWasLoaded(int lvl)
+    {
+
+    }
+
+    public void end()
+    {
+
+    }
+
+    public void update()
+    {
+        /* TODO remplacer par le GUI */
+		if(Input.GetKey(KeyCode.Escape))
+			Application.Quit();
+    }
+
+
 }

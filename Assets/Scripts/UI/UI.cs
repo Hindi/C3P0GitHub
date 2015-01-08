@@ -11,6 +11,8 @@ public class UI : MonoBehaviour {
     private Canvas gameOverMenu;
     [SerializeField]
     private Canvas connectionMenu;
+    [SerializeField]
+    private Canvas serverMenu;
 
     private Canvas currentCanvas;
 
@@ -20,6 +22,7 @@ public class UI : MonoBehaviour {
         EventManager.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.CONNECTIONSTATE, onConnectionState);
+        EventManager.AddListener(EnumEvent.SERVERUI, onServerStart);
 	}
 
     public void onConnectionState()
@@ -43,6 +46,11 @@ public class UI : MonoBehaviour {
     public void onChangeParam()
     {
         updateCurrentCanvas(paramMenu);
+    }
+
+    public void onServerStart()
+    {
+        updateCurrentCanvas(serverMenu);
     }
 
     public void switchToParam()
