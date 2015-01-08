@@ -261,7 +261,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		if(instance != null)
 		{
-			Debug.Log("There should only be one C3PONetworkManager instance");
 			throw new System.Exception("There should be only one active instance of the C3PONetworkManager component at a time.");
 		}
 		else

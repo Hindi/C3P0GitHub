@@ -3,10 +3,14 @@ using System.Collections;
 
 public class QuestionAnswerState : State
 {
+    private Canvas questionMenu;
+    private QuestionAnswerMenu QAMenu;
+
     protected bool loaded;
     private GameObject networkManager;
     private C3PONetwork c3poNetwork;
     private C3PONetworkManager c3poNetworkManager;
+    private UI ui;
 
     private bool isThereAQuestion;
 
@@ -17,10 +21,23 @@ public class QuestionAnswerState : State
 
     public override void onLevelWasLoaded(int lvl)
     {
+        EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         c3poNetwork = networkManager.GetComponent<C3PONetwork>();
         c3poNetworkManager = networkManager.GetComponent<C3PONetworkManager>();
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+        questionMenu = ui.getCurrentCanvas();
+        QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
+    }
+
+    public void onQuestionRecieved(QuestionManager.QuestionKeeper keeper)
+    {
+        questionMenu.gameObject.SetActive(true);
+        QAMenu.setAnswerCount(keeper.choicesNb);
+        QAMenu.setQuestionText(keeper.question);
+        for (int i = 0; i < keeper.choicesNb; ++i)
+            QAMenu.setAnswerText(i, "huk");
     }
 
     // Use this for initialization
@@ -32,29 +49,5 @@ public class QuestionAnswerState : State
     public override void noticeInput(KeyCode key)
     {
 
-    }
-
-    public void OnGUI()
-    {
-        float width = Screen.width;
-        float height = Screen.height;
-        if (isThereAQuestion)
-        {
-            /*GUI.TextArea(new Rect(width / 2 - width / 6, 100.0f,
-                                                    width * 2 / 6, height * 2 / 50),
-                                                c3poNetworkManager.questionBuffer.question);
-            if (GUI.Button(new Rect(width / 2 - width / 6, 200,
-                                                    width * 2 / 6, height * 2 / 50),
-                                                c3poNetworkManager.questionBuffer.rep1))
-            {
-                c3poNetworkManager.sendAnswer(1);
-            }
-            if (GUI.Button(new Rect(width / 2 - width / 6, 300,
-                                                    width * 2 / 6, height * 2 / 50),
-                                                c3poNetworkManager.questionBuffer.rep2))
-            {
-                c3poNetworkManager.sendAnswer(2);
-            }*/
-        }
     }
 }

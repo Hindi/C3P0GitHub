@@ -6,6 +6,8 @@ public class UI : MonoBehaviour {
 	[SerializeField]
     private Canvas pauseMenu;
     [SerializeField]
+    private Canvas questionMenu;
+    [SerializeField]
     private Canvas paramMenu;
     [SerializeField]
     private Canvas gameOverMenu;
@@ -74,6 +76,11 @@ public class UI : MonoBehaviour {
         currentCanvas.gameObject.SetActive(true);
     }
 
+    public Canvas getCurrentCanvas()
+    {
+        return questionMenu;
+    }
+
     private void closeMenus()
     {
         gameOverMenu.gameObject.SetActive(false);
@@ -81,6 +88,7 @@ public class UI : MonoBehaviour {
         paramMenu.gameObject.SetActive(false);
         connectionMenu.gameObject.SetActive(false);
         connectionPromptMenu.gameObject.SetActive(false);
+        questionMenu.gameObject.SetActive(false);
     }
 	
 	// Update is called once per frame
