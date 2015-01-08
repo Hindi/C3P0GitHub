@@ -16,11 +16,17 @@ public class UI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		EventManager<bool>.AddListener (EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager.AddListener(EnumEvent.CLOSEMENU, onCloseMenu);
         EventManager.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.CONNECTIONSTATE, onConnectionState);
 	}
+
+    public void onCloseMenu()
+    {
+        closeMenus();
+    }
 
     public void onConnectionState()
     {
@@ -50,7 +56,7 @@ public class UI : MonoBehaviour {
         updateCurrentCanvas(paramMenu);
     }
 
-    private void updateCurrentCanvas(Canvas newCanvas)
+    public void updateCurrentCanvas(Canvas newCanvas)
     {
         if (currentCanvas)
             currentCanvas.gameObject.SetActive(false);
