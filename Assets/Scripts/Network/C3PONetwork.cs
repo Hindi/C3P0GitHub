@@ -139,14 +139,15 @@ public class C3PONetwork : MonoBehaviour {
 	 * @modifies private string masterHostname : updates it in case the discovery is successful
 	 **/
 	private bool findMasterHostname()
-	{
+    {
+        masterHostname = "192.168.0.19";
+        return true;
 		/* 1st step : checks if this.masterHostname works */
 		if (masterHostname != null)
 		{
 			return true;
 		}
 		/* 2nd step : checks Resources/Network/hostnames.xml */
-        masterHostname = "192.168.43.13";
 		/* 3rd step : runs this.discovery() below */
 		if (discovery())
 		{
@@ -295,14 +296,6 @@ public class C3PONetwork : MonoBehaviour {
 			
 		}
 	}
-
-    void OnConnectedToServer()
-    {
-        if (hostList.Length > 0 && hostList[0].gameType == "C3PO")
-        {
-            ntm.onConnectedToUnity();
-        }
-    }
 	
 	/**
 	 * Confirms that the server was successfully created.
@@ -311,6 +304,11 @@ public class C3PONetwork : MonoBehaviour {
 	{
 		Debug.Log(Time.time + "Server Initialized");
 	}
+
+    void OnConnectedToServer()
+    {
+        ntm.onConnectedToUnity();
+    }
 	
 	/**
 	 * If the IP/Hostname is not correct or the Network is down (doom)
@@ -331,7 +329,8 @@ public class C3PONetwork : MonoBehaviour {
 			hostList = MasterServer.PollHostList();
 			if(hostList.Length > 0 && hostList[0].gameType == "C3PO")
 			{
-				Network.Connect(hostList[0]);
+                //Network.Connect(hostList[0]);
+                Network.Connect("192.168.0.19", 25000);
                 isConnectedToTeacher = true;
                 Debug.Log("Connected to teacher");
 			}

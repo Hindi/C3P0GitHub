@@ -12,6 +12,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas connectionMenu;
     [SerializeField]
+    private Canvas connectionPromptMenu;
+    [SerializeField]
     private Canvas serverMenu;
 
     private Canvas currentCanvas;
@@ -77,6 +79,8 @@ public class UI : MonoBehaviour {
         gameOverMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         paramMenu.gameObject.SetActive(false);
+        connectionMenu.gameObject.SetActive(false);
+        connectionPromptMenu.gameObject.SetActive(false);
     }
 	
 	// Update is called once per frame

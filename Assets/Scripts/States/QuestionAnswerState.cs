@@ -21,7 +21,6 @@ public class QuestionAnswerState : State
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         c3poNetwork = networkManager.GetComponent<C3PONetwork>();
         c3poNetworkManager = networkManager.GetComponent<C3PONetworkManager>();
-        EventManager.Raise(EnumEvent.CONNECTIONSTATE);
     }
 
     // Use this for initialization
