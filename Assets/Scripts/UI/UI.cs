@@ -7,6 +7,20 @@ public class UI : MonoBehaviour {
     private Canvas pauseMenu;
     [SerializeField]
     private Canvas questionMenu;
+    public Canvas QuestionCanvas
+    {
+        get { return questionMenu; }
+        set { questionMenu = value; }
+    }
+
+    [SerializeField]
+    private Canvas scoreMenu;
+    public Canvas ScoreMenu
+    {
+        get { return scoreMenu; }
+        set { scoreMenu = value; }
+    }
+
     [SerializeField]
     private Canvas paramMenu;
     [SerializeField]
@@ -74,11 +88,6 @@ public class UI : MonoBehaviour {
             currentCanvas.gameObject.SetActive(false);
         currentCanvas = newCanvas;
         currentCanvas.gameObject.SetActive(true);
-    }
-
-    public Canvas getCurrentCanvas()
-    {
-        return questionMenu;
     }
 
     private void closeMenus()

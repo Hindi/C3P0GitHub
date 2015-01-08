@@ -11,6 +11,12 @@ public class QuestionAnswerMenu : MonoBehaviour {
     [SerializeField]
     List<Button> buttons;
 
+    [SerializeField]
+    private ProgressBar timeBar;
+
+    private float startTime;
+    private const float questionTime = 10;
+
     public void setQuestionText(string q)
     {
         question.text = q;
@@ -32,18 +38,27 @@ public class QuestionAnswerMenu : MonoBehaviour {
         buttons[id].GetComponentInChildren<Text>().text = text;
     }
 
+    public void startQuestion()
+    {
+        startTime = Time.time;
+    }
+
 	// Use this for initialization
 	void Start () {
-	
+        timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        timeBar.updateValue(questionTime - (Time.time - startTime));
+        if(Time.time - startTime > questionTime)
+            answer(-1);
 	}
 
     public void answer(int id)
     {
-        Debug.Log(id);
+        QuestionManager.AnswerKeeper keeper = new QuestionManager.AnswerKeeper();
+        keeper.intRep = id;
+        EventManager<QuestionManager.AnswerKeeper>.Raise(EnumEvent.ANSWERSND, keeper);
     }
 }

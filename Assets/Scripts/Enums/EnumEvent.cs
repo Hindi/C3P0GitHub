@@ -16,6 +16,7 @@ public enum EnumEvent
     LOADLEVEL,
     LOADEND,
     QUESTIONRCV,
+    ANSWERSND,
     ANSWERRCV,
 	ENEMYDEATH,
 	GAMEOVER,

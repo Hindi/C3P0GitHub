@@ -4,6 +4,7 @@ using System.Collections;
 public class QuestionAnswerState : State
 {
     private Canvas questionMenu;
+    private Canvas scoreMenu;
     private QuestionAnswerMenu QAMenu;
 
     protected bool loaded;
@@ -22,22 +23,43 @@ public class QuestionAnswerState : State
     public override void onLevelWasLoaded(int lvl)
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
+        EventManager<QuestionManager.AnswerKeeper>.AddListener(EnumEvent.ANSWERSND, onAnswerSend);
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         c3poNetwork = networkManager.GetComponent<C3PONetwork>();
         c3poNetworkManager = networkManager.GetComponent<C3PONetworkManager>();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
-        questionMenu = ui.getCurrentCanvas();
+        questionMenu = ui.QuestionCanvas;
+        scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
+        testQuestion();
+    }
+
+    private void testQuestion()
+    {
+        ui.updateCurrentCanvas(questionMenu);
+        questionMenu.gameObject.SetActive(true);
+        QAMenu.setAnswerCount(3);
+        QAMenu.setQuestionText("ABWABWABWBABWABWBAWBA");
+        QAMenu.setAnswerText(0, "huk");
+        QAMenu.setAnswerText(1, "huuuuuuk");
+        QAMenu.startQuestion();
+    }
+
+    public void onAnswerSend(QuestionManager.AnswerKeeper keeper)
+    {
+        ui.updateCurrentCanvas(scoreMenu);
     }
 
     public void onQuestionRecieved(QuestionManager.QuestionKeeper keeper)
     {
+        ui.updateCurrentCanvas(questionMenu);
         questionMenu.gameObject.SetActive(true);
         QAMenu.setAnswerCount(keeper.choicesNb);
         QAMenu.setQuestionText(keeper.question);
         for (int i = 0; i < keeper.choicesNb; ++i)
             QAMenu.setAnswerText(i, "huk");
+        QAMenu.startQuestion();
     }
 
     // Use this for initialization
