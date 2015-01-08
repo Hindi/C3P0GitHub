@@ -266,9 +266,10 @@ public class C3PONetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		tcpNetwork = C3PONetwork.Instance;
-		
-		loginInfos = new Dictionary<string,string>();
-		loginInfos.Add("raphael","jesuisunmotdepasse");
+
+        loginInfos = new Dictionary<string, string>();
+        loginInfos.Add("raphael", "jesuisunmotdepasse");
+        loginInfos.Add("a", "b");
 		playerNetworkInfo = new Dictionary<string, string>();
 		
 		fillLoginInfos();

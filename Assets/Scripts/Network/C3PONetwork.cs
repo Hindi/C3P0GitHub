@@ -87,7 +87,7 @@ public class C3PONetwork : MonoBehaviour {
 		
 		/* Bind to it */
 		MasterServer.port = masterPort;
-		MasterServer.ipAddress = "127.0.0.1"; /* We're on the teacher computer so the master server is right there */
+        MasterServer.ipAddress = "127.0.0.1"; /* We're on the teacher computer so the master server is right there */
 		Network.InitializeServer(1000,gamePort,false);
 		MasterServer.RegisterHost("C3PO", "TeacherServer");
 	}
@@ -194,7 +194,7 @@ public class C3PONetwork : MonoBehaviour {
 
     private void SendData()
     {
-        string customMessage = "10.42.5.244";
+        string customMessage = "127.0.0.1";
         sender.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length);
     }
 	
@@ -220,11 +220,11 @@ public class C3PONetwork : MonoBehaviour {
 	void Start () {
         if(IS_SERVER)
         {
-            sender = new UdpClient(remotePort, AddressFamily.InterNetwork);
+            sender = new UdpClient();
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
             sender.Connect(groupEP);
 
-            InvokeRepeating("SendData", 0, 5f);
+            InvokeRepeating("SendData", 0, 1f);
         }
 	}
 	

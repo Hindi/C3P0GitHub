@@ -13,23 +13,23 @@ public class LobbyState : State {
 
     }
 
-    public void start()
+    public override void start()
     {
         C3PONetwork.Instance.createTeacherServer();
         EventManager.Raise(EnumEvent.SERVERUI);
     }
 
-    public void onLevelWasLoaded(int lvl)
+    public override void onLevelWasLoaded(int lvl)
     {
 
     }
 
-    public void end()
+    public override void end()
     {
 
     }
 
-    public void update()
+    public override void update()
     {
         /* TODO remplacer par le GUI */
 		if(Input.GetKey(KeyCode.Escape))

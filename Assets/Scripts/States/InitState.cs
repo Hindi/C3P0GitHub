@@ -31,7 +31,7 @@ class InitState : State {
             if (C3PONetwork.Instance.IS_SERVER)
             {
                 stateManager_.changeState(StateEnum.SERVERCONNECTION);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Lobby");
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "ServerLobby");
             }
             else
             {
