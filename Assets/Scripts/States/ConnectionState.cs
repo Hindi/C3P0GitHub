@@ -11,7 +11,14 @@ public class ConnectionState : State
     public ConnectionState(StateManager stateManager)
         : base(stateManager)
     {
+        EventManager.AddListener(EnumEvent.CONNECTIONESTABLISHED, onConnectedToTeacher);
+    }
 
+    public void onConnectedToTeacher()
+    {
+        EventManager.Raise(EnumEvent.CLOSEMENU);
+        stateManager_.changeState(StateEnum.QUESTIONANSWER);
+        EventManager<string>.Raise(EnumEvent.LOADLEVEL, "QuestionAnswer");
     }
 
     public override void onLevelWasLoaded(int lvl)

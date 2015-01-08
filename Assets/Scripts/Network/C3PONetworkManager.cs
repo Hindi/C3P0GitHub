@@ -194,7 +194,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		privateID = uniqueID;
 		isConnectedApp = true;
-		Debug.Log("Successful connexion");
+        EventManager.Raise(EnumEvent.CONNECTIONESTABLISHED);
 	}
 	
 	/**
