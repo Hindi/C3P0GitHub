@@ -38,7 +38,8 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 	
 	public bool isConnectedApp;
-	
+	public string login;
+    public string password;
 	
 	
 	
@@ -71,19 +72,25 @@ public class C3PONetworkManager : MonoBehaviour {
 	 **/
 	public void connectToTeacher(string login, string password)
 	{
+        this.login = login;
+        this.password = password;
+
 		if (tcpNetwork == null) 
 			tcpNetwork = C3PONetwork.Instance;
 			
 		tcpNetwork.connectTeacherServer();
-		
+	}
+
+    public void onConnectedToUnity()
+    {
 		if(!tcpNetwork.isConnectedToTeacher)
 		{
 			isConnectedApp = false;
 			throw new System.Exception("Failed to connect to teacher");
 		}
-		
-		networkView.RPC("clientConnect", RPCMode.Server, login, password);
-	}
+
+        networkView.RPC("clientConnect", RPCMode.Server, login, password);
+    }
 	
 	 
 	/**
@@ -273,7 +280,8 @@ public class C3PONetworkManager : MonoBehaviour {
 		playerNetworkInfo = new Dictionary<string, string>();
 		
 		fillLoginInfos();
-		
+
+        EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
 	}
 	
 	// Update is called once per frame
