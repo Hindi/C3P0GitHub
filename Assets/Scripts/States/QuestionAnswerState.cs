@@ -33,7 +33,6 @@ public class QuestionAnswerState : State
         questionMenu = ui.QuestionCanvas;
         scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
-        testQuestion();
     }
 
     public void onAnswerSelected(int id)
