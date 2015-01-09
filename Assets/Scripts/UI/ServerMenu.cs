@@ -12,4 +12,9 @@ public class ServerMenu : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void sendQuestion()
+    {
+        QuestionManager.Instance.sendQuestion("WTF MAN");
+    }
 }

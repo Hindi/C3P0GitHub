@@ -256,7 +256,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     private void giveResult(string uniqueID, string rep, bool b)
     {
-        networkView.RPC("rcvResult", RPCMode.Others, rep, b);
+        networkView.RPC("rcvResult", RPCMode.Others, uniqueID, rep, b);
     }
 
     [RPC]
