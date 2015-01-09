@@ -23,7 +23,8 @@ public class QuestionAnswerState : State
     public override void onLevelWasLoaded(int lvl)
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
-        EventManager<QuestionManager.AnswerKeeper>.AddListener(EnumEvent.ANSWERSND, onAnswerSend);
+        EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
+        EventManager<QuestionManager.AnswerKeeper>.AddListener(EnumEvent.ANSWERRCV, onAnswerSend); 
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         c3poNetwork = networkManager.GetComponent<C3PONetwork>();
@@ -33,6 +34,11 @@ public class QuestionAnswerState : State
         scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
         testQuestion();
+    }
+
+    public void onAnswerSelected(int id)
+    {
+        c3poNetworkManager.sendAnswer(id);
     }
 
     private void testQuestion()
@@ -46,7 +52,7 @@ public class QuestionAnswerState : State
         QAMenu.startQuestion();
     }
 
-    public void onAnswerSend(QuestionManager.AnswerKeeper keeper)
+    public void onAnswerSend(QuestionManager.AnswerKeeper k)
     {
         ui.updateCurrentCanvas(scoreMenu);
     }

@@ -12,7 +12,12 @@ public class QuestionAnswerMenu : MonoBehaviour {
     List<Button> buttons;
 
     [SerializeField]
+    private Text scoreLabel;
+
+    [SerializeField]
     private ProgressBar timeBar;
+
+    private int score;
 
     private float startTime;
     private const float questionTime = 10;
@@ -45,8 +50,17 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        score = 0;
         timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
+        EventManager<bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
 	}
+
+    public void onResultRecieved(bool result)
+    {
+        if (result)
+            score++;
+        scoreLabel.text = score.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,8 +71,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void answer(int id)
     {
-        QuestionManager.AnswerKeeper keeper = new QuestionManager.AnswerKeeper();
-        keeper.intRep = id;
-        EventManager<QuestionManager.AnswerKeeper>.Raise(EnumEvent.ANSWERSND, keeper);
+        EventManager<int>.Raise(EnumEvent.ANSWERSELECT, id);
     }
 }

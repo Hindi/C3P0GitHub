@@ -239,8 +239,8 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
-			string login = playerNetworkInfo[uniqueID];
-            QuestionManager.Instance.rcvAnswer(login, rep);
+            QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
+            giveResult(playerNetworkInfo[uniqueID], "huk", true);
 		}
 	}
 	
@@ -249,10 +249,24 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
-			string login = playerNetworkInfo[uniqueID];
-            QuestionManager.Instance.rcvAnswer(login, rep);
+            QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
+            giveResult(playerNetworkInfo[uniqueID], "huk", true);
 		}
 	}
+
+    private void giveResult(string uniqueID, string rep, bool b)
+    {
+        networkView.RPC("rcvResult", RPCMode.Others, rep, b);
+    }
+
+    [RPC]
+    void rcvResult(string uniqueID, string rep, bool b)
+    {
+		if(playerNetworkInfo.ContainsKey(uniqueID))
+        {
+            EventManager<bool>.Raise(EnumEvent.QUESTIONRESULT, true);
+        }
+    }
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
