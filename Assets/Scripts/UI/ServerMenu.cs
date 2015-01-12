@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ServerMenu : MonoBehaviour {
+
+    private List<QuestionManager.QuestionKeeper> questionList;
+    private int questionNb = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +17,26 @@ public class ServerMenu : MonoBehaviour {
 	
 	}
 
+    public void loadXml()
+    {
+        TextAsset questionFile;
+        questionFile = (TextAsset)UnityEngine.Resources.Load("loadXml/questions");
+        questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
+        questionNb = 0;
+        Debug.Log("Xml loaded");
+    }
+
     public void sendQuestion()
     {
-        QuestionManager.Instance.sendQuestion("WTF MAN");
+        if (questionNb < questionList.Count)
+        {
+            QuestionManager.Instance.sendQuestion(questionList[questionNb]);
+        }
+        Debug.Log("Question sent");
+    }
+
+    public void launchGame()
+    {
+        // lancer le RPC qui charge le jeu à la fois chez les clients et sur le serveur
     }
 }

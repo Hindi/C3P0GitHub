@@ -25,7 +25,7 @@ public class QuestionManager {
         public string rep1, rep2, rep3, rep4;
     }
 
-    [XmlType("QuestionKeeper")]
+    [XmlType("AnswerKeeper")]
     public class AnswerKeeper
     {
         [XmlIgnore]
@@ -83,6 +83,11 @@ public class QuestionManager {
     /**
      * Functions used to send a question to students
      **/
+    public void sendQuestion(QuestionKeeper qBuffer)
+    {
+        C3PONetworkManager.Instance.sendQuestion(qBuffer);
+    }
+
     public void sendQuestion(string squestion, string rep1, string rep2)
     {
         questionBuffer.qType = QuestionType.qM;
