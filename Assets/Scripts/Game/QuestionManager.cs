@@ -89,9 +89,11 @@ public class QuestionManager {
     /**
      * Functions used to send a question to students
      **/
-    public void sendQuestion(QuestionKeeper qBuffer)
+    public void sendQuestion(QuestionKeeper q)
     {
-        C3PONetworkManager.Instance.sendQuestion(qBuffer);
+        questionBuffer = new QuestionKeeper(q);
+        oldQuestions.Add(new QuestionKeeper(questionBuffer));
+        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
 
     public void sendQuestion(string squestion, QuestionKeeper q)
