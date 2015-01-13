@@ -9,7 +9,7 @@ public class ServerMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        loadXml();
 	}
 	
 	// Update is called once per frame
@@ -20,7 +20,7 @@ public class ServerMenu : MonoBehaviour {
     public void loadXml()
     {
         TextAsset questionFile;
-        questionFile = (TextAsset)UnityEngine.Resources.Load("loadXml/questions");
+        questionFile = (TextAsset)UnityEngine.Resources.Load("xml/questions");
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
         questionNb = 0;
         Debug.Log("Xml loaded");
