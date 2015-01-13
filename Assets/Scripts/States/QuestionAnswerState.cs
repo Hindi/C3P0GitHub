@@ -63,7 +63,7 @@ public class QuestionAnswerState : State
         QAMenu.setAnswerCount(keeper.choicesNb);
         QAMenu.setQuestionText(keeper.question);
         for (int i = 0; i < keeper.choicesNb; ++i)
-            QAMenu.setAnswerText(i, "huk");
+            QAMenu.setAnswerText(i, keeper.reponses[i]);
         QAMenu.startQuestion();
     }
 

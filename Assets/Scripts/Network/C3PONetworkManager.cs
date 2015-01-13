@@ -107,13 +107,13 @@ public class C3PONetworkManager : MonoBehaviour {
                 switch(question.choicesNb)
                 {
                     case 2:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2);
+                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1]);
                         break;
                     case 3:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2, question.rep3);
+                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2]);
                         break;
                     case 4:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2, question.rep3, question.rep4);
+                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2], question.reponses[3]);
                         break;
                 }
                 break;

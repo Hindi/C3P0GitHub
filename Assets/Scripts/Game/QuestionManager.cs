@@ -11,18 +11,23 @@ public class QuestionManager {
     [XmlType("QuestionKeeper")]
     public class QuestionKeeper
     {
-        public QuestionKeeper() { }
+        public QuestionKeeper()
+        {
+            reponses = new List<string>();
+        }
         public QuestionKeeper(QuestionKeeper q)
         {
             qType = q.qType;
             choicesNb = q.choicesNb;
             question = q.question;
-            rep1 = q.rep1; rep2 = q.rep2; rep3 = q.rep3; rep4 = q.rep4;
+            reponses = new List<string>();
+            foreach (string s in q.reponses)
+                reponses.Add(s);
         }
         public QuestionType qType;
         public int choicesNb;
         public string question;
-        public string rep1, rep2, rep3, rep4;
+        public List<string> reponses;
     }
 
     [XmlType("AnswerKeeper")]
@@ -88,38 +93,9 @@ public class QuestionManager {
         C3PONetworkManager.Instance.sendQuestion(qBuffer);
     }
 
-    public void sendQuestion(string squestion, string rep1, string rep2)
+    public void sendQuestion(string squestion, QuestionKeeper q)
     {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 2;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-    }
-
-    public void sendQuestion(string squestion, string rep1, string rep2, string rep3)
-    {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 3;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		questionBuffer.rep3 = rep3;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-    }
-
-    public void sendQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
-    {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 3;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		questionBuffer.rep3 = rep3;
-		questionBuffer.rep4 = rep4;
+        questionBuffer = new QuestionKeeper(q);
 		oldQuestions.Add(new QuestionKeeper(questionBuffer));
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
@@ -141,8 +117,8 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 2;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
+        questionBuffer.reponses[0] = rep1;
+        questionBuffer.reponses[1] = rep2;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
@@ -152,9 +128,9 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 3;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
-        questionBuffer.rep3 = rep3;
+        questionBuffer.reponses[0] = rep1;
+        questionBuffer.reponses[1] = rep2;
+        questionBuffer.reponses[2] = rep3;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
@@ -164,10 +140,10 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
-        questionBuffer.rep3 = rep3;
-        questionBuffer.rep4 = rep4;
+        questionBuffer.reponses[0] = rep1;
+        questionBuffer.reponses[1] = rep2;
+        questionBuffer.reponses[2] = rep3;
+        questionBuffer.reponses[3] = rep4;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
