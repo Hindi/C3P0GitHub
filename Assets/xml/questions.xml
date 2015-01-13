@@ -4,7 +4,9 @@
 		<QuestionType>qM</QuestionType>
 		<choicesNb>2</choicesNb>
 		<question>Ceci est un test</question>
-		<rep1>Ceci est la reponse un</rep1>
-		<rep2>Ceci est la reponse deux</rep2>
+		<reponses>
+			<r>Ceci est la reponse un</r>
+			<r>Ceci est la reponse deux</r>
+		</reponses>
 	</QuestionKeeper>
 </Datatable>

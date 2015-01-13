@@ -27,6 +27,7 @@ public class QuestionManager {
         public QuestionType qType;
         public int choicesNb;
         public string question;
+        [XmlArrayItem("r")]
         public List<string> reponses;
     }
 

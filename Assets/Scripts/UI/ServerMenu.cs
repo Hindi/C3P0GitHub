@@ -29,6 +29,7 @@ public class ServerMenu : MonoBehaviour {
     {
         if (questionNb < questionList.Count)
         {
+            Debug.Log(questionList[questionNb].reponses.Count);
             QuestionManager.Instance.sendQuestion(questionList[questionNb]);
         }
     }
