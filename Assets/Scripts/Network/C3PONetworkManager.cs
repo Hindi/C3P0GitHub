@@ -97,13 +97,13 @@ public class C3PONetworkManager : MonoBehaviour {
 	 * Functions used to send a question by the server 
 	 **/
 	public void sendQuestion(QuestionManager.QuestionKeeper question)
-	{
+    {
 		switch(question.qType)
         {
             case QuestionManager.QuestionType.qO:
                 networkView.RPC("rcvQuestionRPC0", RPCMode.Others, question.question);
                 break;
-            default:
+            case QuestionManager.QuestionType.qM:
                 switch(question.choicesNb)
                 {
                     case 2:

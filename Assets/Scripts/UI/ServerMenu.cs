@@ -23,7 +23,6 @@ public class ServerMenu : MonoBehaviour {
         questionFile = (TextAsset)UnityEngine.Resources.Load("xml/questions");
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
         questionNb = 0;
-        Debug.Log("Xml loaded");
     }
 
     public void sendQuestion()
@@ -32,7 +31,6 @@ public class ServerMenu : MonoBehaviour {
         {
             QuestionManager.Instance.sendQuestion(questionList[questionNb]);
         }
-        Debug.Log("Question sent");
     }
 
     public void launchGame()
