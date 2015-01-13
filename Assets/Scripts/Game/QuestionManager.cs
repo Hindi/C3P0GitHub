@@ -118,8 +118,8 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 2;
         questionBuffer.question = squestion;
-        questionBuffer.reponses[0] = rep1;
-        questionBuffer.reponses[1] = rep2;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
@@ -129,9 +129,9 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 3;
         questionBuffer.question = squestion;
-        questionBuffer.reponses[0] = rep1;
-        questionBuffer.reponses[1] = rep2;
-        questionBuffer.reponses[2] = rep3;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
+        questionBuffer.reponses.Add(rep3);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
@@ -141,10 +141,10 @@ public class QuestionManager {
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
-        questionBuffer.reponses[0] = rep1;
-        questionBuffer.reponses[1] = rep2;
-        questionBuffer.reponses[2] = rep3;
-        questionBuffer.reponses[3] = rep4;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
+        questionBuffer.reponses.Add(rep3);
+        questionBuffer.reponses.Add(rep4);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
