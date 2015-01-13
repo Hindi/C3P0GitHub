@@ -129,8 +129,8 @@ public class QuestionManager {
      **/
     public void rcvQuestion(string squestion)
     {
-        questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
+        questionBuffer.qType = QuestionType.qO;
+        questionBuffer.choicesNb = 0;
         questionBuffer.question = squestion;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
@@ -139,7 +139,7 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
+        questionBuffer.choicesNb = 2;
         questionBuffer.question = squestion;
         questionBuffer.rep1 = rep1;
         questionBuffer.rep2 = rep2;
@@ -150,7 +150,7 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
+        questionBuffer.choicesNb = 3;
         questionBuffer.question = squestion;
         questionBuffer.rep1 = rep1;
         questionBuffer.rep2 = rep2;
