@@ -36,6 +36,7 @@ public class LobbyState : State {
         /* TODO remplacer par le GUI */
 		if(Input.GetKey(KeyCode.Escape))
 			Application.Quit();
+        QuestionManager.Instance.update();
     }
 
 
