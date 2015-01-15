@@ -23,6 +23,7 @@ public class QuestionAnswerState : State
     public override void onLevelWasLoaded(int lvl)
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
+        EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
@@ -32,6 +33,11 @@ public class QuestionAnswerState : State
         questionMenu = ui.QuestionCanvas;
         scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
+    }
+
+    public void onResultRecieved(string rep, bool result)
+    {
+        ui.updateCurrentCanvas(scoreMenu);
     }
 
     public void onAnswerSelected(int id)

@@ -27,6 +27,7 @@ public class ServerMenu : MonoBehaviour {
         if (QuestionManager.Instance.isQuestionTimeOver())
         {
             coursButtons.SetActive(false);
+            sendQuestionButton.gameObject.SetActive(false);
             startGameButton.SetActive(true);
         }
 	}
@@ -54,7 +55,7 @@ public class ServerMenu : MonoBehaviour {
         string levelName= "";
         int stateEnum = 0;
         Debug.Log(courseId);
-        if(courseId == 1)
+        if(courseId == 2)
         {
             levelName = "SpaceInvader";
             stateEnum = (int)StateEnum.SPACEINVADER;
