@@ -235,8 +235,11 @@ public class QuestionManager {
         Client current;
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
         {
-            current = e.Value;
-            addDefaultAnswerToClient(ref current);
+            if (!e.Value.AnsweredLast)
+            {
+                current = e.Value;
+                addDefaultAnswerToClient(ref current);
+            }
         }
         current = C3PONetworkManager.Instance.DummyClient;
         addDefaultAnswerToClient(ref current);
