@@ -140,7 +140,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
     {
-        networkView.RPC("rcvResult", netPlayer, RPCMode.Others, rep, b);
+        networkView.RPC("rcvResult", netPlayer, rep, b);
         Debug.Log("Result sent to client " + netPlayer);
     }
 	

@@ -37,6 +37,7 @@ public class Client {
 
     public QuestionManager.AnswerKeeper lastAnswer()
     {
+        Debug.Log(answers.Count);
         return answers[answers.Count - 1];
     }
 
