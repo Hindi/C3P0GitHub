@@ -58,6 +58,7 @@ public class QuestionManager {
 			if (instance == null)
 			{
 				instance = new QuestionManager();
+                instance.questionList = new List<QuestionManager.QuestionKeeper>();
                 return instance;
 			}
 			else 
@@ -78,6 +79,9 @@ public class QuestionManager {
     private List<QuestionKeeper> oldQuestions = null;
     private bool waitForAnswers = false;
     private float questionSendTime;
+    private List<QuestionManager.QuestionKeeper> questionList;
+    private int courseId;
+    private int currentQuestionNb = 0;
 
     /**************************************************************************************
 	 * Public functions                                                                   *
@@ -100,16 +104,31 @@ public class QuestionManager {
     /**
      * Functions used to send a question to students
      **/
-    public void sendQuestion(QuestionKeeper q)
+    public void sendQuestion()
     {
         if (!waitForAnswers)
         {
             waitForAnswers = true;
             questionSendTime = Time.time;
-            questionBuffer = new QuestionKeeper(q);
+            questionBuffer = new QuestionKeeper(questionList[currentQuestionNb]);
             oldQuestions.Add(new QuestionKeeper(questionBuffer));
             C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+            currentQuestionNb++;
         }
+    }
+
+    public bool isQuestionTimeOver()
+    {
+        return !(currentQuestionNb < questionList.Count);
+    }
+
+    public void loadXml(int id)
+    {
+        courseId = id;
+        TextAsset questionFile;
+        questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
+        questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
+        currentQuestionNb = 0;
     }
 
     private void reset()
