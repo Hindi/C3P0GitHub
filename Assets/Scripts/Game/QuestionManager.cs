@@ -232,20 +232,29 @@ public class QuestionManager {
 
     void checkClientsAnswers()
     {
+        Client current;
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
         {
-            if (!e.Value.AnsweredLast)
-            {
-                AnswerKeeper a = new AnswerKeeper();
-                a.question = oldQuestions[oldQuestions.Count - 1];
-                a.rep = a.question.bonneReponse + 1;
-                a.answerTime = 40;
-                a.result = false;
-
-                e.Value.Answers.Add(a);
-            }
-            e.Value.AnsweredLast = false;
+            current = e.Value;
+            addDefaultAnswerToClient(ref current);
         }
+        current = C3PONetworkManager.Instance.DummyClient;
+        addDefaultAnswerToClient(ref current);
+    }
+
+    void addDefaultAnswerToClient(ref Client c)
+    {
+        if (!c.AnsweredLast)
+        {
+            AnswerKeeper a = new AnswerKeeper();
+            a.question = oldQuestions[oldQuestions.Count - 1];
+            a.rep = a.question.bonneReponse + 1;
+            a.answerTime = 40;
+            a.result = false;
+
+            c.Answers.Add(a);
+        }
+        c.AnsweredLast = false;
     }
 
     public void update()

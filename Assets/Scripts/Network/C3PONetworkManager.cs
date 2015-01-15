@@ -57,6 +57,13 @@ public class C3PONetworkManager : MonoBehaviour {
 	/** Used by the server only **/
 	// dictionnaire contenant login/mot de passe
 	private Dictionary<string, string> loginInfos = null;
+
+    //Dummy client copié par les nouveaux connectés pour les stats.
+    private Client dummyClient;
+    public Client DummyClient
+    {
+        get { return dummyClient; }
+    }
 	
 	// dictionnaire contenant un identifiant unique
 	private Dictionary<string, Client> playerNetworkInfo = null;
@@ -140,7 +147,6 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
     {
-        Debug.Log(rep + " " + b);
         networkView.RPC("rcvResult", netPlayer, rep, b);
     }
 	
@@ -200,7 +206,7 @@ public class C3PONetworkManager : MonoBehaviour {
 		if(checkLog(login, password))
 		{
 			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
-            Client c = new Client();
+            Client c = new Client(dummyClient);
             c.Login = login;
             string id = login + System.DateTime.Now;
             c.Id = id;

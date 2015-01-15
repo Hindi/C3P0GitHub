@@ -6,6 +6,13 @@ public class Client {
     public Client()
     {
         answers = new List<QuestionManager.AnswerKeeper>();
+        answeredLast = false;
+    }
+
+    public Client(Client c)
+    {
+        answeredLast = c.AnsweredLast;
+        answers = c.Answers;
     }
 
     private string login;
@@ -41,6 +48,8 @@ public class Client {
     {
         get { return answers; }
     }
+
+
 
     public QuestionManager.AnswerKeeper lastAnswer()
     {
