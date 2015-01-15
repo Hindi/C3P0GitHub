@@ -182,6 +182,7 @@ public class QuestionManager {
         a.result = (a.question.bonneReponse == rep);
 
         c.Answers.Add(a);
+        Debug.Log(c.lastAnswer().question.explication);
     }
 
     /**
