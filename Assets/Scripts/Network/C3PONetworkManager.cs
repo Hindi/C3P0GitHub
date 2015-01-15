@@ -302,7 +302,7 @@ public class C3PONetworkManager : MonoBehaviour {
         loginInfos.Add("raphael", "jesuisunmotdepasse");
         loginInfos.Add("a", "b");
 		playerNetworkInfo = new Dictionary<string, Client>();
-		
+        dummyClient = new Client();
 		fillLoginInfos();
 
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
