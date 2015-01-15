@@ -29,6 +29,13 @@ public class Client {
         set { networkPlayer = value; }
     }
 
+    private bool answeredLast;
+    public bool AnsweredLast
+    {
+        get { return answeredLast; }
+        set { answeredLast = value; }
+    }
+
     public List<QuestionManager.AnswerKeeper> answers;
     public List<QuestionManager.AnswerKeeper> Answers
     {

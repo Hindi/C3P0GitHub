@@ -184,7 +184,6 @@ public class QuestionManager {
         a.result = (a.question.bonneReponse == rep);
 
         c.Answers.Add(a);
-        Debug.Log(c.lastAnswer().question.explication);
     }
 
     /**
@@ -228,6 +227,24 @@ public class QuestionManager {
             b = e.Value.lastQuestionResult();
             explication = e.Value.lastAnswerExplication();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
+        }
+    }
+
+    void checkClientsAnswers()
+    {
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        {
+            if (!e.Value.AnsweredLast)
+            {
+                AnswerKeeper a = new AnswerKeeper();
+                a.question = oldQuestions[oldQuestions.Count - 1];
+                a.intRep = a.question.bonneReponse +1;
+                a.answerTime = 30;
+                a.result = false;
+
+                e.Value.Answers.Add(a);
+            }
+            e.Value.AnsweredLast = false;
         }
     }
 
