@@ -20,6 +20,8 @@ public class QuestionManager {
             qType = q.qType;
             question = q.question;
             reponses = new List<string>();
+            bonneReponse = q.bonneReponse;
+            explication = q.explication;
             foreach (string s in q.reponses)
                 reponses.Add(s);
         }
