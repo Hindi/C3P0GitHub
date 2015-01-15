@@ -82,6 +82,7 @@ public class QuestionManager {
     private List<QuestionManager.QuestionKeeper> questionList;
     private int courseId;
     private int currentQuestionNb = 0;
+    private bool xmlLoaded = false;
 
     /**************************************************************************************
 	 * Public functions                                                                   *
@@ -119,7 +120,7 @@ public class QuestionManager {
 
     public bool isQuestionTimeOver()
     {
-        return !(currentQuestionNb < questionList.Count);
+        return !(xmlLoaded && currentQuestionNb < questionList.Count);
     }
 
     public void loadXml(int id)
@@ -129,6 +130,7 @@ public class QuestionManager {
         questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
         currentQuestionNb = 0;
+        xmlLoaded = true;
     }
 
     private void reset()
