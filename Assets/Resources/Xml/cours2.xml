@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<QuestionKeeper>
+		<QuestionType>qM</QuestionType>
+		<choicesNb>2</choicesNb>
+		<question>Ceci est un test</question>
+		<reponses>
+			<r> Ceci est la reponse un </r>
+			<r> Ceci est la reponse deux </r>
+			<r> Ceci est la reponse trois </r>
+			<r> Ceci est la reponse quatre</r>
+		</reponses>
+	</QuestionKeeper>
+</Datatable>
