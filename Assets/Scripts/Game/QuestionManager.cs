@@ -166,8 +166,9 @@ public class QuestionManager {
             playerAnswers.Add(login, new List<AnswerKeeper>());
         playerAnswers[login].Add(a);
 
-        Debug.Log("abwabwa");
-        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, a.question.explication, (a.question.reponses[a.question.bonneReponse] == rep));
+        bool b = (a.question.reponses[a.question.bonneReponse] == rep);
+
+        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV,a);
     }
 
@@ -180,9 +181,9 @@ public class QuestionManager {
         if (!playerAnswers.ContainsKey(login))
             playerAnswers.Add(login, new List<AnswerKeeper>());
         playerAnswers[login].Add(a);
+        bool b = (a.question.bonneReponse == rep);
 
-        Debug.Log("huk");
-        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, a.question.explication, (a.question.bonneReponse == rep));
+        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
     }
 
