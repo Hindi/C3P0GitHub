@@ -239,7 +239,7 @@ public class QuestionManager {
                 AnswerKeeper a = new AnswerKeeper();
                 a.question = oldQuestions[oldQuestions.Count - 1];
                 a.intRep = a.question.bonneReponse +1;
-                a.answerTime = 30;
+                a.answerTime = 40;
                 a.result = false;
 
                 e.Value.Answers.Add(a);
