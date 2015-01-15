@@ -26,7 +26,7 @@ public class LevelLoader : MonoBehaviour {
 
     public void onLevelLoad(string levelName)
     {
-        StartCoroutine(loadLevelCoroutine(levelName));
+        loadLevel(levelName);
     }
 	
 	// Update is called once per frame
@@ -34,10 +34,9 @@ public class LevelLoader : MonoBehaviour {
 	
 	}
 
-    [RPC]
-    public void loadLevel(string level, int levelPrefix)
+    public void loadLevel(string levelName)
     {
-        StartCoroutine(cloadLevel(level, levelPrefix));
+        StartCoroutine(loadLevelCoroutine(levelName));
     }
 
     private void OnLevelWasLoaded(int iLevel)

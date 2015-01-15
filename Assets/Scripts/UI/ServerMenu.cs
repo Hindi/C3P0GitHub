@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class ServerMenu : MonoBehaviour {
 
-    private List<QuestionManager.QuestionKeeper> questionList;
-    private int questionNb = 0;
 
     [SerializeField]
     private Button sendQuestionButton;
@@ -14,23 +12,30 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private GameObject coursButtons;
 
+    [SerializeField]
+    private GameObject startGameButton;
+
+    private int courseId;
+
 	// Use this for initialization
 	void Start () {
-        
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+    void Update()
+    {
+        if (QuestionManager.Instance.isQuestionTimeOver())
+        {
+            coursButtons.SetActive(false);
+            sendQuestionButton.gameObject.SetActive(false);
+            startGameButton.SetActive(true);
+        }
 	}
 
     public void loadXml(int id)
     {
-        TextAsset questionFile;
-        questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
-        questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
-        questionNb = 0;
-
+        courseId = id;
+        QuestionManager.Instance.loadXml(id);
         switchToSendQuestion();
     }
 
@@ -42,15 +47,19 @@ public class ServerMenu : MonoBehaviour {
 
     public void sendQuestion()
     {
-        if (questionNb < questionList.Count)
-        {
-            QuestionManager.Instance.sendQuestion(questionList[questionNb]);
-            questionNb++;
-        }
+        QuestionManager.Instance.sendQuestion();
     }
 
     public void launchGame()
     {
-        // lancer le RPC qui charge le jeu à la fois chez les clients et sur le serveur
+        string levelName= "";
+        int stateEnum = 0;
+        Debug.Log(courseId);
+        if(courseId == 2)
+        {
+            levelName = "SpaceInvader";
+            stateEnum = (int)StateEnum.SPACEINVADER;
+        }
+        C3PONetworkManager.Instance.loadLevel(levelName, stateEnum);
     }
 }
