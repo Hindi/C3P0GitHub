@@ -270,8 +270,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rcvResult(string rep, bool b)
     {
-        Debug.Log("Result is : " + rep + " " + b);
-        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
+        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
     }
 	
 	/**************************************************************************************

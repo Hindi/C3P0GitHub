@@ -60,7 +60,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void onResultRecieved(string rep, bool result)
     {
-        Debug.Log("huk");
         if (result)
             score++;
         scoreLabel.text = score.ToString();

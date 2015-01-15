@@ -254,6 +254,7 @@ public class QuestionManager {
         {
             if(Time.time - questionSendTime > 5)
             {
+                checkClientsAnswers();
                 sendResults();
                 waitForAnswers = false;
             }
