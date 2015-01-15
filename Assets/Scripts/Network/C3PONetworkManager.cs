@@ -268,6 +268,7 @@ public class C3PONetworkManager : MonoBehaviour {
     {
 		if(playerNetworkInfo.ContainsKey(uniqueID))
         {
+            Debug.Log("abwabwa");
             EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
         }
     }

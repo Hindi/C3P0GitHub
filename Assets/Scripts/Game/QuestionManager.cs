@@ -166,6 +166,8 @@ public class QuestionManager {
             playerAnswers.Add(login, new List<AnswerKeeper>());
         playerAnswers[login].Add(a);
 
+        Debug.Log("abwabwa");
+        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, a.question.explication, (a.question.reponses[a.question.bonneReponse] == rep));
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV,a);
     }
 
@@ -179,6 +181,7 @@ public class QuestionManager {
             playerAnswers.Add(login, new List<AnswerKeeper>());
         playerAnswers[login].Add(a);
 
+        Debug.Log("huk");
         EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, a.question.explication, (a.question.bonneReponse == rep));
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
     }
