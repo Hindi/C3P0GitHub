@@ -140,8 +140,8 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
     {
+        Debug.Log(rep + " " + b);
         networkView.RPC("rcvResult", netPlayer, rep, b);
-        Debug.Log("Result sent to client " + netPlayer);
     }
 	
 	/**************************************************************************************
@@ -270,6 +270,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rcvResult(string rep, bool b)
     {
+        Debug.Log("Result is : " + rep + " " + b);
         EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
     }
 	

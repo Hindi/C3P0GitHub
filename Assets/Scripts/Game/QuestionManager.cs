@@ -102,7 +102,6 @@ public class QuestionManager {
     {
         waitForAnswers = true;
         questionSendTime = Time.time;
-        Debug.Log("Sending Question !");
         questionBuffer = new QuestionKeeper(q);
         oldQuestions.Add(new QuestionKeeper(questionBuffer));
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
@@ -226,7 +225,6 @@ public class QuestionManager {
             b = e.Value.lastQuestionResult();
             explication = e.Value.lastAnswerExplication();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
-            Debug.Log("Sending result to client " + e.Value.Login);
         }
     }
 
@@ -236,7 +234,6 @@ public class QuestionManager {
         {
             if(Time.time - questionSendTime > 5)
             {
-                Debug.Log("sending answers");
                 sendResults();
                 waitForAnswers = false;
             }
