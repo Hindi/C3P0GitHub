@@ -21,7 +21,7 @@ public class ServerMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        questionList = new List<QuestionManager.QuestionKeeper>();
 	}
 	
 	// Update is called once per frame
