@@ -14,6 +14,11 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private GameObject coursButtons;
 
+    [SerializeField]
+    private GameObject startGameButton;
+
+    private int courseId;
+
 	// Use this for initialization
 	void Start () {
         
@@ -26,6 +31,7 @@ public class ServerMenu : MonoBehaviour {
 
     public void loadXml(int id)
     {
+        courseId = id;
         TextAsset questionFile;
         questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
@@ -47,10 +53,22 @@ public class ServerMenu : MonoBehaviour {
             QuestionManager.Instance.sendQuestion(questionList[questionNb]);
             questionNb++;
         }
+        else
+        {
+            coursButtons.SetActive(false);
+            startGameButton.SetActive(true);
+        }
     }
 
     public void launchGame()
     {
-        // lancer le RPC qui charge le jeu à la fois chez les clients et sur le serveur
+        string levelName= "";
+        int stateEnum = 0;
+        if(courseId == 1)
+        {
+            levelName = "SpaceInvader";
+            stateEnum = (int)StateEnum.SPACEINVADER;
+        }
+        C3PONetworkManager.Instance.loadLevel(levelName, stateEnum);
     }
 }

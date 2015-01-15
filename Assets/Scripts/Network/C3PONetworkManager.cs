@@ -64,6 +64,11 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         get { return playerNetworkInfo; }
     }
+
+    [SerializeField]
+    private LevelLoader levelLoader;
+    [SerializeField]
+    private StateManager stateManager;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -141,6 +146,11 @@ public class C3PONetworkManager : MonoBehaviour {
     public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
     {
         networkView.RPC("rcvResult", netPlayer, rep, b);
+    }
+
+    public void loadLevel(string name, int stateEnum)
+    {
+        networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
     }
 	
 	/**************************************************************************************
@@ -242,6 +252,13 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         QuestionManager.Instance.rcvQuestion(question, rep1, rep2, rep3, rep4);
 	}
+
+    [RPC]
+    void rpcLoadLevel(string level, int levelPrefix, int stateEnum)
+    {
+        levelLoader.loadLevel(level);
+        stateManager.changeState((StateEnum)stateEnum);
+    }
 	
 	/**
 	 * Functions used to send an answer to the server
