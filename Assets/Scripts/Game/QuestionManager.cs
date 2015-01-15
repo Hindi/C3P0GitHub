@@ -182,6 +182,7 @@ public class QuestionManager {
         a.intRep = rep;
         a.answerTime = Time.time - questionSendTime;
         a.result = (a.question.bonneReponse == rep);
+        Debug.Log(a.question.bonneReponse + " " + rep);
 
         c.Answers.Add(a);
     }
