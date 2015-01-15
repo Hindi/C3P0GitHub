@@ -24,6 +24,7 @@ public class ServerMenu : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+        Debug.Log(QuestionManager.Instance.isQuestionTimeOver());
         if (QuestionManager.Instance.isQuestionTimeOver())
         {
             coursButtons.SetActive(false);

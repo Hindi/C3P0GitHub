@@ -120,7 +120,7 @@ public class QuestionManager {
 
     public bool isQuestionTimeOver()
     {
-        return !(xmlLoaded && currentQuestionNb < questionList.Count);
+        return (xmlLoaded && currentQuestionNb == questionList.Count);
     }
 
     public void loadXml(int id)
