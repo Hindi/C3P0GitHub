@@ -25,8 +25,13 @@ public class ServerMenu : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+    void Update()
+    {
+        if (questionNb >= questionList.Count)
+        {
+            coursButtons.SetActive(false);
+            startGameButton.SetActive(true);
+        }
 	}
 
     public void loadXml(int id)
