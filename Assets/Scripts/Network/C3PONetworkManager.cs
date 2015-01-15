@@ -59,7 +59,11 @@ public class C3PONetworkManager : MonoBehaviour {
 	private Dictionary<string, string> loginInfos = null;
 	
 	// dictionnaire contenant un identifiant unique
-	private Dictionary<string, string> playerNetworkInfo = null;
+	private Dictionary<string, Client> playerNetworkInfo = null;
+    public  Dictionary<string, Client> PlayerNetworkInfo
+    {
+        get { return playerNetworkInfo; }
+    }
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -133,10 +137,10 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
-	
-	public void sendResult(string login, string rep, bool b)
+
+    public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
     {
-        networkView.RPC("rcvResult", RPCMode.Others, playerNetworkInfo[login], rep, b);
+        networkView.RPC("rcvResult", netPlayer, RPCMode.Others, rep, b);
     }
 	
 	/**************************************************************************************
@@ -195,8 +199,12 @@ public class C3PONetworkManager : MonoBehaviour {
 		if(checkLog(login, password))
 		{
 			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
-			playerNetworkInfo.Add(login+System.DateTime.Now, login);
-			
+            Client c = new Client();
+            c.Login = login;
+            string id = login + System.DateTime.Now;
+            c.Id = id;
+            c.NetworkPlayer = info.sender;
+			playerNetworkInfo.Add(id, c);
 		}
 	}
 	
@@ -238,7 +246,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	/**
 	 * Functions used to send an answer to the server
 	 **/
-	[RPC] 
+	/*[RPC] 
 	void rcvAnswerRPCs(string uniqueID, string rep)
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
@@ -246,31 +254,22 @@ public class C3PONetworkManager : MonoBehaviour {
             QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
             giveResult(playerNetworkInfo[uniqueID], "huk", true);
 		}
-	}
+	}*/
 	
 	[RPC] 
 	void rcvAnswerRPCi(string uniqueID, int rep)
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
-            QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
-            giveResult(playerNetworkInfo[uniqueID], "huk", true);
+            Client c = playerNetworkInfo[uniqueID];
+            QuestionManager.Instance.rcvAnswer(ref c, rep);
 		}
 	}
 
-    private void giveResult(string uniqueID, string rep, bool b)
-    {
-        networkView.RPC("rcvResult", RPCMode.Others, uniqueID, rep, b);
-    }
-
     [RPC]
-    void rcvResult(string uniqueID, string rep, bool b)
+    void rcvResult(string rep, bool b)
     {
-		if(playerNetworkInfo.ContainsKey(uniqueID))
-        {
-            Debug.Log("abwabwa");
-            EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
-        }
+        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
     }
 	
 	/**************************************************************************************
@@ -295,7 +294,7 @@ public class C3PONetworkManager : MonoBehaviour {
         loginInfos = new Dictionary<string, string>();
         loginInfos.Add("raphael", "jesuisunmotdepasse");
         loginInfos.Add("a", "b");
-		playerNetworkInfo = new Dictionary<string, string>();
+		playerNetworkInfo = new Dictionary<string, Client>();
 		
 		fillLoginInfos();
 

@@ -37,7 +37,8 @@ public class QuestionManager {
         [XmlIgnore]
         public QuestionKeeper question;
         public int intRep;
-        public string stringRep;
+        public bool result;
+        public float answerTime;
     }
 
     public enum QuestionType
@@ -72,13 +73,14 @@ public class QuestionManager {
     private static QuestionManager instance = null;
 
     // dictionnaire contenant toutes les réponses à toutes les questions de tout le monde
-	private Dictionary<string, List<AnswerKeeper>> playerAnswers = null;
-	private List<QuestionKeeper> oldQuestions = null;
+    private List<QuestionKeeper> oldQuestions = null;
+    private bool waitForAnswers = false;
+    private float questionSendTime;
 
     /**************************************************************************************
 	 * Public functions                                                                   *
 	 **************************************************************************************/
-    public void sendQuestion(string squestion)
+   /* public void sendQuestion(string squestion)
     {
         questionBuffer.qType = QuestionType.qO;
 		questionBuffer.question = squestion;
@@ -86,20 +88,22 @@ public class QuestionManager {
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
 
+    public void sendQuestion(string squestion, QuestionKeeper q)
+    {
+        questionBuffer = new QuestionKeeper(q);
+        oldQuestions.Add(new QuestionKeeper(questionBuffer));
+        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+    }*/
+
     /**
      * Functions used to send a question to students
      **/
     public void sendQuestion(QuestionKeeper q)
     {
+        waitForAnswers = true;
+        questionSendTime = Time.time;
         questionBuffer = new QuestionKeeper(q);
         oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-    }
-
-    public void sendQuestion(string squestion, QuestionKeeper q)
-    {
-        questionBuffer = new QuestionKeeper(q);
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
 
@@ -156,35 +160,28 @@ public class QuestionManager {
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
-    public void rcvAnswer(string login, string rep)
+    /*public void rcvAnswer(string login, string rep)
     {
         AnswerKeeper a = new AnswerKeeper();
         a.question = oldQuestions[oldQuestions.Count - 1];
         a.stringRep = rep;
 
-        if (!playerAnswers.ContainsKey(login))
-            playerAnswers.Add(login, new List<AnswerKeeper>());
-        playerAnswers[login].Add(a);
+        addPlayerAnswer(login, a);
 
         bool b = (a.question.reponses[a.question.bonneReponse] == rep);
 
-        C3PONetworkManager.Instance.sendResult(login, a.question.explication, b);
-        EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV,a);
-    }
+        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
+    }*/
 
-    public void rcvAnswer(string login, int rep)
+    public void rcvAnswer(ref Client c, int rep)
     {
         AnswerKeeper a = new AnswerKeeper();
         a.question = oldQuestions[oldQuestions.Count - 1];
         a.intRep = rep;
+        a.answerTime = Time.time - questionSendTime;
+        a.result = (a.question.bonneReponse == rep);
 
-        if (!playerAnswers.ContainsKey(login))
-            playerAnswers.Add(login, new List<AnswerKeeper>());
-        playerAnswers[login].Add(a);
-        bool b = (a.question.bonneReponse == rep);
-
-        C3PONetworkManager.Instance.sendResult(login, a.question.explication, b);
-        EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
+        c.Answers.Add(a);
     }
 
     /**
@@ -212,11 +209,34 @@ public class QuestionManager {
         else
         {
             instance = this;
-            
-		    playerAnswers = new Dictionary<string, List<AnswerKeeper>>();
+
 		    oldQuestions = new List<QuestionKeeper>();
 		
 		    questionBuffer = new QuestionKeeper();
+        }
+    }
+
+    void sendResults()
+    {
+        bool b;
+        string explication;
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        {
+            b = e.Value.lastQuestionResult();
+            explication = e.Value.lastAnswerExplication();
+            C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
+        }
+    }
+
+    public void update()
+    {
+        if(waitForAnswers)
+        {
+            if(Time.time - questionSendTime > 5)
+            {
+                Debug.Log("sending answers");
+                sendResults();
+            }
         }
     }
 }
