@@ -168,7 +168,7 @@ public class QuestionManager {
 
         bool b = (a.question.reponses[a.question.bonneReponse] == rep);
 
-        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
+        C3PONetworkManager.Instance.sendResult(login, a.question.explication, b);
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV,a);
     }
 
@@ -183,7 +183,7 @@ public class QuestionManager {
         playerAnswers[login].Add(a);
         bool b = (a.question.bonneReponse == rep);
 
-        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
+        C3PONetworkManager.Instance.sendResult(login, a.question.explication, b);
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
     }
 
