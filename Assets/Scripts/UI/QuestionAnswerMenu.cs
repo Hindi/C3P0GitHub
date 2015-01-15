@@ -18,6 +18,9 @@ public class QuestionAnswerMenu : MonoBehaviour {
     private Text answerLabel;
 
     [SerializeField]
+    private Text resultBoolLabel;
+
+    [SerializeField]
     private ProgressBar timeBar;
 
     private int score;
@@ -61,7 +64,13 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void onResultRecieved(string rep, bool result)
     {
         if (result)
+        {
             score++;
+            resultBoolLabel.text ="Vrais :";
+        }
+        else
+            resultBoolLabel.text = "Faux :";
+        
         scoreLabel.text = score.ToString();
         answerLabel.text = rep;
     }
@@ -75,6 +84,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void answer(int id)
     {
+        resultBoolLabel.text = "";
         answerLabel.text = "En attente des réponses des autres étudiants.";
         EventManager<int>.Raise(EnumEvent.ANSWERSELECT, id);
     }
