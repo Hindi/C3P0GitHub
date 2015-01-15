@@ -17,6 +17,7 @@ public enum StateEnum
     GAME,
     SPACEINVADER,
     LUNARLANDER,
+    PONG,
     CONNECTION,
     SERVERCONNECTION,
     QUESTIONANSWER
