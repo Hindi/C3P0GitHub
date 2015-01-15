@@ -38,7 +38,7 @@ public class QuestionManager {
     {
         [XmlIgnore]
         public QuestionKeeper question;
-        public int intRep;
+        public int rep;
         public bool result;
         public float answerTime;
     }
@@ -179,11 +179,10 @@ public class QuestionManager {
     {
         AnswerKeeper a = new AnswerKeeper();
         a.question = oldQuestions[oldQuestions.Count - 1];
-        a.intRep = rep;
+        a.rep = rep;
         a.answerTime = Time.time - questionSendTime;
         a.result = (a.question.bonneReponse == rep);
-        Debug.Log(a.question.bonneReponse + " " + rep);
-
+        c.AnsweredLast = true;
         c.Answers.Add(a);
     }
 
@@ -239,7 +238,7 @@ public class QuestionManager {
             {
                 AnswerKeeper a = new AnswerKeeper();
                 a.question = oldQuestions[oldQuestions.Count - 1];
-                a.intRep = a.question.bonneReponse +1;
+                a.rep = a.question.bonneReponse + 1;
                 a.answerTime = 40;
                 a.result = false;
 
