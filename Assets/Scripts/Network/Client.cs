@@ -54,6 +54,7 @@ public class Client {
 
     public bool lastQuestionResult()
     {
+        Debug.Log(lastAnswer().result + " " + lastAnswer().intRep + " " + lastAnswer().question.bonneReponse);
         return lastAnswer().result;
     }
 

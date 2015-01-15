@@ -75,6 +75,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void answer(int id)
     {
+        answerLabel.text = "En attente des réponses des autres étudiants.";
         EventManager<int>.Raise(EnumEvent.ANSWERSELECT, id);
     }
 }
