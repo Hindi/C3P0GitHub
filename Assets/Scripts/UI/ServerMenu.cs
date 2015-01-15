@@ -30,6 +30,7 @@ public class ServerMenu : MonoBehaviour {
         questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
         questionNb = 0;
+
         switchToSendQuestion();
     }
 
@@ -44,6 +45,7 @@ public class ServerMenu : MonoBehaviour {
         if (questionNb < questionList.Count)
         {
             QuestionManager.Instance.sendQuestion(questionList[questionNb]);
+            questionNb++;
         }
     }
 

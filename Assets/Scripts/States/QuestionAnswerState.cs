@@ -60,9 +60,9 @@ public class QuestionAnswerState : State
     {
         ui.updateCurrentCanvas(questionMenu);
         questionMenu.gameObject.SetActive(true);
-        QAMenu.setAnswerCount(keeper.choicesNb);
+        QAMenu.setAnswerCount(keeper.reponses.Count);
         QAMenu.setQuestionText(keeper.question);
-        for (int i = 0; i < keeper.choicesNb; ++i)
+        for (int i = 0; i < keeper.reponses.Count; ++i)
             QAMenu.setAnswerText(i, keeper.reponses[i]);
         QAMenu.startQuestion();
     }

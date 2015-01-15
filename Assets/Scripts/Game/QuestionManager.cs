@@ -18,14 +18,12 @@ public class QuestionManager {
         public QuestionKeeper(QuestionKeeper q)
         {
             qType = q.qType;
-            choicesNb = q.choicesNb;
             question = q.question;
             reponses = new List<string>();
             foreach (string s in q.reponses)
                 reponses.Add(s);
         }
         public QuestionType qType;
-        public int choicesNb;
         public string question;
         [XmlArrayItem("r")]
         public List<string> reponses;
@@ -109,7 +107,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion)
     {
         questionBuffer.qType = QuestionType.qO;
-        questionBuffer.choicesNb = 0;
         questionBuffer.question = squestion;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
@@ -118,7 +115,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 2;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);
@@ -129,7 +125,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 3;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);
@@ -141,7 +136,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
     {
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);

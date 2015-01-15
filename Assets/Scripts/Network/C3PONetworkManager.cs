@@ -105,7 +105,7 @@ public class C3PONetworkManager : MonoBehaviour {
                 break;
             case QuestionManager.QuestionType.qM:
 
-                switch(question.choicesNb)
+                switch(question.reponses.Count)
                 {
                     case 2:
                         networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1]);
