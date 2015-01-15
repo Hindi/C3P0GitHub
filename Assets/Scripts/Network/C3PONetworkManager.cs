@@ -134,9 +134,9 @@ public class C3PONetworkManager : MonoBehaviour {
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
 	
-	public void sendResult(string rep, bool b)
+	public void sendResult(string login, string rep, bool b)
     {
-        networkView.RPC("rcvResult", RPCMode.Others, privateID, rep, b);
+        networkView.RPC("rcvResult", RPCMode.Others, playerNetworkInfo[login], rep, b);
     }
 	
 	/**************************************************************************************
