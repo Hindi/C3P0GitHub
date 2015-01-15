@@ -134,7 +134,10 @@ public class C3PONetworkManager : MonoBehaviour {
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
 	
-	
+	public void sendResult(string rep, bool b)
+    {
+        networkView.RPC("rcvResult", RPCMode.Others, privateID, rep, b);
+    }
 	
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
@@ -265,7 +268,7 @@ public class C3PONetworkManager : MonoBehaviour {
     {
 		if(playerNetworkInfo.ContainsKey(uniqueID))
         {
-            EventManager<bool>.Raise(EnumEvent.QUESTIONRESULT, true);
+            EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, true);
         }
     }
 	

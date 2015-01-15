@@ -27,6 +27,8 @@ public class QuestionManager {
         public string question;
         [XmlArrayItem("r")]
         public List<string> reponses;
+        public int bonneReponse;
+        public string explication;
     }
 
     [XmlType("AnswerKeeper")]
@@ -101,11 +103,17 @@ public class QuestionManager {
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
 
+    private void reset()
+    {
+        questionBuffer.reponses.Clear();
+    }
+
     /**
      * Functions called when a question is received by the students
      **/
     public void rcvQuestion(string squestion)
     {
+        reset();
         questionBuffer.qType = QuestionType.qO;
         questionBuffer.question = squestion;
 
@@ -114,6 +122,7 @@ public class QuestionManager {
 
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
@@ -124,6 +133,7 @@ public class QuestionManager {
 
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
@@ -135,6 +145,7 @@ public class QuestionManager {
 
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
@@ -168,6 +179,7 @@ public class QuestionManager {
             playerAnswers.Add(login, new List<AnswerKeeper>());
         playerAnswers[login].Add(a);
 
+        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, a.question.explication, (a.question.bonneReponse == rep));
         EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
     }
 

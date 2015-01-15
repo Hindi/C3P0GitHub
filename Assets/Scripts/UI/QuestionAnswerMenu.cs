@@ -15,6 +15,9 @@ public class QuestionAnswerMenu : MonoBehaviour {
     private Text scoreLabel;
 
     [SerializeField]
+    private Text answerLabel;
+
+    [SerializeField]
     private ProgressBar timeBar;
 
     private int score;
@@ -52,14 +55,15 @@ public class QuestionAnswerMenu : MonoBehaviour {
 	void Start () {
         score = 0;
         timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
-        EventManager<bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
+        EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
 	}
 
-    public void onResultRecieved(bool result)
+    public void onResultRecieved(string rep, bool result)
     {
         if (result)
             score++;
         scoreLabel.text = score.ToString();
+        answerLabel.text = rep;
     }
 	
 	// Update is called once per frame

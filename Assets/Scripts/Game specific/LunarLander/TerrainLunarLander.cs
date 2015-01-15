@@ -25,7 +25,6 @@ public class TerrainLunarLander : MonoBehaviour {
 
     public void setTerrain(int id)
     {
-        Debug.Log(id);
         hideTerrains();
         terrains[id].SetActive(true);
     }

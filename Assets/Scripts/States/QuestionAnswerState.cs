@@ -24,7 +24,6 @@ public class QuestionAnswerState : State
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
-        EventManager<QuestionManager.AnswerKeeper>.AddListener(EnumEvent.ANSWERRCV, onAnswerSend); 
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         c3poNetwork = networkManager.GetComponent<C3PONetwork>();
@@ -38,6 +37,7 @@ public class QuestionAnswerState : State
     public void onAnswerSelected(int id)
     {
         c3poNetworkManager.sendAnswer(id);
+        ui.updateCurrentCanvas(scoreMenu);
     }
 
     private void testQuestion()
@@ -49,11 +49,6 @@ public class QuestionAnswerState : State
         QAMenu.setAnswerText(0, "huk");
         QAMenu.setAnswerText(1, "huuuuuuk");
         QAMenu.startQuestion();
-    }
-
-    public void onAnswerSend(QuestionManager.AnswerKeeper k)
-    {
-        ui.updateCurrentCanvas(scoreMenu);
     }
 
     public void onQuestionRecieved(QuestionManager.QuestionKeeper keeper)

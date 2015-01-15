@@ -302,7 +302,7 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	void OnServerInitialized()
 	{
-		Debug.Log(Time.time + "Server Initialized");
+
 	}
 
     void OnConnectedToServer()

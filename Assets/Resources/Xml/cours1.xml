@@ -7,5 +7,7 @@
 			<r> Ceci est la reponse un </r>
 			<r> Ceci est la reponse deux </r>
 		</reponses>
+		<bonneReponse>1</bonneReponse>
+		<explication>Abwabwabwabwabwabwbaw</explication>
 	</QuestionKeeper>
 </Datatable>
