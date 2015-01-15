@@ -22,7 +22,7 @@ public class BallMoving : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.y > upScreen)
+        if (transform.position.y > upScreen && speed.y > 0)
         {
             speed.y = (speed.y < 0) ? speed.y : -1 * speed.y;
             if (fireBall)
@@ -30,7 +30,7 @@ public class BallMoving : MonoBehaviour {
                 transform.Rotate(new Vector3(0, 0, 2 * Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg));
             }
         }
-        else if (transform.position.y < -downScreen)
+        else if (transform.position.y < -downScreen && speed.y < 0)
         {
             speed.y = (speed.y > 0) ? speed.y : -1 * speed.y;
             if (fireBall)
@@ -47,10 +47,10 @@ public class BallMoving : MonoBehaviour {
      **/
     void OnTriggerEnter2D(Collider2D obstacle)
     {
-
+        PongManagerScript managerScript = manager.GetComponent<PongManagerScript>();
         if (((coupPlayer == -1 && transform.position.x < 0) || (coupPlayer == 1 && transform.position.x > 0)) && coupSpecial)
         {
-            manager.GetComponent<PongManagerScript>().activateCoupSpecial(speed);
+            managerScript.activateCoupSpecial(speed);
             speed = new Vector2(0, 0);
             coupSpecial = false;
         }
@@ -59,8 +59,20 @@ public class BallMoving : MonoBehaviour {
             speed.x *= -1;
             if (fireBall)
             {
-                transform.Rotate(new Vector3(0, 0, 180));
+                transform.Rotate(new Vector3(0, 0, -2 * Mathf.Atan2(speed.x, speed.y) * Mathf.Rad2Deg));
+            }/*
+            if (managerScript.param.id == 0)
+            {
+                // work some magic
             }
+            else if (managerScript.param.id == 1)
+            {
+                // work some other magic
+            }
+            else if (managerScript.param.id == 2)
+            {
+                // work some more magic
+            }*/
         }
         
     }
