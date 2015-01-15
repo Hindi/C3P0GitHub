@@ -102,11 +102,14 @@ public class QuestionManager {
      **/
     public void sendQuestion(QuestionKeeper q)
     {
-        waitForAnswers = true;
-        questionSendTime = Time.time;
-        questionBuffer = new QuestionKeeper(q);
-        oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+        if (!waitForAnswers)
+        {
+            waitForAnswers = true;
+            questionSendTime = Time.time;
+            questionBuffer = new QuestionKeeper(q);
+            oldQuestions.Add(new QuestionKeeper(questionBuffer));
+            C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+        }
     }
 
     private void reset()

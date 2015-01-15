@@ -17,6 +17,7 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private GameObject startGameButton;
 
+    private bool questionTimeOver = false;
     private int courseId;
 
 	// Use this for initialization
@@ -27,7 +28,7 @@ public class ServerMenu : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (questionNb >= questionList.Count)
+        if (questionTimeOver)
         {
             coursButtons.SetActive(false);
             startGameButton.SetActive(true);
@@ -59,10 +60,7 @@ public class ServerMenu : MonoBehaviour {
             questionNb++;
         }
         else
-        {
-            coursButtons.SetActive(false);
-            startGameButton.SetActive(true);
-        }
+            questionTimeOver = true;
     }
 
     public void launchGame()
