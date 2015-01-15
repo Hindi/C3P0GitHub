@@ -2,7 +2,14 @@
 <Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<QuestionKeeper>
 		<QuestionType>qM</QuestionType>
-		<choicesNb>2</choicesNb>
+		<question>Ceci est un test</question>
+		<reponses>
+			<r> Ceci est la reponse un </r>
+			<r> Ceci est la reponse deux </r>
+		</reponses>
+	</QuestionKeeper>
+	<QuestionKeeper>
+		<QuestionType>qM</QuestionType>
 		<question>Ceci est un test</question>
 		<reponses>
 			<r> Ceci est la reponse un </r>
