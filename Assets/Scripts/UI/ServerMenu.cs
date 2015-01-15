@@ -69,7 +69,7 @@ public class ServerMenu : MonoBehaviour {
     {
         string levelName= "";
         int stateEnum = 0;
-        if(courseId == 1)
+        //if(courseId == 1)
         {
             levelName = "SpaceInvader";
             stateEnum = (int)StateEnum.SPACEINVADER;

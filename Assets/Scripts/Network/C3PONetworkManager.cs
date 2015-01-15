@@ -256,6 +256,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rpcLoadLevel(string level, int stateEnum)
     {
+        Debug.Log(level + " " + stateEnum);
         levelLoader.loadLevel(level);
         stateManager.changeState((StateEnum)stateEnum);
     }
