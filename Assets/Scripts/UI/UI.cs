@@ -6,11 +6,29 @@ public class UI : MonoBehaviour {
 	[SerializeField]
     private Canvas pauseMenu;
     [SerializeField]
+    private Canvas questionMenu;
+    public Canvas QuestionCanvas
+    {
+        get { return questionMenu; }
+        set { questionMenu = value; }
+    }
+
+    [SerializeField]
+    private Canvas scoreMenu;
+    public Canvas ScoreMenu
+    {
+        get { return scoreMenu; }
+        set { scoreMenu = value; }
+    }
+
+    [SerializeField]
     private Canvas paramMenu;
     [SerializeField]
     private Canvas gameOverMenu;
     [SerializeField]
     private Canvas connectionMenu;
+    [SerializeField]
+    private Canvas connectionPromptMenu;
     [SerializeField]
     private Canvas serverMenu;
 
@@ -77,6 +95,9 @@ public class UI : MonoBehaviour {
         gameOverMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         paramMenu.gameObject.SetActive(false);
+        connectionMenu.gameObject.SetActive(false);
+        connectionPromptMenu.gameObject.SetActive(false);
+        questionMenu.gameObject.SetActive(false);
     }
 	
 	// Update is called once per frame

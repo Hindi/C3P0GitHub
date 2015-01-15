@@ -3,6 +3,7 @@ Library/
 Build/
 build/
 obj/
+MasterServer/
 *.sln
 *.csproj
 *.suo

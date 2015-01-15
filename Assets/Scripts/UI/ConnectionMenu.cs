@@ -48,9 +48,9 @@ public class ConnectionMenu : MonoBehaviour {
         {
             networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
-            Debug.Log("Connection failed");
+            Debug.Log(e);
             onConnectionQuitClick();
         }
     }

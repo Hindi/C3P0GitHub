@@ -39,7 +39,6 @@ public class ProgressBar : MonoBehaviour
         this.size = size;
         factor = Responsive.responsiveFactor();
 
-        Debug.Log(pos.x + " " + pos.y);
         barRect = new Rect(pos.x, pos.y, size.x * factor, size.y * factor);
         backTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
         frontTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
@@ -59,6 +58,6 @@ public class ProgressBar : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(size.x * fillFactor() * factor);
+
     }
 }

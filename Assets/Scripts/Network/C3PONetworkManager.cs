@@ -38,7 +38,8 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 	
 	public bool isConnectedApp;
-	
+	public string login;
+    public string password;
 	
 	
 	
@@ -58,7 +59,16 @@ public class C3PONetworkManager : MonoBehaviour {
 	private Dictionary<string, string> loginInfos = null;
 	
 	// dictionnaire contenant un identifiant unique
-	private Dictionary<string, string> playerNetworkInfo = null;
+	private Dictionary<string, Client> playerNetworkInfo = null;
+    public  Dictionary<string, Client> PlayerNetworkInfo
+    {
+        get { return playerNetworkInfo; }
+    }
+
+    [SerializeField]
+    private LevelLoader levelLoader;
+    [SerializeField]
+    private StateManager stateManager;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -71,42 +81,49 @@ public class C3PONetworkManager : MonoBehaviour {
 	 **/
 	public void connectToTeacher(string login, string password)
 	{
+        this.login = login;
+        this.password = password;
+
 		if (tcpNetwork == null) 
 			tcpNetwork = C3PONetwork.Instance;
 			
 		tcpNetwork.connectTeacherServer();
-		
+	}
+
+    public void onConnectedToUnity()
+    {
 		if(!tcpNetwork.isConnectedToTeacher)
 		{
 			isConnectedApp = false;
 			throw new System.Exception("Failed to connect to teacher");
 		}
-		
-		networkView.RPC("clientConnect", RPCMode.Server, login, password);
-	}
+
+        networkView.RPC("clientConnect", RPCMode.Server, login, password);
+    }
 	
 	 
 	/**
 	 * Functions used to send a question by the server 
 	 **/
 	public void sendQuestion(QuestionManager.QuestionKeeper question)
-	{
+    {
 		switch(question.qType)
         {
             case QuestionManager.QuestionType.qO:
                 networkView.RPC("rcvQuestionRPC0", RPCMode.Others, question.question);
                 break;
-            default:
-                switch(question.choicesNb)
+            case QuestionManager.QuestionType.qM:
+
+                switch(question.reponses.Count)
                 {
                     case 2:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2);
+                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1]);
                         break;
                     case 3:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2, question.rep3);
+                        networkView.RPC("rcvQuestionRPC3", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2]);
                         break;
                     case 4:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.rep1, question.rep2, question.rep3, question.rep4);
+                        networkView.RPC("rcvQuestionRPC4", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2], question.reponses[3]);
                         break;
                 }
                 break;
@@ -116,17 +133,25 @@ public class C3PONetworkManager : MonoBehaviour {
 	/**
 	 * Functions used to send an answer to the server
 	 **/
-	public void sendAnswer(string rep)
+	/*public void sendAnswer(string rep)
 	{
 		networkView.RPC("rcvAnswerRPCs", RPCMode.Server, privateID, rep);
-	}
+	}*/
 	
 	public void sendAnswer(int rep)
 	{
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
-	
-	
+
+    public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
+    {
+        networkView.RPC("rcvResult", netPlayer, rep, b);
+    }
+
+    public void loadLevel(string name, int stateEnum)
+    {
+        networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
+    }
 	
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
@@ -184,8 +209,12 @@ public class C3PONetworkManager : MonoBehaviour {
 		if(checkLog(login, password))
 		{
 			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
-			playerNetworkInfo.Add(login+System.DateTime.Now, login);
-			
+            Client c = new Client();
+            c.Login = login;
+            string id = login + System.DateTime.Now;
+            c.Id = id;
+            c.NetworkPlayer = info.sender;
+			playerNetworkInfo.Add(id, c);
 		}
 	}
 	
@@ -223,29 +252,43 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         QuestionManager.Instance.rcvQuestion(question, rep1, rep2, rep3, rep4);
 	}
+
+    [RPC]
+    void rpcLoadLevel(string level, int stateEnum)
+    {
+        Debug.Log(level + " " + stateEnum);
+        levelLoader.loadLevel(level);
+        stateManager.changeState((StateEnum)stateEnum);
+    }
 	
 	/**
 	 * Functions used to send an answer to the server
 	 **/
-	[RPC] 
+	/*[RPC] 
 	void rcvAnswerRPCs(string uniqueID, string rep)
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
-			string login = playerNetworkInfo[uniqueID];
-            QuestionManager.Instance.rcvAnswer(login, rep);
+            QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
+            giveResult(playerNetworkInfo[uniqueID], "huk", true);
 		}
-	}
+	}*/
 	
 	[RPC] 
 	void rcvAnswerRPCi(string uniqueID, int rep)
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
-			string login = playerNetworkInfo[uniqueID];
-            QuestionManager.Instance.rcvAnswer(login, rep);
+            Client c = playerNetworkInfo[uniqueID];
+            QuestionManager.Instance.rcvAnswer(ref c, rep);
 		}
 	}
+
+    [RPC]
+    void rcvResult(string rep, bool b)
+    {
+        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
+    }
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -254,7 +297,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		if(instance != null)
 		{
-			Debug.Log("There should only be one C3PONetworkManager instance");
 			throw new System.Exception("There should be only one active instance of the C3PONetworkManager component at a time.");
 		}
 		else
@@ -270,10 +312,11 @@ public class C3PONetworkManager : MonoBehaviour {
         loginInfos = new Dictionary<string, string>();
         loginInfos.Add("raphael", "jesuisunmotdepasse");
         loginInfos.Add("a", "b");
-		playerNetworkInfo = new Dictionary<string, string>();
+		playerNetworkInfo = new Dictionary<string, Client>();
 		
 		fillLoginInfos();
-		
+
+        EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
 	}
 	
 	// Update is called once per frame

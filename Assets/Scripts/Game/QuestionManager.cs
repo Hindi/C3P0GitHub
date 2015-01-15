@@ -11,27 +11,36 @@ public class QuestionManager {
     [XmlType("QuestionKeeper")]
     public class QuestionKeeper
     {
-        public QuestionKeeper() { }
+        public QuestionKeeper()
+        {
+            reponses = new List<string>();
+        }
         public QuestionKeeper(QuestionKeeper q)
         {
             qType = q.qType;
-            choicesNb = q.choicesNb;
             question = q.question;
-            rep1 = q.rep1; rep2 = q.rep2; rep3 = q.rep3; rep4 = q.rep4;
+            reponses = new List<string>();
+            bonneReponse = q.bonneReponse;
+            explication = q.explication;
+            foreach (string s in q.reponses)
+                reponses.Add(s);
         }
         public QuestionType qType;
-        public int choicesNb;
         public string question;
-        public string rep1, rep2, rep3, rep4;
+        [XmlArrayItem("r")]
+        public List<string> reponses;
+        public int bonneReponse;
+        public string explication;
     }
 
-    [XmlType("QuestionKeeper")]
+    [XmlType("AnswerKeeper")]
     public class AnswerKeeper
     {
         [XmlIgnore]
         public QuestionKeeper question;
-        public int intRep;
-        public string stringRep;
+        public int rep;
+        public bool result;
+        public float answerTime;
     }
 
     public enum QuestionType
@@ -49,6 +58,7 @@ public class QuestionManager {
 			if (instance == null)
 			{
 				instance = new QuestionManager();
+                instance.questionList = new List<QuestionManager.QuestionKeeper>();
                 return instance;
 			}
 			else 
@@ -66,13 +76,18 @@ public class QuestionManager {
     private static QuestionManager instance = null;
 
     // dictionnaire contenant toutes les réponses à toutes les questions de tout le monde
-	private Dictionary<string, List<AnswerKeeper>> playerAnswers = null;
-	private List<QuestionKeeper> oldQuestions = null;
+    private List<QuestionKeeper> oldQuestions = null;
+    private bool waitForAnswers = false;
+    private float questionSendTime;
+    private List<QuestionManager.QuestionKeeper> questionList;
+    private int courseId;
+    private int currentQuestionNb = 0;
+    private bool xmlLoaded = false;
 
     /**************************************************************************************
 	 * Public functions                                                                   *
 	 **************************************************************************************/
-    public void sendQuestion(string squestion)
+   /* public void sendQuestion(string squestion)
     {
         questionBuffer.qType = QuestionType.qO;
 		questionBuffer.question = squestion;
@@ -80,43 +95,47 @@ public class QuestionManager {
         C3PONetworkManager.Instance.sendQuestion(questionBuffer);
     }
 
+    public void sendQuestion(string squestion, QuestionKeeper q)
+    {
+        questionBuffer = new QuestionKeeper(q);
+        oldQuestions.Add(new QuestionKeeper(questionBuffer));
+        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+    }*/
+
     /**
      * Functions used to send a question to students
      **/
-    public void sendQuestion(string squestion, string rep1, string rep2)
+    public void sendQuestion()
     {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 2;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+        if (!waitForAnswers)
+        {
+            waitForAnswers = true;
+            questionSendTime = Time.time;
+            questionBuffer = new QuestionKeeper(questionList[currentQuestionNb]);
+            oldQuestions.Add(new QuestionKeeper(questionBuffer));
+            C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+            currentQuestionNb++;
+        }
     }
 
-    public void sendQuestion(string squestion, string rep1, string rep2, string rep3)
+    public bool isQuestionTimeOver()
     {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 3;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		questionBuffer.rep3 = rep3;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+        return (xmlLoaded && currentQuestionNb == questionList.Count);
     }
 
-    public void sendQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
+    public void loadXml(int id)
     {
-        questionBuffer.qType = QuestionType.qM;
-		questionBuffer.choicesNb = 3;
-		questionBuffer.question = squestion;
-		questionBuffer.rep1 = rep1;
-		questionBuffer.rep2 = rep2;
-		questionBuffer.rep3 = rep3;
-		questionBuffer.rep4 = rep4;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+        courseId = id;
+        TextAsset questionFile;
+        questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
+        questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
+        currentQuestionNb = 0;
+        xmlLoaded = true;
+    }
+
+    private void reset()
+    {
+        questionBuffer.reponses.Clear();
     }
 
     /**
@@ -124,8 +143,8 @@ public class QuestionManager {
      **/
     public void rcvQuestion(string squestion)
     {
-        questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
+        reset();
+        questionBuffer.qType = QuestionType.qO;
         questionBuffer.question = squestion;
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
@@ -133,73 +152,71 @@ public class QuestionManager {
 
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
-        questionBuffer.rep3 = rep3;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
+        questionBuffer.reponses.Add(rep3);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
     {
+        reset();
         questionBuffer.qType = QuestionType.qM;
-        questionBuffer.choicesNb = 4;
         questionBuffer.question = squestion;
-        questionBuffer.rep1 = rep1;
-        questionBuffer.rep2 = rep2;
-        questionBuffer.rep3 = rep3;
-        questionBuffer.rep4 = rep4;
+        questionBuffer.reponses.Add(rep1);
+        questionBuffer.reponses.Add(rep2);
+        questionBuffer.reponses.Add(rep3);
+        questionBuffer.reponses.Add(rep4);
 
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
-    public void rcvAnswer(string login, string rep)
+    /*public void rcvAnswer(string login, string rep)
     {
         AnswerKeeper a = new AnswerKeeper();
         a.question = oldQuestions[oldQuestions.Count - 1];
         a.stringRep = rep;
 
-        if (!playerAnswers.ContainsKey(login))
-            playerAnswers.Add(login, new List<AnswerKeeper>());
-        playerAnswers[login].Add(a);
+        addPlayerAnswer(login, a);
 
-        EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV,a);
-    }
+        bool b = (a.question.reponses[a.question.bonneReponse] == rep);
 
-    public void rcvAnswer(string login, int rep)
+        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
+    }*/
+
+    public void rcvAnswer(ref Client c, int rep)
     {
         AnswerKeeper a = new AnswerKeeper();
         a.question = oldQuestions[oldQuestions.Count - 1];
-        a.intRep = rep;
-
-        if (!playerAnswers.ContainsKey(login))
-            playerAnswers.Add(login, new List<AnswerKeeper>());
-        playerAnswers[login].Add(a);
-
-        EventManager<AnswerKeeper>.Raise(EnumEvent.ANSWERRCV, a);
+        a.rep = rep;
+        a.answerTime = Time.time - questionSendTime;
+        a.result = (a.question.bonneReponse == rep);
+        c.AnsweredLast = true;
+        c.Answers.Add(a);
     }
 
     /**
      * Functions used to send an answer to the teacher
      **/
-    public void sendAnswer(string rep)
+    /*public void sendAnswer(string rep)
     {
         C3PONetworkManager.Instance.sendAnswer(rep);
-    }
+    }*/
 
     public void sendAnswer(int rep)
     {
@@ -218,11 +235,57 @@ public class QuestionManager {
         else
         {
             instance = this;
-            
-		    playerAnswers = new Dictionary<string, List<AnswerKeeper>>();
+
 		    oldQuestions = new List<QuestionKeeper>();
 		
 		    questionBuffer = new QuestionKeeper();
+        }
+    }
+
+    void sendResults()
+    {
+        bool b;
+        string explication;
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        {
+            b = e.Value.lastQuestionResult();
+            explication = e.Value.lastAnswerExplication();
+            C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
+        }
+    }
+
+    void checkClientsAnswers()
+    {
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        {
+            if (!e.Value.AnsweredLast)
+            {
+                AnswerKeeper a = new AnswerKeeper();
+                a.question = oldQuestions[oldQuestions.Count - 1];
+                a.rep = a.question.bonneReponse + 1;
+                a.answerTime = 40;
+                a.result = false;
+
+                e.Value.Answers.Add(a);
+            }
+            e.Value.AnsweredLast = false;
+        }
+    }
+
+    void addDefaultAnswerToClient(ref Client c)
+    {
+    }
+
+    public void update()
+    {
+        if(waitForAnswers)
+        {
+            if(Time.time - questionSendTime > 5)
+            {
+                checkClientsAnswers();
+                sendResults();
+                waitForAnswers = false;
+            }
         }
     }
 }
