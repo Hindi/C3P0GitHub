@@ -128,13 +128,14 @@ public class C3PONetworkManager : MonoBehaviour {
 	/**
 	 * Functions used to send an answer to the server
 	 **/
-	public void sendAnswer(string rep)
+	/*public void sendAnswer(string rep)
 	{
 		networkView.RPC("rcvAnswerRPCs", RPCMode.Server, privateID, rep);
-	}
+	}*/
 	
 	public void sendAnswer(int rep)
 	{
+        Debug.Log(rep);
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
 
@@ -262,6 +263,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		if(playerNetworkInfo.ContainsKey(uniqueID))
 		{
+            Debug.Log(rep);
             Client c = playerNetworkInfo[uniqueID];
             QuestionManager.Instance.rcvAnswer(ref c, rep);
 		}

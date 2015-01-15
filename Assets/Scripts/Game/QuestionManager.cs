@@ -189,10 +189,10 @@ public class QuestionManager {
     /**
      * Functions used to send an answer to the teacher
      **/
-    public void sendAnswer(string rep)
+    /*public void sendAnswer(string rep)
     {
         C3PONetworkManager.Instance.sendAnswer(rep);
-    }
+    }*/
 
     public void sendAnswer(int rep)
     {
