@@ -9,7 +9,7 @@ public class BinarySerializer {
 
     public static void SerializeData(PlayerData data)
     {
-        FileStream fs = new FileStream("data.dat", FileMode.Create);
+        FileStream fs = new FileStream("Assets/Ressources/data.dat", FileMode.Create);
 
         // Construct a BinaryFormatter and use it to serialize the data to the stream.
         BinaryFormatter formatter = new BinaryFormatter();
@@ -31,7 +31,7 @@ public class BinarySerializer {
     public static PlayerData DeserializeData()
     {
         // Open the file containing the data that you want to deserialize.
-        FileStream fs = new FileStream("data.dat", FileMode.Open);
+        FileStream fs = new FileStream("Assets/Ressources/data.dat", FileMode.Open);
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();

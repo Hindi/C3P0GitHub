@@ -352,7 +352,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        playerDatas.update();
+    void Update()
+    {
+        if (C3PONetwork.Instance.IS_SERVER)
+            playerDatas.update();
 	}
 }
