@@ -211,19 +211,19 @@ public class Tetromino : MonoBehaviour {
 	// updates falling and foreseen tetrominos
 	void updateGrid()
 	{
-		// yMin stocks the lowest child position of the tetromino that has just fallen
-		int yMin = Grid._grid.h;
+		// yMax stocks the highest child position of the tetromino that has just fallen
+		int yMax = 0;
 
 		// Add the new tetromino to the grid	
 		foreach (Transform child in transform) 
 		{
 			Vector2 v = Grid._grid.roundVec2(child.position);
 			Grid._grid.grid[(int)v.x, (int)v.y] = child;
-			if ((int) v.y < yMin)
-				yMin = (int) v.y;
+			if ((int) v.y > yMax)
+				yMax = (int) v.y;
 		}
 		// Now we delete potential full rows
-		Grid._grid.deleteFullRowsFrom(yMin);		
+		Grid._grid.deleteFullRowsFrom(yMax);		
 	}
 	
 

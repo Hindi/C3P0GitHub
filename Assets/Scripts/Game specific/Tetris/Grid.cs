@@ -68,17 +68,17 @@ public class Grid : MonoBehaviour {
 	
 	
 	// This function decreases the row at height y by nbDecrease 
-	public void decreaseRowBy(int y, int nbDecrease)
+	public void decreaseRow(int y)
 	{
 		for (int x = 0; x < w; x++)
 		{
 			if(grid[x,y] != null)
 			{
 				// Update the block position
-				grid[x,y].position += new Vector3(0,-nbDecrease,0);
+				grid[x,y].position += new Vector3(0,-1,0);
 
 				// Update the grid by moving down the one at pos x,y
-				grid[x, y-nbDecrease] = grid[x, y];
+				grid[x, y-1] = grid[x, y];
 				grid[x,y] = null;		
 			}
 		}
@@ -86,11 +86,11 @@ public class Grid : MonoBehaviour {
 
 	// When rows are deleted we have to move down all the blocks above by the number
 	// of deleted rows
-	public void decreaseAllRowsAboveBy(int p, int nbDecrease)
+	public void decreaseRowsAbove(int p)
 	{
-		for (int y = p+nbDecrease; y < h; y++)
+		for (int y = p; y < h; y++)
 		{
-			decreaseRowBy(y, nbDecrease);
+			decreaseRow(y);
 		}
 	}
 	
@@ -106,23 +106,23 @@ public class Grid : MonoBehaviour {
 	}
 	
 	// Function called when a tetromino has been placed at height y 
-    // (his lower part was at height y). We delete the full rows he might 
-	// have completed (so we only have to check the 4 rows above and count how
-	// many lines are deleted and move down the blocks above by this number
+    // (his highest part is at height y). We delete the full rows he might 
+	// have completed (so we only have to check the 4 rows below) 
+    // If some are deleted we move down the rows above
 	public void deleteFullRowsFrom(int y)
 	{
 		int nbDeleted = 0;
-		for (int i = y; i < y + 4 && i < h + 3; i++)
+		for (int i = y; (i > y-4) && (i >= 0); i--)
 		{
 			if (isRowFull(i))
 			{
 				deleteRow(i);
+                decreaseRowsAbove(i + 1);
 				nbDeleted++;
 			}
 		}
-        if(nbDeleted != 0)
-		    decreaseAllRowsAboveBy(y, nbDeleted);
-		//TO DO Augmenter les points correspondants
+        // if(nbDeleted != 0)
+		// TO DO Augmenter les points correspondants
 	}
 	
 	
