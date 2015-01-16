@@ -14,7 +14,7 @@ public class EnemySpaceWar : Spaceship {
     float calcGaussfromUinforme(float u1, float u2)
     {
         //Debug.Log(-2 * Mathf.Log(u1) * Mathf.Cos(2 * Mathf.PI * u2));
-        return Mathf.Sqrt(Mathf.Abs(-2 * Mathf.Log(u1) * Mathf.Cos(2 * Mathf.PI * u2)));
+        return Mathf.Sqrt(-2 * Mathf.Log(u1)) * Mathf.Cos(2 * Mathf.PI * u2);
     }
 
     Vector2 tirageGaussien()
