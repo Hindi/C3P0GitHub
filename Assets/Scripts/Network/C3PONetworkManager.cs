@@ -312,6 +312,8 @@ public class C3PONetworkManager : MonoBehaviour {
         loginInfos = new Dictionary<string, string>();
         loginInfos.Add("raphael", "jesuisunmotdepasse");
         loginInfos.Add("a", "b");
+        loginInfos.Add("b", "b");
+        loginInfos.Add("c", "b");
 		playerNetworkInfo = new Dictionary<string, Client>();
 		
 		fillLoginInfos();
