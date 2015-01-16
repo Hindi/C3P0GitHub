@@ -59,10 +59,10 @@ public class C3PONetworkManager : MonoBehaviour {
 	private Dictionary<string, string> loginInfos = null;
 	
 	// dictionnaire contenant un identifiant unique
-	private Dictionary<string, Client> playerNetworkInfo = null;
-    public  Dictionary<string, Client> PlayerNetworkInfo
+	private Dictionary<string, Client> clientsInfos = null;
+    public Dictionary<string, Client> ClientsInfos
     {
-        get { return playerNetworkInfo; }
+        get { return clientsInfos; }
     }
 
     [SerializeField]
@@ -100,7 +100,20 @@ public class C3PONetworkManager : MonoBehaviour {
 
         networkView.RPC("clientConnect", RPCMode.Server, login, password);
     }
-	
+
+
+    void OnPlayerDisconnected(NetworkPlayer client)
+    {
+        foreach(KeyValuePair<string, Client> e in ClientsInfos)
+        {
+            if (e.Value.NetworkPlayer == client)
+            {
+                Debug.Log("Removed client " + e.Key);
+                ClientsInfos.Remove(e.Key);
+                return;
+            }
+        }
+    }
 	 
 	/**
 	 * Functions used to send a question by the server 
@@ -214,7 +227,7 @@ public class C3PONetworkManager : MonoBehaviour {
             string id = login + System.DateTime.Now;
             c.Id = id;
             c.NetworkPlayer = info.sender;
-			playerNetworkInfo.Add(id, c);
+            clientsInfos.Add(id, c);
 		}
 	}
 	
@@ -277,9 +290,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC] 
 	void rcvAnswerRPCi(string uniqueID, int rep)
 	{
-		if(playerNetworkInfo.ContainsKey(uniqueID))
+        if (clientsInfos.ContainsKey(uniqueID))
 		{
-            Client c = playerNetworkInfo[uniqueID];
+            Client c = clientsInfos[uniqueID];
             QuestionManager.Instance.rcvAnswer(ref c, rep);
 		}
 	}
@@ -314,7 +327,7 @@ public class C3PONetworkManager : MonoBehaviour {
         loginInfos.Add("a", "b");
         loginInfos.Add("b", "b");
         loginInfos.Add("c", "b");
-		playerNetworkInfo = new Dictionary<string, Client>();
+        clientsInfos = new Dictionary<string, Client>();
 		
 		fillLoginInfos();
 
