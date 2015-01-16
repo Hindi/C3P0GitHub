@@ -2,57 +2,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
-[XmlType("PlayerData")]
-public class PlayerData {
+[XmlType("Credential")]
+public class Credential
+{
+    [XmlAttribute]
+    public string login;
+    [XmlAttribute]
+    public string pass;
+}
 
-    PlayerData()
+public class PlayerData
+{
+
+    private TextAsset credentialFile;
+    private float lastCheckTime;
+
+    private Dictionary<string, string> loginInfos;
+    private bool modified = false;
+
+    public PlayerData()
     {
-        loginInfos = new Dictionary<string, string>();
-        studentNames = new List<string>();
-
-        TextAsset studentFile;
-        studentFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
-        studentNames = XmlHelpers.LoadFromTextAsset<string>(studentFile);
+        credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
+        loginInfos = XmlHelpers.loadCredentials(credentialFile);
 
         lastCheckTime = Time.time;
     }
 
-    private float lastCheckTime;
-    private Dictionary<string, string> loginInfos;
-    private List<string> studentNames;
-    private bool modified = false;
-
-    public void modifyEntry(string name, string pass, NetworkPlayer player)
-    {
-        if(loginInfos.ContainsKey(name))
-        {
-            modified = true;
-            loginInfos[name] = pass;
-        }
-        else 
-        {
-            if(studentNames.Contains(name))
-                loginInfos.Add(name, pass);
-            else
-            {
-                C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
-            }
-        }
-        BinarySerializer.SerializeData(this);
-    }
-
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
-        if (loginInfos.ContainsKey(name) && loginInfos[name] == pass)
-            return true;
-        else if (loginInfos.ContainsKey(name) && loginInfos[name] != pass)
-            return false;
+        if (loginInfos.ContainsKey(name))
+        {
+            if (loginInfos[name] == pass)
+            {
+                Debug.Log("logged in");
+                return true;
+            }
+            else
+                if (loginInfos[name] == "Change me")
+                {
+                    Debug.Log("Adding password to base");
+                    loginInfos.Add(name, pass);
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("Wrong password");
+                    return false;
+                }
+        }
         else
         {
-            Debug.Log("Adding password to base");
-            modifyEntry(name, pass, player);
-            return true;
+            Debug.Log("Wrong login");
+            C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
+            return false;
         }
     }
 
@@ -63,7 +67,6 @@ public class PlayerData {
             if (Time.time - lastCheckTime > 120)
             {
                 modified = false;
-                BinarySerializer.SerializeData(this);
             }
         }
 

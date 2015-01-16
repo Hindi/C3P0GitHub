@@ -347,14 +347,11 @@ public class C3PONetworkManager : MonoBehaviour {
 		fillLoginInfos();
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
 
-        if (C3PONetwork.Instance.IS_SERVER)
-            playerDatas = BinarySerializer.DeserializeData();
+        playerDatas =  new PlayerData();
 	}
 	
 	// Update is called once per frame
     void Update()
     {
-        if (C3PONetwork.Instance.IS_SERVER)
-            playerDatas.update();
 	}
 }

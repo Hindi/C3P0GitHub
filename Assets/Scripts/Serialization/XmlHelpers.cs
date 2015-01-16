@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 
 using UnityEngine;
 
@@ -60,5 +61,21 @@ public class XmlHelpers
             serializer.Serialize(stream, objectToSerialize);
             stream.Close();
         }
+    }
+
+    public static Dictionary<string, string> loadCredentials(TextAsset asset)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        List<Credential> list = LoadFromTextAsset<Credential>(asset);
+
+        foreach (Credential c in list)
+            d.Add(c.login, c.pass);
+
+        return d;
+    }
+
+    public static void saveCredentials(TextAsset asset, Dictionary<string, string> dict)
+    {
+
     }
 }
