@@ -53,7 +53,8 @@ public class Grid : MonoBehaviour {
 	{
 		return ((int)pos.x >= 0 && 
 				(int)pos.x < w &&
-				(int)pos.y >= 0);
+				(int)pos.y >= 0 &&
+                (int)pos.y < h);
 	}
 	
 	// Function that deletes a row;

@@ -231,7 +231,13 @@ public class Tetromino : MonoBehaviour {
 	void nextFalling()
 	{
         foreSeenTetromino.transform.position = spawnPosition;
-        //TO DO check if this is a valid position, if it's not, then game over.
+        // Check if this is a valid position, if it's not, then game over.
+        if (!foreSeenTetromino.isValidGridPos())
+        {
+            gameOver();
+            return;
+        }
+
 		fallingTetromino = foreSeenTetromino;
 		foreSeenTetromino = null;
 
@@ -239,4 +245,12 @@ public class Tetromino : MonoBehaviour {
 		// when the next spawns, the function starts put it in foreSeenTetromino
 	}
 	
+
+
+    // TO DO game over screen and menu
+    void gameOver()
+    {
+        // TO DO pause the game like a menu. Do it with state manager etc
+        Time.timeScale = 0.0f;
+    }
 }
