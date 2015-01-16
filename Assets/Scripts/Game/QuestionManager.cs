@@ -246,7 +246,7 @@ public class QuestionManager {
     {
         bool b;
         string explication;
-        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
             b = e.Value.lastQuestionResult();
             explication = e.Value.lastAnswerExplication();
@@ -256,7 +256,7 @@ public class QuestionManager {
 
     void checkClientsAnswers()
     {
-        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.PlayerNetworkInfo)
+        foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
             if (!e.Value.AnsweredLast)
             {

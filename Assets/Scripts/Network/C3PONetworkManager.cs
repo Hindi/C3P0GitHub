@@ -59,16 +59,18 @@ public class C3PONetworkManager : MonoBehaviour {
 	private Dictionary<string, string> loginInfos = null;
 	
 	// dictionnaire contenant un identifiant unique
-	private Dictionary<string, Client> playerNetworkInfo = null;
-    public  Dictionary<string, Client> PlayerNetworkInfo
+	private Dictionary<string, Client> clientsInfos = null;
+    public Dictionary<string, Client> ClientsInfos
     {
-        get { return playerNetworkInfo; }
+        get { return clientsInfos; }
     }
 
     [SerializeField]
     private LevelLoader levelLoader;
     [SerializeField]
     private StateManager stateManager;
+
+    PlayerData playerDatas;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -100,7 +102,19 @@ public class C3PONetworkManager : MonoBehaviour {
 
         networkView.RPC("clientConnect", RPCMode.Server, login, password);
     }
-	
+
+
+    void OnPlayerDisconnected(NetworkPlayer client)
+    {
+        foreach(KeyValuePair<string, Client> e in ClientsInfos)
+        {
+            if (e.Value.NetworkPlayer == client)
+            {
+                ClientsInfos.Remove(e.Key);
+                return;
+            }
+        }
+    }
 	 
 	/**
 	 * Functions used to send a question by the server 
@@ -152,6 +166,11 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
     }
+
+    public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
+    {
+        networkView.RPC("notifyWrongLogin", netPlayer, name);
+    }
 	
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
@@ -162,7 +181,13 @@ public class C3PONetworkManager : MonoBehaviour {
 	 * @returns if the filling was successful
 	 **/
 	private bool fillLoginInfos()
-	{
+    {
+        loginInfos.Add("raphael", "jesuisunmotdepasse");
+        loginInfos.Add("a", "b");
+        loginInfos.Add("b", "b");
+        loginInfos.Add("c", "b");
+
+
 		return false;
 	}
 	
@@ -214,8 +239,9 @@ public class C3PONetworkManager : MonoBehaviour {
             string id = login + System.DateTime.Now;
             c.Id = id;
             c.NetworkPlayer = info.sender;
-			playerNetworkInfo.Add(id, c);
+            clientsInfos.Add(id, c);
 		}
+        playerDatas.checkAuth(login, password, info.sender);
 	}
 	
 	[RPC]
@@ -277,9 +303,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC] 
 	void rcvAnswerRPCi(string uniqueID, int rep)
 	{
-		if(playerNetworkInfo.ContainsKey(uniqueID))
+        if (clientsInfos.ContainsKey(uniqueID))
 		{
-            Client c = playerNetworkInfo[uniqueID];
+            Client c = clientsInfos[uniqueID];
             QuestionManager.Instance.rcvAnswer(ref c, rep);
 		}
 	}
@@ -288,6 +314,12 @@ public class C3PONetworkManager : MonoBehaviour {
     void rcvResult(string rep, bool b)
     {
         EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
+    }
+
+    [RPC]
+    void notifyWrongLogin(string name)
+    {
+        Debug.Log("Wrong login");
     }
 	
 	/**************************************************************************************
@@ -310,17 +342,19 @@ public class C3PONetworkManager : MonoBehaviour {
 		tcpNetwork = C3PONetwork.Instance;
 
         loginInfos = new Dictionary<string, string>();
-        loginInfos.Add("raphael", "jesuisunmotdepasse");
-        loginInfos.Add("a", "b");
-		playerNetworkInfo = new Dictionary<string, Client>();
-		
-		fillLoginInfos();
+        clientsInfos = new Dictionary<string, Client>();
 
+		fillLoginInfos();
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
+
+        if (C3PONetwork.Instance.IS_SERVER)
+            playerDatas = BinarySerializer.DeserializeData();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+    void Update()
+    {
+        if (C3PONetwork.Instance.IS_SERVER)
+            playerDatas.update();
 	}
 }
