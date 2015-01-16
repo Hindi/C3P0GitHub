@@ -46,17 +46,6 @@ public class QuestionAnswerState : State
         ui.updateCurrentCanvas(scoreMenu);
     }
 
-    private void testQuestion()
-    {
-        ui.updateCurrentCanvas(questionMenu);
-        questionMenu.gameObject.SetActive(true);
-        QAMenu.setAnswerCount(3);
-        QAMenu.setQuestionText("ABWABWABWBABWABWBAWBA");
-        QAMenu.setAnswerText(0, "huk");
-        QAMenu.setAnswerText(1, "huuuuuuk");
-        QAMenu.startQuestion();
-    }
-
     public void onQuestionRecieved(QuestionManager.QuestionKeeper keeper)
     {
         ui.updateCurrentCanvas(questionMenu);
