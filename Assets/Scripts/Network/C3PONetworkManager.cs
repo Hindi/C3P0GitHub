@@ -69,6 +69,8 @@ public class C3PONetworkManager : MonoBehaviour {
     private LevelLoader levelLoader;
     [SerializeField]
     private StateManager stateManager;
+
+    PlayerData playerDatas;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -108,7 +110,6 @@ public class C3PONetworkManager : MonoBehaviour {
         {
             if (e.Value.NetworkPlayer == client)
             {
-                Debug.Log("Removed client " + e.Key);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
@@ -165,6 +166,11 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
     }
+
+    public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
+    {
+        networkView.RPC("notifyWrongLogin", netPlayer, name);
+    }
 	
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
@@ -175,7 +181,13 @@ public class C3PONetworkManager : MonoBehaviour {
 	 * @returns if the filling was successful
 	 **/
 	private bool fillLoginInfos()
-	{
+    {
+        loginInfos.Add("raphael", "jesuisunmotdepasse");
+        loginInfos.Add("a", "b");
+        loginInfos.Add("b", "b");
+        loginInfos.Add("c", "b");
+
+
 		return false;
 	}
 	
@@ -229,6 +241,7 @@ public class C3PONetworkManager : MonoBehaviour {
             c.NetworkPlayer = info.sender;
             clientsInfos.Add(id, c);
 		}
+        playerDatas.checkAuth(login, password, info.sender);
 	}
 	
 	[RPC]
@@ -302,6 +315,12 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
     }
+
+    [RPC]
+    void notifyWrongLogin(string name)
+    {
+        Debug.Log("Wrong login");
+    }
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -323,19 +342,16 @@ public class C3PONetworkManager : MonoBehaviour {
 		tcpNetwork = C3PONetwork.Instance;
 
         loginInfos = new Dictionary<string, string>();
-        loginInfos.Add("raphael", "jesuisunmotdepasse");
-        loginInfos.Add("a", "b");
-        loginInfos.Add("b", "b");
-        loginInfos.Add("c", "b");
         clientsInfos = new Dictionary<string, Client>();
-		
-		fillLoginInfos();
 
+		fillLoginInfos();
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
+
+        playerDatas = BinarySerializer.DeserializeData();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        playerDatas.update();
 	}
 }

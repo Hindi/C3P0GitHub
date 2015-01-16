@@ -5,19 +5,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-public class BinarySerializer : MonoBehaviour {
+public class BinarySerializer {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    static void SerializeData(PlayerData data)
+    public static void SerializeData(PlayerData data)
     {
         FileStream fs = new FileStream("data.dat", FileMode.Create);
 
@@ -38,17 +28,17 @@ public class BinarySerializer : MonoBehaviour {
         }
     }
 
-    static void DeserializeData(PlayerData data)
+    public static PlayerData DeserializeData()
     {
         // Open the file containing the data that you want to deserialize.
-        FileStream fs = new FileStream("DataFile.dat", FileMode.Open);
+        FileStream fs = new FileStream("data.dat", FileMode.Open);
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
             // Deserialize the hashtable from the file and 
             // assign the reference to the local variable.
-            data = (PlayerData)formatter.Deserialize(fs);
+            return (PlayerData)formatter.Deserialize(fs);
         }
         catch (SerializationException e)
         {
