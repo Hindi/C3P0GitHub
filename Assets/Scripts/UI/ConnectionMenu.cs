@@ -21,11 +21,27 @@ public class ConnectionMenu : MonoBehaviour {
     [SerializeField]
     private InputField passwordLabel;
 
+    private bool unityConnected = false;
+
 	// Use this for initialization
 	void Start () {
         network = C3PONetwork.Instance;
         networkManager = C3PONetworkManager.Instance;
+        EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
+        EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
 	}
+
+    void onConnectedToUnity()
+    {
+        loginLabel.text = "";
+        passwordLabel.text = "";
+        unityConnected = true;
+    }
+
+    void onDisconnectedFromUnity()
+    {
+        unityConnected = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,7 +62,10 @@ public class ConnectionMenu : MonoBehaviour {
     {
         try
         {
-            networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
+            if (unityConnected)
+                networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
+            else
+                networkManager.onConnectedToUnity();
         }
         catch (System.Exception e)
         {

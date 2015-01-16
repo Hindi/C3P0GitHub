@@ -307,7 +307,13 @@ public class C3PONetwork : MonoBehaviour {
 
     void OnConnectedToServer()
     {
+        EventManager.Raise(EnumEvent.CONNECTIONTOUNITY);
         ntm.onConnectedToUnity();
+    }
+
+    void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        EventManager.Raise(EnumEvent.DISCONNECTFROMUNITY);
     }
 	
 	/**

@@ -36,25 +36,22 @@ public class PlayerData
         {
             if (loginInfos[name] == pass)
             {
-                Debug.Log("logged in");
                 return true;
             }
             else
                 if (loginInfos[name] == "Change me")
                 {
-                    Debug.Log("Adding password to base");
-                    loginInfos.Add(name, pass);
+                    loginInfos[name] = pass;
                     return true;
                 }
                 else
                 {
-                    Debug.Log("Wrong password");
+                    C3PONetworkManager.Instance.sendNotifyWrongPassword(player, name);
                     return false;
                 }
         }
         else
         {
-            Debug.Log("Wrong login");
             C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
             return false;
         }

@@ -103,6 +103,10 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("clientConnect", RPCMode.Server, login, password);
     }
 
+    public void onFailedAuth()
+    {
+        EventManager.Raise(EnumEvent.AUTHFAILED);
+    }
 
     void OnPlayerDisconnected(NetworkPlayer client)
     {
@@ -144,14 +148,6 @@ public class C3PONetworkManager : MonoBehaviour {
         }
 	}
 	
-	/**
-	 * Functions used to send an answer to the server
-	 **/
-	/*public void sendAnswer(string rep)
-	{
-		networkView.RPC("rcvAnswerRPCs", RPCMode.Server, privateID, rep);
-	}*/
-	
 	public void sendAnswer(int rep)
 	{
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
@@ -170,6 +166,11 @@ public class C3PONetworkManager : MonoBehaviour {
     public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
     {
         networkView.RPC("notifyWrongLogin", netPlayer, name);
+    }
+
+    public void sendNotifyWrongPassword(NetworkPlayer netPlayer, string name)
+    {
+        networkView.RPC("notifyWrongPassword", netPlayer, name);
     }
 	
 	/**************************************************************************************
@@ -231,7 +232,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC]
 	void clientConnect(string login, string password, NetworkMessageInfo info)
 	{
-		if(checkLog(login, password))
+        if (playerDatas.checkAuth(login, password, info.sender))
 		{
 			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
             Client c = new Client();
@@ -241,7 +242,6 @@ public class C3PONetworkManager : MonoBehaviour {
             c.NetworkPlayer = info.sender;
             clientsInfos.Add(id, c);
 		}
-        playerDatas.checkAuth(login, password, info.sender);
 	}
 	
 	[RPC]
@@ -249,7 +249,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		privateID = uniqueID;
 		isConnectedApp = true;
-        EventManager.Raise(EnumEvent.CONNECTIONESTABLISHED);
+        EventManager.Raise(EnumEvent.AUTHSUCCEEDED);
 	}
 	
 	/**
@@ -287,19 +287,6 @@ public class C3PONetworkManager : MonoBehaviour {
         stateManager.changeState((StateEnum)stateEnum);
     }
 	
-	/**
-	 * Functions used to send an answer to the server
-	 **/
-	/*[RPC] 
-	void rcvAnswerRPCs(string uniqueID, string rep)
-	{
-		if(playerNetworkInfo.ContainsKey(uniqueID))
-		{
-            QuestionManager.Instance.rcvAnswer(playerNetworkInfo[uniqueID], rep);
-            giveResult(playerNetworkInfo[uniqueID], "huk", true);
-		}
-	}*/
-	
 	[RPC] 
 	void rcvAnswerRPCi(string uniqueID, int rep)
 	{
@@ -320,6 +307,14 @@ public class C3PONetworkManager : MonoBehaviour {
     void notifyWrongLogin(string name)
     {
         Debug.Log("Wrong login");
+        onFailedAuth();
+    }
+
+    [RPC]
+    void notifyWrongPassword(string name)
+    {
+        Debug.Log("Wrong password");
+        onFailedAuth();
     }
 	
 	/**************************************************************************************
