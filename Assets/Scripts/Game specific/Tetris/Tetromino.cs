@@ -230,19 +230,22 @@ public class Tetromino : MonoBehaviour {
     // 
 	void nextFalling()
 	{
-        foreSeenTetromino.transform.position = spawnPosition;
-        // Check if this is a valid position, if it's not, then game over.
-        if (!foreSeenTetromino.isValidGridPos())
+        if (foreSeenTetromino != null)
         {
-            gameOver();
-            return;
+            foreSeenTetromino.transform.position = spawnPosition;
+            // Check if this is a valid position, if it's not, then game over.
+            if (!foreSeenTetromino.isValidGridPos())
+            {
+                gameOver();
+                return;
+            }
+
+            fallingTetromino = foreSeenTetromino;
+            foreSeenTetromino = null;
+
+            Spawner._spawner.spawnNext();
+            // when the next spawns, the function starts put it in foreSeenTetromino
         }
-
-		fallingTetromino = foreSeenTetromino;
-		foreSeenTetromino = null;
-
-		Spawner._spawner.spawnNext();
-		// when the next spawns, the function starts put it in foreSeenTetromino
 	}
 	
 
