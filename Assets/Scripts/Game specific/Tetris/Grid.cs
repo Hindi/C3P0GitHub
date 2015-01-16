@@ -76,7 +76,7 @@ public class Grid : MonoBehaviour {
 			{
 				// Update the block position
 				grid[x,y].position += new Vector3(0,-nbDecrease,0);
-				
+
 				// Update the grid by moving down the one at pos x,y
 				grid[x, y-nbDecrease] = grid[x, y];
 				grid[x,y] = null;		

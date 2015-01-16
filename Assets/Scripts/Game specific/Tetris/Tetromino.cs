@@ -12,6 +12,10 @@ public class Tetromino : MonoBehaviour {
 	
 	// Time between two "natural" falls of the tetromino
 	private float fallingSpeed;
+
+    // "Timers" not to move left, right, or down at every frames when we hold the key down
+    // A movement every movingRate frames
+    private int moveRightTimer, moveLeftTimer, moveDownTimer, movingRate;
 	
 	// Place where the tetromino will spawn on the board
 	private Vector3 spawnPosition;
@@ -22,14 +26,22 @@ public class Tetromino : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {		
-		//Timer to maje a tetromino falls
+		// Timer to maje a tetromino falls
 		timeSinceLastFall = Time.time;
 		
-		//TO DO Add a level multiplicator if we want to increase difficulty
+		// TO DO Add a level multiplicator if we want to increase difficulty
 		fallingSpeed = 1.0f;
 		
-		//Place where a tetromino will spawn
+		// Place where a tetromino will spawn
 		spawnPosition = new Vector3(4,14,0);
+
+        // movingRate initialization
+        movingRate = 5;
+
+        // Timers initialization
+        moveDownTimer = movingRate;
+        moveRightTimer = movingRate;
+        moveLeftTimer = movingRate;
 		
 		// This block handles wether the tetromino is falling in the board or is 
 		// just foreseen
@@ -55,24 +67,57 @@ public class Tetromino : MonoBehaviour {
 		if (this == fallingTetromino)
 		{
 			// Move Left
-			if (Input.GetKeyDown(KeyCode.LeftArrow)) 
+			if (Input.GetKey(KeyCode.LeftArrow)) 
 			{
-				moveLeft();
+                if (moveLeftTimer == movingRate)
+                {
+                    moveLeft();
+                    moveLeftTimer = 0;
+                }
+
+                moveLeftTimer++;
 			}
-			else if (Input.GetKeyDown(KeyCode.RightArrow))
+			else if (Input.GetKey(KeyCode.RightArrow))
 			{
-				moveRight();
+                if (moveRightTimer == movingRate)
+                {
+                    moveRight();
+                    moveRightTimer = 0;
+                }
+
+                moveRightTimer++;
 			}
-			else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else
+            {
+                moveRightTimer = movingRate;
+                moveLeftTimer = movingRate;
+            }
+            // We can move to the left or to the right and go up or down at the same time
+			if (Input.GetKeyDown(KeyCode.UpArrow))
 			{
 				rotate();
 			}
-			else if (Input.GetKeyDown(KeyCode.DownArrow) || (Time.time - timeSinceLastFall) >= fallingSpeed)
+			else if (Input.GetKey(KeyCode.DownArrow))
 			{
 				// MoveDown handles grid updates if the tetromino is set
-				moveDown();
-				timeSinceLastFall = Time.time;
+                if (moveDownTimer == movingRate)
+                {
+                    moveDown();
+                    moveDownTimer = 0;
+                    timeSinceLastFall = Time.time;
+                }
+                moveDownTimer++;
 			}
+            else
+            {
+                moveDownTimer = movingRate;
+            }
+
+            if ((Time.time - timeSinceLastFall) >= fallingSpeed)
+            {
+                moveDown();
+                timeSinceLastFall = Time.time;
+            }
 		}
 	}
 	
@@ -181,9 +226,12 @@ public class Tetromino : MonoBehaviour {
 		Grid._grid.deleteFullRowsFrom(yMin);		
 	}
 	
+
+    // 
 	void nextFalling()
 	{
         foreSeenTetromino.transform.position = spawnPosition;
+        //TO DO check if this is a valid position, if it's not, then game over.
 		fallingTetromino = foreSeenTetromino;
 		foreSeenTetromino = null;
 
