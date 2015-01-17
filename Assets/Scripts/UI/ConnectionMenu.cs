@@ -21,26 +21,41 @@ public class ConnectionMenu : MonoBehaviour {
     [SerializeField]
     private InputField passwordLabel;
 
-    private bool unityConnected = false;
+    private bool unityConnected;
+    private bool authed;
 
 	// Use this for initialization
 	void Start () {
+        unityConnected = false;
+        authed = false;
         network = C3PONetwork.Instance;
         networkManager = C3PONetworkManager.Instance;
+        EventManager.AddListener(EnumEvent.AUTHSUCCEEDED, onSucceededAuth);
+        EventManager.AddListener(EnumEvent.AUTHFAILED, onFailedAuth);
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
 	}
 
-    void onConnectedToUnity()
+    void onSucceededAuth()
+    {
+        authed = true;
+    }
+
+    void onFailedAuth()
     {
         loginLabel.text = "";
         passwordLabel.text = "";
+    }
+    
+    void onConnectedToUnity()
+    {
         unityConnected = true;
     }
 
     void onDisconnectedFromUnity()
     {
         unityConnected = false;
+        authed = false;
     }
 	
 	// Update is called once per frame
@@ -58,14 +73,22 @@ public class ConnectionMenu : MonoBehaviour {
         ui.updateCurrentCanvas(connectionWelcome);
     }
 
+    private void connect()
+    {
+        if (loginLabel.text != "" && passwordLabel.text != "")
+        {
+            if (!unityConnected)
+                networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
+            else if (!authed)
+                networkManager.tryTologIn(loginLabel.text, passwordLabel.text);
+        }
+    }
+
     public void onConnectionStartClick()
     {
         try
         {
-            if (unityConnected)
-                networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
-            else
-                networkManager.onConnectedToUnity();
+            connect();
         }
         catch (System.Exception e)
         {

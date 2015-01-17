@@ -39,7 +39,7 @@ public class PlayerData
                 return true;
             }
             else
-                if (loginInfos[name] == "Change me")
+                if (loginInfos[name] == "")
                 {
                     loginInfos[name] = pass;
                     return true;

@@ -92,7 +92,14 @@ public class C3PONetworkManager : MonoBehaviour {
 		tcpNetwork.connectTeacherServer();
 	}
 
-    public void onConnectedToUnity()
+    public void tryTologIn(string login, string password)
+    {
+        this.login = login;
+        this.password = password;
+        tryTologIn();
+    }
+
+    public void tryTologIn()
     {
 		if(!tcpNetwork.isConnectedToTeacher)
 		{
@@ -247,6 +254,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC]
 	void clientSuccessfullyConnected(string uniqueID)
 	{
+        Debug.Log("auth succeeded");
 		privateID = uniqueID;
 		isConnectedApp = true;
         EventManager.Raise(EnumEvent.AUTHSUCCEEDED);
@@ -340,7 +348,7 @@ public class C3PONetworkManager : MonoBehaviour {
         clientsInfos = new Dictionary<string, Client>();
 
 		fillLoginInfos();
-        EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
+        //EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
 
         playerDatas =  new PlayerData();
 	}

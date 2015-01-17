@@ -85,8 +85,8 @@ public class C3PONetwork : MonoBehaviour {
 	public void createTeacherServer()
 	{
 		/* Launch MasterServer */
-		string path = Application.dataPath;
-		System.Diagnostics.Process.Start(path + @"\MasterServer\MasterServer.exe");
+		/*string path = Application.dataPath;
+		System.Diagnostics.Process.Start(path + @"\MasterServer\MasterServer.exe");*/
 		
 		/* Bind to it */
 		MasterServer.port = masterPort;
@@ -308,7 +308,7 @@ public class C3PONetwork : MonoBehaviour {
     void OnConnectedToServer()
     {
         EventManager.Raise(EnumEvent.CONNECTIONTOUNITY);
-        ntm.onConnectedToUnity();
+        ntm.tryTologIn();
     }
 
     void OnDisconnectedFromServer(NetworkDisconnection info)
