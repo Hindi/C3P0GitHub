@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class XmlHelpers
 {
-    public static List<T> LoadFromTextAsset<T>(TextAsset textAsset, System.Type[] extraTypes = null)
+    public static List<T> LoadFromTextAsset<T>(TextAsset textAsset, string root = "Datatable")
     {
         if (textAsset == null)
         {
@@ -23,7 +23,7 @@ public class XmlHelpers
 
             XmlRootAttribute xRoot = new XmlRootAttribute
             {
-                ElementName = "Datatable"
+                ElementName = root
             };
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xRoot);
@@ -65,7 +65,7 @@ public class XmlHelpers
     public static Dictionary<string, string> loadCredentials(TextAsset asset)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
-        List<Credential> list = LoadFromTextAsset<Credential>(asset);
+        List<Credential> list = LoadFromTextAsset<Credential>(asset, "ArrayOfCredential");
 
         foreach (Credential c in list)
             d.Add(c.login, c.pass);
