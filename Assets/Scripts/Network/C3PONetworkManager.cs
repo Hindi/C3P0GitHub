@@ -183,21 +183,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
 	 **************************************************************************************/
-
-	/**
-	 * Tries to fill the login/password dictionary from XML file
-	 * @returns if the filling was successful
-	 **/
-	private bool fillLoginInfos()
-    {
-        loginInfos.Add("raphael", "jesuisunmotdepasse");
-        loginInfos.Add("a", "b");
-        loginInfos.Add("b", "b");
-        loginInfos.Add("c", "b");
-
-
-		return false;
-	}
 	
 	/**
 	 * Checks if a login/password combination is correct.
@@ -290,7 +275,6 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rpcLoadLevel(string level, int stateEnum)
     {
-        Debug.Log(level + " " + stateEnum);
         levelLoader.loadLevel(level);
         stateManager.changeState((StateEnum)stateEnum);
     }
@@ -342,13 +326,12 @@ public class C3PONetworkManager : MonoBehaviour {
 	void Start () {
 		tcpNetwork = C3PONetwork.Instance;
 
-        loginInfos = new Dictionary<string, string>();
-        clientsInfos = new Dictionary<string, Client>();
-
-		fillLoginInfos();
-        //EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
-
-        playerDatas =  new PlayerData();
+        if(C3PONetwork.Instance.IS_SERVER)
+        {
+            loginInfos = new Dictionary<string, string>();
+            clientsInfos = new Dictionary<string, Client>();
+            playerDatas = new PlayerData();
+        }
 	}
 	
 	// Update is called once per frame

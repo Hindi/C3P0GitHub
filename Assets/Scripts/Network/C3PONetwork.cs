@@ -140,8 +140,8 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	private bool findMasterHostname()
     {
-        masterHostname = "192.168.0.19";
-        return true;
+        //masterHostname = "192.168.0.19";
+        //return true;
 		/* 1st step : checks if this.masterHostname works */
 		if (masterHostname != null)
 		{
@@ -337,7 +337,7 @@ public class C3PONetwork : MonoBehaviour {
 			if(hostList.Length > 0 && hostList[0].gameType == "C3PO")
 			{
                 //Network.Connect(hostList[0]);
-                Network.Connect("192.168.0.19", 25000);
+                Network.Connect(hostList[0].ip, 25000);
                 isConnectedToTeacher = true;
                 Debug.Log("Connected to teacher");
 			}
