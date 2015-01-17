@@ -52,7 +52,7 @@ public class PlayerData
                 if (loginInfos[name] == "")
                 {
                     loginInfos[name] = pass;
-                    XmlHelpers.saveCredentials("liste des eleves.xml", loginInfos);
+                    XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
                     return true;
                 }
                 else
