@@ -79,6 +79,6 @@ public class XmlHelpers
         foreach (KeyValuePair<string, string> e in dict)
             list.Add(new Credential( e.Key, e.Value));
 
-        SaveToXML<Dictionary<string, string> >(path, dict);
+        SaveToXML<List<Credential>>(path, list);
     }
 }
