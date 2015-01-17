@@ -323,6 +323,7 @@ public class C3PONetwork : MonoBehaviour {
 	{
 		masterHostname = null;
 		connectTeacherServer();
+        C3PONetworkManager.Instance.onFailedAuth("Cannot find the server.");
 	}
 	
 	/**

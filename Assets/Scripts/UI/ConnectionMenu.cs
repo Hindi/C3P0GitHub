@@ -20,6 +20,8 @@ public class ConnectionMenu : MonoBehaviour {
     private InputField loginLabel;
     [SerializeField]
     private InputField passwordLabel;
+    [SerializeField]
+    private Text connectionAnswerLabel;
 
     private bool unityConnected;
     private bool authed;
@@ -31,7 +33,7 @@ public class ConnectionMenu : MonoBehaviour {
         network = C3PONetwork.Instance;
         networkManager = C3PONetworkManager.Instance;
         EventManager.AddListener(EnumEvent.AUTHSUCCEEDED, onSucceededAuth);
-        EventManager.AddListener(EnumEvent.AUTHFAILED, onFailedAuth);
+        EventManager<string>.AddListener(EnumEvent.AUTHFAILED, onFailedAuth);
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
 	}
@@ -41,8 +43,9 @@ public class ConnectionMenu : MonoBehaviour {
         authed = true;
     }
 
-    void onFailedAuth()
+    void onFailedAuth(string reason)
     {
+        connectionAnswerLabel.text = reason;
         loginLabel.text = "";
         passwordLabel.text = "";
     }
@@ -86,6 +89,7 @@ public class ConnectionMenu : MonoBehaviour {
 
     public void onConnectionStartClick()
     {
+        connectionAnswerLabel.text = "";
         try
         {
             connect();

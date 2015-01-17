@@ -73,8 +73,12 @@ public class XmlHelpers
         return d;
     }
 
-    public static void saveCredentials(TextAsset asset, Dictionary<string, string> dict)
+    public static void saveCredentials(string path, Dictionary<string, string> dict)
     {
+        List<Credential> list = new List<Credential>();
+        foreach (KeyValuePair<string, string> e in dict)
+            list.Add(new Credential( e.Key, e.Value));
 
+        SaveToXML<Dictionary<string, string> >(path, dict);
     }
 }

@@ -7,6 +7,16 @@ using System.Runtime.Serialization;
 [XmlType("Credential")]
 public class Credential
 {
+    public Credential()
+    { 
+    }
+
+    public Credential(string log, string pas)
+    {
+        login = log;
+        pass = pas;
+    }
+
     [XmlAttribute]
     public string login;
     [XmlAttribute]
@@ -42,6 +52,7 @@ public class PlayerData
                 if (loginInfos[name] == "")
                 {
                     loginInfos[name] = pass;
+                    XmlHelpers.saveCredentials("liste des eleves.xml", loginInfos);
                     return true;
                 }
                 else

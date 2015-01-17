@@ -110,9 +110,9 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("clientConnect", RPCMode.Server, login, password);
     }
 
-    public void onFailedAuth()
+    public void onFailedAuth(string reason)
     {
-        EventManager.Raise(EnumEvent.AUTHFAILED);
+        EventManager<string>.Raise(EnumEvent.AUTHFAILED, reason);
     }
 
     void OnPlayerDisconnected(NetworkPlayer client)
@@ -314,15 +314,13 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void notifyWrongLogin(string name)
     {
-        Debug.Log("Wrong login");
-        onFailedAuth();
+        onFailedAuth("Wrong login");
     }
 
     [RPC]
     void notifyWrongPassword(string name)
     {
-        Debug.Log("Wrong password");
-        onFailedAuth();
+        onFailedAuth("Wrong password");
     }
 	
 	/**************************************************************************************
