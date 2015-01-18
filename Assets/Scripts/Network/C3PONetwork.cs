@@ -189,7 +189,7 @@ public class C3PONetwork : MonoBehaviour {
         }
 		return true;
 	}
-    /*
+    
     public static bool messageReceived = false;
 
     public void ReceiveCallback(IAsyncResult ar)
@@ -210,9 +210,9 @@ public class C3PONetwork : MonoBehaviour {
         public UdpClient u;
     }
 
-    private void ReceiveData(System.IAsyncResult result)
+    private void ReceiveData(IAsyncResult result)
     {
-        IPEndPoint receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
+        receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
         byte[] received;
         if (receiver != null)
         {
@@ -222,9 +222,9 @@ public class C3PONetwork : MonoBehaviour {
         {
             return;
         }
-        receiver.BeginReceive(new System.AsyncCallback(ReceiveData), null);
-        masterHostname = Encoding.ASCII.GetString(received);
-    }*/
+        receiver.BeginReceive(new AsyncCallback(ReceiveData), null);
+        string receivedString = Encoding.ASCII.GetString(received);
+    }
 
     public void StartReceivingIP()
     {
@@ -242,17 +242,18 @@ public class C3PONetwork : MonoBehaviour {
         }
     }
 
-    private void ReceiveData(IAsyncResult result)
+    /*private void ReceiveData(IAsyncResult result)
     {
         receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
-        byte[] received;
-        received = receiver.EndReceive(result, ref receiveIPGroup);
+        StateObject so = (StateObject)result.AsyncState ;
+        Socket s = so.workSocket;
+        byte[] received  = receiver.EndReceive(result, ref receiveIPGroup);
         Debug.Log("Begin recieve");
         string receivedString = Encoding.ASCII.GetString(received);
         Debug.Log("Begin recieve" + receivedString);
 
         receiver.BeginReceive(new AsyncCallback(ReceiveData), null);
-    }
+    }*/
 
     private void SendData()
     {
