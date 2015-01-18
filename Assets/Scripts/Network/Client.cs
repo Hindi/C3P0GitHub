@@ -43,13 +43,13 @@ public class AnswerStats
 {
     public AnswerStats()
     {
-        reponses = new List<Answer>();
+        answer = new List<Answer>();
     }
 
     [XmlAttribute]
     public int courseId;
     [XmlArrayItem("ar")]
-    public List<Answer> reponses;
+    public List<Answer> answer;
 }
 
 public class Client
@@ -133,7 +133,7 @@ public class Client
 
         foreach(QuestionManager.AnswerKeeper a in answers)
         {
-            stats.reponses.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
+            stats.answer.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
         }
 
         XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
@@ -145,9 +145,9 @@ public class Client
         {
             int score = 0;
             TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
-            List<AnswerStats> stats = XmlHelpers.LoadFromTextAsset<AnswerStats>(statsFile);
+            List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile);
             QuestionManager.AnswerKeeper answerKeeper;
-            foreach(Answer a in stats[0].reponses)
+            foreach (Answer a in stats)
             {
                 answerKeeper = new QuestionManager.AnswerKeeper();
                 answerKeeper.question = new QuestionManager.QuestionKeeper();
