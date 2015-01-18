@@ -215,6 +215,7 @@ public class C3PONetwork : MonoBehaviour {
         if(IS_SERVER)
         {
             Sender snd = new Sender();
+            snd.Send();
             serverIp = localIPAddress();
         }
         else
