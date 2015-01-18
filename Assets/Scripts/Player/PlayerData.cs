@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Runtime.Serialization;
 using System;
 
 [XmlType("Credential")]
@@ -39,6 +38,11 @@ public class PlayerData
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
 
         lastCheckTime = Time.time;
+    }
+
+    public void addAnswer()
+    {
+
     }
 
     private string encryptMd5(string pass)

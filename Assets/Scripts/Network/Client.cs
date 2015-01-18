@@ -1,20 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System;
 
-public class Client {
-    public Client()
+[XmlType("Answer")]
+public class Answer
+{
+    public Answer(int id, int rep, bool res, float time)
     {
-        answers = new List<QuestionManager.AnswerKeeper>();
-        answeredLast = false;
+        questionId = id;
+        response = rep;
+        result = res;
+        answerTime = time;
     }
 
-    public Client(Client c)
+    [XmlAttribute]
+    public int questionId;
+    [XmlAttribute]
+    public int response;
+    [XmlAttribute]
+    public bool result;
+    [XmlAttribute]
+    public float answerTime;
+}
+
+[XmlType("AnswerStats")]
+public class AnswerStats
+{
+    public AnswerStats()
     {
-        answeredLast = c.AnsweredLast;
-        answers = c.Answers;
+        reponses = new List<Answer>();
     }
 
+    [XmlAttribute]
+    public int courseId;
+    [XmlArrayItem("ar")]
+    public List<Answer> reponses;
+}
+
+public class Client
+{
     private string login;
     public string Login
     {
@@ -23,7 +49,7 @@ public class Client {
     }
 
     private string id;
-    public string Id 
+    public string Id
     {
         get { return id; }
         set { id = value; }
@@ -50,6 +76,17 @@ public class Client {
     }
 
 
+    public Client()
+    {
+        answers = new List<QuestionManager.AnswerKeeper>();
+        answeredLast = false;
+    }
+
+    public Client(Client c)
+    {
+        answeredLast = c.AnsweredLast;
+        answers = c.Answers;
+    }
 
     public QuestionManager.AnswerKeeper lastAnswer()
     {
@@ -74,5 +111,18 @@ public class Client {
                 return a.result;
         }
         return true;
+    }
+
+    public void saveStats(int currentCourseId)
+    {
+        AnswerStats stats = new AnswerStats();
+        stats.courseId = currentCourseId;
+
+        foreach(QuestionManager.AnswerKeeper a in answers)
+        {
+            stats.reponses.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
+        }
+
+        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/xml/answers/" + currentCourseId + "/" + login, stats);
     }
 }

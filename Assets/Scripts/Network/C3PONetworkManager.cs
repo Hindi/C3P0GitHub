@@ -121,6 +121,7 @@ public class C3PONetworkManager : MonoBehaviour {
         {
             if (e.Value.NetworkPlayer == client)
             {
+                e.Value.saveStats(0);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
@@ -132,25 +133,16 @@ public class C3PONetworkManager : MonoBehaviour {
 	 **/
 	public void sendQuestion(QuestionManager.QuestionKeeper question)
     {
-		switch(question.qType)
+        switch(question.reponses.Count)
         {
-            case QuestionManager.QuestionType.qO:
-                networkView.RPC("rcvQuestionRPC0", RPCMode.Others, question.question);
+            case 2:
+                networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1]);
                 break;
-            case QuestionManager.QuestionType.qM:
-
-                switch(question.reponses.Count)
-                {
-                    case 2:
-                        networkView.RPC("rcvQuestionRPC2", RPCMode.Others, question.question, question.reponses[0], question.reponses[1]);
-                        break;
-                    case 3:
-                        networkView.RPC("rcvQuestionRPC3", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2]);
-                        break;
-                    case 4:
-                        networkView.RPC("rcvQuestionRPC4", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2], question.reponses[3]);
-                        break;
-                }
+            case 3:
+                networkView.RPC("rcvQuestionRPC3", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2]);
+                break;
+            case 4:
+                networkView.RPC("rcvQuestionRPC4", RPCMode.Others, question.question, question.reponses[0], question.reponses[1], question.reponses[2], question.reponses[3]);
                 break;
         }
 	}
@@ -243,15 +235,6 @@ public class C3PONetworkManager : MonoBehaviour {
 		privateID = uniqueID;
 		isConnectedApp = true;
         EventManager.Raise(EnumEvent.AUTHSUCCEEDED);
-	}
-	
-	/**
-	 * Functions used to send a question by the server 
-	 **/
-	[RPC]
-	void rcvQuestionRPC0(string question)
-	{
-        QuestionManager.Instance.rcvQuestion(question);
 	}
 	
 	[RPC]

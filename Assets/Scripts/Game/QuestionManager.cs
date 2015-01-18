@@ -17,7 +17,7 @@ public class QuestionManager {
         }
         public QuestionKeeper(QuestionKeeper q)
         {
-            qType = q.qType;
+            id = q.id;
             question = q.question;
             reponses = new List<string>();
             bonneReponse = q.bonneReponse;
@@ -25,7 +25,7 @@ public class QuestionManager {
             foreach (string s in q.reponses)
                 reponses.Add(s);
         }
-        public QuestionType qType;
+        public int id;
         public string question;
         [XmlArrayItem("r")]
         public List<string> reponses;
@@ -41,12 +41,6 @@ public class QuestionManager {
         public int rep;
         public bool result;
         public float answerTime;
-    }
-
-    public enum QuestionType
-    {
-        qM, // Multiple choice question
-        qO  // Open choice question
     }
 
 	/**************************************************************************************
@@ -129,6 +123,10 @@ public class QuestionManager {
         TextAsset questionFile;
         questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
         questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
+
+        for (int i = 0; i < questionList.Count; ++i)
+            questionList[i].id = i;
+
         currentQuestionNb = 0;
         xmlLoaded = true;
     }
@@ -138,22 +136,9 @@ public class QuestionManager {
         questionBuffer.reponses.Clear();
     }
 
-    /**
-     * Functions called when a question is received by the students
-     **/
-    public void rcvQuestion(string squestion)
-    {
-        reset();
-        questionBuffer.qType = QuestionType.qO;
-        questionBuffer.question = squestion;
-
-        EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
-    }
-
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
         reset();
-        questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);
@@ -164,7 +149,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
         reset();
-        questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);
@@ -176,7 +160,6 @@ public class QuestionManager {
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
     {
         reset();
-        questionBuffer.qType = QuestionType.qM;
         questionBuffer.question = squestion;
         questionBuffer.reponses.Add(rep1);
         questionBuffer.reponses.Add(rep2);

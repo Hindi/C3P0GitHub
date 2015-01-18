@@ -149,7 +149,6 @@ public class C3PONetwork : MonoBehaviour {
 			return;
 		}
 
-        Debug.Log(masterHostname);
 		MasterServer.port = masterPort;
 		MasterServer.ipAddress = masterHostname;
 		MasterServer.RequestHostList("C3PO");
