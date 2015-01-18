@@ -145,7 +145,7 @@ public class Client
         {
             int score = 0;
             TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
-            List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile);
+            List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "AnswerStats");
             QuestionManager.AnswerKeeper answerKeeper;
             foreach (Answer a in stats)
             {
