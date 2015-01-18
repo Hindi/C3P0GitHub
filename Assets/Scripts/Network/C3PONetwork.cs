@@ -83,10 +83,20 @@ public class C3PONetwork : MonoBehaviour {
         }
         private void Receive(IAsyncResult ar)
         {
-            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
-            byte[] bytes = udp.EndReceive(ar, ref ip);
-            string message = Encoding.ASCII.GetString(bytes);
-            StartListening();
+            try
+            {
+                IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
+                Debug.Log("ah");
+                byte[] bytes = udp.EndReceive(ar, ref ip);
+                Debug.Log("aha");
+                string message = Encoding.ASCII.GetString(bytes);
+                Debug.Log(message);
+                StartListening();
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("EndReceive failed : " + ex);
+            }
         }
     }
 
@@ -169,8 +179,8 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	private bool findMasterHostname()
     {
-        /*masterHostname = "192.168.0.19";
-        return true;*/
+        masterHostname = "192.168.0.19";
+        return true;
 		/* 1st step : checks if this.masterHostname works */
 		if (masterHostname != null)
 		{

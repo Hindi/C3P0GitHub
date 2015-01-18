@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System;
 
 [XmlType("Credential")]
 public class Credential
@@ -40,18 +41,42 @@ public class PlayerData
         lastCheckTime = Time.time;
     }
 
+    private string encryptMd5(string pass)
+    {
+        System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+        byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
+        bs = md5Hasher.ComputeHash(bs);
+        System.Text.StringBuilder s = new System.Text.StringBuilder();
+        foreach (byte b in bs)
+            s.Append(b.ToString("x2").ToLower());
+
+        return s.ToString();
+    }
+
+    private bool verifyMd5(string input, string hash)
+    {
+        string hashOfInput = encryptMd5(input);
+
+        StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+        if (0 == comparer.Compare(hashOfInput, hash))
+            return true;
+        else
+            return false;
+    }
+
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
         if (loginInfos.ContainsKey(name))
         {
-            if (loginInfos[name] == pass)
+            if (verifyMd5(pass, loginInfos[name]))
             {
                 return true;
             }
             else
                 if (loginInfos[name] == "")
                 {
-                    loginInfos[name] = pass;
+                    loginInfos[name] = encryptMd5(pass);
                     XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
                     return true;
                 }
