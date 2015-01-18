@@ -15,10 +15,14 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private GameObject startGameButton;
 
+    [SerializeField]
+    private Text ipLabel;
+
     private int courseId;
 
 	// Use this for initialization
 	void Start () {
+        ipLabel.text = "Server ip address : " + C3PONetwork.Instance.getMyIp();
 	}
 	
 	// Update is called once per frame

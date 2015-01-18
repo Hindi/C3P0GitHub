@@ -68,6 +68,8 @@ public class C3PONetwork : MonoBehaviour {
 	// Server lists received from MasterServer for both Teacher Server and match making
 	private HostData[] hostList = null;
 
+    private string serverIp;
+
     // Used in the discovery
     UdpClient sender;
     UdpClient receiver;
@@ -290,12 +292,18 @@ public class C3PONetwork : MonoBehaviour {
             sender.Connect(groupEP);
 
             InvokeRepeating("SendData", 0, 0.1f);
+            serverIp = localIPAddress();
         }
         else
         {
             StartReceivingIP();
         }
 	}
+
+    public string getMyIp()
+    {
+        return localIPAddress();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -355,6 +363,22 @@ public class C3PONetwork : MonoBehaviour {
 		connectTeacherServer();
         C3PONetworkManager.Instance.onFailedAuth("Cannot find the server.");
 	}
+
+    public string localIPAddress()
+    {
+        IPHostEntry host;
+        string localIP = "";
+        host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (IPAddress ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                localIP = ip.ToString();
+                break;
+            }
+        }
+        return localIP;
+    }
 	
 	/**
 	 * Receives the host lists for both match making and teacher server
