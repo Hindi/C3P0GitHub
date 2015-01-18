@@ -7,6 +7,19 @@ using System;
 [XmlType("Answer")]
 public class Answer
 {
+    public Answer()
+    {
+
+    }
+
+    public Answer(Answer a)
+    {
+        questionId = a.questionId;
+        response = a.response;
+        result = a.result;
+        answerTime = a.answerTime;
+    }
+
     public Answer(int id, int rep, bool res, float time)
     {
         questionId = id;
@@ -123,6 +136,6 @@ public class Client
             stats.reponses.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
         }
 
-        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/xml/answers/" + currentCourseId + "/" + login, stats);
+        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login, stats);
     }
 }
