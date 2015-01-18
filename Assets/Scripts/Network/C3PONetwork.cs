@@ -72,12 +72,35 @@ public class C3PONetwork : MonoBehaviour {
     private string serverIp;
     string customMessage = "192.168.0.19";
 
-    // Used in the discovery
-    UdpClient udpClient;
-    IPEndPoint receiveIPGroup;
-    IPEndPoint broadCastGroup;
     int remotePort = 19784;
 
+    public class Receiver
+    {
+        private readonly UdpClient udp = new UdpClient(15000);
+        public void StartListening()
+        {
+            this.udp.BeginReceive(Receive, new object());
+        }
+        private void Receive(IAsyncResult ar)
+        {
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
+            byte[] bytes = udp.EndReceive(ar, ref ip);
+            string message = Encoding.ASCII.GetString(bytes);
+            StartListening();
+        }
+    }
+
+    public class Sender
+    {
+        public void Send()
+        {
+            UdpClient client = new UdpClient();
+            IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
+            byte[] bytes = Encoding.ASCII.GetBytes("192.168.0.19");
+            client.Send(bytes, bytes.Length, ip);
+            client.Close();
+        }
+    }
 	
 	/**************************************************************************************
 	 * Public functions                                                                   *
@@ -153,114 +176,10 @@ public class C3PONetwork : MonoBehaviour {
 		{
 			return true;
 		}
-		/* 2nd step : checks Resources/Network/hostnames.xml */
-		/* 3rd step : runs this.discovery() below */
-		if (discovery())
-		{
-			return true;
-		}
 		/* 4th step : puts this.askHostnameGUI = true to get user input and returns false */
 		askHostnameGUI = true;
 		return false;
 	}
-	 
-	/**
-	 * Function to find by discovery the Teacher Server's IP/Hostname, to connect to it later.
-	 *
-	 * @returns if the discovery worked
-	 * @modifies private string masterHostname : updates it in case the discovery is successful
-	 **/
-	private bool discovery()
-	{
-        try
-        {
-            /*IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, remotePort);
-            receiver = new UdpClient(remotePort);
-            receiver.Receive(ref remoteIpEndPoint);
-            Debug.Log("huk");
-            Debug.Log(remoteIpEndPoint.Address.ToString());
-            IPEndPoint e = new IPEndPoint(IPAddress.Any, remotePort);
-            UdpClient u = new UdpClient(e);
-
-            UdpState s = new UdpState();
-            s.e = e;
-            s.u = u;
-
-            u.BeginReceive(new AsyncCallback(ReceiveCallback), s);*/
-            return false;
-        }
-        catch(SocketException e)
-        {
-            Debug.Log(e);
-            return false;
-        }
-	}
-
-    public void ReceiveMessages()
-    {
-        // Receive a message and write it to the console.
-        IPEndPoint e = new IPEndPoint(IPAddress.Any, remotePort);
-        UdpClient u = new UdpClient(e);
-
-        UdpState s = new UdpState();
-        s.e = e;
-        s.u = u;
-
-        Debug.Log("listening for messages");
-        u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
-
-        // Do some work while we wait for a message. For this example,
-        // we'll just sleep
-    }
-
-    public static bool messageReceived = false;
-    public void ReceiveCallback(IAsyncResult ar)
-    {
-        UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
-        IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
-
-        Byte[] receiveBytes = u.EndReceive(ar, ref e);
-        string receiveString = Encoding.ASCII.GetString(receiveBytes);
-
-        Debug.Log("Received: {0}" + receiveString);
-        messageReceived = true;
-    }
-
-    public class UdpState
-    {
-        public IPEndPoint e;
-        public UdpClient u;
-    }
-
-    public void StartReceivingIP()
-    {
-        try
-        {
-            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
-        }
-        catch (SocketException e)
-        {
-            Debug.Log(e.Message);
-        }
-    }
-
-    /*private void ReceiveData(IAsyncResult result)
-    {
-        receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
-        StateObject so = (StateObject)result.AsyncState ;
-        Socket s = so.workSocket;
-        byte[] received  = receiver.EndReceive(result, ref receiveIPGroup);
-        Debug.Log("Begin recieve");
-        string receivedString = Encoding.ASCII.GetString(received);
-        Debug.Log("Begin recieve" + receivedString);
-
-        receiver.BeginReceive(new AsyncCallback(ReceiveData), null);
-    }*/
-
-    private void SendData()
-    {
-        udpClient.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length, broadCastGroup);
-    }
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -285,17 +204,13 @@ public class C3PONetwork : MonoBehaviour {
     {
         if(IS_SERVER)
         {
-            udpClient = new UdpClient();
-            broadCastGroup = new IPEndPoint(IPAddress.Broadcast, remotePort);
-
-            InvokeRepeating("SendData", 0, 0.1f);
+            Sender snd = new Sender();
             serverIp = localIPAddress();
         }
         else
         {
-            ReceiveMessages();
-            receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
-            //StartReceivingIP();
+            Receiver rcv = new Receiver();
+            rcv.StartListening();
         }
 	}
 
