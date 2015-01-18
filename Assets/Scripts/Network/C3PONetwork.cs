@@ -70,10 +70,12 @@ public class C3PONetwork : MonoBehaviour {
 	private HostData[] hostList = null;
 
     private string serverIp;
+    string customMessage = "192.168.0.19";
 
     // Used in the discovery
     UdpClient udpClient;
     IPEndPoint receiveIPGroup;
+    IPEndPoint broadCastGroup;
     int remotePort = 19784;
 
 	
@@ -257,8 +259,7 @@ public class C3PONetwork : MonoBehaviour {
 
     private void SendData()
     {
-        string customMessage = "192.168.0.19";
-        udpClient.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length);
+        udpClient.Send(Encoding.ASCII.GetBytes(customMessage), customMessage.Length, broadCastGroup);
     }
 	
 	/**************************************************************************************
@@ -284,9 +285,8 @@ public class C3PONetwork : MonoBehaviour {
     {
         if(IS_SERVER)
         {
-            udpClient = new UdpClient(remotePort);
-            IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
-            udpClient.Connect(groupEP);
+            udpClient = new UdpClient();
+            broadCastGroup = new IPEndPoint(IPAddress.Broadcast, remotePort);
 
             InvokeRepeating("SendData", 0, 0.1f);
             serverIp = localIPAddress();
