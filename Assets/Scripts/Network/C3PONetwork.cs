@@ -91,7 +91,7 @@ public class C3PONetwork : MonoBehaviour {
 		
 		/* Bind to it */
 		MasterServer.port = masterPort;
-        MasterServer.ipAddress = "127.0.0.1"; /* We're on the teacher computer so the master server is right there */
+        MasterServer.ipAddress = "192.168.0.19"; /* We're on the teacher computer so the master server is right there */
 		Network.InitializeServer(1000,gamePort,false);
 		MasterServer.RegisterHost("C3PO", "TeacherServer");
 	}
@@ -141,8 +141,8 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	private bool findMasterHostname()
     {
-        //masterHostname = "192.168.0.19";
-        //return true;
+        masterHostname = "192.168.0.19";
+        return true;
 		/* 1st step : checks if this.masterHostname works */
 		if (masterHostname != null)
 		{
@@ -216,7 +216,9 @@ public class C3PONetwork : MonoBehaviour {
         byte[] received;
         if (receiver != null)
         {
+            Debug.Log("a");
             received = receiver.EndReceive(result, ref receiveIPGroup);
+            Debug.Log("b");
         }
         else
         {
@@ -361,13 +363,12 @@ public class C3PONetwork : MonoBehaviour {
 	{
 		if (msEvent == MasterServerEvent.HostListReceived)
 		{
-			hostList = MasterServer.PollHostList();
+            hostList = MasterServer.PollHostList();
 			if(hostList.Length > 0 && hostList[0].gameType == "C3PO")
 			{
                 //Network.Connect(hostList[0]);
-                Network.Connect(hostList[0].ip, 25000);
+                Network.Connect(hostList[0]);
                 isConnectedToTeacher = true;
-                Debug.Log("Connected to teacher");
 			}
 		}
 	}
