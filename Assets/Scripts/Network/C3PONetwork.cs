@@ -69,9 +69,6 @@ public class C3PONetwork : MonoBehaviour {
 	// Server lists received from MasterServer for both Teacher Server and match making
 	private HostData[] hostList = null;
 
-    [SerializeField]
-    private LANBroadcastService lanBroadcaster;
-
     private string serverIp;
 
     // Used in the discovery
@@ -197,15 +194,30 @@ public class C3PONetwork : MonoBehaviour {
         }
 	}
 
+    public void ReceiveMessages()
+    {
+        // Receive a message and write it to the console.
+        IPEndPoint e = new IPEndPoint(IPAddress.Any, remotePort);
+        UdpClient u = new UdpClient(e);
+
+        UdpState s = new UdpState();
+        s.e = e;
+        s.u = u;
+
+        Debug.Log("listening for messages");
+        u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
+
+        // Do some work while we wait for a message. For this example,
+        // we'll just sleep
+    }
 
     public static bool messageReceived = false;
     public void ReceiveCallback(IAsyncResult ar)
     {
-        Debug.Log("a");
         UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
         IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
 
-        Byte[] receiveBytes = u.EndReceive(ar, ref receiveIPGroup);
+        Byte[] receiveBytes = u.EndReceive(ar, ref e);
         string receiveString = Encoding.ASCII.GetString(receiveBytes);
 
         Debug.Log("Received: {0}" + receiveString);
@@ -266,24 +278,13 @@ public class C3PONetwork : MonoBehaviour {
 			instance = this;
 		}
 	}
-
-    void ipFound(string strIP)
-    {
-        Debug.Log(strIP);
-    }
-
-    void noIpFound()
-    {
-        Debug.Log("huk");
-    }
 	
 	// Use this for initialization
     void Start()
     {
-        lanBroadcaster.StartSearchBroadCasting(ipFound, noIpFound);
-        udpClient = new UdpClient(remotePort);
         if(IS_SERVER)
         {
+            udpClient = new UdpClient(remotePort);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
             udpClient.Connect(groupEP);
 
@@ -292,6 +293,7 @@ public class C3PONetwork : MonoBehaviour {
         }
         else
         {
+            ReceiveMessages();
             receiveIPGroup = new IPEndPoint(IPAddress.Any, remotePort);
             //StartReceivingIP();
         }

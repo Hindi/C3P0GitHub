@@ -126,7 +126,7 @@ public class LANBroadcastService : MonoBehaviour
                 // We are. Now determine who's gonna be the server.
 
                 // This string holds the ip of the new server. We will start off pointing ourselves as the new server
-                string strIPOfServer = Network.player.ipAddress;
+                string strIPOfServer = Network.player.ipAddress.ToString();
                 // Next, we loop through the other messages, to see if there are other players that have more right to be the server (based on IP)
                 foreach (ReceivedMessage objMessage in lstReceivedMessages)
                 {
