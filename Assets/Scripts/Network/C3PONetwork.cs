@@ -143,8 +143,8 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	private bool findMasterHostname()
     {
-        masterHostname = "192.168.0.19";
-        return true;
+        /*masterHostname = "192.168.0.19";
+        return true;*/
 		/* 1st step : checks if this.masterHostname works */
 		if (masterHostname != null)
 		{
@@ -173,9 +173,10 @@ public class C3PONetwork : MonoBehaviour {
         {
             /*IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, remotePort);
             receiver = new UdpClient(remotePort);
-            receiver.Receive(ref remoteIpEndPoint);*/
-            /*Debug.Log(remoteIpEndPoint.Address.ToString());*/
-            /*IPEndPoint e = new IPEndPoint(IPAddress.Any, remotePort);
+            receiver.Receive(ref remoteIpEndPoint);
+            Debug.Log("huk");
+            Debug.Log(remoteIpEndPoint.Address.ToString());
+            IPEndPoint e = new IPEndPoint(IPAddress.Any, remotePort);
             UdpClient u = new UdpClient(e);
 
             UdpState s = new UdpState();
@@ -287,7 +288,7 @@ public class C3PONetwork : MonoBehaviour {
 	void Start () {
         if(IS_SERVER)
         {
-            sender = new UdpClient();
+            sender = new UdpClient(remotePort);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Broadcast, remotePort);
             sender.Connect(groupEP);
 
