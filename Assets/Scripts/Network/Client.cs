@@ -136,6 +136,37 @@ public class Client
             stats.reponses.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
         }
 
-        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login, stats);
+        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
+    }
+
+    public void loadStats(int currentCourseId)
+    {
+        try
+        {
+            int score = 0;
+            TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
+            List<AnswerStats> stats = XmlHelpers.LoadFromTextAsset<AnswerStats>(statsFile);
+            QuestionManager.AnswerKeeper answerKeeper;
+            foreach(Answer a in stats[0].reponses)
+            {
+                answerKeeper = new QuestionManager.AnswerKeeper();
+                answerKeeper.question = new QuestionManager.QuestionKeeper();
+                answerKeeper.answerTime = a.answerTime;
+                answerKeeper.rep = a.response;
+                answerKeeper.result = a.result;
+                answerKeeper.question.id = a.questionId;
+
+                Debug.Log(a.questionId + " "  + a.result);
+
+                if (a.result)
+                    score++;
+                answers.Add(answerKeeper);
+            }
+            C3PONetworkManager.Instance.setScore(networkPlayer, score);
+        }
+        catch
+        {
+
+        }
     }
 }

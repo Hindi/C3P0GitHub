@@ -122,6 +122,7 @@ public class C3PONetworkManager : MonoBehaviour {
             if (e.Value.NetworkPlayer == client)
             {
                 e.Value.saveStats(0);
+                e.Value.loadStats(0);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
@@ -170,6 +171,11 @@ public class C3PONetworkManager : MonoBehaviour {
     public void sendNotifyWrongPassword(NetworkPlayer netPlayer, string name)
     {
         networkView.RPC("notifyWrongPassword", netPlayer, name);
+    }
+
+    public void setScore(NetworkPlayer netPlayer,  int score)
+    {
+        networkView.RPC("setScore", netPlayer, score);
     }
 	
 	/**************************************************************************************
@@ -288,6 +294,12 @@ public class C3PONetworkManager : MonoBehaviour {
     void notifyWrongPassword(string name)
     {
         onFailedAuth("Wrong password");
+    }
+
+    [RPC]
+    void setScore(int score)
+    {
+        EventManager<int>.Raise(EnumEvent.SCOREUPDATE, score);
     }
 	
 	/**************************************************************************************

@@ -59,7 +59,14 @@ public class QuestionAnswerMenu : MonoBehaviour {
         score = 0;
         timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
+        EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
 	}
+
+    public void onScoreUpdate(int s)
+    {
+        score = s;
+        scoreLabel.text = score.ToString();
+    }
 
     public void onResultRecieved(string rep, bool result)
     {
