@@ -12,6 +12,15 @@ public class Grid : MonoBehaviour {
 	public int w ;
 	public int h ;
 	
+    // Level that defines the falling speed
+    public int level;
+
+    // Number of lines done
+    public int nbLines;
+
+    // Score
+    public int score;
+
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
 
@@ -23,8 +32,12 @@ public class Grid : MonoBehaviour {
 	{			
 		// Grid width and length
 		w = 10;
-		h = 20;
-		
+		h = 25;
+
+        level = 0;
+        score = 0;
+        nbLines = 0;
+
 		// Initialization of the grid that stocks all blocks positions.
 		grid = new Transform[w, h];
 		
@@ -122,8 +135,25 @@ public class Grid : MonoBehaviour {
 				nbDeleted++;
 			}
 		}
-        // if(nbDeleted != 0)
-		// TO DO Augmenter les points correspondants
+        switch (nbDeleted)
+        {
+            case 1: 
+                score += 40 * (level + 1);
+                break;
+            case 2: 
+                score += 100 * (level + 1);
+                break;
+            case 3: 
+                score += 300 * (level + 1);
+                break;
+            case 4: 
+                score += 1200 * (level + 1);
+                break;
+            default: break;
+        }
+        nbLines += nbDeleted;
+        // We use this for the level if we implement a way to start at lvl N instead of 0
+        level =Mathf.Max (nbLines / 10, level);
 	}
 	
 	

@@ -24,22 +24,27 @@ public class Tetromino : MonoBehaviour {
 	public static Tetromino fallingTetromino = null ;
 	public static Tetromino foreSeenTetromino = null ;
 
+
+    // Only the Tetromino O can't rotate 
+    [SerializeField]
+    private bool canRotate;
+
 	// Use this for initialization
 	void Start () {		
 		// Timer to maje a tetromino falls
 		timeSinceLastFall = Time.time;
 		
 		// TO DO Add a level multiplicator if we want to increase difficulty
-		fallingSpeed = 1.0f;
+		fallingSpeed = 1.0f / (Grid._grid.level +1);
 		
 		// Place where a tetromino will spawn
-		spawnPosition = new Vector3(4,14,0);
+		spawnPosition = new Vector3(4,20,0);
 
         // movingRate initialization
-        movingRate = 5;
+        movingRate = 4;
 
         // Timers initialization
-        moveDownTimer = movingRate;
+        moveDownTimer = movingRate/2;
         moveRightTimer = movingRate;
         moveLeftTimer = movingRate;
 		
@@ -100,7 +105,7 @@ public class Tetromino : MonoBehaviour {
 			else if (Input.GetKey(KeyCode.DownArrow))
 			{
 				// MoveDown handles grid updates if the tetromino is set
-                if (moveDownTimer == movingRate)
+                if (moveDownTimer == movingRate/2)
                 {
                     moveDown();
                     moveDownTimer = 0;
@@ -108,9 +113,17 @@ public class Tetromino : MonoBehaviour {
                 }
                 moveDownTimer++;
 			}
+            //TO DO  INSTANT FALL STILL NEED TO BE FIXED
+           /* else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                while (isValidGridPos())
+                {
+                    moveDown();
+                }
+            }*/
             else
             {
-                moveDownTimer = movingRate;
+                moveDownTimer = movingRate/2;
             }
 
             if ((Time.time - timeSinceLastFall) >= fallingSpeed)
@@ -120,10 +133,7 @@ public class Tetromino : MonoBehaviour {
             }
 		}
         if (transform.childCount == 0)
-        {
             Destroy(this.gameObject);
-            Debug.Log("Je n'ai plus de partie");
-        }
           
 	}
 	
@@ -174,12 +184,15 @@ public class Tetromino : MonoBehaviour {
 	// TO DO décaler la pièce si c'est possible pour faire quand mm la rotation
 	void rotate()
 	{
-		transform.Rotate(0, 0, -90);
-    
-		// See if valid
-		if (!isValidGridPos())
-			// It's not valid. revert.
-			transform.Rotate(0, 0, 90);
+        if (canRotate)
+        {
+            transform.Rotate(0, 0, -90);
+
+            // See if valid
+            if (!isValidGridPos())
+                // It's not valid. revert.
+                transform.Rotate(0, 0, 90);
+        }
 	}
 	
 	// Function that checks if the position of all the child blocks of a tetromino 
@@ -195,12 +208,7 @@ public class Tetromino : MonoBehaviour {
 				return false;
 
 			// Check if a child	is superposed with another block of the grid
-			if (Grid._grid.grid[(int)v.x, (int)v.y] != null //&&
-				// As childs are moved separately sometimes we don't check if they collide each other 
-				// POTENTIELLEMENT PAS BESOIN SUIVANT COMMENT JE FAIS 
-				// remove
-				//Grid._grid.grid[(int)v.x, (int)v.y].parent != transform
-				)
+			if (Grid._grid.grid[(int)v.x, (int)v.y] != null)
             {
                 return false; 
             }
