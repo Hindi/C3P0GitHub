@@ -112,7 +112,10 @@ public class C3PONetwork : MonoBehaviour {
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
                 if (message == "C3PO request ip")
+                {
                     ipSender.sendIp();
+                    Debug.Log("Received request");
+                }
                 else if (message.Split(' ')[0] == "C3PO")
                 {
                     serverIp = message.Split(' ')[1];
@@ -175,6 +178,7 @@ public class C3PONetwork : MonoBehaviour {
 
         public void broadCastSomething(string s)
         {
+            Debug.Log("Broadcast : " + s);
             byte[] bytes = Encoding.ASCII.GetBytes(s);
             udp.Send(bytes, bytes.Length, ip);
         }
