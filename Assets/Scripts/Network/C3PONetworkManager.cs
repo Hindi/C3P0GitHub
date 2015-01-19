@@ -122,7 +122,6 @@ public class C3PONetworkManager : MonoBehaviour {
             if (e.Value.NetworkPlayer == client)
             {
                 e.Value.saveStats(0);
-                e.Value.loadStats(0);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
@@ -231,6 +230,7 @@ public class C3PONetworkManager : MonoBehaviour {
             c.Id = id;
             c.NetworkPlayer = info.sender;
             clientsInfos.Add(id, c);
+            c.loadStats(0);
 		}
 	}
 	
