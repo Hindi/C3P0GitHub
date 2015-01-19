@@ -112,14 +112,12 @@ public class QuestionManager {
     {
         if (currentQuestionNb > 0)
             currentQuestionNb--;
-        Debug.Log(currentQuestionNb);
     }
 
     public void goToNextQuestion()
     {
         if (currentQuestionNb < questionList.Count - 1)
             currentQuestionNb++;
-        Debug.Log(currentQuestionNb);
     }
 
     public void loadXml(int id)

@@ -96,7 +96,7 @@ public class ConnectionMenu : MonoBehaviour {
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
             if (!unityConnected)
-                networkManager.connectToTeacher(loginLabel.text, passwordLabel.text);
+                networkManager.connectToTeacher(ipLabel.text, loginLabel.text, passwordLabel.text);
             else if (!authed)
                 networkManager.tryTologIn(loginLabel.text, passwordLabel.text);
         }
