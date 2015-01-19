@@ -188,6 +188,7 @@ public class AliensManager : MonoBehaviour {
 	void switchToBreakout()
     {
         breakOutMode = true;
+        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 0.5f);
         ball.gameObject.SetActive(true);
         ball.GetComponent<Ball>().switchToBreakOut();
     }

@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
                     goalScale = Laws.sin();
                     break;
                 case 2:
-                    goalScale = Random.Range(0, 1);
+                    goalScale = Laws.uniforme();
                     break;
             }
 			lastTimeChangeSize = Time.time;
