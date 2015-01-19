@@ -44,8 +44,7 @@ public class ConnectionMenu : MonoBehaviour {
 
     void onServerIpRecieved(string ip)
     {
-        if(ipLabel.IsActive())
-            ipLabel.text = ip;
+        ipLabel.text = ip;
     }
 
     void onSucceededAuth()
@@ -74,8 +73,11 @@ public class ConnectionMenu : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (!serverFound && C3PONetwork.Instance.getServerIp() != "")
+        if (ipLabel.IsActive() && !serverFound && C3PONetwork.Instance.getServerIp() != "")
+        {
             onServerIpRecieved(C3PONetwork.Instance.getServerIp());
+            serverFound = true;
+        }
 	}
 
     public void onConnectionClick()
