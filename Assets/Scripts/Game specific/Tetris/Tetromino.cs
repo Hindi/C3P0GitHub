@@ -41,7 +41,7 @@ public class Tetromino : MonoBehaviour {
 		spawnPosition = new Vector3(4,20,0);
 
         // movingRate initialization
-        movingRate = 5;
+        movingRate = 4;
 
         // Timers initialization
         moveDownTimer = movingRate/2;
