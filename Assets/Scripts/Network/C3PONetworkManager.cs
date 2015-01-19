@@ -172,6 +172,11 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("notifyWrongPassword", netPlayer, name);
     }
 
+    public void sendNotifyLoginInUse(NetworkPlayer netPlayer, string login)
+    {
+        networkView.RPC("notifyLoginInUse", netPlayer, login);
+    }
+
     public void setScore(NetworkPlayer netPlayer,  int score)
     {
         networkView.RPC("setScoreRPC", netPlayer, score);
@@ -229,14 +234,21 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
         if (playerDatas.checkAuth(login, password, info.sender))
 		{
-			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
-            Client c = new Client();
-            c.Login = login;
-            string id = login + System.DateTime.Now;
-            c.Id = id;
-            c.NetworkPlayer = info.sender;
-            clientsInfos.Add(id, c);
-            c.loadStats(0);
+            if(!clientsInfos.ContainsKey(login))
+            {
+                sendNotifyLoginInUse(info.sender, login);
+            }
+            else
+            {
+                networkView.RPC("clientSuccessfullyConnected", info.sender, login + System.DateTime.Now);
+                Client c = new Client();
+                c.Login = login;
+                string id = login + System.DateTime.Now;
+                c.Id = id;
+                c.NetworkPlayer = info.sender;
+                clientsInfos.Add(id, c);
+                c.loadStats(0);
+            }
 		}
 	}
 	
@@ -293,13 +305,19 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void notifyWrongLogin(string name)
     {
-        onFailedAuth("Wrong login");
+        onFailedAuth("Wrong login.");
     }
 
     [RPC]
     void notifyWrongPassword(string name)
     {
-        onFailedAuth("Wrong password");
+        onFailedAuth("Wrong password.");
+    }
+
+    [RPC]
+    void notifyLoginInUse(string login)
+    {
+        onFailedAuth("Login " + login + "already in use.");
     }
 
     [RPC]
