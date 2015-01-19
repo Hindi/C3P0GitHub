@@ -38,20 +38,6 @@ public class Answer
     public float answerTime;
 }
 
-[XmlType("AnswerStats")]
-public class AnswerStats
-{
-    public AnswerStats()
-    {
-        answer = new List<Answer>();
-    }
-
-    [XmlAttribute]
-    public int courseId;
-    [XmlArrayItem("ar")]
-    public List<Answer> answer;
-}
-
 public class Client
 {
     private string login;
@@ -128,15 +114,14 @@ public class Client
 
     public void saveStats(int currentCourseId)
     {
-        AnswerStats stats = new AnswerStats();
-        stats.courseId = currentCourseId;
+        List<Answer> stats = new List<Answer>();
 
         foreach(QuestionManager.AnswerKeeper a in answers)
         {
-            stats.answer.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
+            stats.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
         }
 
-        XmlHelpers.SaveToXML<AnswerStats>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
+        XmlHelpers.SaveToXML<List<Answer>>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
     }
 
     public void loadStats(int currentCourseId)
