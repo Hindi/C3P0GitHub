@@ -79,9 +79,11 @@ public class C3PONetwork : MonoBehaviour {
     {
         public Sender ipSender;
         private UdpClient udp;
+        private bool isServer;
 
-        public ConnectionManager()
+        public ConnectionManager(bool server)
         {
+            isServer = server;
             udp = new UdpClient(15000);
             ipSender = new Sender(udp);
         }
@@ -111,18 +113,25 @@ public class C3PONetwork : MonoBehaviour {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
-                if (message == "C3PO request ip")
+                if (isServer)
                 {
-                    ipSender.sendIp();
-                    Debug.Log("Received request");
-                }
-                else if (message.Split(' ')[0] == "C3PO")
-                {
-                    serverIp = message.Split(' ')[1];
-                    received = true;
+                    if (message == "request ip")
+                    {
+                        ipSender.sendIp();
+                        Debug.Log("Received request");
+                    }
                 }
                 else
-                    StartListening();
+                {
+                    if (message.Split(' ')[0] == "C3PO")
+                    {
+                        serverIp = message.Split(' ')[1];
+                        Debug.Log("Received IP");
+                        received = true;
+                    }
+                    else
+                        StartListening();
+                }
             }
             catch (Exception ex)
             {
@@ -168,7 +177,7 @@ public class C3PONetwork : MonoBehaviour {
 
         public void sendIpRequest()
         {
-            broadCastSomething("C3PO request ip");
+            broadCastSomething("request ip");
         }
 
         public void sendIp()
@@ -288,13 +297,14 @@ public class C3PONetwork : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        ipReceiver = new ConnectionManager();
         if(IS_SERVER)
         {
+            ipReceiver = new ConnectionManager(true);
             ipReceiver.ipSender.sendIp();
         }
         else
         {
+            ipReceiver = new ConnectionManager(false);
             ipReceiver.ipSender.sendIpRequest();
             ipReceiver.StartListening();
             EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
