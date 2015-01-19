@@ -71,8 +71,6 @@ public class C3PONetwork : MonoBehaviour {
 
     ConnectionManager ipReceiver;
 
-    string customMessage = "192.168.0.19";
-
     int remotePort = 19784;
 
     public class ConnectionManager
@@ -113,13 +111,11 @@ public class C3PONetwork : MonoBehaviour {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
-                Debug.Log(message);
                 if (isServer)
                 {
                     if (message == "request ip")
                     {
                         ipSender.sendIp();
-                        Debug.Log("Received request");
                     }
                 }
                 else
@@ -127,7 +123,6 @@ public class C3PONetwork : MonoBehaviour {
                     if (message.Split(' ')[0] == "C3PO")
                     {
                         serverIp = message.Split(' ')[1];
-                        Debug.Log("Received IP " + serverIp);
                         received = true;
                     }
                     else
@@ -188,7 +183,6 @@ public class C3PONetwork : MonoBehaviour {
 
         public void broadCastSomething(string s)
         {
-            Debug.Log("Broadcast : " + s);
             byte[] bytes = Encoding.ASCII.GetBytes(s);
             udp.Send(bytes, bytes.Length, ip);
         }
@@ -311,7 +305,6 @@ public class C3PONetwork : MonoBehaviour {
         else
         {
             ipReceiver = new ConnectionManager(false);
-            ipReceiver.ipSender.sendIpRequest();
             ipReceiver.StartListening();
             EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
         }
