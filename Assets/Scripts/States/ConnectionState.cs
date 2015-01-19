@@ -11,7 +11,7 @@ public class ConnectionState : State
     public ConnectionState(StateManager stateManager)
         : base(stateManager)
     {
-        EventManager.AddListener(EnumEvent.CONNECTIONESTABLISHED, onConnectedToTeacher);
+        EventManager.AddListener(EnumEvent.AUTHSUCCEEDED, onConnectedToTeacher);
     }
 
     public void onConnectedToTeacher()

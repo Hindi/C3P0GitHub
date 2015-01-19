@@ -12,6 +12,15 @@ public class Grid : MonoBehaviour {
 	public int w ;
 	public int h ;
 	
+    // Level that defines the falling speed
+    public int level;
+
+    // Number of lines done
+    public int nbLines;
+
+    // Score
+    public int score;
+
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
 
@@ -23,8 +32,12 @@ public class Grid : MonoBehaviour {
 	{			
 		// Grid width and length
 		w = 10;
-		h = 20;
-		
+		h = 25;
+
+        level = 0;
+        score = 0;
+        nbLines = 0;
+
 		// Initialization of the grid that stocks all blocks positions.
 		grid = new Transform[w, h];
 		
@@ -53,7 +66,8 @@ public class Grid : MonoBehaviour {
 	{
 		return ((int)pos.x >= 0 && 
 				(int)pos.x < w &&
-				(int)pos.y >= 0);
+				(int)pos.y >= 0 &&
+                (int)pos.y < h);
 	}
 	
 	// Function that deletes a row;
@@ -68,17 +82,17 @@ public class Grid : MonoBehaviour {
 	
 	
 	// This function decreases the row at height y by nbDecrease 
-	public void decreaseRowBy(int y, int nbDecrease)
+	public void decreaseRow(int y)
 	{
 		for (int x = 0; x < w; x++)
 		{
 			if(grid[x,y] != null)
 			{
 				// Update the block position
-				grid[x,y].position += new Vector3(0,-nbDecrease,0);
-				
+				grid[x,y].position += new Vector3(0,-1,0);
+
 				// Update the grid by moving down the one at pos x,y
-				grid[x, y-nbDecrease] = grid[x, y];
+				grid[x, y-1] = grid[x, y];
 				grid[x,y] = null;		
 			}
 		}
@@ -86,11 +100,11 @@ public class Grid : MonoBehaviour {
 
 	// When rows are deleted we have to move down all the blocks above by the number
 	// of deleted rows
-	public void decreaseAllRowsAboveBy(int p, int nbDecrease)
+	public void decreaseRowsAbove(int p)
 	{
-		for (int y = p+nbDecrease; y < h; y++)
+		for (int y = p; y < h; y++)
 		{
-			decreaseRowBy(y, nbDecrease);
+			decreaseRow(y);
 		}
 	}
 	
@@ -106,23 +120,40 @@ public class Grid : MonoBehaviour {
 	}
 	
 	// Function called when a tetromino has been placed at height y 
-    // (his lower part was at height y). We delete the full rows he might 
-	// have completed (so we only have to check the 4 rows above and count how
-	// many lines are deleted and move down the blocks above by this number
+    // (his highest part is at height y). We delete the full rows he might 
+	// have completed (so we only have to check the 4 rows below) 
+    // If some are deleted we move down the rows above
 	public void deleteFullRowsFrom(int y)
 	{
 		int nbDeleted = 0;
-		for (int i = y; i < y + 4 && i < h + 3; i++)
+		for (int i = y; (i > y-4) && (i >= 0); i--)
 		{
 			if (isRowFull(i))
 			{
 				deleteRow(i);
+                decreaseRowsAbove(i + 1);
 				nbDeleted++;
 			}
 		}
-        if(nbDeleted != 0)
-		    decreaseAllRowsAboveBy(y, nbDeleted);
-		//TO DO Augmenter les points correspondants
+        switch (nbDeleted)
+        {
+            case 1: 
+                score += 40 * (level + 1);
+                break;
+            case 2: 
+                score += 100 * (level + 1);
+                break;
+            case 3: 
+                score += 300 * (level + 1);
+                break;
+            case 4: 
+                score += 1200 * (level + 1);
+                break;
+            default: break;
+        }
+        nbLines += nbDeleted;
+        // We use this for the level if we implement a way to start at lvl N instead of 0
+        level =Mathf.Max (nbLines / 10, level);
 	}
 	
 	

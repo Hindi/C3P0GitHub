@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<eleves>
-		<e>a</e>
-		<e>b</e>
-		<e>c</e>
-		<e>d</e>
-		<e>e</e>
-		<e>f</e>
-		<e>g</e>
-	</eleves>
-</Datatable>
+<ArrayOfCredential xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Credential login="a" pass="92eb5ffee6ae2fec3ad71c777531578f" />
+  <Credential login="b" pass="92eb5ffee6ae2fec3ad71c777531578f" />
+  <Credential login="c" pass="7f9c5e64ca9ab8d2ee03704097fd58cc" />
+</ArrayOfCredential>

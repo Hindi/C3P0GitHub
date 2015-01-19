@@ -12,6 +12,10 @@ public class Tetromino : MonoBehaviour {
 	
 	// Time between two "natural" falls of the tetromino
 	private float fallingSpeed;
+
+    // "Timers" not to move left, right, or down at every frames when we hold the key down
+    // A movement every movingRate frames
+    private int moveRightTimer, moveLeftTimer, moveDownTimer, movingRate;
 	
 	// Place where the tetromino will spawn on the board
 	private Vector3 spawnPosition;
@@ -20,16 +24,29 @@ public class Tetromino : MonoBehaviour {
 	public static Tetromino fallingTetromino = null ;
 	public static Tetromino foreSeenTetromino = null ;
 
+
+    // Only the Tetromino O can't rotate 
+    [SerializeField]
+    private bool canRotate;
+
 	// Use this for initialization
 	void Start () {		
-		//Timer to maje a tetromino falls
+		// Timer to maje a tetromino falls
 		timeSinceLastFall = Time.time;
 		
-		//TO DO Add a level multiplicator if we want to increase difficulty
-		fallingSpeed = 1.0f;
+		// TO DO Add a level multiplicator if we want to increase difficulty
+		fallingSpeed = 1.0f / (Grid._grid.level +1);
 		
-		//Place where a tetromino will spawn
-		spawnPosition = new Vector3(4,14,0);
+		// Place where a tetromino will spawn
+		spawnPosition = new Vector3(4,20,0);
+
+        // movingRate initialization
+        movingRate = 4;
+
+        // Timers initialization
+        moveDownTimer = movingRate/2;
+        moveRightTimer = movingRate;
+        moveLeftTimer = movingRate;
 		
 		// This block handles wether the tetromino is falling in the board or is 
 		// just foreseen
@@ -55,25 +72,69 @@ public class Tetromino : MonoBehaviour {
 		if (this == fallingTetromino)
 		{
 			// Move Left
-			if (Input.GetKeyDown(KeyCode.LeftArrow)) 
+			if (Input.GetKey(KeyCode.LeftArrow)) 
 			{
-				moveLeft();
+                if (moveLeftTimer == movingRate)
+                {
+                    moveLeft();
+                    moveLeftTimer = 0;
+                }
+
+                moveLeftTimer++;
 			}
-			else if (Input.GetKeyDown(KeyCode.RightArrow))
+			else if (Input.GetKey(KeyCode.RightArrow))
 			{
-				moveRight();
+                if (moveRightTimer == movingRate)
+                {
+                    moveRight();
+                    moveRightTimer = 0;
+                }
+
+                moveRightTimer++;
 			}
-			else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else
+            {
+                moveRightTimer = movingRate;
+                moveLeftTimer = movingRate;
+            }
+            // We can move to the left or to the right and go up or down at the same time
+			if (Input.GetKeyDown(KeyCode.UpArrow))
 			{
 				rotate();
 			}
-			else if (Input.GetKeyDown(KeyCode.DownArrow) || (Time.time - timeSinceLastFall) >= fallingSpeed)
+			else if (Input.GetKey(KeyCode.DownArrow))
 			{
 				// MoveDown handles grid updates if the tetromino is set
-				moveDown();
-				timeSinceLastFall = Time.time;
+                if (moveDownTimer == movingRate/2)
+                {
+                    moveDown();
+                    moveDownTimer = 0;
+                    timeSinceLastFall = Time.time;
+                }
+                moveDownTimer++;
 			}
+            //TO DO  INSTANT FALL STILL NEED TO BE FIXED
+           /* else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                while (isValidGridPos())
+                {
+                    moveDown();
+                }
+            }*/
+            else
+            {
+                moveDownTimer = movingRate/2;
+            }
+
+            if ((Time.time - timeSinceLastFall) >= fallingSpeed)
+            {
+                moveDown();
+                timeSinceLastFall = Time.time;
+            }
 		}
+        if (transform.childCount == 0)
+            Destroy(this.gameObject);
+          
 	}
 	
 	/*******************************************************************************
@@ -116,9 +177,6 @@ public class Tetromino : MonoBehaviour {
 			updateGrid();
 			// Then the next tetromino appears
 			nextFalling();
-			
-			// Disable the script (tetromino can't move anymore)
-			enabled = false;
 		}
 	}
 	
@@ -126,12 +184,15 @@ public class Tetromino : MonoBehaviour {
 	// TO DO décaler la pièce si c'est possible pour faire quand mm la rotation
 	void rotate()
 	{
-		transform.Rotate(0, 0, -90);
-    
-		// See if valid
-		if (!isValidGridPos())
-			// It's not valid. revert.
-			transform.Rotate(0, 0, 90);
+        if (canRotate)
+        {
+            transform.Rotate(0, 0, -90);
+
+            // See if valid
+            if (!isValidGridPos())
+                // It's not valid. revert.
+                transform.Rotate(0, 0, 90);
+        }
 	}
 	
 	// Function that checks if the position of all the child blocks of a tetromino 
@@ -147,12 +208,7 @@ public class Tetromino : MonoBehaviour {
 				return false;
 
 			// Check if a child	is superposed with another block of the grid
-			if (Grid._grid.grid[(int)v.x, (int)v.y] != null //&&
-				// As childs are moved separately sometimes we don't check if they collide each other 
-				// POTENTIELLEMENT PAS BESOIN SUIVANT COMMENT JE FAIS 
-				// remove
-				//Grid._grid.grid[(int)v.x, (int)v.y].parent != transform
-				)
+			if (Grid._grid.grid[(int)v.x, (int)v.y] != null)
             {
                 return false; 
             }
@@ -166,29 +222,49 @@ public class Tetromino : MonoBehaviour {
 	// updates falling and foreseen tetrominos
 	void updateGrid()
 	{
-		// yMin stocks the lowest child position of the tetromino that has just fallen
-		int yMin = Grid._grid.h;
+		// yMax stocks the highest child position of the tetromino that has just fallen
+		int yMax = 0;
 
 		// Add the new tetromino to the grid	
 		foreach (Transform child in transform) 
 		{
 			Vector2 v = Grid._grid.roundVec2(child.position);
 			Grid._grid.grid[(int)v.x, (int)v.y] = child;
-			if ((int) v.y < yMin)
-				yMin = (int) v.y;
+			if ((int) v.y > yMax)
+				yMax = (int) v.y;
 		}
 		// Now we delete potential full rows
-		Grid._grid.deleteFullRowsFrom(yMin);		
+		Grid._grid.deleteFullRowsFrom(yMax);		
 	}
 	
+
+    // 
 	void nextFalling()
 	{
-        foreSeenTetromino.transform.position = spawnPosition;
-		fallingTetromino = foreSeenTetromino;
-		foreSeenTetromino = null;
+        if (foreSeenTetromino != null)
+        {
+            foreSeenTetromino.transform.position = spawnPosition;
+            // Check if this is a valid position, if it's not, then game over.
+            if (!foreSeenTetromino.isValidGridPos())
+            {
+                gameOver();
+                return;
+            }
 
-		Spawner._spawner.spawnNext();
-		// when the next spawns, the function starts put it in foreSeenTetromino
+            fallingTetromino = foreSeenTetromino;
+            foreSeenTetromino = null;
+
+            Spawner._spawner.spawnNext();
+            // when the next spawns, the function starts put it in foreSeenTetromino
+        }
 	}
 	
+
+
+    // TO DO game over screen and menu
+    void gameOver()
+    {
+        // TO DO pause the game like a menu. Do it with state manager etc
+        Time.timeScale = 0.0f;
+    }
 }

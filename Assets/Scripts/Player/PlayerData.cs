@@ -2,57 +2,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System;
 
-[XmlType("PlayerData")]
-public class PlayerData {
+[XmlType("Credential")]
+public class Credential
+{
+    public Credential()
+    { 
+    }
 
-    PlayerData()
+    public Credential(string log, string pas)
     {
-        loginInfos = new Dictionary<string, string>();
-        studentNames = new List<string>();
+        login = log;
+        pass = pas;
+    }
 
-        TextAsset studentFile;
-        studentFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
-        studentNames = XmlHelpers.LoadFromTextAsset<string>(studentFile);
+    [XmlAttribute]
+    public string login;
+    [XmlAttribute]
+    public string pass;
+}
+
+public class PlayerData
+{
+
+    private TextAsset credentialFile;
+    private float lastCheckTime;
+
+    private Dictionary<string, string> loginInfos;
+    private bool modified = false;
+
+    public PlayerData()
+    {
+        credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
+        loginInfos = XmlHelpers.loadCredentials(credentialFile);
 
         lastCheckTime = Time.time;
     }
 
-    private float lastCheckTime;
-    private Dictionary<string, string> loginInfos;
-    private List<string> studentNames;
-    private bool modified = false;
-
-    public void modifyEntry(string name, string pass, NetworkPlayer player)
+    public void addAnswer()
     {
-        if(loginInfos.ContainsKey(name))
-        {
-            modified = true;
-            loginInfos[name] = pass;
-        }
-        else 
-        {
-            if(studentNames.Contains(name))
-                loginInfos.Add(name, pass);
-            else
-            {
-                C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
-            }
-        }
-        BinarySerializer.SerializeData(this);
+
+    }
+
+    private string encryptMd5(string pass)
+    {
+        System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+        byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
+        bs = md5Hasher.ComputeHash(bs);
+        System.Text.StringBuilder s = new System.Text.StringBuilder();
+        foreach (byte b in bs)
+            s.Append(b.ToString("x2").ToLower());
+
+        return s.ToString();
+    }
+
+    private bool verifyMd5(string input, string hash)
+    {
+        string hashOfInput = encryptMd5(input);
+
+        StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+        if (0 == comparer.Compare(hashOfInput, hash))
+            return true;
+        else
+            return false;
     }
 
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
-        if (loginInfos.ContainsKey(name) && loginInfos[name] == pass)
-            return true;
-        else if (loginInfos.ContainsKey(name) && loginInfos[name] != pass)
-            return false;
+        if (loginInfos.ContainsKey(name))
+        {
+            if (verifyMd5(pass, loginInfos[name]))
+            {
+                return true;
+            }
+            else
+                if (loginInfos[name] == "")
+                {
+                    loginInfos[name] = encryptMd5(pass);
+                    XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
+                    return true;
+                }
+                else
+                {
+                    C3PONetworkManager.Instance.sendNotifyWrongPassword(player, name);
+                    return false;
+                }
+        }
         else
         {
-            Debug.Log("Adding password to base");
-            modifyEntry(name, pass, player);
-            return true;
+            C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
+            return false;
         }
     }
 
@@ -63,7 +104,6 @@ public class PlayerData {
             if (Time.time - lastCheckTime > 120)
             {
                 modified = false;
-                BinarySerializer.SerializeData(this);
             }
         }
 
