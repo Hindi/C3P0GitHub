@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAnswer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Answer questionId="0" response="1" result="true" answerTime="4.7191906" />
-  <Answer questionId="1" response="2" result="false" answerTime="0.819234848" />
+  <Answer questionId="0" response="1" result="true" answerTime="1.36857891" />
+  <Answer questionId="1" response="1" result="true" answerTime="1.34876823" />
 </ArrayOfAnswer>
