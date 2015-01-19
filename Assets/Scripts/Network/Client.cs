@@ -174,8 +174,8 @@ public class Client
                 if (a.result)
                     score++;
                 answers.Add(answerKeeper);
+                C3PONetworkManager.Instance.setScore(networkPlayer, score);
             }
-            C3PONetworkManager.Instance.setScore(networkPlayer, score);
         }
         catch
         {
