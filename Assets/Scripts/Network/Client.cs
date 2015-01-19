@@ -112,12 +112,15 @@ public class Client
         if (answers.Exists(x => x.question.id == a.question.id))
         {
             answers.Remove(answers.Find(x => x.question.id == a.question.id));
+            answers.Add(a);
             calcScore();
         }
         else if(a.result)
+        {
             score++;
+            answers.Add(a);
+        }
 
-        answers.Add(a);
     }
 
     public string lastAnswerExplication()

@@ -52,6 +52,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void startQuestion()
     {
         startTime = Time.time;
+        C3PONetworkManager.Instance.sendRequestScore();
     }
 
 	// Use this for initialization
@@ -61,7 +62,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
 
-        C3PONetworkManager.Instance.sendRequestScore();
 	}
 
     public void onScoreUpdate(int s)
