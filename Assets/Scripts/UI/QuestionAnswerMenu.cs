@@ -60,6 +60,8 @@ public class QuestionAnswerMenu : MonoBehaviour {
         timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
+
+        C3PONetworkManager.Instance.sendRequestScore();
 	}
 
     public void onScoreUpdate(int s)

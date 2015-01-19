@@ -176,6 +176,12 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         networkView.RPC("setScoreRPC", netPlayer, score);
     }
+
+    public void sendRequestScore()
+    {
+        networkView.RPC("requestScore", RPCMode.Server, privateID);
+        
+    }
 	
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
@@ -299,8 +305,13 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void setScoreRPC(int score)
     {
-        Debug.Log(score);
         EventManager<int>.Raise(EnumEvent.SCOREUPDATE, score);
+    }
+
+    [RPC]
+    void requestScore(string id)
+    {
+        setScore(clientsInfos[id].NetworkPlayer, clientsInfos[id].Score);
     }
 	
 	/**************************************************************************************
