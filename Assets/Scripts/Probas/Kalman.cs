@@ -1,14 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 
 public class Kalman {
+
+    private MathNet.Numerics.Distributions.Normal distrib = new MathNet.Numerics.Distributions.Normal();
+    private MathNet.Numerics.LinearAlgebra.Double.DenseMatrix Q;
+    private MathNet.Numerics.LinearAlgebra.Matrix<double> sqrtQ;
 
     // k-1 Vector
     Vector4 oldEstimation;
 
-    Kalman(Vector4 initVector)
+    public Kalman(Vector4 initVector)
     {
+        Q = new MathNet.Numerics.LinearAlgebra.Double.DenseMatrix(4, 4);
+        Q.SetRow(0, new double[4] {1/3.0, 1/2.0, 0.0, 0.0,});
+        Q.SetRow(1, new double[4] {1/2.0, 1.0, 0.0, 0.0,});
+        Q.SetRow(2, new double[4] { 0.0, 0.0, 1/3.0, 1/2.0, });
+        Q.SetRow(3, new double[4] { 0.0, 0.0, 1/2.0, 1.0, });
 
+        // Calculating Q^(1/2);
+        Evd<double> eigenVs = Q.Evd();
+
+        MathNet.Numerics.LinearAlgebra.Double.DenseVector values = new MathNet.Numerics.LinearAlgebra.Double.DenseVector(4);
+        double[] tempValues = new double[4];
+        int i = 0;
+        foreach(MathNet.Numerics.Complex c in eigenVs.EigenValues.ToArray())
+        {
+            tempValues[i] = c.Real;
+            i++;
+        }
+        values.SetValues(tempValues);
+        values.MapInplace(System.Math.Sqrt);
+
+        MathNet.Numerics.LinearAlgebra.Double.DiagonalMatrix newValues = new MathNet.Numerics.LinearAlgebra.Double.DiagonalMatrix(4, 4, values.ToArray());
+        sqrtQ = (eigenVs.EigenVectors * newValues) * eigenVs.EigenVectors.Inverse();
+
+        /* This is debug to see what's actually inside Q^1/2 */
+        for (int j = 0; j < sqrtQ.RowCount; j++)
+        {
+            string message = "";
+            for (int k = 0; k < sqrtQ.ColumnCount; k++)
+            {
+                message += sqrtQ.Row(k).At(j).ToString(null, null) + "   ";
+            }
+            Debug.Log(message);
+        }
+        
     }
 
     /* Interpole une valeur pour la position, en supposant aucun input du joueur, dans nbFrames frames */
