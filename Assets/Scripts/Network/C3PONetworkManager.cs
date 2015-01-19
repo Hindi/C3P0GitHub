@@ -222,6 +222,16 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		return password;
 	}
+
+    private bool loginInUse(string login)
+    {
+        foreach(KeyValuePair<string, Client> p in clientsInfos)
+        {
+            if (p.Value.Login == login)
+                return true;
+        }
+        return false;
+    }
 	
 	/**************************************************************************************
 	 * Private RPC Functions                                                     	      *
@@ -234,7 +244,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
         if (playerDatas.checkAuth(login, password, info.sender))
 		{
-            if(clientsInfos.ContainsKey(login))
+            if (!loginInUse(login))
             {
                 sendNotifyLoginInUse(info.sender, login);
             }
