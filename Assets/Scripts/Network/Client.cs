@@ -74,6 +74,14 @@ public class Client
         get { return answers; }
     }
 
+    public void addAnswer(QuestionManager.AnswerKeeper a)
+    {
+        if(answers.Exists(x => x.question.id == a.question.id))
+        {
+            answers.Remove(answers.Find(x => x.question.id == a.question.id));
+        }
+        answers.Add(a);
+    }
 
     public Client()
     {

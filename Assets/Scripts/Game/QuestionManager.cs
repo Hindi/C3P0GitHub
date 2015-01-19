@@ -190,7 +190,7 @@ public class QuestionManager {
         a.answerTime = Time.time - questionSendTime;
         a.result = (a.question.bonneReponse == rep);
         c.AnsweredLast = true;
-        c.Answers.Add(a);
+        c.addAnswer(a);
     }
 
     /**
@@ -249,7 +249,7 @@ public class QuestionManager {
                 a.answerTime = 40;
                 a.result = false;
 
-                e.Value.Answers.Add(a);
+                e.Value.addAnswer(a);
             }
             e.Value.AnsweredLast = false;
         }
