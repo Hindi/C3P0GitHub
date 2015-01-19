@@ -83,7 +83,7 @@ public class C3PONetwork : MonoBehaviour {
         public ConnectionManager()
         {
             udp = new UdpClient(15000);
-            ipSender = new Sender();
+            ipSender = new Sender(udp);
         }
 
         private string serverIp = "";
@@ -112,10 +112,7 @@ public class C3PONetwork : MonoBehaviour {
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
                 if (message == "C3PO request ip")
-                {
                     ipSender.sendIp();
-                    Debug.Log("huk");
-                }
                 else if (message.Split(' ')[0] == "C3PO")
                 {
                     serverIp = message.Split(' ')[1];
@@ -143,9 +140,9 @@ public class C3PONetwork : MonoBehaviour {
         UdpClient udp;
         IPEndPoint ip;
 
-        public Sender()
+        public Sender(UdpClient udp)
         {
-            udp = new UdpClient(15000);
+            this.udp = udp;
             serverIp = localIPAddress();
             ip = new IPEndPoint(IPAddress.Broadcast, 15000);
         }
