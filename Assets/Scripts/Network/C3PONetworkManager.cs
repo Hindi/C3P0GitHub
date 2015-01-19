@@ -244,8 +244,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
         if (playerDatas.checkAuth(login, password, info.sender))
 		{
-            if (!loginInUse(login))
+            if (loginInUse(login))
             {
+                Debug.Log("login in use");
                 sendNotifyLoginInUse(info.sender, login);
             }
             else
