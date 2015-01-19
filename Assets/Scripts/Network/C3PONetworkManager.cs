@@ -246,7 +246,6 @@ public class C3PONetworkManager : MonoBehaviour {
 		{
             if (loginInUse(login))
             {
-                Debug.Log("login in use");
                 sendNotifyLoginInUse(info.sender, login);
             }
             else
@@ -328,7 +327,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void notifyLoginInUse(string login)
     {
-        onFailedAuth("Login " + login + "already in use.");
+        onFailedAuth("Login " + login + " already in use.");
     }
 
     [RPC]

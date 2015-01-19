@@ -7,7 +7,7 @@ public class ServerMenu : MonoBehaviour {
 
 
     [SerializeField]
-    private Button sendQuestionButton;
+    private GameObject questionCanvas;
 
     [SerializeField]
     private GameObject coursButtons;
@@ -20,6 +20,9 @@ public class ServerMenu : MonoBehaviour {
 
     private int courseId;
 
+    [SerializeField]
+    private Text nextQuestionLabel;
+
 	// Use this for initialization
 	void Start () {
         ipLabel.text = "Server ip address : " + C3PONetwork.Instance.getMyIp();
@@ -31,7 +34,7 @@ public class ServerMenu : MonoBehaviour {
         if (QuestionManager.Instance.isQuestionTimeOver())
         {
             coursButtons.SetActive(false);
-            sendQuestionButton.gameObject.SetActive(false);
+            questionCanvas.SetActive(false);
             startGameButton.SetActive(true);
         }
 	}
@@ -46,12 +49,32 @@ public class ServerMenu : MonoBehaviour {
     private void switchToSendQuestion()
     {
         coursButtons.SetActive(false);
-        sendQuestionButton.gameObject.SetActive(true);
+        questionCanvas.SetActive(true);
+        loadquestionText();
+    }
+
+    private void loadquestionText()
+    {
+        if (!QuestionManager.Instance.isQuestionTimeOver())
+            nextQuestionLabel.text = QuestionManager.Instance.getQuestionTxt();
+    }
+
+    public void preiouvsQuestion()
+    {
+        QuestionManager.Instance.goToPreviousQuestion();
+        loadquestionText();
+    }
+
+    public void nextquestion()
+    {
+        QuestionManager.Instance.goToNextQuestion();
+        loadquestionText();
     }
 
     public void sendQuestion()
     {
         QuestionManager.Instance.sendQuestion();
+        loadquestionText();
     }
 
     public void launchGame()

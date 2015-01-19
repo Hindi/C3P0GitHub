@@ -81,20 +81,6 @@ public class QuestionManager {
     /**************************************************************************************
 	 * Public functions                                                                   *
 	 **************************************************************************************/
-   /* public void sendQuestion(string squestion)
-    {
-        questionBuffer.qType = QuestionType.qO;
-		questionBuffer.question = squestion;
-		oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-    }
-
-    public void sendQuestion(string squestion, QuestionKeeper q)
-    {
-        questionBuffer = new QuestionKeeper(q);
-        oldQuestions.Add(new QuestionKeeper(questionBuffer));
-        C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-    }*/
 
     /**
      * Functions used to send a question to students
@@ -115,6 +101,25 @@ public class QuestionManager {
     public bool isQuestionTimeOver()
     {
         return (xmlLoaded && currentQuestionNb == questionList.Count);
+    }
+
+    public string getQuestionTxt()
+    {
+        return questionList[currentQuestionNb].question;
+    }
+
+    public void goToPreviousQuestion()
+    {
+        if (currentQuestionNb > 0)
+            currentQuestionNb--;
+        Debug.Log(currentQuestionNb);
+    }
+
+    public void goToNextQuestion()
+    {
+        if (currentQuestionNb < questionList.Count - 1)
+            currentQuestionNb++;
+        Debug.Log(currentQuestionNb);
     }
 
     public void loadXml(int id)
