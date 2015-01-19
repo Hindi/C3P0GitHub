@@ -159,7 +159,6 @@ public class Client
     {
         try
         {
-            score = 0;
             TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
             List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "ArrayOfAnswer");
             QuestionManager.AnswerKeeper answerKeeper;
@@ -172,10 +171,9 @@ public class Client
                 answerKeeper.result = a.result;
                 answerKeeper.question.id = a.questionId;
 
-                if (a.result)
-                    score++;
                 answers.Add(answerKeeper);
             }
+            calcScore();
             C3PONetworkManager.Instance.setScore(networkPlayer, score);
         }
         catch
