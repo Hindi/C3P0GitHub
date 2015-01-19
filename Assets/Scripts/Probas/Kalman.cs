@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 
 public class Kalman {
+
+    private MathNet.Numerics.Distributions.Normal distrib = new MathNet.Numerics.Distributions.Normal();
+    private MathNet.Numerics.LinearAlgebra.Double.DenseMatrix Q;
 
     // k-1 Vector
     Vector4 oldEstimation;
 
-    Kalman(Vector4 initVector)
+    public Kalman(Vector4 initVector)
     {
+        Q = new MathNet.Numerics.LinearAlgebra.Double.DenseMatrix(4, 4);
 
+        // Calculating Q^(1/2);
+        Evd<double> eigenVs = Q.Evd();
+        MathNet.Numerics.LinearAlgebra.Complex.DenseVector values = (MathNet.Numerics.LinearAlgebra.Complex.DenseVector) eigenVs.EigenValues;
+        MathNet.Numerics.Complex[] tab = values.ToArray();
     }
 
     /* Interpole une valeur pour la position, en supposant aucun input du joueur, dans nbFrames frames */
