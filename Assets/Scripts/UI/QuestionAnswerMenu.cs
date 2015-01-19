@@ -67,7 +67,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void onScoreUpdate(int s)
     {
         score = s;
-        Debug.Log(score);
         scoreLabel.text = score.ToString();
     }
 

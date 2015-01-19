@@ -17,6 +17,8 @@ public class ConnectionMenu : MonoBehaviour {
     private UI ui;
 
     [SerializeField]
+    private InputField ipLabel;
+    [SerializeField]
     private InputField loginLabel;
     [SerializeField]
     private InputField passwordLabel;
@@ -34,9 +36,15 @@ public class ConnectionMenu : MonoBehaviour {
         networkManager = C3PONetworkManager.Instance;
         EventManager.AddListener(EnumEvent.AUTHSUCCEEDED, onSucceededAuth);
         EventManager<string>.AddListener(EnumEvent.AUTHFAILED, onFailedAuth);
+        EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
         EventManager.AddListener(EnumEvent.CONNECTIONTOUNITY, onConnectedToUnity);
-        EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
 	}
+
+    void onServerIpRecieved(string ip)
+    {
+        if(ipLabel.IsActive())
+            ipLabel.text = ip;
+    }
 
     void onSucceededAuth()
     {
@@ -69,6 +77,9 @@ public class ConnectionMenu : MonoBehaviour {
     public void onConnectionClick()
     {
         ui.updateCurrentCanvas(connectionPrompt);
+        EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
+        if (C3PONetwork.Instance.ServerIp != "")
+            onServerIpRecieved(C3PONetwork.Instance.ServerIp);
     }
 
     public void onConnectionQuitClick()

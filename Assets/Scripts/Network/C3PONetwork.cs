@@ -70,6 +70,11 @@ public class C3PONetwork : MonoBehaviour {
 	private HostData[] hostList = null;
 
     private string serverIp;
+    public string ServerIp
+    {
+        get { return serverIp; }
+    }
+
     string customMessage = "192.168.0.19";
 
     int remotePort = 19784;
@@ -86,11 +91,14 @@ public class C3PONetwork : MonoBehaviour {
             try
             {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
-                Debug.Log("ah");
                 byte[] bytes = udp.EndReceive(ar, ref ip);
-                Debug.Log("aha");
                 string message = Encoding.ASCII.GetString(bytes);
-                Debug.Log(message);
+                if(message.Split(' ')[0] == "C3PO")
+                {
+                    message = message.Split(' ')[1];
+                    EventManager<string>.Raise(EnumEvent.SERVERIPRECEIVED, message);
+                    Debug.Log(message);
+                }
                 StartListening();
             }
             catch (Exception ex)
@@ -207,6 +215,11 @@ public class C3PONetwork : MonoBehaviour {
 			instance = this;
 		}
 	}
+
+    void onServerIpRecieved(string ip)
+    {
+        serverIp = ip;
+    }
 	
 	// Use this for initialization
     void Start()
@@ -221,6 +234,8 @@ public class C3PONetwork : MonoBehaviour {
         {
             Receiver rcv = new Receiver();
             rcv.StartListening();
+            EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
+            serverIp = "";
         }
 	}
 

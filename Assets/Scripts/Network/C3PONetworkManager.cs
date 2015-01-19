@@ -331,7 +331,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		tcpNetwork = C3PONetwork.Instance;
+        tcpNetwork = C3PONetwork.Instance;
 
         if(C3PONetwork.Instance.IS_SERVER)
         {
