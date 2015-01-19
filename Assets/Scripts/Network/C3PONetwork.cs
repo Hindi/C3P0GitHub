@@ -78,9 +78,11 @@ public class C3PONetwork : MonoBehaviour {
     public class ConnectionManager
     {
         public Sender ipSender;
+        private UdpClient udp;
 
         public ConnectionManager()
         {
+            udp = new UdpClient(15000);
             ipSender = new Sender();
         }
 
@@ -98,7 +100,6 @@ public class C3PONetwork : MonoBehaviour {
             set { received = value; }
         }
 
-        private readonly UdpClient udp = new UdpClient(15000);
         public void StartListening()
         {
             this.udp.BeginReceive(Receive, new object());
@@ -139,6 +140,16 @@ public class C3PONetwork : MonoBehaviour {
             set { serverIp = value; }
         }
 
+        UdpClient udp;
+        IPEndPoint ip;
+
+        public Sender()
+        {
+            udp = new UdpClient(15000);
+            serverIp = localIPAddress();
+            ip = new IPEndPoint(IPAddress.Broadcast, 15000);
+        }
+
         private string localIPAddress()
         {
             IPHostEntry host;
@@ -157,21 +168,18 @@ public class C3PONetwork : MonoBehaviour {
 
         public void sendIpRequest()
         {
-            UdpClient client = new UdpClient();
-            IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
-            byte[] bytes = Encoding.ASCII.GetBytes("C3PO request ip");
-            client.Send(bytes, bytes.Length, ip);
-            client.Close();
+            broadCastSomething("C3PO request ip");
         }
 
         public void sendIp()
         {
-            serverIp = localIPAddress();
-            UdpClient client = new UdpClient();
-            IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
-            byte[] bytes = Encoding.ASCII.GetBytes("C3PO 192.168.0.19");
-            client.Send(bytes, bytes.Length, ip);
-            client.Close();
+            broadCastSomething("C3PO 192.168.0.19");
+        }
+
+        public void broadCastSomething(string s)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(s);
+            udp.Send(bytes, bytes.Length, ip);
         }
     }
 	
