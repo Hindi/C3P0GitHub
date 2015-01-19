@@ -175,7 +175,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void setScore(NetworkPlayer netPlayer,  int score)
     {
-        networkView.RPC("setScore", netPlayer, score);
+        networkView.RPC("setScoreRPC", netPlayer, score);
     }
 	
 	/**************************************************************************************
@@ -297,7 +297,7 @@ public class C3PONetworkManager : MonoBehaviour {
     }
 
     [RPC]
-    void setScore(int score)
+    void setScoreRPC(int score)
     {
         EventManager<int>.Raise(EnumEvent.SCOREUPDATE, score);
     }
