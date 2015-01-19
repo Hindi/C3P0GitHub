@@ -110,13 +110,13 @@ public class C3PONetwork : MonoBehaviour {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
-                if (message.Split(' ')[0] == "C3PO")
+                if (message == "C3PO request ip")
+                    ipSender.sendIp();
+                else if (message.Split(' ')[0] == "C3PO")
                 {
                     serverIp = message.Split(' ')[1];
                     received = true;
                 }
-                else if (message == "C3PO request ip")
-                    ipSender.sendIp();
                 else
                     StartListening();
             }
