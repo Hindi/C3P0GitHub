@@ -99,15 +99,25 @@ public class Client
         return answers[answers.Count - 1];
     }
 
+    public void calcScore()
+    {
+        score = 0;
+        foreach (QuestionManager.AnswerKeeper a in answers)
+            if (a.result)
+                score++;
+    }
+
     public void addAnswer(QuestionManager.AnswerKeeper a)
     {
         if (answers.Exists(x => x.question.id == a.question.id))
         {
             answers.Remove(answers.Find(x => x.question.id == a.question.id));
+            calcScore();
         }
-        answers.Add(a);
-        if(a.result)
+        else if(a.result)
             score++;
+
+        answers.Add(a);
     }
 
     public string lastAnswerExplication()
