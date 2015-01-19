@@ -45,6 +45,7 @@ public class PlayerData
 
     }
 
+    //ncrypt password
     private string encryptMd5(string pass)
     {
         System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
@@ -57,6 +58,7 @@ public class PlayerData
         return s.ToString();
     }
 
+    //Check password
     private bool verifyMd5(string input, string hash)
     {
         string hashOfInput = encryptMd5(input);

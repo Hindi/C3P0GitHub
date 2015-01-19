@@ -54,8 +54,6 @@ public class C3PONetwork : MonoBehaviour {
 
 	// The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer)
 	private string masterHostname = null;
-	// askHostnameGUI allows to know when to ask the user to enter the IP/Hostname of the MasterServer
-	private bool askHostnameGUI = false;
 	// allows to keep the user input until it's complete
 	private string userTextStream = "ici";
 	// Can be used to know if the server connected to is the teacher or not.
@@ -213,20 +211,10 @@ public class C3PONetwork : MonoBehaviour {
 	 * Connects to the MasterServer to find the teacher's game server and connects to it.
 	 * If this.masterHostname is null, calls findMasterHostname to initialize it
 	 **/
-	public void connectTeacherServer()
-	{
-		if(!findMasterHostname())
-		{
-			return;
-		}
-		
-		if(isConnectedToTeacher)
-		{
-			return;
-		}
-
+	public void connectTeacherServer(string ip)
+	{		
 		MasterServer.port = masterPort;
-		MasterServer.ipAddress = masterHostname;
+		MasterServer.ipAddress = ip;
 		MasterServer.RequestHostList("C3PO");
 	}
 	
@@ -246,25 +234,6 @@ public class C3PONetwork : MonoBehaviour {
 	/**************************************************************************************
 	 * Private Utility Functions                                                          *
 	 **************************************************************************************/
-
-	/**
-	 * Tries to find the IP/Hostname of the MasterServer to connect to later.
-	 * @returns if the discovery worked
-	 * @modifies private string masterHostname : updates it in case the discovery is successful
-	 **/
-	private bool findMasterHostname()
-    {
-        masterHostname = "192.168.0.19";
-        return true;
-		/* 1st step : checks if this.masterHostname works */
-		if (masterHostname != null)
-		{
-			return true;
-		}
-		/* 4th step : puts this.askHostnameGUI = true to get user input and returns false */
-		askHostnameGUI = true;
-		return false;
-	}
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -326,31 +295,6 @@ public class C3PONetwork : MonoBehaviour {
 	}
 	
 	/**
-	 * Prints a text box in the middle of the screen to get the MasterServer IP/Hostname when it should
-	 **/
-	void OnGUI()
-	{
-		float width = Screen.width;
-		float height = Screen.height;
-		if(askHostnameGUI)
-		{
-			GUI.Box(new Rect(width/2 - width /3, height / 2 - height / 15,
-							 width * 2/3, height *2/ 25),
-					"Veuillez entrer l'IP ou le Nom d'hôte donné par le professeur");
-			userTextStream = GUI.TextArea(new Rect(width/2 - width /6, height / 2 - height /35,
-												width * 2/6, height * 2/50),
-											userTextStream, 50);
-			if(userTextStream.Length > 0 && userTextStream[userTextStream.Length-1] == '\n')
-			{
-				masterHostname = userTextStream.Replace(" ", "").Remove(userTextStream.Length -1);
-				askHostnameGUI = false;
-				connectTeacherServer();
-			}
-			
-		}
-	}
-	
-	/**
 	 * Confirms that the server was successfully created.
 	 **/
 	void OnServerInitialized()
@@ -374,8 +318,6 @@ public class C3PONetwork : MonoBehaviour {
 	 **/
 	void OnFailedToConnectToMasterServer()
 	{
-		masterHostname = null;
-		connectTeacherServer();
         C3PONetworkManager.Instance.onFailedAuth("Cannot find the server.");
 	}
 	
