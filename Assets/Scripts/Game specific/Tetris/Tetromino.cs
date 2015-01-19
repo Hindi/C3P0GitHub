@@ -119,6 +119,12 @@ public class Tetromino : MonoBehaviour {
                 timeSinceLastFall = Time.time;
             }
 		}
+        if (transform.childCount == 0)
+        {
+            Destroy(this.gameObject);
+            Debug.Log("Je n'ai plus de partie");
+        }
+          
 	}
 	
 	/*******************************************************************************
@@ -161,9 +167,6 @@ public class Tetromino : MonoBehaviour {
 			updateGrid();
 			// Then the next tetromino appears
 			nextFalling();
-			
-			// Disable the script (tetromino can't move anymore)
-			enabled = false;
 		}
 	}
 	
