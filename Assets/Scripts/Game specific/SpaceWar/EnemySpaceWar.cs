@@ -32,7 +32,7 @@ public class EnemySpaceWar : Spaceship {
 
 	// Use this for initialization
 	void Start () {
-
+        Kalman k = new Kalman(new Vector4(0, 0, 0, 0));
 	}
 
     void addNoiseToPlayerPosition()
@@ -60,7 +60,7 @@ public class EnemySpaceWar : Spaceship {
 	// Update is called once per frame
 	void Update () {
         Vector2 tirage = tirageGaussien();
-        Debug.Log(tirage.x + " " + tirage.y);
+        //Debug.Log(tirage.x + " " + tirage.y);
         estimateNextShotPoition();
         updateTargetPosition();
 	}
