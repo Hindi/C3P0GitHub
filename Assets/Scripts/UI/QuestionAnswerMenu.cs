@@ -71,14 +71,10 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void onResultRecieved(string rep, bool result)
     {
         if (result)
-        {
-            score++;
             resultBoolLabel.text ="Vrais :";
-        }
         else
             resultBoolLabel.text = "Faux :";
         
-        scoreLabel.text = score.ToString();
         answerLabel.text = rep;
     }
 	

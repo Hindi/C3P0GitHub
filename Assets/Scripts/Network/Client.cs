@@ -40,6 +40,13 @@ public class Answer
 
 public class Client
 {
+    private int score;
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
+
     private string login;
     public string Login
     {
@@ -74,17 +81,9 @@ public class Client
         get { return answers; }
     }
 
-    public void addAnswer(QuestionManager.AnswerKeeper a)
-    {
-        if(answers.Exists(x => x.question.id == a.question.id))
-        {
-            answers.Remove(answers.Find(x => x.question.id == a.question.id));
-        }
-        answers.Add(a);
-    }
-
     public Client()
     {
+        score = 0;
         answers = new List<QuestionManager.AnswerKeeper>();
         answeredLast = false;
     }
@@ -98,6 +97,17 @@ public class Client
     public QuestionManager.AnswerKeeper lastAnswer()
     {
         return answers[answers.Count - 1];
+    }
+
+    public void addAnswer(QuestionManager.AnswerKeeper a)
+    {
+        if (answers.Exists(x => x.question.id == a.question.id))
+        {
+            answers.Remove(answers.Find(x => x.question.id == a.question.id));
+        }
+        answers.Add(a);
+        if(a.result)
+            score++;
     }
 
     public string lastAnswerExplication()
@@ -136,7 +146,7 @@ public class Client
     {
         try
         {
-            int score = 0;
+            score = 0;
             TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
             List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "ArrayOfAnswer");
             QuestionManager.AnswerKeeper answerKeeper;

@@ -299,7 +299,6 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void setScoreRPC(int score)
     {
-        Debug.Log(score);
         EventManager<int>.Raise(EnumEvent.SCOREUPDATE, score);
     }
 	
