@@ -81,7 +81,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	/** 
 	 * Functions used to connect to the teacher server application-wise 
 	 **/
-	public void connectToTeacher(string login, string password)
+	public void connectToTeacher(string ip, string login, string password)
 	{
         this.login = login;
         this.password = password;
@@ -89,7 +89,7 @@ public class C3PONetworkManager : MonoBehaviour {
 		if (tcpNetwork == null) 
 			tcpNetwork = C3PONetwork.Instance;
 			
-		tcpNetwork.connectTeacherServer();
+		tcpNetwork.connectTeacherServer(ip);
 	}
 
     public void tryTologIn(string login, string password)
@@ -172,6 +172,11 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("notifyWrongPassword", netPlayer, name);
     }
 
+    public void sendNotifyLoginInUse(NetworkPlayer netPlayer, string login)
+    {
+        networkView.RPC("notifyLoginInUse", netPlayer, login);
+    }
+
     public void setScore(NetworkPlayer netPlayer,  int score)
     {
         networkView.RPC("setScoreRPC", netPlayer, score);
@@ -188,27 +193,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	 **************************************************************************************/
 	
 	/**
-	 * Checks if a login/password combination is correct.
-	 * @arg1 login sent by the client
-	 * @arg2 raw password sent by the client
-	 * @returns if the login infos exist in the database.
-	 **/
-	private bool checkLog(string login, string password)
-	{
-		try
-		{
-			if(Hash(password) == loginInfos[login])
-				return true;
-			else
-				return false;
-		}
-		catch(KeyNotFoundException)
-		{
-			return false;
-		}
-	}
-	
-	/**
 	 * Transforms a password into a custom Hash to check against the stored value
 	 * @arg1 a password to be hashed
 	 * @returns @arg1 hashed
@@ -217,6 +201,16 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
 		return password;
 	}
+
+    private bool loginInUse(string login)
+    {
+        foreach(KeyValuePair<string, Client> p in clientsInfos)
+        {
+            if (p.Value.Login == login)
+                return true;
+        }
+        return false;
+    }
 	
 	/**************************************************************************************
 	 * Private RPC Functions                                                     	      *
@@ -229,14 +223,21 @@ public class C3PONetworkManager : MonoBehaviour {
 	{
         if (playerDatas.checkAuth(login, password, info.sender))
 		{
-			networkView.RPC("clientSuccessfullyConnected", info.sender, login+System.DateTime.Now);
-            Client c = new Client();
-            c.Login = login;
-            string id = login + System.DateTime.Now;
-            c.Id = id;
-            c.NetworkPlayer = info.sender;
-            clientsInfos.Add(id, c);
-            c.loadStats(0);
+            if (loginInUse(login))
+            {
+                sendNotifyLoginInUse(info.sender, login);
+            }
+            else
+            {
+                networkView.RPC("clientSuccessfullyConnected", info.sender, login + System.DateTime.Now);
+                Client c = new Client();
+                c.Login = login;
+                string id = login + System.DateTime.Now;
+                c.Id = id;
+                c.NetworkPlayer = info.sender;
+                clientsInfos.Add(id, c);
+                c.loadStats(0);
+            }
 		}
 	}
 	
@@ -293,13 +294,19 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void notifyWrongLogin(string name)
     {
-        onFailedAuth("Wrong login");
+        onFailedAuth("Wrong login.");
     }
 
     [RPC]
     void notifyWrongPassword(string name)
     {
-        onFailedAuth("Wrong password");
+        onFailedAuth("Wrong password.");
+    }
+
+    [RPC]
+    void notifyLoginInUse(string login)
+    {
+        onFailedAuth("Login " + login + " already in use.");
     }
 
     [RPC]

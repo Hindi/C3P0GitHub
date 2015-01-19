@@ -20,4 +20,26 @@
 		<bonneReponse>1</bonneReponse>
 		<explication>Abwabwabwabwabwabwbaw</explication>
 	</QuestionKeeper>
+	<QuestionKeeper>
+		<question>Ceci est un test 2</question>
+		<reponses>
+			<r> Ceci est la reponse un </r>
+			<r> Ceci est la reponse deux </r>
+			<r> Ceci est la reponse trois </r>
+			<r> Ceci est la reponse quatre</r>
+		</reponses>
+		<bonneReponse>2</bonneReponse>
+		<explication>Abwabwabwabwabwabwbaw</explication>
+	</QuestionKeeper>
+	<QuestionKeeper>
+		<question>Ceci est un test 3</question>
+		<reponses>
+			<r> Ceci est la reponse un </r>
+			<r> Ceci est la reponse deux </r>
+			<r> Ceci est la reponse trois </r>
+			<r> Ceci est la reponse quatre</r>
+		</reponses>
+		<bonneReponse>3</bonneReponse>
+		<explication>Abwabwabwabwabwabwbaw</explication>
+	</QuestionKeeper>
 </Datatable>
