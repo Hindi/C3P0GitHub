@@ -169,13 +169,11 @@ public class Client
                 answerKeeper.result = a.result;
                 answerKeeper.question.id = a.questionId;
 
-                Debug.Log(a.questionId + " "  + a.result);
-
                 if (a.result)
                     score++;
                 answers.Add(answerKeeper);
-                C3PONetworkManager.Instance.setScore(networkPlayer, score);
             }
+            C3PONetworkManager.Instance.setScore(networkPlayer, score);
         }
         catch
         {
