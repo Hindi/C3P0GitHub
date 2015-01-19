@@ -69,18 +69,35 @@ public class C3PONetwork : MonoBehaviour {
 	// Server lists received from MasterServer for both Teacher Server and match making
 	private HostData[] hostList = null;
 
-    private string serverIp;
-    public string ServerIp
-    {
-        get { return serverIp; }
-    }
+    ConnectionManager ipReceiver;
 
     string customMessage = "192.168.0.19";
 
     int remotePort = 19784;
 
-    public class Receiver
+    public class ConnectionManager
     {
+        public Sender ipSender;
+
+        public ConnectionManager()
+        {
+            ipSender = new Sender();
+        }
+
+        private string serverIp = "";
+        public string ServerIp
+        {
+            get { return serverIp; }
+            set { serverIp = value; }
+        }
+
+        private bool received = false;
+        public bool Received
+        {
+            get { return received; }
+            set { received = value; }
+        }
+
         private readonly UdpClient udp = new UdpClient(15000);
         public void StartListening()
         {
@@ -93,13 +110,15 @@ public class C3PONetwork : MonoBehaviour {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
-                if(message.Split(' ')[0] == "C3PO")
+                if (message.Split(' ')[0] == "C3PO")
                 {
-                    message = message.Split(' ')[1];
-                    EventManager<string>.Raise(EnumEvent.SERVERIPRECEIVED, message);
-                    Debug.Log(message);
+                    serverIp = message.Split(' ')[1];
+                    received = true;
                 }
-                StartListening();
+                else if (message == "C3PO request ip")
+                    ipSender.sendIp();
+                else
+                    StartListening();
             }
             catch (Exception ex)
             {
@@ -110,8 +129,41 @@ public class C3PONetwork : MonoBehaviour {
 
     public class Sender
     {
-        public void Send()
+        private string serverIp;
+        public string ServerIp
         {
+            get { return serverIp; }
+            set { serverIp = value; }
+        }
+
+        private string localIPAddress()
+        {
+            IPHostEntry host;
+            string localIP = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                    break;
+                }
+            }
+            return localIP;
+        }
+
+        public void sendIpRequest()
+        {
+            UdpClient client = new UdpClient();
+            IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
+            byte[] bytes = Encoding.ASCII.GetBytes("C3PO request ip");
+            client.Send(bytes, bytes.Length, ip);
+            client.Close();
+        }
+
+        public void sendIp()
+        {
+            serverIp = localIPAddress();
             UdpClient client = new UdpClient();
             IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
             byte[] bytes = Encoding.ASCII.GetBytes("192.168.0.19");
@@ -218,30 +270,33 @@ public class C3PONetwork : MonoBehaviour {
 
     void onServerIpRecieved(string ip)
     {
-        serverIp = ip;
+        ipReceiver.ServerIp = ip;
     }
 	
 	// Use this for initialization
     void Start()
     {
+        ipReceiver = new ConnectionManager();
         if(IS_SERVER)
         {
-            Sender snd = new Sender();
-            snd.Send();
-            serverIp = localIPAddress();
+            ipReceiver.ipSender.sendIp();
         }
         else
         {
-            Receiver rcv = new Receiver();
-            rcv.StartListening();
+            ipReceiver.ipSender.sendIpRequest();
+            ipReceiver.StartListening();
             EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
-            serverIp = "";
         }
 	}
 
     public string getMyIp()
     {
-        return localIPAddress();
+        return ipReceiver.ipSender.ServerIp;
+    }
+
+    public string getServerIp()
+    {
+        return ipReceiver.ServerIp;
     }
 	
 	// Update is called once per frame
@@ -302,22 +357,6 @@ public class C3PONetwork : MonoBehaviour {
 		connectTeacherServer();
         C3PONetworkManager.Instance.onFailedAuth("Cannot find the server.");
 	}
-
-    public string localIPAddress()
-    {
-        IPHostEntry host;
-        string localIP = "";
-        host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                localIP = ip.ToString();
-                break;
-            }
-        }
-        return localIP;
-    }
 	
 	/**
 	 * Receives the host lists for both match making and teacher server

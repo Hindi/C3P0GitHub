@@ -27,9 +27,11 @@ public class ConnectionMenu : MonoBehaviour {
 
     private bool unityConnected;
     private bool authed;
+    private bool serverFound;
 
 	// Use this for initialization
 	void Start () {
+        serverFound = false;
         unityConnected = false;
         authed = false;
         network = C3PONetwork.Instance;
@@ -70,16 +72,16 @@ public class ConnectionMenu : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
+    void Update()
+    {
+        if (!serverFound && C3PONetwork.Instance.getServerIp() != "")
+            onServerIpRecieved(C3PONetwork.Instance.getServerIp());
 	}
 
     public void onConnectionClick()
     {
         ui.updateCurrentCanvas(connectionPrompt);
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
-        if (C3PONetwork.Instance.ServerIp != "")
-            onServerIpRecieved(C3PONetwork.Instance.ServerIp);
     }
 
     public void onConnectionQuitClick()
