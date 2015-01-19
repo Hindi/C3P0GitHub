@@ -41,7 +41,7 @@ public class Tetromino : MonoBehaviour {
 		spawnPosition = new Vector3(4,20,0);
 
         // movingRate initialization
-        movingRate = 4;
+        movingRate = 5;
 
         // Timers initialization
         moveDownTimer = movingRate/2;
@@ -113,14 +113,6 @@ public class Tetromino : MonoBehaviour {
                 }
                 moveDownTimer++;
 			}
-            //TO DO  INSTANT FALL STILL NEED TO BE FIXED
-           /* else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                while (isValidGridPos())
-                {
-                    moveDown();
-                }
-            }*/
             else
             {
                 moveDownTimer = movingRate/2;
