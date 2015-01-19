@@ -81,7 +81,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	/** 
 	 * Functions used to connect to the teacher server application-wise 
 	 **/
-	public void connectToTeacher(string login, string password)
+	public void connectToTeacher(string ip, string login, string password)
 	{
         this.login = login;
         this.password = password;
@@ -89,7 +89,7 @@ public class C3PONetworkManager : MonoBehaviour {
 		if (tcpNetwork == null) 
 			tcpNetwork = C3PONetwork.Instance;
 			
-		tcpNetwork.connectTeacherServer();
+		tcpNetwork.connectTeacherServer(ip);
 	}
 
     public void tryTologIn(string login, string password)
@@ -193,27 +193,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	 **************************************************************************************/
 	
 	/**
-	 * Checks if a login/password combination is correct.
-	 * @arg1 login sent by the client
-	 * @arg2 raw password sent by the client
-	 * @returns if the login infos exist in the database.
-	 **/
-	private bool checkLog(string login, string password)
-	{
-		try
-		{
-			if(Hash(password) == loginInfos[login])
-				return true;
-			else
-				return false;
-		}
-		catch(KeyNotFoundException)
-		{
-			return false;
-		}
-	}
-	
-	/**
 	 * Transforms a password into a custom Hash to check against the stored value
 	 * @arg1 a password to be hashed
 	 * @returns @arg1 hashed
@@ -246,7 +225,6 @@ public class C3PONetworkManager : MonoBehaviour {
 		{
             if (loginInUse(login))
             {
-                Debug.Log("login in use");
                 sendNotifyLoginInUse(info.sender, login);
             }
             else
@@ -328,7 +306,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void notifyLoginInUse(string login)
     {
-        onFailedAuth("Login " + login + "already in use.");
+        onFailedAuth("Login " + login + " already in use.");
     }
 
     [RPC]
