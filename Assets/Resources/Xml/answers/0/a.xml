@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnswer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Answer questionId="0" response="1" result="true" answerTime="1.40679169" />
+  <Answer questionId="1" response="2" result="false" answerTime="1.35870552" />
+  <Answer questionId="0" response="1" result="true" answerTime="3.33040047" />
+</ArrayOfAnswer>
