@@ -294,6 +294,11 @@ public class C3PONetwork : MonoBehaviour {
     {
         ipReceiver.ServerIp = ip;
     }
+
+    void sendIp()
+    {
+        ipReceiver.ipSender.sendIp();
+    }
 	
 	// Use this for initialization
     void Start()
@@ -301,7 +306,7 @@ public class C3PONetwork : MonoBehaviour {
         if(IS_SERVER)
         {
             ipReceiver = new ConnectionManager(true);
-            ipReceiver.ipSender.sendIp();
+            InvokeRepeating("sendIp", 0, 1);
         }
         else
         {
