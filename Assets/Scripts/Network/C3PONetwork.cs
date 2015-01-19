@@ -166,7 +166,7 @@ public class C3PONetwork : MonoBehaviour {
             serverIp = localIPAddress();
             UdpClient client = new UdpClient();
             IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
-            byte[] bytes = Encoding.ASCII.GetBytes("192.168.0.19");
+            byte[] bytes = Encoding.ASCII.GetBytes("C3PO 192.168.0.19");
             client.Send(bytes, bytes.Length, ip);
             client.Close();
         }
