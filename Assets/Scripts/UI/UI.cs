@@ -24,6 +24,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas spaceInvaderParams;
     [SerializeField]
+    private Canvas lunarLanderParams;
+    [SerializeField]
     private Canvas paramMenu;
     [SerializeField]
     private Canvas gameOverMenu;
@@ -63,6 +65,9 @@ public class UI : MonoBehaviour {
         {
             case EnumGame.SPACEINVADER:
                 paramMenu = spaceInvaderParams;
+                break;
+            case EnumGame.LUNARLANDER:
+                paramMenu = lunarLanderParams;
                 break;
         }
         paramMenu.gameObject.SetActive(true);

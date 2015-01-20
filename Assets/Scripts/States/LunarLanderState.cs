@@ -13,6 +13,7 @@ class LunarLanderState : GameState
     public LunarLanderState(StateManager stateManager)
         : base(stateManager)
     {
+        gameId = EnumGame.LUNARLANDER;
     }
 
     public override void onGameRestart()
@@ -28,10 +29,12 @@ class LunarLanderState : GameState
 
     public override void onLevelWasLoaded(int lvl)
     {
+        base.onLevelWasLoaded(lvl);
         loaded = true;
         player_ = GameObject.FindGameObjectWithTag("Player");
         terrain = GameObject.FindGameObjectWithTag("Terrain").GetComponent<TerrainLunarLander>();
         playerScript_ = player_.GetComponent<PlayerLunarLander>();
+        ui.setParamCanvas(gameId);
     }
 
     // Use this for initialization
