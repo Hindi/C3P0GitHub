@@ -136,17 +136,17 @@ public class Player : MonoBehaviour
                         goalScale = (float)Laws.uniforme();
                         break;
                     case 1:
-                        goalScale = Laws.sin();
+                        goalScale = (float)Laws.gauss(5,3);
                         break;
                     case 2:
-                        goalScale = (float)Laws.uniforme();
+                        goalScale = (float)Laws.gauss(5, 1);
                         break;
                 }
                 lastTimeChangeSize = Time.time;
-                transform.localScale = new Vector3(goalScale, 1, 1);
+                //transform.localScale = new Vector3(goalScale, 1, 1);
             }
 		}
-		//transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
+		transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
 
     float calcBouncingForce(float delta)

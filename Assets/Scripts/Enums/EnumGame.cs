@@ -8,8 +8,8 @@ using System.Collections.Generic;
 
 public enum EnumGame
 {
-    PONG,
-    SPACEINVADER,
     SPACEWAR,
+    SPACEINVADER,
+    PONG,
     LUNARLANDER
 };
