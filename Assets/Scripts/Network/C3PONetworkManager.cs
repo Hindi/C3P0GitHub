@@ -189,7 +189,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendGameStats(int gameId, int paramId, int score)
     {
-        networkView.RPC("requestScore", RPCMode.Server, privateID, gameId, paramId, score);
+        networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
     }
 	
 	/**************************************************************************************
@@ -326,7 +326,7 @@ public class C3PONetworkManager : MonoBehaviour {
     }
 
     [RPC]
-    void sendGameStats(int uniqueID, int gameId, int paramId, int score)
+    void sendGameStatsRPC(string uniqueID, int gameId, int paramId, int score)
     {
         Debug.Log("id : " + uniqueID + " | gameId : " + gameId + " | paramId : " + paramId + " | score : " + score);
     }
