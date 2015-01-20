@@ -6,6 +6,7 @@ static class Laws
 {
     private static float currentTime = Time.time;
     private static float period = 2*Mathf.PI;
+    private static Uniform uniform;
 
     private static void updateTime()
     {
@@ -14,16 +15,19 @@ static class Laws
             currentTime = 0;
     }
 
-
-    public static float uniforme()
+    public static void setUniformValues(double[] valuesList)
     {
-        updateTime();
-        if (currentTime > 0 && currentTime < Mathf.PI / 2)
-            return 3;
-        else if (currentTime > Mathf.PI / 2 && currentTime < 1.5f * Mathf.PI)
-            return 10;
+        uniform = new Uniform(valuesList);
+    }
+
+    public static double uniforme()
+    {
+        if(null != uniform)
+        {
+            return uniform.next();
+        }
         else
-            return 6;
+            return 0;
     }
 
     public static float sin()
