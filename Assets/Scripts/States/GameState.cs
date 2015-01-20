@@ -31,7 +31,7 @@ public class GameState : State
 
     }
 
-    public void onGameOver(bool b)
+    public virtual void onGameOver(bool b)
     {
         onGamePaused(true);
     }

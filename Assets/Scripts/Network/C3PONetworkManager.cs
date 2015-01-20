@@ -40,7 +40,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	public bool isConnectedApp;
 	public string login;
     public string password;
-	
+    private int currentCourseId;
 	
 	
 
@@ -121,10 +121,19 @@ public class C3PONetworkManager : MonoBehaviour {
         {
             if (e.Value.NetworkPlayer == client)
             {
-                e.Value.saveStats(0);
+                e.Value.saveStats(currentCourseId);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
+        }
+    }
+
+    public void loadClientStats(int courseId)
+    {
+        currentCourseId = courseId;
+        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        {
+            e.Value.loadStats(courseId);
         }
     }
 	 
@@ -185,7 +194,11 @@ public class C3PONetworkManager : MonoBehaviour {
     public void sendRequestScore()
     {
         networkView.RPC("requestScore", RPCMode.Server, privateID);
-        
+    }
+
+    public void sendGameStats(int gameId, int paramId, int score)
+    {
+        networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
     }
 	
 	/**************************************************************************************
@@ -236,7 +249,7 @@ public class C3PONetworkManager : MonoBehaviour {
                 c.Id = id;
                 c.NetworkPlayer = info.sender;
                 clientsInfos.Add(id, c);
-                c.loadStats(0);
+                c.loadStats(currentCourseId);
             }
 		}
 	}
@@ -320,6 +333,12 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         setScore(clientsInfos[id].NetworkPlayer, clientsInfos[id].Score);
     }
+
+    [RPC]
+    void sendGameStatsRPC(string uniqueID, int gameId, int paramId, int score)
+    {
+        Debug.Log("id : " + uniqueID + " | gameId : " + gameId + " | paramId : " + paramId + " | score : " + score);
+    }
 	
 	/**************************************************************************************
 	 * Unity Default Delegates                                                            *
@@ -346,6 +365,8 @@ public class C3PONetworkManager : MonoBehaviour {
             clientsInfos = new Dictionary<string, Client>();
             playerDatas = new PlayerData();
         }
+
+        currentCourseId = 0;
 	}
 	
 	// Update is called once per frame
