@@ -20,6 +20,17 @@ public class Grid : MonoBehaviour {
 
     // Score
     public int score;
+    public int fastFallScore;
+
+    // Display
+    /*
+    [SerializeField]
+    private Canvas canvas;
+
+    public GUIText guiScore;
+    public GUIText guiLines;
+    public GUIText guiLevel;
+    */
 
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
@@ -34,10 +45,15 @@ public class Grid : MonoBehaviour {
 		w = 10;
 		h = 25;
 
+        fastFallScore = 0;
         level = 5;
         score = 0;
         nbLines = 0;
-
+    /*    
+        guiScore = GameObject.Find("Score").guiText;
+        guiLines = GameObject.Find("Lines").guiText;
+        guiLevel = GameObject.Find("Level").guiText;
+     */
 		// Initialization of the grid that stocks all blocks positions.
 		grid = new Transform[w, h];
 		
@@ -45,7 +61,14 @@ public class Grid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        /*
+        if (guiScore != null)
+            guiScore.text = score.ToString();
+        if (guiLines != null) 
+            guiLines.text = nbLines.ToString();
+        if (guiLevel != null)
+            guiLevel.text = level.ToString();
+         */
 	}
 	
 
@@ -135,6 +158,8 @@ public class Grid : MonoBehaviour {
 				nbDeleted++;
 			}
 		}
+        score += fastFallScore;
+        fastFallScore = 0;
         switch (nbDeleted)
         {
             case 1: 
