@@ -208,7 +208,7 @@ public class Client
         {
             try
             {
-                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("Xml/gameStats/" + gameEnum + "/" + login + ".xml");
+                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("Xml/gameStats/" + gameEnum + "/" + login);
                 gameStats = XmlHelpers.LoadFromTextAsset<GameStat>(statsFile, "ArrayOfGameStat");
                 Debug.Log("loaded : " + gameStats.Count);
             }
