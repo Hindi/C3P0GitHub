@@ -121,7 +121,7 @@ public class C3PONetworkManager : MonoBehaviour {
         {
             if (e.Value.NetworkPlayer == client)
             {
-                e.Value.saveStats(0);
+                e.Value.saveStats(currentCourseId);
                 ClientsInfos.Remove(e.Key);
                 return;
             }
