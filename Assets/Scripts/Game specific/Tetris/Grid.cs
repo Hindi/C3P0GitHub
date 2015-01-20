@@ -34,7 +34,7 @@ public class Grid : MonoBehaviour {
 		w = 10;
 		h = 25;
 
-        level = 0;
+        level = 5;
         score = 0;
         nbLines = 0;
 
