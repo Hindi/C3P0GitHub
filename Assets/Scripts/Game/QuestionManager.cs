@@ -230,12 +230,11 @@ public class QuestionManager {
 
     void sendResults()
     {
-        bool b;
-        string explication;
+        bool b = false;
+        string explication = oldQuestions[oldQuestions.Count - 1].explication;
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
             b = e.Value.lastQuestionResult();
-            explication = e.Value.lastAnswerExplication();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
         }
