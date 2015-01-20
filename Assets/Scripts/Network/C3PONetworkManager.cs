@@ -145,7 +145,7 @@ public class C3PONetworkManager : MonoBehaviour {
         }
     }
 
-    private void loadPlayersGameStats(int stateEnum)
+    private void loadPlayersGameStats(EnumGame stateEnum)
     {
         foreach (KeyValuePair<string, Client> e in clientsInfos)
             e.Value.loadGameStats((EnumGame)stateEnum);
@@ -182,7 +182,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void loadLevel(string name, int stateEnum)
     {
-        loadPlayersGameStats(stateEnum);
+        loadPlayersGameStats(IdConverter.stateToGame((StateEnum)stateEnum));
         networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
         saveClientsStats();
     }
