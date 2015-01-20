@@ -137,11 +137,11 @@ public class C3PONetworkManager : MonoBehaviour {
         }
     }
 
-    private void saveClientsStats(int courseId)
+    private void saveClientsStats()
     {
         foreach (KeyValuePair<string, Client> e in ClientsInfos)
         {
-            e.Value.saveStats(courseId);
+            e.Value.saveStats(currentCourseId);
         }
     }
 
@@ -184,7 +184,7 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         loadPlayersGameStats(stateEnum);
         networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
-        saveClientsStats(stateEnum);
+        saveClientsStats();
     }
 
     public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
