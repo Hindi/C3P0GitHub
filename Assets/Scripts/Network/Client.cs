@@ -203,13 +203,14 @@ public class Client
 
     public void loadGameStats(EnumGame gameEnum)
     {
+        Debug.Log("load game stats");
         if(null != gameEnum)
         {
             try
             {
                 TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("Xml/gameStats/" + gameEnum + "/" + login + ".xml");
                 gameStats = XmlHelpers.LoadFromTextAsset<GameStat>(statsFile, "ArrayOfGameStat");
-                Debug.Log(gameStats.Count);
+                Debug.Log("loaded : " + gameStats.Count);
             }
             catch
             {
