@@ -200,21 +200,21 @@ public class Tetromino : MonoBehaviour {
     {
         int nbTry=0;
         Vector3 originPos = transform.position;
-        while (!isValidGridPos() && nbTry < 2)
+        while (!isValidGridPos() && nbTry < 3)
         {
             transform.position += new Vector3(-1,0,0);
             nbTry++;
         }
-        if (nbTry < 2)
+        if (nbTry < 3)
             return true;
         nbTry = 0;
         transform.position = originPos;
-        while(!isValidGridPos() && nbTry < 2)
+        while(!isValidGridPos() && nbTry < 3)
         {
             transform.position += new Vector3(1, 0, 0);
             nbTry++;
         }
-        if (nbTry < 2)
+        if (nbTry < 3)
             return true;
         transform.position = originPos;
         return false;

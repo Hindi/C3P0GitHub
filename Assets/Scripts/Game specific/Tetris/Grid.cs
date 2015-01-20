@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 /********************************************************************************
@@ -23,14 +24,14 @@ public class Grid : MonoBehaviour {
     public int fastFallScore;
 
     // Display
-    /*
     [SerializeField]
-    private Canvas canvas;
+    private Text guiScore;
 
-    public GUIText guiScore;
-    public GUIText guiLines;
-    public GUIText guiLevel;
-    */
+    [SerializeField]
+    private Text guiLines;
+
+    [SerializeField]
+    private Text guiLevel;
 
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
@@ -49,11 +50,7 @@ public class Grid : MonoBehaviour {
         level = 5;
         score = 0;
         nbLines = 0;
-    /*    
-        guiScore = GameObject.Find("Score").guiText;
-        guiLines = GameObject.Find("Lines").guiText;
-        guiLevel = GameObject.Find("Level").guiText;
-     */
+
 		// Initialization of the grid that stocks all blocks positions.
 		grid = new Transform[w, h];
 		
@@ -61,14 +58,9 @@ public class Grid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*
-        if (guiScore != null)
             guiScore.text = score.ToString();
-        if (guiLines != null) 
-            guiLines.text = nbLines.ToString();
-        if (guiLevel != null)
-            guiLevel.text = level.ToString();
-         */
+            guiLines.text = "Lines : \n" + nbLines;
+            guiLevel.text = "Level : \n " + level;       
 	}
 	
 
