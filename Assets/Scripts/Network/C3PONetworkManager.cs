@@ -40,7 +40,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	public bool isConnectedApp;
 	public string login;
     public string password;
-	
+    private int currentCourseId;
 	
 	
 
@@ -125,6 +125,14 @@ public class C3PONetworkManager : MonoBehaviour {
                 ClientsInfos.Remove(e.Key);
                 return;
             }
+        }
+    }
+
+    public void loadClientStats(int courseId)
+    {
+        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        {
+            e.Value.loadStats(courseId);
         }
     }
 	 
@@ -240,7 +248,7 @@ public class C3PONetworkManager : MonoBehaviour {
                 c.Id = id;
                 c.NetworkPlayer = info.sender;
                 clientsInfos.Add(id, c);
-                c.loadStats(0);
+                c.loadStats(currentCourseId);
             }
 		}
 	}
@@ -356,6 +364,8 @@ public class C3PONetworkManager : MonoBehaviour {
             clientsInfos = new Dictionary<string, Client>();
             playerDatas = new PlayerData();
         }
+
+        currentCourseId = 0;
 	}
 	
 	// Update is called once per frame

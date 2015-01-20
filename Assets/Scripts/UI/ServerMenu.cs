@@ -43,6 +43,7 @@ public class ServerMenu : MonoBehaviour {
     {
         courseId = id;
         QuestionManager.Instance.loadXml(id);
+        C3PONetworkManager.Instance.loadClientStats(id);
         switchToSendQuestion();
     }
 
