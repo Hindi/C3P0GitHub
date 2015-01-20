@@ -32,7 +32,7 @@ public class EnemySpaceWar : Spaceship {
 
 	// Use this for initialization
 	void Start () {
-        Kalman k = new Kalman(new Vector4(0, 0, 0, 0));
+        Kalman k = new Kalman(new Vector4(0, 0, 0, 0), 1);
 	}
 
     void addNoiseToPlayerPosition()
