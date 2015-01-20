@@ -130,6 +130,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void loadClientStats(int courseId)
     {
+        currentCourseId = courseId;
         foreach (KeyValuePair<string, Client> e in ClientsInfos)
         {
             e.Value.loadStats(courseId);
