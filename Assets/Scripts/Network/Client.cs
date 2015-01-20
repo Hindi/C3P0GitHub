@@ -203,7 +203,7 @@ public class Client
 
     public void loadGameStats(EnumGame gameEnum)
     {
-        Debug.Log("load game stats");
+        Debug.Log("Xml/gameStats/" + gameEnum + "/" + login + ".xml");
         if(null != gameEnum)
         {
             try
