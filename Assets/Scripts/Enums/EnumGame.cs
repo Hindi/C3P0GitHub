@@ -8,8 +8,14 @@ using System.Collections.Generic;
 
 public enum EnumGame
 {
-    PONG,
-    SPACEINVADER,
     SPACEWAR,
-    LUNARLANDER
+    SPACEINVADER,
+    PONG,
+    LUNARLANDER,
+    PACMAN,
+    TETRIS,
+    MARIO,
+    ASTEROIDS,
+    ZELDA,
+    MOONPATROL
 };

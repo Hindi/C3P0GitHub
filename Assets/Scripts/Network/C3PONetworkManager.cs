@@ -136,6 +136,20 @@ public class C3PONetworkManager : MonoBehaviour {
             e.Value.loadStats(courseId);
         }
     }
+
+    private void saveClientsStats()
+    {
+        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        {
+            e.Value.saveStats(currentCourseId);
+        }
+    }
+
+    private void loadPlayersGameStats(EnumGame stateEnum)
+    {
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
+            e.Value.loadGameStats((EnumGame)stateEnum);
+    }
 	 
 	/**
 	 * Functions used to send a question by the server 
@@ -168,7 +182,9 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void loadLevel(string name, int stateEnum)
     {
+        loadPlayersGameStats(IdConverter.stateToGame((StateEnum)stateEnum));
         networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
+        saveClientsStats();
     }
 
     public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
@@ -337,7 +353,9 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void sendGameStatsRPC(string uniqueID, int gameId, int paramId, int score)
     {
-        Debug.Log("id : " + uniqueID + " | gameId : " + gameId + " | paramId : " + paramId + " | score : " + score);
+        GameStat g = new GameStat(gameId, paramId, score, 0, 0);
+        clientsInfos[uniqueID].addGameStat(g);
+        clientsInfos[uniqueID].saveGameStats((EnumGame)gameId);
     }
 	
 	/**************************************************************************************

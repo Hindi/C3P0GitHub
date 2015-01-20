@@ -88,7 +88,7 @@ public class AliensManager : MonoBehaviour {
 	
 	bool canFire()
 	{
-		return (Time.time - lastFireTime > fireCooldown / victoryCount && !breakOutMode);
+		return (Time.time - lastFireTime > fireCooldown / (2+victoryCount));
 	}
 
     bool isBreakOutTime()
@@ -101,8 +101,8 @@ public class AliensManager : MonoBehaviour {
 		summonLine(0, alien1);
 		summonLine(spaceBetweenLines, alien1);
 		summonLine(spaceBetweenLines * 2, alien2);
-		summonLine(spaceBetweenLines * 3, alien2);
-		summonLine(spaceBetweenLines * 4, alien3);
+		//summonLine(spaceBetweenLines * 3, alien2);
+		summonLine(spaceBetweenLines * 3, alien3);
 	}
 	
 	public void onEnemyDeath()

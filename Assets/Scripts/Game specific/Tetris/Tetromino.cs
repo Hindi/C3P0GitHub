@@ -110,6 +110,7 @@ public class Tetromino : MonoBehaviour {
                     moveDown();
                     moveDownTimer = 0;
                     timeSinceLastFall = Time.time;
+                    Grid._grid.fastFallScore++;
                 }
                 moveDownTimer++;
 			}
@@ -172,21 +173,54 @@ public class Tetromino : MonoBehaviour {
 		}
 	}
 	
-	
-	// TO DO décaler la pièce si c'est possible pour faire quand mm la rotation
+
 	void rotate()
 	{
         if (canRotate)
         {
+            int nbTry = 0;
             transform.Rotate(0, 0, -90);
 
             // See if valid
             if (!isValidGridPos())
-                // It's not valid. revert.
-                transform.Rotate(0, 0, 90);
+            {
+                if (!tryTranslate())
+                {
+                    // It's not valid, revert
+                    transform.Rotate(0, 0, 90);
+                }
+            }
+               
         }
 	}
 	
+    // When a rotation is impossible we try to move the tetromino to the left/right to do the rotation
+    // We only try it for a translation by 2 on the left, then to the right
+    bool tryTranslate()
+    {
+        int nbTry=0;
+        Vector3 originPos = transform.position;
+        while (!isValidGridPos() && nbTry < 2)
+        {
+            transform.position += new Vector3(-1,0,0);
+            nbTry++;
+        }
+        if (nbTry < 2)
+            return true;
+        nbTry = 0;
+        transform.position = originPos;
+        while(!isValidGridPos() && nbTry < 2)
+        {
+            transform.position += new Vector3(1, 0, 0);
+            nbTry++;
+        }
+        if (nbTry < 2)
+            return true;
+        transform.position = originPos;
+        return false;
+    }
+
+
 	// Function that checks if the position of all the child blocks of a tetromino 
 	// is correct
 	bool isValidGridPos()
@@ -257,6 +291,7 @@ public class Tetromino : MonoBehaviour {
     void gameOver()
     {
         // TO DO pause the game like a menu. Do it with state manager etc
+        Debug.Log("Level : " + Grid._grid.level + " score : " + Grid._grid.score);
         Time.timeScale = 0.0f;
     }
 }
