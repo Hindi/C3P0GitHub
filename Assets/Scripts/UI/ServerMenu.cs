@@ -43,6 +43,7 @@ public class ServerMenu : MonoBehaviour {
     {
         courseId = id;
         QuestionManager.Instance.loadXml(id);
+        C3PONetworkManager.Instance.loadClientStats(id);
         switchToSendQuestion();
     }
 
@@ -81,8 +82,8 @@ public class ServerMenu : MonoBehaviour {
     {
         string levelName= "";
         int stateEnum = 0;
-        Debug.Log(courseId);
-        if(courseId == 2)
+
+        if (courseId == 2 || courseId == 1)
         {
             levelName = "SpaceInvader";
             stateEnum = (int)StateEnum.SPACEINVADER;

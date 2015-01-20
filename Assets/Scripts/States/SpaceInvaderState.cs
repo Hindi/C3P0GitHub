@@ -8,9 +8,12 @@ class SpaceInvaderState : GameState
     private GameObject player_;
     private Player playerScript_;
 
+    private int paramId;
+
     public SpaceInvaderState(StateManager stateManager)
         : base(stateManager)
     {
+        gameId = EnumGame.SPACEINVADER;
     }
 
     public override void onGameRestart()
@@ -19,9 +22,16 @@ class SpaceInvaderState : GameState
             playerScript_.onGameRestart();
     }
 
+    public override void onGameOver(bool b)
+    {
+        base.onGameOver(b);
+        C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, playerScript_.Score);
+    }
+
     public override void setParameter(Parameter param)
     {
-            player_.GetComponent<Player>().setParamId(param.id);
+        paramId = param.id;
+        player_.GetComponent<Player>().setParamId(param.id);
     }
 
 	public override void onLevelWasLoaded(int lvl)
@@ -29,7 +39,8 @@ class SpaceInvaderState : GameState
         base.onLevelWasLoaded(lvl);
 		loaded = true;
 		player_ = GameObject.FindGameObjectWithTag("Player");
-		playerScript_ = player_.GetComponent<Player>();
+        playerScript_ = player_.GetComponent<Player>();
+        ui.setParamCanvas(gameId);
 	}
 
     // Use this for initialization

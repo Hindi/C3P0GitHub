@@ -30,11 +30,18 @@ public class Player : MonoBehaviour
     private int paramId;
 
     private Rect labelRectScore;
+
     private int score;
+    public int Score
+    {
+        get { return score; }
+    }
 
     // Use this for initialization
     void Start()
     {
+        double[] value = {1,3,5,7};
+        Laws.setUniformValues(value);
         labelRectScore = new Rect(Screen.width - (Screen.width / 4), Screen.height / 25, Screen.width / 4, Screen.height / 20);
         paramId = 0;
         lastTimeChangeSize = Time.time;
@@ -119,23 +126,26 @@ public class Player : MonoBehaviour
 			if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)
 				recallProjectile();
 		}
-		//if (Time.time - lastTimeChangeSize > changeSizeCooldown)
-		{
-            switch(paramId)
+
+        {
+            if (Time.time - lastTimeChangeSize > changeSizeCooldown)
             {
-                case 0:
-                    goalScale = Laws.uniforme();
-                    break;
-                case 1:
-                    goalScale = Laws.sin();
-                    break;
-                case 2:
-                    goalScale = Laws.uniforme();
-                    break;
+                switch (paramId)
+                {
+                    case 0:
+                        goalScale = (float)Laws.uniforme();
+                        break;
+                    case 1:
+                        goalScale = (float)Laws.gauss(5,3);
+                        break;
+                    case 2:
+                        goalScale = (float)Laws.gauss(5, 1);
+                        break;
+                }
+                lastTimeChangeSize = Time.time;
+                //transform.localScale = new Vector3(goalScale, 1, 1);
             }
-			lastTimeChangeSize = Time.time;
 		}
-        transform.localScale = new Vector3(goalScale, 1, 1);
 		transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
     }
 

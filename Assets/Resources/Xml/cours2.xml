@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<QuestionKeeper>
-		<question>Ceci est un test</question>
+		<question>Ceci est un test 0</question>
 		<reponses>
 			<r> Ceci est la reponse un </r>
 			<r> Ceci est la reponse deux </r>
@@ -10,12 +10,11 @@
 		<explication>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB</explication>
 	</QuestionKeeper>
 	<QuestionKeeper>
-		<question>Ceci est un test</question>
+		<question>Ceci est un test 1</question>
 		<reponses>
 			<r> Ceci est la reponse un </r>
 			<r> Ceci est la reponse deux </r>
 			<r> Ceci est la reponse trois </r>
-			<r> Ceci est la reponse quatre</r>
 		</reponses>
 		<bonneReponse>1</bonneReponse>
 		<explication>Abwabwabwabwabwabwbaw</explication>

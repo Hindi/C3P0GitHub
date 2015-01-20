@@ -12,6 +12,8 @@ public class GameState : State
 	private bool paused;
 	private float timeScale = Time.timeScale;
     protected bool loaded;
+    protected UI ui;
+    protected EnumGame gameId;
 
     public GameState(StateManager stateManager) : base(stateManager)
     {
@@ -24,6 +26,7 @@ public class GameState : State
     public override void onLevelWasLoaded(int lvl)
     {
         loaded = true;
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
     }
 
     public virtual void onGameRestart()
@@ -31,7 +34,7 @@ public class GameState : State
 
     }
 
-    public void onGameOver(bool b)
+    public virtual void onGameOver(bool b)
     {
         onGamePaused(true);
     }

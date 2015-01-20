@@ -38,6 +38,45 @@ public class Answer
     public float answerTime;
 }
 
+[XmlType("GameStat")]
+public class GameStat
+{
+    public GameStat()
+    {
+
+    }
+
+    public GameStat(GameStat g)
+    {
+        gameId = g.gameId;
+        paramId = g.paramId;
+        score = g.score;
+        nbDefeats = g.nbDefeats;
+        nbVictories = g.nbVictories;
+    }
+
+    public GameStat(int id, int paramId, int sco, int vct, int def)
+    {
+        gameId = id;
+        this.paramId = paramId;
+        score = sco;
+        nbDefeats = def;
+        nbVictories = vct;
+    }
+
+    [XmlAttribute]
+    public int gameId;
+    [XmlAttribute]
+    public int paramId;
+    [XmlAttribute]
+    public int score;
+    [XmlAttribute]
+    public int nbVictories;
+    [XmlAttribute]
+    public int nbDefeats;
+}
+
+
 public class Client
 {
     private int score;
@@ -75,7 +114,13 @@ public class Client
         set { answeredLast = value; }
     }
 
-    public List<QuestionManager.AnswerKeeper> answers;
+    private List<GameStat> gameStats;
+    public List<GameStat> GameStats
+    {
+        get { return gameStats; }
+    }
+
+    private List<QuestionManager.AnswerKeeper> answers;
     public List<QuestionManager.AnswerKeeper> Answers
     {
         get { return answers; }
@@ -85,6 +130,7 @@ public class Client
     {
         score = 0;
         answers = new List<QuestionManager.AnswerKeeper>();
+        gameStats = new List<GameStat>();
         answeredLast = false;
     }
 
@@ -96,6 +142,7 @@ public class Client
 
     public QuestionManager.AnswerKeeper lastAnswer()
     {
+        Debug.Log(answers.Count);
         return answers[answers.Count - 1];
     }
 
@@ -105,6 +152,11 @@ public class Client
         foreach (QuestionManager.AnswerKeeper a in answers)
             if (a.result)
                 score++;
+    }
+
+    public void addGameStat(GameStat g)
+    {
+        gameStats.Add(g);
     }
 
     public void addAnswer(QuestionManager.AnswerKeeper a)
@@ -143,6 +195,30 @@ public class Client
         return true;
     }
 
+    public void saveGameStats(EnumGame gameEnum)
+    {
+        if(null != gameEnum && gameStats.Count != 0)
+            XmlHelpers.SaveToXML<List<GameStat>>("Assets/Resources/Xml/gameStats/" + gameEnum + "/" + login + ".xml", gameStats);
+    }
+
+    public void loadGameStats(EnumGame gameEnum)
+    {
+        Debug.Log("load game stats");
+        if(null != gameEnum)
+        {
+            try
+            {
+                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("Xml/gameStats/" + gameEnum + "/" + login + ".xml");
+                gameStats = XmlHelpers.LoadFromTextAsset<GameStat>(statsFile, "ArrayOfGameStat");
+                Debug.Log("loaded : " + gameStats.Count);
+            }
+            catch
+            {
+
+            }
+        }
+    }
+
     public void saveStats(int currentCourseId)
     {
         List<Answer> stats = new List<Answer>();
@@ -157,28 +233,31 @@ public class Client
 
     public void loadStats(int currentCourseId)
     {
-        try
+        if(currentCourseId != 0)
         {
-            TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
-            List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "ArrayOfAnswer");
-            QuestionManager.AnswerKeeper answerKeeper;
-            foreach (Answer a in stats)
+            try
             {
-                answerKeeper = new QuestionManager.AnswerKeeper();
-                answerKeeper.question = new QuestionManager.QuestionKeeper();
-                answerKeeper.answerTime = a.answerTime;
-                answerKeeper.rep = a.response;
-                answerKeeper.result = a.result;
-                answerKeeper.question.id = a.questionId;
+                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
+                List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "ArrayOfAnswer");
+                QuestionManager.AnswerKeeper answerKeeper;
+                foreach (Answer a in stats)
+                {
+                    answerKeeper = new QuestionManager.AnswerKeeper();
+                    answerKeeper.question = new QuestionManager.QuestionKeeper();
+                    answerKeeper.answerTime = a.answerTime;
+                    answerKeeper.rep = a.response;
+                    answerKeeper.result = a.result;
+                    answerKeeper.question.id = a.questionId;
 
-                answers.Add(answerKeeper);
+                    answers.Add(answerKeeper);
+                }
+                calcScore();
+                C3PONetworkManager.Instance.setScore(networkPlayer, score);
             }
-            calcScore();
-            C3PONetworkManager.Instance.setScore(networkPlayer, score);
-        }
-        catch
-        {
+            catch
+            {
 
+            }
         }
     }
 }

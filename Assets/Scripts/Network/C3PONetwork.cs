@@ -274,8 +274,8 @@ public class C3PONetwork : MonoBehaviour {
         else
         {
             ipReceiver = new ConnectionManager(false);
-            ipReceiver.StartListening();
             EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
+            ipReceiver.StartListening();
         }
 	}
 

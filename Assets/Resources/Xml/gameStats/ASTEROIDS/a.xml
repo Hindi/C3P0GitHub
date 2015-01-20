@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGameStat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GameStat gameId="1" paramId="2" score="2" nbVictories="0" nbDefeats="0" />
+</ArrayOfGameStat>
