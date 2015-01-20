@@ -38,6 +38,41 @@ public class Answer
     public float answerTime;
 }
 
+[XmlType("GameStat")]
+public class GameStat
+{
+    public GameStat()
+    {
+
+    }
+
+    public GameStat(GameStat g)
+    {
+        gameId = g.gameId;
+        score = g.score;
+        nbDefeats = g.nbDefeats;
+        nbVictories = g.nbVictories;
+    }
+
+    public GameStat(int id, int sco, int vct, int def)
+    {
+        gameId = id;
+        score = sco;
+        nbDefeats = def;
+        nbVictories = vct;
+    }
+
+    [XmlAttribute]
+    public int gameId;
+    [XmlAttribute]
+    public int score;
+    [XmlAttribute]
+    public int nbVictories;
+    [XmlAttribute]
+    public int nbDefeats;
+}
+
+
 public class Client
 {
     private int score;

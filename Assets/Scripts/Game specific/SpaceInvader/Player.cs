@@ -30,7 +30,12 @@ public class Player : MonoBehaviour
     private int paramId;
 
     private Rect labelRectScore;
+
     private int score;
+    public int Score
+    {
+        get { return score; }
+    }
 
     // Use this for initialization
     void Start()

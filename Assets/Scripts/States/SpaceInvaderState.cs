@@ -8,6 +8,9 @@ class SpaceInvaderState : GameState
     private GameObject player_;
     private Player playerScript_;
 
+    private const int gameId = 1;
+    private int paramId;
+
     public SpaceInvaderState(StateManager stateManager)
         : base(stateManager)
     {
@@ -19,9 +22,16 @@ class SpaceInvaderState : GameState
             playerScript_.onGameRestart();
     }
 
+    public override void onGameOver(bool b)
+    {
+        base.onGameOver(b);
+        C3PONetworkManager.Instance.sendGameStats(gameId, paramId, playerScript_.Score);
+    }
+
     public override void setParameter(Parameter param)
     {
-            player_.GetComponent<Player>().setParamId(param.id);
+        paramId = param.id;
+        player_.GetComponent<Player>().setParamId(param.id);
     }
 
 	public override void onLevelWasLoaded(int lvl)
