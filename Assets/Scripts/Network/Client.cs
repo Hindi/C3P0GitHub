@@ -130,6 +130,7 @@ public class Client
     {
         score = 0;
         answers = new List<QuestionManager.AnswerKeeper>();
+        gameStats = new List<GameStat>();
         answeredLast = false;
     }
 
