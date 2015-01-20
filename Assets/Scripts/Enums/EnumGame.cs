@@ -11,5 +11,11 @@ public enum EnumGame
     SPACEWAR,
     SPACEINVADER,
     PONG,
-    LUNARLANDER
+    LUNARLANDER,
+    PACMAN,
+    TETRIS,
+    MARIO,
+    ASTEROIDS,
+    ZELDA,
+    MOONPATROL
 };
