@@ -49,14 +49,16 @@ public class GameStat
     public GameStat(GameStat g)
     {
         gameId = g.gameId;
+        paramId = g.paramId;
         score = g.score;
         nbDefeats = g.nbDefeats;
         nbVictories = g.nbVictories;
     }
 
-    public GameStat(int id, int sco, int vct, int def)
+    public GameStat(int id, int paramId, int sco, int vct, int def)
     {
         gameId = id;
+        this.paramId = paramId;
         score = sco;
         nbDefeats = def;
         nbVictories = vct;
@@ -64,6 +66,8 @@ public class GameStat
 
     [XmlAttribute]
     public int gameId;
+    [XmlAttribute]
+    public int paramId;
     [XmlAttribute]
     public int score;
     [XmlAttribute]
@@ -110,7 +114,13 @@ public class Client
         set { answeredLast = value; }
     }
 
-    public List<QuestionManager.AnswerKeeper> answers;
+    private List<GameStat> gameStats;
+    public List<GameStat> GameStats
+    {
+        get { return gameStats; }
+    }
+
+    private List<QuestionManager.AnswerKeeper> answers;
     public List<QuestionManager.AnswerKeeper> Answers
     {
         get { return answers; }
@@ -141,6 +151,11 @@ public class Client
         foreach (QuestionManager.AnswerKeeper a in answers)
             if (a.result)
                 score++;
+    }
+
+    public void addGameStat(GameStat g)
+    {
+        gameStats.Add(g);
     }
 
     public void addAnswer(QuestionManager.AnswerKeeper a)
@@ -177,6 +192,11 @@ public class Client
                 return a.result;
         }
         return true;
+    }
+
+    public void saveGameStats(EnumGame gameEnum)
+    {
+        XmlHelpers.SaveToXML<List<GameStat>>("Assets/Resources/Xml/gameStats/" + gameEnum + "/" + login + ".xml", gameStats);
     }
 
     public void saveStats(int currentCourseId)

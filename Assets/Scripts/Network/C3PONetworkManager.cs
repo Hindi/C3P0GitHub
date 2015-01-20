@@ -338,6 +338,9 @@ public class C3PONetworkManager : MonoBehaviour {
     void sendGameStatsRPC(string uniqueID, int gameId, int paramId, int score)
     {
         Debug.Log("id : " + uniqueID + " | gameId : " + gameId + " | paramId : " + paramId + " | score : " + score);
+        GameStat g = new GameStat(gameId, paramId, score, 0, 0);
+        clientsInfos[uniqueID].addGameStat(g);
+        clientsInfos[uniqueID].saveGameStats((EnumGame)gameId);
     }
 	
 	/**************************************************************************************
