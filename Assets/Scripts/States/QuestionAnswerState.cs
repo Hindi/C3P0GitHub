@@ -24,6 +24,7 @@ public class QuestionAnswerState : State
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
+        EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
@@ -33,6 +34,12 @@ public class QuestionAnswerState : State
         questionMenu = ui.QuestionCanvas;
         scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
+    }
+
+    public void onDisconnectedFromUnity()
+    {
+        stateManager_.changeState(StateEnum.CONNECTION);
+        EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
     }
 
     public void onResultRecieved(string rep, bool result)

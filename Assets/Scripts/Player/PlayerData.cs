@@ -43,6 +43,7 @@ public class PlayerData
 
     public void resetPassword(string login)
     {
+        Debug.Log(login + " " + loginInfos.ContainsKey(login));
         if (loginInfos.ContainsKey(login))
             loginInfos[login] = "";
     }
