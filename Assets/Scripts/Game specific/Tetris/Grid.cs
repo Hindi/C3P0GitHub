@@ -8,7 +8,9 @@ using UnityEngine.UI;
  * line and does it.                                                            *
  ********************************************************************************/
 public class Grid : MonoBehaviour {
-		
+	
+    // TO DO remove singleton aspect no need for that
+
 	// Grid width and length
 	public int w ;
 	public int h ;
@@ -56,7 +58,7 @@ public class Grid : MonoBehaviour {
     private void initGrid()
     {
         fastFallScore = 0;
-        level = 5;
+        level = 15;
         score = 0;
         nbLines = 0;
     }
