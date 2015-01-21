@@ -10,6 +10,8 @@ public class TetrisState : GameState {
         paramId = param.id;
         // TO DO gérer effet 
         // player_.GetComponent<Player>().setParamId(param.id);
+
+        Camera.main.GetComponent<NoiseEffect>().enabled = true;
     }
 
     public TetrisState(StateManager stateManager) : base(stateManager)
