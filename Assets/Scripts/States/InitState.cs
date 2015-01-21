@@ -35,8 +35,8 @@ class InitState : State {
             }
             else
             {
-                stateManager_.changeState(StateEnum.TETRIS);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Tetris");
+                stateManager_.changeState(StateEnum.CONNECTION);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
             }
         }
 	}
