@@ -106,6 +106,7 @@ public class PlayerData
         {
             C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
             loginInfos.Add(name, encryptMd5(pass));
+            XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
             return true;
         }
     }
