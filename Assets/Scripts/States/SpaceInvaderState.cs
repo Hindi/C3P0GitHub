@@ -24,8 +24,11 @@ class SpaceInvaderState : GameState
 
     public override void onGameOver(bool b)
     {
-        base.onGameOver(b);
-        C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, playerScript_.Score);
+        if (loaded)
+        {
+            base.onGameOver(b);
+            C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, playerScript_.Score);
+        }
     }
 
     public override void setParameter(Parameter param)
