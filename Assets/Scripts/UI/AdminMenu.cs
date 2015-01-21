@@ -25,6 +25,7 @@ public class AdminMenu : MonoBehaviour {
     public void kickSpecificClient()
     {
         C3PONetworkManager.Instance.kickClient(clientLoginInput.text);
+        clientLoginInput.text = "";
     }
 
     public void kickEveryBody()
@@ -34,7 +35,8 @@ public class AdminMenu : MonoBehaviour {
 
     public void resetSpecificPassword()
     {
-
+        C3PONetworkManager.Instance.resetPassword(clientLoginInput.text);
+        clientLoginInput.text = "";
     }
 
 	// Use this for initialization
