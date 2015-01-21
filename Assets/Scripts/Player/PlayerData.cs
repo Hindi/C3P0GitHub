@@ -105,7 +105,8 @@ public class PlayerData
         else
         {
             C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
-            return false;
+            loginInfos.Add(name, encryptMd5(pass));
+            return true;
         }
     }
 
