@@ -24,6 +24,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas spaceInvaderParams;
     [SerializeField]
+    private Canvas tetrisParams;
+    [SerializeField]
     private Canvas lunarLanderParams;
     [SerializeField]
     private Canvas paramMenu;
@@ -65,6 +67,9 @@ public class UI : MonoBehaviour {
         {
             case EnumGame.SPACEINVADER:
                 paramMenu = spaceInvaderParams;
+                break;
+            case EnumGame.TETRIS:
+                paramMenu = tetrisParams;
                 break;
             case EnumGame.LUNARLANDER:
                 paramMenu = lunarLanderParams;
