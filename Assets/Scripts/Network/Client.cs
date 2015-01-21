@@ -142,7 +142,17 @@ public class Client
 
     public QuestionManager.AnswerKeeper lastAnswer()
     {
-        Debug.Log(answers.Count);
+        if(answers.Count == 0)
+        {
+            QuestionManager.AnswerKeeper answerKeeper = new QuestionManager.AnswerKeeper();
+            answerKeeper.question = new QuestionManager.QuestionKeeper();
+            answerKeeper.answerTime = 40;
+            answerKeeper.rep = 0;
+            answerKeeper.result = false;
+            answerKeeper.question.id = 0;
+
+            answers.Add(answerKeeper);
+        }
         return answers[answers.Count - 1];
     }
 
