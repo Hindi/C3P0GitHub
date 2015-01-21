@@ -30,6 +30,7 @@ public class BallMoving : MonoBehaviour {
 	void Start () {
         defaultPos = transform.position;
         defaultSpeed = speed;
+        Laws.setUniformValues(new double[] { 45, -45 });
 	}
 	
 	// Update is called once per frame
@@ -69,22 +70,29 @@ public class BallMoving : MonoBehaviour {
         else
         {
             speed.x *= -1;
-            if (fireBall)
-            {
-                transform.Rotate(new Vector3(0, 0, -2 * Mathf.Atan2(speed.x, speed.y) * Mathf.Rad2Deg));
-            }/*
+            float norm = Mathf.Sqrt(speed.x * speed.x + speed.y * speed.y);
+            float Angle = 0; /* Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg; */
+            
             if (managerScript.param.id == 0)
             {
-                // work some magic
+                Angle += (float) Laws.uniforme();
             }
             else if (managerScript.param.id == 1)
             {
-                // work some other magic
+                Angle += (float) Laws.gauss(0, 30);
             }
             else if (managerScript.param.id == 2)
             {
-                // work some more magic
-            }*/
+                Angle += (float) Laws.gauss(0, 60);
+            }
+
+            speed.x = Mathf.Cos(Angle * Mathf.Deg2Rad) * norm * ((transform.position.x > 0) ? -1 : 1);
+            speed.y = Mathf.Sin(Angle * Mathf.Deg2Rad) * norm;
+
+            if (fireBall)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 90 + ((transform.position.x > 0) ? 0 : 180) + ((transform.position.x > 0) ? -1 : 1) * Angle);
+            }
         }
         
     }

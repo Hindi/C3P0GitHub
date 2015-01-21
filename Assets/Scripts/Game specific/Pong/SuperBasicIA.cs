@@ -10,9 +10,15 @@ public class SuperBasicIA : MonoBehaviour {
     private float speed;
     private Vector3 defaultPos;
 
+    private bool coupSpecial = false;
+    private float timer;
+    private float initTimer;
+    private PongManagerScript pms;
+
     public void onRestart()
     {
         transform.position = defaultPos;
+        coupSpecial = false;
     }
 
     // Use this for initialization
@@ -23,13 +29,33 @@ public class SuperBasicIA : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.y - ball.transform.position.y > 0)
+        if (Math.Abs(transform.position.y - ball.transform.position.y) <= 0.1)
         {
-            transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+
         }
         else
         {
-            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+            if (transform.position.y - ball.transform.position.y > 0)
+            {
+                transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+            }
+            else
+            {
+                transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+            }
+        }
+        if (Time.time - initTimer > timer && coupSpecial)
+        {
+            pms.launchCoupSpecial();
+            coupSpecial = false;
         }
 	}
+
+    public void getCoupSpecial(PongManagerScript s)
+    {
+        pms = s;
+        coupSpecial = true;
+        initTimer = Time.time;
+        timer = Math.Abs((float) Laws.gauss() + 10) % 10;
+    }
 }

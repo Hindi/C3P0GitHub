@@ -4,6 +4,7 @@ using System.Collections;
 public class PongState : GameState {
 
     private PongManagerScript gameScript;
+    private Parameter p;
 
     public PongState(StateManager stateManager)
         : base(stateManager)
@@ -13,7 +14,11 @@ public class PongState : GameState {
 
     public override void onGameRestart()
     {
-        base.onGameRestart();
+        if (loaded)
+        {
+            base.onGameRestart();
+            gameScript.onRestart();
+        }
     }
 
     public override void setParameter(Parameter param)
@@ -21,6 +26,7 @@ public class PongState : GameState {
         if (gameScript != null)
         {
             gameScript.setParameter(param);
+            p = param;
         }
         else
         {
@@ -43,6 +49,15 @@ public class PongState : GameState {
     public override void update()
     {
         base.update();
+    }
+
+    public override void onGameOver(bool b)
+    {
+        if (loaded)
+        {
+            base.onGameOver(b);
+            C3PONetworkManager.Instance.sendGameStats((int) gameId, p.id, 0);
+        }
     }
 
 
