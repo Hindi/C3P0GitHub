@@ -15,9 +15,21 @@ public class BallMoving : MonoBehaviour {
     private int coupPlayer;
     private bool fireBall;
 
+    private Vector3 defaultPos;
+    private Vector2 defaultSpeed;
+
+    public void onRestart()
+    {
+        transform.position = defaultPos;
+        speed = defaultSpeed;
+        coupSpecial = false;
+    }
+
 
 	// Use this for initialization
 	void Start () {
+        defaultPos = transform.position;
+        defaultSpeed = speed;
 	}
 	
 	// Update is called once per frame

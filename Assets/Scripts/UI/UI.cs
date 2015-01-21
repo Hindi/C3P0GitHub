@@ -26,6 +26,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas tetrisParams;
     [SerializeField]
+    private Canvas pongParams;
+    [SerializeField]
     private Canvas lunarLanderParams;
     [SerializeField]
     private Canvas paramMenu;
@@ -73,6 +75,9 @@ public class UI : MonoBehaviour {
                 break;
             case EnumGame.LUNARLANDER:
                 paramMenu = lunarLanderParams;
+                break;
+            case EnumGame.PONG:
+                paramMenu = pongParams;
                 break;
         }
         paramMenu.gameObject.SetActive(true);

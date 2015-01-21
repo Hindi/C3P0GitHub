@@ -11,13 +11,13 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject arrow;
     [SerializeField]
-    private GameObject playerPaddle;
+    private GameObject playerPaddle, enemyPaddle;
     [SerializeField]
     private Sprite origBall, specialBall;
 
     [SerializeField]
     private int timerSeconde;
-    private int timerFrame;
+    private float initTime;
 
     [SerializeField]
     private float specialSpeed;
@@ -32,19 +32,44 @@ public class PongManagerScript : MonoBehaviour {
 
     public Parameter param;
 
-    private int coupSpecialTimer = -1;
+    private float coupSpecialTimer = -1;
+    private int frameTimer = 0;
+    private bool animationEnded = true;
     private int coupSpecialTimerTotal;
     private int colorSide = 0;
     [SerializeField]
     private GameObject afficheCoupSpecial;
 
+    private float lastUpdateTime = -1;
+
+    public void onRestart()
+    {
+        initTime = Time.time;
+        lastUpdateTime = -1;
+        colorSide = 0;
+        animationEnded = true;
+        frameTimer = 0;
+        coupSpecialTimer = -1;
+        coupSpecialCharging = true;
+        ball.GetComponent<BallMoving>().onRestart();
+        arrow.SetActive(false);
+        playerPaddle.GetComponent<PlayerControl>().onRestart();
+        enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
+
+    }
+
 	// Use this for initialization
 	void Start () {
-        timerFrame = timerSeconde * 60;
+        initTime = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (Time.time == lastUpdateTime)
+        {
+            return;
+        }
+        lastUpdateTime = Time.time;
 	    if(ball.transform.position.x < -7)
         {
             texts[0].GetComponent<GUIText>().text = (int.Parse(texts[0].GetComponent<GUIText>().text) + 1).ToString();
@@ -74,15 +99,14 @@ public class PongManagerScript : MonoBehaviour {
             }
         }
 
-        if(timerFrame <= 0)
-        {
-            coupSpecialCharging = false;
-            timerFrame = timerSeconde * 60;
-            startCoupSpecialAnimation();
-        }
         if (coupSpecialCharging)
         {
-            timerFrame--;
+            if(Time.time - initTime >= timerSeconde)
+            {
+                coupSpecialCharging = false;
+                initTime = Time.time;
+                startCoupSpecialAnimation();
+            }
         }
         checkCoupSpecial();
         afficheCoupSpecial.transform.position = new Vector3(colorSide, afficheCoupSpecial.transform.position.y, 0);
@@ -132,62 +156,64 @@ public class PongManagerScript : MonoBehaviour {
         System.Random rand = new System.Random();
         player = (rand.Next(0,2) == 0) ? -1 : 1;
         coupSpecialTimerTotal = rand.Next(600, 660);
-        coupSpecialTimer = coupSpecialTimerTotal;
+        coupSpecialTimer = Time.time;
         afficheCoupSpecial.SetActive(true);
+        animationEnded = false;
     }
 
     private void checkCoupSpecial()
     {
-        if (coupSpecialTimer < 0)
+        if (animationEnded)
         {
             return;
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal * 100 / 100 && coupSpecialTimer > coupSpecialTimerTotal * 90 / 100)
+        frameTimer++;
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 0 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 10 / 100)
         {
             changeColorSide();
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal * 90 / 100 && coupSpecialTimer > coupSpecialTimerTotal * 70 / 100)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 10 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 30 / 100)
         {
-            if (coupSpecialTimer % 2 == 0)
+            if (frameTimer % 2 == 0)
             {
                 changeColorSide();
             }
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal * 70 / 100 && coupSpecialTimer > coupSpecialTimerTotal * 50 / 100)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 30 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 50 / 100)
         {
-            if (coupSpecialTimer % 4 == 0)
+            if (frameTimer % 4 == 0)
             {
                 changeColorSide();
             }
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal * 50 / 100 && coupSpecialTimer > coupSpecialTimerTotal * 20 / 100)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 50 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 80 / 100)
         {
-            if (coupSpecialTimer % 8 == 0)
+            if (frameTimer % 8 == 0)
             {
                 changeColorSide();
             }
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal * 20 / 100 && coupSpecialTimer > coupSpecialTimerTotal * 10 / 100)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 80 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 90 / 100)
         {
-            if (coupSpecialTimer % 16 == 0)
+            if (frameTimer % 16 == 0)
             {
                 changeColorSide();
             }
         }
-        if (coupSpecialTimer <= coupSpecialTimerTotal *  10 / 100 && coupSpecialTimer > 0)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 90 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 100 / 100)
         {
-            if (coupSpecialTimer % 30 == 0)
+            if (frameTimer % 30 == 0)
             {
                 changeColorSide();
             }
         }
-        if (coupSpecialTimer == 0)
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 100 / 100)
         {
             Debug.Log("Coup Special granted to " + player);
             colorSide = player;
             ball.GetComponent<BallMoving>().OnCoupSpecialStart(player);
+            animationEnded = true;
         }
-        coupSpecialTimer--;
     }
 
     private void changeColorSide()

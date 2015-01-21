@@ -8,9 +8,16 @@ public class PlayerControl : MonoBehaviour {
     [SerializeField]
     private float upScreen, downScreen;
 
+    private Vector3 defaultPos;
+
+    public void onRestart()
+    {
+        transform.position = defaultPos;
+    }
+
 	// Use this for initialization
 	void Start () {
-	
+        defaultPos = transform.position;
 	}
 	
 	// Update is called once per frame

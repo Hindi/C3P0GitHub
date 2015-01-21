@@ -8,6 +8,7 @@ public class PongState : GameState {
     public PongState(StateManager stateManager)
         : base(stateManager)
     {
+        gameId = EnumGame.PONG;
     }
 
     public override void onGameRestart()
@@ -31,6 +32,7 @@ public class PongState : GameState {
     {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
+        ui.setParamCanvas(gameId);
     }
 
     public override void end()
