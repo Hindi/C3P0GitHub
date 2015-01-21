@@ -73,6 +73,11 @@ public class UI : MonoBehaviour {
         paramMenu.gameObject.SetActive(true);
     }
 
+    public Canvas getcurrentCanvas()
+    {
+        return currentCanvas;
+    }
+
     public void onGameOver(bool b)
     {
         updateCurrentCanvas(gameOverMenu);

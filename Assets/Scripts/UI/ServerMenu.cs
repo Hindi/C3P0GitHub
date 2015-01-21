@@ -10,6 +10,9 @@ public class ServerMenu : MonoBehaviour {
     private GameObject questionCanvas;
 
     [SerializeField]
+    private Canvas adminCanvas;
+
+    [SerializeField]
     private GameObject coursButtons;
 
     [SerializeField]
@@ -22,6 +25,9 @@ public class ServerMenu : MonoBehaviour {
 
     [SerializeField]
     private Text nextQuestionLabel;
+
+    [SerializeField]
+    private UI ui;
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +82,12 @@ public class ServerMenu : MonoBehaviour {
     {
         QuestionManager.Instance.sendQuestion();
         loadquestionText();
+    }
+
+    public void openAdminPanel()
+    {
+        adminCanvas.gameObject.GetComponent<AdminMenu>().setPreviousCanvas(ui.getcurrentCanvas());
+        ui.updateCurrentCanvas(adminCanvas);
     }
 
     public void launchGame()

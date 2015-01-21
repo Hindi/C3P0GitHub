@@ -56,7 +56,6 @@ public class C3PONetworkManager : MonoBehaviour {
 	
 	/** Used by the server only **/
 	// dictionnaire contenant login/mot de passe
-	private Dictionary<string, string> loginInfos = null;
 	
 	// dictionnaire contenant un identifiant unique
 	private Dictionary<string, Client> clientsInfos = null;
@@ -149,6 +148,29 @@ public class C3PONetworkManager : MonoBehaviour {
     {
         foreach (KeyValuePair<string, Client> e in clientsInfos)
             e.Value.loadGameStats((EnumGame)stateEnum);
+    }
+
+    public void kickClient(string login)
+    {
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
+            if (e.Value.Login == login)
+                Network.CloseConnection(e.Value.NetworkPlayer, true);
+    }
+
+    public void kickClient()
+    {
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
+            Network.CloseConnection(e.Value.NetworkPlayer, true);
+    }
+
+    public void resetPassword()
+    {
+        playerDatas.resetPassword();
+    }
+
+    public void resetPassword(string client)
+    {
+        playerDatas.resetPassword(login);
     }
 	 
 	/**
@@ -379,7 +401,6 @@ public class C3PONetworkManager : MonoBehaviour {
 
         if(C3PONetwork.Instance.IS_SERVER)
         {
-            loginInfos = new Dictionary<string, string>();
             clientsInfos = new Dictionary<string, Client>();
             playerDatas = new PlayerData();
         }
