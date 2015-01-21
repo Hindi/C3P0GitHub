@@ -29,6 +29,7 @@ public class PlayerData
     private TextAsset credentialFile;
     private float lastCheckTime;
 
+    //Contains login and hashed pass
     private Dictionary<string, string> loginInfos;
     private bool modified = false;
 
@@ -40,9 +41,18 @@ public class PlayerData
         lastCheckTime = Time.time;
     }
 
-    public void addAnswer()
+    public void resetPassword(string login)
     {
+        Debug.Log(login + " " + loginInfos.ContainsKey(login));
+        if (loginInfos.ContainsKey(login))
+            loginInfos[login] = "";
+    }
 
+    public void resetPassword()
+    {
+        var keys = new List<string>(loginInfos.Keys);
+        foreach (string k in keys)
+            loginInfos[k] = "";
     }
 
     //ncrypt password

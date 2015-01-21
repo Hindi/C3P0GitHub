@@ -221,14 +221,17 @@ public class Client
 
     public void saveStats(int currentCourseId)
     {
-        List<Answer> stats = new List<Answer>();
-
-        foreach(QuestionManager.AnswerKeeper a in answers)
+        if(currentCourseId != 0)
         {
-            stats.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
-        }
+            List<Answer> stats = new List<Answer>();
 
-        XmlHelpers.SaveToXML<List<Answer>>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
+            foreach (QuestionManager.AnswerKeeper a in answers)
+            {
+                stats.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
+            }
+
+            XmlHelpers.SaveToXML<List<Answer>>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
+        }
     }
 
     public void loadStats(int currentCourseId)
