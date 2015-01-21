@@ -168,7 +168,7 @@ public class C3PONetworkManager : MonoBehaviour {
         playerDatas.resetPassword();
     }
 
-    public void resetPassword(string client)
+    public void resetPassword(string login)
     {
         playerDatas.resetPassword(login);
     }
