@@ -35,7 +35,7 @@ public class Tetromino : MonoBehaviour {
 		timeSinceLastFall = Time.time;
 		
         // Falling speed, increases with the lvl
-		fallingSpeed = 1.0f / (Grid._grid.level + 2);
+		fallingSpeed = 1.0f / (Grid._grid.level + 1);
 		
 		// Place where a tetromino will spawn
 		spawnPosition = new Vector3(4,20,0);
