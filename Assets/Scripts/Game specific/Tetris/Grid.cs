@@ -46,15 +46,20 @@ public class Grid : MonoBehaviour {
 		w = 10;
 		h = 25;
 
-        fastFallScore = 0;
-        level = 5;
-        score = 0;
-        nbLines = 0;
+        initGrid();
 
 		// Initialization of the grid that stocks all blocks positions.
 		grid = new Transform[w, h];
 		
 	}
+
+    private void initGrid()
+    {
+        fastFallScore = 0;
+        level = 5;
+        score = 0;
+        nbLines = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -90,11 +95,30 @@ public class Grid : MonoBehaviour {
 	{
 		for (int x = 0; x < w; x++)
 		{
-			Destroy(grid[x, y].gameObject);
-			grid[x,y] = null;
+            if (grid[x, y] != null)
+            {
+                Destroy(grid[x, y].gameObject);
+                grid[x, y] = null;
+            }
 		}
 	}
 	
+    public void gameRestart()
+    {
+        for (int i = 0; i < _grid.h; i++)
+        {
+            deleteRow(i);
+        }
+
+        initGrid();
+        Destroy(Tetromino.foreSeenTetromino.gameObject);
+        Destroy(Tetromino.fallingTetromino.gameObject);
+        // We set them to null manually because destroy (probably) isn't call at the current frame
+        Tetromino.fallingTetromino = null;
+        Tetromino.foreSeenTetromino = null;
+
+        Spawner._spawner.spawnNext();
+    }
 	
 	// This function decreases the row at height y by nbDecrease 
 	public void decreaseRow(int y)

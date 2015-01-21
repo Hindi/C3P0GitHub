@@ -290,8 +290,6 @@ public class Tetromino : MonoBehaviour {
     // TO DO game over screen and menu
     void gameOver()
     {
-        // TO DO pause the game like a menu. Do it with state manager etc
-        Debug.Log("Level : " + Grid._grid.level + " score : " + Grid._grid.score);
-        Time.timeScale = 0.0f;
+        EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
     }
 }
