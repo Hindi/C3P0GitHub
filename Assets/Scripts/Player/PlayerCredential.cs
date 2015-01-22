@@ -90,7 +90,7 @@ public class PlayerCredential
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
         name = cleanString(name);
-        if (loginInfos.ContainsKey(name))
+        if (name.Length > 0 && loginInfos.ContainsKey(name))
         {
             if (verifyMd5(pass, loginInfos[name]))
             {
