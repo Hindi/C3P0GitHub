@@ -69,7 +69,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [SerializeField]
     private StateManager stateManager;
 
-    PlayerData playerDatas;
+    PlayerCredential playerCredentials;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -116,12 +116,12 @@ public class C3PONetworkManager : MonoBehaviour {
 
     void OnPlayerDisconnected(NetworkPlayer client)
     {
-        foreach(KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             if (e.Value.NetworkPlayer == client)
             {
                 e.Value.saveStats(currentCourseId);
-                ClientsInfos.Remove(e.Key);
+                clientsInfos.Remove(e.Key);
                 return;
             }
         }
@@ -130,7 +130,7 @@ public class C3PONetworkManager : MonoBehaviour {
     public void loadClientStats(int courseId)
     {
         currentCourseId = courseId;
-        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             e.Value.loadStats(courseId);
         }
@@ -138,7 +138,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     private void saveClientsStats()
     {
-        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             e.Value.saveStats(currentCourseId);
         }
@@ -165,12 +165,12 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void resetPassword()
     {
-        playerDatas.resetPassword();
+        playerCredentials.resetPassword();
     }
 
     public void resetPassword(string login)
     {
-        playerDatas.resetPassword(login);
+        playerCredentials.resetPassword(login);
     }
 	 
 	/**
@@ -272,7 +272,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC]
 	void clientConnect(string login, string password, NetworkMessageInfo info)
 	{
-        if (playerDatas.checkAuth(login, password, info.sender))
+        if (playerCredentials.checkAuth(login, password, info.sender))
 		{
             if (loginInUse(login))
             {
@@ -369,7 +369,8 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void requestScore(string id)
     {
-        setScore(clientsInfos[id].NetworkPlayer, clientsInfos[id].Score);
+        if(clientsInfos.ContainsKey(id))
+            setScore(clientsInfos[id].NetworkPlayer, clientsInfos[id].Score);
     }
 
     [RPC]
@@ -402,7 +403,7 @@ public class C3PONetworkManager : MonoBehaviour {
         if(C3PONetwork.Instance.IS_SERVER)
         {
             clientsInfos = new Dictionary<string, Client>();
-            playerDatas = new PlayerData();
+            playerCredentials = new PlayerCredential();
         }
 
         currentCourseId = 0;

@@ -193,7 +193,7 @@ public class QuestionManager {
         a.answerTime = Time.time - questionSendTime;
         a.result = (a.question.bonneReponse == rep);
         c.AnsweredLast = true;
-        c.addAnswer(a);
+        c.addAnswer(a, courseId);
     }
 
     /**
@@ -237,6 +237,7 @@ public class QuestionManager {
             b = e.Value.lastQuestionResult();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
+            Debug.Log("Score : " + e.Value.Score);
         }
     }
 
@@ -252,14 +253,11 @@ public class QuestionManager {
                 a.answerTime = 40;
                 a.result = false;
 
-                e.Value.addAnswer(a);
+                e.Value.addAnswer(a, courseId);
+                Debug.Log("Didn't answer, creating default answer");
             }
             e.Value.AnsweredLast = false;
         }
-    }
-
-    void addDefaultAnswerToClient(ref Client c)
-    {
     }
 
     public void update()

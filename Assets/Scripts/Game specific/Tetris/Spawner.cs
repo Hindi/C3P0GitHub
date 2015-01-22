@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
+    // TO DO remove the singleton aspect, no need for that
+
 	public static Spawner _spawner;
 
 	// Vector use to store all the tetrominos and choose randomly the next one to 

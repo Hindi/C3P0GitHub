@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAnswer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Answer questionId="0" response="2" result="false" answerTime="40" />
+  <Answer questionId="0" response="1" result="true" answerTime="1.259964" />
+  <Answer questionId="1" response="2" result="false" answerTime="1.57991791" />
+  <Answer questionId="2" response="2" result="true" answerTime="1.32626343" />
+  <Answer questionId="3" response="2" result="true" answerTime="1.40978241" />
 </ArrayOfAnswer>

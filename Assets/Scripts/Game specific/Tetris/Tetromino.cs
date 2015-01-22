@@ -34,13 +34,14 @@ public class Tetromino : MonoBehaviour {
 		// Timer to maje a tetromino falls
 		timeSinceLastFall = Time.time;
 		
-		// TO DO Add a level multiplicator if we want to increase difficulty
-		fallingSpeed = 1.0f / (Grid._grid.level +1);
+        // Falling speed, increases with the lvl
+		fallingSpeed = 1.0f / (Grid._grid.level + 1);
 		
 		// Place where a tetromino will spawn
 		spawnPosition = new Vector3(4,20,0);
 
         // movingRate initialization
+        // TO DO create REAL timers 
         movingRate = 5;
 
         // Timers initialization
@@ -105,6 +106,7 @@ public class Tetromino : MonoBehaviour {
 			else if (Input.GetKey(KeyCode.DownArrow))
 			{
 				// MoveDown handles grid updates if the tetromino is set
+                // Two ways of moving down, when it ticks and by pressing down
                 if (moveDownTimer == movingRate/2)
                 {
                     moveDown();
@@ -125,6 +127,7 @@ public class Tetromino : MonoBehaviour {
                 timeSinceLastFall = Time.time;
             }
 		}
+        // When a tetromino doesn't have a child anymore he is deleted
         if (transform.childCount == 0)
             Destroy(this.gameObject);
           

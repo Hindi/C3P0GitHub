@@ -8,10 +8,8 @@ public class TetrisState : GameState {
     public override void setParameter(Parameter param)
     {
         paramId = param.id;
-        // TO DO gérer effet 
-        // player_.GetComponent<Player>().setParamId(param.id);
-
-        Camera.main.GetComponent<NoiseEffect>().enabled = true;
+        // Créer une caméra par effet, et on la met en main suivant le paramètre choisit
+        GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraManagerTetris>().setParamId(param.id);
     }
 
     public TetrisState(StateManager stateManager) : base(stateManager)

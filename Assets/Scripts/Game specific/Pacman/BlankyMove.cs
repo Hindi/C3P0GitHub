@@ -16,6 +16,12 @@ public class BlankyMove : MonoBehaviour {
 	int[,] pacGrid;
 	int curTileX;
 	int curTileY;
+
+	bool isMoving = true;
+	
+	public void moving(bool real){
+		isMoving = real;
+	}
 	
 
 	/*
@@ -183,10 +189,9 @@ public class BlankyMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }
