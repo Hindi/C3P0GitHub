@@ -62,6 +62,13 @@ public class AliensManager : MonoBehaviour {
 		EventManager<bool>.AddListener (EnumEvent.GAMEOVER, onGameOver);
 	}
 
+    void OnDestroy()
+    {
+        EventManager.RemoveListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
+        EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+        EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
+    }
+
     void start()
     {
         spawnAliens();
