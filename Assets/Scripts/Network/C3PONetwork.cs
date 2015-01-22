@@ -49,8 +49,6 @@ public class C3PONetwork : MonoBehaviour {
      **/
     [SerializeField]
     public bool IS_SERVER;
-    [SerializeField]
-    private C3PONetworkManager ntm;
 
 	// The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer)
 	private string masterHostname = null;
@@ -305,7 +303,7 @@ public class C3PONetwork : MonoBehaviour {
     void OnConnectedToServer()
     {
         EventManager.Raise(EnumEvent.CONNECTIONTOUNITY);
-        ntm.tryTologIn();
+        C3PONetworkManager.Instance.tryTologIn();
     }
 
     void OnDisconnectedFromServer(NetworkDisconnection info)

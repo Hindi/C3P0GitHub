@@ -140,6 +140,13 @@ public class Client
         answers = c.Answers;
     }
 
+    public void clearStats()
+    {
+        score = 0;
+        answers.Clear();
+        gameStats.Clear();
+    }
+
     public QuestionManager.AnswerKeeper lastAnswer()
     {
         if(answers.Count == 0)

@@ -237,6 +237,7 @@ public class QuestionManager {
             b = e.Value.lastQuestionResult();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
+            Debug.Log("Score : " + e.Value.Score);
         }
     }
 
@@ -253,13 +254,10 @@ public class QuestionManager {
                 a.result = false;
 
                 e.Value.addAnswer(a);
+                Debug.Log("Didn't answer, creating default answer");
             }
             e.Value.AnsweredLast = false;
         }
-    }
-
-    void addDefaultAnswerToClient(ref Client c)
-    {
     }
 
     public void update()

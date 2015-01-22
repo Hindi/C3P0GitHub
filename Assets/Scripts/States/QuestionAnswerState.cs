@@ -9,8 +9,6 @@ public class QuestionAnswerState : State
 
     protected bool loaded;
     private GameObject networkManager;
-    private C3PONetwork c3poNetwork;
-    private C3PONetworkManager c3poNetworkManager;
     private UI ui;
 
     private bool isThereAQuestion;
@@ -27,9 +25,6 @@ public class QuestionAnswerState : State
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
         loaded = true;
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
-        c3poNetwork = networkManager.GetComponent<C3PONetwork>();
-        c3poNetworkManager = networkManager.GetComponent<C3PONetworkManager>();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         questionMenu = ui.QuestionCanvas;
         scoreMenu = ui.ScoreMenu;
@@ -49,7 +44,7 @@ public class QuestionAnswerState : State
 
     public void onAnswerSelected(int id)
     {
-        c3poNetworkManager.sendAnswer(id);
+        C3PONetworkManager.Instance.sendAnswer(id);
         ui.updateCurrentCanvas(scoreMenu);
     }
 
