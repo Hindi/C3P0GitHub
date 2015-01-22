@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Linq;
 using System.Xml.Serialization;
 
 [XmlType("Credential")]
@@ -44,7 +44,7 @@ public class PlayerCredential
 
     private string cleanString(string s)
     {
-        return Regex.Replace(s, @"[\[\]~#{}()`&'^\w\.@-]", "");
+        return new String(s.Where(Char.IsLetterOrDigit).ToArray());
     }
 
     public void resetPassword(string login)
