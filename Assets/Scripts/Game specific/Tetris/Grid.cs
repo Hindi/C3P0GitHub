@@ -58,7 +58,7 @@ public class Grid : MonoBehaviour {
     private void initGrid()
     {
         fastFallScore = 0;
-        level = 1;
+        level = 10;
         score = 0;
         nbLines = 0;
     }
