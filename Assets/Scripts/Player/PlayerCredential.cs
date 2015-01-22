@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Serialization;
 
 [XmlType("Credential")]
@@ -42,14 +41,8 @@ public class PlayerCredential
         lastCheckTime = Time.time;
     }
 
-    private string cleanString(string s)
-    {
-        return new String(s.Where(Char.IsLetterOrDigit).ToArray());
-    }
-
     public void resetPassword(string login)
     {
-        Debug.Log(login + " " + loginInfos.ContainsKey(login));
         if (loginInfos.ContainsKey(login))
             loginInfos[login] = "";
     }
@@ -89,7 +82,6 @@ public class PlayerCredential
 
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
-        name = cleanString(name);
         if (name.Length > 0 && loginInfos.ContainsKey(name))
         {
             if (verifyMd5(pass, loginInfos[name]))
