@@ -11,7 +11,7 @@ public class PankyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 pankyTarget;
 	Vector3 pankyScatterTarget = new Vector3(28,0,2);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;

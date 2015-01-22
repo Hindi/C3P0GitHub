@@ -8,7 +8,7 @@ public class BlankyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 blankyTarget;
 	Vector3 blankyScatterTarget = new Vector3(0,0,0);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;

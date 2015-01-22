@@ -7,6 +7,8 @@ public class PacMove : MonoBehaviour {
 	Vector3 nextDir = Vector3.right;
 	int[,] pacGrid;
 
+	Vector3 enemyPosition;
+
 	//We need to get the direction Pacman is heading for some ghosts.
 	public Vector3 getCurDir(){
 		return curDir;
@@ -136,5 +138,12 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 	
+
+	void onCollisionEnter(Collider collider){
+
+	}
+
+
+
 
 }

@@ -13,7 +13,7 @@ public class AnkyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 ankyTarget;
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
