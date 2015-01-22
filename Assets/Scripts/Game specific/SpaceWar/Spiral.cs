@@ -39,6 +39,6 @@ public class Spiral : MonoBehaviour {
         if (collider.tag == "Player" || collider.tag == "Enemy")
             collider.GetComponent<Spaceship>().exitZone();
         else if (collider.tag == "Projectile")
-            collider.GetComponent<ProjectileSpaceWar>().exitZone();
+            collider.GetComponent<ProjectileSpaceWar>().exitZone(gameObject);
     }
 }

@@ -19,4 +19,10 @@ public class PlayerSpaceWar : Spaceship {
         if (Input.GetKeyDown(KeyCode.Space))
             fire();
 	}
+
+    public override void onHit()
+    {
+        base.onHit();
+        EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+    }
 }
