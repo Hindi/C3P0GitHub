@@ -8,7 +8,7 @@ public class BlankyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 blankyTarget;
 	Vector3 blankyScatterTarget = new Vector3(0,0,0);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -16,6 +16,12 @@ public class BlankyMove : MonoBehaviour {
 	int[,] pacGrid;
 	int curTileX;
 	int curTileY;
+
+	bool isMoving = true;
+	
+	public void moving(bool real){
+		isMoving = real;
+	}
 	
 
 	/*
@@ -183,10 +189,9 @@ public class BlankyMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }

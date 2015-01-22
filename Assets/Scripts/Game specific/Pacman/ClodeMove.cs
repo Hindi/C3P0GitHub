@@ -8,7 +8,7 @@ public class ClodeMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 clodeTarget;
 	Vector3 clodeScatterTarget = new Vector3(0,0,-32);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -17,6 +17,11 @@ public class ClodeMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	
+	bool isMoving = true;
+	
+	public void moving(bool real){
+		isMoving = real;
+	}
 
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -187,10 +192,9 @@ public class ClodeMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }

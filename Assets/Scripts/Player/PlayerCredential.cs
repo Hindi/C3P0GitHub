@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using System;
 
 [XmlType("Credential")]
 public class Credential
@@ -23,7 +23,7 @@ public class Credential
     public string pass;
 }
 
-public class PlayerData
+public class PlayerCredential
 {
 
     private TextAsset credentialFile;
@@ -33,7 +33,7 @@ public class PlayerData
     private Dictionary<string, string> loginInfos;
     private bool modified = false;
 
-    public PlayerData()
+    public PlayerCredential()
     {
         credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
@@ -43,7 +43,6 @@ public class PlayerData
 
     public void resetPassword(string login)
     {
-        Debug.Log(login + " " + loginInfos.ContainsKey(login));
         if (loginInfos.ContainsKey(login))
             loginInfos[login] = "";
     }
@@ -83,7 +82,7 @@ public class PlayerData
 
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
-        if (loginInfos.ContainsKey(name))
+        if (name.Length > 0 && loginInfos.ContainsKey(name))
         {
             if (verifyMd5(pass, loginInfos[name]))
             {

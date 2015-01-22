@@ -142,6 +142,7 @@ public class Player : MonoBehaviour
                         goalScale = (float)Laws.gauss(5, 1);
                         break;
                 }
+                goalScale = Mathf.Abs(goalScale);
                 lastTimeChangeSize = Time.time;
                 //transform.localScale = new Vector3(goalScale, 1, 1);
             }

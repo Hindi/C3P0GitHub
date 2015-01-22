@@ -117,22 +117,7 @@ public class Kalman {
         double[] storage = new double[4];
         storage[0] = obs.x; storage[1] = obs.y; storage[2] = obs.z; storage[3] = obs.w;
         tempVector.SetValues(storage);
-        tempVector = addNoise(tempVector);
-        /* Debug pour voir l'efficacité du Kalman */
-        
-        string message = "new noised position : ";
-        for (int k = 0; k < tempVector.Count; k++)
-        {
-            message += tempVector.At(k).ToString(null, null) + "   ";
-        }
-        Debug.Log(message);
-        message = "old estimation : ";
-        for (int k = 0; k < tempVector.Count; k++)
-        {
-            message += estimation.At(k).ToString(null, null) + "   ";
-        }
-        Debug.Log(message);
-        
+        tempVector = addNoise(tempVector);        
         
         // public noised values
         posBruit.x = (float)tempVector.At(0);

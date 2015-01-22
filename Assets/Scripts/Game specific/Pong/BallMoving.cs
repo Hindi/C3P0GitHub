@@ -86,6 +86,8 @@ public class BallMoving : MonoBehaviour {
                 Angle += (float) Laws.gauss(0, 60);
             }
 
+            Debug.Log("Angle = " + Angle);
+
             speed.x = Mathf.Cos(Angle * Mathf.Deg2Rad) * norm * ((transform.position.x > 0) ? -1 : 1);
             speed.y = Mathf.Sin(Angle * Mathf.Deg2Rad) * norm;
 
@@ -101,6 +103,11 @@ public class BallMoving : MonoBehaviour {
     {
         coupSpecial = true;
         coupPlayer = player;
+    }
+
+    public void cancelCoupSpecial()
+    {
+        coupSpecial = false;
     }
 
     public void setFireBall(bool arg)

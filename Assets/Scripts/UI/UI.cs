@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Linq;
 using System.Collections;
 
 public class UI : MonoBehaviour {
@@ -64,7 +66,7 @@ public class UI : MonoBehaviour {
 
     public void setParamCanvas(EnumGame gameId)
     {
-        paramMenu.gameObject.SetActive(false);
+        closeMenus();
         switch (gameId)
         {
             case EnumGame.SPACEINVADER:
@@ -80,7 +82,12 @@ public class UI : MonoBehaviour {
                 paramMenu = pongParams;
                 break;
         }
-        paramMenu.gameObject.SetActive(true);
+        updateCurrentCanvas(paramMenu);
+    }
+
+    public static string cleanString(string s)
+    {
+        return new String(s.Where(Char.IsLetterOrDigit).ToArray());
     }
 
     public Canvas getcurrentCanvas()
@@ -126,6 +133,7 @@ public class UI : MonoBehaviour {
 
     private void closeMenus()
     {
+        currentCanvas.gameObject.SetActive(false);
         gameOverMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         paramMenu.gameObject.SetActive(false);

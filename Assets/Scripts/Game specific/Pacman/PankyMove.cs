@@ -11,7 +11,7 @@ public class PankyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 pankyTarget;
 	Vector3 pankyScatterTarget = new Vector3(28,0,2);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -19,9 +19,13 @@ public class PankyMove : MonoBehaviour {
 	int[,] pacGrid;
 	int curTileX;
 	int curTileY;
+
+	bool isMoving = true;
 	
-	
-	
+	public void moving(bool real){
+		isMoving = real;
+	}
+
 	
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -189,10 +193,9 @@ public class PankyMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }

@@ -9,6 +9,10 @@ public class AdminMenu : MonoBehaviour {
 
     [SerializeField]
     private InputField clientLoginInput;
+    public string ClientLoginInput
+    {
+        get { return UI.cleanString(clientLoginInput.text); }
+    }
 
     private Canvas previousCanvas;
 
@@ -24,7 +28,7 @@ public class AdminMenu : MonoBehaviour {
 
     public void kickSpecificClient()
     {
-        C3PONetworkManager.Instance.kickClient(clientLoginInput.text);
+        C3PONetworkManager.Instance.kickClient(ClientLoginInput);
         clientLoginInput.text = "";
     }
 
@@ -35,7 +39,7 @@ public class AdminMenu : MonoBehaviour {
 
     public void resetSpecificPassword()
     {
-        C3PONetworkManager.Instance.resetPassword(clientLoginInput.text);
+        C3PONetworkManager.Instance.resetPassword(ClientLoginInput);
         clientLoginInput.text = "";
     }
 

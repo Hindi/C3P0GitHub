@@ -42,6 +42,7 @@ public class Spaceship : MonoBehaviour
             projectile.SetActive(true);
             projectile.transform.position = projectileStartPosition.position;
             projectile.rigidbody2D.AddRelativeForce((Vector2)((transform.up) * 100));
+            projectile.GetComponent<ProjectileSpaceWar>().activate();
         }
     }
 
@@ -54,4 +55,9 @@ public class Spaceship : MonoBehaviour
 	void Update () {
 	
 	}
+
+    public virtual void onHit()
+    {
+        Debug.Log("GameOver");
+    }
 }

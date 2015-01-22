@@ -42,6 +42,23 @@ public class PongManagerScript : MonoBehaviour {
 
     private float lastUpdateTime = -1;
 
+    public int playerScore
+    {
+        get
+        {
+            return int.Parse(texts[1].GetComponent<GUIText>().text);
+        }
+        private set { }
+    }
+    public int enemyScore
+    {
+        get
+        {
+            return int.Parse(texts[0].GetComponent<GUIText>().text);
+        }
+        private set {}
+    }
+
     public void onRestart()
     {
         initTime = Time.time;
@@ -56,6 +73,8 @@ public class PongManagerScript : MonoBehaviour {
         afficheCoupSpecial.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart();
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
+        texts[0].GetComponent<GUIText>().text = 0.ToString();
+        texts[1].GetComponent<GUIText>().text = 0.ToString();
 
     }
 
@@ -73,31 +92,11 @@ public class PongManagerScript : MonoBehaviour {
         lastUpdateTime = Time.time;
 	    if(ball.transform.position.x < -7)
         {
-            texts[0].GetComponent<GUIText>().text = (int.Parse(texts[0].GetComponent<GUIText>().text) + 1).ToString();
-            ball.transform.position = new Vector3(0, 0, 0);
-            if (fireBall)
-            {
-                fireBall = false;
-                coupSpecialCharging = true;
-                ball.GetComponent<BallMoving>().setFireBall(false);
-                ball.GetComponent<SpriteRenderer>().sprite = origBall;
-                ball.GetComponent<BallMoving>().speed = new Vector2((oldSpeed.x < 0) ? oldSpeed.x : -oldSpeed.x, oldSpeed.y);
-                ball.renderer.material.color = Color.white;
-            }
+            onScore(1);
         }
         else if (ball.transform.position.x > 7)
         {
-            texts[1].GetComponent<GUIText>().text = (int.Parse(texts[1].GetComponent<GUIText>().text) + 1).ToString();
-            ball.transform.position = new Vector3(0, 0, 0);
-            if (fireBall)
-            {
-                fireBall = false;
-                coupSpecialCharging = true;
-                ball.GetComponent<BallMoving>().setFireBall(false);
-                ball.GetComponent<SpriteRenderer>().sprite = origBall;
-                ball.GetComponent<BallMoving>().speed = new Vector2((oldSpeed.x > 0) ? oldSpeed.x : -oldSpeed.x, oldSpeed.y);
-                ball.renderer.material.color = Color.white;
-            }
+            onScore(-1);
         }
 
         if (coupSpecialCharging)
@@ -132,6 +131,29 @@ public class PongManagerScript : MonoBehaviour {
             }
         }
 	}
+
+    private void onScore(int player)
+    {
+        texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text = (int.Parse(texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text) + 1).ToString();
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text) >= 10)
+        {
+            EventManager<bool>.Raise(EnumEvent.GAMEOVER, false); // la partie est finie
+        }
+        initTime = Time.time;
+        coupSpecialCharging = true;
+        afficheCoupSpecial.SetActive(false);
+        ball.GetComponent<BallMoving>().cancelCoupSpecial();
+        animationEnded = true;
+        ball.transform.position = new Vector3(0, 0, 0);
+        if (fireBall)
+        {
+            fireBall = false;
+            ball.GetComponent<BallMoving>().setFireBall(false);
+            ball.GetComponent<SpriteRenderer>().sprite = origBall;
+            ball.GetComponent<BallMoving>().speed = new Vector2((oldSpeed.x < 0) ? player * oldSpeed.x : player * -oldSpeed.x, oldSpeed.y);
+            ball.renderer.material.color = Color.white;
+        }
+    }
 
     public void activateCoupSpecial(Vector2 oldSpeed)
     {

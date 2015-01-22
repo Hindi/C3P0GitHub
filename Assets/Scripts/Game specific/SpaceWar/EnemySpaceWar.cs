@@ -25,4 +25,10 @@ public class EnemySpaceWar : Spaceship {
         target.transform.position = kalman.PosInterp;
         noisedPosition.transform.position = kalman.PosBruit;
 	}
+
+    public override void onHit()
+    {
+        base.onHit();
+        EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
+    }
 }

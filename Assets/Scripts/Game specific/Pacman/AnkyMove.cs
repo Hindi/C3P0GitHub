@@ -13,7 +13,7 @@ public class AnkyMove : MonoBehaviour {
 	//Each ghost has specific target and a scatter target
 	Vector3 ankyTarget;
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
-	bool scatterMode = true;
+	bool scatterMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -22,7 +22,11 @@ public class AnkyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	
+	bool isMoving = true;
 	
+	public void moving(bool real){
+		isMoving = real;
+	}
 	
 	
 	/*
@@ -196,10 +200,9 @@ public class AnkyMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }
