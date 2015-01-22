@@ -8,7 +8,6 @@ public class QuestionAnswerState : State
     private QuestionAnswerMenu QAMenu;
 
     protected bool loaded;
-    private GameObject networkManager;
     private UI ui;
 
     private bool isThereAQuestion;
