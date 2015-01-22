@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-using System;
 
 [XmlType("Credential")]
 public class Credential
@@ -39,6 +40,11 @@ public class PlayerCredential
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
 
         lastCheckTime = Time.time;
+    }
+
+    private string cleanString(string s)
+    {
+        return Regex.Replace(s, @"[\[\]~#{}()`&'^\w\.@-]", "");
     }
 
     public void resetPassword(string login)
@@ -83,6 +89,7 @@ public class PlayerCredential
 
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
+        name = cleanString(name);
         if (loginInfos.ContainsKey(name))
         {
             if (verifyMd5(pass, loginInfos[name]))

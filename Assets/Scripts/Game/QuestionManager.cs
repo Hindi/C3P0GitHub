@@ -237,7 +237,6 @@ public class QuestionManager {
             b = e.Value.lastQuestionResult();
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
-            Debug.Log("Score : " + e.Value.Score);
         }
     }
 
