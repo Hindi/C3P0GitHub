@@ -22,7 +22,11 @@ public class AnkyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	
+	bool isMoving = true;
 	
+	public void moving(bool real){
+		isMoving = real;
+	}
 	
 	
 	/*
@@ -196,10 +200,9 @@ public class AnkyMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			scatterMode = !scatterMode;
-			//curDir = -curDir;
+
+		if (isMoving){
+			chase();
 		}
-		chase();
 	}
 }
