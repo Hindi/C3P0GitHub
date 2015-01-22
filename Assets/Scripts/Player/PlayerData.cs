@@ -23,7 +23,7 @@ public class Credential
     public string pass;
 }
 
-public class PlayerData
+public class PlayerCredential
 {
 
     private TextAsset credentialFile;
@@ -33,7 +33,7 @@ public class PlayerData
     private Dictionary<string, string> loginInfos;
     private bool modified = false;
 
-    public PlayerData()
+    public PlayerCredential()
     {
         credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
