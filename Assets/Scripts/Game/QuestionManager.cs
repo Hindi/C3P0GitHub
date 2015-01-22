@@ -193,7 +193,7 @@ public class QuestionManager {
         a.answerTime = Time.time - questionSendTime;
         a.result = (a.question.bonneReponse == rep);
         c.AnsweredLast = true;
-        c.addAnswer(a);
+        c.addAnswer(a, courseId);
     }
 
     /**
@@ -253,7 +253,7 @@ public class QuestionManager {
                 a.answerTime = 40;
                 a.result = false;
 
-                e.Value.addAnswer(a);
+                e.Value.addAnswer(a, courseId);
                 Debug.Log("Didn't answer, creating default answer");
             }
             e.Value.AnsweredLast = false;

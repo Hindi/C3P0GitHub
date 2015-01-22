@@ -126,6 +126,8 @@ public class Client
         get { return answers; }
     }
 
+    private int currentCourseStatsId;
+
     public Client()
     {
         score = 0;
@@ -176,8 +178,11 @@ public class Client
         gameStats.Add(g);
     }
 
-    public void addAnswer(QuestionManager.AnswerKeeper a)
+    public void addAnswer(QuestionManager.AnswerKeeper a, int courseId)
     {
+        Debug.Log(score + " " + a.result);
+        if (currentCourseStatsId != courseId)
+            loadStats(courseId);
         if (answers.Exists(x => x.question.id == a.question.id))
         {
             answers.Remove(answers.Find(x => x.question.id == a.question.id));
@@ -186,6 +191,7 @@ public class Client
         else if(a.result)
             score++;
         answers.Add(a);
+        Debug.Log("New score : " + score);
     }
 
     public string lastAnswerExplication()
@@ -251,6 +257,7 @@ public class Client
     {
         if(currentCourseId != 0)
         {
+            currentCourseStatsId = currentCourseId;
             try
             {
                 TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);

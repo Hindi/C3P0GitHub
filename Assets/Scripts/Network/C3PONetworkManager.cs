@@ -116,12 +116,12 @@ public class C3PONetworkManager : MonoBehaviour {
 
     void OnPlayerDisconnected(NetworkPlayer client)
     {
-        foreach(KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             if (e.Value.NetworkPlayer == client)
             {
                 e.Value.saveStats(currentCourseId);
-                ClientsInfos.Remove(e.Key);
+                clientsInfos.Remove(e.Key);
                 return;
             }
         }
@@ -130,7 +130,7 @@ public class C3PONetworkManager : MonoBehaviour {
     public void loadClientStats(int courseId)
     {
         currentCourseId = courseId;
-        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             e.Value.loadStats(courseId);
         }
@@ -138,7 +138,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     private void saveClientsStats()
     {
-        foreach (KeyValuePair<string, Client> e in ClientsInfos)
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
             e.Value.saveStats(currentCourseId);
         }
