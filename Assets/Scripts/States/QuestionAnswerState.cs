@@ -16,14 +16,14 @@ public class QuestionAnswerState : State
     public QuestionAnswerState(StateManager stateManager)
         : base(stateManager)
     {
-    }
-
-    public override void onLevelWasLoaded(int lvl)
-    {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
+    }
+
+    public override void onLevelWasLoaded(int lvl)
+    {
         loaded = true;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         questionMenu = ui.QuestionCanvas;

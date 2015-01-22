@@ -180,18 +180,19 @@ public class Client
 
     public void addAnswer(QuestionManager.AnswerKeeper a, int courseId)
     {
-        Debug.Log(score + " " + a.result);
         if (currentCourseStatsId != courseId)
             loadStats(courseId);
         if (answers.Exists(x => x.question.id == a.question.id))
         {
             answers.Remove(answers.Find(x => x.question.id == a.question.id));
+            answers.Add(a);
             calcScore();
         }
         else if(a.result)
+        {
             score++;
-        answers.Add(a);
-        Debug.Log("New score : " + score);
+            answers.Add(a);
+        }
     }
 
     public string lastAnswerExplication()
