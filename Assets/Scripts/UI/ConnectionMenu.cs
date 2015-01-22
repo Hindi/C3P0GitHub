@@ -82,6 +82,14 @@ public class ConnectionMenu : MonoBehaviour {
             onServerIpRecieved(C3PONetwork.Instance.getServerIp());
             serverFound = true;
         }
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            onConnectionStartClick();
+        }
+        else if(Input.GetKeyDown(KeyCode.Tab))
+        {
+
+        }
 	}
 
     public void onConnectionClick()
@@ -97,6 +105,21 @@ public class ConnectionMenu : MonoBehaviour {
 
     private void connect()
     {
+        if (ipLabel.text == "")
+        {
+            connectionAnswerLabel.text = "IP field can't be empty.";
+            return;
+        }
+        if (loginLabel.text == "")
+        {
+            connectionAnswerLabel.text = "Login field can't be empty.";
+            return;
+        }
+        if (passwordLabel.text == "")
+        {
+            connectionAnswerLabel.text = "Password field can't be empty.";
+            return;
+        }
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
             if (!unityConnected)
