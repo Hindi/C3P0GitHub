@@ -69,7 +69,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [SerializeField]
     private StateManager stateManager;
 
-    PlayerCredential PlayerCredentials;
+    PlayerCredential playerCredentials;
 	
 	/** Used by the client only **/
 	private string privateID = null;
@@ -165,12 +165,12 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void resetPassword()
     {
-        PlayerCredentials.resetPassword();
+        playerCredentials.resetPassword();
     }
 
     public void resetPassword(string login)
     {
-        PlayerCredentials.resetPassword(login);
+        playerCredentials.resetPassword(login);
     }
 	 
 	/**
@@ -272,7 +272,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	[RPC]
 	void clientConnect(string login, string password, NetworkMessageInfo info)
 	{
-        if (PlayerCredentials.checkAuth(login, password, info.sender))
+        if (playerCredentials.checkAuth(login, password, info.sender))
 		{
             if (loginInUse(login))
             {
@@ -403,7 +403,7 @@ public class C3PONetworkManager : MonoBehaviour {
         if(C3PONetwork.Instance.IS_SERVER)
         {
             clientsInfos = new Dictionary<string, Client>();
-            PlayerCredentials = new PlayerCredential();
+            playerCredentials = new PlayerCredential();
         }
 
         currentCourseId = 0;
