@@ -109,10 +109,6 @@ public class C3PONetwork : MonoBehaviour {
                 string message = Encoding.ASCII.GetString(bytes);
                 if (isServer)
                 {
-                    if (message == "request ip")
-                    {
-                        ipSender.sendIp();
-                    }
                 }
                 else
                 {
@@ -172,9 +168,9 @@ public class C3PONetwork : MonoBehaviour {
             broadCastSomething("request ip");
         }
 
-        public void sendIp()
+        public void sendIp(string ip)
         {
-            broadCastSomething("C3PO 192.168.0.19");
+            broadCastSomething("C3PO " + ip);
         }
 
         public void broadCastSomething(string s)
@@ -200,7 +196,7 @@ public class C3PONetwork : MonoBehaviour {
 		
 		/* Bind to it */
 		MasterServer.port = masterPort;
-        MasterServer.ipAddress = "192.168.0.19"; /* We're on the teacher computer so the master server is right there */
+        MasterServer.ipAddress = getMyIp(); /* We're on the teacher computer so the master server is right there */
 		Network.InitializeServer(1000,gamePort,false);
 		MasterServer.RegisterHost("C3PO", "TeacherServer");
 	}
@@ -258,7 +254,7 @@ public class C3PONetwork : MonoBehaviour {
 
     void sendIp()
     {
-        ipReceiver.ipSender.sendIp();
+        ipReceiver.ipSender.sendIp(getMyIp());
     }
 	
 	// Use this for initialization
