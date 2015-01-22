@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using System;
 
 [XmlType("Credential")]
 public class Credential
@@ -43,7 +43,6 @@ public class PlayerCredential
 
     public void resetPassword(string login)
     {
-        Debug.Log(login + " " + loginInfos.ContainsKey(login));
         if (loginInfos.ContainsKey(login))
             loginInfos[login] = "";
     }
@@ -83,7 +82,7 @@ public class PlayerCredential
 
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
-        if (loginInfos.ContainsKey(name))
+        if (name.Length > 0 && loginInfos.ContainsKey(name))
         {
             if (verifyMd5(pass, loginInfos[name]))
             {

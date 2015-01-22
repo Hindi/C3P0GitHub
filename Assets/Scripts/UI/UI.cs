@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Linq;
 using System.Collections;
 
 public class UI : MonoBehaviour {
@@ -81,6 +83,11 @@ public class UI : MonoBehaviour {
                 break;
         }
         paramMenu.gameObject.SetActive(true);
+    }
+
+    public static string cleanString(string s)
+    {
+        return new String(s.Where(Char.IsLetterOrDigit).ToArray());
     }
 
     public Canvas getcurrentCanvas()

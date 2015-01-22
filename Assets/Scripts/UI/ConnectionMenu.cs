@@ -20,6 +20,10 @@ public class ConnectionMenu : MonoBehaviour {
     private InputField ipLabel;
     [SerializeField]
     private InputField loginLabel;
+    public string LoginLabel
+    {
+        get { return UI.cleanString(loginLabel.text); }
+    }
     [SerializeField]
     private InputField passwordLabel;
     [SerializeField]
@@ -96,9 +100,9 @@ public class ConnectionMenu : MonoBehaviour {
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
             if (!unityConnected)
-                networkManager.connectToTeacher(ipLabel.text, loginLabel.text, passwordLabel.text);
+                networkManager.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
             else if (!authed)
-                networkManager.tryTologIn(loginLabel.text, passwordLabel.text);
+                networkManager.tryTologIn(LoginLabel, passwordLabel.text);
         }
     }
 
