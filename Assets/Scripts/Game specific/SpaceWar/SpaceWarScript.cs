@@ -40,7 +40,7 @@ public class SpaceWarScript : MonoBehaviour {
 
     public void setParameter(Parameter p)
     {
-
+        enemyShip.GetComponent<EnemySpaceWar>().setParameter(p);
     }
 
     public void spaceShipDestroyed(bool b)

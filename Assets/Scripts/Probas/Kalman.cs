@@ -65,10 +65,10 @@ public class Kalman {
 
         // P precision
         P = new DenseMatrix(4, 4);
-        P.SetRow(0, new double[] { 0, 0, 0, 0, });
-        P.SetRow(1, new double[] { 0, 0, 0, 0, });
-        P.SetRow(2, new double[] { 0, 0, 0, 0, });
-        P.SetRow(3, new double[] { 0, 0, 0, 0, });
+        P.SetRow(0, new double[] { 10, 0, 0, 0, });
+        P.SetRow(1, new double[] { 0, 1, 0, 0, });
+        P.SetRow(2, new double[] { 0, 0, 10, 0, });
+        P.SetRow(3, new double[] { 0, 0, 0, 1, });
 
         // F
         F = new DenseMatrix(4, 4);
@@ -176,7 +176,7 @@ public class Kalman {
             string message = "";
             for (int k = 0; k < M.ColumnCount; k++)
             {
-                message += M.Row(k).At(j).ToString(null, null) + "   ";
+                message += M.Row(j).At(k).ToString(null, null) + "   ";
             }
             Debug.Log(message);
         }
@@ -186,7 +186,7 @@ public class Kalman {
             string message = "";
             for (int k = 0; k < sqrtM.ColumnCount; k++)
             {
-                message += sqrtM.Row(k).At(j).ToString(null, null) + "   ";
+                message += sqrtM.Row(j).At(k).ToString(null, null) + "   ";
             }
             Debug.Log(message);
         }

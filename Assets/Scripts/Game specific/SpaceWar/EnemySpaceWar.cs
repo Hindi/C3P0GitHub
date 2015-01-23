@@ -13,6 +13,7 @@ public class EnemySpaceWar : Spaceship {
     private GameObject noisedPosition;
 
     private Kalman kalman;
+    private Parameter p;
 
 	// Use this for initialization
 	void Start () {
@@ -30,5 +31,10 @@ public class EnemySpaceWar : Spaceship {
     {
         base.onHit();
         EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, false);
+    }
+
+    public void setParameter(Parameter param)
+    {
+        p = param;
     }
 }
