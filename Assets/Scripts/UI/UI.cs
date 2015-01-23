@@ -30,6 +30,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas pongParams;
     [SerializeField]
+    private Canvas spaceWarParams;
+    [SerializeField]
     private Canvas lunarLanderParams;
     [SerializeField]
     private Canvas paramMenu;
@@ -80,6 +82,9 @@ public class UI : MonoBehaviour {
                 break;
             case EnumGame.PONG:
                 paramMenu = pongParams;
+                break;
+            case EnumGame.SPACEWAR:
+                paramMenu = spaceWarParams;
                 break;
         }
         updateCurrentCanvas(paramMenu);
