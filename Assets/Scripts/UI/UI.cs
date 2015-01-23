@@ -30,6 +30,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas pongParams;
     [SerializeField]
+    private Canvas spaceWarParams;
+    [SerializeField]
     private Canvas lunarLanderParams;
     [SerializeField]
     private Canvas paramMenu;
