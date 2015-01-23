@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour {
         stateList.Add(StateEnum.GAME, new GameState(this));
         stateList.Add(StateEnum.SERVERCONNECTION, new LobbyState(this));
         stateList.Add(StateEnum.TETRIS, new TetrisState(this));
+        stateList.Add(StateEnum.SPACEWAR, new SpaceWarState(this));
         currentState.start();
 	}
 	
