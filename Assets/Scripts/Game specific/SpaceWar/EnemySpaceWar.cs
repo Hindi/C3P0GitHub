@@ -37,4 +37,9 @@ public class EnemySpaceWar : Spaceship {
     {
         p = param;
     }
+
+    public void onRestart()
+    {
+        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 0.1);
+    }
 }

@@ -34,7 +34,7 @@ public class SpaceWarScript : MonoBehaviour {
         enemyProjectile.rigidbody2D.velocity = new Vector2(0, 0);
         playerShip.transform.localEulerAngles = new Vector3(0, 0, 0);
         enemyShip.transform.localEulerAngles = new Vector3(0, 0, 180);
-
+        enemyShip.GetComponent<EnemySpaceWar>().onRestart();
 
     }
 

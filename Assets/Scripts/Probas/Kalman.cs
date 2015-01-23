@@ -18,6 +18,7 @@ public class Kalman {
     private Matrix H;
     private Matrix K;
     private Matrix R;
+    private Matrix sqrtR;
     private Matrix I;
 
     /* Elements utilisés pour la visualisation (debug principalement) */
@@ -87,8 +88,10 @@ public class Kalman {
 
         // R
         R = new DenseMatrix(2, 2);
-        R.SetRow(0, new double[] { 0, 0, });
-        R.SetRow(1, new double[] { 0, 0, });
+        R.SetRow(0, new double[] { 0.01, 0, });
+        R.SetRow(1, new double[] { 0, 0.01, });
+
+        sqrtR = sqrtm(R);
 
         // I, matrice 4x4 identité
         I = new DenseMatrix(4, 4);
@@ -96,7 +99,6 @@ public class Kalman {
         I.SetRow(1, new double[] { 0, 1, 0, 0, });
         I.SetRow(2, new double[] { 0, 0, 1, 0, });
         I.SetRow(3, new double[] { 0, 0, 0, 1, });
-
     }
 
     /* Interpole une valeur pour la position, en supposant aucun input du joueur, dans nbFrames frames */
@@ -136,12 +138,17 @@ public class Kalman {
         K = (Matrix)(Pkminus1 * H.Transpose() * S.Inverse());
 
         // P(k|k) = (I - KH) * P(k| k-1)
+        Matrix debugMat = (Matrix)(I - K * H);
         P =(Matrix)((I - K * H) * Pkminus1);
 
         // n(k|k) = n(k|k-1) + K(y - H*n(k|k-1))
-        estimation = (Vector)(nkminus1 + K * (H * tempVector - H * nkminus1));
+        Vector y = (Vector) (H * tempVector);
+        y = addImprecision(y);
+        estimation = (Vector)(nkminus1 + K * (y - (H * nkminus1)));
         posInterp.x = (float)estimation.At(0);
+        Debug.Log(estimation.At(0));
         posInterp.y = (float)estimation.At(2);
+        Debug.Log(estimation.At(2));
     }
 
     /*************************************************************************************************
@@ -154,8 +161,8 @@ public class Kalman {
         // Calculating M^(1/2);
         Evd<double> eigenVs = M.Evd();
 
-        DenseVector values = new DenseVector(4);
-        double[] tempValues = new double[4];
+        DenseVector values = new DenseVector(M.RowCount);
+        double[] tempValues = new double[M.RowCount];
         int i = 0;
         foreach (MathNet.Numerics.Complex c in eigenVs.EigenValues.ToArray())
         {
@@ -165,7 +172,7 @@ public class Kalman {
         values.SetValues(tempValues);
         values.MapInplace(System.Math.Sqrt);
 
-        DiagonalMatrix newValues = new DiagonalMatrix(4, 4, values.ToArray());
+        DiagonalMatrix newValues = new DiagonalMatrix(M.RowCount, M.RowCount, values.ToArray());
         sqrtM = (eigenVs.EigenVectors * newValues) * eigenVs.EigenVectors.Inverse();
 
         /* This is debug to see what's actually inside M & M^1/2 */
@@ -206,5 +213,15 @@ public class Kalman {
         Vector noise = new DenseVector(new double[] { t1, t2, t3, t4, });
 
         return ((Vector)(oldVector + sqrtQ*noise));
+    }
+
+    private Vector addImprecision(Vector oldVector)
+    {
+        double t1 = Laws.gauss();
+        double t2 = Laws.gauss();
+
+        Vector imprecision = new DenseVector(new double[] { t1, t2, });
+
+        return ((Vector)(oldVector + sqrtR * imprecision));
     }
 }
