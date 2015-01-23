@@ -96,12 +96,6 @@ public class Player : MonoBehaviour
 
     void move()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-            setDirection(false);
-        else if (Input.GetKey(KeyCode.RightArrow))
-            setDirection(true);
-        else
-            stop();
         transform.position = new Vector3(transform.position.x + currentSpeed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
