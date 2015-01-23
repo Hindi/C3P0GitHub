@@ -83,6 +83,9 @@ public class UI : MonoBehaviour {
             case EnumGame.PONG:
                 paramMenu = pongParams;
                 break;
+            case EnumGame.SPACEWAR:
+                paramMenu = spaceWarParams;
+                break;
         }
         updateCurrentCanvas(paramMenu);
     }

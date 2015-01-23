@@ -29,6 +29,6 @@ public class EnemySpaceWar : Spaceship {
     public override void onHit()
     {
         base.onHit();
-        EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
+        EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, false);
     }
 }
