@@ -5,8 +5,10 @@ public enum EnumInput
 {
     LEFT,
     LEFTDOWN,
+    LEFTUP,
     RIGHT,
     RIGHTDOWN,
+    RIGHTUP,
     UP,
     UPDOWN,
     DOWN,
@@ -14,5 +16,6 @@ public enum EnumInput
     ESCAPE,
     SPACE,
     RETURN,
+    TAB,
     TOUCH
 }

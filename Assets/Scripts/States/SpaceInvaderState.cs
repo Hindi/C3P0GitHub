@@ -66,26 +66,28 @@ class SpaceInvaderState : GameState
     public override void update()
     {
         base.update();
-        
     }
 
     public override void noticeInput(EnumInput key, Touch[] inputs)
     {
-        foreach (var t in inputs)
+        if (loaded)
         {
-            if (t.phase == TouchPhase.Began)
+            foreach (var t in inputs)
             {
-                if (t.position.x > 2 * Screen.width / 3)
-                    playerScript_.setDirection(true);
-                else if (t.position.x < Screen.width / 3)
-                    playerScript_.setDirection(false);
-                else
-                    playerScript_.fire();
-            }
-            if (t.phase == TouchPhase.Ended)
-            {
-                if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
-                    playerScript_.stop();
+                if (t.phase == TouchPhase.Began)
+                {
+                    if (t.position.x > 2 * Screen.width / 3)
+                        playerScript_.setDirection(true);
+                    else if (t.position.x < Screen.width / 3)
+                        playerScript_.setDirection(false);
+                    else
+                        playerScript_.fire();
+                }
+                if (t.phase == TouchPhase.Ended)
+                {
+                    if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
+                        playerScript_.stop();
+                }
             }
         }
     }
@@ -95,17 +97,14 @@ class SpaceInvaderState : GameState
        	if (loaded)
         {
             base.noticeInput(key);
-            if (!Application.isMobilePlatform)
-            {
-                if (key == EnumInput.SPACE)
-                    playerScript_.fire();
-                if (key == EnumInput.LEFT)
-                    playerScript_.setDirection(false);
-                else if (key == EnumInput.RIGHT)
-                    playerScript_.setDirection(true);
-                else
-                    playerScript_.stop();
-            }
+            if (key == EnumInput.SPACE)
+                playerScript_.fire();
+            if (key == EnumInput.LEFT)
+                playerScript_.move(-1);
+            else if (key == EnumInput.RIGHT)
+                playerScript_.move(1);
+            if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
+                playerScript_.stop();
 		}
     }
 }

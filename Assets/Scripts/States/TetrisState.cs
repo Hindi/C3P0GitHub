@@ -39,4 +39,14 @@ public class TetrisState : GameState {
             Grid._grid.gameRestart();
         }
     }
+
+    public override void noticeInput(EnumInput key)
+    {
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+
+    }
 }

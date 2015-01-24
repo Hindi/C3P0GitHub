@@ -63,7 +63,7 @@ public class ConnectionMenu : MonoBehaviour {
         authed = true;
     }
 
-    void switchUiSelect()
+    public void switchUiSelect()
     {
         if (ipLabel.isFocused)
             loginLabel.Select();

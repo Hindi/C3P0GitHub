@@ -35,8 +35,8 @@ class InitState : State {
             }
             else
             {
-                stateManager_.changeState(StateEnum.PONG);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Pong");
+                stateManager_.changeState(StateEnum.SPACEINVADER);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
             }
         }
 	}

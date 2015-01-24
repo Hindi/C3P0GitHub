@@ -5,8 +5,7 @@ public class ConnectionState : State
 {
     protected bool loaded;
     private GameObject networkManager;
-    private C3PONetwork c3poNetwork;
-    private C3PONetworkManager c3poNetworkManager;
+    private ConnectionMenu connectionMenu;
 
     public ConnectionState(StateManager stateManager)
         : base(stateManager)
@@ -25,8 +24,6 @@ public class ConnectionState : State
     {
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
-        c3poNetwork = networkManager.GetComponent<C3PONetwork>();
-        c3poNetworkManager = networkManager.GetComponent<C3PONetworkManager>();
         EventManager.Raise(EnumEvent.CONNECTIONSTATE);
     }
 
@@ -38,7 +35,13 @@ public class ConnectionState : State
 
     public override void noticeInput(EnumInput key)
     {
-
+        if(loaded)
+        {
+            if (key == EnumInput.TAB)
+                connectionMenu.switchUiSelect();
+            else if (key == EnumInput.RETURN)
+                connectionMenu.onConnectionStartClick();
+        }
     }
 
     public override void noticeInput(EnumInput key, Touch[] inputs)

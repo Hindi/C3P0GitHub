@@ -65,13 +65,15 @@ public class PongState : GameState {
 
     public override void noticeInput(EnumInput key)
     {
-        Debug.Log(key);
-        if (key == EnumInput.SPACE)
-            gameScript.launchCoupSpecial();
-        if(key == EnumInput.UP)
-            player.goUp();
-        if (key == EnumInput.DOWN)
-            player.goDown();
+        if (loaded)
+        {
+            if (key == EnumInput.SPACE)
+                gameScript.launchCoupSpecial();
+            if (key == EnumInput.UP)
+                player.goUp();
+            if (key == EnumInput.DOWN)
+                player.goDown();
+        }
     }
 
     public override void noticeInput(EnumInput key, Touch[] inputs)

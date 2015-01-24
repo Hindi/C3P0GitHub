@@ -21,12 +21,16 @@ public class InputManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             stateManager.noticeInput(EnumInput.LEFTDOWN);
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            stateManager.noticeInput(EnumInput.LEFTUP);
         else if (Input.GetKey(KeyCode.LeftArrow))
             stateManager.noticeInput(EnumInput.LEFT);
         if (Input.GetKeyDown(KeyCode.RightArrow))
             stateManager.noticeInput(EnumInput.RIGHTDOWN);
         else if (Input.GetKey(KeyCode.RightArrow))
             stateManager.noticeInput(EnumInput.RIGHT);
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
+            stateManager.noticeInput(EnumInput.RIGHTUP);
         if (Input.GetKeyDown(KeyCode.UpArrow))
             stateManager.noticeInput(EnumInput.UPDOWN);
         else if (Input.GetKey(KeyCode.UpArrow))
@@ -41,6 +45,8 @@ public class InputManager : MonoBehaviour {
             stateManager.noticeInput(EnumInput.RETURN);
         if (Input.GetKeyDown(KeyCode.Escape))
             stateManager.noticeInput(EnumInput.ESCAPE);
+        if (Input.GetKeyDown(KeyCode.Tab))
+            stateManager.noticeInput(EnumInput.TAB);
 
         if (Application.isMobilePlatform)
         {
