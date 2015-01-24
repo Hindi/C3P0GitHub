@@ -16,7 +16,6 @@ public class ConnectionState : State
     public void onConnectedToTeacher()
     {
         EventManager.Raise(EnumEvent.CLOSEMENU);
-        stateManager_.changeState(StateEnum.QUESTIONANSWER);
         EventManager<string>.Raise(EnumEvent.LOADLEVEL, "QuestionAnswer");
     }
 

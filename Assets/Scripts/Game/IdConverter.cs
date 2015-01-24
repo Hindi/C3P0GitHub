@@ -33,4 +33,73 @@ static class IdConverter
                 return (EnumGame)(-1);
         }
     }
+
+    public static EnumGame levelToGame(string lvlname)
+    {
+        return stateToGame(levelToState(lvlname));
+    }
+
+    public static EnumGame courseToGame(int id)
+    {
+        switch(id)
+        {
+            case 1:
+                return EnumGame.SPACEWAR;
+            case 2:
+                return EnumGame.PONG;
+            case 3:
+                return EnumGame.LUNARLANDER;
+            case 4:
+                return EnumGame.SPACEINVADER;
+            case 5:
+                return EnumGame.TETRIS;
+            case 6:
+                return EnumGame.MOONPATROL;
+            case 7:
+                return EnumGame.ASTEROIDS;
+            case 8:
+                return EnumGame.PACMAN;
+            case 9:
+                return EnumGame.MARIO;
+            case 10:
+                return EnumGame.ZELDA;
+            default:
+                return (EnumGame)(-1);
+        }
+    }
+
+    public static StateEnum levelToState(string lvlName)
+    {
+        switch(lvlName)
+        {
+            case "SpaceWar":
+                return StateEnum.SPACEWAR;
+            case "SpaceInvader":
+                return StateEnum.SPACEINVADER;
+            case "Pong":
+                return StateEnum.PONG;
+            case "LunarLander":
+                return StateEnum.LUNARLANDER;
+            case "Pacman":
+                return StateEnum.PACMAN;
+            case "Tetris":
+                return StateEnum.TETRIS;
+            case "Mario":
+                return StateEnum.MARIO;
+            case "Asteroids":
+                return StateEnum.ASTEROIDS;
+            case "Zelda":
+                return StateEnum.ZELDA;
+            case "MoonPatrol":
+                return StateEnum.MOONPATROL;
+            case "ServerLobby":
+                return StateEnum.SERVERCONNECTION;
+            case "connection":
+                return StateEnum.CONNECTION;
+            case "QuestionAnswer":
+                return StateEnum.QUESTIONANSWER;
+            default:
+                return (StateEnum)(-1);
+        }
+    }
 }

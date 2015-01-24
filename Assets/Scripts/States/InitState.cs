@@ -30,12 +30,10 @@ class InitState : State {
 		{
             if (C3PONetwork.Instance.IS_SERVER)
             {
-                stateManager_.changeState(StateEnum.SERVERCONNECTION);
                 EventManager<string>.Raise(EnumEvent.LOADLEVEL, "ServerLobby");
             }
             else
             {
-                stateManager_.changeState(StateEnum.SPACEINVADER);
                 EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
             }
         }

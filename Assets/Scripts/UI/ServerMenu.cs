@@ -93,26 +93,19 @@ public class ServerMenu : MonoBehaviour {
     public void launchGame()
     {
         string levelName= "";
-        int stateEnum = 0;
         
         switch(courseId)
         {
             case 1:
                 levelName = "SpaceInvader";
-                stateEnum = (int)StateEnum.SPACEINVADER;
                 break;
             case 2:
                 levelName = "Tetris";
-                stateEnum = (int)StateEnum.TETRIS;
                 break;
             case 3:
                 levelName = "Pong";
-                stateEnum = (int)StateEnum.PONG;
                 break;
         }
-        if (courseId == 1)
-        {
-        }
-        C3PONetworkManager.Instance.loadLevel(levelName, stateEnum);
+        C3PONetworkManager.Instance.loadLevel(levelName);
     }
 }

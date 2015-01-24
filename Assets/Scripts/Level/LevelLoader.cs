@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /**
  * Classe qui gère le chargement de niveau via le réseau.
@@ -10,6 +11,9 @@ public class LevelLoader : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] keepAliveList;
+
+    [SerializeField]
+    private StateManager stateManager;
 
     private int lastLevelPrefix;
     private bool levelLoaded = false;
@@ -37,6 +41,7 @@ public class LevelLoader : MonoBehaviour {
     public void loadLevel(string levelName)
     {
         StartCoroutine(loadLevelCoroutine(levelName));
+        stateManager.changeState(IdConverter.levelToState(levelName));
     }
 
     private void OnLevelWasLoaded(int iLevel)
@@ -49,10 +54,6 @@ public class LevelLoader : MonoBehaviour {
         Application.LoadLevel(levelName);
 		while(Application.isLoadingLevel)
 			yield return 1;
-
-        /*while (!levelLoaded)
-            yield return 1;
-        levelLoaded = false;*/
     }
 
     private IEnumerator cloadLevel(string levelName, int levelPrefix)
