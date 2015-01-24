@@ -58,7 +58,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         score = 0;
-        timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
+       // timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
         EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
 

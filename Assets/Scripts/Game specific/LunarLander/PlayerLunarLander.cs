@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerLunarLander : MonoBehaviour {
@@ -18,9 +19,6 @@ public class PlayerLunarLander : MonoBehaviour {
     GameObject propulsor;
 
     [SerializeField]
-    GUIStyle guiStyle;
-
-    [SerializeField]
     int fuel;
     float consumCooldown;
     float lastConsumTime;
@@ -32,12 +30,10 @@ public class PlayerLunarLander : MonoBehaviour {
     [SerializeField]
     private ProgressBar verticalBar;
 
-    int reactorState;
+    [SerializeField]
+    private Text fuelLabel;
 
-    private Rect labelRectHorizontal;
-    private Rect labelRectVertical;
-    private Rect labelRectAltitude;
-    private Rect labelRectFuel;
+    int reactorState;
 
     private Vector3 currentVelocity;
 
@@ -46,14 +42,10 @@ public class PlayerLunarLander : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        horizontalBar.init(20, new Vector2(Screen.width - (Screen.width / 5), Screen.height / 25), new Vector2(150, 20));
-        verticalBar.init(10, new Vector2(Screen.width - (Screen.width / 5), Screen.height / 25 * 2), new Vector2(150, 20));
-        altitudeBar.init(10, new Vector2(Screen.width - (Screen.width / 5), Screen.height / 25 * 3), new Vector2(150, 20));
+        horizontalBar.init(20);
+        verticalBar.init(10);
+        altitudeBar.init(10);
 
-        labelRectHorizontal = new Rect(Screen.width - (Screen.width / 3), Screen.height / 25, Screen.width / 4, Screen.height / 20);
-        labelRectVertical = new Rect(Screen.width - (Screen.width / 3), Screen.height / 25 * 2, Screen.width / 4, Screen.height / 20);
-        labelRectAltitude = new Rect(Screen.width - (Screen.width / 3.5f), Screen.height / 25 * 3, Screen.width / 4, Screen.height / 20);
-        labelRectFuel = new Rect(5, Screen.height / 25, Screen.width / 4, Screen.height / 20);
         fontSize = 1;
         consumCooldown = 0.1f;
         lastConsumTime = Time.time;
@@ -111,7 +103,7 @@ public class PlayerLunarLander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        guiStyle.fontSize = Mathf.RoundToInt(Responsive.baseFontSize * Screen.width / Responsive.baseWidth);
+        currentVelocity = rigidbody2D.velocity * 10;
         altitudeBar.updateValue(transform.position.y);
         horizontalBar.updateValue(Mathf.Abs(currentVelocity.x));
         verticalBar.updateValue(Mathf.Abs(currentVelocity.y));
@@ -135,7 +127,8 @@ public class PlayerLunarLander : MonoBehaviour {
         {
             propulsor.SetActive(false);
         }
-	
+
+        fuelLabel.text = "Fuel " + fuel.ToString();
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -150,13 +143,5 @@ public class PlayerLunarLander : MonoBehaviour {
         Physics.gravity = new Vector3(-0, -gravityForce, 0);
     }
 
-    void OnGUI()
-    {
-        currentVelocity = rigidbody2D.velocity * 10;
-        GUI.Label(labelRectHorizontal, "Horizontal Speed", guiStyle);
-        GUI.Label(labelRectVertical, "Vertical Speed", guiStyle);
-        GUI.Label(labelRectAltitude, "Altitude", guiStyle);
-        GUI.Label(labelRectFuel, "Fuel " + fuel.ToString(), guiStyle);
-    }
 
 }

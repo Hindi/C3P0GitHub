@@ -35,8 +35,8 @@ class InitState : State {
             }
             else
             {
-                stateManager_.changeState(StateEnum.CONNECTION);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+                stateManager_.changeState(StateEnum.LUNARLANDER);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "LunarLander");
             }
         }
 	}

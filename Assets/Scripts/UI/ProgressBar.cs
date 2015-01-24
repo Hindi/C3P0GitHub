@@ -1,49 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ProgressBar : MonoBehaviour
 {
-    private float currentValue; //current progress
-    private float maximumValue; //current progress
+    private float currentValue;
+    private float maximumValue;
 
-    private Vector2 pos;
     private Vector2 size;
 
     [SerializeField]
-    private Texture2D emptyTex;
+    private Image background;
     [SerializeField]
-    private Texture2D fullTex;
+    private Image front;
 
-    private Rect barRect;
-    private Rect backTextRect;
-    private Rect frontTextRect;
-    private float factor;
-    void OnGUI()
-    {
-        //draw the background:
-        GUI.BeginGroup(barRect);
-        GUI.Box(backTextRect, emptyTex);
-
-        //draw the filled-in part:
-        GUI.BeginGroup(new Rect(0, 0, size.x * fillFactor() * factor, size.y * factor));
-        GUI.Box(frontTextRect, fullTex);
-
-        GUI.EndGroup();
-        GUI.EndGroup();
-    }
-
-    public void init(float maxValue, Vector2 position, Vector2 size)
+    public void init(float maxValue)
     {
         maximumValue = maxValue;
-        pos = position;
-        this.size = size;
-        factor = Responsive.responsiveFactor();
-
-        barRect = new Rect(pos.x, pos.y, size.x * factor, size.y * factor);
-        backTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
-        frontTextRect = new Rect(0, 0, size.x * factor, size.y * factor);
-
-
     }
 
     private float fillFactor()
@@ -54,10 +27,18 @@ public class ProgressBar : MonoBehaviour
     public void updateValue(float v)
     {
         currentValue = v;
+        if (currentValue > maximumValue)
+            currentValue = maximumValue;
+        front.rectTransform.sizeDelta = new Vector2(size.x * fillFactor(), size.y);
+        Debug.Log(front.rectTransform.rect.size);
     }
 
     void Update()
     {
+    }
 
+    void Start()
+    {
+        size = front.rectTransform.rect.size;
     }
 }
