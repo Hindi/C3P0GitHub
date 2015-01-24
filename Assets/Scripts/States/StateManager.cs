@@ -44,9 +44,14 @@ public class StateManager : MonoBehaviour {
 		currentState.onLevelWasLoaded (lvl);
 	}
 
-    public void noticeInput(KeyCode key)
+    public void noticeInput(EnumInput key)
     {
         currentState.noticeInput(key);
+    }
+
+    public void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        currentState.noticeInput(key, inputs);
     }
 
     public void changeState(StateEnum state)

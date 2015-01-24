@@ -66,40 +66,42 @@ class SpaceInvaderState : GameState
     public override void update()
     {
         base.update();
-        if (Application.isMobilePlatform)
+        
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        foreach (var t in inputs)
         {
-            foreach (var t in Input.touches)
+            if (t.phase == TouchPhase.Began)
             {
-                if (t.phase == TouchPhase.Began)
-                {
-                    if (t.position.x > 2 * Screen.width / 3)
-                        playerScript_.setDirection(true);
-                    else if (t.position.x < Screen.width / 3)
-                        playerScript_.setDirection(false);
-                    else
-                        playerScript_.fire();
-                }
-                if (t.phase == TouchPhase.Ended)
-                {
-                    if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
-                        playerScript_.stop();
-                }
+                if (t.position.x > 2 * Screen.width / 3)
+                    playerScript_.setDirection(true);
+                else if (t.position.x < Screen.width / 3)
+                    playerScript_.setDirection(false);
+                else
+                    playerScript_.fire();
+            }
+            if (t.phase == TouchPhase.Ended)
+            {
+                if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
+                    playerScript_.stop();
             }
         }
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
     {
        	if (loaded)
         {
             base.noticeInput(key);
             if (!Application.isMobilePlatform)
             {
-                if (key == KeyCode.Space)
+                if (key == EnumInput.SPACE)
                     playerScript_.fire();
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (key == EnumInput.LEFT)
                     playerScript_.setDirection(false);
-                else if (Input.GetKey(KeyCode.RightArrow))
+                else if (key == EnumInput.RIGHT)
                     playerScript_.setDirection(true);
                 else
                     playerScript_.stop();

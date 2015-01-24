@@ -35,13 +35,18 @@ class InitState : State {
             }
             else
             {
-                stateManager_.changeState(StateEnum.LUNARLANDER);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "LunarLander");
+                stateManager_.changeState(StateEnum.PONG);
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Pong");
             }
         }
 	}
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
+    {
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
     {
 
     }

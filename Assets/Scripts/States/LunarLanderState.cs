@@ -56,29 +56,31 @@ class LunarLanderState : GameState
     public override void update()
     {
         base.update();
-        if (Application.isMobilePlatform)
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        foreach (var t in inputs)
         {
-            foreach (var t in Input.touches)
+            if (t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
             {
-                if (t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
-                {
-                    if (t.position.x > 2 * Screen.width / 3)
-                        playerScript_.rotate(-1);
-                    else if (t.position.x < Screen.width / 3)
-                        playerScript_.rotate(1);
-                }
-                else if(t.phase == TouchPhase.Began)
-                {
-                    if (t.position.y > 2 * Screen.height / 3)
-                        playerScript_.increaseReactorState();
-                    else if (t.position.y < Screen.height / 3)
-                        playerScript_.decreaseReactorState();
-                }
+                if (t.position.x > 2 * Screen.width / 3)
+                    playerScript_.rotate(-1);
+                else if (t.position.x < Screen.width / 3)
+                    playerScript_.rotate(1);
+            }
+            else if (t.phase == TouchPhase.Began)
+            {
+                if (t.position.y > 2 * Screen.height / 3)
+                    playerScript_.increaseReactorState();
+                else if (t.position.y < Screen.height / 3)
+                    playerScript_.decreaseReactorState();
             }
         }
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
     {
         if (loaded)
         {

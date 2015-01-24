@@ -5,6 +5,7 @@ public class PongState : GameState {
 
     private PongManagerScript gameScript;
     private Parameter p;
+    private PlayerControl player;
 
     public PongState(StateManager stateManager)
         : base(stateManager)
@@ -38,6 +39,7 @@ public class PongState : GameState {
     {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         ui.setParamCanvas(gameId);
     }
 
@@ -61,5 +63,20 @@ public class PongState : GameState {
         }
     }
 
+    public override void noticeInput(EnumInput key)
+    {
+        Debug.Log(key);
+        if (key == EnumInput.SPACE)
+            gameScript.launchCoupSpecial();
+        if(key == EnumInput.UP)
+            player.goUp();
+        if (key == EnumInput.DOWN)
+            player.goDown();
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+
+    }
 
 }

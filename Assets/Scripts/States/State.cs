@@ -39,5 +39,6 @@ public abstract class State {
         stateManager_ = stateManager;
 	}
 
-    public abstract void noticeInput(KeyCode key);
+    public abstract void noticeInput(EnumInput key);
+    public abstract void noticeInput(EnumInput key, Touch[] inputs);
 }

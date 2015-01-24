@@ -36,7 +36,12 @@ public class ConnectionState : State
 
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
+    {
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
     {
 
     }
