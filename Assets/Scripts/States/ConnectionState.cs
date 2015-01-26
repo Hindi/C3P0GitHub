@@ -23,6 +23,7 @@ public class ConnectionState : State
     {
         loaded = true;
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
+        connectionMenu = GameObject.FindGameObjectWithTag("ConnectionMenu").GetComponent<ConnectionMenu>();
         EventManager.Raise(EnumEvent.CONNECTIONSTATE);
     }
 
