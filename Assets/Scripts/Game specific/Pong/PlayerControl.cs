@@ -19,16 +19,24 @@ public class PlayerControl : MonoBehaviour {
 	void Start () {
         defaultPos = transform.position;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKey(KeyCode.DownArrow) && transform.position.y >= -downScreen + 0.1)
+
+    public void goDown()
+    {
+        if (transform.position.y >= -downScreen + 0.1)
         {
             transform.Translate(new Vector3(0, -1 * speed * Time.deltaTime, 0));
         }
-        else if (Input.GetKey(KeyCode.UpArrow) && transform.position.y <= upScreen - 0.1 )
+    }
+
+    public void goUp()
+    {
+        if (transform.position.y <= upScreen - 0.1 )
         {
             transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
         }
+    }
+	
+	// Update is called once per frame
+	void Update () {
 	}
 }

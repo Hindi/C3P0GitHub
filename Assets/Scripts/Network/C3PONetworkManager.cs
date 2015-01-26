@@ -202,10 +202,10 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("rcvResult", netPlayer, rep, b);
     }
 
-    public void loadLevel(string name, int stateEnum)
+    public void loadLevel(string name)
     {
-        loadPlayersGameStats(IdConverter.stateToGame((StateEnum)stateEnum));
-        networkView.RPC("rpcLoadLevel", RPCMode.Others, name, stateEnum);
+        loadPlayersGameStats(IdConverter.levelToGame(name));
+        networkView.RPC("rpcLoadLevel", RPCMode.Others, name);
         saveClientsStats();
     }
 
@@ -320,10 +320,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 
     [RPC]
-    void rpcLoadLevel(string level, int stateEnum)
+    void rpcLoadLevel(string level)
     {
         levelLoader.loadLevel(level);
-        stateManager.changeState((StateEnum)stateEnum);
     }
 	
 	[RPC] 

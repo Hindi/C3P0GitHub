@@ -44,6 +44,9 @@ class SpaceInvaderState : GameState
 		player_ = GameObject.FindGameObjectWithTag("Player");
         playerScript_ = player_.GetComponent<Player>();
         ui.setParamCanvas(gameId);
+
+        if(Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.Landscape;
 	}
 
     // Use this for initialization
@@ -65,17 +68,43 @@ class SpaceInvaderState : GameState
         base.update();
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        if (loaded)
+        {
+            foreach (var t in inputs)
+            {
+                if (t.phase == TouchPhase.Began)
+                {
+                    if (t.position.x > 2 * Screen.width / 3)
+                        playerScript_.setDirection(true);
+                    else if (t.position.x < Screen.width / 3)
+                        playerScript_.setDirection(false);
+                    else
+                        playerScript_.fire();
+                }
+                if (t.phase == TouchPhase.Ended)
+                {
+                    if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
+                        playerScript_.stop();
+                }
+            }
+        }
+    }
+
+    public override void noticeInput(EnumInput key)
     {
        	if (loaded)
         {
             base.noticeInput(key);
-			if (key == KeyCode.Space)
-				playerScript_.fire ();
-			if (key == KeyCode.Return)
-			{
-
-			}
+            if (key == EnumInput.SPACE)
+                playerScript_.fire();
+            if (key == EnumInput.LEFT)
+                playerScript_.move(-1);
+            else if (key == EnumInput.RIGHT)
+                playerScript_.move(1);
+            if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
+                playerScript_.stop();
 		}
     }
 }

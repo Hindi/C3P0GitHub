@@ -22,14 +22,20 @@ public class CameraManagerTetris : MonoBehaviour {
     [SerializeField]
     Camera camera3;
 
+
+    // We reference the main camera so we can disable this one especially
+    [SerializeField]
+    Camera main;
+
     public void setActiveCamera(Camera c)
     {
-        Camera.main.enabled = false;
+        main.gameObject.SetActive(false);
         camera1.gameObject.SetActive(false);
         camera2.gameObject.SetActive(false);
         camera3.gameObject.SetActive(false);
         c.gameObject.SetActive(true);
-        //Camera.SetupCurrent(c);
+        Camera.SetupCurrent(c);
+        Debug.Log("Camera : " + c + " set ");
     }
 
     public void setParamId(int id)

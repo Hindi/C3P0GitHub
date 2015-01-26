@@ -42,7 +42,7 @@ public class Kalman {
     }
 
 
-    public Kalman(Vector4 initVector, double noiseVariance)
+    public Kalman(Vector4 initVector, double noiseVariance, double imprecisionVariance)
     {
         // Q
         Q = new DenseMatrix(4, 4);
@@ -94,8 +94,9 @@ public class Kalman {
 
         // R
         R = new DenseMatrix(2, 2);
-        R.SetRow(0, new double[] { 0.01, 0, });
-        R.SetRow(1, new double[] { 0, 0.01, });
+        R.SetRow(0, new double[] { 1, 0, });
+        R.SetRow(1, new double[] { 0, 1, });
+        R = (Matrix) R.Multiply(imprecisionVariance);
 
         sqrtR = sqrtm(R);
 
@@ -125,7 +126,7 @@ public class Kalman {
         double[] storage = new double[4];
         storage[0] = obs.x; storage[1] = obs.y; storage[2] = obs.z; storage[3] = obs.w;
         tempVector.SetValues(storage);
-        tempVector = addNoise(tempVector);        
+        //tempVector = addNoise(tempVector);        
         
         // public noised values
         posBruit.x = (float)tempVector.At(0);

@@ -98,9 +98,14 @@ public class GameState : State
 
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
     {
-        if (key == KeyCode.Escape)
+        if (key == EnumInput.ESCAPE)
             togglePauseGame();
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+
     }
 }

@@ -125,10 +125,6 @@ public class PongManagerScript : MonoBehaviour {
             currentAngles.z += currentDirection;
             arrow.transform.localEulerAngles = currentAngles;
 
-            if (Input.GetKey(KeyCode.Space) && player == -1)
-            {
-                launchCoupSpecial();
-            }
         }
 	}
 
@@ -185,13 +181,16 @@ public class PongManagerScript : MonoBehaviour {
 
     public void launchCoupSpecial()
     {
-        coupSpecial = false;
-        fireBall = true;
-        ball.GetComponent<BallMoving>().setFireBall(true);
-        ball.transform.Rotate(0, 0, currentAngles.z);
-        ball.GetComponent<SpriteRenderer>().sprite = specialBall;
-        ball.GetComponent<BallMoving>().speed = new Vector2(specialSpeed * -1 * (float)Math.Sin((double)currentAngles.z * Math.PI / 180), specialSpeed * (float)Math.Cos((double)currentAngles.z * Math.PI / 180));
-        arrow.SetActive(false);
+        if (player == -1)
+        {
+            coupSpecial = false;
+            fireBall = true;
+            ball.GetComponent<BallMoving>().setFireBall(true);
+            ball.transform.Rotate(0, 0, currentAngles.z);
+            ball.GetComponent<SpriteRenderer>().sprite = specialBall;
+            ball.GetComponent<BallMoving>().speed = new Vector2(specialSpeed * -1 * (float)Math.Sin((double)currentAngles.z * Math.PI / 180), specialSpeed * (float)Math.Cos((double)currentAngles.z * Math.PI / 180));
+            arrow.SetActive(false);
+        }
     }
 
     private void checkCoupSpecial()

@@ -94,15 +94,10 @@ public class Player : MonoBehaviour
 		EventManager<bool>.Raise (EnumEvent.GAMEOVER, false);
 	}
 
-    void move()
+    public void move(int dir)
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-            setDirection(false);
-        else if (Input.GetKey(KeyCode.RightArrow))
-            setDirection(true);
-        else
-            stop();
-        transform.position = new Vector3(transform.position.x + currentSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+        Debug.Log("move");
+        transform.position = new Vector3(transform.position.x + speed * dir * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
     public void enemyDestroyed()
@@ -120,7 +115,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         guiStyle.fontSize = Mathf.RoundToInt(Responsive.baseFontSize * Screen.width / Responsive.baseWidth);
-		move();
 		if (projectile_.activeSelf)
 		{
 			if (Vector3.Distance(transform.position, projectile_.transform.position) > projectileMaxDistance_)

@@ -30,18 +30,21 @@ class InitState : State {
 		{
             if (C3PONetwork.Instance.IS_SERVER)
             {
-                stateManager_.changeState(StateEnum.SERVERCONNECTION);
                 EventManager<string>.Raise(EnumEvent.LOADLEVEL, "ServerLobby");
             }
             else
             {
-                stateManager_.changeState(StateEnum.CONNECTION);
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
             }
         }
 	}
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
+    {
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
     {
 
     }

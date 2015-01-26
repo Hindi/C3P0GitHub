@@ -10,11 +10,6 @@ public class LobbyState : State {
     }
 
 
-    public override void noticeInput(KeyCode key)
-    {
-
-    }
-
     public override void start()
     {
         C3PONetwork.Instance.createTeacherServer();
@@ -39,5 +34,13 @@ public class LobbyState : State {
         QuestionManager.Instance.update();
     }
 
+    public override void noticeInput(EnumInput key)
+    {
 
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+
+    }
 }

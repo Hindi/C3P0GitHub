@@ -32,8 +32,8 @@ public class QuestionAnswerState : State
 
     public void onDisconnectedFromUnity()
     {
-        stateManager_.changeState(StateEnum.CONNECTION);
-        EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+        if(loaded)
+            EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
     }
 
     public void onResultRecieved(string rep, bool result)
@@ -64,7 +64,12 @@ public class QuestionAnswerState : State
 
     }
 
-    public override void noticeInput(KeyCode key)
+    public override void noticeInput(EnumInput key)
+    {
+
+    }
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
     {
 
     }
