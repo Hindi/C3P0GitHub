@@ -42,7 +42,7 @@ public class TetrisState : GameState {
 
     public override void noticeInput(EnumInput key)
     {
-        /*
+        
         if (loaded)
         {
             base.noticeInput(key);
@@ -68,7 +68,7 @@ public class TetrisState : GameState {
                 }
             }
         }
-        */
+        
     }
 
     public override void noticeInput(EnumInput key, Touch[] inputs)
