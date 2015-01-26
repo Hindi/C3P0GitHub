@@ -4,6 +4,7 @@ using System.Collections;
 public class Destroyable : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){
+		SendMessageUpwards("dotEaten");
 		Destroy(gameObject);
 	}
 

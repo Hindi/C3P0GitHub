@@ -9,6 +9,7 @@ public class ClodeMove : MonoBehaviour {
 	Vector3 clodeTarget;
 	Vector3 clodeScatterTarget = new Vector3(0,0,-32);
 	bool scatterMode = false;
+	bool frightenMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -112,7 +113,14 @@ public class ClodeMove : MonoBehaviour {
 			curTileX = Mathf.RoundToInt(transform.position.x);
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
+
+
+		if (frightenMode){
+			rigidbody.position += curDir * 1.5f * Time.deltaTime;
+		}
+		else{
 			rigidbody.position += curDir * 3 * Time.deltaTime;
+		}
 	}
 
 
@@ -132,6 +140,11 @@ public class ClodeMove : MonoBehaviour {
 			else{
 				clodeTarget = pacman.transform.position;
 			}
+		}
+		else if (frightenMode){
+			int x = (int) Random.Range(0f,27f);
+			int y = (int) Random.Range(0f, 30f);
+			clodeTarget = new Vector3((float) x, 0, (float) y);
 		}
 		else {
 			clodeTarget = clodeScatterTarget;
