@@ -137,6 +137,8 @@ public class Player : MonoBehaviour
                         break;
                 }
                 goalScale = Mathf.Abs(goalScale);
+                if (goalScale > 15)
+                    goalScale = 15;
                 lastTimeChangeSize = Time.time;
                 //transform.localScale = new Vector3(goalScale, 1, 1);
             }
