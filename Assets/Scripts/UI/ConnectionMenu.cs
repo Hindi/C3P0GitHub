@@ -12,6 +12,8 @@ public class ConnectionMenu : MonoBehaviour {
     private Canvas connectionPrompt;
     [SerializeField]
     private Canvas connectionWelcome;
+    [SerializeField]
+    private Canvas singleGameSelect;
 
     [SerializeField]
     private UI ui;
@@ -166,6 +168,7 @@ public class ConnectionMenu : MonoBehaviour {
 
     public void onSingleClick()
     {
-        Debug.Log("huk");
+        ui.updateCurrentCanvas(singleGameSelect);
+        onForm = false;
     }
 }
