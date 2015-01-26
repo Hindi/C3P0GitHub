@@ -73,7 +73,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void onResultRecieved(string rep, bool result)
     {
         if (result)
-            resultBoolLabel.text ="Vrais :";
+            resultBoolLabel.text ="Vrai :";
         else
             resultBoolLabel.text = "Faux :";
         
