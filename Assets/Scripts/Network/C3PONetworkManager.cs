@@ -236,7 +236,8 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendGameStats(int gameId, int paramId, int score)
     {
-        networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
+        if(Network.isClient)
+            networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
     }
 	
 	/**************************************************************************************
