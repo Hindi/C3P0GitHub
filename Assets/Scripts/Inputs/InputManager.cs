@@ -47,6 +47,8 @@ public class InputManager : MonoBehaviour {
             stateManager.noticeInput(EnumInput.ESCAPE);
         if (Input.GetKeyDown(KeyCode.Tab))
             stateManager.noticeInput(EnumInput.TAB);
+        if (Input.GetKeyDown(KeyCode.Menu))
+            stateManager.noticeInput(EnumInput.MENU);
 
         if (Application.isMobilePlatform)
         {

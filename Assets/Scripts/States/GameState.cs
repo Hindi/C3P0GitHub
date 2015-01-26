@@ -100,7 +100,7 @@ public class GameState : State
 
     public override void noticeInput(EnumInput key)
     {
-        if (key == EnumInput.ESCAPE)
+        if (key == EnumInput.ESCAPE || key == EnumInput.MENU)
             togglePauseGame();
     }
 
