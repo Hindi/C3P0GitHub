@@ -34,7 +34,7 @@ class InitState : State {
             }
             else
             {
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "SpaceInvader");
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
             }
         }
 	}

@@ -58,6 +58,6 @@ public class Spaceship : MonoBehaviour
 
     public virtual void onHit()
     {
-        Debug.Log("GameOver");
+        //Debug.Log("GameOver");
     }
 }
