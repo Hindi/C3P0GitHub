@@ -12,6 +12,7 @@ public class PankyMove : MonoBehaviour {
 	Vector3 pankyTarget;
 	Vector3 pankyScatterTarget = new Vector3(28,0,2);
 	bool scatterMode = false;
+	bool frightenMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -116,7 +117,14 @@ public class PankyMove : MonoBehaviour {
 			curTileX = Mathf.RoundToInt(transform.position.x);
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
-		rigidbody.position += curDir * 3 * Time.deltaTime;
+
+
+		if (frightenMode){
+			rigidbody.position += curDir * 1.5f * Time.deltaTime;
+		}
+		else{
+			rigidbody.position += curDir * 3 * Time.deltaTime;
+		}
 	}
 	
 	
@@ -131,6 +139,11 @@ public class PankyMove : MonoBehaviour {
 	void chase(){
 		if(scatterMode){
 			pankyTarget = pankyScatterTarget;
+		}
+		else if (frightenMode){
+			int x = (int) Random.Range(0f,27f);
+			int y = (int) Random.Range(0f, 30f);
+			pankyTarget = new Vector3((float) x, 0, (float) y);
 		}
 		else {
 			pankyTarget = pacman.transform.position + 4 * pacMove.getCurDir();

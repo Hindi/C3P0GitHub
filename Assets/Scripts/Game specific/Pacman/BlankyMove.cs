@@ -9,6 +9,7 @@ public class BlankyMove : MonoBehaviour {
 	Vector3 blankyTarget;
 	Vector3 blankyScatterTarget = new Vector3(0,0,0);
 	bool scatterMode = false;
+	bool frightenMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -113,7 +114,13 @@ public class BlankyMove : MonoBehaviour {
 			curTileX = Mathf.RoundToInt(transform.position.x);
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
+
+		if (frightenMode){
+			rigidbody.position += curDir * 1.75f * Time.deltaTime;
+		}
+		else{
 			rigidbody.position += curDir * 3.5f * Time.deltaTime;
+		}
 	}
 
 
@@ -128,6 +135,11 @@ public class BlankyMove : MonoBehaviour {
 	void chase(){
 		if (scatterMode){
 			blankyTarget = blankyScatterTarget;
+		}
+		else if (frightenMode){
+			int x = (int) Random.Range(0f,27f);
+			int y = (int) Random.Range(0f, 30f);
+			blankyTarget = new Vector3((float) x, 0, (float) y);
 		}
 		else {
 			blankyTarget = pacman.transform.position;

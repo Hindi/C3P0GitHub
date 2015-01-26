@@ -14,6 +14,7 @@ public class AnkyMove : MonoBehaviour {
 	Vector3 ankyTarget;
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
 	bool scatterMode = false;
+	bool frightenMode = false;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -118,7 +119,12 @@ public class AnkyMove : MonoBehaviour {
 			curTileX = Mathf.RoundToInt(transform.position.x);
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
-		rigidbody.position += curDir * 3 * Time.deltaTime;
+		if (frightenMode){
+			rigidbody.position += curDir * 1.5f * Time.deltaTime;
+		}
+		else {
+			rigidbody.position += curDir * 3 * Time.deltaTime;
+		}
 	}
 	
 	
@@ -138,7 +144,12 @@ public class AnkyMove : MonoBehaviour {
 		if (scatterMode){
 			ankyTarget = ankyScatterTarget;
 		}
-		else{
+		else if (frightenMode){
+			int x = (int) Random.Range(0f,27f);
+			int y = (int) Random.Range(0f, 30f);
+			ankyTarget = new Vector3((float) x, 0, (float) y);
+		}
+		else {
 			ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
 		}
 		nextDir = getNextDir();

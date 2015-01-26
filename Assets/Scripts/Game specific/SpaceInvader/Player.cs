@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
 
     public void move(int dir)
     {
-        Debug.Log("move");
         transform.position = new Vector3(transform.position.x + speed * dir * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
@@ -137,6 +136,8 @@ public class Player : MonoBehaviour
                         break;
                 }
                 goalScale = Mathf.Abs(goalScale);
+                if (goalScale > 15)
+                    goalScale = 15;
                 lastTimeChangeSize = Time.time;
                 //transform.localScale = new Vector3(goalScale, 1, 1);
             }

@@ -54,44 +54,18 @@ public class PlayerCredential
             loginInfos[k] = "";
     }
 
-    //ncrypt password
-    private string encryptMd5(string pass)
-    {
-        System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
-        byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
-        bs = md5Hasher.ComputeHash(bs);
-        System.Text.StringBuilder s = new System.Text.StringBuilder();
-        foreach (byte b in bs)
-            s.Append(b.ToString("x2").ToLower());
-
-        return s.ToString();
-    }
-
-    //Check password
-    private bool verifyMd5(string input, string hash)
-    {
-        string hashOfInput = encryptMd5(input);
-
-        StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-        if (0 == comparer.Compare(hashOfInput, hash))
-            return true;
-        else
-            return false;
-    }
-
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
         if (name.Length > 0 && loginInfos.ContainsKey(name))
         {
-            if (verifyMd5(pass, loginInfos[name]))
+            if (Crypto.verifyMd5(pass, loginInfos[name]))
             {
                 return true;
             }
             else
                 if (loginInfos[name] == "")
                 {
-                    loginInfos[name] = encryptMd5(pass);
+                    loginInfos[name] = Crypto.encryptMd5(pass);
                     XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
                     return true;
                 }
@@ -104,7 +78,7 @@ public class PlayerCredential
         else
         {
             C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
-            loginInfos.Add(name, encryptMd5(pass));
+            loginInfos.Add(name, Crypto.encryptMd5(pass));
             XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
             return true;
         }

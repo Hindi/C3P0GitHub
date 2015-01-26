@@ -10,7 +10,7 @@ public class SpaceWarState : GameState {
 	public SpaceWarState(StateManager stateManager)
         : base(stateManager)
     {
-        gameId = EnumGame.PONG;
+        gameId = EnumGame.SPACEWAR;
     }
 
     public override void onGameRestart()

@@ -28,7 +28,7 @@ public class PacMove : MonoBehaviour {
 		Vector3 predicted = transform.position + next;
 		int predX = Mathf.RoundToInt(predicted.x);
 		int predY = Mathf.RoundToInt(- predicted.z);
-		if(pacGrid[predY,predX] == 1){
+		if(pacGrid[predY,predX] >= 1){
 			return true;
 		}
 		return false;
@@ -139,11 +139,9 @@ public class PacMove : MonoBehaviour {
 	}
 	
 
-	void onCollisionEnter(Collider collider){
-
+	void OnTriggerEnter(Collider collider){
+		if (collider.tag == "Enemy"){
+			Camera.main.SendMessage("MoveTo", collider.gameObject);
+		}
 	}
-
-
-
-
 }
