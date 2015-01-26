@@ -23,16 +23,22 @@ public class Kalman {
 
     /* Elements utilisés pour la visualisation (debug principalement) */
     private Vector2 posBruit; // Position bruitée : observation
-    private Vector2 posInterp; // Position interprétée : après le filtre de Kalman
     public Vector2 PosBruit
     {
         get { return posBruit; }
         private set{}
     }
+    private Vector2 posInterp; // Position interprétée : après le filtre de Kalman
     public Vector2 PosInterp
     {
         get { return posInterp; }
-        private set{}
+        private set { }
+    }
+    private Vector2 posImprecise; // Position captée par les capteurs (lol)
+    public Vector2 PosImprecise
+    {
+        get { return posImprecise; }
+        private set { }
     }
 
 
@@ -102,7 +108,7 @@ public class Kalman {
     }
 
     /* Interpole une valeur pour la position, en supposant aucun input du joueur, dans nbFrames frames */
-    Vector2 interpolation(int nbFrames)
+    public Vector2 interpolation(int nbFrames)
     {
         Vector temp = new DenseVector(estimation.ToArray());
         for (int i = 0; i < nbFrames; i++)
@@ -144,11 +150,10 @@ public class Kalman {
         // n(k|k) = n(k|k-1) + K(y - H*n(k|k-1))
         Vector y = (Vector) (H * tempVector);
         y = addImprecision(y);
+        posImprecise = new Vector2((float)y.At(0), (float)y.At(1));
         estimation = (Vector)(nkminus1 + K * (y - (H * nkminus1)));
         posInterp.x = (float)estimation.At(0);
-        Debug.Log(estimation.At(0));
         posInterp.y = (float)estimation.At(2);
-        Debug.Log(estimation.At(2));
     }
 
     /*************************************************************************************************

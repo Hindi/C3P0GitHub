@@ -12,19 +12,23 @@ public class EnemySpaceWar : Spaceship {
     [SerializeField]
     private GameObject noisedPosition;
 
+    [SerializeField]
+    private GameObject imprecision;
+
     private Kalman kalman;
     private Parameter p;
 
 	// Use this for initialization
 	void Start () {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 0.1);
+        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 0.01);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
-        target.transform.position = kalman.PosInterp;
+        target.transform.position = kalman.PosInterp;//kalman.interpolation(60);
         noisedPosition.transform.position = kalman.PosBruit;
+        imprecision.transform.position = kalman.PosImprecise;
 	}
 
     public override void onHit()
@@ -40,6 +44,6 @@ public class EnemySpaceWar : Spaceship {
 
     public void onRestart()
     {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 0.1);
+        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 0.01);
     }
 }
