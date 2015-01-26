@@ -4,6 +4,7 @@ using System.Collections;
 public class SpaceWarState : GameState {
 
     private SpaceWarScript gameScript;
+    private PlayerSpaceWar player;
     private Parameter p;
 
 	public SpaceWarState(StateManager stateManager)
@@ -39,6 +40,7 @@ public class SpaceWarState : GameState {
     {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("SpaceWarScript").GetComponent<SpaceWarScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSpaceWar>();
         ui.setParamCanvas(gameId);
     }
 
@@ -63,4 +65,27 @@ public class SpaceWarState : GameState {
         }
     }
 
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        if (loaded)
+        {
+
+        }
+    }
+
+    public override void noticeInput(EnumInput key)
+    {
+        if (loaded)
+        {
+            base.noticeInput(key);
+            if (key == EnumInput.SPACE)
+                player.fire();
+            if (key == EnumInput.LEFT)
+                player.rotate(1);
+            else if (key == EnumInput.RIGHT)
+                player.rotate(-1);
+            if (key == EnumInput.UP)
+                player.goForward();
+        }
+    }
 }

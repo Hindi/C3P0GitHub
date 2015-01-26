@@ -94,7 +94,7 @@ static class IdConverter
                 return StateEnum.MOONPATROL;
             case "ServerLobby":
                 return StateEnum.SERVERCONNECTION;
-            case "connection":
+            case "Connection":
                 return StateEnum.CONNECTION;
             case "QuestionAnswer":
                 return StateEnum.QUESTIONANSWER;
