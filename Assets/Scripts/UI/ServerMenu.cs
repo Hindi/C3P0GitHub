@@ -107,5 +107,6 @@ public class ServerMenu : MonoBehaviour {
                 break;
         }
         C3PONetworkManager.Instance.loadLevel(levelName);
+        C3PONetworkManager.Instance.unlockGame(levelName);
     }
 }

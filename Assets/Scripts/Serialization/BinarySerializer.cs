@@ -7,9 +7,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class BinarySerializer {
 
-    public static void SerializeData(PlayerCredential data)
+    public static void SerializeData(GameList data)
     {
-        FileStream fs = new FileStream("Assets/Ressources/data.dat", FileMode.Create);
+        FileStream fs = new FileStream("Assets/Resources/data.dat", FileMode.Create);
 
         // Construct a BinaryFormatter and use it to serialize the data to the stream.
         BinaryFormatter formatter = new BinaryFormatter();
@@ -28,17 +28,17 @@ public class BinarySerializer {
         }
     }
 
-    public static PlayerCredential DeserializeData()
+    public static GameList DeserializeData()
     {
         // Open the file containing the data that you want to deserialize.
-        FileStream fs = new FileStream("Assets/Ressources/data.dat", FileMode.Open);
+        FileStream fs = new FileStream("Assets/Resources/data.dat", FileMode.Open);
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
             // Deserialize the hashtable from the file and 
             // assign the reference to the local variable.
-            return (PlayerCredential)formatter.Deserialize(fs);
+            return (GameList)formatter.Deserialize(fs);
         }
         catch (SerializationException e)
         {
