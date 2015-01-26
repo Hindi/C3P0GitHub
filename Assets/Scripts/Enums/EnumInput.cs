@@ -17,5 +17,6 @@ public enum EnumInput
     SPACE,
     RETURN,
     TAB,
-    TOUCH
+    TOUCH,
+    MENU
 }
