@@ -21,7 +21,7 @@ public class EnemySpaceWar : Spaceship {
 	// Use this for initialization
 	void Start () {
         kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            1, 0.01);
+            0.01, 1);
 	}
 	
 	// Update is called once per frame
@@ -46,6 +46,6 @@ public class EnemySpaceWar : Spaceship {
     public void onRestart()
     {
         kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            1, 0.01);
+            0.01, 1);
     }
 }
