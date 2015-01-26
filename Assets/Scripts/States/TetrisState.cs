@@ -42,7 +42,33 @@ public class TetrisState : GameState {
 
     public override void noticeInput(EnumInput key)
     {
+        /*
+        if (loaded)
+        {
+            base.noticeInput(key);
 
+            if (Tetromino.fallingTetromino != null)
+            {
+                switch (key)
+                {
+                    case EnumInput.RIGHT:
+                        Tetromino.fallingTetromino.moveRight();
+                        break;
+                    case EnumInput.LEFT:
+                        Tetromino.fallingTetromino.moveLeft();
+                        break;
+                    case EnumInput.UPDOWN:
+                        Tetromino.fallingTetromino.rotate();
+                        break;
+                    case EnumInput.DOWN:
+                        Tetromino.fallingTetromino.moveDown();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        */
     }
 
     public override void noticeInput(EnumInput key, Touch[] inputs)

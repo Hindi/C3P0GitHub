@@ -70,48 +70,15 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+    // Handles automatic drop and automatic delete when all the tetromino doesn't have any block
 	void Update () 
 	{
+        // Automatic move down handles here
 		if (this == fallingTetromino)
-		{
-			// Move Left
-			if (Input.GetKey(KeyCode.LeftArrow)) 
-			{
-                if (Time.time - moveLeftTimer  >= movingRate)
-                {
-                    moveLeft();
-                    moveLeftTimer = Time.time;
-                }
-			}
-			else if (Input.GetKey(KeyCode.RightArrow))
-			{
-                if (Time.time - moveRightTimer >= movingRate)
-                {
-                    moveRight();
-                    moveRightTimer = Time.time;
-                }
-			}
-            // We can move to the left or to the right and go up or down at the same time
-			if (Input.GetKeyDown(KeyCode.UpArrow))
-			{
-				rotate();
-			}
-			else if (Input.GetKey(KeyCode.DownArrow))
-			{
-				// MoveDown handles grid updates if the tetromino is set
-                // Two ways of moving down, when it ticks and by pressing down
-                if (Time.time - moveDownTimer >=  movingDownRate)
-                {
-                    moveDown();
-                    moveDownTimer = Time.time;
-                    timeSinceLastFall = Time.time;
-                    Grid._grid.fastFallScore++;
-                }
-			}
-
+        {
             if ((Time.time - timeSinceLastFall) >= fallingSpeed)
             {
-                moveDown();
+                goDown();
                 timeSinceLastFall = Time.time;
             }
 		}
@@ -121,33 +88,50 @@ public class Tetromino : MonoBehaviour {
           
 	}
 	
+
+
 	/*******************************************************************************
 	 *                          Movement functions                                 *
 	 *******************************************************************************/
-	void moveLeft()
+	public void moveLeft()
 	{
-		// We move the tetromino to the left
-		transform.position += new Vector3(-1, 0, 0);
-        
-		// See if it's still a valid position
-		if (!isValidGridPos())
-			// Its not valid. revert.
-			transform.position += new Vector3(1, 0, 0);
+        // First we check if we can move left this frame
+        if (Time.time - moveLeftTimer >= movingRate)
+        {
+            // We move the tetromino to the left
+            transform.position += new Vector3(-1, 0, 0);
+
+            // See if it's still a valid position
+            if (!isValidGridPos())
+                // Its not valid. revert.
+                transform.position += new Vector3(1, 0, 0);
+            moveLeftTimer = Time.time;
+        }
+		
 	}
-	
-	void moveRight()
+
+    public void moveRight()
 	{
-		// We move the tetromino to the right
-		transform.position += new Vector3(1, 0, 0);
-        
-		// See if it's still a valid position
-		if (!isValidGridPos())
-			// Its not valid. revert.
-			transform.position += new Vector3(-1, 0, 0);
+        // Check if we can move to the right this frame
+        if (Time.time - moveRightTimer >= movingRate)
+        {
+            // We move the tetromino to the right
+            transform.position += new Vector3(1, 0, 0);
+
+            // See if it's still a valid position
+            if (!isValidGridPos())
+                // Its not valid. revert.
+                transform.position += new Vector3(-1, 0, 0);
+
+            // We set the timer 
+            moveRightTimer = Time.time;
+        }
 	}
-	
-	void moveDown()
-	{
+
+
+    // goDown handles grid updates if the tetromino is set
+    public void goDown()
+    {
 		// We move the tetromino to the bottom
 		transform.position += new Vector3(0, -1, 0);
         
@@ -163,13 +147,24 @@ public class Tetromino : MonoBehaviour {
 			nextFalling();
 		}
 	}
-	
 
-	void rotate()
+    public void moveDown()
+    {
+        // Check if we can move down this frame (thanks to input)
+        if (Time.time - moveDownTimer >= movingDownRate)
+        {
+            goDown();
+            // Reset of the timer to move down
+            moveDownTimer = Time.time;
+            timeSinceLastFall = Time.time;
+            Grid._grid.fastFallScore++;
+        }
+    }
+
+    public void rotate()
 	{
         if (canRotate)
         {
-            int nbTry = 0;
             transform.Rotate(0, 0, -90);
 
             // See if valid

@@ -10,9 +10,7 @@ public class TetrisCamera : MonoBehaviour {
     private BlurEffect blurEffect;
 
 	// Use this for initialization
-	void Start () {
-        var blur = GetComponent("Blur");
-        
+	void Start () {        
 	}
 	
 	// Update is called once per frame
