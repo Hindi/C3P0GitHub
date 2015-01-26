@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
 
     public void move(int dir)
     {
-        Debug.Log("move");
         transform.position = new Vector3(transform.position.x + speed * dir * Time.deltaTime, transform.position.y, transform.position.z);
     }
 

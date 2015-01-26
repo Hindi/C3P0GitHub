@@ -209,6 +209,11 @@ public class C3PONetworkManager : MonoBehaviour {
         saveClientsStats();
     }
 
+    public void unlockGame(string name)
+    {
+        networkView.RPC("rpcUnlockGame", RPCMode.Others, name);
+    }
+
     public void sendNotifyWrongLogin(NetworkPlayer netPlayer, string name)
     {
         networkView.RPC("notifyWrongLogin", netPlayer, name);
@@ -236,7 +241,8 @@ public class C3PONetworkManager : MonoBehaviour {
 
     public void sendGameStats(int gameId, int paramId, int score)
     {
-        networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
+        if(Network.isClient)
+            networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
     }
 	
 	/**************************************************************************************
@@ -323,6 +329,12 @@ public class C3PONetworkManager : MonoBehaviour {
     void rpcLoadLevel(string level)
     {
         levelLoader.loadLevel(level);
+    }
+
+    [RPC]
+    void rpcUnlockGame(string name)
+    {
+        EventManager<string>.Raise(EnumEvent.ADDGAME, name);
     }
 	
 	[RPC] 
