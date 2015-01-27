@@ -18,13 +18,13 @@ public class QuestionAnswerMenu : MonoBehaviour {
     private Text answerLabel;
 
     [SerializeField]
-    private Text resultBoolLabel;
-
-    [SerializeField]
     private ProgressBar timeBar;
+
+    private int lastAnswerId;
 
     private int score;
 
+    bool answered;
     private float startTime;
     private const float questionTime = 10;
 
@@ -57,9 +57,10 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        answered = false;
         score = 0;
        // timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
-        EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
+        EventManager<string, int>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
 
 	}
@@ -70,27 +71,31 @@ public class QuestionAnswerMenu : MonoBehaviour {
         scoreLabel.text = score.ToString();
     }
 
-    public void onResultRecieved(string rep, bool result)
+    public void onResultRecieved(string rep, int resultId)
     {
-        if (result)
-            resultBoolLabel.text ="Vrai :";
-        else
-            resultBoolLabel.text = "Faux :";
-        
+        setQuestionText("");
+        buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();
+        buttons[resultId - 1].GetComponent<AnswerButton>().setRight();
+
         answerLabel.text = rep;
     }
 	
 	// Update is called once per frame
 	void Update () {
         timeBar.updateValue(questionTime - (Time.time - startTime));
-        if(Time.time - startTime > questionTime)
+        if(Time.time - startTime > questionTime && !answered)
             answer(-1);
 	}
 
     public void answer(int id)
     {
-        resultBoolLabel.text = "";
-        answerLabel.text = "En attente des réponses des autres étudiants.";
-        EventManager<int>.Raise(EnumEvent.ANSWERSELECT, id);
+        if (!answered)
+        {
+            lastAnswerId = id;
+            buttons[id - 1].GetComponent<AnswerButton>().setAnswered();
+            answerLabel.text = "En attente des réponses des autres étudiants.";
+            EventManager<int>.Raise(EnumEvent.ANSWERSELECT, id);
+            answered = true;
+        }
     }
 }

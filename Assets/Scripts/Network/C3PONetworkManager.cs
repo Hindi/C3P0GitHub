@@ -197,9 +197,9 @@ public class C3PONetworkManager : MonoBehaviour {
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
 
-    public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
+    public void sendResult(NetworkPlayer netPlayer, string rep, int i)
     {
-        networkView.RPC("rcvResult", netPlayer, rep, b);
+        networkView.RPC("rcvResult", netPlayer, rep, i);
     }
 
     public void loadLevel(string name)
@@ -348,9 +348,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 
     [RPC]
-    void rcvResult(string rep, bool b)
+    void rcvResult(string rep, int i)
     {
-        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
+        EventManager<string, int>.Raise(EnumEvent.QUESTIONRESULT, rep, i);
     }
 
     [RPC]
