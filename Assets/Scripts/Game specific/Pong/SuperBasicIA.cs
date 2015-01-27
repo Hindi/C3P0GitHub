@@ -56,6 +56,6 @@ public class SuperBasicIA : MonoBehaviour {
         pms = s;
         coupSpecial = true;
         initTimer = Time.time;
-        timer = Math.Abs((float) Laws.gauss() + 10) % 10;
+        timer = Math.Abs((float) Laws.gauss() + 10) % 3;
     }
 }
