@@ -27,7 +27,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     bool answered;
     private float startTime;
-    private const float questionTime = 10;
+    private const float questionTime = 5;
 
     public void setQuestionText(string q)
     {
@@ -50,11 +50,20 @@ public class QuestionAnswerMenu : MonoBehaviour {
         buttons[id].GetComponentInChildren<Text>().text = text;
     }
 
+    void reset()
+    {
+        foreach(Button b in buttons)
+            b.GetComponent<AnswerButton>().hideAllIcon();
+
+        answerLabel.text = "";
+        answered = false;
+        timeBar.gameObject.SetActive(true);
+        timeBar.updateValue(questionTime);
+    }
+
     public void startQuestion()
     {
-        buttons[lastAnswerId].GetComponent<AnswerButton>().hideAllIcon();
-        buttons[lastGoodAnswerId].GetComponent<AnswerButton>().hideAllIcon();
-        answerLabel.text = "";
+        reset();
         startTime = Time.time;
         C3PONetworkManager.Instance.sendRequestScore();
     }
@@ -63,7 +72,8 @@ public class QuestionAnswerMenu : MonoBehaviour {
 	void Start () {
         answered = false;
         score = 0;
-       // timeBar.init(questionTime, new Vector2(200, 50), new Vector2(150, 20));
+        timeBar.gameObject.SetActive(true);
+        timeBar.init(questionTime);
         EventManager<string, int>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
 
@@ -77,9 +87,11 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void onResultRecieved(string rep, int resultId)
     {
+        timeBar.gameObject.SetActive(false);
         lastGoodAnswerId = resultId;
         setQuestionText("");
-        buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();
+        if (answered)
+            buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();
         buttons[resultId - 1].GetComponent<AnswerButton>().setRight();
 
         answerLabel.text = rep;
@@ -94,7 +106,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void answer(int id)
     {
-        if (!answered)
+        if (!answered && id != -1)
         {
             lastAnswerId = id;
             buttons[id - 1].GetComponent<AnswerButton>().setAnswered();

@@ -7,6 +7,7 @@ public class ProgressBar : MonoBehaviour
     private float currentValue;
     private float maximumValue;
 
+    [SerializeField]
     private Vector2 size;
 
     [SerializeField]
@@ -17,6 +18,7 @@ public class ProgressBar : MonoBehaviour
     public void init(float maxValue)
     {
         maximumValue = maxValue;
+        size = new Vector2(background.rectTransform.rect.width, background.rectTransform.rect.height);
     }
 
     private float fillFactor()
@@ -30,14 +32,5 @@ public class ProgressBar : MonoBehaviour
         if (currentValue > maximumValue)
             currentValue = maximumValue;
         front.rectTransform.sizeDelta = new Vector2(size.x * fillFactor(), size.y);
-    }
-
-    void Update()
-    {
-    }
-
-    void Start()
-    {
-        size = front.rectTransform.rect.size;
     }
 }
