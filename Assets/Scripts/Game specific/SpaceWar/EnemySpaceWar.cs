@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemySpaceWar : Spaceship {
 
     [SerializeField]
-    private GameObject player;
+    private GameObject player, playerProjectile;
 
     [SerializeField]
     private GameObject target;
@@ -36,23 +36,30 @@ public class EnemySpaceWar : Spaceship {
 
 	// Use this for initialization
 	void Start () {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            0.1, 0.1);
+        if(p != null && p.id == 1)
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
+                1, 1);
+        else
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                0.1, 0.1);
         posHistory = new Vector2[60];
         posHistoryIterator = 0;
+        stateTimer = Time.time;
+        IAState = (p != null && p.id == 0) ? SWIAState.RANDOM : SWIAState.DODGE_ATTACKS;
+        actionNumber = 0;
 
         
-#if UNITY_EDITOR
-#else
+//#if UNITY_EDITOR
+//#else
         target.SetActive(false);
         noisedPosition.SetActive(false);
         imprecision.SetActive(false);
-#endif
+//#endif
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
+        if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
         addInterpretedPosition(kalman.PosInterp);
 
 #if UNITY_EDITOR
@@ -71,6 +78,7 @@ public class EnemySpaceWar : Spaceship {
                 {
                     if (Time.time - stateTimer > stateChangeTimer)
                     {
+                        stateTimer = Time.time;
                         changeRandomState();
                     }
                     switch (IAState)
@@ -132,10 +140,17 @@ public class EnemySpaceWar : Spaceship {
 
     public void onRestart()
     {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            0.1, 0.1);
+        if (p != null && p.id == 1)
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                1, 1);
+        else
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                0.1, 0.1);
         posHistory = new Vector2[60];
         posHistoryIterator = 0;
+        stateTimer = Time.time;
+        IAState = (p != null && p.id == 0) ? SWIAState.RANDOM : SWIAState.DODGE_ATTACKS;
+        actionNumber = 0;
     }
 
     /*************************************************************************************************
@@ -198,6 +213,7 @@ public class EnemySpaceWar : Spaceship {
                 } break;
         }
     }
+
     private void moveRandomly()
     {
         if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) == actionNumber) // time to decide a new action
@@ -231,7 +247,6 @@ public class EnemySpaceWar : Spaceship {
                         IAAction = SWIAAction.NOTHING;
                     } break;
             }
-            Debug.Log("New action : " + IAAction);
         }
 
 
@@ -240,31 +255,24 @@ public class EnemySpaceWar : Spaceship {
             case SWIAAction.MOVE_FORWARD:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                 } break;
             case SWIAAction.MOVE_TURN_LEFT:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                     rotate(1);
-                    Debug.Log("Turn left");
                 } break;
             case SWIAAction.MOVE_TURN_RIGHT:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                     rotate(-1);
-                    Debug.Log("Turn right");
                 } break;
             case SWIAAction.TURN_LEFT:
                 {
                     rotate(1);
-                    Debug.Log("Turn left");
                 } break;
             case SWIAAction.TURN_RIGHT:
                 {
                     rotate(-1);
-                    Debug.Log("Turn right");
                 } break;
             case SWIAAction.NOTHING:
                 {
@@ -272,18 +280,47 @@ public class EnemySpaceWar : Spaceship {
                 } break;
         }
     }
+
     private void attackRandomly()
     {
-
+        fire();
     }
+
     private bool dodgeAttacks()
     {
-        return true;
+        bool self = dodgeSelfProjectile();
+        bool player = dodgePlayerProjectile();
+        return (self && player);
     }
+
+    private bool dodgeSelfProjectile()
+    {
+        if (distance(projectile) > 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool dodgePlayerProjectile()
+    {
+        if (distance(playerProjectile) > 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private float distance(GameObject g)
+    {
+        return (Mathf.Sqrt(Mathf.Pow(transform.position.x - g.transform.position.x,2) + Mathf.Pow(transform.position.y - g.transform.position.y,2)));
+    }
+
     private void moveTowardsPlayer()
     {
 
     }
+
     private void attackPlayer()
     {
 
