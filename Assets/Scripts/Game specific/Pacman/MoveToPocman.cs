@@ -3,16 +3,8 @@ using System.Collections;
 
 public class MoveToPocman : MonoBehaviour {
 	GameObject pocman;
-	GameObject blanky;
-	GameObject panky;
-	GameObject anky;
-	GameObject clode;
 
 	PacMove pocMove;
-	BlankyMove blankyMove;
-	PankyMove pankyMove;
-	AnkyMove ankyMove;
-	ClodeMove clodeMove;
 
 
 	Vector3 startingPosition;
@@ -21,23 +13,12 @@ public class MoveToPocman : MonoBehaviour {
 
 	bool isTarget = false;
 	bool gotHit = false;
+	bool keyPressed = false;
 
 	// Use this for initialization
 	void Start () {
 		pocman = GameObject.FindGameObjectWithTag("Pacman");
 		pocMove = pocman.GetComponent<PacMove>();
-
-		blanky = GameObject.Find("Blanky");
-		blankyMove = blanky.GetComponent<BlankyMove>();
-
-		panky = GameObject.Find("Panky");
-		pankyMove = panky.GetComponent<PankyMove>();
-
-		anky = GameObject.Find("Anky");
-		ankyMove = anky.GetComponent<AnkyMove>();
-
-		clode = GameObject.Find("Clode");
-		clodeMove = clode.GetComponent<ClodeMove>();
 
 		startingPosition = transform.position;
 		startingForward = transform.position + 25 * transform.forward;
@@ -52,11 +33,6 @@ public class MoveToPocman : MonoBehaviour {
 			targetPosition = ghost.transform.position;
 			isTarget = true;
 			gotHit = true;
-			pocMove.moving(false);
-			blankyMove.moving(false);
-			pankyMove.moving(false);
-			ankyMove.moving(false);
-			clodeMove.moving(false);
 		}
 	}
 
@@ -67,24 +43,24 @@ public class MoveToPocman : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Return)){
 			isTarget = false;
 			gotHit = false;
+			keyPressed = true;
 
 		}
 		if (isTarget){
-			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.deltaTime));
+			Time.timeScale = 0;
+			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.unscaledDeltaTime));
 			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
-				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.deltaTime);
+				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.unscaledDeltaTime);
 			}
 		}
 		else {
+
 			targetPosition = startingPosition;
-			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, startingForward, Time.deltaTime));
-			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.deltaTime);
-			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
-				pocMove.moving(true);
-				blankyMove.moving(true);
-				pankyMove.moving(true);
-				ankyMove.moving(true);
-				clodeMove.moving(true);
+			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, startingForward, Time.unscaledDeltaTime));
+			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
+			if (keyPressed && Vector3.Distance(transform.position, startingPosition) < 0.5f){
+				Time.timeScale = 1;
+
 			}
 		}	
 

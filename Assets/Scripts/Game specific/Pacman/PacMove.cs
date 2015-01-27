@@ -13,11 +13,6 @@ public class PacMove : MonoBehaviour {
 	public Vector3 getCurDir(){
 		return curDir;
 	}
-	bool isMoving = true;
-
-	public void moving(bool real){
-		isMoving = real;
-	}
 
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -133,9 +128,7 @@ public class PacMove : MonoBehaviour {
 				nextDir = curDir;
 			}
 		}
-		if(isMoving){
-			move ();
-		}
+		move ();
 	}
 	
 
