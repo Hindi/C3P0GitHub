@@ -27,13 +27,25 @@ public class Grid : MonoBehaviour {
 
     // Display
     [SerializeField]
-    private Text guiScore;
+    private Text guiScorePC;
 
     [SerializeField]
-    private Text guiLines;
+    private Text guiLinesPC;
 
     [SerializeField]
-    private Text guiLevel;
+    private Text guiLevelPC;
+
+    [SerializeField]
+    private Text guiScoreMobile;
+
+    [SerializeField]
+    private Text guiLinesMobile;
+
+    [SerializeField]
+    private Text guiLevelMobile;
+
+
+    private Text guiLevel, guiLines, guiScore;
 
     // Display scaling
     public float xScale, yScale;
@@ -54,11 +66,18 @@ public class Grid : MonoBehaviour {
         {
             xScale = 1.76f;
             yScale = 0.836f;
+            guiLevel = guiLevelMobile;
+            guiScore = guiScoreMobile;
+            guiLines = guiLinesMobile;
         }
         else
         {
             xScale = 1f;
             yScale = 1f;
+
+            guiLevel = guiLevelPC;
+            guiScore = guiScorePC;
+            guiLines = guiLinesPC;
         }
         initGrid();
 
