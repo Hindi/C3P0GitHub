@@ -35,6 +35,9 @@ public class Grid : MonoBehaviour {
     [SerializeField]
     private Text guiLevel;
 
+    // Display scaling
+    public float xScale, yScale;
+
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
 
@@ -47,6 +50,9 @@ public class Grid : MonoBehaviour {
 		// Grid width and length
 		w = 10;
 		h = 25;
+
+        xScale = 1.76f;
+        yScale = 0.836f;
 
         initGrid();
 
@@ -133,7 +139,7 @@ public class Grid : MonoBehaviour {
 			if(grid[x,y] != null)
 			{
 				// Update the block position
-				grid[x,y].position += new Vector3(0,-1,0);
+				grid[x,y].position += new Vector3(0, -1 * yScale, 0);
 
 				// Update the grid by moving down the one at pos x,y
 				grid[x, y-1] = grid[x, y];

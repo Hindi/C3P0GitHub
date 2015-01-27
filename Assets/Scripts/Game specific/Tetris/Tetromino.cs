@@ -20,6 +20,8 @@ public class Tetromino : MonoBehaviour {
 	// Place where the tetromino will spawn on the board
 	private Vector3 spawnPosition;
 	
+
+    
 	
 	public static Tetromino fallingTetromino = null ;
 	public static Tetromino foreSeenTetromino = null ;
@@ -29,6 +31,8 @@ public class Tetromino : MonoBehaviour {
     [SerializeField]
     private bool canRotate;
 
+
+
 	// Use this for initialization
 	void Start () {		
 		// Timer to maje a tetromino falls
@@ -37,8 +41,6 @@ public class Tetromino : MonoBehaviour {
         // Falling speed, increases with the lvl
 		fallingSpeed = 1.0f / (Grid._grid.level + 1);
 		
-		// Place where a tetromino will spawn
-		spawnPosition = new Vector3(4,20,0);
 
         // movingRate initialization
         // Thus we can go left or right 12 times per second
@@ -51,6 +53,24 @@ public class Tetromino : MonoBehaviour {
         moveRightTimer = Time.time;
         moveLeftTimer = Time.time;
 		
+        // Initialisation for scaling (not 1 if mobile)
+        // Initialisation for spawnPosition
+        if (Application.isMobilePlatform)
+        {
+
+            // Place where a tetromino will spawn
+            spawnPosition = new Vector3(-3.31f + Grid._grid.xScale * 4f, 20f * Grid._grid.yScale, 0);
+        }
+        else
+        {
+            // Place where a tetromino will spawn
+            spawnPosition = new Vector3(4f * Grid._grid.xScale, 20f * Grid._grid.yScale, 0);
+        }
+
+
+
+        
+
 		// This block handles wether the tetromino is falling in the board or is 
 		// just foreseen
 		
@@ -59,6 +79,10 @@ public class Tetromino : MonoBehaviour {
 		{
 			fallingTetromino = this;
 			fallingTetromino.transform.position = spawnPosition;
+
+
+            // Size scaling differs if it's for mobile or computer and if it's foreseen or falling
+            transform.localScale = new Vector3(Grid._grid.xScale, Grid._grid.yScale, 1);
 			
 			// We create the foreseen tetromino
 			Spawner._spawner.spawnNext();
@@ -66,6 +90,10 @@ public class Tetromino : MonoBehaviour {
 		else if (foreSeenTetromino == null)
 		{
 			foreSeenTetromino = this;
+            if (Application.isMobilePlatform)
+                transform.localScale = new Vector3(0.8f, 0.8f, 1f);//foreSeenScaleMobile;
+            else
+                transform.localScale = new Vector3(1f, 1f, 1f);
 		}
 	}
 	
@@ -99,12 +127,12 @@ public class Tetromino : MonoBehaviour {
         if (Time.time - moveLeftTimer >= movingRate)
         {
             // We move the tetromino to the left
-            transform.position += new Vector3(-1, 0, 0);
+            transform.position += new Vector3(-1*Grid._grid.xScale, 0, 0);
 
             // See if it's still a valid position
             if (!isValidGridPos())
                 // Its not valid. revert.
-                transform.position += new Vector3(1, 0, 0);
+                transform.position += new Vector3(1 * Grid._grid.xScale, 0, 0);
             moveLeftTimer = Time.time;
         }
 		
@@ -116,12 +144,12 @@ public class Tetromino : MonoBehaviour {
         if (Time.time - moveRightTimer >= movingRate)
         {
             // We move the tetromino to the right
-            transform.position += new Vector3(1, 0, 0);
+            transform.position += new Vector3(1 * Grid._grid.xScale, 0, 0);
 
             // See if it's still a valid position
             if (!isValidGridPos())
                 // Its not valid. revert.
-                transform.position += new Vector3(-1, 0, 0);
+                transform.position += new Vector3(-1 * Grid._grid.xScale, 0, 0);
 
             // We set the timer 
             moveRightTimer = Time.time;
@@ -133,13 +161,13 @@ public class Tetromino : MonoBehaviour {
     public void goDown()
     {
 		// We move the tetromino to the bottom
-		transform.position += new Vector3(0, -1, 0);
+        transform.position += new Vector3(0, -1 * Grid._grid.yScale, 0);
         
 		// See if it's still a valid position
 		if (!isValidGridPos())
 		{
 			// Its not valid. revert.
-			transform.position += new Vector3(0, 1, 0);
+            transform.position += new Vector3(0, 1 * Grid._grid.yScale, 0);
 			// The tetromino is set and can't move anymore
 			// So we update the grid and delete rows if they are full (done in updateGrid)
 			updateGrid();
@@ -166,7 +194,7 @@ public class Tetromino : MonoBehaviour {
         if (canRotate)
         {
             transform.Rotate(0, 0, -90);
-
+            transform.localScale = new Vector3(transform.localScale.y, transform.localScale.x, transform.localScale.z);
             // See if valid
             if (!isValidGridPos())
             {
@@ -174,9 +202,9 @@ public class Tetromino : MonoBehaviour {
                 {
                     // It's not valid, revert
                     transform.Rotate(0, 0, 90);
+                    transform.localScale = new Vector3(transform.localScale.y, transform.localScale.x, transform.localScale.z);
                 }
-            }
-               
+            }               
         }
 	}
 	
@@ -206,6 +234,17 @@ public class Tetromino : MonoBehaviour {
         return false;
     }
 
+    // Function that converts position into grid position
+    Vector2 convertPos(Vector2 pos)
+    {
+        if (Application.isMobilePlatform)
+        {
+            return (new Vector2((pos.x + 3.31f) / Grid._grid.xScale, pos.y / Grid._grid.yScale));
+        }
+        else
+            return pos;
+    }
+
 
 	// Function that checks if the position of all the child blocks of a tetromino 
 	// is correct
@@ -213,7 +252,7 @@ public class Tetromino : MonoBehaviour {
 	{
 		foreach(Transform child in transform)
 		{
-			Vector2 v = Grid._grid.roundVec2(child.position);
+			Vector2 v = Grid._grid.roundVec2(convertPos(child.position));
 			
 			// Check if it's inside the borders
 			if (!Grid._grid.isInsideBorders(v))
@@ -240,7 +279,7 @@ public class Tetromino : MonoBehaviour {
 		// Add the new tetromino to the grid	
 		foreach (Transform child in transform) 
 		{
-			Vector2 v = Grid._grid.roundVec2(child.position);
+			Vector2 v = Grid._grid.roundVec2(convertPos(child.position));
 			Grid._grid.grid[(int)v.x, (int)v.y] = child;
 			if ((int) v.y > yMax)
 				yMax = (int) v.y;
@@ -257,6 +296,10 @@ public class Tetromino : MonoBehaviour {
         {
             foreSeenTetromino.transform.position = spawnPosition;
             // Check if this is a valid position, if it's not, then game over.
+
+            // Rescale for the game (foreseen can be smaller)
+            foreSeenTetromino.transform.localScale = new Vector3(Grid._grid.xScale, Grid._grid.yScale, 1);
+
             if (!foreSeenTetromino.isValidGridPos())
             {
                 gameOver();
