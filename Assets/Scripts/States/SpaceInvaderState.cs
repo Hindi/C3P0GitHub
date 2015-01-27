@@ -60,6 +60,8 @@ class SpaceInvaderState : GameState
     public override void end()
     {
         base.end();
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // Update is called once per frame

@@ -65,10 +65,14 @@ public class GameChoiceMenu : MonoBehaviour {
             checkAndAddGame("Zelda", s);
             checkAndAddGame("Pacman", s);
         }
-        updateactuveButton();
+        onGameAdded("Tetris");
+        onGameAdded("Pong");
+        onGameAdded("SpaceWar");
+        onGameAdded("LunarLander");
+        updateactiveButton();
     }
 
-    void updateactuveButton()
+    void updateactiveButton()
     {
 
         foreach (EnumGame e in availableGames)
@@ -90,7 +94,7 @@ public class GameChoiceMenu : MonoBehaviour {
             availableGames.Add(g);
         gameList.md5List.Add(Crypto.encryptMd5(name));
         BinarySerializer.SerializeData(gameList);
-        updateactuveButton();
+        updateactiveButton();
     }
 	
 	// Update is called once per frame

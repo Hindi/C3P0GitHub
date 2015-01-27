@@ -8,10 +8,6 @@ public class PlayerSpaceWar : Spaceship {
     {
 	}
 
-    public void goForward()
-    {
-        rigidbody2D.AddRelativeForce(new Vector3(0, linearSpeed * Time.deltaTime, 0));
-    }
 	
 	// Update is called once per frame
 	void Update () {

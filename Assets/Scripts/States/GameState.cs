@@ -89,6 +89,10 @@ public class GameState : State
     // Use this for state transition
     public override void end()
     {
+        EventManager<bool>.RemoveListener(EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
+        EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
+
         loaded = false;
     }
 

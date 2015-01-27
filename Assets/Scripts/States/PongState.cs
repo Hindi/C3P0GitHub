@@ -58,7 +58,6 @@ public class PongState : GameState {
         if (loaded)
         {
             base.onGameOver(b);
-            Debug.Log(gameScript.playerScore - gameScript.enemyScore);
             C3PONetworkManager.Instance.sendGameStats((int) gameId, p.id, gameScript.playerScore - gameScript.enemyScore);
         }
     }
@@ -67,6 +66,7 @@ public class PongState : GameState {
     {
         if (loaded)
         {
+            base.noticeInput(key);
             if (key == EnumInput.SPACE)
                 gameScript.launchCoupSpecial();
             if (key == EnumInput.UP)
