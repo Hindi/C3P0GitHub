@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemySpaceWar : Spaceship {
 
     [SerializeField]
-    private GameObject player;
+    private GameObject player, playerProjectile;
 
     [SerializeField]
     private GameObject target;
@@ -36,23 +36,30 @@ public class EnemySpaceWar : Spaceship {
 
 	// Use this for initialization
 	void Start () {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            0.1, 0.1);
+        if(p != null && p.id == 1)
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
+                1, 1);
+        else
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                0.1, 0.1);
         posHistory = new Vector2[60];
         posHistoryIterator = 0;
+        stateTimer = Time.time;
+        IAState = (p != null && p.id == 0) ? SWIAState.RANDOM : SWIAState.DODGE_ATTACKS;
+        actionNumber = 0;
 
         
-#if UNITY_EDITOR
-#else
+//#if UNITY_EDITOR
+//#else
         target.SetActive(false);
         noisedPosition.SetActive(false);
         imprecision.SetActive(false);
-#endif
+//#endif
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
+        if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
         addInterpretedPosition(kalman.PosInterp);
 
 #if UNITY_EDITOR
@@ -71,6 +78,8 @@ public class EnemySpaceWar : Spaceship {
                 {
                     if (Time.time - stateTimer > stateChangeTimer)
                     {
+                        stateTimer = Time.time;
+                        actionNumber = 0;
                         changeRandomState();
                     }
                     switch (IAState)
@@ -94,6 +103,7 @@ public class EnemySpaceWar : Spaceship {
             case 1:
             case 2:
                 {
+                    Debug.Log(IAState);
                     switch (IAState)
                     {
                         case SWIAState.MOVE_TOWARDS_PLAYER:
@@ -132,10 +142,17 @@ public class EnemySpaceWar : Spaceship {
 
     public void onRestart()
     {
-        kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0), 
-            0.1, 0.1);
+        if (p != null && p.id == 1)
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                1, 1);
+        else
+            kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
+                0.1, 0.1);
         posHistory = new Vector2[60];
         posHistoryIterator = 0;
+        stateTimer = Time.time;
+        IAState = (p != null && p.id == 0) ? SWIAState.RANDOM : SWIAState.DODGE_ATTACKS;
+        actionNumber = 0;
     }
 
     /*************************************************************************************************
@@ -198,9 +215,10 @@ public class EnemySpaceWar : Spaceship {
                 } break;
         }
     }
+
     private void moveRandomly()
     {
-        if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) == actionNumber) // time to decide a new action
+        if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) >= actionNumber) // time to decide a new action
         {
             actionNumber++;
             int i = Random.Range(1, 7);
@@ -231,7 +249,6 @@ public class EnemySpaceWar : Spaceship {
                         IAAction = SWIAAction.NOTHING;
                     } break;
             }
-            Debug.Log("New action : " + IAAction);
         }
 
 
@@ -240,31 +257,24 @@ public class EnemySpaceWar : Spaceship {
             case SWIAAction.MOVE_FORWARD:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                 } break;
             case SWIAAction.MOVE_TURN_LEFT:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                     rotate(1);
-                    Debug.Log("Turn left");
                 } break;
             case SWIAAction.MOVE_TURN_RIGHT:
                 {
                     goForward();
-                    Debug.Log("Go forward");
                     rotate(-1);
-                    Debug.Log("Turn right");
                 } break;
             case SWIAAction.TURN_LEFT:
                 {
                     rotate(1);
-                    Debug.Log("Turn left");
                 } break;
             case SWIAAction.TURN_RIGHT:
                 {
                     rotate(-1);
-                    Debug.Log("Turn right");
                 } break;
             case SWIAAction.NOTHING:
                 {
@@ -272,18 +282,71 @@ public class EnemySpaceWar : Spaceship {
                 } break;
         }
     }
+
     private void attackRandomly()
     {
-
+        fire();
     }
+
     private bool dodgeAttacks()
     {
+        bool self = dodgeSelfProjectile();
+        bool player = dodgePlayerProjectile();
+        return (self && player);
+    }
+
+    private bool dodgeSelfProjectile()
+    {
+        if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
+        {
+            Debug.Log(projectile.activeInHierarchy);
+            float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
+            if (Angle >= 0)
+            {
+                rotate(-1);
+                goForward();
+            }
+            else
+            {
+                rotate(1);
+                goForward();
+            }
+            return false;
+        }
         return true;
     }
+
+    private bool dodgePlayerProjectile()
+    {
+        if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
+        {
+            Debug.Log(projectile.activeInHierarchy);
+            float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
+            if (Angle >= 0)
+            {
+                rotate(-1);
+                goForward();
+            }
+            else
+            {
+                rotate(1);
+                goForward();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private float distance(GameObject g)
+    {
+        return (Mathf.Sqrt(Mathf.Pow(transform.position.x - g.transform.position.x,2) + Mathf.Pow(transform.position.y - g.transform.position.y,2)));
+    }
+
     private void moveTowardsPlayer()
     {
 
     }
+
     private void attackPlayer()
     {
 
