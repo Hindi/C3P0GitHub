@@ -50,10 +50,16 @@ public class Grid : MonoBehaviour {
 		// Grid width and length
 		w = 10;
 		h = 25;
-
-        xScale = 1.76f;
-        yScale = 0.836f;
-
+        if (Application.isMobilePlatform)
+        {
+            xScale = 1.76f;
+            yScale = 0.836f;
+        }
+        else
+        {
+            xScale = 1f;
+            yScale = 1f;
+        }
         initGrid();
 
 		// Initialization of the grid that stocks all blocks positions.

@@ -57,7 +57,6 @@ public class Tetromino : MonoBehaviour {
         // Initialisation for spawnPosition
         if (Application.isMobilePlatform)
         {
-
             // Place where a tetromino will spawn
             spawnPosition = new Vector3(-3.31f + Grid._grid.xScale * 4f, 20f * Grid._grid.yScale, 0);
         }
@@ -93,7 +92,7 @@ public class Tetromino : MonoBehaviour {
             if (Application.isMobilePlatform)
                 transform.localScale = new Vector3(0.8f, 0.8f, 1f);//foreSeenScaleMobile;
             else
-                transform.localScale = new Vector3(1f, 1f, 1f);
+                transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
 		}
 	}
 	
