@@ -11,7 +11,6 @@ public class CanvaManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log(Application.isMobilePlatform);
         if(Application.isMobilePlatform)
         {
             canvaPC.gameObject.SetActive(false);

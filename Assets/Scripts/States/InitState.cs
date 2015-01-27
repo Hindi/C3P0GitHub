@@ -34,7 +34,7 @@ class InitState : State {
             }
             else
             {
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Tetris");
             }
         }
 	}

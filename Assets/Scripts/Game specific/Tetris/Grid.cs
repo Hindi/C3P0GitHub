@@ -27,13 +27,28 @@ public class Grid : MonoBehaviour {
 
     // Display
     [SerializeField]
-    private Text guiScore;
+    private Text guiScorePC;
 
     [SerializeField]
-    private Text guiLines;
+    private Text guiLinesPC;
 
     [SerializeField]
-    private Text guiLevel;
+    private Text guiLevelPC;
+
+    [SerializeField]
+    private Text guiScoreMobile;
+
+    [SerializeField]
+    private Text guiLinesMobile;
+
+    [SerializeField]
+    private Text guiLevelMobile;
+
+
+    private Text guiLevel, guiLines, guiScore;
+
+    // Display scaling
+    public float xScale, yScale;
 
 	// The grid that stocks all blocks positions.
 	public Transform[,] grid;
@@ -47,7 +62,23 @@ public class Grid : MonoBehaviour {
 		// Grid width and length
 		w = 10;
 		h = 25;
+        if (Application.isMobilePlatform)
+        {
+            xScale = 1.76f;
+            yScale = 0.836f;
+            guiLevel = guiLevelMobile;
+            guiScore = guiScoreMobile;
+            guiLines = guiLinesMobile;
+        }
+        else
+        {
+            xScale = 1f;
+            yScale = 1f;
 
+            guiLevel = guiLevelPC;
+            guiScore = guiScorePC;
+            guiLines = guiLinesPC;
+        }
         initGrid();
 
 		// Initialization of the grid that stocks all blocks positions.
@@ -133,7 +164,7 @@ public class Grid : MonoBehaviour {
 			if(grid[x,y] != null)
 			{
 				// Update the block position
-				grid[x,y].position += new Vector3(0,-1,0);
+				grid[x,y].position += new Vector3(0, -1 * yScale, 0);
 
 				// Update the grid by moving down the one at pos x,y
 				grid[x, y-1] = grid[x, y];

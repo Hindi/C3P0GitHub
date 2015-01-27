@@ -4,8 +4,9 @@ using System.Collections;
 public class DotGenerator : MonoBehaviour {
 	int[,] pacGrid;
 	int remainingDots = 0;
-
+	float timer;
 	public GameObject pacDot;
+	public GameObject Energizer;
 
 
 	/* Generating all the 244 pacDots on the field*/
@@ -14,7 +15,7 @@ public class DotGenerator : MonoBehaviour {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+			{0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0},
 			{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0},
@@ -34,7 +35,7 @@ public class DotGenerator : MonoBehaviour {
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
 			{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-			{0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0},
+			{0, 3, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 3, 0},
 			{0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0},
 			{0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0},
 			{0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0},
@@ -50,9 +51,21 @@ public class DotGenerator : MonoBehaviour {
 					dot.transform.parent = transform;
 					++remainingDots;
 				}
+				if(pacGrid[j,i] == 3){
+					GameObject ene = Instantiate(Energizer, new Vector3(i, 0, -j), Quaternion.identity) as GameObject;
+					ene.transform.parent = transform;
+					++remainingDots;
+				}
 			}
 		}
+		timer = Time.time;
 	}
+
+	void frighten(){
+		BroadcastMessage("frightened");
+	}
+
+
 	void dotEaten(){
 		--remainingDots;
 		if (remainingDots == 0){
@@ -63,7 +76,11 @@ public class DotGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (Time.time - timer > 60f)
+		{
+			timer = Time.time;
+			BroadcastMessage("scatter");
+		}
 	}
 
 }
