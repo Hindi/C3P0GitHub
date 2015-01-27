@@ -79,6 +79,7 @@ public class EnemySpaceWar : Spaceship {
                     if (Time.time - stateTimer > stateChangeTimer)
                     {
                         stateTimer = Time.time;
+                        actionNumber = 0;
                         changeRandomState();
                     }
                     switch (IAState)
@@ -102,6 +103,7 @@ public class EnemySpaceWar : Spaceship {
             case 1:
             case 2:
                 {
+                    Debug.Log(IAState);
                     switch (IAState)
                     {
                         case SWIAState.MOVE_TOWARDS_PLAYER:
@@ -216,7 +218,7 @@ public class EnemySpaceWar : Spaceship {
 
     private void moveRandomly()
     {
-        if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) == actionNumber) // time to decide a new action
+        if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) >= actionNumber) // time to decide a new action
         {
             actionNumber++;
             int i = Random.Range(1, 7);
@@ -295,20 +297,44 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeSelfProjectile()
     {
-        if (distance(projectile) > 1)
+        if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
         {
-            return true;
+            Debug.Log(projectile.activeInHierarchy);
+            float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
+            if (Angle >= 0)
+            {
+                rotate(-1);
+                goForward();
+            }
+            else
+            {
+                rotate(1);
+                goForward();
+            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     private bool dodgePlayerProjectile()
     {
-        if (distance(playerProjectile) > 1)
+        if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
         {
-            return true;
+            Debug.Log(projectile.activeInHierarchy);
+            float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
+            if (Angle >= 0)
+            {
+                rotate(-1);
+                goForward();
+            }
+            else
+            {
+                rotate(1);
+                goForward();
+            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     private float distance(GameObject g)
