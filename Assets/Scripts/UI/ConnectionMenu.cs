@@ -171,4 +171,9 @@ public class ConnectionMenu : MonoBehaviour {
         ui.updateCurrentCanvas(singleGameSelect);
         onForm = false;
     }
+
+    public void onExitGameClick()
+    {
+        Application.Quit();
+    }
 }
