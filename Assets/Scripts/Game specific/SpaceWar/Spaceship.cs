@@ -19,9 +19,21 @@ public class Spaceship : MonoBehaviour
     [SerializeField]
     protected Transform projectileStartPosition;
 
+    [SerializeField]
+    protected float maxSpeed;
+
     public void rotate(float speedFactor)
     {
         transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
+    }
+
+    public void goForward()
+    {
+        rigidbody2D.AddRelativeForce(new Vector3(0, linearSpeed * Time.deltaTime, 0));
+        if (rigidbody2D.velocity.magnitude > maxSpeed)
+        {
+            rigidbody2D.velocity = rigidbody2D.velocity.normalized * maxSpeed;
+        }
     }
 
     public void exitZone()
@@ -53,7 +65,6 @@ public class Spaceship : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     public virtual void onHit()
