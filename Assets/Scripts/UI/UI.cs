@@ -95,6 +95,11 @@ public class UI : MonoBehaviour {
         return new String(s.Where(Char.IsLetterOrDigit).ToArray());
     }
 
+    public void goToMainMenu()
+    {
+        EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
+    }
+
     public Canvas getcurrentCanvas()
     {
         return currentCanvas;
