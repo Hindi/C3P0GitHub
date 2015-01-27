@@ -21,6 +21,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
     private ProgressBar timeBar;
 
     private int lastAnswerId;
+    private int lastGoodAnswerId;
 
     private int score;
 
@@ -51,6 +52,9 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void startQuestion()
     {
+        buttons[lastAnswerId].GetComponent<AnswerButton>().hideAllIcon();
+        buttons[lastGoodAnswerId].GetComponent<AnswerButton>().hideAllIcon();
+        answerLabel.text = "";
         startTime = Time.time;
         C3PONetworkManager.Instance.sendRequestScore();
     }
@@ -73,6 +77,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void onResultRecieved(string rep, int resultId)
     {
+        lastGoodAnswerId = resultId;
         setQuestionText("");
         buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();
         buttons[resultId - 1].GetComponent<AnswerButton>().setRight();

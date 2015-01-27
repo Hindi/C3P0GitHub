@@ -9,7 +9,12 @@ public class BlankyMove : MonoBehaviour {
 	Vector3 blankyTarget;
 	Vector3 blankyScatterTarget = new Vector3(0,0,0);
 	bool scatterMode = false;
+	float scatterDelay = 20.0f;
+	float scatterTimer;
+	
 	bool frightenMode = false;
+	float frightenDelay = 10.0f;
+	float frightenTimer;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -18,11 +23,23 @@ public class BlankyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 
-	bool isMoving = true;
+	bool isMoving = false;
 	
 	public void moving(bool real){
 		isMoving = real;
 	}
+
+	public void scatter(){
+		scatterMode = true;
+		scatterTimer = Time.time;
+	}
+	
+	public void frightened(){
+		frightenMode = true;
+		frightenTimer = Time.time;
+	}
+	
+
 	
 
 	/*
@@ -133,13 +150,14 @@ public class BlankyMove : MonoBehaviour {
 	 * Then he moves*/
 
 	void chase(){
-		if (scatterMode){
-			blankyTarget = blankyScatterTarget;
-		}
-		else if (frightenMode){
+
+		if (frightenMode){
 			int x = (int) Random.Range(0f,27f);
 			int y = (int) Random.Range(0f, 30f);
 			blankyTarget = new Vector3((float) x, 0, (float) y);
+		}
+		else if (scatterMode){
+			blankyTarget = blankyScatterTarget;
 		}
 		else {
 			blankyTarget = pacman.transform.position;
@@ -198,12 +216,18 @@ public class BlankyMove : MonoBehaviour {
 		blankyTarget = pacman.transform.position;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
+		moving(true);
 	}
 	
 	void FixedUpdate () {
-
 		if (isMoving){
 			chase();
+			if (scatterMode && Time.time - scatterTimer > scatterDelay){
+				scatterMode = false;
+			}
+			if (frightenMode && Time.time - frightenTimer > frightenDelay){
+				frightenMode = false;
+			}
 		}
 	}
 }

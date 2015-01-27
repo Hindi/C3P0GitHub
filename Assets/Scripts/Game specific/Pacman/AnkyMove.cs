@@ -14,7 +14,12 @@ public class AnkyMove : MonoBehaviour {
 	Vector3 ankyTarget;
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
 	bool scatterMode = false;
+	float scatterDelay = 20.0f;
+	float scatterTimer;
+	
 	bool frightenMode = false;
+	float frightenDelay = 10.0f;
+	float frightenTimer;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -23,12 +28,23 @@ public class AnkyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	
-	bool isMoving = true;
+	bool isMoving = false;
 	
 	public void moving(bool real){
 		isMoving = real;
 	}
+
+	public void scatter(){
+		scatterMode = true;
+		scatterTimer = Time.time;
+	}
 	
+	public void frightened(){
+		frightenMode = true;
+		frightenTimer = Time.time;
+	}
+	
+
 	
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -141,13 +157,14 @@ public class AnkyMove : MonoBehaviour {
 	 * Then he moves*/
 	
 	void chase(){
-		if (scatterMode){
-			ankyTarget = ankyScatterTarget;
-		}
-		else if (frightenMode){
+
+		if (frightenMode){
 			int x = (int) Random.Range(0f,27f);
 			int y = (int) Random.Range(0f, 30f);
 			ankyTarget = new Vector3((float) x, 0, (float) y);
+		}
+		else if (scatterMode){
+			ankyTarget = ankyScatterTarget;
 		}
 		else {
 			ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
@@ -214,6 +231,12 @@ public class AnkyMove : MonoBehaviour {
 
 		if (isMoving){
 			chase();
+			if (scatterMode && Time.time - scatterTimer > scatterDelay){
+				scatterMode = false;
+			}
+			if (frightenMode && Time.time - frightenTimer > frightenDelay){
+				frightenMode = false;
+			}
 		}
 	}
 }

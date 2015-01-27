@@ -9,7 +9,12 @@ public class ClodeMove : MonoBehaviour {
 	Vector3 clodeTarget;
 	Vector3 clodeScatterTarget = new Vector3(0,0,-32);
 	bool scatterMode = false;
+	float scatterDelay = 20.0f;
+	float scatterTimer;
+	
 	bool frightenMode = false;
+	float frightenDelay = 10.0f;
+	float frightenTimer;
 
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -18,11 +23,22 @@ public class ClodeMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	
-	bool isMoving = true;
+	bool isMoving = false;
 	
 	public void moving(bool real){
 		isMoving = real;
 	}
+
+	public void scatter(){
+		scatterMode = true;
+		scatterTimer = Time.time;
+	}
+	
+	public void frightened(){
+		frightenMode = true;
+		frightenTimer = Time.time;
+	}
+	
 
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -114,7 +130,6 @@ public class ClodeMove : MonoBehaviour {
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
 
-
 		if (frightenMode){
 			rigidbody.position += curDir * 1.5f * Time.deltaTime;
 		}
@@ -133,18 +148,19 @@ public class ClodeMove : MonoBehaviour {
 	 * Then he moves*/
 
 	void chase(){
-		if (!scatterMode){
+
+		if (frightenMode){
+			int x = (int) Random.Range(0f,27f);
+			int y = (int) Random.Range(0f, 30f);
+			clodeTarget = new Vector3((float) x, 0, (float) y);
+		}
+		else if (!scatterMode){
 			if (Vector3.Distance(pacman.transform.position, transform.position) <= 8.0f){
 				clodeTarget = clodeScatterTarget;
 			}
 			else{
 				clodeTarget = pacman.transform.position;
 			}
-		}
-		else if (frightenMode){
-			int x = (int) Random.Range(0f,27f);
-			int y = (int) Random.Range(0f, 30f);
-			clodeTarget = new Vector3((float) x, 0, (float) y);
 		}
 		else {
 			clodeTarget = clodeScatterTarget;
@@ -208,6 +224,12 @@ public class ClodeMove : MonoBehaviour {
 
 		if (isMoving){
 			chase();
+			if (scatterMode && Time.time - scatterTimer > scatterDelay){
+				scatterMode = false;
+			}
+			if (frightenMode && Time.time - frightenTimer > frightenDelay){
+				frightenMode = false;
+			}
 		}
 	}
 }

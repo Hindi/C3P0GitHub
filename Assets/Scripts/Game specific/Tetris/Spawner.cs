@@ -10,6 +10,12 @@ public class Spawner : MonoBehaviour {
 	// Vector use to store all the tetrominos and choose randomly the next one to 
 	// be spawned
 	public GameObject[] tetrominos;
+
+    [SerializeField]
+    Vector3 posMobile;
+
+    [SerializeField]
+    Vector3 posPC;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,14 +28,15 @@ public class Spawner : MonoBehaviour {
 	
 	
 	public void spawnNext()
-	{
-		// Create a random index that will choose the one to be drawn in tetrominos
-		int i = Random.Range(0, tetrominos.Length);
-		
-		// Create a Tetromino at the spawner Position
-		Instantiate(tetrominos[i],
-					transform.position,
-					Quaternion.identity);
+    {
+        // Create a random index that will choose the one to be drawn in tetrominos
+        int i = Random.Range(0, tetrominos.Length);
+
+        // Create a Tetromino at the spawner Position
+        Instantiate(tetrominos[i],
+                    transform.position,
+                    Quaternion.identity);
+
 	}
 	
 	
@@ -42,6 +49,18 @@ public class Spawner : MonoBehaviour {
 		else 
 		{
 			_spawner = this;
+
 		}
+
+
+        // Position differs if it's mobile or not
+        if (Application.isMobilePlatform)
+        {
+            transform.position = posMobile;
+        }
+        else
+        {
+            transform.position = posPC;
+        }
 	}
 }

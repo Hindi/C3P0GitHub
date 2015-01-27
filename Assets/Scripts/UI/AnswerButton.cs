@@ -14,6 +14,13 @@ public class AnswerButton : MonoBehaviour {
 	void Start () {
 	
 	}
+
+    public void hideAllIcon()
+    {
+        rightIcon.SetActive(false);
+        wrongIcon.SetActive(false);
+        answeredIcon.SetActive(false);
+    }
 	
     public void setRight()
     {
