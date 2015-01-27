@@ -20,6 +20,7 @@ public class MoveToPocman : MonoBehaviour {
 	Vector3 targetPosition;
 
 	bool isTarget = false;
+	bool gotHit = false;
 
 	// Use this for initialization
 	void Start () {
@@ -42,33 +43,52 @@ public class MoveToPocman : MonoBehaviour {
 		startingForward = transform.position + 25 * transform.forward;
 		targetPosition = startingPosition;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)){
+
+
+
+
+	public void MoveTo(GameObject ghost){
+		if (!gotHit){
+			targetPosition = ghost.transform.position;
 			isTarget = true;
+			gotHit = true;
 			pocMove.moving(false);
 			blankyMove.moving(false);
 			pankyMove.moving(false);
 			ankyMove.moving(false);
 			clodeMove.moving(false);
 		}
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+
 		if (Input.GetKeyDown(KeyCode.Return)){
 			isTarget = false;
-			pocMove.moving(true);
-			blankyMove.moving(true);
-			pankyMove.moving(true);
-			ankyMove.moving(true);
-			clodeMove.moving(true);
+			gotHit = false;
+
 		}
 		if (isTarget){
-			targetPosition = pocman.transform.position;
-			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, pocman.transform.position + pocMove.getCurDir(), Time.deltaTime));
+			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.deltaTime));
+			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
+				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.deltaTime);
+			}
 		}
 		else {
 			targetPosition = startingPosition;
 			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, startingForward, Time.deltaTime));
+			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.deltaTime);
+			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
+				pocMove.moving(true);
+				blankyMove.moving(true);
+				pankyMove.moving(true);
+				ankyMove.moving(true);
+				clodeMove.moving(true);
+			}
 		}	
-		transform.position = Vector3.Lerp(transform.position, targetPosition, 2 * Time.deltaTime);
+
+
+
 	}
 }

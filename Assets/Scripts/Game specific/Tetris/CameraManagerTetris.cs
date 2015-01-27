@@ -35,7 +35,6 @@ public class CameraManagerTetris : MonoBehaviour {
         camera3.gameObject.SetActive(false);
         c.gameObject.SetActive(true);
         Camera.SetupCurrent(c);
-        Debug.Log("Camera : " + c + " set ");
     }
 
     public void setParamId(int id)

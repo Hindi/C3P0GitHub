@@ -64,10 +64,13 @@ public class Grid : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-            guiScore.text = score.ToString();
-            guiLines.text = "Lines : \n" + nbLines;
-            guiLevel.text = "Level : \n " + level;       
+	void Update () 
+    {
+        // Score update
+        guiScore.text = score.ToString();
+        guiLines.text = "Lines : \n" + nbLines;
+        guiLevel.text = "Level : \n " + level;       
+
 	}
 	
 
