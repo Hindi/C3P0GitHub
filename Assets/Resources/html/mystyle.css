@@ -1,0 +1,53 @@
+#vertgraph {
+    width: 378px;
+    height: 207px;
+    position: relative;
+    background: url("../../Sprites/html pages/g_backbar.png") no-repeat;
+}
+
+#vertgraph ul {
+    width: 378px;
+    height: 207px;
+    margin: 0;
+    padding: 0;
+}
+
+#vertgraph ul li {
+    position: absolute;
+    width: 42px;
+    height: 240px;
+    bottom: 28px;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: url("../../Sprites/html pages/g_colorbar3.png") no-repeat !important;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    line-height: 0px;
+    list-style-type: none;
+}
+
+#vertgraph li.a1 {
+    left: 18px;
+    background-position: 0px bottom !important;
+}
+
+#vertgraph li.a2 {
+    left: 95px;
+    background-position: -42px bottom !important;
+}
+
+#vertgraph li.a3 {
+    left: 170px;
+    background-position: -84px bottom !important;
+}
+
+#vertgraph li.a4 {
+    left: 245px;
+    background-position: -126px bottom !important;
+}
+
+#vertgraph li.abstention {
+    left: 321px;
+    background-position: -168px bottom !important;
+}
