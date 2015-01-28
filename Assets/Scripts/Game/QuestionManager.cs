@@ -114,10 +114,14 @@ public class QuestionManager {
             currentQuestionNb--;
     }
 
-    public void goToNextQuestion()
+    public bool goToNextQuestion()
     {
         if (currentQuestionNb < questionList.Count - 1)
+        {
             currentQuestionNb++;
+            return true;
+        }
+        return false;
     }
 
     public void loadXml(int id)
@@ -132,6 +136,11 @@ public class QuestionManager {
 
         currentQuestionNb = 0;
         xmlLoaded = true;
+    }
+
+    public void unloadXml()
+    {
+        questionList.Clear();
     }
 
     private void reset()

@@ -136,7 +136,7 @@ public class C3PONetworkManager : MonoBehaviour {
         }
     }
 
-    private void saveClientsStats()
+    public void saveClientsStats()
     {
         foreach (KeyValuePair<string, Client> e in clientsInfos)
         {

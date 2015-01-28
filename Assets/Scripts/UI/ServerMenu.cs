@@ -14,7 +14,10 @@ public class ServerMenu : MonoBehaviour {
 
     [SerializeField]
     private GameObject coursButtons;
-
+    [SerializeField]
+    private GameObject sendButtons;
+    [SerializeField]
+    private GameObject nextButtons;
     [SerializeField]
     private GameObject startGameButton;
 
@@ -29,20 +32,17 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private UI ui;
 
+    private bool startGame;
+
 	// Use this for initialization
 	void Start () {
         ipLabel.text = "Server ip address : " + C3PONetwork.Instance.getMyIp();
+        startGame = false;
 	}
 	
 	// Update is called once per frame
     void Update()
     {
-        if (QuestionManager.Instance.isQuestionTimeOver())
-        {
-            coursButtons.SetActive(false);
-            questionCanvas.SetActive(false);
-            startGameButton.SetActive(true);
-        }
 	}
 
     public void loadXml(int id)
@@ -57,7 +57,20 @@ public class ServerMenu : MonoBehaviour {
     {
         coursButtons.SetActive(false);
         questionCanvas.SetActive(true);
+        sendButtons.SetActive(true);
+        nextButtons.SetActive(true);
+        startGameButton.SetActive(false);
+        startGame = false;
         loadquestionText();
+    }
+
+    private void switchStartGame()
+    {
+        coursButtons.SetActive(false);
+        sendButtons.SetActive(false);
+        nextButtons.SetActive(false);
+        startGameButton.SetActive(true);
+        startGame = true;
     }
 
     private void loadquestionText()
@@ -69,18 +82,28 @@ public class ServerMenu : MonoBehaviour {
     public void preiouvsQuestion()
     {
         QuestionManager.Instance.goToPreviousQuestion();
+        if (startGame)
+            switchToSendQuestion();
         loadquestionText();
     }
 
     public void nextquestion()
     {
-        QuestionManager.Instance.goToNextQuestion();
-        loadquestionText();
+        if(QuestionManager.Instance.goToNextQuestion())
+            loadquestionText();
+        else
+        {
+            switchStartGame();
+        }
     }
 
     public void sendQuestion()
     {
         QuestionManager.Instance.sendQuestion();
+        if (QuestionManager.Instance.isQuestionTimeOver())
+        {
+            switchStartGame();
+        }
         loadquestionText();
     }
 
@@ -88,6 +111,16 @@ public class ServerMenu : MonoBehaviour {
     {
         adminCanvas.gameObject.GetComponent<AdminMenu>().setPreviousCanvas(ui.getcurrentCanvas());
         ui.updateCurrentCanvas(adminCanvas);
+    }
+
+    public void goBackToMainMenu()
+    {
+        coursButtons.SetActive(true);
+        questionCanvas.SetActive(false);
+        startGameButton.SetActive(false);
+        QuestionManager.Instance.unloadXml();
+        nextQuestionLabel.text = "";
+        C3PONetworkManager.Instance.saveClientsStats();
     }
 
     public void launchGame()
