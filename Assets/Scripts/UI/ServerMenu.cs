@@ -22,6 +22,8 @@ public class ServerMenu : MonoBehaviour {
     private GameObject nextButtons;
     [SerializeField]
     private GameObject startGameButton;
+    [SerializeField]
+    private GameObject statsButton;
 
     [SerializeField]
     private Text ipLabel;
@@ -49,6 +51,18 @@ public class ServerMenu : MonoBehaviour {
     {
 	}
 
+    public void showStats()
+    {
+        try
+        {
+            System.Diagnostics.Process.Start(@"Assets\Resources\html\lastQuestionStat.html");
+        }
+        catch 
+        {
+
+        }
+    }
+
     public void loadXml(int id)
     {
         courseId = id;
@@ -65,6 +79,7 @@ public class ServerMenu : MonoBehaviour {
         sendButtons.SetActive(true);
         nextButtons.SetActive(true);
         startGameButton.SetActive(false);
+        statsButton.SetActive(false);
         startGame = false;
         loadquestionText();
     }
@@ -104,6 +119,7 @@ public class ServerMenu : MonoBehaviour {
 
     public void sendQuestion()
     {
+        statsButton.SetActive(true);
         QuestionManager.Instance.sendQuestion();
         if (QuestionManager.Instance.isQuestionTimeOver())
         {

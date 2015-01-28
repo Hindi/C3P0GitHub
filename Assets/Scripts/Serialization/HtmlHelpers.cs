@@ -17,11 +17,19 @@ public class HtmlHelpers {
     {
         const int pixH = 165;
         float sum = a1 + a2 + a3 + a4 + abs;
-        float a1p = a1 / sum;
-        float a2p = a2 / sum;
-        float a3p = a3 / sum;
-        float a4p = a4 / sum;
-        float absp = abs / sum;
+        float a1p = 0;
+        float a2p = 0;
+        float a3p = 0;
+        float a4p = 0;
+        float absp = 0;
+        if(sum != 0)
+        {
+            a1p = a1 / sum;
+            a2p = a2 / sum;
+            a3p = a3 / sum;
+            a4p = a4 / sum;
+            absp = abs / sum;
+        }
 
         string page = head + @"
                 <body>
@@ -38,13 +46,20 @@ public class HtmlHelpers {
             + foot;
 
         string path = @"Assets/Resources/html/"+ filename + ".html";
+        writeFile(path, page);
+        path = @"Assets/Resources/html/lastQuestionStat.html";
+        writeFile(path, page);
+    }
+
+    private static void writeFile(string path, string content)
+    {
         if (File.Exists(path))
         {
             File.Delete(path);
         }
         using (FileStream fs = File.Create(path))
         {
-            AddText(fs, page);
+            AddText(fs, content);
         }
     }
 
