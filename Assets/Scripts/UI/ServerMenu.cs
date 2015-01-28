@@ -17,6 +17,8 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private GameObject sendButtons;
     [SerializeField]
+    private GameObject previousButton;
+    [SerializeField]
     private GameObject nextButtons;
     [SerializeField]
     private GameObject startGameButton;
@@ -59,6 +61,7 @@ public class ServerMenu : MonoBehaviour {
     {
         coursButtons.SetActive(false);
         questionCanvas.SetActive(true);
+        previousButton.SetActive(true);
         sendButtons.SetActive(true);
         nextButtons.SetActive(true);
         startGameButton.SetActive(false);
@@ -130,6 +133,7 @@ public class ServerMenu : MonoBehaviour {
 
     public void launchGame()
     {
+        previousButton.SetActive(false);
         gameLaunched = true;
         string levelName= "";
         
