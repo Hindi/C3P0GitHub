@@ -231,8 +231,8 @@ public class QuestionManager {
     void sendResults()
     {
         int i = 0;
-        int questionId = (oldQuestions.Count - 1);
-        string explication = oldQuestions[questionId].explication;
+        int questionId = 0;
+        string explication = oldQuestions[(oldQuestions.Count - 1)].explication;
 
         int[] answers = {0,0,0,0,0};
 
@@ -241,16 +241,13 @@ public class QuestionManager {
             i = e.Value.lastAnswer().question.bonneReponse;
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, i);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
-
+            questionId = e.Value.lastAnswer().question.id;
+            
             //Count for stats
             if(e.Value.lastAnswer().answerTime == 999)
-            {
                 answers[0]++;
-            }
             else
-            {
                 answers[e.Value.lastAnswer().rep]++;
-            }
         }
 
         HtmlHelpers.createAnswerStatPage("Q " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
