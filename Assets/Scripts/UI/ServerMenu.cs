@@ -33,11 +33,13 @@ public class ServerMenu : MonoBehaviour {
     private UI ui;
 
     private bool startGame;
+    private bool gameLaunched;
 
 	// Use this for initialization
 	void Start () {
         ipLabel.text = "Server ip address : " + C3PONetwork.Instance.getMyIp();
         startGame = false;
+        gameLaunched = false;
 	}
 	
 	// Update is called once per frame
@@ -120,11 +122,15 @@ public class ServerMenu : MonoBehaviour {
         startGameButton.SetActive(false);
         QuestionManager.Instance.unloadXml();
         nextQuestionLabel.text = "";
+
         C3PONetworkManager.Instance.saveClientsStats();
+        if (gameLaunched)
+            C3PONetworkManager.Instance.saveClientsGameStats();
     }
 
     public void launchGame()
     {
+        gameLaunched = true;
         string levelName= "";
         
         switch(courseId)

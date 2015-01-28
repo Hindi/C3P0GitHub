@@ -41,6 +41,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	public string login;
     public string password;
     private int currentCourseId;
+    private EnumGame currentGameEnum;
 	
 	
 
@@ -136,6 +137,14 @@ public class C3PONetworkManager : MonoBehaviour {
         }
     }
 
+    public void saveClientsGameStats()
+    {
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
+        {
+            e.Value.saveGameStats(currentGameEnum);
+        }
+    }
+
     public void saveClientsStats()
     {
         foreach (KeyValuePair<string, Client> e in clientsInfos)
@@ -146,6 +155,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     private void loadPlayersGameStats(EnumGame stateEnum)
     {
+        currentGameEnum = stateEnum;
         foreach (KeyValuePair<string, Client> e in clientsInfos)
             e.Value.loadGameStats((EnumGame)stateEnum);
     }
