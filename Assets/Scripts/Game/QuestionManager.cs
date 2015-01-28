@@ -250,7 +250,7 @@ public class QuestionManager {
                 answers[e.Value.lastAnswer().rep]++;
         }
 
-        HtmlHelpers.createAnswerStatPage("Q " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
+        HtmlHelpers.createAnswerStatPage("Course " + courseId + " Question " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
     }
 
     void checkClientsAnswers()
