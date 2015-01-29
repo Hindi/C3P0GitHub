@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-    // TO DO remove the singleton aspect, no need for that
 
 	public static Spawner _spawner;
 
@@ -16,9 +15,13 @@ public class Spawner : MonoBehaviour {
 
     [SerializeField]
     Vector3 posPC;
-	
+
+    // Use for easier tests for mobile UI
+    private bool isMobile;
+
 	// Use this for initialization
 	void Start () {
+        isMobile = true;// Remove Application.isMobilePlatform;
 		spawnNext();
 	}
 	
@@ -54,7 +57,7 @@ public class Spawner : MonoBehaviour {
 
 
         // Position differs if it's mobile or not
-        if (Application.isMobilePlatform)
+        if (isMobile)
         {
             transform.position = posMobile;
         }

@@ -47,6 +47,9 @@ public class Grid : MonoBehaviour {
 
     private Text guiLevel, guiLines, guiScore;
 
+    // Use for easier tests for mobile UI
+    private bool isMobile;
+
     // Display scaling
     public float xScale, yScale;
 
@@ -62,9 +65,15 @@ public class Grid : MonoBehaviour {
 		// Grid width and length
 		w = 10;
 		h = 25;
-        if (Application.isMobilePlatform)
+
+
+        isMobile = true; // Remove Application.isMobilePlatform;
+
+        if (isMobile)
         {
-            xScale = 1.76f;
+            float temp = ((float) Screen.width / (float) Screen.height);
+            Debug.Log(temp);
+            xScale = 1.156f * temp / (2f / 3f);
             yScale = 0.836f;
             guiLevel = guiLevelMobile;
             guiScore = guiScoreMobile;

@@ -19,8 +19,9 @@ public class Tetromino : MonoBehaviour {
 	
 	// Place where the tetromino will spawn on the board
 	private Vector3 spawnPosition;
-	
 
+    // Use for easier tests for mobile UI
+    private bool isMobile;
     
 	
 	public static Tetromino fallingTetromino = null ;
@@ -52,13 +53,16 @@ public class Tetromino : MonoBehaviour {
         moveDownTimer = Time.time;
         moveRightTimer = Time.time;
         moveLeftTimer = Time.time;
+
+        isMobile = true; // Remove Application.isMobilePlatform;
 		
         // Initialisation for scaling (not 1 if mobile)
         // Initialisation for spawnPosition
-        if (Application.isMobilePlatform)
+        if (isMobile)
         {
             // Place where a tetromino will spawn
-            spawnPosition = new Vector3(-3.31f + Grid._grid.xScale * 4f, 20f * Grid._grid.yScale, 0);
+            spawnPosition = new Vector3((-4.5f + 4f) * Grid._grid.xScale, 20f * Grid._grid.yScale + 0.19f, 0);
+            Debug.Log(spawnPosition);
         }
         else
         {
@@ -89,7 +93,7 @@ public class Tetromino : MonoBehaviour {
 		else if (foreSeenTetromino == null)
 		{
 			foreSeenTetromino = this;
-            if (Application.isMobilePlatform)
+            if (isMobile)
                 transform.localScale = new Vector3(0.8f, 0.8f, 1f);//foreSeenScaleMobile;
             else
                 transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
@@ -236,9 +240,9 @@ public class Tetromino : MonoBehaviour {
     // Function that converts position into grid position
     Vector2 convertPos(Vector2 pos)
     {
-        if (Application.isMobilePlatform)
+        if (isMobile)
         {
-            return (new Vector2((pos.x + 3.31f) / Grid._grid.xScale, pos.y / Grid._grid.yScale));
+            return (new Vector2((pos.x + 4.5f * Grid._grid.xScale) / Grid._grid.xScale, (pos.y - 0.19f) / Grid._grid.yScale));
         }
         else
             return pos;

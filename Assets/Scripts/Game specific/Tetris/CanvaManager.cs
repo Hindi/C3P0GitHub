@@ -9,9 +9,13 @@ public class CanvaManager : MonoBehaviour {
     [SerializeField]
     GameObject canvaMobile;
 
+    // Use for easier tests for mobile UI
+    private bool isMobile;
+
 	// Use this for initialization
 	void Start () {
-        if(Application.isMobilePlatform)
+        isMobile = true; // Remove Application.isMobilePlatform;
+        if(isMobile)
         {
             canvaPC.gameObject.SetActive(false);
             canvaMobile.gameObject.SetActive(true);
