@@ -134,7 +134,7 @@ public class PacMove : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){
 		if (collider.tag == "Enemy"){
-			Camera.main.SendMessage("MoveTo", collider.gameObject);
+			Camera.main.SendMessage("MoveTo", collider.gameObject, SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }
