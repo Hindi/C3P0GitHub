@@ -42,6 +42,29 @@ public class TetrisState : GameState {
         }
     }
 
+
+    public override void noticeInput(EnumInput key, Touch[] inputs)
+    {
+        if (loaded)
+        {
+            foreach (var t in inputs)
+            {
+                if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
+                {
+                    if (t.position.x > 2 * Screen.width / 3)
+                        Tetromino.fallingTetromino.moveRight();
+                    else if (t.position.x < Screen.width / 3)
+                        Tetromino.fallingTetromino.moveLeft();
+                    else if (t.position.y < Screen.height / 3)
+                        Tetromino.fallingTetromino.rotate();
+                    else
+                        Tetromino.fallingTetromino.moveDown();
+                }
+            }
+        }
+    }
+
+
     public override void noticeInput(EnumInput key)
     {
         
@@ -71,11 +94,6 @@ public class TetrisState : GameState {
             }
         }
         
-    }
-
-    public override void noticeInput(EnumInput key, Touch[] inputs)
-    {
-
     }
 
     // Use this for state transition
