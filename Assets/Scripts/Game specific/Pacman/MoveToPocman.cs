@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MoveToPocman : MonoBehaviour {
 	GameObject pocman;
-
 	PacMove pocMove;
 
+	public Randomizer rand;
 
 	Vector3 startingPosition;
 	Vector3 startingForward;
@@ -52,15 +52,19 @@ public class MoveToPocman : MonoBehaviour {
 			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
 				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.unscaledDeltaTime);
 			}
+			else {
+				rand.enabled = true;
+			}
 		}
 		else {
-
+			rand.enabled = false;
 			targetPosition = startingPosition;
 			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, startingForward, Time.unscaledDeltaTime));
 			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
+
 			if (keyPressed && Vector3.Distance(transform.position, startingPosition) < 0.5f){
 				Time.timeScale = 1;
-
+				keyPressed = false;
 			}
 		}	
 
