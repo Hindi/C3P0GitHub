@@ -41,11 +41,15 @@ public class PongState : GameState {
         gameScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         ui.setParamCanvas(gameId);
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.Landscape;
     }
 
     public override void end()
     {
         base.end();
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     public override void update()
@@ -78,7 +82,24 @@ public class PongState : GameState {
 
     public override void noticeInput(EnumInput key, Touch[] inputs)
     {
-
+        if (loaded)
+        {
+            foreach (var t in inputs)
+            {
+                if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
+                {
+                    if (t.position.x > Screen.width / 2)
+                    {
+                        if (t.position.y > Screen.height / 2)
+                            player.goUp();
+                        else
+                            player.goDown();
+                    }
+                    else
+                        gameScript.launchCoupSpecial();
+                }
+            }
+        }
     }
 
 }
