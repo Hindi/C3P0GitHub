@@ -54,20 +54,18 @@ public class TetrisState : GameState {
         {
             foreach (var t in inputs)
             {
-                if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
-                {
-                    if (t.phase == TouchPhase.Began && t.position.y > 2 * Screen.height / 3)
-                        Tetromino.fallingTetromino.rotate();
-                    else if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
-                    {
-                        if (t.position.y < Screen.height / 4)
-                            Tetromino.fallingTetromino.moveDown();
-                        else if (t.position.x > 2 * Screen.width / 3)
-                            Tetromino.fallingTetromino.moveRight();
-                        else if (t.position.x < Screen.width / 3)
-                            Tetromino.fallingTetromino.moveLeft();
-                    }
-                }
+				if (t.phase == TouchPhase.Began && t.position.y > 2 * Screen.height / 3)
+					Tetromino.fallingTetromino.rotate();
+				else if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
+				{
+					if (t.position.y < Screen.height / 4)
+						Tetromino.fallingTetromino.moveDown();
+					else if (t.position.x > 2 * Screen.width / 3)
+						Tetromino.fallingTetromino.moveRight();
+					else if (t.position.x < Screen.width / 3)
+						Tetromino.fallingTetromino.moveLeft();
+				}
+			
             }
         }
     }
