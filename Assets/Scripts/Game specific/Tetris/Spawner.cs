@@ -10,8 +10,6 @@ public class Spawner : MonoBehaviour {
 	// be spawned
 	public GameObject[] tetrominos;
 
-    [SerializeField]
-    Vector3 posMobile;
 
     [SerializeField]
     Vector3 posPC;
@@ -21,8 +19,18 @@ public class Spawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        isMobile = true;// Remove Application.isMobilePlatform;
+        isMobile = Application.isMobilePlatform;
 		spawnNext();
+
+        // Position differs if it's mobile or not
+        if (isMobile)//Application.isMobilePlatform
+        {
+            transform.position = new Vector3(-4.75f * Grid._grid.xScale, 21f * Grid._grid.yScale, 0);
+        }
+        else
+        {
+            transform.position = posPC;
+        }
 	}
 	
 	// Update is called once per frame
@@ -56,14 +64,5 @@ public class Spawner : MonoBehaviour {
 		}
 
 
-        // Position differs if it's mobile or not
-        if (isMobile)
-        {
-            transform.position = posMobile;
-        }
-        else
-        {
-            transform.position = posPC;
-        }
 	}
 }

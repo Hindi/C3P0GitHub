@@ -8,8 +8,6 @@ using UnityEngine.UI;
  * line and does it.                                                            *
  ********************************************************************************/
 public class Grid : MonoBehaviour {
-	
-    // TO DO remove singleton aspect no need for that
 
 	// Grid width and length
 	public int w ;
@@ -67,14 +65,13 @@ public class Grid : MonoBehaviour {
 		h = 25;
 
 
-        isMobile = true; // Remove Application.isMobilePlatform;
+        isMobile = Application.isMobilePlatform;
 
         if (isMobile)
         {
             float temp = ((float) Screen.width / (float) Screen.height);
-            Debug.Log(temp);
             xScale = 1.156f * temp / (2f / 3f);
-            yScale = 0.836f;
+            yScale = 0.88f;
             guiLevel = guiLevelMobile;
             guiScore = guiScoreMobile;
             guiLines = guiLinesMobile;

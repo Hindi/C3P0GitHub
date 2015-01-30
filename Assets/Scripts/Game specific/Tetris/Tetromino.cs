@@ -54,20 +54,19 @@ public class Tetromino : MonoBehaviour {
         moveRightTimer = Time.time;
         moveLeftTimer = Time.time;
 
-        isMobile = true; // Remove Application.isMobilePlatform;
+        isMobile = Application.isMobilePlatform;
 		
         // Initialisation for scaling (not 1 if mobile)
         // Initialisation for spawnPosition
         if (isMobile)
         {
             // Place where a tetromino will spawn
-            spawnPosition = new Vector3((-4.5f + 4f) * Grid._grid.xScale, 20f * Grid._grid.yScale + 0.19f, 0);
-            Debug.Log(spawnPosition);
+            spawnPosition = new Vector3((-4.5f + 4f) * Grid._grid.xScale, 19f * Grid._grid.yScale, 0);
         }
         else
         {
             // Place where a tetromino will spawn
-            spawnPosition = new Vector3(4f * Grid._grid.xScale, 20f * Grid._grid.yScale, 0);
+            spawnPosition = new Vector3(5f * Grid._grid.xScale, 19f * Grid._grid.yScale, 0);
         }
 
 
@@ -94,7 +93,7 @@ public class Tetromino : MonoBehaviour {
 		{
 			foreSeenTetromino = this;
             if (isMobile)
-                transform.localScale = new Vector3(0.8f, 0.8f, 1f);//foreSeenScaleMobile;
+                transform.localScale = new Vector3(0.4f * Grid._grid.xScale, 0.6f * Grid._grid.yScale, 1f);//foreSeenScaleMobile;
             else
                 transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
 		}
@@ -219,7 +218,7 @@ public class Tetromino : MonoBehaviour {
         Vector3 originPos = transform.position;
         while (!isValidGridPos() && nbTry < 3)
         {
-            transform.position += new Vector3(-1,0,0);
+            transform.position += new Vector3(-1 * Grid._grid.xScale,0,0);
             nbTry++;
         }
         if (nbTry < 3)
@@ -228,7 +227,7 @@ public class Tetromino : MonoBehaviour {
         transform.position = originPos;
         while(!isValidGridPos() && nbTry < 3)
         {
-            transform.position += new Vector3(1, 0, 0);
+            transform.position += new Vector3(1 * Grid._grid.xScale, 0, 0);
             nbTry++;
         }
         if (nbTry < 3)
@@ -242,7 +241,7 @@ public class Tetromino : MonoBehaviour {
     {
         if (isMobile)
         {
-            return (new Vector2((pos.x + 4.5f * Grid._grid.xScale) / Grid._grid.xScale, (pos.y - 0.19f) / Grid._grid.yScale));
+            return (new Vector2((pos.x + 4.5f * Grid._grid.xScale) / Grid._grid.xScale, (pos.y) / Grid._grid.yScale));
         }
         else
             return pos;
@@ -310,6 +309,7 @@ public class Tetromino : MonoBehaviour {
             }
 
             fallingTetromino = foreSeenTetromino;
+            fallingTetromino.timeSinceLastFall = Time.time;
             foreSeenTetromino = null;
 
             Spawner._spawner.spawnNext();
