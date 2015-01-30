@@ -34,7 +34,7 @@ class InitState : State {
             }
             else
             {
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Asteroids");
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
             }
         }
 	}
