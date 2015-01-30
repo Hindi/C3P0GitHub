@@ -9,6 +9,7 @@ public class TetrisState : GameState {
     {
         paramId = param.id;
         // Créer une caméra par effet, et on la met en main suivant le paramètre choisit
+        // To do toujours util ?  remove
         GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraManagerTetris>().setParamId(param.id);
     }
 
@@ -16,12 +17,16 @@ public class TetrisState : GameState {
     {
         gameId = EnumGame.TETRIS;
     }
+
+
     public override void onLevelWasLoaded(int lvl)
     {
         base.onLevelWasLoaded(lvl);
         ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
+        {
             Screen.orientation = ScreenOrientation.Portrait;
+        }
     }
 
     public override void onGameOver(bool b)

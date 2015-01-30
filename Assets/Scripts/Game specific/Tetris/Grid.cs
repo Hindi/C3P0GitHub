@@ -66,10 +66,24 @@ public class Grid : MonoBehaviour {
 
 
         isMobile = Application.isMobilePlatform;
+        
+        // Portrait mode can be loaded after this initialisation
+        // Thus we make sure that good resolution are taken into account
+        float wi, he;
+        if (Screen.width > Screen.height) 
+        {
+            wi = (float)Screen.height;
+            he = (float)Screen.width;
+        }
+        else 
+        {
+            wi = (float)Screen.width;
+            he = (float)Screen.height;
+        }
 
         if (isMobile)
         {
-            float temp = ((float) Screen.width / (float) Screen.height);
+            float temp = w/h;
             xScale = 1.156f * temp / (2f / 3f);
             yScale = 0.88f;
             guiLevel = guiLevelMobile;
