@@ -78,11 +78,11 @@ class SpaceInvaderState : GameState
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if (t.position.x > 2 * Screen.width / 3)
+                    if (t.position.x > 3 * Screen.width / 4)
                         playerScript_.move(1);
-                    else if (t.position.x < Screen.width / 3)
+                    else if (t.position.x < Screen.width / 4)
                         playerScript_.move(-1);
-                    else
+                    else if (!paused)
                         playerScript_.fire();
                 }
             }

@@ -9,8 +9,8 @@ using System.Collections;
 public class GameState : State
 {
 
-	private bool paused;
-	private float timeScale = Time.timeScale;
+    private float timeScale = Time.timeScale;
+    protected bool paused;
     protected bool loaded;
     protected UI ui;
     protected EnumGame gameId;
