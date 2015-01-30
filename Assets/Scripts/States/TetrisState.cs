@@ -20,6 +20,8 @@ public class TetrisState : GameState {
     {
         base.onLevelWasLoaded(lvl);
         ui.setParamCanvas(gameId);
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.Portrait;
     }
 
     public override void onGameOver(bool b)
@@ -75,4 +77,13 @@ public class TetrisState : GameState {
     {
 
     }
+
+    // Use this for state transition
+    public override void end()
+    {
+        base.end();
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.AutoRotation;
+    }
+
 }

@@ -9,7 +9,9 @@ public class CameraManagerTetris : MonoBehaviour {
 	void Start () {
 
         if (Application.isMobilePlatform)
+        {
             main.transform.position = new Vector3(0, 10f, -10);
+        }
         else
             main.transform.position = new Vector3(4.5f, 10f, -10);
         blur = main.GetComponent<Blur>() as Blur;
