@@ -114,10 +114,14 @@ public class QuestionManager {
             currentQuestionNb--;
     }
 
-    public void goToNextQuestion()
+    public bool goToNextQuestion()
     {
         if (currentQuestionNb < questionList.Count - 1)
+        {
             currentQuestionNb++;
+            return true;
+        }
+        return false;
     }
 
     public void loadXml(int id)
@@ -132,6 +136,11 @@ public class QuestionManager {
 
         currentQuestionNb = 0;
         xmlLoaded = true;
+    }
+
+    public void unloadXml()
+    {
+        questionList.Clear();
     }
 
     private void reset()
@@ -230,14 +239,27 @@ public class QuestionManager {
 
     void sendResults()
     {
-        bool b = false;
-        string explication = oldQuestions[oldQuestions.Count - 1].explication;
+        int i = 0;
+        int questionId = 0;
+        string explication = oldQuestions[(oldQuestions.Count - 1)].explication;
+
+        int[] answers = {0,0,0,0,0};
+
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
-            b = e.Value.lastQuestionResult();
-            C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, b);
+            i = e.Value.lastAnswer().question.bonneReponse;
+            C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, i);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
+            questionId = e.Value.lastAnswer().question.id;
+            
+            //Count for stats
+            if(e.Value.lastAnswer().answerTime == 999)
+                answers[0]++;
+            else
+                answers[e.Value.lastAnswer().rep]++;
         }
+
+        HtmlHelpers.createAnswerStatPage("Course " + courseId + " Question " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
     }
 
     void checkClientsAnswers()
@@ -249,7 +271,7 @@ public class QuestionManager {
                 AnswerKeeper a = new AnswerKeeper();
                 a.question = oldQuestions[oldQuestions.Count - 1];
                 a.rep = a.question.bonneReponse + 1;
-                a.answerTime = 40;
+                a.answerTime = 999;
                 a.result = false;
 
                 e.Value.addAnswer(a, courseId);

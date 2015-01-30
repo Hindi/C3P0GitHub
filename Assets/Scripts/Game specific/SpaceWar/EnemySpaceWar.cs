@@ -103,7 +103,6 @@ public class EnemySpaceWar : Spaceship {
             case 1:
             case 2:
                 {
-                    Debug.Log(IAState);
                     switch (IAState)
                     {
                         case SWIAState.MOVE_TOWARDS_PLAYER:
@@ -292,6 +291,11 @@ public class EnemySpaceWar : Spaceship {
     {
         bool self = dodgeSelfProjectile();
         bool player = dodgePlayerProjectile();
+        if (Time.time - stateTimer > stateChangeTimer)
+        {
+            stateTimer = Time.time;
+            IAState = SWIAState.MOVE_TOWARDS_PLAYER;
+        }
         return (self && player);
     }
 
@@ -299,7 +303,6 @@ public class EnemySpaceWar : Spaceship {
     {
         if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
         {
-            Debug.Log(projectile.activeInHierarchy);
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
             {
@@ -320,9 +323,8 @@ public class EnemySpaceWar : Spaceship {
     {
         if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
         {
-            Debug.Log(projectile.activeInHierarchy);
             float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
-            if (Angle >= 0)
+            if (Angle >= 0 || Angle <= -180)
             {
                 rotate(-1);
                 goForward();
@@ -344,12 +346,49 @@ public class EnemySpaceWar : Spaceship {
 
     private void moveTowardsPlayer()
     {
-
+        Debug.Log("Move towards player");
+        float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - player.transform.position.y, transform.position.x - player.transform.position.x) * Mathf.Rad2Deg + 90;
+        if (Angle >= 0 || Angle <= -180)
+        {
+            rotate(1);
+            goForward();
+        }
+        else
+        {
+            rotate(-1);
+            goForward();
+        }
+        if (distance(player) <= 3)
+        {
+            stateTimer = Time.time;
+            IAState = SWIAState.ATTACK_PLAYER;
+        }
     }
 
     private void attackPlayer()
     {
-
+        Debug.Log("Attack player");
+        Vector2 prediction = interpolation(60);
+        float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - prediction.y, transform.position.x - prediction.x) * Mathf.Rad2Deg + 90;
+        if (Angle >= 0 || Angle <= -180)
+        {
+            rotate(1);
+        }
+        else
+        {
+            rotate(-1);
+        }
+        if (Mathf.Abs(Angle) <= 1)
+        {
+            fire();
+            stateTimer = Time.time;
+            IAState = SWIAState.DODGE_ATTACKS;
+        }
+        if (Time.time - stateTimer > stateChangeTimer)
+        {
+            stateTimer = Time.time;
+            IAState = SWIAState.DODGE_ATTACKS;
+        }
     }
 
 }

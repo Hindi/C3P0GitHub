@@ -16,7 +16,7 @@ public class QuestionAnswerState : State
         : base(stateManager)
     {
         EventManager<QuestionManager.QuestionKeeper>.AddListener(EnumEvent.QUESTIONRCV, onQuestionRecieved);
-        EventManager<string, bool>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
+        EventManager<string, int>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
         EventManager<int>.AddListener(EnumEvent.ANSWERSELECT, onAnswerSelected);
     }
@@ -36,15 +36,14 @@ public class QuestionAnswerState : State
             EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
     }
 
-    public void onResultRecieved(string rep, bool result)
+    public void onResultRecieved(string rep, int resultId)
     {
-        ui.updateCurrentCanvas(scoreMenu);
+
     }
 
     public void onAnswerSelected(int id)
     {
         C3PONetworkManager.Instance.sendAnswer(id);
-        ui.updateCurrentCanvas(scoreMenu);
     }
 
     public void onQuestionRecieved(QuestionManager.QuestionKeeper keeper)

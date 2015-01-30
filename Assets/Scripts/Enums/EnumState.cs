@@ -13,8 +13,6 @@ using System.Text;
 public enum StateEnum
 {
     INIT,
-    MENU,
-    GAME,
     SPACEWAR,
     SPACEINVADER,
     PONG,

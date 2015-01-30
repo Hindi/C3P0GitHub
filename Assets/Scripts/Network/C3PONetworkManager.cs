@@ -41,6 +41,7 @@ public class C3PONetworkManager : MonoBehaviour {
 	public string login;
     public string password;
     private int currentCourseId;
+    private EnumGame currentGameEnum;
 	
 	
 
@@ -136,7 +137,15 @@ public class C3PONetworkManager : MonoBehaviour {
         }
     }
 
-    private void saveClientsStats()
+    public void saveClientsGameStats()
+    {
+        foreach (KeyValuePair<string, Client> e in clientsInfos)
+        {
+            e.Value.saveGameStats(currentGameEnum);
+        }
+    }
+
+    public void saveClientsStats()
     {
         foreach (KeyValuePair<string, Client> e in clientsInfos)
         {
@@ -146,6 +155,7 @@ public class C3PONetworkManager : MonoBehaviour {
 
     private void loadPlayersGameStats(EnumGame stateEnum)
     {
+        currentGameEnum = stateEnum;
         foreach (KeyValuePair<string, Client> e in clientsInfos)
             e.Value.loadGameStats((EnumGame)stateEnum);
     }
@@ -197,9 +207,9 @@ public class C3PONetworkManager : MonoBehaviour {
 		networkView.RPC("rcvAnswerRPCi", RPCMode.Server, privateID, rep);
 	}
 
-    public void sendResult(NetworkPlayer netPlayer, string rep, bool b)
+    public void sendResult(NetworkPlayer netPlayer, string rep, int i)
     {
-        networkView.RPC("rcvResult", netPlayer, rep, b);
+        networkView.RPC("rcvResult", netPlayer, rep, i);
     }
 
     public void loadLevel(string name)
@@ -348,9 +358,9 @@ public class C3PONetworkManager : MonoBehaviour {
 	}
 
     [RPC]
-    void rcvResult(string rep, bool b)
+    void rcvResult(string rep, int i)
     {
-        EventManager<string, bool>.Raise(EnumEvent.QUESTIONRESULT, rep, b);
+        EventManager<string, int>.Raise(EnumEvent.QUESTIONRESULT, rep, i);
     }
 
     [RPC]
