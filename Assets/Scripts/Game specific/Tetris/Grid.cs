@@ -83,7 +83,7 @@ public class Grid : MonoBehaviour {
 
         if (isMobile)
         {
-            float temp = w/h;
+            float temp = wi/he;
             xScale = 1.156f * temp / (2f / 3f);
             yScale = 0.88f;
             guiLevel = guiLevelMobile;
@@ -169,6 +169,7 @@ public class Grid : MonoBehaviour {
         initGrid();
         Destroy(Tetromino.foreSeenTetromino.gameObject);
         Destroy(Tetromino.fallingTetromino.gameObject);
+
         // We set them to null manually because destroy (probably) isn't call at the current frame
         Tetromino.fallingTetromino = null;
         Tetromino.foreSeenTetromino = null;
