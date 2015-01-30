@@ -22,7 +22,7 @@ public class BallMoving : MonoBehaviour {
     {
         transform.position = defaultPos;
         speed = defaultSpeed;
-        coupSpecial = false;
+        cancelCoupSpecial();
     }
 
 

@@ -76,19 +76,14 @@ class SpaceInvaderState : GameState
         {
             foreach (var t in inputs)
             {
-                if (t.phase == TouchPhase.Began)
+                if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
                     if (t.position.x > 2 * Screen.width / 3)
-                        playerScript_.setDirection(true);
+                        playerScript_.move(1);
                     else if (t.position.x < Screen.width / 3)
-                        playerScript_.setDirection(false);
+                        playerScript_.move(-1);
                     else
                         playerScript_.fire();
-                }
-                if (t.phase == TouchPhase.Ended)
-                {
-                    if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
-                        playerScript_.stop();
                 }
             }
         }
@@ -105,8 +100,6 @@ class SpaceInvaderState : GameState
                 playerScript_.move(-1);
             else if (key == EnumInput.RIGHT)
                 playerScript_.move(1);
-            if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
-                playerScript_.stop();
 		}
     }
 }

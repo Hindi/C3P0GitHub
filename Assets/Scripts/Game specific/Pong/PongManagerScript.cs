@@ -61,16 +61,15 @@ public class PongManagerScript : MonoBehaviour {
 
     public void onRestart()
     {
-        initTime = Time.time;
         lastUpdateTime = -1;
         colorSide = 0;
         animationEnded = true;
         frameTimer = 0;
         coupSpecialTimer = -1;
-        coupSpecialCharging = true;
-        ball.GetComponent<BallMoving>().onRestart();
+
+        reset();
+
         arrow.SetActive(false);
-        afficheCoupSpecial.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart();
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
         texts[0].GetComponent<GUIText>().text = 0.ToString();
@@ -135,19 +134,26 @@ public class PongManagerScript : MonoBehaviour {
         {
             EventManager<bool>.Raise(EnumEvent.GAMEOVER, false); // la partie est finie
         }
+        reset();
+    }
+
+    private void reset()
+    {
         initTime = Time.time;
         coupSpecialCharging = true;
         afficheCoupSpecial.SetActive(false);
         ball.GetComponent<BallMoving>().cancelCoupSpecial();
         animationEnded = true;
         ball.transform.position = new Vector3(0, 0, 0);
+        ball.GetComponent<SpriteRenderer>().sprite = origBall;
+        ball.renderer.material.color = Color.white;
+        coupSpecial = false;
+
         if (fireBall)
         {
             fireBall = false;
             ball.GetComponent<BallMoving>().setFireBall(false);
-            ball.GetComponent<SpriteRenderer>().sprite = origBall;
             ball.GetComponent<BallMoving>().speed = new Vector2((oldSpeed.x < 0) ? player * oldSpeed.x : player * -oldSpeed.x, oldSpeed.y);
-            ball.renderer.material.color = Color.white;
         }
     }
 

@@ -53,7 +53,9 @@ public class InputManager : MonoBehaviour {
         if (Application.isMobilePlatform)
         {
             if (Input.touches.Length > 0)
+            {
                 stateManager.noticeInput(EnumInput.TOUCH, Input.touches);
+            }
         }
 	}
 }
