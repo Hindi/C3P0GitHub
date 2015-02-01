@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>Class mostly used to debug onmobile phone. It prints things on screen.</summary>
 public class DebugMenu : MonoBehaviour {
 
     [SerializeField]

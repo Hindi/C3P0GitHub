@@ -1,27 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+/// <summary>This state is active when the player plays Space Invader.</summary>
 class SpaceInvaderState : GameState
 {
+    /// <summary>The gameObject of the player.</summary>
     [SerializeField]
     private GameObject player_;
+
+    /// <summary>The script of the player.</summary>
     private Player playerScript_;
 
+    /// <summary>The current parameter id.</summary>
     private int paramId;
 
+    /// <summary>Called when the lobby scene from Unity is loaded.</summary>
+    /// <param name="lvl">Id of the level loaded.</param>
+    /// <returns>void</returns>
     public SpaceInvaderState(StateManager stateManager)
         : base(stateManager)
     {
         gameId = EnumGame.SPACEINVADER;
     }
 
+    /// <summary>Called when the player restart the game.</summary>
+    /// <returns>void</returns>
     public override void onGameRestart()
     {
         if(loaded)
             playerScript_.onGameRestart();
     }
 
+    /// <summary>Called when the player lose or win.</summary>
+    /// <param name="b">True if the player won.</param>
+    /// <returns>void</returns>
     public override void onGameOver(bool b)
     {
         if (loaded)
@@ -31,12 +43,18 @@ class SpaceInvaderState : GameState
         }
     }
 
+    /// <summary>Defines which function will influence the size of the player.</summary>
+    /// <param name="param">The parameter the player chose.</param>
+    /// <returns>void</returns>
     public override void setParameter(Parameter param)
     {
         paramId = param.id;
         player_.GetComponent<Player>().setParamId(param.id);
     }
 
+    /// <summary>Called when the lobby scene from Unity is loaded.</summary>
+    /// <param name="lvl">Id of the level loaded.</param>
+    /// <returns>void</returns>
 	public override void onLevelWasLoaded(int lvl)
 	{
         base.onLevelWasLoaded(lvl);
@@ -49,14 +67,15 @@ class SpaceInvaderState : GameState
             Screen.orientation = ScreenOrientation.Landscape;
 	}
 
-    // Use this for initialization
+    /// <summary>Called on start.</summary>
+    /// <returns>void</returns>
     public override void start()
 	{
         base.start();
     }
 
-
-    // Use this for state transition
+    /// <summary>Called when leaving this state.</summary>
+    /// <returns>void</returns>
     public override void end()
     {
         base.end();
@@ -64,12 +83,16 @@ class SpaceInvaderState : GameState
             Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
-    // Update is called once per frame
+    /// <summary>Called each frame.</summary>
+    /// <returns>void</returns>
     public override void update()
     {
         base.update();
     }
 
+    /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
+    /// <param name="key">The input sent.</param>
+    /// <returns>void</returns>
     public override void noticeInput(EnumInput key, Touch[] inputs)
     {
         if (loaded)
@@ -89,6 +112,9 @@ class SpaceInvaderState : GameState
         }
     }
 
+    /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
+    /// <param name="key">The input sent.</param>
+    /// <returns>void</returns>
     public override void noticeInput(EnumInput key)
     {
        	if (loaded)
