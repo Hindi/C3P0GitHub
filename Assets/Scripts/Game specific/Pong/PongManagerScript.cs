@@ -142,11 +142,11 @@ public class PongManagerScript : MonoBehaviour {
         initTime = Time.time;
         coupSpecialCharging = true;
         afficheCoupSpecial.SetActive(false);
-        ball.GetComponent<BallMoving>().cancelCoupSpecial();
         animationEnded = true;
         ball.transform.position = new Vector3(0, 0, 0);
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
+        ball.GetComponent<BallMoving>().onRestart();
         coupSpecial = false;
 
         if (fireBall)

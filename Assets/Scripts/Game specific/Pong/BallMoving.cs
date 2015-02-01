@@ -21,7 +21,7 @@ public class BallMoving : MonoBehaviour {
     public void onRestart()
     {
         transform.position = defaultPos;
-        speed = defaultSpeed;
+        speed = new Vector2(defaultSpeed.x, defaultSpeed.y);
         cancelCoupSpecial();
     }
 
@@ -29,7 +29,7 @@ public class BallMoving : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         defaultPos = transform.position;
-        defaultSpeed = speed;
+        defaultSpeed = new Vector2(speed.x, speed.y);
         Laws.setUniformValues(new double[] { 45, -45 });
 	}
 	
@@ -51,6 +51,7 @@ public class BallMoving : MonoBehaviour {
                 transform.Rotate(new Vector3(0, 0, 2 * Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg));
             }
         }
+
         transform.Translate(new Vector3(speed.x * Time.deltaTime, speed.y * Time.deltaTime, 0), Space.World);
 	}
 
