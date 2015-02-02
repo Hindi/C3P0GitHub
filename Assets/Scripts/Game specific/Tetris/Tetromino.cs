@@ -1,42 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
 /*********************************************************************************** 
- * This class handles Tetrominos (foreseen, movements, inputs ...)                 *
+ * This class handles Tetrominos (foreseen, movements...)                          *
  ***********************************************************************************/
 
 
-
+/// <summary>
+/// Class that handles Tetrominos (scale, position, movements).
+/// </summary>
 public class Tetromino : MonoBehaviour {
-	// Time since last fall (gravity tick)
+    /// <summary>
+    /// Time since last fall.
+    /// </summary>
 	private float timeSinceLastFall;
 	
-	// Time between two "natural" falls of the tetromino
+    /// <summary>
+	/// Time between two "natural" falls of the tetromino.
+    /// </summary>
 	private float fallingSpeed;
 
-    // "Timers" not to move left, right, or down at every frames when we hold the key down
-    // A movement every movingRate frames
+    /// <summary>
+    /// "Timers" not to move left, right, or down at every frames when we hold the key down
+    /// A movement every movingRate frames.
+    /// </summary>
     private float moveRightTimer, moveLeftTimer, moveDownTimer, movingRate, movingDownRate;
 	
-	// Place where the tetromino will spawn on the board
+	/// <summary>
+    /// Place where the tetromino will spawn on the board (depends of the platform).
+	/// </summary>
 	private Vector3 spawnPosition;
 
-    // Use for easier tests for mobile UI
+    /// <summary>
+    /// Use for easier tests for mobile UI.
+    /// </summary>
     private bool isMobile;
     
-	
+	/// <summary>
+	/// Reference to the falling tetromino.
+	/// </summary>
 	public static Tetromino fallingTetromino = null ;
+
+    /// <summary>
+    /// Reference to the foreseen tetromino.
+    /// </summary>
 	public static Tetromino foreSeenTetromino = null ;
 
 
-    // Only the Tetromino O can't rotate 
+    /// <summary>
+    /// A boolean to prevent Tetromino O (square) to rotate.
+    /// </summary>
     [SerializeField]
     private bool canRotate;
 
 
 
 	// Use this for initialization
+    /// <summary>
+    /// Called when a Tetromino is created and initializes it (falling speed, movement rate, scale, ...).
+    /// </summary>
+    /// <returns>void</returns>
 	void Start () {		
-		// Timer to maje a tetromino falls
+		// Timer to make a tetromino falls also set on creation because the first one is never foreseen.
 		timeSinceLastFall = Time.time;
 		
         // Falling speed, increases with the lvl
@@ -100,10 +124,13 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    // Handles automatic drop and automatic delete when all the tetromino doesn't have any block
+    /// <summary>
+    /// Handles automatic drop and automatic delete when the tetromino doesn't have any child left.
+    /// </summary>
+    /// <returns>void</returns>
 	void Update () 
 	{
-        // Automatic move down handles here
+        // Automatic move down handled here
 		if (this == fallingTetromino)
         {
             if ((Time.time - timeSinceLastFall) >= fallingSpeed)
@@ -112,7 +139,7 @@ public class Tetromino : MonoBehaviour {
                 timeSinceLastFall = Time.time;
             }
 		}
-        // When a tetromino doesn't have a child anymore he is deleted
+        // When a tetromino doesn't have any child anymore he is deleted
         if (transform.childCount == 0)
             Destroy(this.gameObject);
           
@@ -123,6 +150,11 @@ public class Tetromino : MonoBehaviour {
 	/*******************************************************************************
 	 *                          Movement functions                                 *
 	 *******************************************************************************/
+    /// <summary>
+    /// Move the tetromino to the left if allowed.
+    /// Note : called only for the falling tetromino.
+    /// </summary>
+    /// <returns>void</returns>
 	public void moveLeft()
 	{
         // First we check if we can move left this frame
@@ -140,6 +172,11 @@ public class Tetromino : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Move the tetromino to the right if allowed.
+    /// Note : called only for the falling tetromino.
+    /// </summary>
+    /// <returns>void</returns>
     public void moveRight()
 	{
         // Check if we can move to the right this frame
@@ -160,6 +197,12 @@ public class Tetromino : MonoBehaviour {
 
 
     // goDown handles grid updates if the tetromino is set
+    /// <summary>
+    /// Move the tetromino down by one if allowed. If the movement can't be done. The tetromino is set
+    /// and the next one begins to fall (rows are deleted if necessary and grid is updated).
+    /// Note : called only for the falling tetromino.
+    /// </summary>
+    /// <returns>void</returns>
     public void goDown()
     {
 		// We move the tetromino to the bottom
@@ -178,6 +221,10 @@ public class Tetromino : MonoBehaviour {
 		}
 	}
 
+    /// <summary>
+    /// Called when the player activates the fast fall (pressing down arrow on computer for example)
+    /// </summary>
+    /// <returns>void</returns>
     public void moveDown()
     {
         // Check if we can move down this frame (thanks to input)
@@ -191,6 +238,11 @@ public class Tetromino : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Called when the player rotates the falling tetromino. Makes the falling tetromino rotates by 90°.
+    /// If the tetromino rotation should be invalid, try to move the tetromino to the left or the right to rotate.
+    /// </summary>
+    /// <returns>void</returns>
     public void rotate()
 	{
         if (canRotate)
@@ -210,8 +262,12 @@ public class Tetromino : MonoBehaviour {
         }
 	}
 	
-    // When a rotation is impossible we try to move the tetromino to the left/right to do the rotation
-    // We only try it for a translation by 2 on the left, then to the right
+
+    /// <summary>
+    /// Called when a rotation is not immediatly possible we try to move the tetromino to the left/right to do the rotation
+    /// We only try it for a translation by 3 on the left, then to the right
+    /// </summary>
+    /// <returns>void</returns>
     bool tryTranslate()
     {
         int nbTry=0;
@@ -236,7 +292,12 @@ public class Tetromino : MonoBehaviour {
         return false;
     }
 
-    // Function that converts position into grid position
+
+    /// <summary>
+    /// Function that converts position into grid position
+    /// </summary>
+    /// <param name="pos">The position we want to convert</param>
+    /// <returns>Vector2 the position in the grid (colomn, rows)</returns>
     Vector2 convertPos(Vector2 pos)
     {
         if (isMobile)
@@ -247,9 +308,15 @@ public class Tetromino : MonoBehaviour {
             return pos;
     }
 
-
-	// Function that checks if the position of all the child blocks of a tetromino 
-	// is correct
+    /// <summary>
+    /// Function that checks if the position of all the child blocks of a tetromino 
+	/// is correct (doesn't collide with a block in the grid, or doesn't go out of the boarders)
+    /// </summary>
+    /// <returns>
+    /// boolean
+    /// True if it is correct
+    /// False otherwise.
+    /// </returns>
 	bool isValidGridPos()
 	{
 		foreach(Transform child in transform)
@@ -270,9 +337,13 @@ public class Tetromino : MonoBehaviour {
 		return true;
 	}
 	
-	// Grid is updated only when a tetromino sets down
-	// Updates grid and deletes complete rows
-	// updates falling and foreseen tetrominos
+
+    /// <summary>
+	/// Called when a tetromino is set down
+	/// Updates grid and deletes complete rows
+	/// Updates falling and foreseen tetrominos
+    /// </summary>
+    /// <returns>void</returns>
 	void updateGrid()
 	{
 		// yMax stocks the highest child position of the tetromino that has just fallen
@@ -291,7 +362,11 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 
-    // 
+    /// <summary>
+    /// Called when a tetromino is set down and do the transition (foreseen tetromino becomes the fallingtetromino).
+    /// It also handles resize (foreseen tetromino scale is different from the tetrominos' scale of the board.
+    /// </summary>
+    /// <returns>void</returns>
 	void nextFalling()
 	{
         if (foreSeenTetromino != null)
@@ -318,7 +393,10 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 
-
+    /// <summary>
+    /// Called when the player has lost.
+    /// </summary>
+    /// <returns>void</returns>
     void gameOver()
     {
         EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
