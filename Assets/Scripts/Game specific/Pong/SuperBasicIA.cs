@@ -15,15 +15,16 @@ public class SuperBasicIA : MonoBehaviour {
     private float initTimer;
     private PongManagerScript pms;
 
-    public void onRestart()
+    public void onRestart(float resizeWidth, float resizeHeight)
     {
-        transform.position = defaultPos;
+        transform.position = new Vector3(defaultPos.x * resizeWidth, defaultPos.y * resizeHeight, 0);
         coupSpecial = false;
     }
 
     // Use this for initialization
     void Start()
     {
+        pms = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
         defaultPos = transform.position;
     }
 	
@@ -46,7 +47,7 @@ public class SuperBasicIA : MonoBehaviour {
         }
         if (Time.time - initTimer > timer && coupSpecial)
         {
-            pms.launchCoupSpecial();
+            pms.launchCoupSpecial(1);
             coupSpecial = false;
         }
 	}
