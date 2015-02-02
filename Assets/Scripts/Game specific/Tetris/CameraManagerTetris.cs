@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class is meant to handle camera effects for the game tetris.
+/// Reminds that the effect is chosen at the beginning of a party by the player.
+/// </summary>
 public class CameraManagerTetris : MonoBehaviour {
-    
-
 
 	// Use this for initialization
+    /// <summary>
+    /// Called when a CameraManagerTetris element is instantiate (when the scene is loading).
+    /// We use it for initialisation. Ensures camera positions (different for mobile or pc)
+    /// Shortcuts to access camera effect are created.
+    /// </summary>
+    /// <returns>void</returns>
 	void Start () {
 
         if (Application.isMobilePlatform)
@@ -24,15 +32,28 @@ public class CameraManagerTetris : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// Shortcut for activation/desactivation of a camera effect.
+    /// </summary>
     private Blur blur;
+
+    /// <summary>
+    /// Shortcut for activation/desactivation of a camera effect.
+    /// </summary>
     private NoiseEffect noise;
 
-
-    // We reference the main camera so we can access to its components more easely
+    /// <summary>
+    /// We reference the main camera so we can access to its components more easely
+    /// </summary>
     [SerializeField]
     Camera main;
 
 
+    /// <summary>
+    /// Enable the right camera effect
+    /// </summary>
+    /// <param name="id">Id of the camera effect to enable</param>
+    /// <returns>void</returns>
     public void setParamId(int id)
     {
         switch (id)

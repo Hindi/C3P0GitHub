@@ -7,6 +7,10 @@ using UnityEngine.UI;
  * Grid is meant to save the block's position. It checks if we have to delete a *
  * line and does it.                                                            *
  ********************************************************************************/
+
+/// <summary>
+/// Grid is meant to save and update almost all the data of the tetris game (score, lines, the block's position...). 
+/// </summary>
 public class Grid : MonoBehaviour {
 
 	// Grid width and length
