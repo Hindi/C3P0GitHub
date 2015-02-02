@@ -22,12 +22,17 @@ using System.Threading;
  *
  * This class is built against the singleton model
  **/
+/// <summary>
+/// C3PONetwork is a class facilitating network communication for the C3PO project.
+/// Only basic networking is managed here.
+///  This class is built against the singleton model</summary>
 public class C3PONetwork : MonoBehaviour {
 
 	/**************************************************************************************
 	 * Attributes                                                                         *
 	 **************************************************************************************/
-	// instance, should be unique
+
+    /// <summary>C3PO is a singleton;</summary>
 	private static C3PONetwork instance = null;
 	public static C3PONetwork Instance
 	{
@@ -44,37 +49,45 @@ public class C3PONetwork : MonoBehaviour {
 		}
 	}
 
-    /**
-     * 
-     **/
+
+    /// <summary>Set to true or false in Unity before compiling.</summary>
     [SerializeField]
     public bool IS_SERVER;
 
-	// The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer)
+    // <summary>The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer.</summary>
 	private string masterHostname = null;
-	// allows to keep the user input until it's complete
-	private string userTextStream = "ici";
-	// Can be used to know if the server connected to is the teacher or not.
+
+    // <summary>Can be used to know if the server connected to is the teacher or not.</summary>
 	public bool isConnectedToTeacher = false;
-	// masterPort is the port number on which the MasterServer is set.
+
+    // <summary>MasterPort is the port number on which the MasterServer is set.</summary>
 	[SerializeField]
 	private int masterPort = 23466;
-	// gamePort number is the port on which the game server is set.
+
+    // <summary>GamePort number is the port on which the game server is set.</summary>
 	[SerializeField]
 	private int gamePort = 25000;
-	// Server lists received from MasterServer for both Teacher Server and match making
+    
+    // <summary>Server lists received from MasterServer for both Teacher Server and match making.</summary>
 	private HostData[] hostList = null;
 
+    // <summary>Object that does the detection of the game server.</summary>
     ConnectionManager ipReceiver;
 
-    int remotePort = 19784;
-
+    // <summary>Inner class made for the detection of the server.</summary>
     public class ConnectionManager
     {
+        // <summary>Object that broadcasts the ip.</summary>
         public Sender ipSender;
+
+        // <summary>The udp socket.</summary>
         private UdpClient udp;
+
+        // <summary>True if it's the server.</summary>
         private bool isServer;
 
+        // <summary>Constructor.</summary>
+        /// <param name="server">True if it's the server.</param>
         public ConnectionManager(bool server)
         {
             isServer = server;
@@ -82,6 +95,7 @@ public class C3PONetwork : MonoBehaviour {
             ipSender = new Sender(udp);
         }
 
+        // <summary>CStore the server ip as a string.</summary>
         private string serverIp = "";
         public string ServerIp
         {
@@ -89,6 +103,7 @@ public class C3PONetwork : MonoBehaviour {
             set { serverIp = value; }
         }
 
+        // <summary>True if the ip has been recieved.</summary>
         private bool received = false;
         public bool Received
         {
@@ -96,10 +111,13 @@ public class C3PONetwork : MonoBehaviour {
             set { received = value; }
         }
 
+        // <summary>Starts the coroutine that listen for udp broadcast.</summary>
         public void StartListening()
         {
             this.udp.BeginReceive(Receive, new object());
         }
+
+        // <summary>The function used by the coroutine to recieve the server's ip.</summary>
         private void Receive(IAsyncResult ar)
         {
             try
@@ -107,10 +125,7 @@ public class C3PONetwork : MonoBehaviour {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Any, 15000);
                 byte[] bytes = udp.EndReceive(ar, ref ip);
                 string message = Encoding.ASCII.GetString(bytes);
-                if (isServer)
-                {
-                }
-                else
+                if (!isServer)
                 {
                     if (message.Split(' ')[0] == "C3PO")
                     {
@@ -128,8 +143,10 @@ public class C3PONetwork : MonoBehaviour {
         }
     }
 
+    // <summary>Inner class that boradcast the server's ip on the local network.</summary>
     public class Sender
     {
+        // <summary>Stores the server IP as a string.</summary>
         private string serverIp;
         public string ServerIp
         {
@@ -137,9 +154,14 @@ public class C3PONetwork : MonoBehaviour {
             set { serverIp = value; }
         }
 
+        // <summary>The udp socket.</summary>
         UdpClient udp;
+
+        // <summary>Stores the server IP as an IP object.</summary>
         IPEndPoint ip;
 
+        // <summary>Constructor.</summary>
+        /// <param name="udp">Udp socket used to broadcast on local network.</param>
         public Sender(UdpClient udp)
         {
             this.udp = udp;
@@ -147,6 +169,7 @@ public class C3PONetwork : MonoBehaviour {
             ip = new IPEndPoint(IPAddress.Broadcast, 15000);
         }
 
+        // <summary>Finds and returns the local ipAdress.</summary>
         private string localIPAddress()
         {
             IPHostEntry host;
@@ -163,16 +186,13 @@ public class C3PONetwork : MonoBehaviour {
             return localIP;
         }
 
-        public void sendIpRequest()
-        {
-            broadCastSomething("request ip");
-        }
-
+        // <summary>Broadcast the server's ip.</summary>
         public void sendIp(string ip)
         {
             broadCastSomething("C3PO " + ip);
         }
 
+        // <summary>Broadcast a string on the network.</summary>
         public void broadCastSomething(string s)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(s);
@@ -184,10 +204,9 @@ public class C3PONetwork : MonoBehaviour {
 	 * Public functions                                                                   *
 	 **************************************************************************************/
 	
-	/**
-	 * Function to be called on the teacher version of the C3PO program.
-	 * Launches a Unity MasterServer locally, and creates the main game server
-	 **/
+    /// <summary>Function to be called on the teacher version of the C3PO program.
+    /// Launch and initialize the  master server and register the server.</summary>
+    /// <returns>void</returns>
 	public void createTeacherServer()
 	{
 		/* Launch MasterServer */
@@ -201,28 +220,14 @@ public class C3PONetwork : MonoBehaviour {
 		MasterServer.RegisterHost("C3PO", "TeacherServer");
 	}
 
-	/**
-	 * Connects to the MasterServer to find the teacher's game server and connects to it.
-	 * If this.masterHostname is null, calls findMasterHostname to initialize it
-	 **/
+    /// <summary>Connects to the MasterServer to find the teacher's game server and connects to it.</summary>
+    /// <param name="ip">The ip of the server.</param>
+    /// <returns>void</returns>
 	public void connectTeacherServer(string ip)
 	{		
 		MasterServer.port = masterPort;
 		MasterServer.ipAddress = ip;
 		MasterServer.RequestHostList("C3PO");
-	}
-	
-	/**
-	 * Joins a multi-player server (p2p).
-	 * If none exist, creates one or asks the teacher server to create one (depending on platform)
-	 */
-	public void joinMultiPlayerGame()
-	{
-		if(isConnectedToTeacher)
-		{
-			// disconnect
-		}
-		// connect to someone else
 	}
 	
 	/**************************************************************************************
@@ -233,7 +238,9 @@ public class C3PONetwork : MonoBehaviour {
 	 * Unity Default Delegates                                                            *
 	 **************************************************************************************/
 
-	// Awake is used to make sure there's only one
+    /// <summary>Awake is used to make sure there's only one.</summary>
+    /// <param name="ip">The ip of the server.</param>
+    /// <returns>void</returns>
 	void Awake()
 	{
 		if(instance != null)
@@ -247,17 +254,24 @@ public class C3PONetwork : MonoBehaviour {
 		}
 	}
 
+    /// <summary>Called when the client recieves the server's ip and stores it.</summary>
+    /// <param name="ip">The ip of the server.</param>
+    /// <returns>void</returns>
     void onServerIpRecieved(string ip)
     {
         ipReceiver.ServerIp = ip;
     }
 
+    /// <summary>Uses the ipSender to broadcast the local ip address.</summary>
+    /// <returns>void</returns>
     void sendIp()
     {
         ipReceiver.ipSender.sendIp(getMyIp());
     }
-	
-	// Use this for initialization
+
+
+    /// <summary>This is where we differenciate server and client. The first broadcast the ip and the other tries to catch it.</summary>
+    /// <returns>void</returns>
     void Start()
     {
         if(IS_SERVER)
@@ -273,51 +287,46 @@ public class C3PONetwork : MonoBehaviour {
         }
 	}
 
+    /// <summary>Get the ip address of the machine.</summary>
+    /// <returns>string : the ip address</returns>
     public string getMyIp()
     {
         return ipReceiver.ipSender.ServerIp;
     }
 
+    /// <summary>Get the ip address of the server.</summary>
+    /// <returns>void</returns>
     public string getServerIp()
     {
         return ipReceiver.ServerIp;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		//Debug.Log(masterHostname);
-	}
-	
-	/**
-	 * Confirms that the server was successfully created.
-	 **/
-	void OnServerInitialized()
-	{
 
-	}
-
+    /// <summary>Called when connected to server, tries to login.</summary>
+    /// <returns>void</returns>
     void OnConnectedToServer()
     {
         EventManager.Raise(EnumEvent.CONNECTIONTOUNITY);
         C3PONetworkManager.Instance.tryTologIn();
     }
 
+    /// <summary>Called when the client is disconnected from the server. Broadcast the info with events.</summary>
+    /// <param name="info">Unity object that contains the disconnection info.</param>
+    /// <returns>void</returns>
     void OnDisconnectedFromServer(NetworkDisconnection info)
     {
         EventManager.Raise(EnumEvent.DISCONNECTFROMUNITY);
     }
 	
-	/**
-	 * If the IP/Hostname is not correct or the Network is down (doom)
-	 **/
+    /// <summary>If the IP/Hostname is not correct or the Network is down notice the client.</summary>
+    /// <returns>void</returns>
 	void OnFailedToConnectToMasterServer()
 	{
         C3PONetworkManager.Instance.onFailedAuth("Cannot find the server.");
 	}
 	
-	/**
-	 * Receives the host lists for both match making and teacher server
-	 **/
+    /// <summary>Called when the master server sends the host list. Connects to the server that name is "C3PO"</summary>
+    /// <param name="msEvent">Unity object that contains the list of the servers connected to the master server.</param>
+    /// <returns>void</returns>
 	void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
 		if (msEvent == MasterServerEvent.HostListReceived)
@@ -325,7 +334,6 @@ public class C3PONetwork : MonoBehaviour {
             hostList = MasterServer.PollHostList();
 			if(hostList.Length > 0 && hostList[0].gameType == "C3PO")
 			{
-                //Network.Connect(hostList[0]);
                 Network.Connect(hostList[0]);
                 isConnectedToTeacher = true;
 			}
