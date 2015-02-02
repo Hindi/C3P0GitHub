@@ -4,49 +4,58 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
+/// <summary>Class that contains client's credentials for xml serialization</summary>
 [XmlType("Credential")]
 public class Credential
 {
+    /// <summary>Default constructor.</summary>
     public Credential()
     { 
     }
 
+    /// <summary>Default constructor.</summary>
     public Credential(string log, string pas)
     {
         login = log;
         pass = pas;
     }
 
+    /// <summary>The login.</summary>
     [XmlAttribute]
     public string login;
+
+    /// <summary>The password.</summary>
     [XmlAttribute]
     public string pass;
 }
 
+/// <summary>Class that contains the clients credentials when they connect.</summary>
 public class PlayerCredential
 {
-
+    /// <summary>Contains the necessary informations for XML serialization.</summary>
     private TextAsset credentialFile;
-    private float lastCheckTime;
 
-    //Contains login and hashed pass
+    /// <summary>The Dictionnary that contains the credentials.</summary>
     private Dictionary<string, string> loginInfos;
-    private bool modified = false;
 
+    /// <summary>Default constructor.</summary>
     public PlayerCredential()
     {
         credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
-
-        lastCheckTime = Time.time;
     }
 
+    /// <summary>Reset the password so that the client will be able to set another one on the next sign in.</summary>
+    /// <param name="login">The login of the client</param>
+    /// <returns>void</returns>
     public void resetPassword(string login)
     {
         if (loginInfos.ContainsKey(login))
             loginInfos[login] = "";
     }
 
+    /// <summary>Reset the password of all the clients.</summary>
+    /// <returns>void</returns>
     public void resetPassword()
     {
         var keys = new List<string>(loginInfos.Keys);
@@ -54,6 +63,12 @@ public class PlayerCredential
             loginInfos[k] = "";
     }
 
+    /// <summary>Called when someone tris to sign in. The function checks for the login and password.
+    /// and assign a new password if no one is assigned.</summary>
+    /// <param name="name">The login delivered by the client.</param>
+    /// <param name="pass">The password delivered by the client.</param>
+    /// <param name="pass">The NetworkPlayer object that identifies the client.</param>
+    /// <returns>Bool : True if login and password are correct.</returns>
     public bool checkAuth(string name, string pass, NetworkPlayer player)
     {
         if (name.Length > 0 && loginInfos.ContainsKey(name))
@@ -83,17 +98,4 @@ public class PlayerCredential
             return true;
         }
     }
-
-    public void update()
-    {
-        if(modified)
-        {
-            if (Time.time - lastCheckTime > 120)
-            {
-                modified = false;
-            }
-        }
-
-    }
-
 }

@@ -5,22 +5,22 @@ using System.Collections.Generic;
 /**
  * Classe qui gère le chargement de niveau via le réseau.
  * A tester une fois le réseau fonctionnel.
- */ 
+ */
 
+/// <summary>Class that load unity scenes.</summary>
 public class LevelLoader : MonoBehaviour {
 
+    /// <summary>The list of the objects that needs to stay alive on scene change.</summary>
     [SerializeField]
     private GameObject[] keepAliveList;
 
+    /// <summary>A reference to the stateManager.</summary>
     [SerializeField]
     private StateManager stateManager;
 
-    private int lastLevelPrefix;
-    private bool levelLoaded = false;
 
-	// Use this for initialization
+    /// <summary>Monobehaviour Start function.</summary>
 	void Start () {
-	    lastLevelPrefix = 0;
         for (int i = 0; i < keepAliveList.Length; ++i )
             DontDestroyOnLoad(keepAliveList[i]);
 
@@ -28,6 +28,8 @@ public class LevelLoader : MonoBehaviour {
         EventManager.Raise(EnumEvent.LOADEND);
 	}
 
+    /// <summary>Callback called when the LOADLEVEL event is triggered.</summary>
+    /// <param name="levelName">The name of the level.</param>
     public void onLevelLoad(string levelName)
     {
         loadLevel(levelName);
@@ -38,50 +40,20 @@ public class LevelLoader : MonoBehaviour {
 	
 	}
 
+    /// <summary>Starts the coroutine that loads a scene. Also notify the StateManager to load the corresponding state.</summary>
+    /// <param name="levelName">The name of the level.</param>
     public void loadLevel(string levelName)
     {
         StartCoroutine(loadLevelCoroutine(levelName));
         stateManager.changeState(IdConverter.levelToState(levelName));
     }
 
-    private void OnLevelWasLoaded(int iLevel)
-    {
-        levelLoaded = true;
-    }
-
+    /// <summary>Coroutine that loads a Unity scene.</summary>
+    /// <param name="levelName">The name of the level.</param>
     private IEnumerator loadLevelCoroutine(string levelName)
     {
         Application.LoadLevel(levelName);
 		while(Application.isLoadingLevel)
 			yield return 1;
-    }
-
-    private IEnumerator cloadLevel(string levelName, int levelPrefix)
-    {
-            lastLevelPrefix = levelPrefix;
-            
-            // There is no reason to send any more data over the network on the default channel,
-            // because we are about to load the level, thus all those objects will get deleted anyway
-            Network.SetSendingEnabled(0, false);
-            
-            // We need to stop receiving because the level must be loaded first.
-            // Once the level is loaded, rpc's and other state update attached to objects in the level are allowed to fire
-            Network.isMessageQueueRunning = false;
-            
-            // All network views loaded from a level will get a prefix into their NetworkViewID.
-            // This will prevent old updates from clients leaking into a newly created scene.
-            Network.SetLevelPrefix(levelPrefix);
-            Application.LoadLevel(levelName);
-            
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForEndOfFrame();
-            
-            // Allow receiving data again
-            Network.isMessageQueueRunning = true;
-            // Now the level has been loaded and we can start sending out data to clients
-            Network.SetSendingEnabled(0, true);
-            
-            
-            EventManager.Raise(EnumEvent.LOADLEVEL);
     }
 }

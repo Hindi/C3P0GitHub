@@ -13,6 +13,11 @@ public class ParamMenu : MonoBehaviour {
     [SerializeField]
     private GameObject explanationObj;
 
+    [SerializeField]
+    private GameObject mobileInput;
+    [SerializeField]
+    private GameObject pcInput;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -40,5 +45,17 @@ public class ParamMenu : MonoBehaviour {
     public void onCloseExplanationClick()
     {
         explanationObj.SetActive(false);
+    }
+
+    public void onKeyInfoClick(bool b)
+    {
+        if (Application.isMobilePlatform)
+        {
+            mobileInput.SetActive(b);
+        }
+        else
+        {
+            pcInput.SetActive(b);
+        }
     }
 }

@@ -3,16 +3,29 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
+
+/// <summary>Class that create html pages to display stats.</summary>
 public class HtmlHelpers {
 
+    /// <summary>Generic html header.</summary>
     static string head = @"<!DOCTYPE html>
             <html>
                 <head>
                     <title>Answers</title>
                     <link rel='stylesheet' href='mystyle.css'>
                 </head>";
+
+    /// <summary>Generic html footer.</summary>
     static string foot = @"</html>";
 
+    /// <summary>Creates the page that display the statistics of the clients answers to a question.</summary>
+    /// <param name="filename">The name of the file we want to create</param>
+    /// <param name="a1">The amount of answers for response 1</param>
+    /// <param name="a2">The amount of answers for response 2</param>
+    /// <param name="a3">The amount of answers for response 3</param>
+    /// <param name="a4">The amount of answers for response 4</param>
+    /// <param name="abs">The amount of people that didn't answer</param>
+    /// <returns>void</returns>
     public static void createAnswerStatPage(string filename, float a1, float a2, float a3, float a4, float abs)
     {
         const int pixH = 165;
@@ -51,6 +64,10 @@ public class HtmlHelpers {
         writeFile(path, page);
     }
 
+    /// <summary>Actualy writes the file. If another file of the smae name exists, deletes it.</summary>
+    /// <param name="path">The full path (filename included) of the file.</param>
+    /// <param name="content">The content to put in that file</param>
+    /// <returns>void</returns>
     private static void writeFile(string path, string content)
     {
         if (File.Exists(path))

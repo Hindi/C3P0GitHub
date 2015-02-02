@@ -5,9 +5,9 @@ public delegate void Callback();
 public delegate void Callback<T>(T arg1);
 public delegate void Callback<T, U>(T arg1, U arg2);
 
-/**
- * An EventManager for events that have no parameters.
- */
+/// <summary>
+///  An EventManager for events that have no parameters.
+/// </summary>
 static public class EventManager
 {
     private static Dictionary<EnumEvent, Delegate> eventTable = new Dictionary<EnumEvent, Delegate>();
@@ -66,10 +66,9 @@ static public class EventManager
     }
 }
 
-
-/**
- * An EventManager for events that have one parameter of type T.
- */
+/// <summary>
+/// An EventManager for events that have one parameter of type T.
+/// </summary>
 static public class EventManager<T>
 {
     private static Dictionary<EnumEvent, Delegate> eventTable = new Dictionary<EnumEvent, Delegate>();
@@ -128,10 +127,9 @@ static public class EventManager<T>
     }
 }
 
-
-/**
- * An EventManager for events that have two parameters of types T and U.
- */
+/// <summary>
+/// An EventManager for events that have one parameter of type T and U.
+/// </summary>
 static public class EventManager<T, U>
 {
     private static Dictionary<EnumEvent, Delegate> eventTable = new Dictionary<EnumEvent, Delegate>();

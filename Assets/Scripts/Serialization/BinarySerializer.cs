@@ -5,8 +5,14 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
+
+/// <summary>Class use to serialize data in binary format.</summary>
 public class BinarySerializer {
 
+
+    /// <summary>Serialize the datas contained in the GameList object.</summary>
+    /// <param name="data">The GameList object</param>
+    /// <returns>void</returns>
     public static void SerializeData(GameList data)
     {
         FileStream fs = new FileStream("Assets/Resources/data.dat", FileMode.Create);
@@ -28,6 +34,9 @@ public class BinarySerializer {
         }
     }
 
+
+    /// <summary>Deserialize the datas contained in data.dat.</summary>
+    /// <returns>GameList:  the datas in data.dat</returns>
     public static GameList DeserializeData()
     {
         // Open the file containing the data that you want to deserialize.

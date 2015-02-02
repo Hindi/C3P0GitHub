@@ -2,41 +2,56 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>The menu displayed when the client connects to the server.</summary>
 public class ConnectionMenu : MonoBehaviour {
 
-    [SerializeField]
-    private C3PONetwork network;
-    private C3PONetworkManager networkManager;
-
+    /// <summary>The canvas containing the ui for the connection (ip, login, pass).</summary>
     [SerializeField]
     private Canvas connectionPrompt;
+    /// <summary>The canvas containing the first ui seen by the client.</summary>
     [SerializeField]
     private Canvas connectionWelcome;
+    /// <summary>The canvas containing the game list seen in local mode.</summary>
     [SerializeField]
     private Canvas singleGameSelect;
 
+    /// <summary>Reference to the UI class.</summary>
     [SerializeField]
     private UI ui;
 
+    /// <summary>The input where the client writes the ip.</summary>
     [SerializeField]
     private InputField ipLabel;
+
+    /// <summary>The input where the client writes the login.</summary>
     [SerializeField]
     private InputField loginLabel;
     public string LoginLabel
     {
         get { return UI.cleanString(loginLabel.text); }
     }
+
+    /// <summary>The input where the client writes the password.</summary>
     [SerializeField]
     private InputField passwordLabel;
+
+    /// <summary>Text object that notify the client if there is an error.</summary>
     [SerializeField]
     private Text connectionAnswerLabel;
 
+    /// <summary>True if the client is connected on unity.</summary>
     private bool unityConnected;
+
+    /// <summary>True if the client is authenticated.</summary>
     private bool authed;
+
+    /// <summary>True if the server was found automatically.</summary>
     private bool serverFound;
+
+    /// <summary>True if the client is on the connectionPrompt canvas.</summary>
     private bool onForm;
 
-	// Use this for initialization
+    /// <summary>Called on start. Initialises the variables</summary>
     void Start()
     {
         ipLabel.Select();
@@ -44,8 +59,6 @@ public class ConnectionMenu : MonoBehaviour {
         serverFound = false;
         unityConnected = false;
         authed = false;
-        network = C3PONetwork.Instance;
-        networkManager = C3PONetworkManager.Instance;
         EventManager.AddListener(EnumEvent.AUTHSUCCEEDED, onSucceededAuth);
         EventManager<string>.AddListener(EnumEvent.AUTHFAILED, onFailedAuth);
         EventManager<string>.AddListener(EnumEvent.SERVERIPRECEIVED, onServerIpRecieved);
@@ -53,6 +66,9 @@ public class ConnectionMenu : MonoBehaviour {
         EventManager.AddListener(EnumEvent.DISCONNECTFROMUNITY, onDisconnectedFromUnity);
 	}
 
+    /// <summary>Called if the server is recieved via udp.</summary>
+    /// <param name="ip">The ip broadcasted by the server.</param>
+    /// <returns>void</returns>
     void onServerIpRecieved(string ip)
     {
         ipLabel.text = ip;
@@ -60,40 +76,56 @@ public class ConnectionMenu : MonoBehaviour {
             switchUiSelect();
     }
 
+    /// <summary>Called if the authentication succeeded.</summary>
+    /// <returns>void</returns>
     void onSucceededAuth()
     {
         authed = true;
     }
 
+    /// <summary>Switched the focus between the input fields.</summary>
+    /// <returns>void</returns>
     public void switchUiSelect()
     {
         if (ipLabel.isFocused)
+        {
             loginLabel.Select();
+        }
         else if (loginLabel.isFocused)
+        {
             passwordLabel.Select();
+        }
         else
             ipLabel.Select();
     }
 
+    /// <summary>Called if the authentication failed.</summary>
+    /// <param name="reason">The reason why it failed.</param>
+    /// <returns>void</returns>
     void onFailedAuth(string reason)
     {
         connectionAnswerLabel.text = reason;
         loginLabel.text = "";
         passwordLabel.text = "";
     }
-    
+
+    /// <summary>Called when the client is connected to the server (not authenticated yet).</summary>
+    /// <returns>void</returns>
     void onConnectedToUnity()
     {
         unityConnected = true;
     }
 
+    /// <summary>Called when the client is disconnected from the server.</summary>
+    /// <returns>void</returns>
     void onDisconnectedFromUnity()
     {
         unityConnected = false;
         authed = false;
     }
-	
-	// Update is called once per frame
+
+    /// <summary>Called each frame. Check the inputs and update the ip field input.</summary>
+    /// <returns>void</returns>
     void Update()
     {
         if (ipLabel.IsActive() && !serverFound && C3PONetwork.Instance.getServerIp() != "")
@@ -114,18 +146,24 @@ public class ConnectionMenu : MonoBehaviour {
         }
 	}
 
+    /// <summary>Called when the client clicks on the "Connection" button of the Welcome menu (!= connecitonStart).</summary>
+    /// <returns>void</returns>
     public void onConnectionClick()
     {
         onForm = true;
         ui.updateCurrentCanvas(connectionPrompt);
     }
 
+    /// <summary>Called when the client click on the "Back" button.</summary>
+    /// <returns>void</returns>
     public void onConnectionQuitClick()
     {
         ui.updateCurrentCanvas(connectionWelcome);
         onForm = false;
     }
 
+    /// <summary>Called when the client tries to conenct to the server.</summary>
+    /// <returns>void</returns>
     private void connect()
     {
         if (ipLabel.text == "")
@@ -146,12 +184,14 @@ public class ConnectionMenu : MonoBehaviour {
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
             if (!unityConnected)
-                networkManager.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
+                C3PONetworkManager.Instance.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
             else if (!authed)
-                networkManager.tryTologIn(LoginLabel, passwordLabel.text);
+                C3PONetworkManager.Instance.tryTologIn(LoginLabel, passwordLabel.text);
         }
     }
 
+    /// <summary>Called when the client clicks on the "Connection" button from the connection prompt.</summary>
+    /// <returns>void</returns>
     public void onConnectionStartClick()
     {
         connectionAnswerLabel.text = "";
@@ -166,12 +206,16 @@ public class ConnectionMenu : MonoBehaviour {
         }
     }
 
+    /// <summary>Called when the client clicks on the "Single" button.</summary>
+    /// <returns>void</returns>
     public void onSingleClick()
     {
         ui.updateCurrentCanvas(singleGameSelect);
         onForm = false;
     }
 
+    /// <summary>Called when the client clicks on the "Exit" button.</summary>
+    /// <returns>void</returns>
     public void onExitGameClick()
     {
         Application.Quit();

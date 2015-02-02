@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
-/**
- * All of the possible states must be listed here in order to be used.
- * 
- */
-
-
+/// <summary>
+///  All of the possible states must be listed here in order to be used.
+/// </summary>
 public enum StateEnum
 {
     INIT,

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// If we add more fonctionnality to the parameters, we'll probably needthis too.
+/// </summary>
 public class ParameterManager : MonoBehaviour {
 
     [SerializeField]

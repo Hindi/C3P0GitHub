@@ -3,18 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
+/// <summary>
+/// Manages all of the questions and answers.
+/// </summary>
 public class QuestionManager {
 
     /**************************************************************************************
      * Public Nested Classes & Enums                                                      *
      **************************************************************************************/
+
+
+    /// <summary>
+    /// Innher class that represents the question. It contains all of its datas.
+    /// </summary>
     [XmlType("QuestionKeeper")]
     public class QuestionKeeper
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public QuestionKeeper()
         {
             reponses = new List<string>();
         }
+
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
         public QuestionKeeper(QuestionKeeper q)
         {
             id = q.id;
@@ -25,27 +40,49 @@ public class QuestionManager {
             foreach (string s in q.reponses)
                 reponses.Add(s);
         }
+        /// <summary>
+        /// The id of the question, also its position in the list for the current course.
+        /// </summary>
         public int id;
+
+        /// <summary>The string that'll be displayed client side.</summary>
         public string question;
+
+
+        /// <summary>The possible responses.</summary>
         [XmlArrayItem("r")]
         public List<string> reponses;
+
+        /// <summary>The correct answer.</summary>
         public int bonneReponse;
+
+        /// <summary>The explanation.</summary>
         public string explication;
     }
 
+    /// <summary>TThis class represents an answer sent by a client.</summary>
     [XmlType("AnswerKeeper")]
     public class AnswerKeeper
     {
+        /// <summary>The question related to this answer.</summary>
         [XmlIgnore]
         public QuestionKeeper question;
+
+        /// <summary>The id of the response the client sent.</summary>
         public int rep;
+
+        /// <summary>The response of the client is either true or false.</summary>
         public bool result;
+
+        /// <summary>The time it took for the client to answer (999 if he didn't answer in time).</summary>
         public float answerTime;
     }
 
 	/**************************************************************************************
 	 * Public Attributes                                                                  *
 	 **************************************************************************************/
+    /// <summary>This class is a singleton, get its instance with this function.</summary>
+    /// <returns>The instance of QuestionManager.</returns>
     public static QuestionManager Instance
 	{
 		get {
@@ -67,24 +104,36 @@ public class QuestionManager {
     /**************************************************************************************
 	 * Private Attributes                                                                 *
 	 **************************************************************************************/
+    /// <summary>The instance is stored here.</summary>
     private static QuestionManager instance = null;
 
-    // dictionnaire contenant toutes les réponses à toutes les questions de tout le monde
+    /// <summary>The previously asked question.</summary>
     private List<QuestionKeeper> oldQuestions = null;
+
+    /// <summary>If a question is sent, we wait for the answers.</summary>
     private bool waitForAnswers = false;
+
+    /// <summary>The time we're waiting for answers.</summary>
     private float questionSendTime;
+
+    /// <summary>The list of all the question to be asked, loaded from XML.</summary>
     private List<QuestionManager.QuestionKeeper> questionList;
+
+    /// <summary>The current course.</summary>
     private int courseId;
+
+    /// <summary>The id of the current question.</summary>
     private int currentQuestionNb = 0;
+
+    /// <summary>True if the question were loaded.</summary>
     private bool xmlLoaded = false;
 
     /**************************************************************************************
 	 * Public functions                                                                   *
 	 **************************************************************************************/
 
-    /**
-     * Functions used to send a question to students
-     **/
+    /// <summary>This function sends the question to the clients.</summary>
+    /// <returns>void</returns>
     public void sendQuestion()
     {
         if (!waitForAnswers)
@@ -98,22 +147,30 @@ public class QuestionManager {
         }
     }
 
+    /// <summary>This function checks if the time allowed for the quesiton is over.</summary>
+    /// <returns>bool : True if the time passed.</returns>
     public bool isQuestionTimeOver()
     {
         return (xmlLoaded && currentQuestionNb == questionList.Count);
     }
 
+    /// <summary>This function access the question string displayed on clients.</summary>
+    /// <returns>string</returns>
     public string getQuestionTxt()
     {
         return questionList[currentQuestionNb].question;
     }
 
+    /// <summary>This function sets the previous question as current.</summary>
+    /// <returns>void</returns>
     public void goToPreviousQuestion()
     {
         if (currentQuestionNb > 0)
             currentQuestionNb--;
     }
 
+    /// <summary>This function sets the next question as current.</summary>
+    /// <returns>Bool :false if the current qestion is the last of the list.</returns>
     public bool goToNextQuestion()
     {
         if (currentQuestionNb < questionList.Count - 1)
@@ -124,6 +181,9 @@ public class QuestionManager {
         return false;
     }
 
+    /// <summary>Load the questions for the current course from the xml file and add them to the questionList.</summary>
+    /// <param name="id">The id of the current course</param>
+    /// <returns>void</returns>
     public void loadXml(int id)
     {
         courseId = id;
@@ -138,16 +198,25 @@ public class QuestionManager {
         xmlLoaded = true;
     }
 
+    /// <summary>Clears the question list.</summary>
+    /// <returns>void</returns>
     public void unloadXml()
     {
         questionList.Clear();
     }
 
+    /// <summary>Clears the question buffer.</summary>
+    /// <returns>void</returns>
     private void reset()
     {
         questionBuffer.reponses.Clear();
     }
 
+    /// <summary>Triggers the event that displays the question menu on the client.</summary>
+    /// <param name="squestion">The string displayed, the actual question.</param>
+    /// <param name="rep1">A possible response.</param>
+    /// <param name="rep2">A possible response.</param>
+    /// <returns>void</returns>
     public void rcvQuestion(string squestion, string rep1, string rep2)
     {
         reset();
@@ -158,6 +227,12 @@ public class QuestionManager {
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
+    /// <summary>Triggers the event that displays the question menu on the client.</summary>
+    /// <param name="squestion">The string displayed, the actual question.</param>
+    /// <param name="rep1">A possible response.</param>
+    /// <param name="rep2">A possible response.</param>
+    /// <param name="rep3">A possible response.</param>
+    /// <returns>void</returns>
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3)
     {
         reset();
@@ -169,6 +244,13 @@ public class QuestionManager {
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
+    /// <summary>Triggers the event that displays the question menu on the client.</summary>
+    /// <param name="squestion">The string displayed, the actual question.</param>
+    /// <param name="rep1">A possible response.</param>
+    /// <param name="rep2">A possible response.</param>
+    /// <param name="rep3">A possible response.</param>
+    /// <param name="rep4">A possible response.</param>
+    /// <returns>void</returns>
     public void rcvQuestion(string squestion, string rep1, string rep2, string rep3, string rep4)
     {
         reset();
@@ -181,19 +263,10 @@ public class QuestionManager {
         EventManager<QuestionKeeper>.Raise(EnumEvent.QUESTIONRCV, questionBuffer);
     }
 
-    /*public void rcvAnswer(string login, string rep)
-    {
-        AnswerKeeper a = new AnswerKeeper();
-        a.question = oldQuestions[oldQuestions.Count - 1];
-        a.stringRep = rep;
-
-        addPlayerAnswer(login, a);
-
-        bool b = (a.question.reponses[a.question.bonneReponse] == rep);
-
-        C3PONetworkManager.Instance.sendResult(a.question.explication, b);
-    }*/
-
+    /// <summary>Called when a client send an answer.</summary>
+    /// <param name="c">The client that sent the answer.</param>
+    /// <param name="rep">The id of the response.</param>
+    /// <returns>void</returns>
     public void rcvAnswer(ref Client c, int rep)
     {
         AnswerKeeper a = new AnswerKeeper();
@@ -205,14 +278,9 @@ public class QuestionManager {
         c.addAnswer(a, courseId);
     }
 
-    /**
-     * Functions used to send an answer to the teacher
-     **/
-    /*public void sendAnswer(string rep)
-    {
-        C3PONetworkManager.Instance.sendAnswer(rep);
-    }*/
-
+    /// <summary>Called by the client to send an answer to the server.</summary>
+    /// <param name="rep">The id of the response.</param>
+    /// <returns>void</returns>
     public void sendAnswer(int rep)
     {
         C3PONetworkManager.Instance.sendAnswer(rep);
@@ -221,6 +289,7 @@ public class QuestionManager {
     /**************************************************************************************
 	 * Public Constructor                                                                 *
 	 **************************************************************************************/
+    /// <summary>Public constructor.</summary>
     public QuestionManager()
     {
         if(instance != null)
@@ -237,6 +306,8 @@ public class QuestionManager {
         }
     }
 
+    /// <summary>Called by the server to send the result to the client.</summary>
+    /// <returns>void</returns>
     void sendResults()
     {
         int i = 0;
@@ -262,6 +333,8 @@ public class QuestionManager {
         HtmlHelpers.createAnswerStatPage("Course " + courseId + " Question " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
     }
 
+    /// <summary>Check the answers of the clients for the last question.</summary>
+    /// <returns>void</returns>
     void checkClientsAnswers()
     {
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
@@ -281,6 +354,8 @@ public class QuestionManager {
         }
     }
 
+    /// <summary>Called each frame, as soon as the quesiton time is over, check the answers ans send the results.</summary>
+    /// <returns>void</returns>
     public void update()
     {
         if(waitForAnswers)

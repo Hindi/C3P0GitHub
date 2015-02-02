@@ -6,8 +6,14 @@ using System.Xml.Serialization;
 
 using UnityEngine;
 
+
+/// <summary>Serialize and deserialize the datas from and to xml.</summary>
 public class XmlHelpers
 {
+    /// <summary>Use a textAsset to load datas.</summary>
+    /// <param name="textAsset">The textAsset</param>
+    /// <param name="root">The root node in the xml. Default is "Datatable"</param>
+    /// <returns>List<typeparam name="T"></typeparam></returns>
     public static List<T> LoadFromTextAsset<T>(TextAsset textAsset, string root = "Datatable")
     {
         if (textAsset == null)
@@ -48,6 +54,10 @@ public class XmlHelpers
         return null;
     }
 
+    /// <summary>Save datas contained on the serializabe object in an xml file.</summary>
+    /// <param name="path">The path (including the name) of the xml file.</param>
+    /// <param name="objectToSerialize">The object to be saved.</param>
+    /// <returns>void</returns>
     public static void SaveToXML<T>(string path, T objectToSerialize) where T : class
     {
         if (string.IsNullOrEmpty(path))
@@ -62,6 +72,9 @@ public class XmlHelpers
         }
     }
 
+    /// <summary>Load the credential file.</summary>
+    /// <param name="asset">The textAsset where the credential file is.</param>
+    /// <returns>A dictionnary containing the credentials.</returns>
     public static Dictionary<string, string> loadCredentials(TextAsset asset)
     {
         Dictionary<string, string> d = new Dictionary<string, string>();
@@ -73,6 +86,10 @@ public class XmlHelpers
         return d;
     }
 
+    /// <summary>Save the credential in a file.</summary>
+    /// <param name="path">The path (including the name) of the xml file.</param>
+    /// <param name="dict">The dictionnary containing the credentials.</param>
+    /// <returns>void</returns>
     public static void saveCredentials(string path, Dictionary<string, string> dict)
     {
         List<Credential> list = new List<Credential>();

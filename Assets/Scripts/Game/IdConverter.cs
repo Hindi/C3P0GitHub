@@ -5,6 +5,9 @@ using System.Text;
 
 static class IdConverter
 {
+    /// <summary>
+    /// Converts a StateEnum into an EnumGame.
+    /// </summary>
     public static EnumGame stateToGame(StateEnum state)
     {
         switch(state)
@@ -34,6 +37,9 @@ static class IdConverter
         }
     }
 
+    /// <summary>
+    /// Converts a level name into an EnumGame.
+    /// </summary>
     public static EnumGame levelToGame(string lvlname)
     {
         return stateToGame(levelToState(lvlname));
@@ -68,6 +74,9 @@ static class IdConverter
         }
     }
 
+    /// <summary>
+    /// Converts a level name into a StateEnum.
+    /// </summary>
     public static StateEnum levelToState(string lvlName)
     {
         switch(lvlName)

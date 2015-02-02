@@ -7,6 +7,7 @@ using System.Collections;
  * 
  */
 
+/// <summary>Class that check for the inputs and notify the StateManager that relay the info to the current state.</summary>
 public class InputManager : MonoBehaviour {
 
     private StateManager stateManager;
@@ -15,8 +16,10 @@ public class InputManager : MonoBehaviour {
 	void Start () {
         stateManager = GameObject.FindGameObjectWithTag("StateManager").GetComponent<StateManager>();
 	}
-	
-	// Update is called once per frame
+
+
+    /// <summary>Called every frame to check the inputs.</summary>
+    /// <returns>void</returns>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
