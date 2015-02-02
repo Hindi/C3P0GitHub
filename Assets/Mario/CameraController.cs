@@ -16,9 +16,11 @@ public class CameraController : MonoBehaviour {
     private Vector3 startPosition;
     private float dezoomSpeed;
 
+    private bool turned;
 	// Use this for initialization
     void Start()
     {
+        turned = false;
         orthographicFollow();
         Screen.SetResolution(1920, 1200, true);
         playerScript = player.GetComponent<PlayerBehaviour>();
@@ -33,13 +35,31 @@ public class CameraController : MonoBehaviour {
         {
             transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            turnRight();
+            if (!turned)
+            {
+                turnLeft();
+                turned = true;
+            }
+            else
+            {
+                turnRight();
+                turned = false;
+            }
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            turnLeft();
+            if (!turned)
+            {
+                turnRight();
+                turned = true;
+            }
+            else
+            {
+                turnLeft();
+                turned = false;
+            }
         }
         if (Input.GetKeyDown("p"))
         {

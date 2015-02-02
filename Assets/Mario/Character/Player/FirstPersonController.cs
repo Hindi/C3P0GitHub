@@ -66,12 +66,12 @@ public class FirstPersonController : MonoBehaviour
 
         sliding = false;
 
-        if (Input.GetKey("right"))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             moveRight();
             moving = true;
         }
-        if(Input.GetKey("left"))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             moveLeft();
             moving = true;
