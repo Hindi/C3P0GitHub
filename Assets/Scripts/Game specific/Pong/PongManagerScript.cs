@@ -146,7 +146,6 @@ public class PongManagerScript : MonoBehaviour {
         ball.transform.position = new Vector3(0, 0, 0);
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
-        ball.GetComponent<BallMoving>().onRestart();
         coupSpecial = false;
 
         if (fireBall)
@@ -187,16 +186,13 @@ public class PongManagerScript : MonoBehaviour {
 
     public void launchCoupSpecial()
     {
-        if (player == -1)
-        {
-            coupSpecial = false;
-            fireBall = true;
-            ball.GetComponent<BallMoving>().setFireBall(true);
-            ball.transform.Rotate(0, 0, currentAngles.z);
-            ball.GetComponent<SpriteRenderer>().sprite = specialBall;
-            ball.GetComponent<BallMoving>().speed = new Vector2(specialSpeed * -1 * (float)Math.Sin((double)currentAngles.z * Math.PI / 180), specialSpeed * (float)Math.Cos((double)currentAngles.z * Math.PI / 180));
-            arrow.SetActive(false);
-        }
+        coupSpecial = false;
+        fireBall = true;
+        ball.GetComponent<BallMoving>().setFireBall(true);
+        ball.transform.Rotate(0, 0, currentAngles.z);
+        ball.GetComponent<SpriteRenderer>().sprite = specialBall;
+        ball.GetComponent<BallMoving>().speed = new Vector2(specialSpeed * -1 * (float)Math.Sin((double)currentAngles.z * Math.PI / 180), specialSpeed * (float)Math.Cos((double)currentAngles.z * Math.PI / 180));
+        arrow.SetActive(false);
     }
 
     private void checkCoupSpecial()
