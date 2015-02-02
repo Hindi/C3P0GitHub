@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BallMoving : MonoBehaviour {
 
-    [SerializeField]
     private float upScreen, downScreen;
     [SerializeField]
     public Vector2 speed;
@@ -24,6 +23,12 @@ public class BallMoving : MonoBehaviour {
         transform.position = defaultPos;
         speed = new Vector2(defaultSpeed.x, defaultSpeed.y);
         cancelCoupSpecial();
+    }
+
+    public void setScreenSize(float uScreen, float dScreen)
+    {
+        upScreen = uScreen;
+        downScreen = dScreen;
     }
 
 

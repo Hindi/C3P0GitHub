@@ -10,12 +10,18 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private Text[] texts;
     [SerializeField]
+    private GameObject[] limits;
+    [SerializeField]
     private GameObject arrow;
     [SerializeField]
     private GameObject playerPaddle, enemyPaddle;
     [SerializeField]
     private Sprite origBall, specialBall;
 
+    [SerializeField]
+    private float upScreen, downScreen;
+
+    [NonSerialized]
     public float resizeHeight, resizeWidth;
 
     [SerializeField]
@@ -83,6 +89,7 @@ public class PongManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         initTime = Time.time;
+        ball.GetComponent<BallMoving>().setScreenSize(upScreen, downScreen);
 	}
 	
 	// Update is called once per frame
@@ -149,6 +156,7 @@ public class PongManagerScript : MonoBehaviour {
         ball.transform.position = new Vector3(0, 0, 0);
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
+        ball.GetComponent<BallMoving>().cancelCoupSpecial();
         coupSpecial = false;
 
         if (fireBall)
@@ -263,6 +271,7 @@ public class PongManagerScript : MonoBehaviour {
     {
         resizeWidth = Screen.width / 1024f;
         resizeHeight = Screen.height / 768f;
-        Debug.Log(resizeWidth + "x" + resizeHeight);
+        limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
+        limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
     }
 }
