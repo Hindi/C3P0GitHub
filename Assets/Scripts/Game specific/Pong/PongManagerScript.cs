@@ -16,6 +16,8 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private Sprite origBall, specialBall;
 
+    public float resizeHeight, resizeWidth;
+
     [SerializeField]
     private int timerSeconde;
     private float initTime;
@@ -71,8 +73,8 @@ public class PongManagerScript : MonoBehaviour {
         reset(-1);
 
         arrow.SetActive(false);
-        playerPaddle.GetComponent<PlayerControl>().onRestart();
-        enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
+        playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
+        enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
 
@@ -90,11 +92,11 @@ public class PongManagerScript : MonoBehaviour {
             return;
         }
         lastUpdateTime = Time.time;
-	    if(ball.transform.position.x < -7)
+	    if(ball.transform.position.x < -7 * resizeWidth)
         {
             onScore(1);
         }
-        else if (ball.transform.position.x > 7)
+        else if (ball.transform.position.x > 7 * resizeWidth)
         {
             onScore(-1);
         }
@@ -185,8 +187,10 @@ public class PongManagerScript : MonoBehaviour {
         animationEnded = false;
     }
 
-    public void launchCoupSpecial()
+    public void launchCoupSpecial(int p)
     {
+        if (!coupSpecial || p != player)
+            return;
         coupSpecial = false;
         fireBall = true;
         ball.GetComponent<BallMoving>().setFireBall(true);
@@ -257,6 +261,8 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-
+        resizeWidth = Screen.width / 1024f;
+        resizeHeight = Screen.height / 768f;
+        Debug.Log(resizeWidth + "x" + resizeHeight);
     }
 }
