@@ -118,7 +118,7 @@ public class PongManagerScript : MonoBehaviour {
             }
         }
         checkCoupSpecial();
-        afficheCoupSpecial.transform.position = new Vector3(colorSide, afficheCoupSpecial.transform.position.y, 0);
+        afficheCoupSpecial.transform.position = new Vector3(colorSide * resizeWidth, afficheCoupSpecial.transform.position.y * resizeHeight, 0);
 
         if (coupSpecial)
         {
@@ -215,6 +215,8 @@ public class PongManagerScript : MonoBehaviour {
             return;
         }
         frameTimer++;
+        /*
+         * Cette section a été commentée parce que l'indicateur changeait trop souvent de côté pour que ce soit visible
         if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 0 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 10 / 100)
         {
             changeColorSide();
@@ -226,7 +228,8 @@ public class PongManagerScript : MonoBehaviour {
                 changeColorSide();
             }
         }
-        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 30 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 50 / 100)
+         * */
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 0 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 50 / 100)
         {
             if (frameTimer % 4 == 0)
             {
