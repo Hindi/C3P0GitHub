@@ -53,7 +53,7 @@ public abstract class GameState : State
     /// <param name="b">True if paused</param>
     /// <returns>void</returns>
 	public void onGamePaused(bool b)
-	{
+    {
 		paused = b;
 		applyPause ();
 	}
@@ -67,7 +67,7 @@ public abstract class GameState : State
     /// <param name="b">True if paused.</param>
     /// <returns>void</returns>
 	public virtual void pauseGame(bool b)
-	{
+    {
 		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, paused);
 	}
 
@@ -101,7 +101,6 @@ public abstract class GameState : State
 	{
 		if (paused)
         {
-            timeScale = Time.timeScale;
             Time.timeScale = 0;
         }
 		else
