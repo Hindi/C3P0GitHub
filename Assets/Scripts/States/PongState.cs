@@ -43,6 +43,7 @@ public class PongState : GameState {
         ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
+        gameScript.updateElementsResolution();
     }
 
     public override void end()

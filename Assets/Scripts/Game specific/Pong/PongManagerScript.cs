@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PongManagerScript : MonoBehaviour {
 
     [SerializeField]
     private GameObject ball;
     [SerializeField]
-    private GameObject[] texts;
+    private Text[] texts;
     [SerializeField]
     private GameObject arrow;
     [SerializeField]
@@ -46,7 +47,7 @@ public class PongManagerScript : MonoBehaviour {
     {
         get
         {
-            return int.Parse(texts[1].GetComponent<GUIText>().text);
+            return int.Parse(texts[1].text);
         }
         private set { }
     }
@@ -54,7 +55,7 @@ public class PongManagerScript : MonoBehaviour {
     {
         get
         {
-            return int.Parse(texts[0].GetComponent<GUIText>().text);
+            return int.Parse(texts[0].text);
         }
         private set {}
     }
@@ -67,13 +68,13 @@ public class PongManagerScript : MonoBehaviour {
         frameTimer = 0;
         coupSpecialTimer = -1;
 
-        reset();
+        reset(-1);
 
         arrow.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart();
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
-        texts[0].GetComponent<GUIText>().text = 0.ToString();
-        texts[1].GetComponent<GUIText>().text = 0.ToString();
+        texts[0].text = 0.ToString();
+        texts[1].text = 0.ToString();
 
     }
 
@@ -129,15 +130,15 @@ public class PongManagerScript : MonoBehaviour {
 
     private void onScore(int player)
     {
-        texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text = (int.Parse(texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text) + 1).ToString();
-        if (int.Parse(texts[((player == 1) ? 0 : 1)].GetComponent<GUIText>().text) >= 10)
+        texts[((player == 1) ? 0 : 1)].text = (int.Parse( texts[((player == 1) ? 0 : 1)].text ) + 1).ToString();
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].text ) >= 10)
         {
             EventManager<bool>.Raise(EnumEvent.GAMEOVER, false); // la partie est finie
         }
-        reset();
+        reset(player);
     }
 
-    private void reset()
+    private void reset(int player)
     {
         initTime = Time.time;
         coupSpecialCharging = true;
@@ -252,5 +253,10 @@ public class PongManagerScript : MonoBehaviour {
     private void changeColorSide()
     {
         colorSide = (colorSide == -1) ? 1 : -1;
+    }
+
+    public void updateElementsResolution()
+    {
+
     }
 }

@@ -72,23 +72,30 @@ public class BallMoving : MonoBehaviour {
         {
             speed.x *= -1;
             float norm = Mathf.Sqrt(speed.x * speed.x + speed.y * speed.y);
-            float Angle = 0; /* Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg; */
-            
-            if (managerScript.param.id == 0)
+            float Angle = 0;
+            if (transform.position.x < 0) // côté joueur
             {
-                Angle += (float) Laws.uniforme();
+                Angle = Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg;
             }
-            else if (managerScript.param.id == 1)
+            else
             {
-                Angle += (float) Laws.gauss(0, 30);
-            }
-            else if (managerScript.param.id == 2)
-            {
-                Angle += (float) Laws.gauss(0, 60);
-            }
+                if (managerScript.param.id == 0)
+                {
+                    Angle += (float)Laws.uniforme();
+                }
+                else if (managerScript.param.id == 1)
+                {
+                    Angle += (float)Laws.gauss(0, 30);
+                }
+                else if (managerScript.param.id == 2)
+                {
+                    Angle += (float)Laws.gauss(0, 60);
+                }
 
-            speed.x = Mathf.Cos(Angle * Mathf.Deg2Rad) * norm * ((transform.position.x > 0) ? -1 : 1);
-            speed.y = Mathf.Sin(Angle * Mathf.Deg2Rad) * norm;
+                speed.x = Mathf.Cos(Angle * Mathf.Deg2Rad) * norm * ((transform.position.x > 0) ? -1 : 1);
+                speed.y = Mathf.Sin(Angle * Mathf.Deg2Rad) * norm;
+
+            }
 
             if (fireBall)
             {
