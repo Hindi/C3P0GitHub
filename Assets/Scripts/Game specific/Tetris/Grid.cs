@@ -10,54 +10,115 @@ using UnityEngine.UI;
 public class Grid : MonoBehaviour {
 
 	// Grid width and length
+
+    /// <summary>
+    /// The number of coloms of the tetris board grid.
+    /// </summary>
 	public int w ;
+
+    /// <summary>
+    /// The number of rows of the tetris board grid.
+    /// </summary>
 	public int h ;
 	
-    // Level that defines the falling speed
+    /// <summary>
+    /// Level of the game that defines the falling speed and points multiplicator.
+    /// </summary>
     public int level;
 
-    // Number of lines done
+    /// <summary>
+    /// Number of lines done this party.
+    /// </summary>
     public int nbLines;
 
-    // Score
+
+    /// <summary>
+    /// Total score of the player this party.
+    /// </summary>
     public int score;
+
+    /// <summary>
+    /// Save the bonus score obtained when we fast fall a tetromino.
+    /// </summary>
     public int fastFallScore;
 
-    // Display
+    // Display fields
+
+    /// <summary>
+    /// The Text that displays score for PC (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiScorePC;
 
+
+
+    /// <summary>
+    /// The Text that displays the number of lines done for PC (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiLinesPC;
 
+
+    /// <summary>
+    /// The Text that displays the level for PC (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiLevelPC;
 
+
+    /// <summary>
+    /// The Text that displays score for mobile platforms (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiScoreMobile;
 
+    /// <summary>
+    /// The Text that displays the number of lines done for mobile platforms (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiLinesMobile;
 
+    /// <summary>
+    /// The Text that displays the level for mobile platforms (emplacement depends of the platform)
+    /// </summary>
     [SerializeField]
     private Text guiLevelMobile;
 
-
+    /// <summary>
+    /// Those Text are used during update and refers wether to a Text for PC or mobile of the same name.
+    /// </summary>
     private Text guiLevel, guiLines, guiScore;
 
     // Use for easier tests for mobile UI
+    /// <summary>
+    /// Used for easier tests on mobile platforms
+    /// </summary>
     private bool isMobile;
 
     // Display scaling
+    /// <summary>
+    /// Floats that represent the resizing ratio for the current resolution.
+    /// </summary>
     public float xScale, yScale;
 
-	// The grid that stocks all blocks positions.
+	
+    /// <summary>
+    /// The grid that stocks all blocks positions.
+    /// </summary>
 	public Transform[,] grid;
 
     // The _grid is a singleton
+    /// <summary>
+    /// _grid is used to make a singleton.
+    /// </summary>
     public static Grid _grid;
 
 	// Use this for initialization
+    /// <summary>
+    /// Called when a Grid element is instantiate.
+    /// We use it for initialisation.
+    /// </summary>
+    /// <returns>void</returns>
 	void Start () 
 	{			
 		// Grid width and length
@@ -106,6 +167,10 @@ public class Grid : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Called to initialise score, the number of lines done and the level.
+    /// </summary>
+    /// <returns>void</returns>
     private void initGrid()
     {
         fastFallScore = 0;
@@ -115,13 +180,17 @@ public class Grid : MonoBehaviour {
     }
 	
 	// Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame. 
+    /// We update all the Text we display (score, number of  lines and level).
+    /// </summary>
+    /// <returns>void</returns>
 	void Update () 
     {
         // Score update
         guiScore.text = score.ToString();
         guiLines.text = "Lines : \n" + nbLines;
-        guiLevel.text = "Level : \n " + level;       
-
+        guiLevel.text = "Level : \n " + level; 
 	}
 	
 
@@ -130,6 +199,12 @@ public class Grid : MonoBehaviour {
 	
 	// A helper function that is used to round positions (cause rotations might
 	// create some small errors that could stack
+    /// <summary>
+    /// A helper function that is used to round positions (cause rotations might
+    /// create some small errors that could stack. 
+    /// </summary>
+    /// <param name="v">The position (Vector 2) we want to round.</param>
+    /// <returns>Vector2</returns>
 	public Vector2 roundVec2(Vector2 v) 
 	{
 		return new Vector2(Mathf.Round(v.x),
@@ -138,6 +213,15 @@ public class Grid : MonoBehaviour {
 	
 	
 	// A function that checks if the tetrominos is inside the borders
+    /// <summary>
+    /// Called at every movement of a tetromino to determine if it is inside the borders.
+    /// It checks if the tetrominos is inside the borders. 
+    /// </summary>
+    /// <param name="pos">The position we check</param>
+    /// <returns>boolean
+    /// True if the tetromino is still inside the board boarders
+    /// False otherwise.
+    /// </returns>
 	public bool isInsideBorders(Vector2 pos)
 	{
 		return ((int)pos.x >= 0 && 
@@ -146,7 +230,14 @@ public class Grid : MonoBehaviour {
                 (int)pos.y < h);
 	}
 	
-	// Function that deletes a row;
+    /// <summary>
+    /// Called when we want to delete a row.
+    /// Mostly when the row is full and has to be deleted.
+    /// </summary>
+    /// <param name="y">The number of the row we want to delete.
+    /// 0 is the bottom of the grid.
+    /// </param>
+    /// <returns>void</returns>
 	public void deleteRow(int y)
 	{
 		for (int x = 0; x < w; x++)
@@ -159,6 +250,10 @@ public class Grid : MonoBehaviour {
 		}
 	}
 	
+    /// <summary>
+    /// Called on restart
+    /// </summary>
+    /// <returns>void</returns>
     public void gameRestart()
     {
         for (int i = 0; i < _grid.h; i++)
@@ -177,7 +272,11 @@ public class Grid : MonoBehaviour {
         Spawner._spawner.spawnNext();
     }
 	
-	// This function decreases the row at height y by nbDecrease 
+    /// <summary>
+    /// Called when a row has been deleted. Decrease the row number y by one.
+    /// </summary>
+    /// <param name="y">Number of the row from which we want to decrease</param>
+    /// <returns>void</returns>
 	public void decreaseRow(int y)
 	{
 		for (int x = 0; x < w; x++)
@@ -194,8 +293,10 @@ public class Grid : MonoBehaviour {
 		}
 	}
 
-	// When rows are deleted we have to move down all the blocks above by the number
-	// of deleted rows
+    /// <summary>
+    /// When a row is deleted we have to move down all the blocks above by one.
+    /// </summary>
+    /// <param name="p">We decrease all the row above p by one (p included)</param>
 	public void decreaseRowsAbove(int p)
 	{
 		for (int y = p; y < h; y++)
@@ -205,6 +306,13 @@ public class Grid : MonoBehaviour {
 	}
 	
 	// Function that returns true if the row y is full and false otherwise
+    /// <summary>
+    /// Called to check if the row number y is full.
+    /// </summary>
+    /// <param name="y">Number of the row we want to check</param>
+    /// <returns>boolean
+    /// true if the row is full
+    /// false otherwise.</returns>
 	public bool isRowFull(int y)
 	{
 		for (int x = 0; x < w; x++)
@@ -214,11 +322,15 @@ public class Grid : MonoBehaviour {
 		}
 		return true;
 	}
-	
-	// Function called when a tetromino has been placed at height y 
-    // (his highest part is at height y). We delete the full rows he might 
-	// have completed (so we only have to check the 4 rows below) 
-    // If some are deleted we move down the rows above
+
+	/// <summary>
+	/// Function called when a tetromino has been placed at height y 
+    /// (his highest part is at height y). We delete the full rows he might 
+	/// have completed (so we only have to check the 4 rows below) .
+    /// If some are deleted we move down the rows above.
+    /// </summary>
+    /// <param name="y">Highest row from where we check if we have to delete this row.</param>
+    /// <returns>void</returns>
 	public void deleteFullRowsFrom(int y)
 	{
 		int nbDeleted = 0;
@@ -255,6 +367,10 @@ public class Grid : MonoBehaviour {
 	}
 	
 	
+    /// <summary>
+    /// Called just before Start(). Here we handle the singleton aspect.
+    /// </summary>
+    /// <returns>void</returns>
 	void Awake()
 	{
 		if (_grid != null)
