@@ -2,43 +2,54 @@
 using System.Collections;
 
 public class ClodeMove : MonoBehaviour {
-	//We need to know where pacman is
 	GameObject pacman;
-
-	//Each ghost has specific target and a scatter target
 	Vector3 clodeTarget;
 	Vector3 clodeScatterTarget = new Vector3(0,0,-32);
+	Vector3 homeTarget = new Vector3(13, 0, -11);
 	bool scatterMode = false;
-	float scatterDelay = 20.0f;
+	float scatterDelay = 10.0f;
 	float scatterTimer;
-	
 	bool frightenMode = false;
-	float frightenDelay = 10.0f;
+	float frightenDelay = 5.0f;
 	float frightenTimer;
-
+	bool eaten = false;
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
-
 	int[,] pacGrid;
 	int curTileX;
 	int curTileY;
-	
 	bool isMoving = false;
-	
-	public void moving(bool real){
+	Color defaultColor;
+
+
+
+	void moving(bool real){
 		isMoving = real;
 	}
 
-	public void scatter(){
+	void scatter(){
 		scatterMode = true;
 		scatterTimer = Time.time;
 	}
 	
-	public void frightened(){
+	void frightened(){
 		frightenMode = true;
 		frightenTimer = Time.time;
+		renderer.material.color = Color.blue;
 	}
 	
+	void destroyWho(){
+		if (frightenMode){
+			eaten = true;
+			frightenMode = false;
+			renderer.material.color = defaultColor;
+			collider.enabled = false;
+			renderer.enabled = false;
+		}
+		else {
+			Debug.Log("pacman");
+		}
+	}
 
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -165,6 +176,9 @@ public class ClodeMove : MonoBehaviour {
 		else {
 			clodeTarget = clodeScatterTarget;
 		}
+		if (eaten){
+			clodeTarget = homeTarget;
+		}
 		nextDir = getNextDir();
 		move();
 	}
@@ -218,6 +232,7 @@ public class ClodeMove : MonoBehaviour {
 		clodeTarget = pacman.transform.position;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
+		defaultColor = renderer.material.color;
 	}
 	
 	void FixedUpdate () {
@@ -229,6 +244,12 @@ public class ClodeMove : MonoBehaviour {
 			}
 			if (frightenMode && Time.time - frightenTimer > frightenDelay){
 				frightenMode = false;
+			}
+			if (Vector3.Distance(transform.position, homeTarget) < 1f){
+				eaten = false;
+				renderer.material.color = defaultColor;
+				collider.enabled = true;
+				renderer.enabled = true;
 			}
 		}
 	}

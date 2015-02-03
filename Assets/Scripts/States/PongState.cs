@@ -73,7 +73,7 @@ public class PongState : GameState {
         {
             base.noticeInput(key);
             if (key == EnumInput.SPACE)
-                gameScript.launchCoupSpecial();
+                gameScript.launchCoupSpecial(-1);
             if (key == EnumInput.UP)
                 player.goUp();
             if (key == EnumInput.DOWN)
@@ -97,7 +97,7 @@ public class PongState : GameState {
                             player.goDown();
                     }
                     else
-                        gameScript.launchCoupSpecial();
+                        gameScript.launchCoupSpecial(-1);
                 }
             }
         }

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveToPocman : MonoBehaviour {
+public class MiniGameController : MonoBehaviour {
 	GameObject pocman;
 	PacMove pocMove;
 
-	public Randomizer rand;
+	Randomizer rand;
 
 	Vector3 startingPosition;
 	Vector3 startingForward;
@@ -13,19 +13,25 @@ public class MoveToPocman : MonoBehaviour {
 
 	bool isTarget = false;
 	bool gotHit = false;
-	bool keyPressed = false;
+	bool miniGame = false;
+
+
+	void niceShot(){
+		isTarget = false;
+		gotHit = false;
+		miniGame = false;
+	}
 
 	// Use this for initialization
 	void Start () {
 		pocman = GameObject.FindGameObjectWithTag("Pacman");
 		pocMove = pocman.GetComponent<PacMove>();
-
+		rand = GetComponentInChildren<Randomizer>();
 		startingPosition = transform.position;
 		startingForward = transform.position + 25 * transform.forward;
 		targetPosition = startingPosition;
+
 	}
-
-
 
 
 	public void MoveTo(GameObject ghost){
@@ -40,12 +46,6 @@ public class MoveToPocman : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown(KeyCode.Return)){
-			isTarget = false;
-			gotHit = false;
-			keyPressed = true;
-
-		}
 		if (isTarget){
 			Time.timeScale = 0;
 			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.unscaledDeltaTime));
@@ -53,7 +53,11 @@ public class MoveToPocman : MonoBehaviour {
 				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.unscaledDeltaTime);
 			}
 			else {
-				rand.enabled = true;
+				if (!miniGame){
+					rand.enabled = true;
+					SendMessageUpwards("startMiniGame");
+					miniGame = true;
+				}
 			}
 		}
 		else {
@@ -62,10 +66,9 @@ public class MoveToPocman : MonoBehaviour {
 			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, startingForward, Time.unscaledDeltaTime));
 			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
 
-			if (keyPressed && Vector3.Distance(transform.position, startingPosition) < 0.5f){
+			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
 				Time.timeScale = 1;
-				keyPressed = false;
-			}
+				}
 		}	
 
 
