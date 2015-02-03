@@ -48,6 +48,7 @@ public class PongManagerScript : MonoBehaviour {
     private int colorSide = 0;
     [SerializeField]
     private GameObject afficheCoupSpecial;
+    private float afficheCoupSpecialInitialY;
 
     private float lastUpdateTime = -1;
 
@@ -90,6 +91,7 @@ public class PongManagerScript : MonoBehaviour {
 	void Start () {
         initTime = Time.time;
         ball.GetComponent<BallMoving>().setScreenSize(upScreen, downScreen);
+        afficheCoupSpecialInitialY = afficheCoupSpecial.transform.position.y;
 	}
 	
 	// Update is called once per frame
@@ -118,7 +120,7 @@ public class PongManagerScript : MonoBehaviour {
             }
         }
         checkCoupSpecial();
-        afficheCoupSpecial.transform.position = new Vector3(colorSide * resizeWidth, afficheCoupSpecial.transform.position.y * resizeHeight, 0);
+        afficheCoupSpecial.transform.position = new Vector3(colorSide * resizeWidth, afficheCoupSpecialInitialY * resizeHeight, 0);
 
         if (coupSpecial)
         {
@@ -272,8 +274,16 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-        resizeWidth = Screen.width / 1024f;
-        resizeHeight = Screen.height / 768f;
+        if (Application.isMobilePlatform) // application en mode portrait, on doit inverser width et height
+        {
+            resizeWidth = Screen.height / 1024f;
+            resizeHeight = Screen.width / 768f;
+        }
+        else
+        {
+            resizeWidth = Screen.width / 1024f;
+            resizeHeight = Screen.height / 768f;
+        }
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
     }
