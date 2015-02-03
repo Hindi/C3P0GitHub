@@ -2,48 +2,59 @@
 using System.Collections;
 
 public class AnkyMove : MonoBehaviour {
-
-	//We need to know where pacman and Blanky are
 	GameObject pacman;
 	GameObject blanky;
-	
-	//And we need to know where he goes.
 	PacMove pacMove;
-	
-	//Each ghost has specific target and a scatter target
 	Vector3 ankyTarget;
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
+	Vector3 homeTarget = new Vector3(13, 0, -11);
 	bool scatterMode = false;
-	float scatterDelay = 20.0f;
+	float scatterDelay = 10.0f;
 	float scatterTimer;
-	
 	bool frightenMode = false;
-	float frightenDelay = 10.0f;
+	float frightenDelay = 5.0f;
 	float frightenTimer;
-
+	bool eaten = false;
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
-	
 	int[,] pacGrid;
 	int curTileX;
 	int curTileY;
-	
 	bool isMoving = false;
-	
-	public void moving(bool real){
+	Color defaultColor;
+
+
+
+	void moving(bool real){
 		isMoving = real;
 	}
 
-	public void scatter(){
+	void scatter(){
 		scatterMode = true;
 		scatterTimer = Time.time;
 	}
 	
-	public void frightened(){
+	void frightened(){
 		frightenMode = true;
 		frightenTimer = Time.time;
+		renderer.material.color = Color.blue;
 	}
-	
+
+	void destroyWho(){
+		if (frightenMode){
+			eaten = true;
+			frightenMode = false;
+			renderer.material.color = defaultColor;
+			collider.enabled = false;
+			renderer.enabled = false;
+		}
+		else {
+			Debug.Log("pacman");
+		}
+	}
+
+
+
 
 	
 	/*
@@ -169,6 +180,9 @@ public class AnkyMove : MonoBehaviour {
 		else {
 			ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
 		}
+		if (eaten){
+			ankyTarget = homeTarget;
+		}
 		nextDir = getNextDir();
 		move();
 	}
@@ -225,6 +239,8 @@ public class AnkyMove : MonoBehaviour {
 		ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
+		defaultColor = renderer.material.color;
+
 	}
 	
 	void FixedUpdate () {
@@ -236,6 +252,12 @@ public class AnkyMove : MonoBehaviour {
 			}
 			if (frightenMode && Time.time - frightenTimer > frightenDelay){
 				frightenMode = false;
+				renderer.material.color = defaultColor;
+			}
+			if (Vector3.Distance(transform.position, homeTarget) < 1f){
+				eaten = false;
+				collider.enabled = true;
+				renderer.enabled = true;
 			}
 		}
 	}
