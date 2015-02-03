@@ -38,11 +38,11 @@ public class SuperBasicIA : MonoBehaviour {
         {
             if (transform.position.y - ball.transform.position.y > 0)
             {
-                transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+                transform.Translate(new Vector3(0, -speed * Time.deltaTime * pms.resizeHeight, 0));
             }
             else
             {
-                transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+                transform.Translate(new Vector3(0, speed * Time.deltaTime * pms.resizeHeight, 0));
             }
         }
         if (Time.time - initTimer > timer && coupSpecial)
