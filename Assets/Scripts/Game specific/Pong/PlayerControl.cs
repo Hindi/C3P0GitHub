@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour {
     public void onRestart(float resizeWidth, float resizeHeight)
     {
         transform.position = new Vector3(defaultPos.x * resizeWidth, defaultPos.y * resizeHeight, 0);
+        transform.localScale = new Vector3(resizeWidth, resizeHeight, 1);
     }
 
 	// Use this for initialization

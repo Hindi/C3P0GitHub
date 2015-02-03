@@ -57,70 +57,70 @@ TextureImporter:
     - name: Youyoupi_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_1
       rect:
         serializedVersion: 2
-        x: 213
+        x: 207
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_2
       rect:
         serializedVersion: 2
-        x: 419
+        x: 414
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_3
       rect:
         serializedVersion: 2
-        x: 625
+        x: 621
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_4
       rect:
         serializedVersion: 2
-        x: 831
+        x: 828
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_5
       rect:
         serializedVersion: 2
-        x: 1037
+        x: 1035
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_6
       rect:
         serializedVersion: 2
-        x: 1243
+        x: 1242
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,38 +129,38 @@ TextureImporter:
         serializedVersion: 2
         x: 1449
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_8
       rect:
         serializedVersion: 2
-        x: 1655
+        x: 1656
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_9
       rect:
         serializedVersion: 2
-        x: 1861
+        x: 1863
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Youyoupi_10
       rect:
         serializedVersion: 2
-        x: 2067
+        x: 2070
         y: 0
-        width: 206
-        height: 355
+        width: 207
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

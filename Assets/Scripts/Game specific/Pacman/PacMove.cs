@@ -6,7 +6,7 @@ public class PacMove : MonoBehaviour {
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
 	int[,] pacGrid;
-
+	GameObject obj;
 	Vector3 enemyPosition;
 
 	//We need to get the direction Pacman is heading for some ghosts.
@@ -37,6 +37,15 @@ public class PacMove : MonoBehaviour {
 	{
 		rigidbody.position += curDir * 4 * Time.deltaTime;
 		curDir = nextDir;
+	}
+	
+	void destroyThat(){
+		if(obj.tag == "Energizer"){
+		Destroy(obj);
+		}
+		if(obj.tag == "Enemy"){
+			obj.SendMessage("destroyWho");
+		}
 	}
 
 
@@ -133,8 +142,12 @@ public class PacMove : MonoBehaviour {
 	
 
 	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "Enemy"){
+		if (collider.tag == "Enemy" || collider.tag == "Energizer"){
+			obj = collider.gameObject;
 			Camera.main.SendMessage("MoveTo", collider.gameObject, SendMessageOptions.DontRequireReceiver);
+		}
+		if (collider.tag == "Ball"){
+			Destroy(collider.gameObject);
 		}
 	}
 }
