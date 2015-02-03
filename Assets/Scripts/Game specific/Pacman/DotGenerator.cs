@@ -47,12 +47,12 @@ public class DotGenerator : MonoBehaviour {
 		for (int i = 0; i<28; ++i){
 			for(int j = 0; j<31; j++){
 				if(pacGrid[j,i] == 1){
-					GameObject dot = Instantiate(pacDot, new Vector3(i, 0, -j), Quaternion.identity) as GameObject;
+					GameObject dot = Instantiate(pacDot, new Vector3(i, 0.3f, -j), Quaternion.identity) as GameObject;
 					dot.transform.parent = transform;
 					++remainingDots;
 				}
 				if(pacGrid[j,i] == 3){
-					GameObject ene = Instantiate(Energizer, new Vector3(i, 0, -j), Quaternion.identity) as GameObject;
+					GameObject ene = Instantiate(Energizer, new Vector3(i, .3f, -j), Quaternion.identity) as GameObject;
 					ene.transform.parent = transform;
 					++remainingDots;
 				}
@@ -76,7 +76,7 @@ public class DotGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - timer > 60f)
+		if (Time.time - timer > 40f)
 		{
 			timer = Time.time;
 			BroadcastMessage("scatter");
