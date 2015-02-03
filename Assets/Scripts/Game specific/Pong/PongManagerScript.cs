@@ -54,7 +54,7 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private float applaudTimer;
     private float initTimerGauche, initTimerDroite;
-    private bool applauds = false;
+    private bool applaudsGauche = false, applaudsDroite = false;
 
     private float lastUpdateTime = -1;
 
@@ -154,26 +154,23 @@ public class PongManagerScript : MonoBehaviour {
         afficheCoupSpecial.transform.position = new Vector3(0.5f * colorSide * resizeWidth, afficheCoupSpecialInitialY * resizeHeight, 0);
 
         // Animation des personnages qui applaudissent
-        if (applauds)
+        if (Time.time - initTimerGauche > applaudTimer && applaudsGauche)
         {
-            if (Time.time - initTimerGauche > applaudTimer)
+            foreach (GameObject g in spectateursGauche)
             {
-                foreach (GameObject g in spectateursGauche)
-                {
-                    if (g != null)
-                        g.GetComponent<Animator>().SetBool("applaud", false);
-                }
-                applauds = false;
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
             }
-            if (Time.time - initTimerDroite > applaudTimer)
+            applaudsGauche = false;
+        }
+        if (Time.time - initTimerDroite > applaudTimer && applaudsDroite)
+        {
+            foreach (GameObject g in spectateursDroite)
             {
-                foreach (GameObject g in spectateursDroite)
-                {
-                    if (g != null)
-                        g.GetComponent<Animator>().SetBool("applaud", false);
-                }
-                applauds = false;
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
             }
+            applaudsDroite = false;
         }
 	}
 
@@ -192,17 +189,17 @@ public class PongManagerScript : MonoBehaviour {
                 if (g != null)
                     g.GetComponent<Animator>().SetBool("applaud", true);
             }
-            applauds = true;
+            applaudsGauche = true;
         }
         else
         {
-            initTimerGauche = Time.time;
+            initTimerDroite = Time.time;
             foreach (GameObject g in spectateursDroite)
             {
                 if (g != null)
                     g.GetComponent<Animator>().SetBool("applaud", true);
             }
-            applauds = true;
+            applaudsDroite = true;
         }
         reset(player);
     }
@@ -332,16 +329,8 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-        if (Application.isMobilePlatform) // application en mode portrait, on doit inverser width et height
-        {
-            resizeWidth = Screen.height / 1024f;
-            resizeHeight = Screen.width / 768f;
-        }
-        else
-        {
-            resizeWidth = Screen.width / 1024f;
-            resizeHeight = Screen.height / 768f;
-        }
+        resizeWidth = Math.Max(Screen.height, Screen.height) / 1024f;
+        resizeHeight = Math.Min(Screen.height, Screen.height) / 768f;
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
     }
