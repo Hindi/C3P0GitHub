@@ -329,10 +329,12 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-        float width, height;
+        float ratio, width, height, ratioref;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
-        resizeWidth = 0.9f * (width / 1024f);
+        ratio = width / height;
+        ratioref = 1024f / 768f;
+        resizeWidth = 0.9f * (ratio / ratioref);
         resizeHeight = 0.9f * (height / 768f);
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
