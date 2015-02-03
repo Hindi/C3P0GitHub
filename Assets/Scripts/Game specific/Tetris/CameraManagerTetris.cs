@@ -7,31 +7,6 @@ using System.Collections;
 /// </summary>
 public class CameraManagerTetris : MonoBehaviour {
 
-	// Use this for initialization
-    /// <summary>
-    /// Called when a CameraManagerTetris element is instantiate (when the scene is loading).
-    /// We use it for initialisation. Ensures camera positions (different for mobile or pc)
-    /// Shortcuts to access camera effect are created.
-    /// </summary>
-    /// <returns>void</returns>
-	void Start () {
-
-        if (Application.isMobilePlatform)
-        {
-            main.transform.position = new Vector3(0, 10f, -10);
-        }
-        else
-            main.transform.position = new Vector3(4.5f, 10f, -10);
-        blur = main.GetComponent<Blur>() as Blur;
-        noise = main.GetComponent<NoiseEffect>() as NoiseEffect;
-            
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     /// <summary>
     /// Shortcut for activation/desactivation of a camera effect.
     /// </summary>
@@ -48,6 +23,42 @@ public class CameraManagerTetris : MonoBehaviour {
     [SerializeField]
     Camera main;
 
+    /// <summary>
+    /// Reference to another camera (used to stack some noise effect
+    /// </summary>
+    [SerializeField]
+    Camera noiseCamera;
+
+    // Use this for initialization
+    /// <summary>
+    /// Called when a CameraManagerTetris element is instantiate (when the scene is loading).
+    /// We use it for initialisation. Ensures camera positions (different for mobile or pc)
+    /// Shortcuts to access camera effect are created.
+    /// </summary>
+    /// <returns>void</returns>
+    void Start()
+    {
+
+        if (Application.isMobilePlatform)
+        {
+            main.transform.position = new Vector3(0, 10f, -10);
+        }
+        else
+            main.transform.position = new Vector3(4.5f, 10f, -10);
+        blur = main.GetComponent<Blur>() as Blur;
+        noise = main.GetComponent<NoiseEffect>() as NoiseEffect;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+            noiseCamera.gameObject.SetActive(true);
+        if (Input.GetKeyUp("space"))
+            noiseCamera.gameObject.SetActive(false);
+    }
+
 
     /// <summary>
     /// Enable the right camera effect
@@ -56,6 +67,8 @@ public class CameraManagerTetris : MonoBehaviour {
     /// <returns>void</returns>
     public void setParamId(int id)
     {
+        // suivant les cas on active la camera fille de la main (pour add du noise) avec :
+        // noiseCamera.gameObject.SetActive(true);
         switch (id)
         {
             case 0:
