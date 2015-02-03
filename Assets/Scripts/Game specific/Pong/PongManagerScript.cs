@@ -52,6 +52,8 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject[] spectateursGauche, spectateursDroite;
     [SerializeField]
+    private GameObject groupeGauche, groupeDroite;
+    [SerializeField]
     private float applaudTimer;
     private float initTimerGauche, initTimerDroite;
     private bool applaudsGauche = false, applaudsDroite = false;
@@ -88,6 +90,7 @@ public class PongManagerScript : MonoBehaviour {
         arrow.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
+
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
 
@@ -329,12 +332,28 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-        float width, height;
+        float width, height, ratio;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
-        resizeWidth = 0.9f * (width / 1024f);
-        resizeHeight = 0.9f * (height / 768f);
+        ratio = width / height;
+        resizeWidth = ratio / (1024f/768f);
+        resizeHeight = (1024f / 768f) / ratio;
+
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
+
+        groupeGauche.transform.position = new Vector3(groupeGauche.transform.position.x * resizeWidth, groupeGauche.transform.position.y * resizeHeight, 0);
+        groupeDroite.transform.position = new Vector3(groupeDroite.transform.position.x * resizeWidth, groupeDroite.transform.position.y * resizeHeight, 0);
+
+        float maxRescale = Math.Max(resizeWidth, resizeHeight);
+
+        foreach (GameObject g in spectateursGauche)
+        {
+            g.transform.localScale = new Vector3(maxRescale * g.transform.localScale.x, maxRescale * g.transform.localScale.y, g.transform.localScale.z);
+        }
+        foreach (GameObject g in spectateursDroite)
+        {
+            g.transform.localScale = new Vector3(maxRescale * g.transform.localScale.x, maxRescale * g.transform.localScale.y, g.transform.localScale.z);
+        }
     }
 }
