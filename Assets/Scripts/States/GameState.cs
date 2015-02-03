@@ -102,7 +102,6 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	private void applyPause()
 	{
-        Debug.Log("Nombre de pauses ?");
         if (paused)
         {
             Time.timeScale = 0;
