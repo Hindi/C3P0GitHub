@@ -4,11 +4,13 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
+    [SerializeField]
+    private MarioScoreManager scoreManager;
 
     public AudioClip jumpSound;
     public float movementSpeed = 5.0f;
     public float mouseSensitivity = 5.0f;
-    public float jumpSpeed = 20.0f;
+    public float jumpSpeed = 15.0f;
     public float upDownRange = 60.0f;
     public GameObject cameraHolder;
     
@@ -18,6 +20,15 @@ public class FirstPersonController : MonoBehaviour
     private bool jumping = false;
     private bool moving = false;
     private bool facingRight = true;
+
+    private bool dieing = false;
+    public bool Dieing
+    {
+        get { return dieing; }
+    }
+
+    [SerializeField]
+    private Sprite death;
 
     CharacterController characterController;
 
@@ -44,9 +55,14 @@ public class FirstPersonController : MonoBehaviour
         */
 
         // Movement
-
-        float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
+        float forwardSpeed = 0;//Input.GetAxis("Vertical") * movementSpeed;
         float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+
+        Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
+
+        speed = transform.rotation * speed;
+        if (speed.x == 0)
+            moving = false;
 
         if (!characterController.isGrounded)
         {
@@ -66,26 +82,25 @@ public class FirstPersonController : MonoBehaviour
 
         sliding = false;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             moveRight();
             moving = true;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             moveLeft();
             moving = true;
         }
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
 
-        Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
-
-        speed = transform.rotation * speed;
-        if (speed.x == 0)
-            moving = false;
+            scoreManager.addScore(11);
+        }
 
         
 		anim.SetBool ("moving", moving);
-		anim.SetBool ("sliding", sliding);
+		//anim.SetBool ("sliding", sliding);
 		anim.SetBool ("jumping", jumping);
 
         characterController.Move(speed * Time.deltaTime);
@@ -96,10 +111,10 @@ public class FirstPersonController : MonoBehaviour
 		if (!facingRight) 
 		{
 			flip();
-            if (moving)
+            /*if (moving)
             {
                 sliding = true;
-            }
+            }*/
 		}
 
 	}
@@ -109,10 +124,10 @@ public class FirstPersonController : MonoBehaviour
 		if (facingRight) 
 		{
 			flip();
-            if (moving)
+            /*if (moving)
             {
                 sliding = true;
-            }
+            }*/
         }
 	}
 
@@ -132,11 +147,28 @@ public class FirstPersonController : MonoBehaviour
 
     public void bounce()
     {
-        verticalVelocity = jumpSpeed/2;
+        verticalVelocity = jumpSpeed/1.5f;
     }
 
     public void eatChamp()
     {
         cameraHolder.GetComponent<CameraController>().eatChamp();
+    }
+
+    public void die()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        dieing = true;
+        anim.enabled = false;
+        verticalVelocity = jumpSpeed / 1.5f;
+        GetComponent<SpriteRenderer>().sprite = death;
+    }
+
+    void OnCollisionStay(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.transform.tag == "Pipe")
+        {
+            Debug.Log("huk");
+        }
     }
 }

@@ -45,7 +45,7 @@ public class MushroomBehaviour : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!bounce && collision.collider.gameObject.layer == LayerMask.NameToLayer("Terrain obstacles"))
+        if (!bounce && collision.collider.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
             triggerTime = Time.time;
             bounce = true;
@@ -56,10 +56,16 @@ public class MushroomBehaviour : MonoBehaviour {
         }
     }
 
+    public void changeDir(Vector3 dir)
+    {
+        direction = dir;
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.transform.tag == "Player")
         {
+            GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<MarioScoreManager>().addScore(11);
             collider.GetComponent<FirstPersonController>().eatChamp();
             Destroy(gameObject);
         }
