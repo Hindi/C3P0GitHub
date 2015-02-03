@@ -108,6 +108,26 @@ public class PongManagerScript : MonoBehaviour {
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
 
+
+        if (applaudsGauche)
+        {
+            foreach (GameObject g in spectateursGauche)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
+            }
+            applaudsGauche = false;
+        }
+        if (applaudsDroite)
+        {
+            foreach (GameObject g in spectateursDroite)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
+            }
+            applaudsDroite = false;
+        }
+
     }
 
 	// Use this for initialization
@@ -366,6 +386,8 @@ public class PongManagerScript : MonoBehaviour {
         }
         else
         {
+            mainCamera.transform.LookAt(new Vector3(0, 1, 0));
+            Time.timeScale = 1;
             EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
         }
     }
