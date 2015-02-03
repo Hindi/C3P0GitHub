@@ -3,13 +3,13 @@ using System.Collections;
 
 public class BallMoving : MonoBehaviour {
 
-    [SerializeField]
     private float upScreen, downScreen;
     [SerializeField]
     public Vector2 speed;
 
     [SerializeField]
     private GameObject manager;
+    private PongManagerScript managerScript;
 
     private bool coupSpecial = false;
     private int coupPlayer;
@@ -25,9 +25,17 @@ public class BallMoving : MonoBehaviour {
         cancelCoupSpecial();
     }
 
+    public void setScreenSize(float uScreen, float dScreen)
+    {
+        upScreen = uScreen;
+        downScreen = dScreen;
+    }
+
 
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
+        managerScript = manager.GetComponent<PongManagerScript>();
         defaultPos = transform.position;
         defaultSpeed = new Vector2(speed.x, speed.y);
         Laws.setUniformValues(new double[] { 45, -45 });
@@ -35,7 +43,7 @@ public class BallMoving : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.y > upScreen && speed.y > 0)
+        if (transform.position.y > upScreen * managerScript.resizeHeight && speed.y > 0)
         {
             speed.y = (speed.y < 0) ? speed.y : -1 * speed.y;
             if (fireBall)
@@ -43,7 +51,7 @@ public class BallMoving : MonoBehaviour {
                 transform.Rotate(new Vector3(0, 0, 2 * Mathf.Atan2(speed.y, speed.x) * Mathf.Rad2Deg));
             }
         }
-        else if (transform.position.y < -downScreen && speed.y < 0)
+        else if (transform.position.y < -downScreen * managerScript.resizeHeight && speed.y < 0)
         {
             speed.y = (speed.y > 0) ? speed.y : -1 * speed.y;
             if (fireBall)
@@ -52,7 +60,7 @@ public class BallMoving : MonoBehaviour {
             }
         }
 
-        transform.Translate(new Vector3(speed.x * Time.deltaTime, speed.y * Time.deltaTime, 0), Space.World);
+        transform.Translate(new Vector3(speed.x * Time.deltaTime * managerScript.resizeWidth, speed.y * Time.deltaTime * managerScript.resizeHeight, 0), Space.World);
 	}
 
     /**

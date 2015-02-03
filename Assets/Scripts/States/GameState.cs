@@ -53,9 +53,12 @@ public abstract class GameState : State
     /// <param name="b">True if paused</param>
     /// <returns>void</returns>
 	public void onGamePaused(bool b)
-	{
-		paused = b;
-		applyPause ();
+    {
+        if (loaded)
+        {
+            paused = b;
+            applyPause();
+        }
 	}
 
     /// <summary>Abstract function specific for each game. It is called when the player chose a parameter</summary>
@@ -67,7 +70,7 @@ public abstract class GameState : State
     /// <param name="b">True if paused.</param>
     /// <returns>void</returns>
 	public virtual void pauseGame(bool b)
-	{
+    {
 		EventManager<bool>.Raise (EnumEvent.PAUSEGAME, paused);
 	}
 
@@ -99,13 +102,12 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	private void applyPause()
 	{
-		if (paused)
+        if (paused)
         {
-            timeScale = Time.timeScale;
             Time.timeScale = 0;
         }
-		else
-			Time.timeScale = timeScale;
+        else
+            Time.timeScale = timeScale;
 	}
 
     /// <summary>Called on start.</summary>

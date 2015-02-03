@@ -7,32 +7,34 @@ public class PlayerControl : MonoBehaviour {
     private float speed;
     [SerializeField]
     private float upScreen, downScreen;
+    private PongManagerScript managerScript;
 
     private Vector3 defaultPos;
 
-    public void onRestart()
+    public void onRestart(float resizeWidth, float resizeHeight)
     {
-        transform.position = defaultPos;
+        transform.position = new Vector3(defaultPos.x * resizeWidth, defaultPos.y * resizeHeight, 0);
     }
 
 	// Use this for initialization
 	void Start () {
         defaultPos = transform.position;
+        managerScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
 	}
 
     public void goDown()
     {
-        if (transform.position.y >= -downScreen + 0.1)
+        if (transform.position.y >= -downScreen * managerScript.resizeHeight + 0.3)
         {
-            transform.Translate(new Vector3(0, -1 * speed * Time.deltaTime, 0));
+            transform.Translate(new Vector3(0, -1 * speed * Time.deltaTime * managerScript.resizeHeight, 0));
         }
     }
 
     public void goUp()
     {
-        if (transform.position.y <= upScreen - 0.1 )
+        if (transform.position.y <= upScreen * managerScript.resizeHeight - 0.3)
         {
-            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+            transform.Translate(new Vector3(0, speed * Time.deltaTime * managerScript.resizeHeight, 0));
         }
     }
 	

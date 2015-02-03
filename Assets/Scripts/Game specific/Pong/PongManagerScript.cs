@@ -10,11 +10,19 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private Text[] texts;
     [SerializeField]
+    private GameObject[] limits;
+    [SerializeField]
     private GameObject arrow;
     [SerializeField]
     private GameObject playerPaddle, enemyPaddle;
     [SerializeField]
     private Sprite origBall, specialBall;
+
+    [SerializeField]
+    private float upScreen, downScreen;
+
+    [NonSerialized]
+    public float resizeHeight, resizeWidth;
 
     [SerializeField]
     private int timerSeconde;
@@ -40,6 +48,13 @@ public class PongManagerScript : MonoBehaviour {
     private int colorSide = 0;
     [SerializeField]
     private GameObject afficheCoupSpecial;
+    private float afficheCoupSpecialInitialY;
+    [SerializeField]
+    private GameObject[] spectateursGauche, spectateursDroite;
+    [SerializeField]
+    private float applaudTimer;
+    private float initTimerGauche, initTimerDroite;
+    private bool applaudsGauche = false, applaudsDroite = false;
 
     private float lastUpdateTime = -1;
 
@@ -71,8 +86,8 @@ public class PongManagerScript : MonoBehaviour {
         reset(-1);
 
         arrow.SetActive(false);
-        playerPaddle.GetComponent<PlayerControl>().onRestart();
-        enemyPaddle.GetComponent<SuperBasicIA>().onRestart();
+        playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
+        enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
 
@@ -81,36 +96,31 @@ public class PongManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         initTime = Time.time;
+        ball.GetComponent<BallMoving>().setScreenSize(upScreen, downScreen);
+        afficheCoupSpecialInitialY = afficheCoupSpecial.transform.position.y;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (Time.time == lastUpdateTime)
         {
             return;
         }
         lastUpdateTime = Time.time;
-	    if(ball.transform.position.x < -7)
+        /*
+         * Updates sur l'état du jeu
+         */
+        // Vérification de la sortie de la balle
+	    if(ball.transform.position.x < -7 * resizeWidth)
         {
             onScore(1);
         }
-        else if (ball.transform.position.x > 7)
+        else if (ball.transform.position.x > 7 * resizeWidth)
         {
             onScore(-1);
         }
-
-        if (coupSpecialCharging)
-        {
-            if(Time.time - initTime >= timerSeconde)
-            {
-                coupSpecialCharging = false;
-                initTime = Time.time;
-                startCoupSpecialAnimation();
-            }
-        }
-        checkCoupSpecial();
-        afficheCoupSpecial.transform.position = new Vector3(colorSide, afficheCoupSpecial.transform.position.y, 0);
-
+        // Mise à jour de la direction de l'aiguille pendant un coup spécial
         if (coupSpecial)
         {
             if (player == -1)
@@ -126,6 +136,42 @@ public class PongManagerScript : MonoBehaviour {
             arrow.transform.localEulerAngles = currentAngles;
 
         }
+
+        /*
+         * Updates des animations
+         */
+        // Animation du coup spécial
+        if (coupSpecialCharging)
+        {
+            if(Time.time - initTime >= timerSeconde)
+            {
+                coupSpecialCharging = false;
+                initTime = Time.time;
+                startCoupSpecialAnimation();
+            }
+        }
+        checkCoupSpecial();
+        afficheCoupSpecial.transform.position = new Vector3(0.5f * colorSide * resizeWidth, afficheCoupSpecialInitialY * resizeHeight, 0);
+
+        // Animation des personnages qui applaudissent
+        if (Time.time - initTimerGauche > applaudTimer && applaudsGauche)
+        {
+            foreach (GameObject g in spectateursGauche)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
+            }
+            applaudsGauche = false;
+        }
+        if (Time.time - initTimerDroite > applaudTimer && applaudsDroite)
+        {
+            foreach (GameObject g in spectateursDroite)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", false);
+            }
+            applaudsDroite = false;
+        }
 	}
 
     private void onScore(int player)
@@ -134,6 +180,26 @@ public class PongManagerScript : MonoBehaviour {
         if (int.Parse(texts[((player == 1) ? 0 : 1)].text ) >= 10)
         {
             EventManager<bool>.Raise(EnumEvent.GAMEOVER, false); // la partie est finie
+        }
+        if (player == -1)
+        {
+            initTimerGauche = Time.time;
+            foreach (GameObject g in spectateursGauche)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", true);
+            }
+            applaudsGauche = true;
+        }
+        else
+        {
+            initTimerDroite = Time.time;
+            foreach (GameObject g in spectateursDroite)
+            {
+                if (g != null)
+                    g.GetComponent<Animator>().SetBool("applaud", true);
+            }
+            applaudsDroite = true;
         }
         reset(player);
     }
@@ -147,6 +213,7 @@ public class PongManagerScript : MonoBehaviour {
         ball.transform.position = new Vector3(0, 0, 0);
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
+        ball.GetComponent<BallMoving>().cancelCoupSpecial();
         coupSpecial = false;
 
         if (fireBall)
@@ -185,8 +252,10 @@ public class PongManagerScript : MonoBehaviour {
         animationEnded = false;
     }
 
-    public void launchCoupSpecial()
+    public void launchCoupSpecial(int p)
     {
+        if (!coupSpecial || p != player)
+            return;
         coupSpecial = false;
         fireBall = true;
         ball.GetComponent<BallMoving>().setFireBall(true);
@@ -203,6 +272,8 @@ public class PongManagerScript : MonoBehaviour {
             return;
         }
         frameTimer++;
+        /*
+         * Cette section a été commentée parce que l'indicateur changeait trop souvent de côté pour que ce soit visible
         if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 0 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 10 / 100)
         {
             changeColorSide();
@@ -214,7 +285,8 @@ public class PongManagerScript : MonoBehaviour {
                 changeColorSide();
             }
         }
-        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 30 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 50 / 100)
+         * */
+        if (Time.time - coupSpecialTimer >= coupSpecialTimerTotal * 0 / 100 && Time.time - coupSpecialTimer < coupSpecialTimerTotal * 50 / 100)
         {
             if (frameTimer % 4 == 0)
             {
@@ -257,6 +329,9 @@ public class PongManagerScript : MonoBehaviour {
 
     public void updateElementsResolution()
     {
-
+        resizeWidth = Math.Max(Screen.height, Screen.height) / 1024f;
+        resizeHeight = Math.Min(Screen.height, Screen.height) / 768f;
+        limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
+        limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
     }
 }
