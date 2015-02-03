@@ -54,8 +54,11 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	public void onGamePaused(bool b)
     {
-		paused = b;
-		applyPause ();
+        if (loaded)
+        {
+            paused = b;
+            applyPause();
+        }
 	}
 
     /// <summary>Abstract function specific for each game. It is called when the player chose a parameter</summary>
@@ -99,12 +102,13 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	private void applyPause()
 	{
-		if (paused)
+        Debug.Log("Nombre de pauses ?");
+        if (paused)
         {
             Time.timeScale = 0;
         }
-		else
-			Time.timeScale = timeScale;
+        else
+            Time.timeScale = timeScale;
 	}
 
     /// <summary>Called on start.</summary>

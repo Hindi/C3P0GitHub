@@ -42,7 +42,7 @@ public class PongState : GameState {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
-            Screen.orientation = ScreenOrientation.LandscapeRight;
+            Screen.orientation = ScreenOrientation.Landscape;
         gameScript.updateElementsResolution();
     }
 
