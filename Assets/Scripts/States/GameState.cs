@@ -20,9 +20,6 @@ public abstract class GameState : State
     public GameState(StateManager stateManager) : base(stateManager)
     {
 		paused = false;
-        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
-        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
-        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
     }
 
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -110,18 +107,21 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public override void start()
     {
+        loaded = true;
         changeParam();
+        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
     }
 
     /// <summary>Called when leaving this state.</summary>
     /// <returns>void</returns>
     public override void end()
     {
+        loaded = false;
         EventManager<bool>.RemoveListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
-
-        loaded = false;
     }
 
     /// <summary>Called each frame.</summary>
