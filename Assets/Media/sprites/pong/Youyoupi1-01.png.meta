@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: c94396cb061fd6941a471c84cae2a5cf
+guid: 71f2e8199f4c5da409477f49f2a0e4a8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Youyoupi_0
-    21300002: Youyoupi_1
-    21300004: Youyoupi_2
-    21300006: Youyoupi_3
-    21300008: Youyoupi_4
-    21300010: Youyoupi_5
-    21300012: Youyoupi_6
-    21300014: Youyoupi_7
-    21300016: Youyoupi_8
-    21300018: Youyoupi_9
-    21300020: Youyoupi_10
+    21300000: Youyoupi1-01_0
+    21300002: Youyoupi1-01_1
+    21300004: Youyoupi1-01_2
+    21300006: Youyoupi1-01_3
+    21300008: Youyoupi1-01_4
+    21300010: Youyoupi1-01_5
+    21300012: Youyoupi1-01_6
+    21300014: Youyoupi1-01_7
+    21300016: Youyoupi1-01_8
+    21300018: Youyoupi1-01_9
+    21300020: Youyoupi1-01_10
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,7 +54,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Youyoupi_0
+    - name: Youyoupi1-01_0
       rect:
         serializedVersion: 2
         x: 0
@@ -62,9 +62,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_1
+    - name: Youyoupi1-01_1
       rect:
         serializedVersion: 2
         x: 207
@@ -72,9 +72,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_2
+    - name: Youyoupi1-01_2
       rect:
         serializedVersion: 2
         x: 414
@@ -82,9 +82,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_3
+    - name: Youyoupi1-01_3
       rect:
         serializedVersion: 2
         x: 621
@@ -92,9 +92,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_4
+    - name: Youyoupi1-01_4
       rect:
         serializedVersion: 2
         x: 828
@@ -102,9 +102,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_5
+    - name: Youyoupi1-01_5
       rect:
         serializedVersion: 2
         x: 1035
@@ -112,9 +112,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_6
+    - name: Youyoupi1-01_6
       rect:
         serializedVersion: 2
         x: 1242
@@ -122,9 +122,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_7
+    - name: Youyoupi1-01_7
       rect:
         serializedVersion: 2
         x: 1449
@@ -132,9 +132,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_8
+    - name: Youyoupi1-01_8
       rect:
         serializedVersion: 2
         x: 1656
@@ -142,9 +142,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_9
+    - name: Youyoupi1-01_9
       rect:
         serializedVersion: 2
         x: 1863
@@ -152,9 +152,9 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Youyoupi_10
+    - name: Youyoupi1-01_10
       rect:
         serializedVersion: 2
         x: 2070
@@ -162,7 +162,7 @@ TextureImporter:
         width: 207
         height: 354
       alignment: 7
-      pivot: {x: .5, y: 0}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

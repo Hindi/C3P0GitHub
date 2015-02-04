@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: bd4925f47bc679f4fa62ea3810da7c0b
+guid: 9932feeabc203bb43a393f554fd176b3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "pointill\xE9s (1)_0"
+    21300000: noapp6_4
+    21300002: noapp6_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,20 +38,30 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 0, y: 469, z: 0, w: 279}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: "pointill\xE9s (1)_0"
+    - name: noapp6_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 145
-        width: 23
-        height: 1738
+        x: 472
+        y: 0
+        width: 118
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: noapp6_1
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 0
+        width: 118
+        height: 177
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
