@@ -61,6 +61,10 @@ public class EnemySpaceWar : Spaceship {
 	void Update () {
         if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
         addInterpretedPosition(kalman.PosInterp);
+        if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
+        {
+            onHit();
+        }
 
 #if UNITY_EDITOR
         /* DEBUG : Moving points around */
@@ -346,7 +350,6 @@ public class EnemySpaceWar : Spaceship {
 
     private void moveTowardsPlayer()
     {
-        Debug.Log("Move towards player");
         float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - player.transform.position.y, transform.position.x - player.transform.position.x) * Mathf.Rad2Deg + 90;
         if (Angle >= 0 || Angle <= -180)
         {
@@ -367,7 +370,6 @@ public class EnemySpaceWar : Spaceship {
 
     private void attackPlayer()
     {
-        Debug.Log("Attack player");
         Vector2 prediction = interpolation(60);
         float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - prediction.y, transform.position.x - prediction.x) * Mathf.Rad2Deg + 90;
         if (Angle >= 0 || Angle <= -180)

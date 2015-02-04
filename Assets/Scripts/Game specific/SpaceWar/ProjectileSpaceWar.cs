@@ -10,7 +10,7 @@ public class ProjectileSpaceWar : MonoBehaviour {
     public void exitZone(GameObject spiral)
     {
         Vector2 delta = spiral.transform.position - transform.position;
-        transform.position = (Vector2)spiral.transform.position + delta;
+        transform.position = (Vector2)spiral.transform.position + delta * 0.99f;
     }
 
     public void activate()
@@ -23,6 +23,10 @@ public class ProjectileSpaceWar : MonoBehaviour {
         if (gameObject.activeInHierarchy && Time.time - timer >= lifeTime)
         {
             rigidbody2D.isKinematic = false;
+            gameObject.SetActive(false);
+        }
+        if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
+        {
             gameObject.SetActive(false);
         }
     }

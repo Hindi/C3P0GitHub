@@ -20,6 +20,11 @@ public class SpaceWarScript : MonoBehaviour {
         basePPPos = playerProjectile.transform.position;
         baseEPPos = enemyProjectile.transform.position;
 	}
+
+    void OnDestroy()
+    {
+        EventManager<bool>.RemoveListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,6 +35,8 @@ public class SpaceWarScript : MonoBehaviour {
     {
         playerShip.transform.position = basePlayerPos;
         enemyShip.transform.position = baseEnemyPos;
+        playerProjectile.SetActive(false);
+        enemyProjectile.SetActive(false);
         playerProjectile.transform.position = basePPPos;
         enemyProjectile.transform.position = baseEPPos;
         playerShip.rigidbody2D.velocity = new Vector2(0, 0);
