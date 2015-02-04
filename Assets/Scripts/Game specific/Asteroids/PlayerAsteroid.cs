@@ -20,9 +20,9 @@ public class PlayerAsteroid : MonoBehaviour {
     float leftRightRange;
 
 
-    float rotLeftRight, rotUpDown;
+    public float rotLeftRight;
+    public float rotUpDown;
 
-    private Ray ray;
 	// Use this for initialization
 	void Start () {
         upDownRange = 10f;
@@ -35,16 +35,22 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
 
+        if (Input.GetKeyDown(KeyCode.Space))
+            this.fire();
+        if (Input.GetKey(KeyCode.LeftArrow))
+            rotLeftRight -= 0.1f;
+        if (Input.GetKey(KeyCode.RightArrow))
+            rotLeftRight += 0.1f;
+        if (Input.GetKey(KeyCode.UpArrow))
+            rotUpDown -= 0.1f;
+        if (Input.GetKey(KeyCode.DownArrow))
+            rotUpDown += 0.1f;
+
         rotLeftRight = Mathf.Clamp(rotLeftRight, -leftRightRange, leftRightRange);
         rotUpDown = Mathf.Clamp(rotUpDown, -upDownRange, upDownRange);
         transform.eulerAngles = new Vector3(rotUpDown, rotLeftRight, 0);
 
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-            rayCast(ray);
-        }
 
 	}
 
@@ -56,7 +62,7 @@ public class PlayerAsteroid : MonoBehaviour {
     public void rayCast(Ray ray)
     {
         RaycastHit hit;
-        Physics.Raycast(ray, out hit, 100000);
+        Physics.Raycast(ray, out hit, 1500);
         if (hit.transform !=null)
         {
             if(hit.transform.CompareTag("Asteroid"))
@@ -69,5 +75,13 @@ public class PlayerAsteroid : MonoBehaviour {
         {
             Debug.Log("j'ai raté");
         }
+    }
+
+    public void fire()
+    {
+        Ray ray;
+        Debug.Log("Je tente de tirer");
+        ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        rayCast(ray);
     }
 }
