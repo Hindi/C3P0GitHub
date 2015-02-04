@@ -74,7 +74,31 @@ public class SpaceWarState : GameState {
     {
         if (loaded)
         {
-
+            foreach (var t in inputs)
+            {
+                if (t.position.x < Screen.width / 2) // partie inférience de l'écran
+                {
+                    if (t.position.x < Screen.height / 2) // partie gauche de l'écran
+                    {
+                        player.rotate(1);
+                    }
+                    else // partie droite
+                    {
+                        player.rotate(-1);
+                    }
+                }
+                else // partie supérieure de l'écran
+                {
+                    if (t.position.x < Screen.height / 2) // partie gauche de l'écran
+                    {
+                        player.fire();
+                    }
+                    else // partie droite
+                    {
+                        player.goForward();
+                    }
+                }
+            }
         }
     }
 
