@@ -18,7 +18,23 @@ public class MushroomBehaviour : MonoBehaviour {
         startPosition = transform.position;
         rigidbody.useGravity = false;
         collider.enabled = false;
-	}
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    public void onGameRestart()
+    {
+        destroy();
+    }
+
+    void OnDestroy()
+    {
+        EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    void destroy()
+    {
+        Destroy(gameObject);
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {

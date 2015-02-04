@@ -54,11 +54,7 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	public void onGamePaused(bool b)
     {
-        if (loaded)
-        {
-            paused = b;
-            applyPause();
-        }
+        applyPause(b);
 	}
 
     /// <summary>Abstract function specific for each game. It is called when the player chose a parameter</summary>

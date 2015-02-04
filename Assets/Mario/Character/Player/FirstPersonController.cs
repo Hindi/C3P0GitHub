@@ -51,6 +51,9 @@ public class FirstPersonController : MonoBehaviour
     public void restart()
     {
         transform.position = startPosition;
+        dieing = false;
+        anim.enabled = true;
+        finishing = false;
     }
 
     // Update is called once per frame
@@ -72,7 +75,9 @@ public class FirstPersonController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, flagBasePosition.position, 5 * Time.deltaTime);
             if(Vector3.Distance(transform.position, flagBasePosition.position) < 0.1f)
-                finishing = false;
+            {
+                //finishing = false;
+            }
         }
         else
         {
@@ -110,6 +115,10 @@ public class FirstPersonController : MonoBehaviour
             {
                 moveLeft();
             }*/
+            if (transform.position.y < -10)
+            {
+                EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+            }
 
             anim.SetBool("moving", moving);
             //anim.SetBool ("sliding", sliding);
