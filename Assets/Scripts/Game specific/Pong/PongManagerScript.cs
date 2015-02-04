@@ -29,6 +29,7 @@ public class PongManagerScript : MonoBehaviour {
 
     [NonSerialized]
     public float resizeHeight, resizeWidth;
+    private float aspectRatio;
 
     [SerializeField]
     private int timerSeconde;
@@ -258,7 +259,7 @@ public class PongManagerScript : MonoBehaviour {
         if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
         {
             textCanvas.SetActive(false);
-            mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, -1, 0.3f, 1000), 0);
+            mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
             gameOver = true;
             ball.transform.position = new Vector3(10, 10, -20);
             Time.timeScale = 0;
@@ -419,9 +420,12 @@ public class PongManagerScript : MonoBehaviour {
         float width, height, ratio;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
-        ratio = width / height;
-        resizeWidth = ratio / (1024f/768f);
-        resizeHeight = (1024f / 768f) / ratio;
+        aspectRatio = width / height;
+        ratio = width / 1024f;
+        resizeWidth = 1;//aspectRatio / (1024f/768f);
+        resizeHeight = 1; //(1024f / 768f) / aspectRatio;
+
+        mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
 
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
