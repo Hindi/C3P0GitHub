@@ -214,6 +214,7 @@ public class FirstPersonController : MonoBehaviour
         if (collider.transform.tag == "Objective")
         {
             finishing = true;
+            anim.enabled=false;
         }
     }
 }
