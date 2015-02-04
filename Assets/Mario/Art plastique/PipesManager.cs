@@ -27,6 +27,8 @@ public class PipesManager : MonoBehaviour {
     {
         bigPipe.transform.position = bigPipeStartPos;
         smallPipe.transform.position = smallPipeStartPos;
+        bigPipeObjPos = bigPipeStartPos;
+        smallPipeObjPos = smallPipeStartPos;
     }
 
     void Update()

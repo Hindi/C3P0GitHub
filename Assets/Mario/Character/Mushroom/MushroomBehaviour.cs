@@ -18,7 +18,23 @@ public class MushroomBehaviour : MonoBehaviour {
         startPosition = transform.position;
         rigidbody.useGravity = false;
         collider.enabled = false;
-	}
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    public void onGameRestart()
+    {
+        destroy();
+    }
+
+    void OnDestroy()
+    {
+        EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    void destroy()
+    {
+        Destroy(gameObject);
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -69,6 +85,14 @@ public class MushroomBehaviour : MonoBehaviour {
             collider.GetComponent<FirstPersonController>().eatChamp();
             Destroy(gameObject);
         }
-
+        if (!bounce && collider.gameObject.layer == LayerMask.NameToLayer("terrain"))
+        {
+            triggerTime = Time.time;
+            bounce = true;
+            if (direction == Vector3.right)
+                direction = Vector3.left;
+            else
+                direction = Vector3.right;
+        }
     }
 }

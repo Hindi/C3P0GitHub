@@ -28,7 +28,10 @@ public class MarioState : GameState
     public override void onGameRestart()
     {
         if (loaded)
+        {
             playerScript_.restart();
+            scoreManager.restart();
+        }
     }
 
     /// <summary>Called when the player lose or win.</summary>

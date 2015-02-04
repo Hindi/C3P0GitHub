@@ -28,14 +28,30 @@ public class GoombaBehaviour : MonoBehaviour
 	void Start ()
     {
         anim = GetComponent<Animator>();
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
 	}
+
+    public void onGameRestart()
+    {
+        destroy();
+    }
+
+    void OnDestroy()
+    {
+        EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
+    }
+
+    void destroy()
+    {
+        Destroy(gameObject);
+    }
 	
 	// Update is called once per frame
 	void Update() 
     {
 		if (isReadyToDie()) 
         {
-			Destroy(gameObject);
+            destroy();
 		}
 	}
 
