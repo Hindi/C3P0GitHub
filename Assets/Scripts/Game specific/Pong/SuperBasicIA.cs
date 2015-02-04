@@ -9,6 +9,7 @@ public class SuperBasicIA : MonoBehaviour {
     [SerializeField]
     private float speed;
     private Vector3 defaultPos;
+    private Vector3 originalScale;
 
     private bool coupSpecial = false;
     private float timer;
@@ -18,7 +19,7 @@ public class SuperBasicIA : MonoBehaviour {
     public void onRestart(float resizeWidth, float resizeHeight)
     {
         transform.position = new Vector3(defaultPos.x * resizeWidth, defaultPos.y * resizeHeight, 0);
-        transform.localScale = new Vector3(resizeWidth, resizeHeight, 1);
+        transform.localScale = new Vector3(originalScale.x * resizeWidth, originalScale.y * resizeHeight, originalScale.z);
         coupSpecial = false;
     }
 
@@ -27,6 +28,7 @@ public class SuperBasicIA : MonoBehaviour {
     {
         pms = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
         defaultPos = transform.position;
+        originalScale = transform.localScale;
     }
 	
 	// Update is called once per frame

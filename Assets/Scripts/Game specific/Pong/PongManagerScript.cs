@@ -21,6 +21,8 @@ public class PongManagerScript : MonoBehaviour {
     private GameObject playerPaddle, enemyPaddle;
     [SerializeField]
     private Sprite origBall, specialBall;
+    [SerializeField]
+    private GameObject pointilles;
 
     [SerializeField]
     private float upScreen, downScreen;
@@ -61,9 +63,13 @@ public class PongManagerScript : MonoBehaviour {
     private float applaudTimer;
     private float initTimerGauche, initTimerDroite;
     private bool applaudsGauche = false, applaudsDroite = false;
+    [SerializeField]
+    private GameObject spectateursFin, gradins;
+
 
     private bool gameOver = false;
     private Matrix4x4 initCameraMatrix;
+    private Vector3 lookAtTarget = new Vector3(0, 0, 0);
 
     private float lastUpdateTime = -1;
 
@@ -91,6 +97,8 @@ public class PongManagerScript : MonoBehaviour {
         mainCamera.GetComponent<Camera>().projectionMatrix = initCameraMatrix;
         mainCamera.transform.position = new Vector3(0, 0, -10);
         textCanvas.SetActive(true);
+        lookAtTarget = new Vector3(0, 0, 0);
+        mainCamera.transform.LookAt(lookAtTarget);
 
         lastUpdateTime = -1;
         colorSide = 0;
@@ -104,6 +112,10 @@ public class PongManagerScript : MonoBehaviour {
         playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
         ball.GetComponent<BallMoving>().onRestart();
+
+        groupeGauche.SetActive(true);
+        groupeDroite.SetActive(true);
+        spectateursFin.SetActive(false);
 
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
@@ -144,6 +156,7 @@ public class PongManagerScript : MonoBehaviour {
         if (gameOver)
         {
             onGameEnd();
+            return;
         }
 
         if (Time.time == lastUpdateTime)
@@ -242,9 +255,8 @@ public class PongManagerScript : MonoBehaviour {
         }
         reset(player);
 
-        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 1)
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
         {
-            Debug.Log("A CHANGER! REMETTRE LE SCORE A 10");
             textCanvas.SetActive(false);
             mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, -1, 0.3f, 1000), 0);
             gameOver = true;
@@ -378,17 +390,27 @@ public class PongManagerScript : MonoBehaviour {
         colorSide = (colorSide == -1) ? 1 : -1;
     }
 
+    private bool firstTimeTurning;
     private void onGameEnd()
     {
         if (Vector3.Distance(mainCamera.transform.position, new Vector3(0, 0, 0)) > 0.5f)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, 0), Time.unscaledDeltaTime);
+            firstTimeTurning = true;
         }
         else
         {
-            mainCamera.transform.LookAt(new Vector3(0, 1, 0));
-            Time.timeScale = 1;
-            EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+            if (firstTimeTurning)
+            {
+                firstTimeTurning = false;
+                groupeGauche.SetActive(false);
+                groupeDroite.SetActive(false);
+                spectateursFin.SetActive(true);
+                EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+                Time.timeScale = 1;
+            }
+            lookAtTarget = Vector3.Lerp(lookAtTarget, new Vector3(0,10,-0.4f), Time.unscaledDeltaTime);
+            mainCamera.transform.LookAt(lookAtTarget);
         }
     }
 
@@ -406,8 +428,17 @@ public class PongManagerScript : MonoBehaviour {
 
         groupeGauche.transform.position = new Vector3(groupeGauche.transform.position.x * resizeWidth, groupeGauche.transform.position.y * resizeHeight, 0);
         groupeDroite.transform.position = new Vector3(groupeDroite.transform.position.x * resizeWidth, groupeDroite.transform.position.y * resizeHeight, 0);
+        spectateursFin.transform.position = new Vector3(spectateursFin.transform.position.x * resizeWidth, spectateursFin.transform.position.y * resizeHeight, 0);
+        gradins.transform.position = new Vector3(gradins.transform.position.x * resizeWidth, gradins.transform.position.y * resizeHeight, 0);
 
+        pointilles.transform.position = new Vector3(pointilles.transform.position.x * resizeWidth, pointilles.transform.position.y * resizeHeight, 0);
+
+
+        // Tous les rescale sont fait avec un rescale identique pour garder une cohérence de forme
         float maxRescale = Math.Max(resizeWidth, resizeHeight);
+        float minRescale = Math.Min(resizeWidth, resizeHeight);
+
+        pointilles.transform.localScale = new Vector3(pointilles.transform.localScale.x * minRescale, pointilles.transform.localScale.y * minRescale, 1);
 
         foreach (GameObject g in spectateursGauche)
         {
