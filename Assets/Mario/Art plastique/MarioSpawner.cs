@@ -8,9 +8,14 @@ public class MarioSpawner : MonoBehaviour {
     [SerializeField]
     private GameObject mushroom;
 
+    private float lastSpawnTime;
+
+    [SerializeField]
+    private float spawnCD;
+
 	// Use this for initialization
 	void Start () {
-	
+        lastSpawnTime = Time.time;
 	}
 
     private void spawnSomething()
@@ -43,9 +48,10 @@ public class MarioSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+
+        if (Time.time - lastSpawnTime > spawnCD)
         {
+            lastSpawnTime = Time.time;
             spawnSomething();
         }
 	}

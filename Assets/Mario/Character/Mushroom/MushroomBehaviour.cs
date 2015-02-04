@@ -6,7 +6,7 @@ public class MushroomBehaviour : MonoBehaviour {
     public double distance;
 
     private bool bounce = false;
-    private bool goingOut = true;
+    private bool goingOut = false;
     private Vector3 startPosition;
     private Vector3 direction = Vector3.right;
 
