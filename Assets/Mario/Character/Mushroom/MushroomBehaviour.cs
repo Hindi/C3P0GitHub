@@ -6,7 +6,7 @@ public class MushroomBehaviour : MonoBehaviour {
     public double distance;
 
     private bool bounce = false;
-    private bool goingOut = false;
+    private bool goingOut = true;
     private Vector3 startPosition;
     private Vector3 direction = Vector3.right;
 
@@ -24,8 +24,8 @@ public class MushroomBehaviour : MonoBehaviour {
 	void FixedUpdate () {
         if (goingOut)
         {
-            transform.Translate(Vector3.up * Time.deltaTime);
-            if (Vector3.Distance(transform.position, startPosition) > distance)
+            //transform.Translate(Vector3.up * Time.deltaTime);
+            //if (Vector3.Distance(transform.position, startPosition) > distance)
             {
                 goingOut = false;
                 rigidbody.useGravity = true;

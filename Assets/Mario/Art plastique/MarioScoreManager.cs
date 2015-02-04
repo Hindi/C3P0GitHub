@@ -4,6 +4,10 @@ using System.Collections;
 public class MarioScoreManager : MonoBehaviour {
 
     private int score;
+    public int Score
+    {
+        get { return score; }
+    }
 
     [SerializeField]
     private PipesManager pipeManager;
@@ -11,9 +15,11 @@ public class MarioScoreManager : MonoBehaviour {
     [SerializeField]
     private GameObject invisBorder;
 
+    bool inPlace;
+
 	// Use this for initialization
 	void Start () {
-	
+        inPlace = false;
 	}
 	
 	// Update is called once per frame
@@ -21,11 +27,18 @@ public class MarioScoreManager : MonoBehaviour {
 	
 	}
 
+    public void restart()
+    {
+        inPlace = false;
+        score = 0;
+    }
+
     public void addScore(int s)
     {
         score += s;
-        if (score > 40)
+        if (score > 40 && !inPlace)
         {
+            inPlace = true;
             pipeManager.moveBigPipe(1);
             invisBorder.SetActive(false);
         }

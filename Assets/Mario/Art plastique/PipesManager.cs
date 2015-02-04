@@ -12,16 +12,27 @@ public class PipesManager : MonoBehaviour {
     Vector3 bigPipeObjPos;
     Vector3 smallPipeObjPos;
 
+    Vector3 bigPipeStartPos;
+    Vector3 smallPipeStartPos;
+
     void Start()
     {
         bigPipeObjPos = bigPipe.transform.position;
         smallPipeObjPos = smallPipe.transform.position;
+        bigPipeStartPos = bigPipeObjPos;
+        smallPipeStartPos = smallPipeObjPos;
+    }
+
+    public void restart()
+    {
+        bigPipe.transform.position = bigPipeStartPos;
+        smallPipe.transform.position = smallPipeStartPos;
     }
 
     void Update()
     {
-        bigPipe.transform.position = Vector3.Lerp(bigPipe.transform.position, bigPipeObjPos, 0.01f);
-        smallPipe.transform.position = Vector3.Lerp(smallPipe.transform.position, smallPipeObjPos, 0.01f);
+        bigPipe.transform.position = Vector3.MoveTowards(bigPipe.transform.position, bigPipeObjPos, 0.01f);
+        smallPipe.transform.position = Vector3.MoveTowards(smallPipe.transform.position, smallPipeObjPos, 0.01f);
     }
 
     public void moveBigPipe(float deltayPositionY)

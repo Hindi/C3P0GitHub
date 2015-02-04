@@ -29,6 +29,9 @@ public class GameChoiceMenu : MonoBehaviour {
         public Button button;
     }
 
+    [SerializeField]
+    private UI ui;
+
     /// <summary>This list is used as a dictionnary but can be used in the editor. It contains the button that will be activated is the game is available.</summary>
     [SerializeField]
     private List<EnumGameDict> buttonDict;
@@ -124,6 +127,7 @@ public class GameChoiceMenu : MonoBehaviour {
     /// <returns>void</returns>
     public void loadLevel(string level)
     {
+        ui.onCloseMenu();
         levelLoader.loadLevel(level);
     }
 }

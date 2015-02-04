@@ -20,6 +20,7 @@ public class FirstPersonController : MonoBehaviour
     private bool jumping = false;
     private bool moving = false;
     private bool facingRight = true;
+    private bool finishing = false;
 
     private bool dieing = false;
     public bool Dieing
@@ -30,7 +31,13 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField]
     private Sprite death;
 
+    [SerializeField]
+    private Transform flagBasePosition;
+
+    private Vector3 startPosition;
+
     CharacterController characterController;
+    float sideSpeed;
 
     // Use this for initialization
     void Start()
@@ -38,6 +45,12 @@ public class FirstPersonController : MonoBehaviour
         //Screen.lockCursor = true;
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        startPosition = transform.position;
+    }
+
+    public void restart()
+    {
+        transform.position = startPosition;
     }
 
     // Update is called once per frame
@@ -55,81 +68,104 @@ public class FirstPersonController : MonoBehaviour
         */
 
         // Movement
-        float forwardSpeed = 0;//Input.GetAxis("Vertical") * movementSpeed;
-        float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
-
-        Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
-
-        speed = transform.rotation * speed;
-        if (speed.x == 0)
-            moving = false;
-
-        if (!characterController.isGrounded)
+        if(finishing)
         {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime * 6;
+            transform.position = Vector3.MoveTowards(transform.position, flagBasePosition.position, 5 * Time.deltaTime);
+            if(Vector3.Distance(transform.position, flagBasePosition.position) < 0.1f)
+                finishing = false;
         }
         else
         {
-            jumping = false;
+            float forwardSpeed = 0;//Input.GetAxis("Vertical") * movementSpeed;
+
+            Vector3 speed = new Vector3(sideSpeed, verticalVelocity, forwardSpeed);
+
+            speed = transform.rotation * speed;
+            if (speed.x == 0)
+                moving = false;
+
+            if (!characterController.isGrounded)
+            {
+                verticalVelocity += Physics.gravity.y * Time.deltaTime * 6;
+            }
+            else
+            {
+                jumping = false;
+            }
+            sliding = false;
+
+           /* if (characterController.isGrounded && Input.GetButton("Jump"))
+            {
+                verticalVelocity = jumpSpeed;
+                AudioSource.PlayClipAtPoint(jumpSound, transform.position);
+                jumping = true;
+            }
+
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                moveRight();
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                moveLeft();
+            }*/
+
+            anim.SetBool("moving", moving);
+            //anim.SetBool ("sliding", sliding);
+            anim.SetBool("jumping", jumping);
+
+            characterController.Move(speed * Time.deltaTime);
         }
 
-        if (characterController.isGrounded && Input.GetButton("Jump"))
+        
+    }
+
+    public void jump()
+    {
+        if (characterController.isGrounded)
         {
             verticalVelocity = jumpSpeed;
             AudioSource.PlayClipAtPoint(jumpSound, transform.position);
             jumping = true;
         }
-
-        sliding = false;
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            moveRight();
-            moving = true;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            moveLeft();
-            moving = true;
-        }
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-
-            scoreManager.addScore(11);
-        }
-
-        
-		anim.SetBool ("moving", moving);
-		//anim.SetBool ("sliding", sliding);
-		anim.SetBool ("jumping", jumping);
-
-        characterController.Move(speed * Time.deltaTime);
     }
 
-    void moveRight ()
+    public void moveRight ()
 	{
-		if (!facingRight) 
-		{
-			flip();
-            /*if (moving)
-            {
-                sliding = true;
-            }*/
-		}
-
-	}
-
-	void moveLeft ()
-	{
-		if (facingRight) 
-		{
-			flip();
-            /*if (moving)
-            {
-                sliding = true;
-            }*/
+        if (!finishing)
+        {
+            if (!facingRight)
+                flip();
+            moving = true;
+            move();
         }
+        else
+            stop();
 	}
+
+    public void moveLeft()
+	{
+        if(!finishing)
+        {
+            if (facingRight)
+                flip();
+            move();
+        }
+        else
+            stop();
+	}
+
+    void move()
+    {
+        moving = true;
+        sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+    }
+
+    public void stop()
+    {
+        sideSpeed = 0;
+    }
 
     void flip()
     {
@@ -164,11 +200,11 @@ public class FirstPersonController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = death;
     }
 
-    void OnCollisionStay(Collision collisionInfo)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collisionInfo.collider.transform.tag == "Pipe")
+        if (collider.transform.tag == "Objective")
         {
-            Debug.Log("huk");
+            finishing = true;
         }
     }
 }

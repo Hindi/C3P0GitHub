@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour {
         stateList.Add(StateEnum.TETRIS, new TetrisState(this));
         stateList.Add(StateEnum.SPACEWAR, new SpaceWarState(this));
         stateList.Add(StateEnum.ASTEROIDS, new AsteroidsState(this));
+        stateList.Add(StateEnum.MARIO, new MarioState(this));
         currentState.start();
 	}
 	
