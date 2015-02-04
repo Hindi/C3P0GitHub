@@ -1,0 +1,3909 @@
+fileFormatVersion: 2
+guid: 82dcfec7354f5ce47af3b3cf28b79623
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: death
+    21300002: supermariobros_0
+    21300004: supermariobros_1
+    21300006: supermariobros_2
+    21300008: supermariobros_3
+    21300010: supermariobros_4
+    21300012: supermariobros_5
+    21300014: supermariobros_6
+    21300016: supermariobros_7
+    21300018: supermariobros_8
+    21300020: supermariobros_9
+    21300022: supermariobros_10
+    21300024: supermariobros_11
+    21300026: supermariobros_12
+    21300028: supermariobros_13
+    21300030: supermariobros_14
+    21300032: supermariobros_15
+    21300034: supermariobros_16
+    21300036: supermariobros_17
+    21300038: supermariobros_18
+    21300040: supermariobros_19
+    21300042: supermariobros_20
+    21300044: supermariobros_21
+    21300046: supermariobros_22
+    21300048: supermariobros_23
+    21300050: supermariobros_24
+    21300052: supermariobros_25
+    21300054: supermariobros_26
+    21300056: supermariobros_27
+    21300058: supermariobros_28
+    21300060: supermariobros_29
+    21300062: supermariobros_30
+    21300064: supermariobros_31
+    21300066: supermariobros_32
+    21300068: supermariobros_33
+    21300070: supermariobros_34
+    21300072: supermariobros_35
+    21300074: supermariobros_36
+    21300076: supermariobros_37
+    21300078: supermariobros_38
+    21300080: supermariobros_39
+    21300082: supermariobros_40
+    21300084: supermariobros_41
+    21300086: supermariobros_42
+    21300088: supermariobros_43
+    21300090: supermariobros_44
+    21300092: supermariobros_45
+    21300094: supermariobros_46
+    21300096: supermariobros_47
+    21300098: supermariobros_48
+    21300100: supermariobros_49
+    21300102: supermariobros_50
+    21300104: supermariobros_51
+    21300106: supermariobros_52
+    21300108: supermariobros_53
+    21300110: supermariobros_54
+    21300112: supermariobros_55
+    21300114: supermariobros_56
+    21300116: supermariobros_57
+    21300118: supermariobros_58
+    21300120: supermariobros_59
+    21300122: supermariobros_60
+    21300124: supermariobros_61
+    21300126: supermariobros_62
+    21300128: supermariobros_63
+    21300130: supermariobros_64
+    21300132: supermariobros_65
+    21300134: supermariobros_66
+    21300136: supermariobros_67
+    21300138: supermariobros_68
+    21300140: supermariobros_69
+    21300142: supermariobros_70
+    21300144: supermariobros_71
+    21300146: supermariobros_72
+    21300148: supermariobros_73
+    21300150: supermariobros_74
+    21300152: supermariobros_75
+    21300154: supermariobros_76
+    21300156: supermariobros_77
+    21300158: supermariobros_78
+    21300160: supermariobros_79
+    21300162: supermariobros_80
+    21300164: supermariobros_81
+    21300166: supermariobros_82
+    21300168: supermariobros_83
+    21300170: supermariobros_84
+    21300172: supermariobros_85
+    21300174: supermariobros_86
+    21300176: supermariobros_87
+    21300178: supermariobros_88
+    21300180: supermariobros_89
+    21300182: supermariobros_90
+    21300184: supermariobros_91
+    21300186: supermariobros_92
+    21300188: supermariobros_93
+    21300190: supermariobros_94
+    21300192: supermariobros_95
+    21300194: supermariobros_96
+    21300196: supermariobros_97
+    21300198: supermariobros_98
+    21300200: supermariobros_99
+    21300202: supermariobros_100
+    21300204: supermariobros_101
+    21300206: supermariobros_102
+    21300208: supermariobros_103
+    21300210: supermariobros_104
+    21300212: supermariobros_105
+    21300214: supermariobros_106
+    21300216: supermariobros_107
+    21300218: supermariobros_108
+    21300220: supermariobros_109
+    21300222: supermariobros_110
+    21300224: supermariobros_111
+    21300226: supermariobros_112
+    21300228: supermariobros_113
+    21300230: supermariobros_114
+    21300232: supermariobros_115
+    21300234: supermariobros_116
+    21300236: supermariobros_117
+    21300238: supermariobros_118
+    21300240: supermariobros_119
+    21300242: supermariobros_120
+    21300244: death
+    21300246: supermariobros_122
+    21300248: supermariobros_123
+    21300250: supermariobros_124
+    21300252: supermariobros_125
+    21300254: supermariobros_126
+    21300256: supermariobros_127
+    21300258: supermariobros_128
+    21300260: supermariobros_129
+    21300262: supermariobros_130
+    21300264: supermariobros_131
+    21300266: supermariobros_132
+    21300268: supermariobros_133
+    21300270: supermariobros_134
+    21300272: supermariobros_135
+    21300274: supermariobros_136
+    21300276: supermariobros_137
+    21300278: supermariobros_138
+    21300280: supermariobros_139
+    21300282: supermariobros_140
+    21300284: supermariobros_141
+    21300286: supermariobros_142
+    21300288: supermariobros_143
+    21300290: supermariobros_144
+    21300292: supermariobros_145
+    21300294: supermariobros_146
+    21300296: supermariobros_147
+    21300298: supermariobros_148
+    21300300: supermariobros_149
+    21300302: supermariobros_150
+    21300304: supermariobros_151
+    21300306: supermariobros_152
+    21300308: supermariobros_153
+    21300310: supermariobros_154
+    21300312: supermariobros_155
+    21300314: supermariobros_156
+    21300316: supermariobros_157
+    21300318: supermariobros_158
+    21300320: supermariobros_159
+    21300322: supermariobros_160
+    21300324: supermariobros_161
+    21300326: supermariobros_162
+    21300328: supermariobros_163
+    21300330: supermariobros_164
+    21300332: supermariobros_165
+    21300334: supermariobros_166
+    21300336: supermariobros_167
+    21300338: supermariobros_168
+    21300340: supermariobros_169
+    21300342: supermariobros_170
+    21300344: supermariobros_171
+    21300346: supermariobros_172
+    21300348: supermariobros_173
+    21300350: supermariobros_174
+    21300352: supermariobros_175
+    21300354: supermariobros_176
+    21300356: supermariobros_177
+    21300358: supermariobros_178
+    21300360: supermariobros_179
+    21300362: supermariobros_180
+    21300364: supermariobros_181
+    21300366: supermariobros_182
+    21300368: supermariobros_183
+    21300370: supermariobros_184
+    21300372: supermariobros_185
+    21300374: supermariobros_186
+    21300376: supermariobros_187
+    21300378: supermariobros_188
+    21300380: supermariobros_189
+    21300382: supermariobros_190
+    21300384: supermariobros_191
+    21300386: supermariobros_192
+    21300388: supermariobros_193
+    21300390: supermariobros_194
+    21300392: supermariobros_195
+    21300394: supermariobros_196
+    21300396: supermariobros_197
+    21300398: supermariobros_198
+    21300400: supermariobros_199
+    21300402: supermariobros_200
+    21300404: supermariobros_201
+    21300406: supermariobros_202
+    21300408: supermariobros_203
+    21300410: supermariobros_204
+    21300412: supermariobros_205
+    21300414: supermariobros_206
+    21300416: supermariobros_207
+    21300418: supermariobros_208
+    21300420: supermariobros_209
+    21300422: supermariobros_210
+    21300424: supermariobros_211
+    21300426: supermariobros_212
+    21300428: supermariobros_213
+    21300430: supermariobros_214
+    21300432: supermariobros_215
+    21300434: supermariobros_216
+    21300436: supermariobros_217
+    21300438: supermariobros_218
+    21300440: supermariobros_219
+    21300442: supermariobros_220
+    21300444: supermariobros_221
+    21300446: supermariobros_222
+    21300448: supermariobros_223
+    21300450: supermariobros_224
+    21300452: supermariobros_225
+    21300454: supermariobros_226
+    21300456: supermariobros_227
+    21300458: supermariobros_228
+    21300460: supermariobros_229
+    21300462: supermariobros_230
+    21300464: supermariobros_231
+    21300466: supermariobros_232
+    21300468: supermariobros_233
+    21300470: supermariobros_234
+    21300472: supermariobros_235
+    21300474: supermariobros_236
+    21300476: supermariobros_237
+    21300478: supermariobros_238
+    21300480: supermariobros_239
+    21300482: supermariobros_240
+    21300484: supermariobros_241
+    21300486: supermariobros_242
+    21300488: supermariobros_243
+    21300490: supermariobros_244
+    21300492: supermariobros_245
+    21300494: supermariobros_246
+    21300496: supermariobros_247
+    21300498: supermariobros_248
+    21300500: supermariobros_249
+    21300502: supermariobros_250
+    21300504: supermariobros_251
+    21300506: supermariobros_252
+    21300508: supermariobros_253
+    21300510: supermariobros_254
+    21300512: supermariobros_255
+    21300514: supermariobros_256
+    21300516: supermariobros_257
+    21300518: supermariobros_258
+    21300520: supermariobros_259
+    21300522: supermariobros_260
+    21300524: supermariobros_261
+    21300526: supermariobros_262
+    21300528: supermariobros_263
+    21300530: supermariobros_264
+    21300532: supermariobros_265
+    21300534: supermariobros_266
+    21300536: supermariobros_267
+    21300538: supermariobros_268
+    21300540: supermariobros_269
+    21300542: supermariobros_270
+    21300544: supermariobros_271
+    21300546: supermariobros_272
+    21300548: supermariobros_273
+    21300550: supermariobros_274
+    21300552: supermariobros_275
+    21300554: supermariobros_276
+    21300556: supermariobros_277
+    21300558: supermariobros_278
+    21300560: supermariobros_279
+    21300562: supermariobros_280
+    21300564: supermariobros_281
+    21300566: supermariobros_282
+    21300568: supermariobros_283
+    21300570: supermariobros_284
+    21300572: supermariobros_285
+    21300574: supermariobros_286
+    21300576: supermariobros_287
+    21300578: supermariobros_288
+    21300580: supermariobros_289
+    21300582: supermariobros_290
+    21300584: supermariobros_291
+    21300586: supermariobros_292
+    21300588: supermariobros_293
+    21300590: supermariobros_294
+    21300592: supermariobros_295
+    21300594: supermariobros_296
+    21300596: supermariobros_297
+    21300598: supermariobros_298
+    21300600: supermariobros_299
+    21300602: supermariobros_300
+    21300604: supermariobros_301
+    21300606: supermariobros_302
+    21300608: supermariobros_303
+    21300610: supermariobros_304
+    21300612: supermariobros_305
+    21300614: supermariobros_306
+    21300616: supermariobros_307
+    21300618: supermariobros_308
+    21300620: supermariobros_309
+    21300622: supermariobros_310
+    21300624: supermariobros_311
+    21300626: supermariobros_312
+    21300628: supermariobros_313
+    21300630: supermariobros_314
+    21300632: supermariobros_315
+    21300634: supermariobros_316
+    21300636: supermariobros_317
+    21300638: supermariobros_318
+    21300640: supermariobros_319
+    21300642: supermariobros_320
+    21300644: supermariobros_321
+    21300646: supermariobros_322
+    21300648: supermariobros_323
+    21300650: supermariobros_324
+    21300652: supermariobros_325
+    21300654: supermariobros_326
+    21300656: supermariobros_327
+    21300658: supermariobros_328
+    21300660: supermariobros_329
+    21300662: supermariobros_330
+    21300664: supermariobros_331
+    21300666: supermariobros_332
+    21300668: supermariobros_333
+    21300670: supermariobros_334
+    21300672: supermariobros_335
+    21300674: supermariobros_336
+    21300676: supermariobros_337
+    21300678: supermariobros_338
+    21300680: supermariobros_339
+    21300682: supermariobros_340
+    21300684: supermariobros_341
+    21300686: supermariobros_342
+    21300688: supermariobros_343
+    21300690: supermariobros_344
+    21300692: supermariobros_345
+    21300694: supermariobros_346
+    21300696: supermariobros_347
+    21300698: supermariobros_348
+    21300700: supermariobros_349
+    21300702: supermariobros_350
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: supermariobros_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1695
+        width: 42
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 1693
+        width: 40
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_2
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1690
+        width: 50
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_3
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 1690
+        width: 42
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_4
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 1687
+        width: 45
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1632
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_6
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 1319
+        width: 35
+        height: 363
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_7
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 1643
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_8
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 1663
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_9
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 1648
+        width: 37
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_10
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1648
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_11
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 1645
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_12
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 1645
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_13
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1620
+        width: 67
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_14
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 1618
+        width: 104
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_15
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1628
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_16
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 1642
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_17
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 1605
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_18
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1605
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_19
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 1605
+        width: 12
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_20
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1585
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_21
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 1585
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_22
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 1585
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_23
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1597
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_24
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 1595
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_25
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1595
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_26
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 1595
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_27
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1588
+        width: 99
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_28
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 1531
+        width: 162
+        height: 77
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_29
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 1566
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_30
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1566
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_31
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 1566
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_32
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 1540
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_33
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 1538
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_34
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1553
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_35
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 1551
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_36
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 1551
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_37
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 1530
+        width: 99
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_38
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 1520
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_39
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1520
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_40
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1520
+        width: 4
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_41
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 1520
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_42
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1508
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_43
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 1508
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_44
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1508
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_45
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 1508
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_46
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1460
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_47
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 1460
+        width: 194
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_48
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1409
+        width: 32
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_49
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 1409
+        width: 35
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_50
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 1419
+        width: 52
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_51
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1354
+        width: 120
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_52
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 1389
+        width: 66
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_53
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 1356
+        width: 132
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_54
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1323
+        width: 104
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_55
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 1364
+        width: 98
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_56
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 1256
+        width: 132
+        height: 83
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_57
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1289
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_58
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1289
+        width: 39
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_59
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 1287
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_60
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 1287
+        width: 34
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_61
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 1259
+        width: 132
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_62
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 888
+        width: 331
+        height: 398
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_63
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 1102
+        width: 182
+        height: 184
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_64
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 1232
+        width: 28
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_65
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 1079
+        width: 67
+        height: 140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_66
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 1207
+        width: 60
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_67
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 1211
+        width: 41
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_68
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1075
+        width: 145
+        height: 136
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_69
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1144
+        width: 56
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_70
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1144
+        width: 57
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_71
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 1144
+        width: 57
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_72
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 1130
+        width: 40
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_73
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1130
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_74
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 1130
+        width: 34
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_75
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 1130
+        width: 35
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_76
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1087
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_77
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 1087
+        width: 35
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_78
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 922
+        width: 89
+        height: 140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_79
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 1045
+        width: 32
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_80
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 1045
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_81
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 1045
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_82
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1045
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_83
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1045
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_84
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 1045
+        width: 29
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_85
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1045
+        width: 29
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_86
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1042
+        width: 46
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_87
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 1045
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_88
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 1007
+        width: 78
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_89
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 1007
+        width: 47
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_90
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1007
+        width: 49
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_91
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1007
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_92
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 1005
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_93
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 938
+        width: 34
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_94
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 938
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_95
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 938
+        width: 50
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_96
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 938
+        width: 32
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_97
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 938
+        width: 96
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_98
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 938
+        width: 30
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_99
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 938
+        width: 30
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_100
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 903
+        width: 49
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_101
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 903
+        width: 63
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_102
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 903
+        width: 49
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_103
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 903
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_104
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 903
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_105
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 901
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_106
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 871
+        width: 37
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_107
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 818
+        width: 32
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_108
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 805
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_109
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 806
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_110
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 805
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_111
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 806
+        width: 36
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_112
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 808
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_113
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 808
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_114
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 774
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_115
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 773
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_116
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 774
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_117
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 774
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_118
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 774
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_119
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 774
+        width: 37
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_120
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 805
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: death
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 774
+        width: 34
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_122
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 763
+        width: 29
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_123
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 764
+        width: 34
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_124
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 761
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_125
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 763
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_126
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 764
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_127
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 763
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_128
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 764
+        width: 37
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_129
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 744
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_130
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 746
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_131
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 744
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_132
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 746
+        width: 36
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_133
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 748
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_134
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 748
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_135
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 734
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_136
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 734
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_137
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 734
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_138
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 734
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_139
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 734
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_140
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 734
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_141
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 723
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_142
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 724
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_143
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 723
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_144
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 723
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_145
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 724
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_146
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 723
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_147
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 684
+        width: 35
+        height: 52
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_148
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 686
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_149
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 684
+        width: 35
+        height: 52
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_150
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 686
+        width: 36
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_151
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 659
+        width: 33
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_152
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 661
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_153
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 661
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_154
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 659
+        width: 32
+        height: 65
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_155
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 663
+        width: 35
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_156
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 659
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_157
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 664
+        width: 34
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_158
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 647
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_159
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 649
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_160
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 649
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_161
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 649
+        width: 31
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_162
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 651
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_163
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 649
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_164
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 654
+        width: 34
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_165
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 688
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_166
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 688
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_167
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 652
+        width: 35
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_168
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 652
+        width: 33
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_169
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 584
+        width: 35
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_170
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 584
+        width: 30
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_171
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 589
+        width: 32
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_172
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 589
+        width: 35
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_173
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 589
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_174
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 589
+        width: 34
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_175
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 589
+        width: 30
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_176
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 589
+        width: 34
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_177
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 572
+        width: 34
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_178
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 571
+        width: 32
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_179
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 576
+        width: 30
+        height: 56
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_180
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 576
+        width: 35
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_181
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 577
+        width: 34
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_182
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 576
+        width: 35
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_183
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 576
+        width: 30
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_184
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 576
+        width: 35
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_185
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 594
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_186
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 589
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_187
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 589
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_188
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 587
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_189
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 587
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_190
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 586
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_191
+      rect:
+        serializedVersion: 2
+        x: 1007
+        y: 586
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_192
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 512
+        width: 34
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_193
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 512
+        width: 36
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_194
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 515
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_195
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 517
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_196
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 514
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_197
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 517
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_198
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 500
+        width: 35
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_199
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 500
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_200
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 502
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_201
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 504
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_202
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 500
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_203
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 505
+        width: 35
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_204
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 562
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_205
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 562
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_206
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 512
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_207
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 500
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_208
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 497
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_209
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 497
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_210
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 497
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_211
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 495
+        width: 30
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_212
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 494
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_213
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 495
+        width: 30
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_214
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 495
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_215
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 439
+        width: 30
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_216
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 444
+        width: 31
+        height: 56
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_217
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 442
+        width: 35
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_218
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 442
+        width: 30
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_219
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 440
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_220
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 442
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_221
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 442
+        width: 34
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_222
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 430
+        width: 30
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_223
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 430
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_224
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 429
+        width: 32
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_225
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 430
+        width: 34
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_226
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 429
+        width: 35
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_227
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 437
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_228
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 437
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_229
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 437
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_230
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 462
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_231
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 445
+        width: 18
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_232
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 467
+        width: 32
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_233
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 449
+        width: 18
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_234
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 415
+        width: 44
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_235
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 415
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_236
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 415
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_237
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 405
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_238
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 405
+        width: 34
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_239
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 409
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_240
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 409
+        width: 32
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_241
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 409
+        width: 50
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_242
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 409
+        width: 60
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_243
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 409
+        width: 23
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_244
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 409
+        width: 26
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_245
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 404
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_246
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 404
+        width: 31
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_247
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 404
+        width: 32
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_248
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 410
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_249
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 353
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_250
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 353
+        width: 30
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_251
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 357
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_252
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 357
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_253
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 358
+        width: 35
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_254
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 355
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_255
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 355
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_256
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 355
+        width: 35
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_257
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 355
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_258
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 355
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_259
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 357
+        width: 35
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_260
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 357
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_261
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 358
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_262
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 360
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_263
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 360
+        width: 36
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_264
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 358
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_265
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 340
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_266
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 338
+        width: 34
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_267
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 360
+        width: 28
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_268
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 362
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_269
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 360
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_270
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 360
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_271
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 362
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_272
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 360
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_273
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 325
+        width: 38
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_274
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 317
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_275
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 318
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_276
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 318
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_277
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 318
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_278
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 318
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_279
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 280
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_280
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 278
+        width: 34
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_281
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 320
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_282
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 322
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_283
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 320
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_284
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 320
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_285
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 322
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_286
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 320
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_287
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 248
+        width: 65
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_288
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 248
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_289
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 248
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_290
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 248
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_291
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 293
+        width: 30
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_292
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 293
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_293
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 277
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_294
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 278
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_295
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 277
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_296
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 277
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_297
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 277
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_298
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 248
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_299
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 248
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_300
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 246
+        width: 30
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_301
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 248
+        width: 34
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_302
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 246
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_303
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 251
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_304
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 248
+        width: 36
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_305
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 215
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_306
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 158
+        width: 221
+        height: 98
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_307
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 246
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_308
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 213
+        width: 52
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_309
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 213
+        width: 52
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_310
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 215
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_311
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 206
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_312
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 206
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_313
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 205
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_314
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 206
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_315
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 206
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_316
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 206
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_317
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 206
+        width: 37
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_318
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 185
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_319
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 185
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_320
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 185
+        width: 25
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_321
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 176
+        width: 67
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_322
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 166
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_323
+      rect:
+        serializedVersion: 2
+        x: 895
+        y: 166
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_324
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 166
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_325
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 166
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_326
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 166
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_327
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 166
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_328
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 146
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_329
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 146
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_330
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 146
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_331
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 145
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_332
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 145
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_333
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 138
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_334
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 136
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_335
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 135
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_336
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 133
+        width: 30
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_337
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 128
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_338
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 128
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_339
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 128
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_340
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 128
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_341
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 129
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_342
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 129
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_343
+      rect:
+        serializedVersion: 2
+        x: 895
+        y: 93
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_344
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 93
+        width: 33
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_345
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 91
+        width: 30
+        height: 65
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_346
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 94
+        width: 36
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_347
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 91
+        width: 33
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_348
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 96
+        width: 33
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_349
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 91
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: supermariobros_350
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 774
+        width: 34
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

@@ -16,13 +16,14 @@ public class CameraController : MonoBehaviour {
     private Vector3 startPosition;
     private float dezoomSpeed;
 
-    private bool turned;
+    private bool turnedRight;
+    private bool turnedLeft;
 	// Use this for initialization
     void Start()
     {
-        turned = false;
+        turnedRight = false;
+        turnedLeft = false;
         orthographicFollow();
-        Screen.SetResolution(1920, 1200, true);
         playerScript = player.GetComponent<PlayerBehaviour>();
         transform.position = player.transform.position;
         goalRotation = (int)transform.rotation.y;
@@ -37,28 +38,28 @@ public class CameraController : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (!turned)
+            if (!turnedRight)
             {
                 turnLeft();
-                turned = true;
+                turnedRight = true;
             }
             else
             {
                 turnRight();
-                turned = false;
+                turnedRight = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (!turned)
+            if (!turnedLeft)
             {
                 turnRight();
-                turned = true;
+                turnedLeft = true;
             }
             else
             {
                 turnLeft();
-                turned = false;
+                turnedLeft = false;
             }
         }
         if (Input.GetKeyDown("p"))

@@ -66,6 +66,11 @@ public class Spawner : MonoBehaviour {
         // Create a random index that will choose the one to be drawn in tetrominos
         int i = Random.Range(0, tetrominos.Length);
 
+        // This makes sure we don't draw the max value for the random, so we can't have an out of range for the array
+        while( i == tetrominos.Length)
+        {
+            i = Random.Range(0, tetrominos.Length);
+        }
         // Create a Tetromino at the spawner Position
         Instantiate(tetrominos[i],
                     transform.position,
