@@ -112,6 +112,7 @@ public class PongManagerScript : MonoBehaviour {
         textCanvas.SetActive(true);
         lookAtTarget = new Vector3(0, 0, 0);
         mainCamera.transform.LookAt(lookAtTarget);
+        mainCamera.GetComponent<Camera>().backgroundColor = new Color(0, 0, 0);
 
         lastUpdateTime = -1;
         colorSide = 0;
@@ -440,6 +441,9 @@ public class PongManagerScript : MonoBehaviour {
     private void onGameLost()
     {
         gameLost = true;
+        //mainCamera.GetComponent<Camera>().backgroundColor = new Color(120f/255, 120f/255, 120f/255);
+        textCanvas.SetActive(false);
+        //mainCamera.transform.position = new Vector3(0, 0, 20);
         libellule.SetActive(true);
         libellule.GetComponent<Libellule>().activate();
     }
