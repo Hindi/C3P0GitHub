@@ -31,23 +31,18 @@ public class PongManagerScript : MonoBehaviour {
     public float resizeHeight, resizeWidth;
     private float aspectRatio;
 
-    [SerializeField]
-    private int timerSeconde;
-    private float initTime;
 
     [SerializeField]
     private float specialSpeed;
 
-    private bool coupSpecial;
-    private bool coupSpecialCharging = true;
-    private bool fireBall;
-    private int player;
+    /* Déplacement de la balle */
     private Vector2 oldSpeed;
     private Vector3 currentAngles;
     private int currentDirection;
 
     public Parameter param;
 
+    /* Coup spécial */
     private float coupSpecialTimer = -1;
     private int frameTimer = 0;
     private bool animationEnded = true;
@@ -56,6 +51,15 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject afficheCoupSpecial;
     private float afficheCoupSpecialInitialY;
+    private bool coupSpecial;
+    private bool coupSpecialCharging = true;
+    private bool fireBall;
+    private int player;
+    [SerializeField]
+    private int timerSeconde;
+    private float initTime;
+
+    /* Spectateurs pendant le jeu */
     [SerializeField]
     private GameObject[] spectateursGauche, spectateursDroite;
     [SerializeField]
@@ -64,16 +68,23 @@ public class PongManagerScript : MonoBehaviour {
     private float applaudTimer;
     private float initTimerGauche, initTimerDroite;
     private bool applaudsGauche = false, applaudsDroite = false;
+
+
+    /* Fin du jeu */
+    /* Victoire */
     [SerializeField]
     private GameObject spectateursFin, gradins;
-
-
-    private bool gameOver = false;
+    private bool gameOver = false, gameLost = false;
     private Matrix4x4 initCameraMatrix;
     private Vector3 lookAtTarget = new Vector3(0, 0, 0);
+    /* Defaite */
+    [SerializeField]
+    private GameObject libellule;
 
+    /* Ne pas faire les updates si le jeu est en pause */
     private float lastUpdateTime = -1;
 
+    /* Utilisé pour le score envoyé au serveur */
     public int playerScore
     {
         get
@@ -94,6 +105,7 @@ public class PongManagerScript : MonoBehaviour {
     public void onRestart()
     {
         gameOver = false;
+        gameLost = false;
 
         mainCamera.GetComponent<Camera>().projectionMatrix = initCameraMatrix;
         mainCamera.transform.position = new Vector3(0, 0, -10);
@@ -112,6 +124,7 @@ public class PongManagerScript : MonoBehaviour {
         arrow.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
+        ball.SetActive(true);
         ball.GetComponent<BallMoving>().onRestart();
 
         groupeGauche.SetActive(true);
@@ -157,6 +170,10 @@ public class PongManagerScript : MonoBehaviour {
         if (gameOver)
         {
             onGameEnd();
+            return;
+        }
+        if (gameLost)
+        {
             return;
         }
 
@@ -258,11 +275,16 @@ public class PongManagerScript : MonoBehaviour {
 
         if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
         {
-            textCanvas.SetActive(false);
-            mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
-            gameOver = true;
-            ball.transform.position = new Vector3(10, 10, -20);
-            Time.timeScale = 0;
+            ball.transform.position = new Vector3(10, 3, -20);
+            ball.SetActive(false);
+            if (player == -1)
+            {
+                gameOver = true;
+                mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
+                textCanvas.SetActive(false);
+                Time.timeScale = 0;
+            }
+            else onGameLost();
         }
 
     }
@@ -413,6 +435,13 @@ public class PongManagerScript : MonoBehaviour {
             lookAtTarget = Vector3.Lerp(lookAtTarget, new Vector3(0,10,-0.4f), Time.unscaledDeltaTime);
             mainCamera.transform.LookAt(lookAtTarget);
         }
+    }
+
+    private void onGameLost()
+    {
+        gameLost = true;
+        libellule.SetActive(true);
+        libellule.GetComponent<Libellule>().activate();
     }
 
     public void updateElementsResolution()
