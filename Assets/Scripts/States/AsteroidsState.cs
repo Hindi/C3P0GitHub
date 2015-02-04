@@ -5,6 +5,9 @@ public class AsteroidsState : GameState
 {
     private int paramId;
 
+    private PlayerAsteroid playerScript_;
+
+    private GameObject player_;
 
     public AsteroidsState(StateManager stateManager)
         : base(stateManager)
@@ -41,6 +44,8 @@ public class AsteroidsState : GameState
     {
         base.onLevelWasLoaded(lvl);
         loaded = true;
+        player_ = GameObject.FindGameObjectWithTag("Player");
+        playerScript_ = player_.GetComponent<PlayerAsteroid>();
         ui.onCloseMenu();
         //ui.setParamCanvas(gameId);
 
@@ -95,15 +100,15 @@ public class AsteroidsState : GameState
     {
         if (loaded)
         {
-            /*base.noticeInput(key);
+            base.noticeInput(key);
             if (key == EnumInput.SPACE)
                 playerScript_.fire();
             if (key == EnumInput.LEFT)
-                playerScript_.move(-1);
-            else if (key == EnumInput.RIGHT)
-                playerScript_.move(1);
-            if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
-                playerScript_.stop();*/
+                playerScript_.rotLeftRight--;
+            //else if (key == EnumInput.RIGHT)
+                //playerScript_.move(1);
+            //if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
+                    //playerScript_.stop();
         }
     }
 }

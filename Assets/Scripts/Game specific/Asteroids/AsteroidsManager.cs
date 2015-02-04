@@ -12,4 +12,10 @@ public class AsteroidsManager : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public static bool rayCast(Ray ray)
+    {
+        return false;
+    }
+
 }

@@ -21,30 +21,28 @@ public class PongManagerScript : MonoBehaviour {
     private GameObject playerPaddle, enemyPaddle;
     [SerializeField]
     private Sprite origBall, specialBall;
+    [SerializeField]
+    private GameObject pointilles;
 
     [SerializeField]
     private float upScreen, downScreen;
 
     [NonSerialized]
     public float resizeHeight, resizeWidth;
+    private float aspectRatio;
 
-    [SerializeField]
-    private int timerSeconde;
-    private float initTime;
 
     [SerializeField]
     private float specialSpeed;
 
-    private bool coupSpecial;
-    private bool coupSpecialCharging = true;
-    private bool fireBall;
-    private int player;
+    /* Déplacement de la balle */
     private Vector2 oldSpeed;
     private Vector3 currentAngles;
     private int currentDirection;
 
     public Parameter param;
 
+    /* Coup spécial */
     private float coupSpecialTimer = -1;
     private int frameTimer = 0;
     private bool animationEnded = true;
@@ -53,6 +51,15 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject afficheCoupSpecial;
     private float afficheCoupSpecialInitialY;
+    private bool coupSpecial;
+    private bool coupSpecialCharging = true;
+    private bool fireBall;
+    private int player;
+    [SerializeField]
+    private int timerSeconde;
+    private float initTime;
+
+    /* Spectateurs pendant le jeu */
     [SerializeField]
     private GameObject[] spectateursGauche, spectateursDroite;
     [SerializeField]
@@ -62,11 +69,22 @@ public class PongManagerScript : MonoBehaviour {
     private float initTimerGauche, initTimerDroite;
     private bool applaudsGauche = false, applaudsDroite = false;
 
-    private bool gameOver = false;
-    private Matrix4x4 initCameraMatrix;
 
+    /* Fin du jeu */
+    /* Victoire */
+    [SerializeField]
+    private GameObject spectateursFin, gradins;
+    private bool gameOver = false, gameLost = false;
+    private Matrix4x4 initCameraMatrix;
+    private Vector3 lookAtTarget = new Vector3(0, 0, 0);
+    /* Defaite */
+    [SerializeField]
+    private GameObject libellule;
+
+    /* Ne pas faire les updates si le jeu est en pause */
     private float lastUpdateTime = -1;
 
+    /* Utilisé pour le score envoyé au serveur */
     public int playerScore
     {
         get
@@ -87,10 +105,13 @@ public class PongManagerScript : MonoBehaviour {
     public void onRestart()
     {
         gameOver = false;
+        gameLost = false;
 
         mainCamera.GetComponent<Camera>().projectionMatrix = initCameraMatrix;
         mainCamera.transform.position = new Vector3(0, 0, -10);
         textCanvas.SetActive(true);
+        lookAtTarget = new Vector3(0, 0, 0);
+        mainCamera.transform.LookAt(lookAtTarget);
 
         lastUpdateTime = -1;
         colorSide = 0;
@@ -103,7 +124,12 @@ public class PongManagerScript : MonoBehaviour {
         arrow.SetActive(false);
         playerPaddle.GetComponent<PlayerControl>().onRestart(resizeWidth, resizeHeight);
         enemyPaddle.GetComponent<SuperBasicIA>().onRestart(resizeWidth, resizeHeight);
+        ball.SetActive(true);
         ball.GetComponent<BallMoving>().onRestart();
+
+        groupeGauche.SetActive(true);
+        groupeDroite.SetActive(true);
+        spectateursFin.SetActive(false);
 
         texts[0].text = 0.ToString();
         texts[1].text = 0.ToString();
@@ -144,6 +170,11 @@ public class PongManagerScript : MonoBehaviour {
         if (gameOver)
         {
             onGameEnd();
+            return;
+        }
+        if (gameLost)
+        {
+            return;
         }
 
         if (Time.time == lastUpdateTime)
@@ -242,14 +273,18 @@ public class PongManagerScript : MonoBehaviour {
         }
         reset(player);
 
-        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 1)
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
         {
-            Debug.Log("A CHANGER! REMETTRE LE SCORE A 10");
-            textCanvas.SetActive(false);
-            mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, -1, 0.3f, 1000), 0);
-            gameOver = true;
-            ball.transform.position = new Vector3(10, 10, -20);
-            Time.timeScale = 0;
+            ball.transform.position = new Vector3(10, 3, -20);
+            ball.SetActive(false);
+            if (player == -1)
+            {
+                gameOver = true;
+                mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
+                textCanvas.SetActive(false);
+                Time.timeScale = 0;
+            }
+            else onGameLost();
         }
 
     }
@@ -378,18 +413,35 @@ public class PongManagerScript : MonoBehaviour {
         colorSide = (colorSide == -1) ? 1 : -1;
     }
 
+    private bool firstTimeTurning;
     private void onGameEnd()
     {
         if (Vector3.Distance(mainCamera.transform.position, new Vector3(0, 0, 0)) > 0.5f)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, 0), Time.unscaledDeltaTime);
+            firstTimeTurning = true;
         }
         else
         {
-            mainCamera.transform.LookAt(new Vector3(0, 1, 0));
-            Time.timeScale = 1;
-            EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+            if (firstTimeTurning)
+            {
+                firstTimeTurning = false;
+                groupeGauche.SetActive(false);
+                groupeDroite.SetActive(false);
+                spectateursFin.SetActive(true);
+                EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+                Time.timeScale = 1;
+            }
+            lookAtTarget = Vector3.Lerp(lookAtTarget, new Vector3(0,10,-0.4f), Time.unscaledDeltaTime);
+            mainCamera.transform.LookAt(lookAtTarget);
         }
+    }
+
+    private void onGameLost()
+    {
+        gameLost = true;
+        libellule.SetActive(true);
+        libellule.GetComponent<Libellule>().activate();
     }
 
     public void updateElementsResolution()
@@ -397,17 +449,29 @@ public class PongManagerScript : MonoBehaviour {
         float width, height, ratio;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
-        ratio = width / height;
-        resizeWidth = ratio / (1024f/768f);
-        resizeHeight = (1024f / 768f) / ratio;
+        aspectRatio = width / height;
+        ratio = width / 1024f;
+        resizeWidth = 1;//aspectRatio / (1024f/768f);
+        resizeHeight = 1; //(1024f / 768f) / aspectRatio;
+
+        mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
 
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
 
         groupeGauche.transform.position = new Vector3(groupeGauche.transform.position.x * resizeWidth, groupeGauche.transform.position.y * resizeHeight, 0);
         groupeDroite.transform.position = new Vector3(groupeDroite.transform.position.x * resizeWidth, groupeDroite.transform.position.y * resizeHeight, 0);
+        spectateursFin.transform.position = new Vector3(spectateursFin.transform.position.x * resizeWidth, spectateursFin.transform.position.y * resizeHeight, 0);
+        gradins.transform.position = new Vector3(gradins.transform.position.x * resizeWidth, gradins.transform.position.y * resizeHeight, 0);
 
+        pointilles.transform.position = new Vector3(pointilles.transform.position.x * resizeWidth, pointilles.transform.position.y * resizeHeight, 0);
+
+
+        // Tous les rescale sont fait avec un rescale identique pour garder une cohérence de forme
         float maxRescale = Math.Max(resizeWidth, resizeHeight);
+        float minRescale = Math.Min(resizeWidth, resizeHeight);
+
+        pointilles.transform.localScale = new Vector3(pointilles.transform.localScale.x * minRescale, pointilles.transform.localScale.y * minRescale, 1);
 
         foreach (GameObject g in spectateursGauche)
         {
