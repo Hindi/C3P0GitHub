@@ -39,7 +39,7 @@ public class Spaceship : MonoBehaviour
     public void exitZone()
     {
         Vector2 delta = spiral.transform.position - transform.position;
-        transform.position = (Vector2)spiral.transform.position + delta;
+        transform.position = (Vector2)spiral.transform.position + 0.99f * delta;
     }
 
     private bool canFire()

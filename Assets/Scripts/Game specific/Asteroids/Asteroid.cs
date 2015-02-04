@@ -7,6 +7,7 @@ public class Asteroid : MonoBehaviour {
     private Vector3 target;
     public int hp;
 
+
     [SerializeField]
     private float speed;
 
@@ -25,10 +26,10 @@ public class Asteroid : MonoBehaviour {
     public void hit()
     {
         hp--;
-        // TO DO rpc pour mettre à jour les HP pour tout le monde
         if (hp <= 0)
         {
             Destroy(this.gameObject);
+            AsteroidSpawner._spawner.spawnNext();
         }
     }
 

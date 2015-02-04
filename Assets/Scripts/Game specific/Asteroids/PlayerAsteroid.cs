@@ -29,8 +29,8 @@ public class PlayerAsteroid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        upDownRange = 10f;
-        leftRightRange = 20f;
+        upDownRange = 15f;
+        leftRightRange = 22f;
         mouseSensitivity = 1f;
         cdShoot = 1f;
         cdMoveHorizontal = 1f / 60f;
@@ -48,13 +48,13 @@ public class PlayerAsteroid : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
             this.fire();
         if (Input.GetKey(KeyCode.LeftArrow))
-            rotLeftRight -= 0.1f;
+            moveRight(false);
         if (Input.GetKey(KeyCode.RightArrow))
-            rotLeftRight += 0.1f;
+            moveRight(true);
         if (Input.GetKey(KeyCode.UpArrow))
-            rotUpDown -= 0.1f;
+            moveUp(true);
         if (Input.GetKey(KeyCode.DownArrow))
-            rotUpDown += 0.1f;
+            moveUp(false);
 
         setRotation();
 	}
@@ -73,6 +73,8 @@ public class PlayerAsteroid : MonoBehaviour {
             if(hit.transform.CompareTag("Asteroid"))
             {
                 Debug.Log("un asteroid a été touche en pos : " + hit.point);
+                // TO DO Envoyer au serveur qu'on a touché tel asteroid pour qu'il fasse la synchro 
+                // On accède à l'astéroid avec le code en dessus (plus ou moins)
                 hit.transform.gameObject.GetComponent<Asteroid>().hit();
             }
         }
