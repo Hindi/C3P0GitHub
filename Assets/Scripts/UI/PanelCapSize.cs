@@ -26,7 +26,7 @@ public class PanelCapSize : MonoBehaviour {
         {
             rect.sizeDelta = new Vector2(standardizedWidth * 3/4, rect.sizeDelta.y);
         }
-        else
+        else if (rect.sizeDelta.x < standardizedWidth * 3 / 4 - 10)
         {
             rect.sizeDelta = new Vector2(originalSize.x, rect.sizeDelta.y);
         }
@@ -35,7 +35,7 @@ public class PanelCapSize : MonoBehaviour {
         {
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, standardizedHeight * 3/4);
         }
-        else
+        else if (rect.sizeDelta.y < standardizedHeight * 3/4 - 10)
         {
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, originalSize.y);
         }
