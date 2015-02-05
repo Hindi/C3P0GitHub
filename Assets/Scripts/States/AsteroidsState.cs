@@ -76,23 +76,28 @@ public class AsteroidsState : GameState
     {
         if (loaded)
         {
-           /* foreach (var t in inputs)
+            foreach (var t in inputs)
             {
-                if (t.phase == TouchPhase.Began)
+                if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
                     if (t.position.x > 2 * Screen.width / 3)
-                        playerScript_.setDirection(true);
+                        playerScript_.moveRight(true);
                     else if (t.position.x < Screen.width / 3)
-                        playerScript_.setDirection(false);
-                    else
+                        playerScript_.moveRight(false);
+                    if (t.position.y > 2 * Screen.height / 3)
+                        playerScript_.moveUp(true);
+                    else if (t.position.y < Screen.height / 3)
+                        playerScript_.moveUp(false);
+
+                    // if we touch the center part of the screen, we fire
+                    // fire handles cooldown
+                    if (t.position.x < 2 * Screen.width / 3 &&
+                        t.position.x > Screen.width / 3 &&
+                        t.position.y < 2 * Screen.height / 3 &&
+                        t.position.y > Screen.height / 3)
                         playerScript_.fire();
                 }
-                if (t.phase == TouchPhase.Ended)
-                {
-                    if (t.position.x > 2 * Screen.width / 3 || t.position.x < Screen.width / 3)
-                        playerScript_.stop();
-                }
-            }*/
+            }
         }
     }
 
@@ -104,11 +109,15 @@ public class AsteroidsState : GameState
             if (key == EnumInput.SPACE)
                 playerScript_.fire();
             if (key == EnumInput.LEFT)
-                playerScript_.rotLeftRight--;
-            //else if (key == EnumInput.RIGHT)
-                //playerScript_.move(1);
-            //if (key == EnumInput.LEFTUP || key == EnumInput.RIGHTUP)
-                    //playerScript_.stop();
+                playerScript_.rotLeftRight -= playerScript_.speed;
+            else if (key == EnumInput.RIGHT)
+                playerScript_.rotLeftRight += playerScript_.speed;
+            if (key == EnumInput.UP)
+                playerScript_.rotUpDown -= playerScript_.speed;
+            else if (key == EnumInput.DOWN)
+                playerScript_.rotUpDown += playerScript_.speed;
         }
     }
+
+
 }

@@ -117,7 +117,7 @@ public class C3PONetwork : MonoBehaviour {
             this.udp.BeginReceive(Receive, new object());
         }
 
-        // <summary>The function used by the coroutine to recieve the server's ip.</summary>
+        // <summary>The function used by the coroutine to receive the server's ip.</summary>
         private void Receive(IAsyncResult ar)
         {
             try
