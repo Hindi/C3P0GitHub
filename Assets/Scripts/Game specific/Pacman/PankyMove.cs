@@ -180,7 +180,7 @@ public class PankyMove : MonoBehaviour {
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
-				Debug.Log("pacman");
+				EventManager.Raise(EnumEvent.GAMEOVER);
 			}
 		}
 	}
@@ -188,7 +188,7 @@ public class PankyMove : MonoBehaviour {
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
-				Debug.Log("pacman");
+				EventManager.Raise(EnumEvent.GAMEOVER);
 			}
 		}
 	}
@@ -252,7 +252,7 @@ public class PankyMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 
 
 		pacman = GameObject.FindGameObjectWithTag("Pacman");

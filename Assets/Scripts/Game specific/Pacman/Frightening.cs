@@ -2,8 +2,20 @@
 using System.Collections;
 
 public class Frightening : MonoBehaviour {
+	bool gameOver = false;
+
+	void onGameOver(){
+		gameOver = true;
+	}
+
+	void Start(){
+		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
+	}
 
 	void OnDestroy(){
-		EventManager.Raise(EnumEvent.FRIGHTENED);
+		if(!gameOver){
+			EventManager.Raise(EnumEvent.FRIGHTENED);
+		}
+		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 }
