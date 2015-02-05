@@ -6,6 +6,7 @@ public class ProjectileSpaceWar : MonoBehaviour {
     [SerializeField]
     private float lifeTime;
     private float timer;
+    private Vector3 basePos;
 
     public void exitZone(GameObject spiral)
     {

@@ -69,6 +69,7 @@ public class Spaceship : MonoBehaviour
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
         {
             onHit();
+            onRestart();
         }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) >= 4.5)
         {
@@ -80,4 +81,6 @@ public class Spaceship : MonoBehaviour
     {
         //Debug.Log("GameOver");
     }
+
+    public virtual void onRestart(){}
 }

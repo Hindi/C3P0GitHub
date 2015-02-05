@@ -3,9 +3,12 @@ using System.Collections;
 
 public class PlayerSpaceWar : Spaceship {
 
+    private Vector3 basePos;
+
 	// Use this for initialization
     void Start()
     {
+        basePos = transform.position;
 	}
 
 	
@@ -19,5 +22,11 @@ public class PlayerSpaceWar : Spaceship {
     {
         base.onHit();
         EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, true);
+    }
+
+    public override void onRestart()
+    {
+        base.onRestart();
+        transform.position = basePos;
     }
 }
