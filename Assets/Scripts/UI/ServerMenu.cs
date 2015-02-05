@@ -5,6 +5,35 @@ using System.Collections.Generic;
 
 public class ServerMenu : MonoBehaviour {
 
+    private class ScoreKeeper
+    {
+        public ScoreKeeper()
+        {
+            score = 0;
+            paramId = 0;
+            login = "";
+        }
+
+        public ScoreKeeper(int s, int p, string l)
+        {
+            score = s;
+            paramId = p;
+            login = l;
+        }
+
+
+        public int CompareTo(ScoreKeeper b)
+        {
+            return score.CompareTo(b.score);
+        }
+
+        int score;
+        public int Score { get { return score; } set { score = value; } }
+        int paramId;
+        public int ParamId { get { return paramId; } set { paramId = value; } }
+        string login;
+        public string Login { get { return login; } set { login = value; } }
+    }
 
     [SerializeField]
     private GameObject questionCanvas;
@@ -36,19 +65,44 @@ public class ServerMenu : MonoBehaviour {
     [SerializeField]
     private UI ui;
 
+    [SerializeField]
+    int scoreDisplayCount;
+
+    float lastScoreListUpdateTime;
+
+    [SerializeField]
+    float scoreListUpdateCD;
+
     private bool startGame;
     private bool gameLaunched;
+
+    //TOP SCORE
+    [SerializeField]
+    private GameObject scoreTopList;
+    [SerializeField]
+    private Text scoreLoginText;
+    [SerializeField]
+    private Text scoreParamText;
+    [SerializeField]
+    private Text scoreScoreText;
+    private List<ScoreKeeper> scoreList;
 
 	// Use this for initialization
 	void Start () {
         ipLabel.text = "Server ip address : " + C3PONetwork.Instance.getMyIp();
         startGame = false;
         gameLaunched = false;
+
+        scoreList = new List<ScoreKeeper>();
 	}
 	
 	// Update is called once per frame
     void Update()
     {
+        if(Time.time - lastScoreListUpdateTime > scoreListUpdateCD)
+        {
+            updateScoreList();
+        }
 	}
 
     public void showStats()
@@ -73,6 +127,7 @@ public class ServerMenu : MonoBehaviour {
 
     private void switchToSendQuestion()
     {
+        scoreTopList.gameObject.SetActive(false);
         coursButtons.SetActive(false);
         questionCanvas.SetActive(true);
         previousButton.SetActive(true);
@@ -86,9 +141,11 @@ public class ServerMenu : MonoBehaviour {
 
     private void switchStartGame()
     {
+        lastScoreListUpdateTime = Time.time;
         coursButtons.SetActive(false);
         sendButtons.SetActive(false);
         nextButtons.SetActive(false);
+        scoreTopList.gameObject.SetActive(true);
         startGameButton.SetActive(true);
         startGame = true;
     }
@@ -167,5 +224,59 @@ public class ServerMenu : MonoBehaviour {
         }
         C3PONetworkManager.Instance.loadLevel(levelName);
         C3PONetworkManager.Instance.unlockGame(levelName);
+    }
+
+    public void addScore(int score, int paramId, string login)
+    {
+        ScoreKeeper sk = scoreList.Find(x => x.Login == login);
+        if(sk != null)
+        {
+            if (sk.Score > score)
+                return;
+            else
+            {
+                int id = scoreList.FindIndex(x => x.Login == login);
+                scoreList[id].Score = score;
+                scoreList[id].ParamId = paramId;
+            }
+        }
+        else
+        {
+            scoreList.Add(new ScoreKeeper(score, paramId, login));
+        }
+    }
+
+    private void sortAndCutScoreList()
+    {
+        scoreList.Sort(delegate(ScoreKeeper p1, ScoreKeeper p2)
+        {
+            return p2.CompareTo(p1);
+        });
+
+        if (scoreList.Count > scoreDisplayCount)
+            scoreList.RemoveRange(scoreDisplayCount, scoreList.Count - scoreDisplayCount);
+    }
+    
+    private void writeScoreListOnScreen()
+    {
+        string loginTxt = "";
+        string paramTxt = "";
+        string scoreTxt = "";
+        foreach(ScoreKeeper sk in scoreList)
+        {
+            loginTxt += sk.Login + "\n";
+            paramTxt += sk.ParamId + "\n";
+            scoreTxt += sk.Score + "\n";
+        }
+        scoreLoginText.text = loginTxt;
+        scoreParamText.text = paramTxt;
+        scoreScoreText.text = scoreTxt;
+    }
+
+    private void updateScoreList()
+    {
+        lastScoreListUpdateTime = Time.time;
+        sortAndCutScoreList();
+        writeScoreListOnScreen();
     }
 }

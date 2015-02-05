@@ -63,7 +63,6 @@ public class PongState : GameState {
         if (loaded)
         {
             base.onGameOver(b);
-            C3PONetworkManager.Instance.sendGameStats((int) gameId, p.id, gameScript.playerScore - gameScript.enemyScore);
         }
     }
 

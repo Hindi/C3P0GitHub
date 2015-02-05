@@ -42,7 +42,6 @@ public class MarioState : GameState
         if (loaded)
         {
             base.onGameOver(b);
-            C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, scoreManager.Score);
         }
     }
 

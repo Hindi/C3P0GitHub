@@ -41,7 +41,7 @@ public class PlayerCredential
     /// <summary>Default constructor.</summary>
     public PlayerCredential()
     {
-        credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/liste des eleves");
+        credentialFile = (TextAsset)UnityEngine.Resources.Load("xml/credentials");
         loginInfos = XmlHelpers.loadCredentials(credentialFile);
     }
 

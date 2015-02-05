@@ -11,8 +11,6 @@ class SpaceInvaderState : GameState
     /// <summary>The script of the player.</summary>
     private Player playerScript_;
 
-    /// <summary>The current parameter id.</summary>
-    private int paramId;
 
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
     /// <param name="lvl">Id of the level loaded.</param>
@@ -39,7 +37,6 @@ class SpaceInvaderState : GameState
         if (loaded)
         {
             base.onGameOver(b);
-            C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, playerScript_.Score);
         }
     }
 
@@ -87,6 +84,7 @@ class SpaceInvaderState : GameState
     /// <returns>void</returns>
     public override void update()
     {
+        score = playerScript_.Score;
         base.update();
     }
 

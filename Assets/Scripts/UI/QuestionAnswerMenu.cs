@@ -75,7 +75,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
         timeBar.gameObject.SetActive(true);
         timeBar.init(questionTime);
         EventManager<string, int>.AddListener(EnumEvent.QUESTIONRESULT, onResultRecieved);
-        EventManager<int>.AddListener(EnumEvent.SCOREUPDATE, onScoreUpdate);
+        EventManager<int>.AddListener(EnumEvent.SCOREUPDATEQA, onScoreUpdate);
 
 	}
 
