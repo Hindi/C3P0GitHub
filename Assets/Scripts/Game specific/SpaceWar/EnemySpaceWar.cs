@@ -141,7 +141,7 @@ public class EnemySpaceWar : Spaceship {
         p = param;
     }
 
-    public void onRestart()
+    public override void onRestart()
     {
         if (p != null && p.id == 1)
             kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
@@ -359,7 +359,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeSpirale()
     {
-        if (distance(spiral) <= 2)
+        if (distance(spiral) <= 3)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - spiral.transform.position.y, transform.position.x - spiral.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -379,7 +379,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeSelfProjectile()
     {
-        if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 3 && projectile.activeInHierarchy)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -399,7 +399,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgePlayerProjectile()
     {
-        if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 3 && playerProjectile.activeInHierarchy)
         {
             float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0 || Angle <= -180)
