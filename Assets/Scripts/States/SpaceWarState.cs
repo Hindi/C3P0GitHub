@@ -57,6 +57,7 @@ public class SpaceWarState : GameState {
     public override void update()
     {
         base.update();
+        score = gameScript.score;
     }
 
     public override void onGameOver(bool b)

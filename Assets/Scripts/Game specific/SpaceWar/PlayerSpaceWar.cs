@@ -12,10 +12,7 @@ public class PlayerSpaceWar : Spaceship {
 	// Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
-        {
-            onHit();
-        }
+        base.Update();
 	}
 
     public override void onHit()
