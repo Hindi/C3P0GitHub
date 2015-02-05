@@ -39,7 +39,7 @@ public class Spaceship : MonoBehaviour
     public void exitZone()
     {
         Vector2 delta = spiral.transform.position - transform.position;
-        transform.position = (Vector2)spiral.transform.position + delta;
+        transform.position = (Vector2)spiral.transform.position + 0.99f * delta;
     }
 
     private bool canFire()
@@ -69,6 +69,7 @@ public class Spaceship : MonoBehaviour
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
         {
             onHit();
+            onRestart();
         }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) >= 4.5)
         {
@@ -80,4 +81,6 @@ public class Spaceship : MonoBehaviour
     {
         //Debug.Log("GameOver");
     }
+
+    public virtual void onRestart(){}
 }

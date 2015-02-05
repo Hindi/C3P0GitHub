@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MiniGameController : MonoBehaviour {
 	GameObject pocman;
-	PacMove pocMove;
 
 	Randomizer rand;
 
@@ -14,6 +13,7 @@ public class MiniGameController : MonoBehaviour {
 	bool isTarget = false;
 	bool gotHit = false;
 	bool miniGame = false;
+	bool gameOver = false;
 
 
 	void niceShot(){
@@ -22,26 +22,37 @@ public class MiniGameController : MonoBehaviour {
 		miniGame = false;
 	}
 
+	void onGameOver(){
+		gameOver = true;
+	}
+
+	void onRestart(){
+		gameOver = false;
+	}
+
 	// Use this for initialization
 	void Start () {
 		pocman = GameObject.FindGameObjectWithTag("Pacman");
-		pocMove = pocman.GetComponent<PacMove>();
 		rand = GetComponentInChildren<Randomizer>();
 		startingPosition = transform.position;
 		startingForward = transform.position + 25 * transform.forward;
 		targetPosition = startingPosition;
-
+		EventManager<GameObject>.AddListener(EnumEvent.ENCOUNTER, moveTo);
+		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
+		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
+		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
+		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
+		EventManager.AddListener (EnumEvent.RESTARTGAME, onRestart);
 	}
 
 
-	public void MoveTo(GameObject ghost){
+	public void moveTo(GameObject ghost){
 		if (!gotHit){
 			targetPosition = ghost.transform.position;
 			isTarget = true;
 			gotHit = true;
 		}
 	}
-
 
 	// Update is called once per frame
 	void Update () {
@@ -55,7 +66,7 @@ public class MiniGameController : MonoBehaviour {
 			else {
 				if (!miniGame){
 					rand.enabled = true;
-					SendMessageUpwards("startMiniGame");
+					EventManager.Raise(EnumEvent.MINIGAME_START);
 					miniGame = true;
 				}
 			}
@@ -67,11 +78,21 @@ public class MiniGameController : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
 
 			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
-				Time.timeScale = 1;
+				if(!gameOver){
+					Time.timeScale = 1;
 				}
+				else{
+					EventManager.Raise(EnumEvent.RESTARTGAME);
+					EventManager.Raise (EnumEvent.RESTARTSTATE);
+				}
+			}
 		}	
+	}
 
-
-
+	void OnDestroy(){
+		EventManager<GameObject>.RemoveListener(EnumEvent.ENCOUNTER, moveTo);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
 	}
 }

@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Frightening : MonoBehaviour {
-	bool gameOver = false;
+public class Dot : MonoBehaviour {
 
+	bool gameOver = false;
+	
 	void onGameOver(){
 		gameOver = true;
 	}
-
+	
 	void Start(){
 		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
-
 	void OnDestroy(){
 		if(!gameOver){
-			EventManager.Raise(EnumEvent.FRIGHTENED);
+			EventManager.Raise(EnumEvent.DOT_EATEN);
 		}
 		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 	}

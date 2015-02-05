@@ -57,7 +57,7 @@ public class SpaceWarState : GameState {
     public override void update()
     {
         base.update();
-        if (score != gameScript.score)
+        if (gameScript != null && score != gameScript.score)
         {
             score = gameScript.score;
             scoreChanged = true;
