@@ -23,9 +23,6 @@ public class LevelLoader : MonoBehaviour {
 	void Start () {
         for (int i = 0; i < keepAliveList.Length; ++i )
             DontDestroyOnLoad(keepAliveList[i]);
-
-        EventManager<string>.AddListener(EnumEvent.LOADLEVEL, onLevelLoad);
-        EventManager.Raise(EnumEvent.LOADEND);
 	}
 
     /// <summary>Callback called when the LOADLEVEL event is triggered.</summary>
