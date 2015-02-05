@@ -24,6 +24,8 @@ public abstract class GameState : State
     private const int sendScoreCD = 1;
     private float lastSendScoreTime;
 
+    
+
     /// <summary>Constructor.</summary>
     public GameState(StateManager stateManager) : base(stateManager)
     {
@@ -51,7 +53,8 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public virtual void onGameOver(bool b)
     {
-        C3PONetworkManager.Instance.sendNotifyGameOver(b);
+        if (Network.isClient)
+            C3PONetworkManager.Instance.sendNotifyGameOver(b);
         onGamePaused(true);
     }
 
@@ -138,8 +141,11 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public override void update()
     {
-        if (Time.time - lastSendScoreTime > sendScoreCD)
+        if (Time.time - lastSendScoreTime > sendScoreCD && Network.isClient)
+        {
+            lastSendScoreTime = Time.time;
             C3PONetworkManager.Instance.sendGameStats(paramId, score);
+        }
     }
 
     /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
