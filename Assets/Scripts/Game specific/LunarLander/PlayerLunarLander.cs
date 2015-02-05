@@ -16,9 +16,6 @@ public class PlayerLunarLander : MonoBehaviour {
     float horizontalForce;
 
     [SerializeField]
-    GameObject propulsor;
-
-    [SerializeField]
     int fuel;
     float consumCooldown;
     float lastConsumTime;
@@ -34,6 +31,22 @@ public class PlayerLunarLander : MonoBehaviour {
     private Text fuelLabel;
     [SerializeField]
     private Text scoreLabel;
+
+    [SerializeField]
+    private GameObject reactor1;
+    [SerializeField]
+    private GameObject reactor2;
+    [SerializeField]
+    private GameObject reactor3;
+
+    [SerializeField]
+    private GameObject explosion;
+
+    [SerializeField]
+    private TerrainLunarLander terrain;
+
+    [SerializeField]
+    private CameraLunarLander camera;
 
     int reactorState;
 
@@ -58,7 +71,6 @@ public class PlayerLunarLander : MonoBehaviour {
         verticalBar.init(10);
         altitudeBar.init(10);
 
-        fontSize = 1;
         consumCooldown = 0.1f;
         lastConsumTime = Time.time;
         reactorState = 0;
@@ -67,13 +79,28 @@ public class PlayerLunarLander : MonoBehaviour {
 
     public void onGameRestart()
     {
+        score = 0;
         fuel = maxFuel;
+        resetAfterLanding();
+    }
+
+    private void resetAfterLanding()
+    {
+        transform.rotation = Quaternion.identity;
+        GetComponent<SpriteRenderer>().enabled = true;
+        explosion.SetActive(false);
         landed = false;
-        transform.position = new Vector3(-10, 6, 0);
+        transform.position = terrain.getRandomSpawn();
+        resetCamera();
         resetReactorState();
         resetForce();
         Physics2D.gravity = new Vector3(-horizontalForce, -gravityForce, 0);
-        rigidbody2D.AddForce(new Vector3(8000, -100, 0));
+        rigidbody2D.AddForce(new Vector3(6000, -100, 0));
+    }
+
+    private void resetCamera()
+    {
+        camera.resetCameraPosition(new Vector3(transform.position.x + Screen.width/100, camera.InitialPosition.y, Camera.main.transform.position.z));
     }
 
     void resetForce()
@@ -102,7 +129,7 @@ public class PlayerLunarLander : MonoBehaviour {
         if(reactorState < 3)
         {
             reactorState++;
-            propulsor.transform.localScale = new Vector3(0.5f, propulsor.transform.localScale.y + 1, 0.5f);
+            updateReactorSprite();
         }
     }
 
@@ -111,7 +138,30 @@ public class PlayerLunarLander : MonoBehaviour {
         if (reactorState > 0)
         {
             reactorState--;
-            propulsor.transform.localScale = new Vector3(0.5f, propulsor.transform.localScale.y - 1, 0.5f);
+            updateReactorSprite();
+        }
+    }
+
+    private void updateReactorSprite()
+    {
+        switch(reactorState)
+        {
+            case 0:
+                reactor1.SetActive(false);
+                break;
+            case 1:
+                reactor1.SetActive(true);
+                reactor2.SetActive(false);
+                break;
+            case 2:
+                reactor1.SetActive(false);
+                reactor2.SetActive(true);
+                reactor3.SetActive(false);
+                break;
+            case 3:
+                reactor2.SetActive(false);
+                reactor3.SetActive(true);
+                break;
         }
     }
 
@@ -127,8 +177,9 @@ public class PlayerLunarLander : MonoBehaviour {
         if (landed)
         {
             if (Time.time - restartTimerStart > timeBeforeRestart)
-                EventManager.Raise(EnumEvent.RESTARTGAME);
-
+                resetAfterLanding();
+            if(fuel <= 0)
+                EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
         }
         else
         {
@@ -143,18 +194,6 @@ public class PlayerLunarLander : MonoBehaviour {
                     rigidbody2D.AddRelativeForce(new Vector3(0, propulsorForce * reactorState, 0));
                     useFuel();
                 }
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                    increaseReactorState();
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                    decreaseReactorState();
-                if (Input.GetKey(KeyCode.LeftArrow) && transform.rotation.z > -0.7f)
-                    rotate(1);
-                if (Input.GetKey(KeyCode.RightArrow) && transform.rotation.z < 0.7f)
-                    rotate(-1);
-            }
-            else
-            {
-                EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
             }
         }
 
@@ -162,14 +201,30 @@ public class PlayerLunarLander : MonoBehaviour {
         scoreLabel.text = "Score " + score.ToString();
 	}
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnBecameInvisible()
     {
-        landed = true;
-        restartTimerStart = Time.time;
-        if (collision.collider.tag == "Platform")
-            if (collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f)
-                score += 10;
-        //Physics.gravity = new Vector3(-0, -gravityForce, 0);
+        crash();
     }
 
+    void crash()
+    {
+        landed = true;
+        explosion.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        restartTimerStart = Time.time;
+        if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f)
+        {
+            score += 10;
+            landed = true;
+        }
+        else
+        {
+            crash();
+        }
+        Physics.gravity = new Vector3(-0, -gravityForce, 0);
+    }
 }
