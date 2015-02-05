@@ -421,6 +421,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rpcLoadLevel(string level)
     {
+        currentGameEnum = IdConverter.levelToGame(level);
         levelLoader.loadLevel(level);
     }
 
