@@ -15,8 +15,8 @@ public class StateManager : MonoBehaviour {
     [SerializeField]
     private Dictionary<StateEnum, State> stateList;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         stateList = new Dictionary<StateEnum, State>();
         currentState = new InitState(this);
 
@@ -30,6 +30,10 @@ public class StateManager : MonoBehaviour {
         stateList.Add(StateEnum.SPACEWAR, new SpaceWarState(this));
         stateList.Add(StateEnum.ASTEROIDS, new AsteroidsState(this));
         stateList.Add(StateEnum.MARIO, new MarioState(this));
+    }
+
+	// Use this for initialization
+	void Start () {
         currentState.start();
 	}
 	
@@ -40,7 +44,7 @@ public class StateManager : MonoBehaviour {
 
 	
 	public void OnLevelWasLoaded(int lvl)
-	{
+    {
 		currentState.onLevelWasLoaded (lvl);
 	}
 

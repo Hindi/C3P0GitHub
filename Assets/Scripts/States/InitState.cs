@@ -27,13 +27,6 @@ class InitState : State {
     /// <returns>void</returns>
     public override void update()
     {
-	}
-
-    /// <summary>Called when the lobby scene from Unity is loaded.</summary>
-    /// <param name="lvl">Id of the level loaded.</param>
-    /// <returns>void</returns>
-    public override void onLevelWasLoaded(int lvl)
-    {
         if (C3PONetwork.Instance.IS_SERVER)
         {
             EventManager<string>.Raise(EnumEvent.LOADLEVEL, "ServerLobby");
@@ -42,6 +35,13 @@ class InitState : State {
         {
             EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
         }
+	}
+
+    /// <summary>Called when the lobby scene from Unity is loaded.</summary>
+    /// <param name="lvl">Id of the level loaded.</param>
+    /// <returns>void</returns>
+    public override void onLevelWasLoaded(int lvl)
+    {
     }
 
     /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
