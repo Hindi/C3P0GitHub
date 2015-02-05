@@ -6,14 +6,15 @@ using System.Collections;
 /// </summary>
 public class AsteroidNetwork : MonoBehaviour {
 
-    public static NetworkViewID viewId = Network.AllocateViewID();
+    // TO DO remove? public static NetworkViewID viewId = Network.AllocateViewID();
 
     private AsteroidsManager asteroidsManager;
 
+    // TO DO rajouter un argument pour donner une couleur ou non à l'astéroid (accéder au Halo)
     [RPC]
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, bool b)
     {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp);
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, b);
     }
 
 

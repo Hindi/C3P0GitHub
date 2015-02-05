@@ -11,6 +11,7 @@ public class Asteroid : MonoBehaviour {
 
     private static int nbAsteroid = 0;
 
+
     [SerializeField]
     private float speed;
 
@@ -18,17 +19,30 @@ public class Asteroid : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
+        /*
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-        asteroidManager = GameObject.FindGameObjectWithTag("AsteroidsManager").GetComponent<AsteroidsManager>();
+        
         //target = shipScript.getTarget();
         isUsed = false;
         id = nbAsteroid;
         nbAsteroid++;
-        AsteroidFactory._factory.asteroidNotInUse.Push(this);
+        AsteroidFactory._factory.push(this);
         //gameObject.renderer.enabled = false;
         gameObject.SetActive(false);
+         * */
 	}
 	
+    void Awake()
+    {
+        asteroidManager = GameObject.FindGameObjectWithTag("asteroidManager").GetComponent<AsteroidsManager>();
+        shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
+
+        //target = shipScript.getTarget();
+        isUsed = false;
+        id = nbAsteroid;
+        nbAsteroid++;
+    }
+
 	// Update is called once per frame
 	void Update () {
         if (isUsed)
@@ -62,7 +76,9 @@ public class Asteroid : MonoBehaviour {
         }
     }
 
-    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health)
+
+    // bool b indicates if it is activated or not
+    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health, bool b)
     {
         target = cible;
         transform.position = posSpawn;
@@ -70,8 +86,15 @@ public class Asteroid : MonoBehaviour {
         isUsed = true;
         //gameObject.renderer.enabled = true;
 
-        // Now we add it to the use asteroids dictionary
-        asteroidManager.add(this.id, this);
-    }
+        // We activate the asteroid if needed 
+        gameObject.SetActive(b);
 
+        if (b)
+        {
+            // Now we add it to the use asteroids dictionary
+            asteroidManager.add(this.id, this);
+        }
+        else
+            AsteroidFactory._factory.push(this);
+    }
 }
