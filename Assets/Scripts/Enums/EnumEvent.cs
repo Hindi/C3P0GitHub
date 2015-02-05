@@ -8,28 +8,27 @@ using System.Text;
 /// </summary>
 public enum EnumEvent
 {
-    PLAYSOUND,
-    LOADLEVEL,
-    LOADEND,
-    QUESTIONRCV,
-    QUESTIONRESULT,
-    ANSWERSELECT,
-    ANSWERRCV,
-	ENEMYDEATH,
-    SPACESHIPDESTROYED,
-	GAMEOVER,
-	PAUSEGAME,
-    RESTARTGAME,
-    CHANGEPARAM,
-    CONNECTIONSTATE,
-    CONNECTIONTOUNITY,
-    DISCONNECTFROMUNITY,
-	CLOSEMENU,
-	SERVERUI,
-    AUTHFAILED,
-    AUTHSUCCEEDED,
-    SCOREUPDATEQA,
-    SERVERIPRECEIVED,
-    PRINTONSCREEN,
-    ADDGAME
+    PLAYSOUND,              //Play a sound
+    LOADLEVEL,              //Load unity scene + change state
+    QUESTIONRCV,            //When a question is recieved
+    QUESTIONRESULT,         //When the result is recieved
+    ANSWERSELECT,           //Answer selected
+    ANSWERRCV,              //Answer recieved
+	ENEMYDEATH,             //Enemy died
+    SPACESHIPDESTROYED,     //Spaceship destroyed
+	GAMEOVER,               //Game ends (win or lose)
+	PAUSEGAME,              //Game paused
+    RESTARTGAME,            //Restart the game
+    CHANGEPARAM,            //Parameter changed
+    CONNECTIONSTATE,        //Jump to sonnection state
+    CONNECTIONTOUNITY,      //Connection to unity succedeed
+    DISCONNECTFROMUNITY,    //Disconnected from unity
+	CLOSEMENU,              //Close all menus
+	SERVERUI,               //Server menu open
+    AUTHFAILED,             //Authentication failed
+    AUTHSUCCEEDED,          //Authentication succeeded
+    SCOREUPDATEQA,          //Question score updated
+    SERVERIPRECEIVED,       //Recieved the server IP (udp broadcast)
+    PRINTONSCREEN,          //Print a string on screen (mobile phone debug)
+    ADDGAME                 //Unlock a game for the client's solo
 };
