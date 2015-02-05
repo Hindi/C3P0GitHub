@@ -71,6 +71,9 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <summary>Stores the client id.</summary>
 	private string privateID = null;
 
+    [SerializeField]
+    private ServerMenu serverMenu;
+
     /// <summary>Functions used to connect to the teacher server application-wise .</summary>
     /// <param name="ip">The ip of the server.</param>
     /// <param name="login">The login of the client.</param>
@@ -261,6 +264,15 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("rpcUnlockGame", RPCMode.Others, name);
     }
 
+
+    /// <summary>Functions used to notify the server that a player won or lost his game.</summary>
+    /// <param name="b">True if won.</param>
+    /// <returns>void</returns>
+    public void sendNotifyGameOver(bool b)
+    {
+        networkView.RPC("notifyGameOver", RPCMode.Server, privateID, (int)currentGameEnum, b);
+    }
+
     /// <summary>Functions used to notify a specific client that the login he uses does not exists.</summary>
     /// <param name="netPlayer">Unity object containing the client's info (used by the RPC).</param>
     /// <param name="name">The login.</param>
@@ -304,15 +316,15 @@ public class C3PONetworkManager : MonoBehaviour {
         networkView.RPC("requestScore", RPCMode.Server, privateID);
     }
 
-    /// <summary>Functions used by the client client to send the game stats to the server.</summary>
+    /// <summary>Functions used by the client to send the game stats to the server.</summary>
     /// <param name="gameId">The id of the current game.</param>
     /// <param name="paramId">The id of the current parameter used by the client.</param>
     /// <param name="score">The score the client achieved during this game.</param>
     /// <returns>void</returns>
-    public void sendGameStats(int gameId, int paramId, int score)
+    public void sendGameStats(int paramId, int score)
     {
         if(Network.isClient)
-            networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, gameId, paramId, score);
+            networkView.RPC("sendGameStatsRPC", RPCMode.Server, privateID, (int)currentGameEnum, paramId, score);
     }
 
     /// <summary>Checks weither this login is already used or not.</summary>
@@ -409,6 +421,7 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rpcLoadLevel(string level)
     {
+        currentGameEnum = IdConverter.levelToGame(level);
         levelLoader.loadLevel(level);
     }
 
@@ -478,12 +491,12 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void setScoreRPC(int score)
     {
-        EventManager<int>.Raise(EnumEvent.SCOREUPDATE, score);
+        EventManager<int>.Raise(EnumEvent.SCOREUPDATEQA, score);
     }
 
 
-    /// <summary>Functions used to by the client to askfor its score.</summary>
-    /// <param name="id)">The unique id of the client.</param>
+    /// <summary>Functions used to by the client to askfor its score (Q/A).</summary>
+    /// <param name="id">The unique id of the client.</param>
     /// <returns>void</returns>
     [RPC]
     void requestScore(string id)
@@ -492,8 +505,18 @@ public class C3PONetworkManager : MonoBehaviour {
             setScore(clientsInfos[id].NetworkPlayer, clientsInfos[id].Score);
     }
 
-    /// <summary>Functions used by the client client to send the game stats to the server.</summary>
+    /// <summary>Notify the server that the player won or lost his game.</summary>
     /// <param name="uniqueID">The uniqueID of the client.</param>
+    /// <param name="gameId">The id of the current game.</param>
+    /// <param name="b">True if won.</param>
+    /// <returns>void</returns>
+    [RPC]
+    void notifyGameOver(string uniqueID, int gameId, bool b)
+    {
+        clientsInfos[uniqueID].saveGameStats((EnumGame)gameId);
+    }
+
+    /// <summary>Functions used by the client client to send the game stats to the server.</summary>
     /// <param name="gameId">The id of the current game.</param>
     /// <param name="paramId">The id of the current parameter used by the client.</param>
     /// <param name="score">The score the client achieved during this game.</param>
@@ -501,9 +524,12 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void sendGameStatsRPC(string uniqueID, int gameId, int paramId, int score)
     {
-        GameStat g = new GameStat(gameId, paramId, score, 0, 0);
-        clientsInfos[uniqueID].addGameStat(g);
-        clientsInfos[uniqueID].saveGameStats((EnumGame)gameId);
+        if (currentGameEnum == (EnumGame)gameId)
+        {
+            GameStat g = new GameStat(gameId, paramId, score, 0, 0);
+            clientsInfos[uniqueID].addGameStat(g);
+            serverMenu.addScore(score, paramId, clientsInfos[uniqueID].Login);
+        }
     }
 	
 	/**************************************************************************************

@@ -42,16 +42,26 @@ public class SpaceWarState : GameState {
         gameScript = GameObject.FindGameObjectWithTag("SpaceWarScript").GetComponent<SpaceWarScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSpaceWar>();
         ui.setParamCanvas(gameId);
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.Landscape;
+        gameScript.updateElementsResolution();
     }
 
     public override void end()
     {
         base.end();
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     public override void update()
     {
         base.update();
+        if (score != gameScript.score)
+        {
+            score = gameScript.score;
+            scoreChanged = true;
+        }
     }
 
     public override void onGameOver(bool b)
@@ -69,7 +79,31 @@ public class SpaceWarState : GameState {
     {
         if (loaded)
         {
-
+            foreach (var t in inputs)
+            {
+                if (t.position.y < Screen.height / 2) // partie inférience de l'écran
+                {
+                    if (t.position.x < Screen.width / 2) // partie gauche de l'écran
+                    {
+                        player.rotate(1);
+                    }
+                    else // partie droite
+                    {
+                        player.goForward();
+                    }
+                }
+                else // partie supérieure de l'écran
+                {
+                    if (t.position.x < Screen.width / 2) // partie gauche de l'écran
+                    {
+                        player.rotate(-1);
+                    }
+                    else // partie droite
+                    {
+                        player.fire();
+                    }
+                }
+            }
         }
     }
 

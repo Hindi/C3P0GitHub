@@ -36,6 +36,8 @@ public class UI : MonoBehaviour {
     [SerializeField]
     private Canvas asteroidsParam;
     [SerializeField]
+    private Canvas marioParam;
+    [SerializeField]
     private Canvas paramMenu;
     [SerializeField]
     private Canvas gameOverMenu;
@@ -90,6 +92,9 @@ public class UI : MonoBehaviour {
                 break;
             case EnumGame.ASTEROIDS:
                 paramMenu = asteroidsParam;
+                break;
+            case EnumGame.MARIO:
+                paramMenu = marioParam;
                 break;
         }
         updateCurrentCanvas(paramMenu);

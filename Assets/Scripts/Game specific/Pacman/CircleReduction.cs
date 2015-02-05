@@ -4,10 +4,14 @@ using System.Collections;
 public class CircleReduction : MonoBehaviour {
 	float timer;
 
+	void OnDestroy(){
+		EventManager.RemoveListener(EnumEvent.MINIGAME_TERMINATE, terminate);
+	}
 
 	// Use this for initialization
 	void Start () {
 		timer = Time.realtimeSinceStartup;
+		EventManager.AddListener(EnumEvent.MINIGAME_TERMINATE, terminate);
 	}
 	
 	// Update is called once per frame

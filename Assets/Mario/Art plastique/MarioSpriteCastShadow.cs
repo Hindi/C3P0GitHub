@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Destroyable : MonoBehaviour {
-
-	void OnDestroy(){
-		SendMessageUpwards("dotEaten", SendMessageOptions.DontRequireReceiver);
-	}
-
+public class MarioSpriteCastShadow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        renderer.receiveShadows = true;
+        renderer.castShadows = true;
 	}
 	
 	// Update is called once per frame

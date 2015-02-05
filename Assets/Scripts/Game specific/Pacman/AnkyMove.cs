@@ -22,11 +22,11 @@ public class AnkyMove : MonoBehaviour {
 	int curTileY;
 	bool isMoving = false;
 	Color defaultColor;
-
-
-
-	void moving(bool real){
-		isMoving = real;
+	
+	void moving(bool real, string tag){
+		if (tag == gameObject.tag){
+			isMoving = real;
+		}
 	}
 
 	void scatter(){
@@ -39,23 +39,6 @@ public class AnkyMove : MonoBehaviour {
 		frightenTimer = Time.time;
 		renderer.material.color = Color.blue;
 	}
-
-	void destroyWho(){
-		if (frightenMode){
-			eaten = true;
-			frightenMode = false;
-			renderer.material.color = defaultColor;
-			collider.enabled = false;
-			renderer.enabled = false;
-		}
-		else {
-			Debug.Log("pacman");
-		}
-	}
-
-
-
-
 	
 	/*
 	 * We check if the tile the player wants to go is a valid tile
@@ -186,8 +169,42 @@ public class AnkyMove : MonoBehaviour {
 		nextDir = getNextDir();
 		move();
 	}
-	
-	
+
+
+	void sentenceWin(string tag){
+		if (tag == gameObject.tag){
+			if (frightenMode){
+				eaten = true;
+				frightenMode = false;
+				renderer.material.color = defaultColor;
+				collider.enabled = false;
+				renderer.enabled = false;
+				EventManager.Raise(EnumEvent.GHOST_EATEN);
+			}
+			else{
+				EventManager.Raise(EnumEvent.GAMEOVER);
+			}
+		}
+	}
+
+	void sentenceTO(string tag){
+		if (tag == gameObject.tag){
+			if (!frightenMode){
+				EventManager.Raise(EnumEvent.GAMEOVER);
+			}
+		}
+	}
+
+	void onRestartGame(){
+		scatterMode = false;
+		frightenMode = false;
+		renderer.material.color = defaultColor;
+		eaten = false;
+		collider.enabled = true;
+		renderer.enabled = true;
+		rigidbody.position = new Vector3(11, 0, -14);
+	}
+
 	void Start () {
 		
 		/*
@@ -232,9 +249,15 @@ public class AnkyMove : MonoBehaviour {
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
-		
+		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
+		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+
 		pacman = GameObject.FindGameObjectWithTag("Pacman");
-		blanky = GameObject.Find("Blanky");
+		blanky = GameObject.FindGameObjectWithTag("Blanky");
 		pacMove = pacman.GetComponent<PacMove>();
 		ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
 		curTileX = Mathf.RoundToInt(transform.position.x);
@@ -247,6 +270,7 @@ public class AnkyMove : MonoBehaviour {
 
 		if (isMoving){
 			chase();
+		}
 			if (scatterMode && Time.time - scatterTimer > scatterDelay){
 				scatterMode = false;
 			}
@@ -259,6 +283,14 @@ public class AnkyMove : MonoBehaviour {
 				collider.enabled = true;
 				renderer.enabled = true;
 			}
-		}
+	}
+
+	void OnDestroy(){
+		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
+		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
 	}
 }

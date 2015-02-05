@@ -65,7 +65,6 @@ public class TetrisState : GameState {
         if (loaded)
         {
             base.onGameOver(b);
-            C3PONetworkManager.Instance.sendGameStats((int)gameId, paramId, Grid._grid.score);
         }
     }
 

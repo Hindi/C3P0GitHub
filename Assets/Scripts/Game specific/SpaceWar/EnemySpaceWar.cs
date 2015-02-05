@@ -58,7 +58,9 @@ public class EnemySpaceWar : Spaceship {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
+        base.Update();
         if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
         addInterpretedPosition(kalman.PosInterp);
 
@@ -120,7 +122,7 @@ public class EnemySpaceWar : Spaceship {
                             {
                                 if (dodgeAttacks())
                                 {
-                                    moveRandomly();
+                                    moveIntelligently();
                                 }
                             } break;
                     }
@@ -282,6 +284,61 @@ public class EnemySpaceWar : Spaceship {
         }
     }
 
+    private void moveIntelligently()
+    {
+        if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) >= actionNumber) // time to decide a new action
+        {
+            actionNumber++;
+            int i = Random.Range(1, 4);
+            switch (i)
+            {
+                case 1:
+                    {
+                        IAAction = SWIAAction.MOVE_FORWARD;
+                    } break;
+                case 2:
+                    {
+                        IAAction = SWIAAction.MOVE_TURN_LEFT;
+                    } break;
+                case 3:
+                    {
+                        IAAction = SWIAAction.MOVE_TURN_RIGHT;
+                    } break;
+            }
+        }
+
+
+        switch (IAAction)
+        {
+            case SWIAAction.MOVE_FORWARD:
+                {
+                    goForward();
+                } break;
+            case SWIAAction.MOVE_TURN_LEFT:
+                {
+                    goForward();
+                    rotate(1);
+                } break;
+            case SWIAAction.MOVE_TURN_RIGHT:
+                {
+                    goForward();
+                    rotate(-1);
+                } break;
+            case SWIAAction.TURN_LEFT:
+                {
+                    rotate(1);
+                } break;
+            case SWIAAction.TURN_RIGHT:
+                {
+                    rotate(-1);
+                } break;
+            case SWIAAction.NOTHING:
+                {
+                    // nothing
+                } break;
+        }
+    }
+
     private void attackRandomly()
     {
         fire();
@@ -289,6 +346,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeAttacks()
     {
+        bool spirale = dodgeSpirale();
         bool self = dodgeSelfProjectile();
         bool player = dodgePlayerProjectile();
         if (Time.time - stateTimer > stateChangeTimer)
@@ -296,7 +354,27 @@ public class EnemySpaceWar : Spaceship {
             stateTimer = Time.time;
             IAState = SWIAState.MOVE_TOWARDS_PLAYER;
         }
-        return (self && player);
+        return (self && player && spirale);
+    }
+
+    private bool dodgeSpirale()
+    {
+        if (distance(spiral) <= 2)
+        {
+            float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - spiral.transform.position.y, transform.position.x - spiral.transform.position.x) * Mathf.Rad2Deg + 90;
+            if (Angle >= 0)
+            {
+                rotate(-1);
+                goForward();
+            }
+            else
+            {
+                rotate(1);
+                goForward();
+            }
+            return false;
+        }
+        return true;
     }
 
     private bool dodgeSelfProjectile()
@@ -346,7 +424,6 @@ public class EnemySpaceWar : Spaceship {
 
     private void moveTowardsPlayer()
     {
-        Debug.Log("Move towards player");
         float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - player.transform.position.y, transform.position.x - player.transform.position.x) * Mathf.Rad2Deg + 90;
         if (Angle >= 0 || Angle <= -180)
         {
@@ -367,7 +444,6 @@ public class EnemySpaceWar : Spaceship {
 
     private void attackPlayer()
     {
-        Debug.Log("Attack player");
         Vector2 prediction = interpolation(60);
         float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - prediction.y, transform.position.x - prediction.x) * Mathf.Rad2Deg + 90;
         if (Angle >= 0 || Angle <= -180)

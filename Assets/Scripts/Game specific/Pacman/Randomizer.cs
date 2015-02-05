@@ -27,6 +27,6 @@ public class Randomizer : MonoBehaviour {
 	}
 
 	void OnDisable(){
-		BroadcastMessage("terminate",SendMessageOptions.DontRequireReceiver);
+		EventManager.Raise(EnumEvent.MINIGAME_TERMINATE);
 	}
 }

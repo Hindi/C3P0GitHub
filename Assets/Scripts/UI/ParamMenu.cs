@@ -39,7 +39,10 @@ public class ParamMenu : MonoBehaviour {
     public void onQuestionMarkClick(string s)
     {
         explanationObj.SetActive(true);
-        explanationText.text = s;
+        if (s != "")
+        {
+            explanationText.text = s;
+        }
     }
 
     public void onCloseExplanationClick()

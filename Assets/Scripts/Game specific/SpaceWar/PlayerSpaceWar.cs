@@ -10,8 +10,9 @@ public class PlayerSpaceWar : Spaceship {
 
 	
 	// Update is called once per frame
-	void Update () {
-
+    void Update()
+    {
+        base.Update();
 	}
 
     public override void onHit()

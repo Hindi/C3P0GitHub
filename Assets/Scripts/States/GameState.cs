@@ -16,13 +16,21 @@ public abstract class GameState : State
     /// <summary>The current game id.</summary>
     protected EnumGame gameId;
 
+    protected int score = 0;
+    protected bool scoreChanged;
+
+    /// <summary>The current parameter id.</summary>
+    protected int paramId = 0;
+
+    private const int sendScoreCD = 3;
+    private float lastSendScoreTime;
+
+    
+
     /// <summary>Constructor.</summary>
     public GameState(StateManager stateManager) : base(stateManager)
     {
 		paused = false;
-        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
-        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
-        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
     }
 
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -46,6 +54,8 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public virtual void onGameOver(bool b)
     {
+        if (Network.isClient)
+            C3PONetworkManager.Instance.sendNotifyGameOver(b);
         onGamePaused(true);
     }
 
@@ -54,11 +64,7 @@ public abstract class GameState : State
     /// <returns>void</returns>
 	public void onGamePaused(bool b)
     {
-        if (loaded)
-        {
-            paused = b;
-            applyPause();
-        }
+        applyPause(b);
 	}
 
     /// <summary>Abstract function specific for each game. It is called when the player chose a parameter</summary>
@@ -114,25 +120,34 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public override void start()
     {
+        lastSendScoreTime = Time.time;
+        loaded = true;
         changeParam();
+        EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
+        EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
+        EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
     }
 
     /// <summary>Called when leaving this state.</summary>
     /// <returns>void</returns>
     public override void end()
     {
+        loaded = false;
         EventManager<bool>.RemoveListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
-
-        loaded = false;
     }
 
     /// <summary>Called each frame.</summary>
     /// <returns>void</returns>
     public override void update()
     {
-
+        if (Time.time - lastSendScoreTime > sendScoreCD && Network.isClient && scoreChanged)
+        {
+            scoreChanged = true;
+            lastSendScoreTime = Time.time;
+            C3PONetworkManager.Instance.sendGameStats(paramId, score);
+        }
     }
 
     /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>

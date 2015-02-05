@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class SpaceWarScript : MonoBehaviour {
@@ -7,6 +8,9 @@ public class SpaceWarScript : MonoBehaviour {
     private GameObject playerShip, enemyShip, playerProjectile, enemyProjectile;
     private Vector3 basePlayerPos, baseEnemyPos, basePPPos, baseEPPos;
     public int score = 0;
+    private float aspectRatio;
+    [SerializeField]
+    private GameObject mainCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +20,11 @@ public class SpaceWarScript : MonoBehaviour {
         basePPPos = playerProjectile.transform.position;
         baseEPPos = enemyProjectile.transform.position;
 	}
+
+    void OnDestroy()
+    {
+        EventManager<bool>.RemoveListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,6 +35,8 @@ public class SpaceWarScript : MonoBehaviour {
     {
         playerShip.transform.position = basePlayerPos;
         enemyShip.transform.position = baseEnemyPos;
+        playerProjectile.SetActive(false);
+        enemyProjectile.SetActive(false);
         playerProjectile.transform.position = basePPPos;
         enemyProjectile.transform.position = baseEPPos;
         playerShip.rigidbody2D.velocity = new Vector2(0, 0);
@@ -54,5 +65,14 @@ public class SpaceWarScript : MonoBehaviour {
             score++;
             onRestart();
         }
+    }
+
+    public void updateElementsResolution()
+    {
+        float width, height;
+        width = Math.Max(Screen.width, Screen.height);
+        height = Math.Min(Screen.width, Screen.height);
+        aspectRatio = width / height;
+        mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
     }
 }
