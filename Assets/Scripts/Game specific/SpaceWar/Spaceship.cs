@@ -64,7 +64,16 @@ public class Spaceship : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    protected void Update()
+    {
+        if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
+        {
+            onHit();
+        }
+        if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) >= 4.5)
+        {
+            transform.position /= 2;
+        }
 	}
 
     public virtual void onHit()

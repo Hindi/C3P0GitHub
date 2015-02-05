@@ -56,6 +56,7 @@ public class PongState : GameState {
     public override void update()
     {
         base.update();
+        score = gameScript.playerScore - gameScript.enemyScore;
     }
 
     public override void onGameOver(bool b)
