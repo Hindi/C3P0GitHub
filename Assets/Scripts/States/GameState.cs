@@ -17,11 +17,12 @@ public abstract class GameState : State
     protected EnumGame gameId;
 
     protected int score = 0;
+    protected bool scoreChanged;
 
     /// <summary>The current parameter id.</summary>
     protected int paramId = 0;
 
-    private const int sendScoreCD = 1;
+    private const int sendScoreCD = 3;
     private float lastSendScoreTime;
 
     
@@ -141,8 +142,9 @@ public abstract class GameState : State
     /// <returns>void</returns>
     public override void update()
     {
-        if (Time.time - lastSendScoreTime > sendScoreCD && Network.isClient)
+        if (Time.time - lastSendScoreTime > sendScoreCD && Network.isClient && scoreChanged)
         {
+            scoreChanged = true;
             lastSendScoreTime = Time.time;
             C3PONetworkManager.Instance.sendGameStats(paramId, score);
         }
