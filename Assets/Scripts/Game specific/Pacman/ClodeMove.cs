@@ -254,7 +254,7 @@ public class ClodeMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 
 
 		pacman = GameObject.FindGameObjectWithTag("Pacman");

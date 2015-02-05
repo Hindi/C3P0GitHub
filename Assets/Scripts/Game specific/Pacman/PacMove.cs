@@ -168,7 +168,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, onMiniGameLost);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, onMiniGameWin);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 
 	}
 

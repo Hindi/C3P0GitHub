@@ -85,7 +85,7 @@ class SpaceInvaderState : GameState
     public override void update()
     {
         base.update();
-        if(score != playerScript_.Score)
+        if(playerScript_ != null && score != playerScript_.Score)
         {
             scoreChanged = true;
             score = playerScript_.Score;

@@ -3,17 +3,19 @@ using System.Collections;
 
 public class Dot : MonoBehaviour {
 
-
+	bool gameOver = false;
+	
+	void onGameOver(){
+		gameOver = true;
+	}
+	
+	void Start(){
+		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
+	}
 	void OnDestroy(){
-		EventManager.Raise(EnumEvent.DOT_EATEN);
-	}
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		if(!gameOver){
+			EventManager.Raise(EnumEvent.DOT_EATEN);
+		}
+		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 }

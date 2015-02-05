@@ -13,12 +13,21 @@ public class MiniGameController : MonoBehaviour {
 	bool isTarget = false;
 	bool gotHit = false;
 	bool miniGame = false;
+	bool gameOver = false;
 
 
 	void niceShot(){
 		isTarget = false;
 		gotHit = false;
 		miniGame = false;
+	}
+
+	void onGameOver(){
+		gameOver = true;
+	}
+
+	void onRestart(){
+		gameOver = false;
 	}
 
 	// Use this for initialization
@@ -32,6 +41,8 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
+		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
+		EventManager.AddListener (EnumEvent.RESTARTGAME, onRestart);
 	}
 
 
@@ -67,7 +78,13 @@ public class MiniGameController : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
 
 			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
-				Time.timeScale = 1;
+				if(!gameOver){
+					Time.timeScale = 1;
+				}
+				else{
+					EventManager.Raise(EnumEvent.RESTARTGAME);
+					EventManager.Raise (EnumEvent.RESTARTSTATE);
+				}
 			}
 		}	
 	}
