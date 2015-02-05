@@ -71,6 +71,7 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <summary>Stores the client id.</summary>
 	private string privateID = null;
 
+    [SerializeField]
     private ServerMenu serverMenu;
 
     /// <summary>Functions used to connect to the teacher server application-wise .</summary>
@@ -553,7 +554,6 @@ public class C3PONetworkManager : MonoBehaviour {
             playerCredentials = new PlayerCredential();
         }
         currentCourseId = 0;
-        serverMenu = GameObject.FindGameObjectWithTag("ServerMenu").GetComponent<ServerMenu>();
 	}
 	
 	// Update is called once per frame
