@@ -79,7 +79,7 @@ public class AliensManager : MonoBehaviour {
         changeDirection = false;
         breakOutMode = false;
         lastFireTime = Time.time;
-
+        gameStartTime = Time.time;
         lastMoveTime = Time.time;
     }
 

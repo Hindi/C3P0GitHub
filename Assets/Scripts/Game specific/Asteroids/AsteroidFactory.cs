@@ -14,8 +14,6 @@ public class AsteroidFactory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        // TO DO régler le nombre max d'astéroids selon le nombre de joueurs
-	    asteroidNotInUse = new Stack<Asteroid>();
 
         // We create some asteroids when the scene is loaded
         for(int i = 0; i < nbAsteroidInitalized; i++)
@@ -31,19 +29,29 @@ public class AsteroidFactory : MonoBehaviour {
 	
 	}
 
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="target"></param>
+    /// <param name="hp"></param>
+    /// <param name="b"></param>
+    /// 
+    // le booléen sert à indiquer si on demande un nouvel asteroid pour s'en servir immédiatement ou juste pour 
+    // le chargement afin que tout le monde ait une pool d'astéroids déjà instanciés.
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, bool b)
     {
-        if (asteroidNotInUse.Count > 0)
+        if (asteroidNotInUse.Count > 0 && b)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp);
+            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, b);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp);
+            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, b);
         }
     }
-
 
     /* not used anymore
     public int getFreeId()
@@ -74,7 +82,9 @@ public class AsteroidFactory : MonoBehaviour {
         }
         else
         {
-            _factory = this; 
+            _factory = this;
+
+            _factory.asteroidNotInUse = new Stack<Asteroid>();
         }
     }
 

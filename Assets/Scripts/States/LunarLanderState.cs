@@ -90,7 +90,7 @@ class LunarLanderState : GameState
                     else if (t.position.x < Screen.width / 3)
                         playerScript_.rotate(1);
                 }
-                else if (t.phase == TouchPhase.Began)
+                if (t.phase == TouchPhase.Began)
                 {
                     if (t.position.y > 2 * Screen.height / 3)
                         playerScript_.increaseReactorState();

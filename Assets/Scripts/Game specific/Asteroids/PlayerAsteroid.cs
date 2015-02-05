@@ -73,7 +73,7 @@ public class PlayerAsteroid : MonoBehaviour {
             if(hit.transform.CompareTag("Asteroid"))
             {
                 Debug.Log("un asteroid a été touche en pos : " + hit.point);
-                // TO DO Envoyer au serveur qu'on a touché tel asteroid pour qu'il fasse la synchro 
+                // TO DO Envoyer à tout le monde qu'on a touché tel asteroid pour qu'il fasse la synchro 
                 // On accède à l'astéroid avec le code en dessus (plus ou moins)
                 hit.transform.gameObject.GetComponent<Asteroid>().hit();
             }

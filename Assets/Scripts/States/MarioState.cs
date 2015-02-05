@@ -99,6 +99,7 @@ public class MarioState : GameState
     {
         if (loaded)
         {
+            base.noticeInput(key, inputs);
             foreach (var t in inputs)
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
