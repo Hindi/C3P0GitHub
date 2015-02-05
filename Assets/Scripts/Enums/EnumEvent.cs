@@ -30,5 +30,20 @@ public enum EnumEvent
     SCOREUPDATEQA,          //Question score updated
     SERVERIPRECEIVED,       //Recieved the server IP (udp broadcast)
     PRINTONSCREEN,          //Print a string on screen (mobile phone debug)
-    ADDGAME                 //Unlock a game for the client's solo
+    ADDGAME,                //Unlock a game for the client's solo
+	ENCOUNTER,				//When the player collides with something
+	MINIGAME_START,			//Minigame starts
+	MINIGAME_WIN,			//The minigame is won
+	MINIGAME_LOST,			//The minigame is lost
+	MINIGAME_TO,			//Minigame timeout
+	MINIGAME_TERMINATE,		//Minigame stops
+	SCATTERMODE,			//Activate scatter mode (Pacman)
+	FRIGHTENED,				//Activate frighten mode (Pacman)
+	MOVING,					//Movement allowed
+	SENTENCE_LOST,			//When the minigame is lost
+	SENTENCE_TO,			//When the time for the minigame is over
+	SENTENCE_WIN,			//When the minigame is lost
+	GHOST_EATEN,			//A ghost is eaten (Pacman)
+	DOT_EATEN,				//A dot is eaten (Pacman)
+	NEW_GAME,				//Launches the game
 };
