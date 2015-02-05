@@ -4,6 +4,6 @@ using System.Collections;
 public class Frightening : MonoBehaviour {
 
 	void OnDestroy(){
-		SendMessageUpwards("frighten", SendMessageOptions.DontRequireReceiver);
+		EventManager.Raise(EnumEvent.FRIGHTENED);
 	}
 }

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Destroyable : MonoBehaviour {
+public class Dot : MonoBehaviour {
+
 
 	void OnDestroy(){
-		SendMessageUpwards("dotEaten", SendMessageOptions.DontRequireReceiver);
+		EventManager.Raise(EnumEvent.DOT_EATEN);
 	}
-
-
 	// Use this for initialization
 	void Start () {
 	
