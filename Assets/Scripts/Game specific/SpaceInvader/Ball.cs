@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour {
     public void switchToBreakOut()
     {
         transform.parent = null;
-        rigidbody.AddForce(new Vector3(0, 0, 1.5f));
+        rigidbody.AddForce(new Vector3(0, 0, 1.2f));
     }
 
     public void switchToNormal()
