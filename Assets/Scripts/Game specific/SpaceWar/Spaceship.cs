@@ -55,7 +55,7 @@ public class Spaceship : MonoBehaviour
 
     public void fire()
     {
-        if (canFire())
+        if (canFire() && !isEnd)
         {
             projectile.SetActive(true);
             projectile.transform.position = projectileStartPosition.position;
