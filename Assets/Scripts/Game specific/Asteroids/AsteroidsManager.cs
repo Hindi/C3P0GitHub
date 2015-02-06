@@ -13,9 +13,13 @@ public class AsteroidsManager : MonoBehaviour {
 
 
     private static Dictionary<int, Asteroid> asteroidInUse;
+    private static int nbAsteroid;
 
     [SerializeField]
     int nbAsteroidToSpawn;
+
+    [SerializeField]
+    AsteroidNetwork asteroidNetwork;
 
 	// Use this for initialization
 	void Start () {
@@ -23,10 +27,7 @@ public class AsteroidsManager : MonoBehaviour {
         pos = new Vector3(0, 0, 0);
         target = pos;
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-        for (int i = 0; i < nbAsteroidToSpawn; nbAsteroidToSpawn++)
-        {
-            AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), false);
-        }
+
 	}
 	
 	// Update is called once per frame
@@ -39,7 +40,15 @@ public class AsteroidsManager : MonoBehaviour {
             pos = mainCamera.ViewportToWorldPoint(pos);
 
             Vector3 target = shipScript.getTarget();
-            AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), true);
+            if (nbAsteroid % 2 == 0)
+            {
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, EnumColor.RED);
+            }
+            else
+            {
+                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid);
+            }
+            nbAsteroid++;
             timeSinceLastSpawn = Time.time;
         }
         
