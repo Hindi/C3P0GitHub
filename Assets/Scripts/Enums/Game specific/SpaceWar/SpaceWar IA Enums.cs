@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Enum used to store the general activity state of the AI
+/// </summary>
 public enum SWIAState {
     RANDOM,
     MOVE_RANDOMLY,
@@ -10,6 +13,9 @@ public enum SWIAState {
     DODGE_ATTACKS
 }
 
+/// <summary>
+/// Enum used to store the current movement performed by the AI
+/// </summary>
 public enum SWIAAction
 {
     MOVE_FORWARD,

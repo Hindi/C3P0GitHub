@@ -3,45 +3,86 @@ using System.Collections;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 using MathNet.Numerics.LinearAlgebra.Double;
 
+/// <summary>
+/// Applies a Kalman filter (position + speed) on a 2Dimentional object
+/// </summary>
 public class Kalman {
 
     /* Elements utilisés pour garder en mémoire */
+    /// <summary>
+    /// Vector containing the estimated position/speed of the object after applying the Kalman filter
+    /// </summary>
     private Vector estimation;
+    /// <summary>
+    /// Matrix used to apply the Kalman filter
+    /// </summary>
     private Matrix P;
 
     /* Elements utilisés pour rajouter le bruit */
+    /// <summary>
+    /// Matrix used as a model for the noise on the object's trajectory
+    /// </summary>
     private Matrix Q;
     private Matrix sqrtQ;
 
     /* Elements utilisés pour le Kalman */
+    /// <summary>
+    /// Trajectory matrix
+    /// </summary>
     private Matrix F;
+    /// <summary>
+    /// Matrix turning a Position+Speed Vector into a Position Vector
+    /// </summary>
     private Matrix H;
+    /// <summary>
+    /// Matrix used in the Kalman filter operation, doesn't actually need to be saved between iterations
+    /// </summary>
     private Matrix K;
+    /// <summary>
+    /// Matrix used as a model for sensor imprecision
+    /// </summary>
     private Matrix R;
     private Matrix sqrtR;
+    /// <summary>
+    /// The unit matrix
+    /// </summary>
     private Matrix I;
 
     /* Elements utilisés pour la visualisation (debug principalement) */
     private Vector2 posBruit; // Position bruitée : observation
+    /// <summary>
+    /// Position of the object as modelled by the noise Q, may be used for graphical feedback
+    /// </summary>
     public Vector2 PosBruit
     {
         get { return posBruit; }
         private set{}
     }
     private Vector2 posInterp; // Position interprétée : après le filtre de Kalman
+    /// <summary>
+    /// Contains the position interpreted by the Kalman filter
+    /// </summary>
     public Vector2 PosInterp
     {
         get { return posInterp; }
         private set { }
     }
-    private Vector2 posImprecise; // Position captée par les capteurs (lol)
+    private Vector2 posImprecise; // Position captée par les capteurs
+    /// <summary>
+    /// Position of the object after sensor imprecision, may be used for graphical feedback
+    /// </summary>
     public Vector2 PosImprecise
     {
         get { return posImprecise; }
         private set { }
     }
 
-
+    /// <summary>
+    /// Creates a Kalman filter for the object
+    /// </summary>
+    /// <param name="initVector">Initial position of the object</param>
+    /// <param name="noiseVariance">Variance used for Q, trajectory noise model</param>
+    /// <param name="imprecisionVariance">Variance used for R, sensor imprecision model</param>
     public Kalman(Vector4 initVector, double noiseVariance, double imprecisionVariance)
     {
         // Q
@@ -109,6 +150,12 @@ public class Kalman {
     }
 
     /* Interpole une valeur pour la position, en supposant aucun input du joueur, dans nbFrames frames */
+    /// <summary>
+    /// Tries to predict the object's position in nbFrames units of time.<br/>
+    /// Currently does a pretty poor job at it.
+    /// </summary>
+    /// <param name="nbFrames">The number of units of time ahead we want to know the object's position</param>
+    /// <returns>A position vector</returns>
     public Vector2 interpolation(int nbFrames)
     {
         Vector temp = new DenseVector(estimation.ToArray());
@@ -120,6 +167,10 @@ public class Kalman {
     }
 
     /* Prends une observation (pos.x, speed.x, pos.y, speed.y) non bruitée, la bruite et estime les nouveaux paramètres */
+    /// <summary>
+    /// Takes a sensor-perfect observation as entry for a Kalman filter iteration, adds realistic sensor imperfection and updates the internal state accordingly
+    /// </summary>
+    /// <param name="obs">A noised sensor-perfect position+speed observation</param>
     public void addObservation(Vector4 obs)
     {
         Vector tempVector = new DenseVector(4);
@@ -161,6 +212,11 @@ public class Kalman {
      * Private used functions                                                                        *
      *************************************************************************************************/
     /* Square root of a matrix using eigenvectors and eigenvalues (assuming it can be applied, undefined if not) */
+    /// <summary>
+    /// Square root of a matrix using eigenvectors and eigenvalues (assuming it can be applied, undefined if not)
+    /// </summary>
+    /// <param name="M">A Matrix</param>
+    /// <returns>The square root of M if applicable</returns>
     private Matrix sqrtm(Matrix M)
     {
         MathNet.Numerics.LinearAlgebra.Matrix<double> sqrtM;
@@ -209,6 +265,11 @@ public class Kalman {
     }
 
     /* Prends le vecteur réel et en retourne une version artificiellement bruitée */
+    /// <summary>
+    /// Adds artificial noise to a Position+Speed Vector according to Q
+    /// </summary>
+    /// <param name="oldVector">Position+Speed Vector</param>
+    /// <returns>Noised Vector</returns>
     private Vector addNoise(Vector oldVector)
     {
         double t1 = Laws.gauss();
@@ -221,6 +282,11 @@ public class Kalman {
         return ((Vector)(oldVector + sqrtQ*noise));
     }
 
+    /// <summary>
+    /// Adds artificial sensor imprecision to a Position Vector according to R
+    /// </summary>
+    /// <param name="oldVector">Position Vector</param>
+    /// <returns>Noised Vector</returns>
     private Vector addImprecision(Vector oldVector)
     {
         double t1 = Laws.gauss();
