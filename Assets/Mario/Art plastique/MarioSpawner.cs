@@ -13,17 +13,49 @@ public class MarioSpawner : MonoBehaviour {
     [SerializeField]
     private float spawnCD;
 
+    private int paramId;
+    public int ParamId
+    {
+        get { return paramId; }
+        set { paramId = value; }
+    }
+
 	// Use this for initialization
 	void Start () {
         lastSpawnTime = Time.time;
 	}
+
+    private double getDeltaPos()
+    {
+        double ret;
+        switch(paramId)
+        {
+            case 0:
+                ret = Laws.uniforme(-4, 4);
+                break;
+            case 1:
+                ret = Laws.gauss(0, 4);
+                break;
+            case 2:
+                ret = 0;
+                break;
+            default:
+                ret = 0;
+                break;
+        }
+
+        if (ret > 4)
+            ret = 4;
+
+        return ret;
+    }
 
     private void spawnSomething()
     {
         float pickRdm = Random.value;
         float dirRdm = Random.value;
         GameObject curObj;
-        Vector3 spawnPos = new Vector3(transform.position.x + Random.Range(-4, 4), transform.position.y, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x + (float)getDeltaPos(), transform.position.y, transform.position.z);
 
         if(pickRdm > 0.5f)
         {

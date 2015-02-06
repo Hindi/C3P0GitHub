@@ -64,7 +64,6 @@ public class MarioState : GameState
         playerScript_ = player_.GetComponent<FirstPersonController>();
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<MarioScoreManager>();
         spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<MarioSpawner>();
-        ui.setParamCanvas(gameId);
 
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
@@ -75,6 +74,7 @@ public class MarioState : GameState
     public override void start()
     {
         base.start();
+        ui.setParamCanvas(gameId);
     }
 
     /// <summary>Called when leaving this state.</summary>

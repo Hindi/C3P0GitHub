@@ -40,10 +40,15 @@ public class PongState : GameState {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
         gameScript.updateElementsResolution();
+    }
+
+    public override void start()
+    {
+        base.start();
+        ui.setParamCanvas(gameId);
     }
 
     public override void end()
@@ -93,7 +98,7 @@ public class PongState : GameState {
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if (t.position.x > Screen.width / 2)
+                    if (t.position.x < Screen.width / 2)
                     {
                         if (t.position.y > Screen.height / 2)
                             player.goUp();

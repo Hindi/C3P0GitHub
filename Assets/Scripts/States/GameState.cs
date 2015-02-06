@@ -39,7 +39,6 @@ public abstract class GameState : State
     public override void onLevelWasLoaded(int lvl)
     {
         loaded = true;
-        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
     }
 
     /// <summary>Called when the player restart the game.</summary>
@@ -123,6 +122,7 @@ public abstract class GameState : State
         lastSendScoreTime = Time.time;
         loaded = true;
         changeParam();
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
