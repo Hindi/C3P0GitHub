@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
 	float timer;
 	int score;
 	int scoreAux;
+
+
 	[SerializeField]
 	private GameObject pacDot;
 
@@ -46,9 +48,15 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void onRestart(){
+		createDots();
+		EventManager.Raise(EnumEvent.RESTARTSTATE);
+	}
+
 	void onGameOver(){
+		scoreAux = score;
 		score = 0;
-		scoreAux = 0;
+
 	}
 
 	void OnDestroy(){
@@ -98,7 +106,6 @@ public class GameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.AddListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.AddListener(EnumEvent.GHOST_EATEN, ghostEaten);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, createDots);
 		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 
@@ -107,8 +114,7 @@ public class GameController : MonoBehaviour {
 		Debug.Log(remainingDots);
 		score += 10;
 		if (remainingDots == 0){
-			EventManager.Raise(EnumEvent.RESTARTGAME);
-			EventManager.Raise(EnumEvent.RESTARTSTATE);
+			onRestart();
 		}
 	}
 
@@ -117,8 +123,7 @@ public class GameController : MonoBehaviour {
 		Debug.Log(remainingDots);
 		score += 50;
 		if (remainingDots == 0){
-			EventManager.Raise(EnumEvent.RESTARTGAME);
-			EventManager.Raise(EnumEvent.RESTARTSTATE);
+			onRestart();
 		}
 	}
 

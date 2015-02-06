@@ -30,6 +30,8 @@ public class StateManager : MonoBehaviour {
         stateList.Add(StateEnum.SPACEWAR, new SpaceWarState(this));
         stateList.Add(StateEnum.ASTEROIDS, new AsteroidsState(this));
         stateList.Add(StateEnum.MARIO, new MarioState(this));
+		stateList.Add(StateEnum.PACMAN, new PacmanState(this));
+
     }
 
 	// Use this for initialization
