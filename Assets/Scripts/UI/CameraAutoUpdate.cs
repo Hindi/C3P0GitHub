@@ -2,11 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerParamObject : MonoBehaviour {
+public class CameraAutoUpdate : MonoBehaviour {
 
     [SerializeField]
     private GameObject androidInfo, paramPanel;
-    private Canvas androidInfoCanvas, paramPanelCanvas;
+    private Canvas androidInfoCanvas, paramPanelCanvas, thisCanvas;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +14,21 @@ public class PlayerParamObject : MonoBehaviour {
             androidInfoCanvas = androidInfo.GetComponent<Canvas>();
         if(paramPanel != null)
             paramPanelCanvas = paramPanel.GetComponent<Canvas>();
+        thisCanvas = GetComponent<Canvas>();
+
+        Camera mainCamera = (GameObject.FindGameObjectWithTag("MainCamera")).GetComponent<Camera>();
+        if (androidInfoCanvas != null)
+        {
+            androidInfoCanvas.worldCamera = mainCamera;
+        }
+        if (paramPanelCanvas != null)
+        {
+            paramPanelCanvas.worldCamera = mainCamera;
+        }
+        if (thisCanvas != null)
+        {
+            thisCanvas.worldCamera = mainCamera;
+        }
 	}
 	
 	// Update is called once per frame
@@ -27,6 +42,10 @@ public class PlayerParamObject : MonoBehaviour {
         if (paramPanelCanvas != null)
         {
             paramPanelCanvas.worldCamera = mainCamera;
+        }
+        if (thisCanvas != null)
+        {
+            thisCanvas.worldCamera = mainCamera;
         }
 	}
 }
