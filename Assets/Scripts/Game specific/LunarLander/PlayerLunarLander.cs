@@ -75,6 +75,7 @@ public class PlayerLunarLander : MonoBehaviour {
         lastConsumTime = Time.time;
         reactorState = 0;
         timeBeforeRestart = 1;
+        onGameRestart();
 	}
 
     public void onGameRestart()
@@ -103,6 +104,10 @@ public class PlayerLunarLander : MonoBehaviour {
         camera.resetCameraPosition(new Vector3(transform.position.x + Screen.width/100, camera.InitialPosition.y, Camera.main.transform.position.z));
     }
 
+    void OnDestroy()
+    {
+        Physics2D.gravity = new Vector2(0, 9.81f);
+    }
     void resetForce()
     {
         rigidbody2D.isKinematic = true;
@@ -225,6 +230,6 @@ public class PlayerLunarLander : MonoBehaviour {
         {
             crash();
         }
-        Physics.gravity = new Vector3(-0, -gravityForce, 0);
+        Physics2D.gravity = new Vector2(-0, -gravityForce);
     }
 }

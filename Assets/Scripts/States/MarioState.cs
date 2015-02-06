@@ -108,9 +108,9 @@ public class MarioState : GameState
                 {
                     if(t.position.y < Screen.height / 2)
                     {
-                        if (t.position.x > 3 * Screen.width / 4)
+                        if (t.position.x > Screen.width / 2)
                             playerScript_.moveRight();
-                        else if (t.position.x < Screen.width / 4)
+                        else if (t.position.x < Screen.width / 2)
                             playerScript_.moveLeft();
                     }
                     else
