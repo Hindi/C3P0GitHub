@@ -18,6 +18,8 @@ public class BallMoving : MonoBehaviour {
     private Vector3 defaultPos;
     private Vector2 defaultSpeed;
 
+    private float restartTimer;
+
     public void onRestart()
     {
         transform.position = defaultPos;
@@ -38,11 +40,16 @@ public class BallMoving : MonoBehaviour {
         managerScript = manager.GetComponent<PongManagerScript>();
         defaultPos = transform.position;
         defaultSpeed = new Vector2(speed.x, speed.y);
-        Laws.setUniformValues(new double[] { 45, -45 });
+        //Laws.setUniformValues(new double[] { 45, -45 });
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (Time.time - restartTimer <= 3)
+        {
+            return;
+        }
+
         if (transform.position.y > upScreen * managerScript.resizeHeight && speed.y > 0)
         {
             speed.y = (speed.y < 0) ? speed.y : -1 * speed.y;
@@ -89,7 +96,7 @@ public class BallMoving : MonoBehaviour {
             {
                 if (managerScript.param.id == 0)
                 {
-                    Angle += (float)Laws.uniforme();
+                    Angle = Random.Range(-80,81);
                 }
                 else if (managerScript.param.id == 1)
                 {
@@ -99,6 +106,10 @@ public class BallMoving : MonoBehaviour {
                 {
                     Angle += (float)Laws.gauss(0, 60);
                 }
+                if (Angle > 80)
+                    Angle = 80;
+                if (Angle < -80)
+                    Angle = 80;
 
                 speed.x = Mathf.Cos(Angle * Mathf.Deg2Rad) * norm * ((transform.position.x > 0) ? -1 : 1);
                 speed.y = Mathf.Sin(Angle * Mathf.Deg2Rad) * norm;
@@ -111,6 +122,11 @@ public class BallMoving : MonoBehaviour {
             }
         }
         
+    }
+
+    public void onScore()
+    {
+        restartTimer = Time.time;
     }
 
     public void OnCoupSpecialStart(int player)
