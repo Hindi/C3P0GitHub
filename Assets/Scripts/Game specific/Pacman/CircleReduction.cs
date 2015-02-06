@@ -10,14 +10,14 @@ public class CircleReduction : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		timer = Time.realtimeSinceStartup;
+		timer = Time.time;
 		EventManager.AddListener(EnumEvent.MINIGAME_TERMINATE, terminate);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		transform.localScale -= new Vector3 (0.1f, 0.1f, 0.1f) * Time.deltaTime;
-		if(Time.realtimeSinceStartup - timer > 10f){
+		if(Time.time - timer > 10f){
 			Destroy(gameObject);
 		}
 	}

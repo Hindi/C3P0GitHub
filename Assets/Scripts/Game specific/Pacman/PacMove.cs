@@ -240,7 +240,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, onMiniGameLost);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, onMiniGameWin);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
-		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }

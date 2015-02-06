@@ -301,7 +301,7 @@ public class ClodeMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 
 	}

@@ -378,7 +378,7 @@ public class BlankyMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 
 
@@ -419,7 +419,7 @@ public class BlankyMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }
