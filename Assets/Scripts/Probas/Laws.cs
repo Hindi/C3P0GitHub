@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 static class Laws
@@ -20,14 +21,19 @@ static class Laws
         uniform = new Uniform(valuesList);
     }
 
-    public static double uniforme()
+    public static double discreteUniforme()
     {
-        if(null != uniform)
+        if (null != uniform)
         {
             return uniform.next();
         }
         else
             return 0;
+    }
+
+    public static double uniforme(int min, int max)
+    {
+        return UnityEngine.Random.Range(min, max);
     }
 
     public static double gauss(double moyenne = 0, double stddev = 1)
@@ -39,5 +45,10 @@ static class Laws
     {
         updateTime();
         return (2 + Mathf.Abs(8 * Mathf.Sin(currentTime)));
+    }
+
+    public static double exponential(double lambda)
+    {
+        return MathNet.Numerics.Distributions.Exponential.Sample(lambda);
     }
 }

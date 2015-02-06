@@ -15,18 +15,23 @@ public class Ball : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        initPos = transform.position;
 	}
 
     public void switchToBreakOut()
     {
-        transform.parent = null;
         rigidbody.AddForce(new Vector3(0, 0, 1.2f));
+    }
+
+    private void resetForce()
+    {
+        rigidbody.isKinematic = true;
+        rigidbody.isKinematic = false;
     }
 
     public void switchToNormal()
     {
-        transform.position = initPos;
+        resetForce();
+        transform.position = new Vector3(playerScript_.transform.position.x, playerScript_.transform.position.y, playerScript_.transform.position.z + 2);
     }
 
     void OnCollisionEnter(Collision collision)

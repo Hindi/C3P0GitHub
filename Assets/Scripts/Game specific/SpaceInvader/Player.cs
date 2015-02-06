@@ -132,23 +132,29 @@ public class Player : MonoBehaviour
                 switch (paramId)
                 {
                     case 0:
-                        goalScale = (float)Laws.uniforme();
+                        goalScale = (float)Laws.uniforme(1, 15);
                         break;
                     case 1:
-                        goalScale = (float)Laws.gauss(5,3);
+                        goalScale = (float)Laws.exponential(0.5f);
                         break;
                     case 2:
-                        goalScale = (float)Laws.gauss(5, 1);
+                        goalScale = (float)Laws.gauss(8, 2);
                         break;
                 }
-                goalScale = Mathf.Abs(goalScale);
-                if (goalScale > 15)
-                    goalScale = 15;
+                cutScale();
                 lastTimeChangeSize = Time.time;
                 //transform.localScale = new Vector3(goalScale, 1, 1);
             }
 		}
 		transform.localScale -= new Vector3((transform.localScale.x - goalScale) / (transform.localScale.x + goalScale), 0, 0);
+    }
+
+    private void cutScale()
+    {
+        if (goalScale > 15)
+            goalScale = 15;
+        else if (goalScale <= 1)
+            goalScale = 1;
     }
 
     float calcBouncingForce(float delta)
