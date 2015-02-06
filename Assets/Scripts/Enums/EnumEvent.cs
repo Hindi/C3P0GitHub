@@ -45,5 +45,6 @@ public enum EnumEvent
 	SENTENCE_WIN,			//When the minigame is lost
 	GHOST_EATEN,			//A ghost is eaten (Pacman)
 	DOT_EATEN,				//A dot is eaten (Pacman)
-	RESTARTSTATE			//Reset the state of each object
+	RESTARTSTATE,			//Reset the state of each object
+    UPDATEGAMESCORE         //Notify the gamestate that the score got updated
 };
