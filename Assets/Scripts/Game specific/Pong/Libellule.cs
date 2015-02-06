@@ -15,7 +15,7 @@ public class Libellule : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         initTime = Time.time;
         initPos = transform.position;
 	}
@@ -51,6 +51,10 @@ public class Libellule : MonoBehaviour {
 
     public void destroyPoints()
     {
+        if (points == null)
+        {
+            return;
+        }
         foreach (GameObject p in points)
         {
             Destroy(p, 0);

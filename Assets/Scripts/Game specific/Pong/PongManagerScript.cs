@@ -279,11 +279,11 @@ public class PongManagerScript : MonoBehaviour {
         }
         reset(player);
 
-        if (true)//int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
         {
             ball.transform.position = new Vector3(10, 3, -20);
             ball.SetActive(false);
-            if (false)//player == -1)
+            if (player == -1)
             {
                 gameOver = true;
                 mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
