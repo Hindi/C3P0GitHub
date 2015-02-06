@@ -104,11 +104,14 @@ public class MarioState : GameState
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if (t.position.x > 3 * Screen.width / 4)
-                        playerScript_.moveRight();
-                    else if (t.position.x < Screen.width / 4)
-                        playerScript_.moveLeft();
-                    else if (!paused)
+                    if(t.position.y < Screen.height / 2)
+                    {
+                        if (t.position.x > 3 * Screen.width / 4)
+                            playerScript_.moveRight();
+                        else if (t.position.x < Screen.width / 4)
+                            playerScript_.moveLeft();
+                    }
+                    else
                         playerScript_.jump();
                 }
             }
