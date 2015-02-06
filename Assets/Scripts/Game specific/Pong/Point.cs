@@ -5,7 +5,7 @@ public class Point : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Destroy(gameObject, 4);
+        Destroy(gameObject, 3);
 	}
 	
 	// Update is called once per frame

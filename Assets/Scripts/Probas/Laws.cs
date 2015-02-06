@@ -36,9 +36,9 @@ static class Laws
         return UnityEngine.Random.Range(min, max);
     }
 
-    public static double gauss(double moyenne = 0, double variance = 1)
+    public static double gauss(double moyenne = 0, double stddev = 1)
     {
-        return MathNet.Numerics.Distributions.Normal.Sample(moyenne, variance);
+        return MathNet.Numerics.Distributions.Normal.Sample(moyenne, stddev);
     }
 
     public static float sin()
