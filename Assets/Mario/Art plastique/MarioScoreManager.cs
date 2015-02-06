@@ -37,11 +37,10 @@ public class MarioScoreManager : MonoBehaviour {
     public void addScore(int s)
     {
         score += s;
-        if (!inPlace)
+        if (!pipeManager.isPlaced())
         {
             if (score > 50)
             {
-                inPlace = true;
                 pipeManager.moveBigPipe(1);
                 invisBorder.SetActive(false);
             }
@@ -56,5 +55,6 @@ public class MarioScoreManager : MonoBehaviour {
             else if (score > 8)
                 pipeManager.moveBigPipe(1);
         }
+       
     }
 }
