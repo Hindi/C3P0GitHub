@@ -10,26 +10,48 @@ public class AsteroidNetwork : MonoBehaviour {
 
     private AsteroidsManager asteroidsManager;
 
-    // TO DO rajouter un argument pour donner une couleur ou non à l'astéroid (accéder au Halo)
-    [RPC]
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, bool b)
+   
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
     {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, b);
+        networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id, EnumColor.NONE);
     }
 
 
+    // 
     [RPC]
+    private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, EnumColor.NONE);
+    }
+
+
+    public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    {
+        networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, color);
+    }
+
+
+
+    [RPC]
+    private void createAsteroidColorRPC(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, color);
+    }
+
+
     public void hitAsteroid(int id)
+    {
+        networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
+    }
+
+    [RPC]
+    private void hitAsteroidRPC(int id)
     {
         asteroidsManager.hit(id);
     }
 
 
-    [RPC]
-    public void push(Asteroid ast)
-    {
-        AsteroidFactory._factory.push(ast);
-    }
+   
 
 	// Use this for initialization
 	void Start () {

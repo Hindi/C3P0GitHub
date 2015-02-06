@@ -4,43 +4,29 @@ using System.Collections;
 public class Asteroid : MonoBehaviour {
 
     public int id;
-    private AsteroidShip shipScript;
     private Vector3 target;
     public int hp;
     public bool isUsed;
 
-    private static int nbAsteroid = 0;
 
 
     [SerializeField]
     private float speed;
 
+
+    private AsteroidShip shipScript;
     private AsteroidsManager asteroidManager;
-    
+    private Behaviour halo;
+
 	// Use this for initialization
 	void Start () {
-        /*
-        shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-        
-        //target = shipScript.getTarget();
-        isUsed = false;
-        id = nbAsteroid;
-        nbAsteroid++;
-        AsteroidFactory._factory.push(this);
-        //gameObject.renderer.enabled = false;
-        gameObject.SetActive(false);
-         * */
 	}
 	
     void Awake()
     {
         asteroidManager = GameObject.FindGameObjectWithTag("asteroidManager").GetComponent<AsteroidsManager>();
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-
-        //target = shipScript.getTarget();
-        isUsed = false;
-        id = nbAsteroid;
-        nbAsteroid++;
+        halo = (Behaviour) gameObject.GetComponent("Halo");
     }
 
 	// Update is called once per frame
@@ -68,33 +54,49 @@ public class Asteroid : MonoBehaviour {
             // Calls a RPC that does that for everyone
             asteroidManager.remove(this.id);
 
-            // We disable the gameobject assiociated
-            gameObject.SetActive(false);
-
             // Now we add it to the unuse asteroid stack
+            // Factry disables the gameobject 
             AsteroidFactory._factory.push(this);
         }
     }
 
 
     // bool b indicates if it is activated or not
-    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health, bool b)
+    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health, int id, EnumColor color)
     {
         target = cible;
         transform.position = posSpawn;
         hp = health;
         isUsed = true;
+        this.id = id;
         //gameObject.renderer.enabled = true;
 
-        // We activate the asteroid if needed 
-        gameObject.SetActive(b);
+        setColor(color);
 
-        if (b)
+        // We activate the asteroid and add it to use asteroid
+        gameObject.SetActive(true);
+        asteroidManager.add(this.id, this);
+    }
+
+    public void setColor(EnumColor color)
+    {
+        switch(color)
         {
-            // Now we add it to the use asteroids dictionary
-            asteroidManager.add(this.id, this);
+            case EnumColor.NONE :
+                (halo.GetType().GetProperty("enabled")).SetValue(halo, false, null); // it disables the halo
+                break;
+            case EnumColor.GREEN :
+                halo.light.color = Color.green;
+                break;
+            case EnumColor.BLUE :
+                halo.light.color = Color.blue;
+                break;
+            case EnumColor.RED :
+                halo.light.color = Color.red;
+                break;
+            default :
+                Debug.Log("Forgot to had this color " + color + " in the switch setColor");
+                break;
         }
-        else
-            AsteroidFactory._factory.push(this);
     }
 }

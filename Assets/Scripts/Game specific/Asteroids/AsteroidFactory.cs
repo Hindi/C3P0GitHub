@@ -14,15 +14,19 @@ public class AsteroidFactory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        Asteroid ast;
         // We create some asteroids when the scene is loaded
         for(int i = 0; i < nbAsteroidInitalized; i++)
         {
             // When an Asteroid is created, he isn't used immediatly so it adds itself
             // in the asteroidNotInUse stack
-            Instantiate(asteroids);
+            ast = ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>();
+
+            push(ast);
         }
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,28 +34,32 @@ public class AsteroidFactory : MonoBehaviour {
 	}
 
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="target"></param>
-    /// <param name="hp"></param>
-    /// <param name="b"></param>
-    /// 
-    // le booléen sert à indiquer si on demande un nouvel asteroid pour s'en servir immédiatement ou juste pour 
-    // le chargement afin que tout le monde ait une pool d'astéroids déjà instanciés.
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, bool b)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
     {
-        if (asteroidNotInUse.Count > 0 && b)
+        if (asteroidNotInUse.Count > 0)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, b);
+            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, EnumColor.NONE);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, b);
+            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
         }
     }
+
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    {
+        if (asteroidNotInUse.Count > 0)
+        {
+            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, color);
+        }
+        else
+        {
+            // Instantiate a new Asteroid so it gets the start phase and initialise it after
+            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
+        }
+    }
+
 
     /* not used anymore
     public int getFreeId()
@@ -96,5 +104,6 @@ public class AsteroidFactory : MonoBehaviour {
     public void push(Asteroid ast)
     {
         asteroidNotInUse.Push(ast);
+        ast.gameObject.SetActive(false);
     }
 }
