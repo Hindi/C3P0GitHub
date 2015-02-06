@@ -4,12 +4,12 @@ using System.Collections;
 public class MarioState : GameState 
 {
     /// <summary>The gameObject of the player.</summary>
-    [SerializeField]
     private GameObject player_;
 
     /// <summary>The script of the player.</summary>
     private FirstPersonController playerScript_;
     private MarioScoreManager scoreManager;
+    private MarioSpawner spawner;
 
     /// <summary>The current parameter id.</summary>
     private int paramId;
@@ -51,6 +51,7 @@ public class MarioState : GameState
     public override void setParameter(Parameter param)
     {
         paramId = param.id;
+        spawner.ParamId = paramId;
     }
 
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -62,6 +63,7 @@ public class MarioState : GameState
         player_ = GameObject.FindGameObjectWithTag("Player");
         playerScript_ = player_.GetComponent<FirstPersonController>();
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<MarioScoreManager>();
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<MarioSpawner>();
         ui.setParamCanvas(gameId);
 
         if (Application.isMobilePlatform)
