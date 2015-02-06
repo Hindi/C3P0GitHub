@@ -71,6 +71,10 @@ public class CameraManagerTetris : MonoBehaviour {
         // noiseCamera.gameObject.SetActive(true);
         switch (id)
         {
+            case -1:
+                blur.enabled = false;
+                noise.enabled = false;
+                break;
             case 0:
                 //setActiveCamera(camera1);
                 blur.enabled = true;
