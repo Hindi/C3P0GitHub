@@ -76,7 +76,6 @@ public class TetrisState : GameState {
         if (loaded)
         {
             base.onGameRestart();
-            GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraManagerTetris>().setParamId(-1);
             Grid._grid.gameRestart();
         }
     }
