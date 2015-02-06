@@ -9,6 +9,8 @@ public class PipesManager : MonoBehaviour {
     [SerializeField]
     private GameObject smallPipe;
 
+    Vector3 startPosition;
+
     Vector3 bigPipeObjPos;
     Vector3 smallPipeObjPos;
 
@@ -48,5 +50,10 @@ public class PipesManager : MonoBehaviour {
     {
         smallPipeObjPos = new Vector3(smallPipe.transform.position.x,
             smallPipe.transform.position.y + deltayPositionY, smallPipe.transform.position.z);
+    }
+
+    public bool isPlaced()
+    {
+        return (Vector3.Distance(bigPipe.transform.position, bigPipeStartPos) >= 4);
     }
 }
