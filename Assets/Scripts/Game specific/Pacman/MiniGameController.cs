@@ -32,7 +32,7 @@ public class MiniGameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pocman = GameObject.FindGameObjectWithTag("Pacman");
+		pocman = GameObject.FindGameObjectWithTag("Player");
 		rand = GetComponentInChildren<Randomizer>();
 		startingPosition = transform.position;
 		startingForward = transform.position + 25 * transform.forward;
@@ -42,6 +42,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
 		EventManager.AddListener (EnumEvent.RESTARTSTATE, onRestart);
+		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 
 
@@ -57,7 +58,7 @@ public class MiniGameController : MonoBehaviour {
 	void Update () {
 
 		if (isTarget){
-			Time.timeScale = 0;
+			EventManager<bool>.Raise(EnumEvent.MOVING, false);
 			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.unscaledDeltaTime));
 			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
 				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.unscaledDeltaTime);
@@ -77,9 +78,7 @@ public class MiniGameController : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position, startingPosition, 2 * Time.unscaledDeltaTime);
 
 			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
-				if(!gameOver){
-					Time.timeScale = 1;
-				}
+				EventManager<bool>.Raise(EnumEvent.MOVING,true);
 			}
 		}	
 	}
@@ -89,5 +88,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
+		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestart);
+		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 }

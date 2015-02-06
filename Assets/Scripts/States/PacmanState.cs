@@ -7,9 +7,14 @@ class PacmanState : GameState
 	/// <summary>The gameObject of the player.</summary>
 	[SerializeField]
 	private GameObject player_;
+
+	[SerializeField]
+	private GameObject gameController_;
 	
 	/// <summary>The script of the player.</summary>
 	private PacMove playerScript_;
+
+	private PacmanController gameControllerScript_;
 	
 	
 	/// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -25,8 +30,9 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void onGameRestart()
 	{
-	/*	if(loaded)
-			playerScript_.onGameRestart();*/
+		if(loaded){
+			gameControllerScript_.onRestart();
+		}
 	}
 	
 	/// <summary>Called when the player lose or win.</summary>
@@ -37,6 +43,7 @@ class PacmanState : GameState
 		if (loaded)
 		{
 			base.onGameOver(b);
+			gameControllerScript_.onRestart();
 		}
 	}
 	
@@ -45,8 +52,8 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void setParameter(Parameter param)
 	{
-		paramId = param.id;
-		player_.GetComponent<Player>().setParamId(param.id);
+		/*paramId = param.id;
+		player_.GetComponent<Player>().setParamId(param.id);*/
 	}
 	
 	/// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -58,8 +65,9 @@ class PacmanState : GameState
 		loaded = true;
 		player_ = GameObject.FindGameObjectWithTag("Player");
 		playerScript_ = player_.GetComponent<PacMove>();
+		gameController_ = GameObject.FindGameObjectWithTag("Pacman");
+		gameControllerScript_ = gameController_.GetComponent<PacmanController>();
 		ui.setParamCanvas(gameId);
-		
 		if(Application.isMobilePlatform)
 			Screen.orientation = ScreenOrientation.Landscape;
 	}
@@ -119,16 +127,18 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void noticeInput(EnumInput key)
 	{
-		/*if (loaded)
+		if (loaded)
 		{
 			base.noticeInput(key);
-			if (key == EnumInput.SPACE)
-				playerScript_.fire();
+			if (key == EnumInput.UP)
+				playerScript_.goUp();
 			if (key == EnumInput.LEFT)
-				playerScript_.move(-1);
-			else if (key == EnumInput.RIGHT)
-				playerScript_.move(1);
-		}*/
+				playerScript_.goLeft();
+			if (key == EnumInput.RIGHT)
+				playerScript_.goRight();
+			if (key == EnumInput.DOWN)
+				playerScript_.goDown();
+		}
 	}
 }
 

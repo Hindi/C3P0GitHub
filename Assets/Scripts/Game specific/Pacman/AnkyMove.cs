@@ -21,12 +21,18 @@ public class AnkyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	bool isMoving = false;
+	bool inHouse = true;
 	Color defaultColor;
 	
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
 			isMoving = real;
+			inHouse = false;
 		}
+	}
+
+	void moving(bool res){
+		isMoving = res;
 	}
 
 	void scatter(){
@@ -182,7 +188,7 @@ public class AnkyMove : MonoBehaviour {
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -190,7 +196,7 @@ public class AnkyMove : MonoBehaviour {
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -203,6 +209,8 @@ public class AnkyMove : MonoBehaviour {
 		collider.enabled = true;
 		renderer.enabled = true;
 		rigidbody.position = new Vector3(11, 0, -14);
+		curDir = Vector3.left;
+		nextDir = Vector3.left;
 	}
 
 	void Start () {
@@ -255,8 +263,9 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
+		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 
-		pacman = GameObject.FindGameObjectWithTag("Pacman");
+		pacman = GameObject.FindGameObjectWithTag("Player");
 		blanky = GameObject.FindGameObjectWithTag("Blanky");
 		pacMove = pacman.GetComponent<PacMove>();
 		ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
@@ -268,7 +277,7 @@ public class AnkyMove : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-		if (isMoving){
+		if (isMoving && !inHouse){
 			chase();
 		}
 			if (scatterMode && Time.time - scatterTimer > scatterDelay){
@@ -292,5 +301,6 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }
