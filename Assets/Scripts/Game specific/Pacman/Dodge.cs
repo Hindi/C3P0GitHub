@@ -6,6 +6,8 @@ public class Dodge : MonoBehaviour {
 	Camera circleCamera;
 	float timer;
 	int layerMask = 1 << 11;
+	[SerializeField]
+	float delay = 5f;
 
 	void startMiniGame(){
 		timer = Time.realtimeSinceStartup;
@@ -23,8 +25,9 @@ public class Dodge : MonoBehaviour {
 	}
 	
 	void Update () {
+		Debug.DrawRay(circleCamera.ScreenToWorldPoint(Input.mousePosition - 0.5f * circleCamera.transform.forward), circleCamera.transform.forward, Color.green);
 		if (miniGame){
-			if (Time.realtimeSinceStartup - timer > 5f){
+			if (Time.realtimeSinceStartup - timer > delay){
 				EventManager.Raise(EnumEvent.MINIGAME_TO);
 				miniGame = false;
 			}
