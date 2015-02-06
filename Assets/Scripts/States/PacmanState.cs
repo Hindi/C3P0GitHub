@@ -67,7 +67,6 @@ class PacmanState : GameState
 		playerScript_ = player_.GetComponent<PacMove>();
 		gameController_ = GameObject.FindGameObjectWithTag("Pacman");
 		gameControllerScript_ = gameController_.GetComponent<PacmanController>();
-		ui.setParamCanvas(gameId);
 		if(Application.isMobilePlatform)
 			Screen.orientation = ScreenOrientation.Landscape;
 	}
@@ -76,7 +75,8 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void start()
 	{
-		base.start();
+        base.start();
+        ui.setParamCanvas(gameId);
 	}
 	
 	/// <summary>Called when leaving this state.</summary>

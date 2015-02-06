@@ -41,11 +41,16 @@ public class SpaceWarState : GameState {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("SpaceWarScript").GetComponent<SpaceWarScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSpaceWar>();
-        ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
         gameScript.onRestart();
         gameScript.updateElementsResolution();
+    }
+
+    public override void start()
+    {
+        base.start();
+        ui.setParamCanvas(gameId);
     }
 
     public override void end()

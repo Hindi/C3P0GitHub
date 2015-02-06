@@ -46,7 +46,6 @@ class LunarLanderState : GameState
         player_ = GameObject.FindGameObjectWithTag("Player");
         terrain = GameObject.FindGameObjectWithTag("Terrain").GetComponent<TerrainLunarLander>();
         playerScript_ = player_.GetComponent<PlayerLunarLander>();
-        ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
     }
@@ -56,6 +55,7 @@ class LunarLanderState : GameState
     public override void start()
     {
         base.start();
+        ui.setParamCanvas(gameId);
     }
 
 
