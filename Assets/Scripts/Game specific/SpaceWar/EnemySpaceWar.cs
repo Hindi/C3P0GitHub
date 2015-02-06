@@ -365,7 +365,7 @@ public class EnemySpaceWar : Spaceship {
         bool spirale = dodgeSpirale();
         bool self = dodgeSelfProjectile();
         bool player = dodgePlayerProjectile();
-        if (Time.time - stateTimer > stateChangeTimer)
+        if (Time.time - stateTimer > stateChangeTimer / 2)
         {
             stateTimer = Time.time;
             IAState = SWIAState.MOVE_TOWARDS_PLAYER;
@@ -375,7 +375,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeSpirale()
     {
-        if (distance(spiral) <= 3)
+        if (distance(spiral) <= 2)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - spiral.transform.position.y, transform.position.x - spiral.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -395,7 +395,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgeSelfProjectile()
     {
-        if (distance(playerProjectile) <= 3 && projectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -415,7 +415,7 @@ public class EnemySpaceWar : Spaceship {
 
     private bool dodgePlayerProjectile()
     {
-        if (distance(playerProjectile) <= 3 && playerProjectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
         {
             float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0 || Angle <= -180)
