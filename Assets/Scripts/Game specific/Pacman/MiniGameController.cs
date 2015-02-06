@@ -41,8 +41,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
-		EventManager.AddListener (EnumEvent.RESTARTGAME, onRestart);
+		EventManager.AddListener (EnumEvent.RESTARTSTATE, onRestart);
 	}
 
 
@@ -80,10 +79,6 @@ public class MiniGameController : MonoBehaviour {
 			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
 				if(!gameOver){
 					Time.timeScale = 1;
-				}
-				else{
-					EventManager.Raise(EnumEvent.RESTARTGAME);
-					EventManager.Raise (EnumEvent.RESTARTSTATE);
 				}
 			}
 		}	
