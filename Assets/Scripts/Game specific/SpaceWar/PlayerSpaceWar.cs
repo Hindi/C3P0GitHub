@@ -34,6 +34,5 @@ public class PlayerSpaceWar : Spaceship {
     public override void onRestart()
     {
         base.onRestart();
-        transform.position = basePos;
     }
 }

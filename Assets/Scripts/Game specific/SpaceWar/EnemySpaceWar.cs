@@ -157,6 +157,7 @@ public class EnemySpaceWar : Spaceship {
 
     public override void onRestart()
     {
+        base.onRestart();
         if (p != null && p.id == 1)
             kalman = new Kalman(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0),
                 1, 1);

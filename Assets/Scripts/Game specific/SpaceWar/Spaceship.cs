@@ -88,11 +88,14 @@ public class Spaceship : MonoBehaviour
 
     public virtual void onHit()
     {
-        GameObject explo = (GameObject) GameObject.Instantiate(explosion);
-        explo.transform.position = transform.position;
-        renderer.enabled = false;
-        isEnd = true;
-        initEndTimer = Time.time;
+        if (!isEnd)
+        {
+            GameObject explo = (GameObject)GameObject.Instantiate(explosion);
+            explo.transform.position = transform.position;
+            renderer.enabled = false;
+            isEnd = true;
+            initEndTimer = Time.time;
+        }
     }
 
     public virtual void onRestart(){
