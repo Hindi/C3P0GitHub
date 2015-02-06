@@ -40,10 +40,15 @@ public class PongState : GameState {
         base.onLevelWasLoaded(lvl);
         gameScript = GameObject.FindGameObjectWithTag("PongManagerScript").GetComponent<PongManagerScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
         gameScript.updateElementsResolution();
+    }
+
+    public override void start()
+    {
+        base.start();
+        ui.setParamCanvas(gameId);
     }
 
     public override void end()

@@ -48,7 +48,6 @@ public class TetrisState : GameState {
     public override void onLevelWasLoaded(int lvl)
     {
         base.onLevelWasLoaded(lvl);
-        ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
         {
             Screen.orientation = ScreenOrientation.Portrait;
@@ -157,6 +156,17 @@ public class TetrisState : GameState {
         base.end();
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.AutoRotation;
+    }
+
+    // Use this for state transition
+    /// <summary>
+    /// Called when entering this state.
+    /// </summary>
+    /// <returns>void</returns>
+    public override void start()
+    {
+        base.start();
+        ui.setParamCanvas(gameId);
     }
 
 }
