@@ -101,7 +101,13 @@ public class Player : MonoBehaviour
 
     public void enemyDestroyed()
     {
+        updateScore();
+    }
+
+    private void updateScore()
+    {
         score++;
+        EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
     }
 
     public void recallProjectile()

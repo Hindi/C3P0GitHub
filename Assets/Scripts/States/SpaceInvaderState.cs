@@ -85,11 +85,6 @@ class SpaceInvaderState : GameState
     public override void update()
     {
         base.update();
-        if(playerScript_ != null && score != playerScript_.Score)
-        {
-            scoreChanged = true;
-            score = playerScript_.Score;
-        }
     }
 
     /// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
