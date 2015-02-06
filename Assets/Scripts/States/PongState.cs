@@ -64,7 +64,7 @@ public class PongState : GameState {
         if (gameScript != null && score != gameScript.playerScore - gameScript.enemyScore)
         {
             score = gameScript.playerScore - gameScript.enemyScore;
-            scoreChanged = true;
+            EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
         }
     }
 

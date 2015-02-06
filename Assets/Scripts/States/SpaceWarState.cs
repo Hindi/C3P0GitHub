@@ -63,10 +63,10 @@ public class SpaceWarState : GameState {
     public override void update()
     {
         base.update();
-        if (gameScript != null && score != gameScript.score)
+        if (gameScript != null && score != gameScript.Score)
         {
-            score = gameScript.score;
-            scoreChanged = true;
+            score = gameScript.Score;
+            EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
         }
     }
 
@@ -75,9 +75,6 @@ public class SpaceWarState : GameState {
         if (loaded)
         {
             base.onGameOver(b);
-            /* TODO : compléter avec le score réel 
-            C3PONetworkManager.Instance.sendGameStats((int)gameId, p.id, gameScript.playerScore - gameScript.enemyScore);
-             * */
         }
     }
 

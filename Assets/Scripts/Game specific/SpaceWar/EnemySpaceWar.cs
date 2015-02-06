@@ -64,6 +64,15 @@ public class EnemySpaceWar : Spaceship {
         if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
         addInterpretedPosition(kalman.PosInterp);
 
+        if (isEnd)
+        {
+            if(Time.time - initEndTimer >= 2)
+            {
+                isEnd = false;
+                EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, false);
+            }
+        }
+
 #if UNITY_EDITOR
         /* DEBUG : Moving points around */
         //target.transform.position = kalman.interpolation(60);
@@ -139,7 +148,6 @@ public class EnemySpaceWar : Spaceship {
     public override void onHit()
     {
         base.onHit();
-        EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, false);
     }
 
     public void setParameter(Parameter param)

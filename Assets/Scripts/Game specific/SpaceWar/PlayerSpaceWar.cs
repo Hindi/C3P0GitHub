@@ -16,12 +16,19 @@ public class PlayerSpaceWar : Spaceship {
     void Update()
     {
         base.Update();
+        if (isEnd)
+        {
+            if (Time.time - initEndTimer >= 2)
+            {
+                isEnd = false;
+                EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, true);
+            }
+        }
 	}
 
     public override void onHit()
     {
         base.onHit();
-        EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, true);
     }
 
     public override void onRestart()

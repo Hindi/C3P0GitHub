@@ -7,7 +7,10 @@ public class SpaceWarScript : MonoBehaviour {
     [SerializeField]
     private GameObject playerShip, enemyShip, playerProjectile, enemyProjectile;
     private Vector3 basePlayerPos, baseEnemyPos, basePPPos, baseEPPos;
-    public int score = 0;
+    private int score = 0;
+    public int Score {
+        get{return score;} private set{}
+    }
     private float aspectRatio;
     [SerializeField]
     private GameObject mainCamera;

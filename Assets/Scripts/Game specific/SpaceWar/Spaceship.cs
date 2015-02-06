@@ -22,6 +22,12 @@ public class Spaceship : MonoBehaviour
     [SerializeField]
     protected float maxSpeed;
 
+    [SerializeField]
+    protected GameObject explosion;
+
+    protected float initEndTimer;
+    protected bool isEnd;
+
     public void rotate(float speedFactor)
     {
         transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
@@ -66,10 +72,13 @@ public class Spaceship : MonoBehaviour
 	// Update is called once per frame
     protected void Update()
     {
+        if (isEnd)
+        {
+            return;
+        }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
         {
             onHit();
-            onRestart();
         }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) >= 4.5)
         {
@@ -79,8 +88,15 @@ public class Spaceship : MonoBehaviour
 
     public virtual void onHit()
     {
-        //Debug.Log("GameOver");
+        GameObject explo = (GameObject) GameObject.Instantiate(explosion);
+        explo.transform.position = transform.position;
+        renderer.enabled = false;
+        isEnd = true;
+        initEndTimer = Time.time;
     }
 
-    public virtual void onRestart(){}
+    public virtual void onRestart(){
+        isEnd = false;
+        renderer.enabled = true;
+    }
 }
