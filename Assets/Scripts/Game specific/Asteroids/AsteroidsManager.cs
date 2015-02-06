@@ -87,6 +87,7 @@ public class AsteroidsManager : MonoBehaviour {
         Asteroid ast;
         if (asteroidInUse.TryGetValue(id, out ast))
         {
+            // We should always be in this case.
             ast.hit();
         }
         else

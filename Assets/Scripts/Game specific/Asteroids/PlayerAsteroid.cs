@@ -14,6 +14,9 @@ public class PlayerAsteroid : MonoBehaviour {
     [SerializeField]
     private Camera playerCamera;
 
+    [SerializeField]
+    private AsteroidNetwork asteroidNetwork;
+
     public float mouseSensitivity;
 
     float upDownRange;
@@ -75,7 +78,7 @@ public class PlayerAsteroid : MonoBehaviour {
                 Debug.Log("un asteroid a été touche en pos : " + hit.point);
                 // TO DO Envoyer à tout le monde qu'on a touché tel asteroid pour qu'il fasse la synchro 
                 // On accède à l'astéroid avec le code en dessus (plus ou moins)
-                hit.transform.gameObject.GetComponent<Asteroid>().hit();
+                asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponent<Asteroid>().id);
             }
         }
         else
