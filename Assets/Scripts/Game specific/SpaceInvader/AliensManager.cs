@@ -35,8 +35,8 @@ public class AliensManager : MonoBehaviour {
 	private float fireCooldown;
 
     [SerializeField]
+    private float breakOutCooldown;
     private float breakOutStartTime;
-    private float gameStartTime;
 
 	
     private int direction;
@@ -54,9 +54,6 @@ public class AliensManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         start();
-
-        gameStartTime = Time.time;
-
         EventManager.AddListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
 		EventManager<bool>.AddListener (EnumEvent.GAMEOVER, onGameOver);
@@ -79,7 +76,7 @@ public class AliensManager : MonoBehaviour {
         changeDirection = false;
         breakOutMode = false;
         lastFireTime = Time.time;
-        gameStartTime = Time.time;
+        breakOutStartTime = Time.time;
         lastMoveTime = Time.time;
     }
 
@@ -100,7 +97,7 @@ public class AliensManager : MonoBehaviour {
 
     bool isBreakOutTime()
     {
-        return (Time.time - gameStartTime > breakOutStartTime && !breakOutMode);
+        return (Time.time - breakOutStartTime > breakOutCooldown && !breakOutMode);
     }
 	
 	private void spawnAliens()
@@ -116,7 +113,8 @@ public class AliensManager : MonoBehaviour {
 	{
 		deathCount++;
 		if (deathCount == alienCount)
-			EventManager<bool>.Raise (EnumEvent.GAMEOVER, true);
+            EventManager<bool>.Raise(EnumEvent.RESTARTGAME, true);
+        victoryCount++;
 	}
 
     public void onRestartGame()
@@ -127,8 +125,7 @@ public class AliensManager : MonoBehaviour {
 	
 	public void onGameOver(bool b)
 	{
-		if (b == true)
-		    victoryCount++;
+
 	}
 
     private void summonLine(int z, GameObject prefab)
@@ -164,7 +161,7 @@ public class AliensManager : MonoBehaviour {
         }
     }
 
-    private void fire()
+    private void alienFire()
     {
 		if (canFire()) 
             if(transform.childCount > 0)
@@ -177,7 +174,7 @@ public class AliensManager : MonoBehaviour {
 	// Update is called once per frame
     void Update()
 	{
-		fire ();
+        alienFire();
         if (transform.childCount == 0)
         {
             spawnAliens();
@@ -187,6 +184,9 @@ public class AliensManager : MonoBehaviour {
 				moveAliens ();
 				lastMoveTime = Time.time;
 		}
+
+        if (breakOutMode && player.transform.position.z > ball.transform.position.z)
+            switchBackToNormal();
 
         if (isBreakOutTime())
             switchToBreakout();
@@ -202,8 +202,8 @@ public class AliensManager : MonoBehaviour {
 
     void switchBackToNormal()
     {
+        breakOutStartTime = Time.time;
         breakOutMode = false;
         ball.gameObject.SetActive(false);
-        ball.GetComponent<Ball>().switchToNormal();
     }
 }
