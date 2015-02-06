@@ -13,7 +13,7 @@ public class SpaceWarScript : MonoBehaviour {
     private GameObject mainCamera;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         EventManager<bool>.AddListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
         basePlayerPos = playerShip.transform.position;
         baseEnemyPos = enemyShip.transform.position;

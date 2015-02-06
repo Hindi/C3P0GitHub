@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour {
 
     public void onParamChangeClick()
     {
+        EventManager.Raise(EnumEvent.RESTARTGAME);  
         ui.switchToParam();
     }
 

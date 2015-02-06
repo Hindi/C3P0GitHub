@@ -19,12 +19,18 @@ public class ClodeMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	bool isMoving = false;
+	bool inHouse = true;
 	Color defaultColor;
 
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
 			isMoving = real;
+			inHouse = false;
 		}
+	}
+
+	void moving(bool real){
+		isMoving = real;
 	}
 
 	void scatter(){
@@ -182,7 +188,7 @@ public class ClodeMove : MonoBehaviour {
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -190,7 +196,7 @@ public class ClodeMove : MonoBehaviour {
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -203,6 +209,8 @@ public class ClodeMove : MonoBehaviour {
 		collider.enabled = true;
 		renderer.enabled = true;
 		rigidbody.position = new Vector3(16, 0, -14);
+		curDir = Vector3.left;
+		nextDir = Vector3.left;
 	}
 
 	void Start () {
@@ -255,9 +263,10 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
+		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 
 
-		pacman = GameObject.FindGameObjectWithTag("Pacman");
+		pacman = GameObject.FindGameObjectWithTag("Player");
 		clodeTarget = pacman.transform.position;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
@@ -266,7 +275,7 @@ public class ClodeMove : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-		if (isMoving){
+		if (isMoving && !inHouse){
 			chase();
 			}
 			if (scatterMode && Time.time - scatterTimer > scatterDelay){
@@ -291,6 +300,7 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 
 	}
 }

@@ -126,6 +126,13 @@ public abstract class GameState : State
         EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
+        EventManager<int>.AddListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
+    }
+
+    public void onScoreUpdate(int s)
+    {
+        scoreChanged = true;
+        score = s;
     }
 
     /// <summary>Called when leaving this state.</summary>
@@ -136,6 +143,7 @@ public abstract class GameState : State
         EventManager<bool>.RemoveListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
+        EventManager<int>.RemoveListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
     }
 
     /// <summary>Called each frame.</summary>

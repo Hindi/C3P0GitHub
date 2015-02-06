@@ -20,13 +20,19 @@ public class PankyMove : MonoBehaviour {
 	int curTileX;
 	int curTileY;
 	bool isMoving = false;
+	bool inHouse = true;
 	Color defaultColor;
 
 
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
 			isMoving = real;
+			inHouse = false;
 		}
+	}
+
+	void moving(bool real){
+		isMoving = real;
 	}
 
 	void scatter(){
@@ -180,7 +186,7 @@ public class PankyMove : MonoBehaviour {
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -188,7 +194,7 @@ public class PankyMove : MonoBehaviour {
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -201,6 +207,8 @@ public class PankyMove : MonoBehaviour {
 		collider.enabled = true;
 		renderer.enabled = true;
 		rigidbody.position = new Vector3(13.5f, 0, -14f);
+		curDir = Vector3.right;
+		nextDir = Vector3.right;
 	}
 
 	void Start () {
@@ -248,6 +256,7 @@ public class PankyMove : MonoBehaviour {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
 		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
+		EventManager<bool>.AddListener(EnumEvent.MOVING,moving);
 		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
@@ -255,7 +264,7 @@ public class PankyMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 
 
-		pacman = GameObject.FindGameObjectWithTag("Pacman");
+		pacman = GameObject.FindGameObjectWithTag("Player");
 		pacMove = pacman.GetComponent<PacMove>();
 		pankyTarget = pacman.transform.position + 4 * pacMove.getCurDir();
 		curTileX = Mathf.RoundToInt(transform.position.x);
@@ -266,7 +275,7 @@ public class PankyMove : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-		if (isMoving){
+		if (isMoving && !inHouse){
 			chase();
 		}
 			if (scatterMode && Time.time - scatterTimer > scatterDelay){
@@ -289,6 +298,7 @@ public class PankyMove : MonoBehaviour {
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 
 	}
 }

@@ -169,51 +169,51 @@ public class PacMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, onMiniGameWin);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
+		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 
 	}
 
+	public void goUp(){
+		if (isValid(Vector3.forward)){
+			nextDir = Vector3.forward;
+		}
+		else{
+			nextDir = curDir;
+		}
+	}
+
+	public void goDown(){
+		if (isValid(Vector3.back)){
+			nextDir = Vector3.back;
+		}
+		else{
+			nextDir = curDir;
+		}
+	}
+
+	public void goLeft(){
+		if (isValid(Vector3.left)){
+			nextDir = Vector3.left;
+		}
+		else{
+			nextDir = curDir;
+		}
+	}
+
+	public void goRight(){
+		if (isValid(Vector3.right)){
+			nextDir = Vector3.right;
+		}
+		else{
+			nextDir = curDir;
+		}
+	}
 
 	/// <summary>
 	/// This is where the player can try to change its direction for another valid direction
 	/// </summary>
 	/// <returns>void</returns>
 	void FixedUpdate () {
-		if (Input.GetKey(KeyCode.Z))
-		{
-			if (isValid(Vector3.forward)){
-				nextDir = Vector3.forward;
-			}
-			else{
-				nextDir = curDir;
-			}
-		}
-		else if (Input.GetKey(KeyCode.Q))
-		{	
-				if (isValid(Vector3.left)){
-					nextDir = Vector3.left;
-				}
-			else{
-				nextDir = curDir;
-			}
-		}
-		else if (Input.GetKey(KeyCode.S))
-		{
-				if (isValid(Vector3.back)){
-					nextDir = Vector3.back;
-				}
-			else{
-				nextDir = curDir;
-			}
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			if (isValid(Vector3.right)){
-				nextDir = Vector3.right;
-				}
-			else{
-				nextDir = curDir;
-			}
-		}
 		if(isMoving){
 			move ();
 		}
@@ -238,5 +238,6 @@ public class PacMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, onMiniGameWin);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }

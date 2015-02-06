@@ -7,6 +7,9 @@ public class TerrainLunarLander : MonoBehaviour {
     [SerializeField]
     List<GameObject> terrains;
 
+    [SerializeField]
+    List<GameObject> spawns;
+
 	// Use this for initialization
 	void Start () {
 
@@ -27,5 +30,10 @@ public class TerrainLunarLander : MonoBehaviour {
     {
         hideTerrains();
         terrains[id].SetActive(true);
+    }
+
+    public Vector3 getRandomSpawn()
+    {
+        return spawns[(int)Random.Range(0, spawns.Count)].transform.position;
     }
 }

@@ -44,6 +44,7 @@ public class SpaceWarState : GameState {
         ui.setParamCanvas(gameId);
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
+        gameScript.onRestart();
         gameScript.updateElementsResolution();
     }
 

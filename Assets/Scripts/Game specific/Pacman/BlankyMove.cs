@@ -125,6 +125,10 @@ public class BlankyMove : MonoBehaviour {
 		}
 	}
 
+	void moving(bool real){
+		isMoving = real;
+	}
+
 	/// <summary>
 	/// Activates the scatter mode
 	/// </summary>
@@ -306,7 +310,7 @@ public class BlankyMove : MonoBehaviour {
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -314,7 +318,7 @@ public class BlankyMove : MonoBehaviour {
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
-				EventManager.Raise(EnumEvent.GAMEOVER);
+				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
@@ -327,6 +331,8 @@ public class BlankyMove : MonoBehaviour {
 		collider.enabled = true;
 		renderer.enabled = true;
 		rigidbody.position = new Vector3(13, 0, -11);
+		curDir = Vector3.right;
+		nextDir = Vector3.right;
 	}
 
 	/// <summary>
@@ -373,9 +379,10 @@ public class BlankyMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 
 
-		pacman = GameObject.FindGameObjectWithTag("Pacman");
+		pacman = GameObject.FindGameObjectWithTag("Player");
 		blankyTarget = pacman.transform.position;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
@@ -411,6 +418,6 @@ public class BlankyMove : MonoBehaviour {
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
-
+		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }

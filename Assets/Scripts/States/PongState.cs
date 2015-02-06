@@ -93,7 +93,7 @@ public class PongState : GameState {
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if (t.position.x > Screen.width / 2)
+                    if (t.position.x < Screen.width / 2)
                     {
                         if (t.position.y > Screen.height / 2)
                             player.goUp();

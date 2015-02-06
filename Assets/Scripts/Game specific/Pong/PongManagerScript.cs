@@ -10,7 +10,7 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject ball;
     [SerializeField]
-    private GameObject textCanvas;
+    private GameObject textCanvas, perduCanvas;
     [SerializeField]
     private Text[] texts;
     [SerializeField]
@@ -110,6 +110,7 @@ public class PongManagerScript : MonoBehaviour {
         mainCamera.GetComponent<Camera>().projectionMatrix = initCameraMatrix;
         mainCamera.transform.position = new Vector3(0, 0, -10);
         textCanvas.SetActive(true);
+        perduCanvas.SetActive(false);
         lookAtTarget = new Vector3(0, 0, 0);
         mainCamera.transform.LookAt(lookAtTarget);
         mainCamera.GetComponent<Camera>().backgroundColor = new Color(0, 0, 0);
@@ -155,6 +156,9 @@ public class PongManagerScript : MonoBehaviour {
             applaudsDroite = false;
         }
 
+        libellule.GetComponent<Libellule>().destroyPoints();
+        libellule.GetComponent<Libellule>().restart();
+
     }
 
 	// Use this for initialization
@@ -163,6 +167,7 @@ public class PongManagerScript : MonoBehaviour {
         ball.GetComponent<BallMoving>().setScreenSize(upScreen, downScreen);
         afficheCoupSpecialInitialY = afficheCoupSpecial.transform.position.y;
         initCameraMatrix = mainCamera.GetComponent<Camera>().projectionMatrix;
+        perduCanvas.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -187,11 +192,11 @@ public class PongManagerScript : MonoBehaviour {
          * Updates sur l'état du jeu
          */
         // Vérification de la sortie de la balle
-	    if(ball.transform.position.x < -7 * resizeWidth)
+	    if(ball.transform.position.x < -6 * resizeWidth)
         {
             onScore(1);
         }
-        else if (ball.transform.position.x > 7 * resizeWidth)
+        else if (ball.transform.position.x > 6 * resizeWidth)
         {
             onScore(-1);
         }
@@ -283,7 +288,6 @@ public class PongManagerScript : MonoBehaviour {
                 gameOver = true;
                 mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
                 textCanvas.SetActive(false);
-                Time.timeScale = 0;
             }
             else onGameLost();
         }
@@ -300,6 +304,7 @@ public class PongManagerScript : MonoBehaviour {
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
         ball.GetComponent<BallMoving>().cancelCoupSpecial();
+        ball.GetComponent<BallMoving>().onScore();
         coupSpecial = false;
 
         if (fireBall)
@@ -419,7 +424,7 @@ public class PongManagerScript : MonoBehaviour {
     {
         if (Vector3.Distance(mainCamera.transform.position, new Vector3(0, 0, 0)) > 0.5f)
         {
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, 0), Time.unscaledDeltaTime);
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, 0), 3 * Time.unscaledDeltaTime);
             firstTimeTurning = true;
         }
         else
@@ -431,7 +436,6 @@ public class PongManagerScript : MonoBehaviour {
                 groupeDroite.SetActive(false);
                 spectateursFin.SetActive(true);
                 EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
-                Time.timeScale = 1;
             }
             lookAtTarget = Vector3.Lerp(lookAtTarget, new Vector3(0,10,-0.4f), Time.unscaledDeltaTime);
             mainCamera.transform.LookAt(lookAtTarget);
@@ -443,7 +447,8 @@ public class PongManagerScript : MonoBehaviour {
         gameLost = true;
         //mainCamera.GetComponent<Camera>().backgroundColor = new Color(120f/255, 120f/255, 120f/255);
         textCanvas.SetActive(false);
-        //mainCamera.transform.position = new Vector3(0, 0, 20);
+        perduCanvas.SetActive(true);
+        mainCamera.transform.position = new Vector3(0, 0, 20);
         libellule.SetActive(true);
         libellule.GetComponent<Libellule>().activate();
     }

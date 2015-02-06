@@ -99,6 +99,12 @@ public class EnemySpaceWar : Spaceship {
                             {
                                 attackRandomly();
                             } break;
+                        case SWIAState.DODGE_ATTACKS:
+                            {
+                                IAState = SWIAState.RANDOM;
+                                moveRandomly();
+                                attackRandomly();
+                            } break;
                     }
                 } break;
 
@@ -153,6 +159,7 @@ public class EnemySpaceWar : Spaceship {
         posHistoryIterator = 0;
         stateTimer = Time.time;
         IAState = (p != null && p.id == 0) ? SWIAState.RANDOM : SWIAState.DODGE_ATTACKS;
+        IAAction = (p != null && p.id == 0) ? SWIAAction.MOVE_TURN_LEFT : SWIAAction.MOVE_FORWARD;
         actionNumber = 0;
     }
 

@@ -21,6 +21,7 @@ public class LevelLoader : MonoBehaviour {
 
     /// <summary>Monobehaviour Start function.</summary>
 	void Start () {
+        EventManager<string>.AddListener(EnumEvent.LOADLEVEL, onLevelLoad);
         for (int i = 0; i < keepAliveList.Length; ++i )
             DontDestroyOnLoad(keepAliveList[i]);
 	}

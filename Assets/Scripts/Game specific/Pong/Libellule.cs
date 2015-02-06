@@ -11,10 +11,11 @@ public class Libellule : MonoBehaviour {
     private float initTime;
     private Vector3 initPos;
     private int nbPoints = 0;
+    private List<GameObject> points;
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         initTime = Time.time;
         initPos = transform.position;
 	}
@@ -24,21 +25,39 @@ public class Libellule : MonoBehaviour {
         transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
         if (Time.time - initTime >= timer)
         {
-            EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
-            transform.position = initPos;
-            gameObject.SetActive(false);
+            restart();
             return;
         }
-        if (Time.time - initTime >= nbPoints * timer / 10)
+        if (Time.time - initTime >= nbPoints * timer / 20)
         {
             nbPoints++;
-            Instantiate(point, transform.position, transform.rotation);
+            points.Add((GameObject) Instantiate(point, transform.position, transform.rotation));
         }
 	}
 
+    public void restart()
+    {
+        EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
+        transform.position = initPos;
+        gameObject.SetActive(false);
+    }
+
     public void activate()
     {
+        points = new List<GameObject>();
         initTime = Time.time;
         nbPoints = 0;
+    }
+
+    public void destroyPoints()
+    {
+        if (points == null)
+        {
+            return;
+        }
+        foreach (GameObject p in points)
+        {
+            Destroy(p, 0);
+        }
     }
 }

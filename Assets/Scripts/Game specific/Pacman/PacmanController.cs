@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour {
+public class PacmanController : MonoBehaviour {
 	int[,] pacGrid;
 	int remainingDots = 0;
 	float timer;
 	int score;
-	int scoreAux;
+
+
 	[SerializeField]
 	private GameObject pacDot;
 
@@ -14,7 +15,6 @@ public class GameController : MonoBehaviour {
 	private GameObject Energizer;
 
 	void deleteDots(){
-		scoreAux = score;
 		GameObject[] dots = GameObject.FindGameObjectsWithTag("Ball");
 		foreach (GameObject dot in dots){
 			Destroy(dot);
@@ -25,11 +25,9 @@ public class GameController : MonoBehaviour {
 			Destroy(ener);
 			--remainingDots;
 		}
-		score = scoreAux;
 	}
 
 	void createDots(){
-			deleteDots();
 		for (int i = 0; i<28; ++i){
 			for(int j = 0; j<31; j++){
 				if(pacGrid[j,i] == 1){
@@ -46,17 +44,22 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	void onGameOver(){
+	public void onRestart(){
+		deleteDots();
+		createDots();
 		score = 0;
-		scoreAux = 0;
+		EventManager.Raise(EnumEvent.GAMEOVER);
+		EventManager.Raise(EnumEvent.RESTARTSTATE);
+	}
+
+	public void onGameOver(){
+		EventManager.Raise(EnumEvent.GAMEOVER);
 	}
 
 	void OnDestroy(){
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.RemoveListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.RemoveListener(EnumEvent.GHOST_EATEN, ghostEaten);
-		EventManager.RemoveListener(EnumEvent.RESTARTGAME, createDots);
-		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 	/* Generating all the 244 pacDots on the field*/
 	void Start () {
@@ -98,27 +101,21 @@ public class GameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.AddListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.AddListener(EnumEvent.GHOST_EATEN, ghostEaten);
-		EventManager.AddListener(EnumEvent.RESTARTGAME, createDots);
-		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 
 	void dotEaten(){
 		--remainingDots;
-		Debug.Log(remainingDots);
 		score += 10;
 		if (remainingDots == 0){
-			EventManager.Raise(EnumEvent.RESTARTGAME);
-			EventManager.Raise(EnumEvent.RESTARTSTATE);
+			EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
 		}
 	}
 
 	void enerEaten(){
 		--remainingDots;
-		Debug.Log(remainingDots);
 		score += 50;
 		if (remainingDots == 0){
-			EventManager.Raise(EnumEvent.RESTARTGAME);
-			EventManager.Raise(EnumEvent.RESTARTSTATE);
+			EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
 		}
 	}
 

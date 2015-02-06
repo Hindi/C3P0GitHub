@@ -85,17 +85,23 @@ class LunarLanderState : GameState
             {
                 if (t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if (t.position.x > 2 * Screen.width / 3)
-                        playerScript_.rotate(-1);
-                    else if (t.position.x < Screen.width / 3)
-                        playerScript_.rotate(1);
+                    if(t.position.x < Screen.width / 2)
+                    {
+                        if (t.position.y > Screen.height / 2)
+                            playerScript_.rotate(-1);
+                        else if (t.position.y < Screen.height / 2)
+                            playerScript_.rotate(1);
+                    }
                 }
-                else if (t.phase == TouchPhase.Began)
+                if (t.phase == TouchPhase.Began)
                 {
-                    if (t.position.y > 2 * Screen.height / 3)
-                        playerScript_.increaseReactorState();
-                    else if (t.position.y < Screen.height / 3)
-                        playerScript_.decreaseReactorState();
+                    if (t.position.x > Screen.width / 2)
+                    {
+                        if (t.position.y > Screen.height / 2)
+                            playerScript_.increaseReactorState();
+                        else if (t.position.y < Screen.height / 2)
+                            playerScript_.decreaseReactorState();
+                    }
                 }
             }
         }
