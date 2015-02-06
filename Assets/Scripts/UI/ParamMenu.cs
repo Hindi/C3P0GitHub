@@ -32,7 +32,6 @@ public class ParamMenu : MonoBehaviour {
     {
         paramManager.setParamId(id);
         paramManager.applyParameter();
-        EventManager.Raise(EnumEvent.RESTARTGAME);  
         EventManager<bool>.Raise(EnumEvent.PAUSEGAME, false);
     }
 

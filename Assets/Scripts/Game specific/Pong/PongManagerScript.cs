@@ -283,7 +283,6 @@ public class PongManagerScript : MonoBehaviour {
                 gameOver = true;
                 mainCamera.GetComponent<MatrixBlender>().BlendToMatrix(Matrix4x4.Perspective(53, aspectRatio, 0.3f, 1000), 0);
                 textCanvas.SetActive(false);
-                Time.timeScale = 0;
             }
             else onGameLost();
         }
@@ -431,7 +430,6 @@ public class PongManagerScript : MonoBehaviour {
                 groupeDroite.SetActive(false);
                 spectateursFin.SetActive(true);
                 EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
-                Time.timeScale = 1;
             }
             lookAtTarget = Vector3.Lerp(lookAtTarget, new Vector3(0,10,-0.4f), Time.unscaledDeltaTime);
             mainCamera.transform.LookAt(lookAtTarget);
