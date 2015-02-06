@@ -126,7 +126,7 @@ public abstract class GameState : State
         EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
-        onGameRestart();
+        //onGameRestart();
     }
 
     /// <summary>Called when leaving this state.</summary>
