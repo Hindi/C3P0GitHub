@@ -135,10 +135,10 @@ public class Player : MonoBehaviour
                         goalScale = (float)Laws.uniforme(1, 15);
                         break;
                     case 1:
-                        goalScale = (float)Laws.exponential(2);
+                        goalScale = (float)Laws.exponential(0.5f);
                         break;
                     case 2:
-                        goalScale = (float)Laws.gauss(8, 1);
+                        goalScale = (float)Laws.gauss(8, 2);
                         break;
                 }
                 cutScale();
