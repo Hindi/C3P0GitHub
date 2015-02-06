@@ -59,7 +59,7 @@ static class Laws
 
         vect = (Vector) (sqrtR * vect);
         
-        return (new Vector2((float) vect.At(0), (float) vect.At(1));
+        return (new Vector2((float) vect.At(0), (float) vect.At(1)));
     }
 
     public static float sin()
