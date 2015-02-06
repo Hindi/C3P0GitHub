@@ -94,17 +94,18 @@ public class BallMoving : MonoBehaviour {
             }
             else
             {
+                /* Here is the magic stuff ! */
                 if (managerScript.param.id == 0)
                 {
                     Angle = Random.Range(-80,81);
                 }
                 else if (managerScript.param.id == 1)
                 {
-                    Angle += (float)Laws.gauss(0, 30);
+                    Angle += -80 + 2 * (float)Laws.poisson(4);
                 }
                 else if (managerScript.param.id == 2)
                 {
-                    Angle += (float)Laws.gauss(0, 60);
+                    Angle += ((float)Laws.binom(0.5,10) - 5) * 16;
                 }
                 if (Angle > 80)
                     Angle = 80;

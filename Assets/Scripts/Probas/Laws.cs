@@ -73,6 +73,16 @@ static class Laws
         return MathNet.Numerics.Distributions.Exponential.Sample(lambda);
     }
 
+    public static float poisson(double lambda)
+    {
+        return MathNet.Numerics.Distributions.Poisson.Sample(lambda);
+    }
+
+    public static float binom(double param, int nb)
+    {
+        return MathNet.Numerics.Distributions.Binomial.Sample(param, nb);
+    }
+
     /*************************************************************************************************
      * Private used functions                                                                        *
      *************************************************************************************************/

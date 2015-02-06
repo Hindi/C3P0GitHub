@@ -92,8 +92,8 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void update()
 	{
-		/*base.update();
-		if(playerScript_ != null && score != playerScript_.Score)
+		base.update();
+		/*if(playerScript_ != null && score != playerScript_.Score)
 		{
 			scoreChanged = true;
 			score = playerScript_.Score;

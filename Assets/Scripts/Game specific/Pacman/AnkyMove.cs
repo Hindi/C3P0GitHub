@@ -37,13 +37,15 @@ public class AnkyMove : MonoBehaviour {
 
 	void scatter(){
 		scatterMode = true;
-		scatterTimer = Time.time;
+		scatterTimer = 0f;
 	}
 	
 	void frightened(){
-		frightenMode = true;
-		frightenTimer = Time.time;
-		renderer.material.color = Color.blue;
+		if(!eaten){
+			frightenMode = true;
+			frightenTimer = 0f;
+			renderer.material.color = Color.blue;
+		}
 	}
 	
 	/*
@@ -136,10 +138,10 @@ public class AnkyMove : MonoBehaviour {
 			curTileY = Mathf.RoundToInt(- transform.position.z);
 		}
 		if (frightenMode){
-			rigidbody.position += curDir * 1.5f * Time.deltaTime;
+			transform.position += curDir * 1.5f * Time.deltaTime;
 		}
 		else {
-			rigidbody.position += curDir * 3 * Time.deltaTime;
+			transform.position += curDir * 3 * Time.deltaTime;
 		}
 	}
 	
@@ -208,7 +210,8 @@ public class AnkyMove : MonoBehaviour {
 		eaten = false;
 		collider.enabled = true;
 		renderer.enabled = true;
-		rigidbody.position = new Vector3(11, 0, -14);
+		transform.position = new Vector3(11, 0, -14);
+		inHouse = true;
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
 	}
@@ -257,14 +260,6 @@ public class AnkyMove : MonoBehaviour {
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
-		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
-		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
-		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
-
 		pacman = GameObject.FindGameObjectWithTag("Player");
 		blanky = GameObject.FindGameObjectWithTag("Blanky");
 		pacMove = pacman.GetComponent<PacMove>();
@@ -273,17 +268,29 @@ public class AnkyMove : MonoBehaviour {
 		curTileY = Mathf.RoundToInt(- transform.position.z);
 		defaultColor = renderer.material.color;
 
+		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
+		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
+		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
+
+
+
 	}
 	
 	void FixedUpdate () {
 
 		if (isMoving && !inHouse){
 			chase();
+			scatterTimer += Time.deltaTime;
+			frightenTimer += Time.deltaTime;
 		}
-			if (scatterMode && Time.time - scatterTimer > scatterDelay){
+			if (scatterMode && scatterTimer > scatterDelay){
 				scatterMode = false;
 			}
-			if (frightenMode && Time.time - frightenTimer > frightenDelay){
+			if (frightenMode && frightenTimer > frightenDelay){
 				frightenMode = false;
 				renderer.material.color = defaultColor;
 			}
@@ -300,7 +307,7 @@ public class AnkyMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
-		EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
+		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 	}
 }

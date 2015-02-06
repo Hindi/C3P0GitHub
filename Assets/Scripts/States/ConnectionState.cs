@@ -42,7 +42,8 @@ public class ConnectionState : State
     /// <returns>void</returns>
     public override void start()
     {
-
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.Portrait;
     }
 
     /// <summary>Called when leaving this state.</summary>
