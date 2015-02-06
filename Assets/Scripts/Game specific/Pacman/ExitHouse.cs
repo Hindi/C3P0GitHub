@@ -26,10 +26,10 @@ public class ExitHouse : MonoBehaviour {
 	void Update () {
 		if (Time.time - timer > delay && newGame){
 			if (Mathf.Abs(transform.position.x - waypoint1.x) > 0.1f){
-				rigidbody.position = Vector3.Lerp(transform.position, waypoint1, Time.deltaTime);
+				transform.position = Vector3.Lerp(transform.position, waypoint1, Time.deltaTime);
 			}
 			else if (Mathf.Abs(transform.position.z - waypoint2.z) > 0.1f){
-				rigidbody.position = Vector3.Lerp(transform.position, waypoint2, Time.deltaTime);
+				transform.position = Vector3.Lerp(transform.position, waypoint2, Time.deltaTime);
 			}
 			else{
 				EventManager<bool, string>.Raise(EnumEvent.MOVING, true, gameObject.tag);

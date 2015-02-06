@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using System.Collections;
 /**
  * PacMove is a class which determines how the player will move.
@@ -93,7 +93,7 @@ public class PacMove : MonoBehaviour {
 	/// <returns>void</returns>
 	void move()
 	{
-		rigidbody.position += curDir * 4 * Time.deltaTime;
+		rigidbody.MovePosition(rigidbody.position + curDir * 4 * Time.deltaTime);
 		curDir = nextDir;
 	}
 
@@ -216,6 +216,9 @@ public class PacMove : MonoBehaviour {
 	void FixedUpdate () {
 		if(isMoving){
 			move ();
+		}
+		else{
+			rigidbody.velocity = Vector3.zero;
 		}
 	}
 	

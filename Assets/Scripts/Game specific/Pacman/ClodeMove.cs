@@ -35,12 +35,12 @@ public class ClodeMove : MonoBehaviour {
 
 	void scatter(){
 		scatterMode = true;
-		scatterTimer = Time.time;
+		scatterTimer = 0f;
 	}
 	
 	void frightened(){
 		frightenMode = true;
-		frightenTimer = Time.time;
+		frightenTimer = 0f;
 		renderer.material.color = Color.blue;
 	}
 
@@ -135,10 +135,10 @@ public class ClodeMove : MonoBehaviour {
 		}
 
 		if (frightenMode){
-			rigidbody.position += curDir * 1.5f * Time.deltaTime;
+			transform.position += curDir * 1.5f * Time.deltaTime;
 		}
 		else{
-			rigidbody.position += curDir * 3 * Time.deltaTime;
+			transform.position += curDir * 3 * Time.deltaTime;
 		}
 	}
 
@@ -208,7 +208,7 @@ public class ClodeMove : MonoBehaviour {
 		eaten = false;
 		collider.enabled = true;
 		renderer.enabled = true;
-		rigidbody.position = new Vector3(16, 0, -14);
+		transform.position = new Vector3(16, 0, -14);
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
 	}
@@ -277,20 +277,22 @@ public class ClodeMove : MonoBehaviour {
 
 		if (isMoving && !inHouse){
 			chase();
-			}
-			if (scatterMode && Time.time - scatterTimer > scatterDelay){
-				scatterMode = false;
-			}
-			if (frightenMode && Time.time - frightenTimer > frightenDelay){
-				frightenMode = false;
-				renderer.material.color = defaultColor;
-			}
-			if (Vector3.Distance(transform.position, homeTarget) < 1f){
-				eaten = false;
-				renderer.material.color = defaultColor;
-				collider.enabled = true;
-				renderer.enabled = true;
-			}
+			scatterTimer += Time.deltaTime;
+			frightenTimer += Time.deltaTime;
+		}
+		if (scatterMode && scatterTimer > scatterDelay){
+			scatterMode = false;
+		}
+		if (frightenMode && frightenTimer > frightenDelay){
+			frightenMode = false;
+			renderer.material.color = defaultColor;
+		}
+		if (Vector3.Distance(transform.position, homeTarget) < 1f){
+			eaten = false;
+			renderer.material.color = defaultColor;
+			collider.enabled = true;
+			renderer.enabled = true;
+		}
 	}
 
 	void OnDestroy(){

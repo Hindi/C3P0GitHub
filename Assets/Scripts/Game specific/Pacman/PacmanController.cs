@@ -13,7 +13,7 @@ public class PacmanController : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject Energizer;
-
+	
 	void deleteDots(){
 		GameObject[] dots = GameObject.FindGameObjectsWithTag("Ball");
 		foreach (GameObject dot in dots){
@@ -48,8 +48,8 @@ public class PacmanController : MonoBehaviour {
 		deleteDots();
 		createDots();
 		score = 0;
-		EventManager.Raise(EnumEvent.GAMEOVER);
 		EventManager.Raise(EnumEvent.RESTARTSTATE);
+		EventManager.Raise(EnumEvent.GAMEOVER);
 	}
 
 	public void onGameOver(){
