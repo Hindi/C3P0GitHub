@@ -24,8 +24,8 @@ public class Ball : MonoBehaviour {
 
     private void resetForce()
     {
-        rigidbody.isKinematic = true;
-        rigidbody.isKinematic = false;
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
     }
 
     public void switchToNormal()

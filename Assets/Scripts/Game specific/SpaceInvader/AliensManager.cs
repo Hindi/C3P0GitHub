@@ -195,7 +195,7 @@ public class AliensManager : MonoBehaviour {
 	void switchToBreakout()
     {
         breakOutMode = true;
-        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 0.5f);
+        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 2);
         ball.gameObject.SetActive(true);
         ball.GetComponent<Ball>().switchToBreakOut();
     }
@@ -205,5 +205,6 @@ public class AliensManager : MonoBehaviour {
         breakOutStartTime = Time.time;
         breakOutMode = false;
         ball.gameObject.SetActive(false);
+        ball.GetComponent<Ball>().switchToNormal();
     }
 }
