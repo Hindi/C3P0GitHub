@@ -47,6 +47,8 @@ public class PlayerLunarLander : MonoBehaviour {
 
     [SerializeField]
     private CameraLunarLander camera;
+    [SerializeField]
+    private Text gratzText;
 
     int reactorState;
 
@@ -64,6 +66,8 @@ public class PlayerLunarLander : MonoBehaviour {
     public int Score { get { return score; } }
 
     RaycastHit2D hit;
+    private PlatformLunarLander lastPlatformLanded;
+
 
 	// Use this for initialization
     void Start()
@@ -90,6 +94,9 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void resetAfterLanding()
     {
+        gratzText.gameObject.SetActive(false);
+        if (lastPlatformLanded)
+            lastPlatformLanded.lightDown();
         transform.rotation = Quaternion.identity;
         GetComponent<SpriteRenderer>().enabled = true;
         explosion.SetActive(false);
@@ -97,7 +104,6 @@ public class PlayerLunarLander : MonoBehaviour {
         transform.position = terrain.getRandomSpawn();
         resetCamera();
         resetReactorState();
-        resetForce();
         Physics2D.gravity = new Vector3(-horizontalForce, -gravityForce, 0);
         rigidbody2D.AddForce(new Vector3(3000, -100, 0));
     }
@@ -150,7 +156,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     public void increaseReactorState()
     {
-        if(reactorState < 3)
+        if(!landed && reactorState < 3)
         {
             reactorState++;
             updateReactorSprite();
@@ -166,7 +172,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     public void decreaseReactorState()
     {
-        if (reactorState > 0)
+        if (!landed && reactorState > 0)
         {
             reactorState--;
             updateReactorSprite();
@@ -195,7 +201,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     public void rotate(float speedFactor)
     {
-        if (fuel > 0)
+        if (fuel > 0 && ! landed)
         {
             transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
             useRotationFuel();
@@ -247,6 +253,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     void crash()
     {
+        timeBeforeRestart = 1;
         landed = true;
         explosion.SetActive(true);
         GetComponent<SpriteRenderer>().enabled = false;
@@ -254,16 +261,23 @@ public class PlayerLunarLander : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        restartTimerStart = Time.time;
-        if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f)
+        if(!landed)
         {
-            score += 10;
+            restartTimerStart = Time.time;
+            if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f)
+            {
+                timeBeforeRestart = 3;
+                score += 10;
+                lastPlatformLanded = collision.collider.gameObject.GetComponent<PlatformLunarLander>();
+                lastPlatformLanded.lightUp();
+                gratzText.gameObject.SetActive(true);
+            }
+            else
+            {
+                crash();
+            }
+            resetForce();
             landed = true;
         }
-        else
-        {
-            crash();
-        }
-        Physics2D.gravity = new Vector2(-0, -gravityForce);
     }
 }
