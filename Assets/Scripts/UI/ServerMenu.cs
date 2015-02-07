@@ -219,7 +219,7 @@ public class ServerMenu : MonoBehaviour {
                 levelName = "Tetris";
                 break;
             case 3:
-                levelName = "Pong";
+                levelName = "Asteroids";
                 break;
         }
         C3PONetworkManager.Instance.loadLevel(levelName);
