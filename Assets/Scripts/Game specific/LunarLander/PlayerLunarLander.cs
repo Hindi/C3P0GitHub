@@ -73,7 +73,7 @@ public class PlayerLunarLander : MonoBehaviour {
         verticalBar.init(10);
         altitudeBar.init(10);
 
-        consumCooldown = 0.1f;
+        consumCooldown = 0.2f;
         lastConsumTime = Time.time;
         reactorState = 0;
         timeBeforeRestart = 1;
@@ -85,6 +85,7 @@ public class PlayerLunarLander : MonoBehaviour {
         score = 0;
         fuel = maxFuel;
         resetAfterLanding();
+        fuelLabel.color = Color.white;
     }
 
     private void resetAfterLanding()
@@ -103,7 +104,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void resetCamera()
     {
-        camera.resetCameraPosition(new Vector3(transform.position.x + Screen.width/100, 4, Camera.main.transform.position.z));
+        camera.resetCameraPosition(new Vector3(transform.position.x, 4, Camera.main.transform.position.z));
     }
 
     void OnDestroy()
@@ -116,12 +117,28 @@ public class PlayerLunarLander : MonoBehaviour {
         rigidbody2D.isKinematic = false;
     }
 
-    void useFuel()
+    void useReactorFuel()
+    {
+        useFuel(reactorState);
+    }
+
+    void useRotationFuel()
+    {
+        useFuel(1);
+    }
+
+    void useFuel(int c)
     {
         if (Time.time - lastConsumTime > consumCooldown)
         {
-            fuel--;
+            fuel = Mathf.Max(0, fuel - c);
             lastConsumTime = Time.time;
+
+            if (fuel == 0)
+            {
+                fuelLabel.color = Color.red;
+                hideReadctorSprites();
+            }
         }
     }
 
@@ -140,6 +157,13 @@ public class PlayerLunarLander : MonoBehaviour {
         }
     }
 
+    private void hideReadctorSprites()
+    {
+        reactor1.SetActive(false);
+        reactor2.SetActive(false);
+        reactor3.SetActive(false);
+    }
+
     public void decreaseReactorState()
     {
         if (reactorState > 0)
@@ -151,31 +175,31 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void updateReactorSprite()
     {
-        switch(reactorState)
+        hideReadctorSprites();
+        if(fuel > 0)
         {
-            case 0:
-                reactor1.SetActive(false);
-                break;
-            case 1:
-                reactor1.SetActive(true);
-                reactor2.SetActive(false);
-                break;
-            case 2:
-                reactor1.SetActive(false);
-                reactor2.SetActive(true);
-                reactor3.SetActive(false);
-                break;
-            case 3:
-                reactor2.SetActive(false);
-                reactor3.SetActive(true);
-                break;
+            switch (reactorState)
+            {
+                case 1:
+                    reactor1.SetActive(true);
+                    break;
+                case 2:
+                    reactor2.SetActive(true);
+                    break;
+                case 3:
+                    reactor3.SetActive(true);
+                    break;
+            }
         }
     }
 
     public void rotate(float speedFactor)
     {
-        transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
-        useFuel();
+        if (fuel > 0)
+        {
+            transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
+            useRotationFuel();
+        }
     }
 	
 	// Update is called once per frame
@@ -207,7 +231,7 @@ public class PlayerLunarLander : MonoBehaviour {
                 if (reactorState > 0)
                 {
                     rigidbody2D.AddRelativeForce(new Vector3(0, propulsorForce * reactorState, 0));
-                    useFuel();
+                    useReactorFuel();
                 }
             }
         }
