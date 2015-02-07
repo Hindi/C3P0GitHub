@@ -113,6 +113,9 @@ public class PacMove : MonoBehaviour {
 		curDir = nextDir;
 	}
 
+	/// <summary>
+	/// Called when the player loses the mini-game
+	/// </summary>
 	void onMiniGameLost(){
 		if (obj.tag != "Energizer")
 		{
@@ -120,6 +123,9 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the player wins the mini-game
+	/// </summary>
 	void onMiniGameWin(){
 		if(obj.tag == "Energizer"){
 			Destroy(obj);
@@ -129,6 +135,9 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the player takes to much time in the mini-game
+	/// </summary>
 	void onMiniGameTO(){
 		if(obj.tag != "Energizer")
 		{
@@ -136,12 +145,18 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the player restarts the game
+	/// </summary>
 	void onRestartGame(){
 		rigidbody.position = new Vector3 (13f, 0, -23f);
 		curDir = Vector3.right;
 		nextDir = Vector3.right;
 	}
 
+	/// <summary>
+	/// Caled when a power up is piked up
+	/// </summary>
 	void onPowerUp(){
 		powerUp = true;
 		powerTimer = 0f;
@@ -149,7 +164,7 @@ public class PacMove : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// This is where the tile representation is initialised.
+	/// Called when the scene is loaded
 	/// </summary>
 	/// <returns>void</returns>
 	void Start () {
@@ -196,6 +211,9 @@ public class PacMove : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Called when the Event UP is raised
+	/// </summary>
 	public void goUp(){
 		if (isValid(Vector3.forward)){
 			nextDir = Vector3.forward;
@@ -205,6 +223,9 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the Event DOWN is raised
+	/// </summary>
 	public void goDown(){
 		if (isValid(Vector3.back)){
 			nextDir = Vector3.back;
@@ -214,6 +235,9 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the Event LEFT is raised
+	/// </summary>
 	public void goLeft(){
 		if (isValid(Vector3.left)){
 			nextDir = Vector3.left;
@@ -223,6 +247,9 @@ public class PacMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the Event RIGHT is raised
+	/// </summary>
 	public void goRight(){
 		if (isValid(Vector3.right)){
 			nextDir = Vector3.right;
@@ -264,6 +291,10 @@ public class PacMove : MonoBehaviour {
 			EventManager<GameObject>.Raise(EnumEvent.ENCOUNTER, collider.gameObject);
 		}
 	}
+
+	/// <summary>
+	/// Called when this script is destroyed
+	/// </summary>
 	void OnDestroy(){
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, onMiniGameLost);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, onMiniGameWin);
