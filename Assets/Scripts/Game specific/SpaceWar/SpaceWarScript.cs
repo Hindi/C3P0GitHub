@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 
@@ -9,6 +10,8 @@ public class SpaceWarScript : MonoBehaviour {
 
     [SerializeField]
     private GameObject playerShip, enemyShip, playerProjectile, enemyProjectile;
+    [SerializeField]
+    private Text scoreText;
     private Vector3 basePlayerPos, baseEnemyPos, basePPPos, baseEPPos;
     private int score = 0;
     public int Score {
@@ -37,7 +40,7 @@ public class SpaceWarScript : MonoBehaviour {
 	
 	}
 
-    public void onRestart()
+    public void onRestart(bool scoreReset = true)
     {
         playerShip.transform.position = basePlayerPos;
         enemyShip.transform.position = baseEnemyPos;
@@ -53,6 +56,11 @@ public class SpaceWarScript : MonoBehaviour {
         enemyShip.transform.localEulerAngles = new Vector3(0, 0, 180);
         enemyShip.GetComponent<EnemySpaceWar>().onRestart();
         playerShip.GetComponent<PlayerSpaceWar>().onRestart();
+        if (scoreReset)
+        {
+            scoreText.text = 0.ToString();
+            score = 0;
+        }
 
     }
 
@@ -78,7 +86,8 @@ public class SpaceWarScript : MonoBehaviour {
         else
         {
             score++;
-            onRestart();
+            scoreText.text = score.ToString();
+            onRestart(false);
         }
     }
 
