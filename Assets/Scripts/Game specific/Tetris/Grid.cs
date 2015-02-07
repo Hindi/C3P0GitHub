@@ -178,9 +178,14 @@ public class Grid : MonoBehaviour {
     private void initGrid()
     {
         fastFallScore = 0;
-        level = 3;
+        level = 0;
         score = 0;
         nbLines = 0;
+
+        // Display initialisation
+        guiScore.text = score.ToString();
+        guiLines.text = "Lines : \n" + nbLines;
+        guiLevel.text = "Level : \n " + level; 
     }
 	
 	// Update is called once per frame
@@ -191,10 +196,12 @@ public class Grid : MonoBehaviour {
     /// <returns>void</returns>
 	void Update () 
     {
+        /* TO DO remove 
         // Score update
         guiScore.text = score.ToString();
         guiLines.text = "Lines : \n" + nbLines;
         guiLevel.text = "Level : \n " + level; 
+         * */
 	}
 	
 
@@ -366,8 +373,15 @@ public class Grid : MonoBehaviour {
             default: break;
         }
         nbLines += nbDeleted;
+
         // We use this for the level if we implement a way to start at lvl N instead of 0
         level =Mathf.Max (nbLines / 10, level);
+
+
+        // Display upgrade
+        guiScore.text = score.ToString();
+        guiLines.text = "Lines : \n" + nbLines;
+        guiLevel.text = "Level : \n " + level; 
 	}
 	
 	
