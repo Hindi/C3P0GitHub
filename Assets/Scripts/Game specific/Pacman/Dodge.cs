@@ -25,7 +25,6 @@ public class Dodge : MonoBehaviour {
 	}
 	
 	void Update () {
-		Debug.DrawRay(circleCamera.ScreenToWorldPoint(Input.mousePosition - 0.5f * circleCamera.transform.forward), circleCamera.transform.forward, Color.green);
 		if (miniGame){
 			if (Time.time - timer > delay){
 				EventManager.Raise(EnumEvent.MINIGAME_TO);

@@ -10,11 +10,16 @@ class PacmanState : GameState
 
 	[SerializeField]
 	private GameObject gameController_;
-	
+
+	[SerializeField]
+	private GameObject circleCamera;
+
 	/// <summary>The script of the player.</summary>
 	private PacMove playerScript_;
 
 	private PacmanController gameControllerScript_;
+
+	private Randomizer rand;
 	
 	
 	/// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -52,8 +57,8 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void setParameter(Parameter param)
 	{
-		/*paramId = param.id;
-		player_.GetComponent<Player>().setParamId(param.id);*/
+		paramId = param.id;
+		rand.setParamId(param.id);
 	}
 	
 	/// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -67,6 +72,9 @@ class PacmanState : GameState
 		playerScript_ = player_.GetComponent<PacMove>();
 		gameController_ = GameObject.FindGameObjectWithTag("Pacman");
 		gameControllerScript_ = gameController_.GetComponent<PacmanController>();
+		circleCamera = GameObject.FindGameObjectWithTag("CircleCamera");
+		rand = circleCamera.GetComponent<Randomizer>();
+
 		if(Application.isMobilePlatform)
 			Screen.orientation = ScreenOrientation.Landscape;
 	}
@@ -93,11 +101,6 @@ class PacmanState : GameState
 	public override void update()
 	{
 		base.update();
-		/*if(playerScript_ != null && score != playerScript_.Score)
-		{
-			scoreChanged = true;
-			score = playerScript_.Score;
-		}*/
 	}
 	
 	/// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
