@@ -1,6 +1,7 @@
 Temp/
 Library/
 Build/
+Builds/
 build/
 obj/
 MasterServer/
@@ -11,6 +12,5 @@ MasterServer/
 *.unityproj
 /C3P0GitHub.userprefs
 C3P0GitHub.userprefs
-Xml
 Assets/Resources/data.dat
 /Assets/Resources/data.dat

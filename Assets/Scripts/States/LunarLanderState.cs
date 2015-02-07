@@ -117,13 +117,13 @@ class LunarLanderState : GameState
             if (!Application.isMobilePlatform)
             {
                 base.noticeInput(key);
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                    playerScript_.increaseReactorState();
-                if (Input.GetKeyDown(KeyCode.DownArrow))
+                if (key == EnumInput.UPDOWN)
+                playerScript_.increaseReactorState();
+                if (key == EnumInput.DOWNDOWN)
                     playerScript_.decreaseReactorState();
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (key == EnumInput.LEFT)
                     playerScript_.rotate(1);
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (key == EnumInput.RIGHT)
                     playerScript_.rotate(-1);
             }
         }

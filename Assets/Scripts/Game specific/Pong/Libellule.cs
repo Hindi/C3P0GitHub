@@ -18,6 +18,7 @@ public class Libellule : MonoBehaviour {
 	void Awake () {
         initTime = Time.time;
         initPos = transform.position;
+        gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
