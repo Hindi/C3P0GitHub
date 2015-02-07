@@ -252,8 +252,15 @@ public class C3PONetworkManager : MonoBehaviour {
     public void loadLevel(string name)
     {
         loadPlayersGameStats(IdConverter.levelToGame(name));
-        networkView.RPC("rpcLoadLevel", RPCMode.Others, name);
         saveClientsStats();
+        int questionCount = QuestionManager.Instance.CurrentQuestionNb;
+        float goodAnswerRatio = 0;
+
+        foreach(KeyValuePair<string, Client> p in clientsInfos)
+        {
+            goodAnswerRatio = (int)(p.Value.Score / questionCount);
+            networkView.RPC("rpcLoadLevel", p.Value.NetworkPlayer, name, goodAnswerRatio);
+        }
     }
 
     /// <summary>Functions used to broadcast to all the client the order to unlock agame.</summary>
@@ -417,12 +424,14 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <summary>RPC : order the client to load a unity scene.</summary>
     /// <param name="question">The question asked.</param>
     /// <param name="level">The level name.</param>
+    /// <param name="goodAnswerRatio">The ratio that dtermines how the student succeded during thequestion / answer phase.</param>
     /// <returns>void</returns>
     [RPC]
-    void rpcLoadLevel(string level)
+    void rpcLoadLevel(string level, float goodAnswerRatio)
     {
         currentGameEnum = IdConverter.levelToGame(level);
         levelLoader.loadLevel(level);
+        EventManager<float>.Raise(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
 
     /// <summary>RPC : unlock a game for the client.</summary>

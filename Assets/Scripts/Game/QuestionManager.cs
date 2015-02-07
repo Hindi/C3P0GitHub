@@ -124,6 +124,10 @@ public class QuestionManager {
 
     /// <summary>The id of the current question.</summary>
     private int currentQuestionNb = 0;
+    public int CurrentQuestionNb
+    {
+        get { return currentQuestionNb; }
+    }
 
     /// <summary>True if the question were loaded.</summary>
     private bool xmlLoaded = false;
