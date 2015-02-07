@@ -298,7 +298,10 @@ public class C3PONetwork : MonoBehaviour {
     /// <returns>void</returns>
     public string getServerIp()
     {
-        return ipReceiver.ServerIp;
+        if (ipReceiver.ServerIp != null)
+            return ipReceiver.ServerIp;
+        else
+            return "";
     }
 
     /// <summary>Called when connected to server, tries to login.</summary>
