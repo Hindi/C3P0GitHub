@@ -71,7 +71,7 @@ public class Asteroid : MonoBehaviour {
 
 
     // bool b indicates if it is activated or not
-    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health, int id, EnumColor color)
+    public void init(Vector3 posSpawn, Vector3 cible, int health, int id, EnumColor color)
     {
         target = cible;
         transform.position = posSpawn;
@@ -84,7 +84,13 @@ public class Asteroid : MonoBehaviour {
 
         // We activate the asteroid and add it to use asteroid
         gameObject.SetActive(true);
-        asteroidManager.add(this.id, this);
+        asteroidManager.add(id, this);
+    }
+
+    public void destroy()
+    {
+        gameObject.SetActive(false);
+        AsteroidFactory._factory.asteroidNotInUse.Push(this);
     }
 
     public void setColor(EnumColor color)

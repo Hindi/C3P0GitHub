@@ -5,12 +5,14 @@ using System.Collections.Generic;
 public class AsteroidFactory : MonoBehaviour {
 
     public static AsteroidFactory _factory;
+
     public Stack<Asteroid> asteroidNotInUse;
+
     [SerializeField]
     public int nbAsteroidInitalized;
 
     [SerializeField]
-    List<GameObject> asteroidsList;
+    List<GameObject> asteroidsPrefabList;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +30,7 @@ public class AsteroidFactory : MonoBehaviour {
 
     private GameObject getRandomAsteroids()
     {
-        return asteroidsList[Random.Range(0, asteroidsList.Count -1)];
+        return asteroidsPrefabList[Random.Range(0, asteroidsPrefabList.Count - 1)];
     }
 	
 	// Update is called once per frame
@@ -39,12 +41,12 @@ public class AsteroidFactory : MonoBehaviour {
     {
         if (asteroidNotInUse.Count > 0)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            asteroidNotInUse.Pop().init(pos, target, hp, id, EnumColor.NONE);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroidsList[prefabId])).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, EnumColor.NONE);
         }
     }
 
@@ -52,12 +54,12 @@ public class AsteroidFactory : MonoBehaviour {
     {
         if (asteroidNotInUse.Count > 0)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, color);
+            asteroidNotInUse.Pop().init(pos, target, hp, id, color);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroidsList[prefabId])).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
+            ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, color);
         }
     }
 

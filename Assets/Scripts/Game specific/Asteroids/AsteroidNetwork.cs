@@ -20,11 +20,6 @@ public class AsteroidNetwork : MonoBehaviour {
 
 
     // 
-    [RPC]
-    private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
-    {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
-    }
 
 
     public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, int prefabId, EnumColor color)
@@ -34,13 +29,6 @@ public class AsteroidNetwork : MonoBehaviour {
         AsteroidFactory._factory.createAsteroid(pos, target, hp, id,prefabId, color);
     }
 
-
-
-    [RPC]
-    private void createAsteroidColorRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId, int color)
-    {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId, (EnumColor) color);
-    }
 
 
     public void hitAsteroid(int id)
@@ -57,7 +45,23 @@ public class AsteroidNetwork : MonoBehaviour {
         asteroidsManager.hit(id);
     }
 
+    [RPC]
+    private void destroyAsteroidRPC(int id)
+    {
+        asteroidsManager.remove(id);
+    }
 
+    [RPC]
+    private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
+    }
+
+    [RPC]
+    private void createAsteroidColorRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId, int color)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId, (EnumColor)color);
+    }
    
 
 	// Use this for initialization
