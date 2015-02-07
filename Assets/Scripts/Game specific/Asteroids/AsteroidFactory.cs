@@ -35,7 +35,7 @@ public class AsteroidFactory : MonoBehaviour {
 	void Update () {
 	}
 
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
     {
         if (asteroidNotInUse.Count > 0)
         {
@@ -44,11 +44,11 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            ((GameObject)Instantiate(asteroidsList[prefabId])).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
         }
     }
 
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId, EnumColor color)
     {
         if (asteroidNotInUse.Count > 0)
         {
@@ -57,7 +57,7 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
+            ((GameObject)Instantiate(asteroidsList[prefabId])).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
         }
     }
 
