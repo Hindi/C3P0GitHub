@@ -222,6 +222,9 @@ public class ServerMenu : MonoBehaviour {
                 levelName = "Asteroids";
                 break;
         }
+
+        if (levelName == "Asteroids")
+            EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Asteroids");
         C3PONetworkManager.Instance.loadLevel(levelName);
         C3PONetworkManager.Instance.unlockGame(levelName);
     }
