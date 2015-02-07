@@ -28,7 +28,6 @@ public class ParamMenu : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        EventManager<float>.AddListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
 	}
 	
 	// Update is called once per frame
@@ -36,13 +35,15 @@ public class ParamMenu : MonoBehaviour {
 	    
 	}
 
-    public void goodAnswerRatio(float r)
+    public void activateButtons(float r)
     {
-        Debug.Log(r);
         param2.interactable = true;
         param3.interactable = true;
         if (r < 0.33f)
+        {
+            Debug.Log(r);
             param2.interactable = false;
+        }
         if (r < 0.66f)
             param3.interactable = false;
     }

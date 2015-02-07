@@ -25,6 +25,7 @@ public abstract class GameState : State
     private const int sendScoreCD = 3;
     private float lastSendScoreTime;
 
+    float answerRatio;
     
 
     /// <summary>Constructor.</summary>
@@ -91,7 +92,7 @@ public abstract class GameState : State
     public virtual void changeParam()
     {
         applyPause(true);
-        EventManager.Raise(EnumEvent.CHANGEPARAM);
+        EventManager <float>.Raise(EnumEvent.CHANGEPARAM, answerRatio);
     }
 
     /// <summary>Set paused to the value of the given parameter and apply the pause or unpause.</summary>
@@ -127,6 +128,7 @@ public abstract class GameState : State
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
         EventManager<int>.AddListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
+        EventManager<float>.AddListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
 
     public void onScoreUpdate(int s)
@@ -144,7 +146,14 @@ public abstract class GameState : State
         EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
         EventManager<int>.RemoveListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
+        EventManager<float>.RemoveListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
+
+    public void goodAnswerRatio(float r)
+    {
+        answerRatio = r;
+    }
+
 
     /// <summary>Called each frame.</summary>
     /// <returns>void</returns>

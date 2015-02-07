@@ -58,6 +58,7 @@ class SpaceInvaderState : GameState
 		loaded = true;
 		player_ = GameObject.FindGameObjectWithTag("Player");
         playerScript_ = player_.GetComponent<Player>();
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         ui.setParamCanvas(gameId);
 
         if(Application.isMobilePlatform)

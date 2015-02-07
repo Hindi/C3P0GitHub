@@ -56,7 +56,7 @@ public class UI : MonoBehaviour {
 	void Start () {
         EventManager<bool>.AddListener(EnumEvent.PAUSEGAME, onGamePaused);
         EventManager.AddListener(EnumEvent.CLOSEMENU, onCloseMenu);
-        EventManager.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
+        EventManager <float>.AddListener(EnumEvent.CHANGEPARAM, onChangeParam);
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.CONNECTIONSTATE, onConnectionState);
         EventManager.AddListener(EnumEvent.SERVERUI, onServerStart);
@@ -133,9 +133,10 @@ public class UI : MonoBehaviour {
             closeMenus();
 	}
 
-    public void onChangeParam()
+    public void onChangeParam(float ratio)
     {
         updateCurrentCanvas(paramMenu);
+        paramMenu.GetComponent<ParamMenu>().activateButtons(ratio);
     }
 
     public void onServerStart()
