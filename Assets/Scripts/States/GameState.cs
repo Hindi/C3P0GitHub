@@ -97,7 +97,7 @@ public abstract class GameState : State
     /// <summary>Set paused to the value of the given parameter and apply the pause or unpause.</summary>
     /// <param name="b">True if the game needs to be paused.</param>
     /// <returns>void</returns>
-    private void applyPause(bool b)
+    protected void applyPause(bool b)
     {
         paused = b;
         applyPause();
