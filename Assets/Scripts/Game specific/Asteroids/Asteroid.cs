@@ -18,6 +18,15 @@ public class Asteroid : MonoBehaviour {
     private AsteroidsManager asteroidManager;
     private Behaviour halo;
 
+    [SerializeField]
+    GameObject blenderObject;
+    [SerializeField]
+    private Material blueMat;
+    [SerializeField]
+    private Material greenMat;
+    [SerializeField]
+    private Material redMat;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -86,13 +95,13 @@ public class Asteroid : MonoBehaviour {
                 (halo.GetType().GetProperty("enabled")).SetValue(halo, false, null); // it disables the halo
                 break;
             case EnumColor.GREEN :
-                halo.light.color = Color.green;
+                blenderObject.renderer.material = greenMat;
                 break;
-            case EnumColor.BLUE :
-                halo.light.color = Color.blue;
+            case EnumColor.BLUE:
+                blenderObject.renderer.material = blueMat;
                 break;
-            case EnumColor.RED :
-                halo.light.color = Color.red;
+            case EnumColor.RED:
+                blenderObject.renderer.material = redMat;
                 break;
             default :
                 Debug.Log("Forgot to had this color " + color + " in the switch setColor");

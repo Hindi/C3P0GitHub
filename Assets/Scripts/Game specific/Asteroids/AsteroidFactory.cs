@@ -10,7 +10,7 @@ public class AsteroidFactory : MonoBehaviour {
     public int nbAsteroidInitalized;
 
     [SerializeField]
-    GameObject asteroids;
+    List<GameObject> asteroidsList;
 
 	// Use this for initialization
 	void Start () {
@@ -20,19 +20,20 @@ public class AsteroidFactory : MonoBehaviour {
         {
             // When an Asteroid is created, he isn't used immediatly so it adds itself
             // in the asteroidNotInUse stack
-            ast = ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>();
+            ast = ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>();
 
             push(ast);
         }
 	}
 
-
+    private GameObject getRandomAsteroids()
+    {
+        return asteroidsList[Random.Range(0, asteroidsList.Count -1)];
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
-
 
     public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
     {
@@ -43,7 +44,7 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
         }
     }
 
@@ -56,7 +57,7 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(asteroids)).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
+            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
         }
     }
 
