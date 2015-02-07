@@ -17,12 +17,9 @@ public class ParamMenu : MonoBehaviour {
     private GameObject mobileInput;
     [SerializeField]
     private GameObject pcInput;
-    [SerializeField]
-    private GameObject controlIcon;
 
 	// Use this for initialization
 	void Start () {
-        controlIcon.SetActive(Application.isMobilePlatform);
 	}
 	
 	// Update is called once per frame
