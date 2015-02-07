@@ -63,6 +63,9 @@ public class PlayerLunarLander : MonoBehaviour {
     private int score;
     public int Score { get { return score; } }
 
+    Ray ray;
+    RaycastHit hit;
+
 	// Use this for initialization
     void Start()
     {
@@ -76,6 +79,8 @@ public class PlayerLunarLander : MonoBehaviour {
         reactorState = 0;
         timeBeforeRestart = 1;
         onGameRestart();
+        ray.direction = Vector3.down;
+        hit.distance = 100;
 	}
 
     public void onGameRestart()
@@ -101,7 +106,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void resetCamera()
     {
-        camera.resetCameraPosition(new Vector3(transform.position.x + Screen.width/100, camera.InitialPosition.y, Camera.main.transform.position.z));
+        camera.resetCameraPosition(new Vector3(transform.position.x + Screen.width/100, 4, Camera.main.transform.position.z));
     }
 
     void OnDestroy()
@@ -178,6 +183,15 @@ public class PlayerLunarLander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        ray.origin = transform.position;
+        Debug.DrawRay(transform.position, Vector3.down * 100);
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log(Vector3.Distance(transform.position, hit.transform.position));
+            if(Vector3.Distance(transform.position, hit.transform.position) < 50)
+                camera.zoom();
+        }
 
         if (landed)
         {
