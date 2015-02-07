@@ -109,7 +109,7 @@ public class ServerMenu : MonoBehaviour {
     {
         try
         {
-            System.Diagnostics.Process.Start(@"Assets\Resources\html\lastQuestionStat.html");
+            //System.Diagnostics.Process.Start(@"Assets\Resources\html\lastQuestionStat.html");
         }
         catch 
         {
