@@ -141,6 +141,7 @@ public class Spaceship : MonoBehaviour
             renderer.enabled = false;
             isEnd = true;
             initEndTimer = Time.time;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
 
@@ -150,5 +151,6 @@ public class Spaceship : MonoBehaviour
     public virtual void onRestart(){
         isEnd = false;
         renderer.enabled = true;
+        GetComponent<PolygonCollider2D>().enabled = true;
     }
 }
