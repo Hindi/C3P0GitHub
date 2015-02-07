@@ -15,6 +15,8 @@ public class TetrisState : GameState {
     private int paramId;
 
 
+    private Grid gridScript;
+
     /// <summary>
     /// Define the active camera effect at the beginning of a party.
     /// The effect depends of the parameter chosen.
@@ -48,6 +50,7 @@ public class TetrisState : GameState {
     public override void onLevelWasLoaded(int lvl)
     {
         base.onLevelWasLoaded(lvl);
+        gridScript = GameObject.FindGameObjectWithTag("Grid").GetComponent<Grid>();
         if (Application.isMobilePlatform)
         {
             Screen.orientation = ScreenOrientation.Portrait;
@@ -144,6 +147,22 @@ public class TetrisState : GameState {
         }
         
     }
+
+
+    /// <summary>
+    /// Called each frame, meant to update the score in real time to the server
+    /// </summary>
+    /// <returns>void</returns>
+    public override void update()
+    {
+        base.update();
+        if(gridScript != null && score != gridScript.score)
+        {
+            score = gridScript.score;
+            EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
+        }
+    }
+
 
     // Use this for state transition
     /// <summary>
