@@ -50,7 +50,7 @@ public class AsteroidsState : GameState
         applyPause(false);
         ui.onCloseMenu();
         //ui.setParamCanvas(gameId);
-
+        //playerScript_.updateElementsResolution();
     }
 
     // Use this for initialization

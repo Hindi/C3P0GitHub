@@ -92,7 +92,12 @@ public class PlayerAsteroid : MonoBehaviour {
         if (Time.time - timeSinceLastShoot > cdShoot)
         {
             Ray ray;
-            ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
+            // The ratio we use are calculated with the relative position of the target in the cockpit image. 
+            // TO DO modifier ça avec le resize
+            ray = playerCamera.ScreenPointToRay(new Vector3(0.5022583559168925f * Screen.width, 0.6112600536193029f * Screen.height, 0f));
+
+            Debug.Log(Input.mousePosition);
             rayCast(ray);
             timeSinceLastShoot = Time.time;
         }
@@ -134,4 +139,19 @@ public class PlayerAsteroid : MonoBehaviour {
         rotUpDown = Mathf.Clamp(rotUpDown, -upDownRange, upDownRange);
         transform.eulerAngles = new Vector3(rotUpDown, rotLeftRight, 0);
     }
+
+    /*
+    /// <summary>
+    /// Used to change the camera's size according to screen size ratio to keep consistent across all platforms
+    /// </summary>
+    public void updateElementsResolution()
+    {
+        float width, height;
+        width = Math.Max(Screen.width, Screen.height);
+        height = Math.Min(Screen.width, Screen.height);
+        aspectRatio = width / height;
+        playerCamera.projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
+     * playerCamera.aspect = (float)Screen.width /(float) Screen.height
+    }
+     * */
 }

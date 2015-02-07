@@ -18,14 +18,34 @@ public class ParamMenu : MonoBehaviour {
     [SerializeField]
     private GameObject pcInput;
 
+    [SerializeField]
+    private Button param1;
+    [SerializeField]
+    private Button param2;
+    [SerializeField]
+    private Button param3;
+
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
+        EventManager<float>.AddListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	    
 	}
+
+    public void goodAnswerRatio(float r)
+    {
+        Debug.Log(r);
+        param2.interactable = true;
+        param3.interactable = true;
+        if (r < 0.33f)
+            param2.interactable = false;
+        if (r < 0.66f)
+            param3.interactable = false;
+    }
 
     public void onParamClick(int id)
     {
