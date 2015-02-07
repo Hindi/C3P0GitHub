@@ -332,7 +332,7 @@ public class QuestionManager {
 
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
-            i = e.Value.lastAnswer().question.bonneReponse;
+            i = questionList[currentQuestionNb].bonneReponse;
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, i);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
             questionId = e.Value.lastAnswer().question.id;
