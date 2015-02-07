@@ -60,7 +60,6 @@ public class MiniGameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 		if (isTarget){
 			EventManager<bool>.Raise(EnumEvent.MOVING, false);
 			transform.LookAt(targetPosition);

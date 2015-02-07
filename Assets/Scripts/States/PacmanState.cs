@@ -108,18 +108,20 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void noticeInput(EnumInput key, Touch[] inputs)
 	{
-	/*	if (loaded)
+/*	if (loaded)
 		{
 			foreach (var t in inputs)
 			{
 				if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
 				{
-					if (t.position.x > 3 * Screen.width / 4)
+					if (t.position.y > 2 * Screen.width / )
 						playerScript_.move(1);
 					else if (t.position.x < Screen.width / 4)
 						playerScript_.move(-1);
-					else if (!paused)
-						playerScript_.fire();
+					else if (t.position.x < Screen.width / 4)
+						playerScript_.move(-1);
+					else if (t.position.x < Screen.width / 4)
+						playerScript_.move(-1);
 				}
 			}
 		}*/
