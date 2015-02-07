@@ -58,7 +58,12 @@ public class C3PONetwork : MonoBehaviour {
 	private string masterHostname = null;
 
     // <summary>Can be used to know if the server connected to is the teacher or not.</summary>
-	public bool isConnectedToTeacher = false;
+	private bool isConnectedToTeacher = false;
+    public bool IsConnectedToTeacher
+    {
+        get { return isConnectedToTeacher; }
+        private set { }
+    }
 
     // <summary>MasterPort is the port number on which the MasterServer is set.</summary>
 	[SerializeField]
@@ -318,6 +323,7 @@ public class C3PONetwork : MonoBehaviour {
     void OnDisconnectedFromServer(NetworkDisconnection info)
     {
         EventManager.Raise(EnumEvent.DISCONNECTFROMUNITY);
+        isConnectedToTeacher = false;
     }
 	
     /// <summary>If the IP/Hostname is not correct or the Network is down notice the client.</summary>

@@ -46,6 +46,5 @@ public enum EnumEvent
 	GHOST_EATEN,			//A ghost is eaten (Pacman)
 	DOT_EATEN,				//A dot is eaten (Pacman)
     RESTARTSTATE,			//Reset the state of each object
-    GOODANSWERRATIO,		//The client recieved the good answer ratio
     UPDATEGAMESCORE         //Notify the gamestate that the score got updated
 };

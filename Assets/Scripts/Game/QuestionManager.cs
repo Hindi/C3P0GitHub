@@ -101,6 +101,16 @@ public class QuestionManager {
 	}
 	private QuestionKeeper questionBuffer;
 
+    /// <summary>
+    /// Contains the good answer/bad answer ratio 
+    /// </summary>
+    private float answerRatio;
+    public float AnswerRatio
+    {
+        get { return answerRatio; }
+        set { answerRatio = value; }
+    }
+
     /**************************************************************************************
 	 * Private Attributes                                                                 *
 	 **************************************************************************************/

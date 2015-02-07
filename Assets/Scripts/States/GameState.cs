@@ -31,7 +31,7 @@ public abstract class GameState : State
     /// <summary>Constructor.</summary>
     public GameState(StateManager stateManager) : base(stateManager)
     {
-		paused = false;
+        paused = false;
     }
 
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
@@ -128,7 +128,6 @@ public abstract class GameState : State
         EventManager<bool>.AddListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
         EventManager<int>.AddListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
-        EventManager<float>.AddListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
 
     public void onScoreUpdate(int s)
@@ -146,7 +145,6 @@ public abstract class GameState : State
         EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onGameRestart);
         EventManager<int>.RemoveListener(EnumEvent.UPDATEGAMESCORE, onScoreUpdate);
-        EventManager<float>.RemoveListener(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
 
     public void goodAnswerRatio(float r)

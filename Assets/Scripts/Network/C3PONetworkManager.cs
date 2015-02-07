@@ -102,7 +102,7 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <returns>void</returns>
     public void tryTologIn()
     {
-        if (!C3PONetwork.Instance.isConnectedToTeacher)
+        if (!C3PONetwork.Instance.IsConnectedToTeacher)
 		{
 			throw new System.Exception("Failed to connect to teacher");
 		}
@@ -429,9 +429,9 @@ public class C3PONetworkManager : MonoBehaviour {
     [RPC]
     void rpcLoadLevel(string level, float goodAnswerRatio)
     {
+        QuestionManager.Instance.AnswerRatio = goodAnswerRatio;
         currentGameEnum = IdConverter.levelToGame(level);
         levelLoader.loadLevel(level);
-        EventManager<float>.Raise(EnumEvent.GOODANSWERRATIO, goodAnswerRatio);
     }
 
     /// <summary>RPC : unlock a game for the client.</summary>

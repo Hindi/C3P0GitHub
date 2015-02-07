@@ -35,13 +35,18 @@ public class ParamMenu : MonoBehaviour {
 	    
 	}
 
+    void OnEnable()
+    {
+        if(C3PONetwork.Instance.IsConnectedToTeacher)
+            activateButtons(QuestionManager.Instance.AnswerRatio);
+    }
+
     public void activateButtons(float r)
     {
         param2.interactable = true;
         param3.interactable = true;
         if (r < 0.33f)
         {
-            Debug.Log(r);
             param2.interactable = false;
         }
         if (r < 0.66f)
