@@ -77,6 +77,10 @@ class PacmanState : GameState
 
 		if(Application.isMobilePlatform)
 			Screen.orientation = ScreenOrientation.Portrait;
+
+        float ratio = (float)Screen.width / Screen.height;
+        ((GameObject)GameObject.FindGameObjectWithTag("MainCamera")).GetComponent<Camera>().projectionMatrix = Matrix4x4.Perspective(60 * 1/ ratio, ratio, 0.3f, 50);
+        circleCamera.GetComponent<Camera>().aspect = ratio;
 	}
 	
 	/// <summary>Called on start.</summary>
@@ -116,11 +120,11 @@ class PacmanState : GameState
 				{
 					if (t.position.y > 2 * Screen.height /3)
 						playerScript_.goUp();
-					else if (t.position.y < Screen.height / 4)
+					else if (t.position.y < Screen.height / 3)
 						playerScript_.goDown();
 					else if (t.position.x < Screen.width / 2)
 						playerScript_.goLeft();
-					else if (t.position.x < Screen.width / 2)
+					else if (t.position.x > Screen.width / 2)
 						playerScript_.goRight();
 				}
 			}
