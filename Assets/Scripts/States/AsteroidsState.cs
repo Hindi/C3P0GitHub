@@ -46,6 +46,7 @@ public class AsteroidsState : GameState
         loaded = true;
         player_ = GameObject.FindGameObjectWithTag("player");
         playerScript_ = player_.GetComponent<PlayerAsteroid>();
+        GameObject.FindGameObjectWithTag("UI").GetComponent<UI>().closeMenus();
         ui.onCloseMenu();
         //ui.setParamCanvas(gameId);
 

@@ -156,15 +156,18 @@ public class UI : MonoBehaviour {
         currentCanvas.gameObject.SetActive(true);
     }
 
-    private void closeMenus()
+    public void closeMenus()
     {
         currentCanvas.gameObject.SetActive(false);
-        gameOverMenu.gameObject.SetActive(false);
-        pauseMenu.gameObject.SetActive(false);
         paramMenu.gameObject.SetActive(false);
-        connectionMenu.gameObject.SetActive(false);
-        connectionPromptMenu.gameObject.SetActive(false);
-        questionMenu.gameObject.SetActive(false);
+        if(!C3PONetwork.Instance.IS_SERVER)
+        {
+            gameOverMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(false);
+            connectionMenu.gameObject.SetActive(false);
+            connectionPromptMenu.gameObject.SetActive(false);
+            questionMenu.gameObject.SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
