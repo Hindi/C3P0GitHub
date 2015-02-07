@@ -95,6 +95,18 @@ public class EnemySpaceWar : Spaceship {
         imprecision.SetActive(false);
 //#endif
 	}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        try
+        {
+            collider.GetComponent<PlayerSpaceWar>().onHit();
+        }
+        catch (System.NullReferenceException)
+        {
+
+        }
+    }
 	
 	// Update is called once per frame
     void Update()
