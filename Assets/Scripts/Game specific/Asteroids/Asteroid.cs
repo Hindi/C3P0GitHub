@@ -71,7 +71,7 @@ public class Asteroid : MonoBehaviour {
         this.id = id;
         //gameObject.renderer.enabled = true;
 
-        setColor(color);
+        //setColor(color);
 
         // We activate the asteroid and add it to use asteroid
         gameObject.SetActive(true);

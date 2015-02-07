@@ -12,7 +12,7 @@ public class AsteroidsManager : MonoBehaviour {
     private AsteroidShip shipScript;
 
 
-    private static Dictionary<int, Asteroid> asteroidInUse;
+    private static Dictionary<int, Asteroid> asteroidInUse = new Dictionary<int,Asteroid>();
     private static int nbAsteroid;
 
     [SerializeField]
@@ -61,9 +61,7 @@ public class AsteroidsManager : MonoBehaviour {
     /// <param name="ast">Element added</param>
     public void add(int id, Asteroid ast)
     {
-        Debug.Log("Add asteroid of id : " + id);
         asteroidInUse.Add(id, ast);
-
         Debug.Log(asteroidInUse.Count);
     }
 
@@ -85,6 +83,7 @@ public class AsteroidsManager : MonoBehaviour {
     public void hit(int id)
     {
         Asteroid ast;
+        Debug.Log("je suis ici");
         if (asteroidInUse.TryGetValue(id, out ast))
         {
             // We should always be in this case.

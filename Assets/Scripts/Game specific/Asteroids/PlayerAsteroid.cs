@@ -75,9 +75,9 @@ public class PlayerAsteroid : MonoBehaviour {
         {
             if(hit.transform.CompareTag("Asteroid"))
             {
-                Debug.Log("un asteroid a été touche en pos : " + hit.point);
                 // TO DO Envoyer à tout le monde qu'on a touché tel asteroid pour qu'il fasse la synchro 
                 // On accède à l'astéroid avec le code en dessus (plus ou moins)
+                //asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponent<Asteroid>().id);
                 asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponent<Asteroid>().id);
             }
         }
@@ -92,7 +92,6 @@ public class PlayerAsteroid : MonoBehaviour {
         if (Time.time - timeSinceLastShoot > cdShoot)
         {
             Ray ray;
-            Debug.Log("Je tente de tirer");
             ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
             rayCast(ray);
             timeSinceLastShoot = Time.time;
