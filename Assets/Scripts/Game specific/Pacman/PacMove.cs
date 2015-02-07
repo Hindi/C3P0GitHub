@@ -62,6 +62,22 @@ public class PacMove : MonoBehaviour {
 		isMoving = res;
 	}
 
+	/// <summary>
+	/// True if under effects of a power up
+	/// </summary>
+	bool powerUp = false;
+
+	/// <summary>
+	/// How long the power up lasted.
+	/// </summary>
+	float powerTimer;
+
+	/// <summary>
+	/// The duration of the power up
+	/// </summary>
+	[SerializeField]
+	float powerUpDelay = 5f;
+
 
 	/// <summary>
 	/// Gets the current direction the player is heading.
@@ -126,6 +142,12 @@ public class PacMove : MonoBehaviour {
 		nextDir = Vector3.right;
 	}
 
+	void onPowerUp(){
+		powerUp = true;
+		powerTimer = 0f;
+		(GetComponent("Halo") as Behaviour).enabled = true;
+	}
+
 	/// <summary>
 	/// This is where the tile representation is initialised.
 	/// </summary>
@@ -170,6 +192,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
+		EventManager.AddListener(EnumEvent.FRIGHTENED, onPowerUp);
 
 	}
 
@@ -215,6 +238,11 @@ public class PacMove : MonoBehaviour {
 	/// <returns>void</returns>
 	void FixedUpdate () {
 		if(isMoving){
+			powerTimer += Time.deltaTime;
+			if (powerUp && powerTimer > powerUpDelay){
+				(GetComponent("Halo") as Behaviour).enabled = false;
+				powerUp = false;
+			}
 			move ();
 		}
 		else{
@@ -242,5 +270,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.FRIGHTENED, onPowerUp);
+
 	}
 }

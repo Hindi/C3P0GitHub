@@ -1,19 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Pacman controller is the class that controls the behavour of each enemy, the score and the collectible elements.
+/// </summary>
 public class PacmanController : MonoBehaviour {
+
+	/// <summary>
+	/// The tile representation of the game board.
+	/// </summary>
 	int[,] pacGrid;
+
+	/// <summary>
+	/// The current number of dots on the screen
+	/// </summary>
 	int remainingDots = 0;
+
+	/// <summary>
+	/// The timer for the scatter cycle.
+	/// </summary>
 	float timer;
+
+	/// <summary>
+	/// The player's score.
+	/// </summary>
 	int score;
 
-
+	/// <summary>
+	/// The dot prefab.
+	/// </summary>
 	[SerializeField]
 	private GameObject pacDot;
 
+	/// <summary>
+	/// The energizer prefab.
+	/// </summary>
 	[SerializeField]
 	private GameObject Energizer;
-	
+
+
+	/// <summary>
+	/// Deletes the dots present in the scene.
+	/// </summary>
 	void deleteDots(){
 		GameObject[] dots = GameObject.FindGameObjectsWithTag("Ball");
 		foreach (GameObject dot in dots){
@@ -26,7 +54,9 @@ public class PacmanController : MonoBehaviour {
 			--remainingDots;
 		}
 	}
-
+	/// <summary>
+	/// Creates the dots.
+	/// </summary>
 	void createDots(){
 		for (int i = 0; i<28; ++i){
 			for(int j = 0; j<31; j++){
@@ -44,6 +74,9 @@ public class PacmanController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// This function is called each time the player restarts the game.
+	/// </summary>
 	public void onRestart(){
 		deleteDots();
 		createDots();
@@ -52,10 +85,16 @@ public class PacmanController : MonoBehaviour {
 		EventManager.Raise(EnumEvent.GAMEOVER);
 	}
 
+	/// <summary>
+	/// Called when the player has won or lost the game
+	/// </summary>
 	public void onGameOver(){
 		EventManager.Raise(EnumEvent.GAMEOVER);
 	}
 
+	/// <summary>
+	/// Called when this script is destroyed
+	/// </summary>
 	void OnDestroy(){
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.RemoveListener(EnumEvent.DOT_EATEN, dotEaten);
@@ -102,7 +141,10 @@ public class PacmanController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.AddListener(EnumEvent.GHOST_EATEN, ghostEaten);
 	}
-
+	
+	/// <summary>
+	/// Called when the player gets a dot.
+	/// </summary>
 	void dotEaten(){
 		--remainingDots;
 		score += 10;
@@ -112,6 +154,9 @@ public class PacmanController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when a player gets an energizer.
+	/// </summary>
 	void enerEaten(){
 		--remainingDots;
 		score += 50;
@@ -121,13 +166,17 @@ public class PacmanController : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when a player gets a froghtened ghost
+	/// </summary>
 	void ghostEaten(){
 		score += 200;
 		EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
 	}
 
-	
-	// Update is called once per frame
+	/// <summary>
+	/// Called at each frame.
+	/// </summary>
 	void Update () {
 		if (Time.time - timer > 40f)
 		{

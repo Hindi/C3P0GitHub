@@ -1,24 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>This state is active when the player plays Space Invader.</summary>
+/// <summary>This state is active when the player plays Pacman.</summary>
 class PacmanState : GameState
 {
 	/// <summary>The gameObject of the player.</summary>
 	[SerializeField]
 	private GameObject player_;
 
+	/// <summary>
+	/// The GameObject of the game Controller
+	/// </summary>
 	[SerializeField]
 	private GameObject gameController_;
 
+	/// <summary>
+	/// The game object of the circle camera.
+	/// </summary>
 	[SerializeField]
 	private GameObject circleCamera;
 
 	/// <summary>The script of the player.</summary>
 	private PacMove playerScript_;
 
+	/// <summary>
+	/// The script of the game controller.
+	/// </summary>
 	private PacmanController gameControllerScript_;
 
+	/// <summary>
+	/// The script of the circle generator.
+	/// </summary>
 	private Randomizer rand;
 	
 	
