@@ -73,6 +73,7 @@ public class PongState : GameState {
     {
         base.start();
         ui.setParamCanvas(gameId);
+        Application.targetFrameRate = 60;
     }
 
     /// <summary>
@@ -83,6 +84,7 @@ public class PongState : GameState {
         base.end();
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.AutoRotation;
+        Application.targetFrameRate = -1;
     }
 
     /// <summary>
