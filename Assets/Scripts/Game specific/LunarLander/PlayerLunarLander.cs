@@ -63,8 +63,7 @@ public class PlayerLunarLander : MonoBehaviour {
     private int score;
     public int Score { get { return score; } }
 
-    Ray ray;
-    RaycastHit hit;
+    RaycastHit2D hit;
 
 	// Use this for initialization
     void Start()
@@ -79,8 +78,6 @@ public class PlayerLunarLander : MonoBehaviour {
         reactorState = 0;
         timeBeforeRestart = 1;
         onGameRestart();
-        ray.direction = Vector3.down;
-        hit.distance = 100;
 	}
 
     public void onGameRestart()
@@ -101,7 +98,7 @@ public class PlayerLunarLander : MonoBehaviour {
         resetReactorState();
         resetForce();
         Physics2D.gravity = new Vector3(-horizontalForce, -gravityForce, 0);
-        rigidbody2D.AddForce(new Vector3(6000, -100, 0));
+        rigidbody2D.AddForce(new Vector3(3000, -100, 0));
     }
 
     private void resetCamera()
@@ -184,13 +181,13 @@ public class PlayerLunarLander : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        ray.origin = transform.position;
-        Debug.DrawRay(transform.position, Vector3.down * 100);
-        if (Physics.Raycast(ray, out hit))
+        hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -1), -Vector2.up*10);
+        if (hit.collider != null && (hit.transform.tag == "Terrain" || hit.transform.tag == "Platform"))
         {
-            Debug.Log(Vector3.Distance(transform.position, hit.transform.position));
-            if(Vector3.Distance(transform.position, hit.transform.position) < 50)
-                camera.zoom();
+            float distance = Vector2.Distance(transform.position, hit.point);
+            altitudeBar.updateValue(distance);
+            if (distance < 5)
+                camera.Zooming = true;
         }
 
         if (landed)
@@ -203,7 +200,6 @@ public class PlayerLunarLander : MonoBehaviour {
         else
         {
             currentVelocity = rigidbody2D.velocity * 10;
-            altitudeBar.updateValue(transform.position.y);
             horizontalBar.updateValue(Mathf.Abs(currentVelocity.x));
             verticalBar.updateValue(Mathf.Abs(currentVelocity.y));
             if (fuel > 0)
