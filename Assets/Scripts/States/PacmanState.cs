@@ -76,7 +76,7 @@ class PacmanState : GameState
 		rand = circleCamera.GetComponent<Randomizer>();
 
 		if(Application.isMobilePlatform)
-			Screen.orientation = ScreenOrientation.Landscape;
+			Screen.orientation = ScreenOrientation.Portrait;
 	}
 	
 	/// <summary>Called on start.</summary>
@@ -108,23 +108,23 @@ class PacmanState : GameState
 	/// <returns>void</returns>
 	public override void noticeInput(EnumInput key, Touch[] inputs)
 	{
-/*	if (loaded)
+		if (loaded)
 		{
 			foreach (var t in inputs)
 			{
 				if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
 				{
-					if (t.position.y > 2 * Screen.width / )
-						playerScript_.move(1);
-					else if (t.position.x < Screen.width / 4)
-						playerScript_.move(-1);
-					else if (t.position.x < Screen.width / 4)
-						playerScript_.move(-1);
-					else if (t.position.x < Screen.width / 4)
-						playerScript_.move(-1);
+					if (t.position.y > 2 * Screen.height /3)
+						playerScript_.goUp();
+					else if (t.position.y < Screen.height / 4)
+						playerScript_.goDown();
+					else if (t.position.x < Screen.width / 2)
+						playerScript_.goLeft();
+					else if (t.position.x < Screen.width / 2)
+						playerScript_.goRight();
 				}
 			}
-		}*/
+		}
 	}
 	
 	/// <summary>Recieves all the necessary inputs (keyboard, gamepad and mouse).</summary>
