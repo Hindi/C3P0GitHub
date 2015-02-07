@@ -304,7 +304,7 @@ public class PongManagerScript : MonoBehaviour {
         ball.GetComponent<SpriteRenderer>().sprite = origBall;
         ball.renderer.material.color = Color.white;
         ball.GetComponent<BallMoving>().cancelCoupSpecial();
-        ball.GetComponent<BallMoving>().onScore();
+        ball.GetComponent<BallMoving>().onScore(((player == -1) ? playerPaddle : enemyPaddle).transform.position.x * 4 / (float)5);
         coupSpecial = false;
 
         if (fireBall)
@@ -321,7 +321,6 @@ public class PongManagerScript : MonoBehaviour {
         this.oldSpeed = oldSpeed;
         coupSpecial = true;
         arrow.SetActive(true);
-        //ball.
         currentAngles = new Vector3(0, 0, player * 90);
         currentDirection = 1;
         arrow.transform.localEulerAngles = currentAngles;
