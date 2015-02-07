@@ -22,6 +22,7 @@ public class BallMoving : MonoBehaviour {
 
     public void onRestart()
     {
+        restartTimer = 3;
         transform.position = defaultPos;
         speed = new Vector2(defaultSpeed.x, defaultSpeed.y);
         cancelCoupSpecial();
@@ -125,8 +126,9 @@ public class BallMoving : MonoBehaviour {
         
     }
 
-    public void onScore()
+    public void onScore(float posX)
     {
+        transform.position = new Vector3(posX, transform.position.y, transform.position.z);
         restartTimer = Time.time;
     }
 

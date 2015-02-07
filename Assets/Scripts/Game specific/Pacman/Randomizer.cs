@@ -7,18 +7,15 @@ public class Randomizer : MonoBehaviour {
 	private GameObject circle;
 
 	int paramId;
-
-
+	
 	Color couleur;
-	// Use this for initialization
-
+	
 	public void setColor(Color col){
 		couleur = col;
 	}
 
 	public void setParamId(int id){
 		paramId = id;
-		Debug.Log(paramId);
 	}
 
 	void create(){
@@ -30,7 +27,7 @@ public class Randomizer : MonoBehaviour {
 			dot.transform.Translate(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 1f, transform);
 			break;
 		case 1:
-			dot.transform.Translate((float)Laws.gauss(0,3.5), (float)Laws.gauss (0,3.5), 1f, transform);
+			dot.transform.Translate((float)Laws.gauss(0,3f), (float)Laws.gauss (0,3f), 1f, transform);
 			break;
 		case 2:
 			Vector2 corr = Laws.gaussCorrelated(2);
@@ -43,10 +40,13 @@ public class Randomizer : MonoBehaviour {
 		couleur = Color.gray;
 	}
 	void Update () {
+		if (Time.timeScale > 0 ){
 			create();
+		}
 	}
 
 	void OnDisable(){
 		EventManager.Raise(EnumEvent.MINIGAME_TERMINATE);
 	}
+	
 }

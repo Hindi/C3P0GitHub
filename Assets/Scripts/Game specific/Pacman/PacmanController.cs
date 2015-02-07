@@ -106,6 +106,7 @@ public class PacmanController : MonoBehaviour {
 	void dotEaten(){
 		--remainingDots;
 		score += 10;
+		EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
 		if (remainingDots == 0){
 			EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
 		}
@@ -114,6 +115,7 @@ public class PacmanController : MonoBehaviour {
 	void enerEaten(){
 		--remainingDots;
 		score += 50;
+		EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
 		if (remainingDots == 0){
 			EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
 		}
@@ -121,6 +123,7 @@ public class PacmanController : MonoBehaviour {
 
 	void ghostEaten(){
 		score += 200;
+		EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
 	}
 
 	
