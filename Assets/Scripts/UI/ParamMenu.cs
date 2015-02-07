@@ -38,6 +38,7 @@ public class ParamMenu : MonoBehaviour {
 
     public void goodAnswerRatio(float r)
     {
+        Debug.Log(r);
         param2.interactable = true;
         param3.interactable = true;
         if (r < 0.33f)
@@ -60,11 +61,6 @@ public class ParamMenu : MonoBehaviour {
         {
             explanationText.text = s;
         }
-    }
-
-    void OnEnable()
-    {
-        Debug.Log("boite");
     }
 
     public void onCloseExplanationClick()
