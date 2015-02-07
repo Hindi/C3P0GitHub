@@ -58,6 +58,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
         answerLabel.text = "";
         answered = false;
         timeBar.gameObject.SetActive(true);
+        timeBar.init(questionTime);
         timeBar.updateValue(questionTime);
     }
 
