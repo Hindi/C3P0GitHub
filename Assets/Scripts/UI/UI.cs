@@ -136,7 +136,8 @@ public class UI : MonoBehaviour {
     public void onChangeParam(float ratio)
     {
         updateCurrentCanvas(paramMenu);
-        paramMenu.GetComponent<ParamMenu>().activateButtons(ratio);
+        Debug.Log(ratio);
+        paramMenu.GetComponent<ParamMenu>().AnswerRatio = ratio;
     }
 
     public void onServerStart()

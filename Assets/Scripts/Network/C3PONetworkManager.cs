@@ -102,7 +102,7 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <returns>void</returns>
     public void tryTologIn()
     {
-        if (!C3PONetwork.Instance.isConnectedToTeacher)
+        if (!C3PONetwork.Instance.IsConnectedToTeacher)
 		{
 			throw new System.Exception("Failed to connect to teacher");
 		}

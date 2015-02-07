@@ -25,6 +25,19 @@ public class ParamMenu : MonoBehaviour {
     [SerializeField]
     private Button param3;
 
+    private float answerRatio;
+    public float AnswerRatio
+    {
+        get
+        {
+            return answerRatio;
+        }
+        set
+        {
+            answerRatio = value;
+        }
+    }
+
 	// Use this for initialization
     void Start()
     {
@@ -34,6 +47,12 @@ public class ParamMenu : MonoBehaviour {
 	void Update () {
 	    
 	}
+
+    void OnEnable()
+    {
+        if(C3PONetwork.Instance.IsConnectedToTeacher)
+            activateButtons(0);
+    }
 
     public void activateButtons(float r)
     {
