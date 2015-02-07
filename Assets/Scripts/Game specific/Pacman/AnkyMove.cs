@@ -302,7 +302,6 @@ public class AnkyMove : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-        /*
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
@@ -310,6 +309,5 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
-         * */
 	}
 }

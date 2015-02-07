@@ -11,9 +11,11 @@ public class MiniGameController : MonoBehaviour {
 	Vector3 targetPosition;
 
 	bool isTarget = false;
+	Color col;
 	bool gotHit = false;
 	bool miniGame = false;
 	bool gameOver = false;
+
 
 
 	void niceShot(){
@@ -49,8 +51,10 @@ public class MiniGameController : MonoBehaviour {
 	public void moveTo(GameObject ghost){
 		if (!gotHit){
 			targetPosition = ghost.transform.position;
+			col = ghost.renderer.material.color;
 			isTarget = true;
 			gotHit = true;
+			rand.setColor(col);
 		}
 	}
 
@@ -59,17 +63,18 @@ public class MiniGameController : MonoBehaviour {
 
 		if (isTarget){
 			EventManager<bool>.Raise(EnumEvent.MOVING, false);
-			transform.LookAt(Vector3.Lerp(transform.position + transform.forward, targetPosition, Time.unscaledDeltaTime));
+			transform.LookAt(targetPosition);
 			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
 				transform.position = Vector3.Lerp(transform.position, pocman.transform.position, 2 * Time.unscaledDeltaTime);
 			}
 			else {
 				if (!miniGame){
-					rand.enabled = true;
 					EventManager.Raise(EnumEvent.MINIGAME_START);
+					rand.enabled = true;
 					miniGame = true;
 				}
 			}
+			rand.setColor(col);
 		}
 		else {
 			rand.enabled = false;

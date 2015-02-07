@@ -16,8 +16,8 @@ public class CircleReduction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale -= new Vector3 (0.1f, 0.1f, 0.1f) * Time.deltaTime;
-		if(Time.time - timer > 10f){
+		transform.localScale -= new Vector3 (.5f, .5f, 0.5f) * Time.deltaTime;
+		if(Time.time - timer > 2){
 			Destroy(gameObject);
 		}
 	}

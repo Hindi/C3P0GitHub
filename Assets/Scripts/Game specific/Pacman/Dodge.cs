@@ -10,7 +10,7 @@ public class Dodge : MonoBehaviour {
 	float delay = 5f;
 
 	void startMiniGame(){
-		timer = Time.realtimeSinceStartup;
+		timer = Time.time;
 		miniGame = true;
 	}
 
@@ -27,7 +27,7 @@ public class Dodge : MonoBehaviour {
 	void Update () {
 		Debug.DrawRay(circleCamera.ScreenToWorldPoint(Input.mousePosition - 0.5f * circleCamera.transform.forward), circleCamera.transform.forward, Color.green);
 		if (miniGame){
-			if (Time.realtimeSinceStartup - timer > delay){
+			if (Time.time - timer > delay){
 				EventManager.Raise(EnumEvent.MINIGAME_TO);
 				miniGame = false;
 			}
