@@ -25,6 +25,19 @@ public class ParamMenu : MonoBehaviour {
     [SerializeField]
     private Button param3;
 
+    private float answerRatio;
+    public float AnswerRatio
+    {
+        get
+        {
+            return answerRatio;
+        }
+        set
+        {
+            answerRatio = value;
+        }
+    }
+
 	// Use this for initialization
     void Start()
     {
