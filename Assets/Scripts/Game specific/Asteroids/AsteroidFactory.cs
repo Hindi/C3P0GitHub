@@ -5,12 +5,14 @@ using System.Collections.Generic;
 public class AsteroidFactory : MonoBehaviour {
 
     public static AsteroidFactory _factory;
+
     public Stack<Asteroid> asteroidNotInUse;
+
     [SerializeField]
     public int nbAsteroidInitalized;
 
     [SerializeField]
-    List<GameObject> asteroidsList;
+    List<GameObject> asteroidsPrefabList;
 
 	// Use this for initialization
 	void Start () {
@@ -28,36 +30,36 @@ public class AsteroidFactory : MonoBehaviour {
 
     private GameObject getRandomAsteroids()
     {
-        return asteroidsList[Random.Range(0, asteroidsList.Count -1)];
+        return asteroidsPrefabList[Random.Range(0, asteroidsPrefabList.Count - 1)];
     }
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
     {
         if (asteroidNotInUse.Count > 0)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            asteroidNotInUse.Pop().init(pos, target, hp, id, EnumColor.NONE);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, EnumColor.NONE);
+            ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, EnumColor.NONE);
         }
     }
 
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId, EnumColor color)
     {
         if (asteroidNotInUse.Count > 0)
         {
-            asteroidNotInUse.Pop().initAsteroid(pos, target, hp, id, color);
+            asteroidNotInUse.Pop().init(pos, target, hp, id, color);
         }
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
-            ((GameObject)Instantiate(getRandomAsteroids())).GetComponent<Asteroid>().initAsteroid(pos, target, hp, id, color);
+            ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, color);
         }
     }
 

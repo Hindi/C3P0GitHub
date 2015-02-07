@@ -42,11 +42,11 @@ public class AsteroidsManager : MonoBehaviour {
             Vector3 target = shipScript.getTarget();
             if (nbAsteroid % 2 == 0)
             {
-                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, EnumColor.GREEN);
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 0, EnumColor.RED);
             }
             else
             {
-                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid);
+                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), 1, nbAsteroid);
             }
             nbAsteroid++;
             timeSinceLastSpawn = Time.time;
@@ -71,6 +71,7 @@ public class AsteroidsManager : MonoBehaviour {
     /// <returns>void</returns>
     public void remove(int id)
     {
+        asteroidInUse[id].destroy();
         if (!asteroidInUse.Remove(id)) 
             Debug.Log("Problem there is no asteroid with the id : " + id);
     }
