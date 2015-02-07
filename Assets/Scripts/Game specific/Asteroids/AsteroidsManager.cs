@@ -73,17 +73,13 @@ public class AsteroidsManager : MonoBehaviour {
     public void remove(int id)
     {
         Debug.Log(asteroidInUse.Count);
-        if (asteroidInUse.Remove(id)) 
-            Debug.Log("I removed asteroid with the id : " + id);
-        else
+        if (!asteroidInUse.Remove(id)) 
             Debug.Log("Problem there is no asteroid with the id : " + id);
-        Debug.Log(asteroidInUse.Count);
     }
 
     public void hit(int id)
     {
         Asteroid ast;
-        Debug.Log("je suis ici");
         if (asteroidInUse.TryGetValue(id, out ast))
         {
             // We should always be in this case.

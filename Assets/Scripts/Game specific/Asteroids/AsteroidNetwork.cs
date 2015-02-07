@@ -14,8 +14,8 @@ public class AsteroidNetwork : MonoBehaviour {
     public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
     {
         // TO DO remettre l'appel au rpc
-        networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id);
-        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id, EnumColor.NONE);
+        //networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id);
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, EnumColor.NONE);
     }
 
 
@@ -30,8 +30,8 @@ public class AsteroidNetwork : MonoBehaviour {
     public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
     {
         // TO DO remettre l'appel au rpc
-        networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, (int) color);
-        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id, color);
+        //networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, (int) color);
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, color);
     }
 
 
@@ -46,9 +46,9 @@ public class AsteroidNetwork : MonoBehaviour {
     public void hitAsteroid(int id)
     {
         // TO DO remettre l'appel au rpc
-        networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
-        //asteroidsManager.hit(id);
-        //Debug.Log("je suis dans le network");
+        //networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
+        asteroidsManager.hit(id);
+        Debug.Log("je suis dans le network");
     }
 
     [RPC]
@@ -62,7 +62,7 @@ public class AsteroidNetwork : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        asteroidsManager = GameObject.FindGameObjectWithTag("asteroidManager").GetComponent<AsteroidsManager>();
 	}
 	
 	// Update is called once per frame

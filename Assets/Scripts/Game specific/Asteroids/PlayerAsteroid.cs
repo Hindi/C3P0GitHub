@@ -33,7 +33,7 @@ public class PlayerAsteroid : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         upDownRange = 15f;
-        leftRightRange = 22f;
+        leftRightRange = 25f;
         mouseSensitivity = 1f;
         cdShoot = 1f;
         cdMoveHorizontal = 1f / 60f;
