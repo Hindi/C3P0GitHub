@@ -1,18 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// AI script for the enemy in SpaceWar
+/// </summary>
 public class SpaceWarState : GameState {
 
+    /// <summary>
+    /// The script managing most of the game's mechanics
+    /// </summary>
     private SpaceWarScript gameScript;
+    /// <summary>
+    /// The player script
+    /// </summary>
     private PlayerSpaceWar player;
     private Parameter p;
 
+    /// <summary>
+    /// Called when the lobby scene from Unity is loaded, sets the Game ID
+    /// </summary>
+    /// <param name="stateManager">The instance managing all the states</param>
 	public SpaceWarState(StateManager stateManager)
         : base(stateManager)
     {
         gameId = EnumGame.SPACEWAR;
     }
 
+    /// <summary>
+    /// Delegate called when the game needs to (re)start
+    /// </summary>
     public override void onGameRestart()
     {
         if (loaded)
@@ -22,6 +38,10 @@ public class SpaceWarState : GameState {
         }
     }
 
+    /// <summary>
+    /// Sets the parameter used in game when selected from the menu
+    /// </summary>
+    /// <param name="param">The parameter that should be used in game forward</param>
     public override void setParameter(Parameter param)
     {
         if (gameScript != null)
@@ -35,7 +55,10 @@ public class SpaceWarState : GameState {
         }
     }
 
-
+    /// <summary>
+    /// Delegate called when the game scene is done loading.
+    /// </summary>
+    /// <param name="lvl">The game's level done loading</param>
     public override void onLevelWasLoaded(int lvl)
     {
         base.onLevelWasLoaded(lvl);
@@ -47,12 +70,18 @@ public class SpaceWarState : GameState {
         gameScript.updateElementsResolution();
     }
 
+    /// <summary>
+    /// Similar to Unity's Start delegate, called when the state starts
+    /// </summary>
     public override void start()
     {
         base.start();
         ui.setParamCanvas(gameId);
     }
 
+    /// <summary>
+    /// Similar to Unity's OnDestroy delegate, called when the state stops
+    /// </summary>
     public override void end()
     {
         base.end();
@@ -60,6 +89,9 @@ public class SpaceWarState : GameState {
             Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
+    /// <summary>
+    /// Similar to Unity's Update delegate, called each frame to advance in game
+    /// </summary>
     public override void update()
     {
         base.update();
@@ -70,6 +102,10 @@ public class SpaceWarState : GameState {
         }
     }
 
+    /// <summary>
+    /// Delegate called when the game is over
+    /// </summary>
+    /// <param name="b">True if player won</param>
     public override void onGameOver(bool b)
     {
         if (loaded)
@@ -78,6 +114,10 @@ public class SpaceWarState : GameState {
         }
     }
 
+    /// <summary>
+    /// Called by the Input Manager to notify a key is being pressed
+    /// </summary>
+    /// <param name="key">The key being pressed</param>
     public override void noticeInput(EnumInput key, Touch[] inputs)
     {
         if (loaded)
@@ -110,6 +150,11 @@ public class SpaceWarState : GameState {
         }
     }
 
+    /// <summary>
+    /// Called by the Input Manager to notify a key/touch screen action going on
+    /// </summary>
+    /// <param name="key">The key being pressed</param>
+    /// <param name="inputs">A touch screen action</param>
     public override void noticeInput(EnumInput key)
     {
         if (loaded)

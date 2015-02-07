@@ -2,6 +2,9 @@
 using System;
 using System.Collections;
 
+/// <summary>
+/// GameManager for SpaceWar. Mostly manages restarts and score.
+/// </summary>
 public class SpaceWarScript : MonoBehaviour {
 
     [SerializeField]
@@ -53,11 +56,19 @@ public class SpaceWarScript : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Called by the state to set the AI's parameter
+    /// </summary>
+    /// <param name="p">The new parameter</param>
     public void setParameter(Parameter p)
     {
         enemyShip.GetComponent<EnemySpaceWar>().setParameter(p);
     }
 
+    /// <summary>
+    /// Delegate called when one of the ships is destroyed
+    /// </summary>
+    /// <param name="b">True if player ship, false otherwise</param>
     public void spaceShipDestroyed(bool b)
     {
         if (b) // the player has been destroyed
@@ -71,6 +82,9 @@ public class SpaceWarScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Used to change the camera's size according to screen size ratio to keep consistent across all platforms
+    /// </summary>
     public void updateElementsResolution()
     {
         float width, height;

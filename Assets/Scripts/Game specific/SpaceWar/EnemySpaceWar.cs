@@ -2,32 +2,71 @@
 using System.Collections;
 
 public class EnemySpaceWar : Spaceship {
-
+    /// <summary>
+    /// Player and player's projectile GameObjects
+    /// </summary>
     [SerializeField]
     private GameObject player, playerProjectile;
 
+    /// <summary>
+    /// GameObject used to graphically show the Kalman
+    /// </summary>
     [SerializeField]
     private GameObject target;
 
+    /// <summary>
+    /// GameObject used to graphically show the Kalman
+    /// </summary>
     [SerializeField]
     private GameObject noisedPosition;
 
+    /// <summary>
+    /// GameObject used to graphically show the Kalman
+    /// </summary>
     [SerializeField]
     private GameObject imprecision;
 
+    /// <summary>
+    /// Kalman filter to provide a realistic observation of the player's position.
+    /// </summary>
     private Kalman kalman;
     private Parameter p;
 
+    /// <summary>
+    /// History of positions that went through the Kalman filter.
+    /// </summary>
+    /// <remarks>When instanciated, size MUST be an even number</remarks>
     private Vector2[] posHistory; // Requiers un nombre pair de valeurs! Très Important!
+    /// <summary>
+    /// Used to write to the correct cell of the Array
+    /// </summary>
     private int posHistoryIterator;
 
+    /// <summary>
+    /// Timer used to determine when to change AI's state
+    /// </summary>
     private float stateTimer;
+    /// <summary>
+    /// Fixed value indicating when stateTimer should trigger
+    /// </summary>
     [SerializeField]
     private float stateChangeTimer;
+    /// <summary>
+    /// Fixed value indicating how many times the AI changes its action during a state
+    /// </summary>
     [SerializeField]
     private int actionsPerTimer;
+    /// <summary>
+    /// The number of actions already started during this state cycle
+    /// </summary>
     private int actionNumber;
+    /// <summary>
+    /// The current state of the AI
+    /// </summary>
     private SWIAState IAState;
+    /// <summary>
+    /// The actual movement (= action) the AI is currently doing
+    /// </summary>
     private SWIAAction IAAction;
 
     /*************************************************************************************************
@@ -145,16 +184,26 @@ public class EnemySpaceWar : Spaceship {
         }
 	}
 
+    /// <summary>
+    /// Called when the ship is hit by a projectile or the center spiral
+    /// </summary>
     public override void onHit()
     {
         base.onHit();
     }
 
+    /// <summary>
+    /// Sets the parameter dictating the AI's state machine
+    /// </summary>
+    /// <param name="param">The new AI parameter</param>
     public void setParameter(Parameter param)
     {
         p = param;
     }
 
+    /// <summary>
+    /// Resets the AI to be ready for a new round
+    /// </summary>
     public override void onRestart()
     {
         base.onRestart();
@@ -175,13 +224,22 @@ public class EnemySpaceWar : Spaceship {
     /*************************************************************************************************
      * Private used functions                                                                        *
      *************************************************************************************************/
-
+    /// <summary>
+    /// Adds a new position estimated by the Kalman to the history
+    /// </summary>
+    /// <param name="position">Position estimated by Kalman filter</param>
     private void addInterpretedPosition(Vector2 position)
     {
         posHistory[posHistoryIterator] = new Vector2(position.x, position.y);
         posHistoryIterator = (posHistoryIterator == posHistory.Length - 1) ? 0 : posHistoryIterator + 1;
     }
 
+    /// <summary>
+    /// Provides a prediction for the player's position using estimation history.<br/>
+    /// Much more reliable than the Kalman's own interpolation due to the player's overall speed being lower than the noise speed
+    /// </summary>
+    /// <param name="nbFrames">The number of time units in which we want to know the player's position</param>
+    /// <returns>A position vector</returns>
     private Vector2 interpolation(int nbFrames)
     {
         Vector2 oldPos = new Vector2(0, 0), newPos = new Vector2(0, 0), speed5f;
@@ -212,7 +270,9 @@ public class EnemySpaceWar : Spaceship {
     /*************************************************************************************************
      * Private IA action functions                                                                   *
      *************************************************************************************************/
-
+    /// <summary>
+    /// Change the State when parameter is set to Random
+    /// </summary>
     private void changeRandomState()
     {
         int i = Random.Range(1, 4);
@@ -233,6 +293,9 @@ public class EnemySpaceWar : Spaceship {
         }
     }
 
+    /// <summary>
+    /// Determines an action and executes it when State is set to Move Randomly
+    /// </summary>
     private void moveRandomly()
     {
         if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) >= actionNumber) // time to decide a new action
@@ -300,6 +363,9 @@ public class EnemySpaceWar : Spaceship {
         }
     }
 
+    /// <summary>
+    /// Determines an action and executes it when state is set to Dodge Attacks and there's nothing to dodge
+    /// </summary>
     private void moveIntelligently()
     {
         if ((int)((Time.time - stateTimer) / (stateChangeTimer / actionsPerTimer)) >= actionNumber) // time to decide a new action
@@ -355,17 +421,24 @@ public class EnemySpaceWar : Spaceship {
         }
     }
 
+    /// <summary>
+    /// Makes the AI fire at will
+    /// </summary>
     private void attackRandomly()
     {
         fire();
     }
 
+    /// <summary>
+    /// Tries pretty badly to adjust the trajectory to dodge projectiles as well as the center spiral
+    /// </summary>
+    /// <returns>True if there's nothing to dodge, false otherwise</returns>
     private bool dodgeAttacks()
     {
         bool spirale = dodgeSpirale();
         bool self = dodgeSelfProjectile();
         bool player = dodgePlayerProjectile();
-        if (Time.time - stateTimer > stateChangeTimer)
+        if (Time.time - stateTimer > stateChangeTimer / 2)
         {
             stateTimer = Time.time;
             IAState = SWIAState.MOVE_TOWARDS_PLAYER;
@@ -373,9 +446,13 @@ public class EnemySpaceWar : Spaceship {
         return (self && player && spirale);
     }
 
+    /// <summary>
+    /// Tries to adjust the trajectory to dodge the center spiral
+    /// </summary>
+    /// <returns>False if the trajectory has to be altered, True otherwise</returns>
     private bool dodgeSpirale()
     {
-        if (distance(spiral) <= 3)
+        if (distance(spiral) <= 2)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - spiral.transform.position.y, transform.position.x - spiral.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -393,9 +470,13 @@ public class EnemySpaceWar : Spaceship {
         return true;
     }
 
+    /// <summary>
+    /// Tries to adjust the trajectory to dodge self's projectile
+    /// </summary>
+    /// <returns>False if the trajectory has to be altered, True otherwise</returns>
     private bool dodgeSelfProjectile()
     {
-        if (distance(playerProjectile) <= 3 && projectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 2 && projectile.activeInHierarchy)
         {
             float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - projectile.transform.position.y, transform.position.x - projectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0)
@@ -413,9 +494,13 @@ public class EnemySpaceWar : Spaceship {
         return true;
     }
 
+    /// <summary>
+    /// Tries to adjust the trajectory to dodge player's projectile
+    /// </summary>
+    /// <returns>False if the trajectory has to be altered, True otherwise</returns>
     private bool dodgePlayerProjectile()
     {
-        if (distance(playerProjectile) <= 3 && playerProjectile.activeInHierarchy)
+        if (distance(playerProjectile) <= 2 && playerProjectile.activeInHierarchy)
         {
             float Angle = - transform.eulerAngles.z + Mathf.Atan2(transform.position.y - playerProjectile.transform.position.y, transform.position.x - playerProjectile.transform.position.x) * Mathf.Rad2Deg + 90;
             if (Angle >= 0 || Angle <= -180)
@@ -433,11 +518,19 @@ public class EnemySpaceWar : Spaceship {
         return true;
     }
 
+    /// <summary>
+    /// Similar to Vector2.Distance, but with this AI's position
+    /// </summary>
+    /// <param name="g">GameObject to determine the distance with</param>
+    /// <returns>Distance between this and g</returns>
     private float distance(GameObject g)
     {
         return (Mathf.Sqrt(Mathf.Pow(transform.position.x - g.transform.position.x,2) + Mathf.Pow(transform.position.y - g.transform.position.y,2)));
     }
 
+    /// <summary>
+    /// Determine an action and executes it to move towards the player, regardless of any obstacles
+    /// </summary>
     private void moveTowardsPlayer()
     {
         float Angle = -transform.eulerAngles.z + Mathf.Atan2(transform.position.y - player.transform.position.y, transform.position.x - player.transform.position.x) * Mathf.Rad2Deg + 90;
@@ -458,6 +551,9 @@ public class EnemySpaceWar : Spaceship {
         }
     }
 
+    /// <summary>
+    /// Aims at player's interpolated position in 60 frames and shoots if facing it
+    /// </summary>
     private void attackPlayer()
     {
         Vector2 prediction = interpolation(60);

@@ -3,36 +3,69 @@ using System.Collections;
 
 public class Spaceship : MonoBehaviour
 {
-
+    /// <summary>
+    /// The object marking the center of the screen
+    /// </summary>
     [SerializeField]
     protected GameObject spiral;
 
+    /// <summary>
+    /// This ship's projectile
+    /// </summary>
     [SerializeField]
     protected GameObject projectile;
 
+    /// <summary>
+    /// The factor by which this ship can alter its rotating speed
+    /// </summary>
     [SerializeField]
     protected float rotationSpeed;
 
+    /// <summary>
+    /// The factor by which this ship can alter its moving speed
+    /// </summary>
     [SerializeField]
     protected float linearSpeed;
 
+    /// <summary>
+    /// GameObject marking the position at which this ship's projectile starts when fired
+    /// </summary>
     [SerializeField]
     protected Transform projectileStartPosition;
 
+    /// <summary>
+    /// This ship's maximum speed
+    /// </summary>
     [SerializeField]
     protected float maxSpeed;
 
+    /// <summary>
+    /// A prefab used to create an explosion when killed
+    /// </summary>
     [SerializeField]
     protected GameObject explosion;
 
+    /// <summary>
+    /// Timer used to count to game restart once killed
+    /// </summary>
     protected float initEndTimer;
+    /// <summary>
+    /// Bool used to prevent actions once killed
+    /// </summary>
     protected bool isEnd;
 
+    /// <summary>
+    /// Rotates the ship according to rotationSpeed
+    /// </summary>
+    /// <param name="speedFactor">1 or -1 to turn left or right</param>
     public void rotate(float speedFactor)
     {
         transform.Rotate(new Vector3(0, 0, rotationSpeed * speedFactor) * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Adds forward momentum according to linearSpeed
+    /// </summary>
     public void goForward()
     {
         rigidbody2D.AddRelativeForce(new Vector3(0, linearSpeed * Time.deltaTime, 0));
@@ -42,20 +75,30 @@ public class Spaceship : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when exiting the screen
+    /// </summary>
     public void exitZone()
     {
         Vector2 delta = spiral.transform.position - transform.position;
         transform.position = (Vector2)spiral.transform.position + 0.99f * delta;
     }
 
+    /// <summary>
+    /// Checks if firing a new projectile is possible
+    /// </summary>
+    /// <returns>True if firing is possible</returns>
     private bool canFire()
     {
         return (!projectile.activeSelf);
     }
 
+    /// <summary>
+    /// Tries to fire a new projectile
+    /// </summary>
     public void fire()
     {
-        if (canFire())
+        if (canFire() && !isEnd)
         {
             projectile.SetActive(true);
             projectile.transform.position = projectileStartPosition.position;
@@ -86,6 +129,9 @@ public class Spaceship : MonoBehaviour
         }
 	}
 
+    /// <summary>
+    /// Called when the ship is destroyed
+    /// </summary>
     public virtual void onHit()
     {
         if (!isEnd)
@@ -98,6 +144,9 @@ public class Spaceship : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the round restarts to reset attributes
+    /// </summary>
     public virtual void onRestart(){
         isEnd = false;
         renderer.enabled = true;

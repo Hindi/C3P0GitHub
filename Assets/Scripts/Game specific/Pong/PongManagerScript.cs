@@ -279,7 +279,7 @@ public class PongManagerScript : MonoBehaviour {
         }
         reset(player);
 
-        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 5)
+        if (int.Parse(texts[((player == 1) ? 0 : 1)].text) >= 10)
         {
             ball.transform.position = new Vector3(10, 3, -20);
             ball.SetActive(false);

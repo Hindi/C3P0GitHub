@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Script used on the player's ship in SpaceWar
+/// </summary>
 public class PlayerSpaceWar : Spaceship {
 
     private Vector3 basePos;
@@ -26,11 +29,17 @@ public class PlayerSpaceWar : Spaceship {
         }
 	}
 
+    /// <summary>
+    /// Called when the ship is hit by a projectile or the center spiral
+    /// </summary>
     public override void onHit()
     {
         base.onHit();
     }
 
+    /// <summary>
+    /// Resets the ship's properties to be ready for the next round
+    /// </summary>
     public override void onRestart()
     {
         base.onRestart();

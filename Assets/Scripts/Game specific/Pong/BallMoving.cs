@@ -97,7 +97,7 @@ public class BallMoving : MonoBehaviour {
                 /* Here is the magic stuff ! */
                 if (managerScript.param.id == 0)
                 {
-                    Angle = Random.Range(-80,81);
+                    Angle = (float) Laws.uniforme(-80,81);
                 }
                 else if (managerScript.param.id == 1)
                 {

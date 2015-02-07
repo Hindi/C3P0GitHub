@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Monobehaviour class used to actually resize UI Panels supposed to always have the same physical size, if that physical size is larger than the current's screen physical size
+/// </summary>
 public class PanelCapSize : MonoBehaviour {
 
     private static float ratio;
