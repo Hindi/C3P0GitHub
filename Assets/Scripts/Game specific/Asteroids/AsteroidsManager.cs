@@ -36,13 +36,13 @@ public class AsteroidsManager : MonoBehaviour {
             asteroidInUse = new Dictionary<int, Asteroid>();
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(50, 200));
+            Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
             pos = mainCamera.ViewportToWorldPoint(pos);
 
             Vector3 target = shipScript.getTarget();
             if (nbAsteroid % 2 == 0)
             {
-                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, EnumColor.RED);
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, EnumColor.GREEN);
             }
             else
             {
@@ -62,7 +62,6 @@ public class AsteroidsManager : MonoBehaviour {
     public void add(int id, Asteroid ast)
     {
         asteroidInUse.Add(id, ast);
-        Debug.Log(asteroidInUse.Count);
     }
 
     /// <summary>
@@ -72,7 +71,6 @@ public class AsteroidsManager : MonoBehaviour {
     /// <returns>void</returns>
     public void remove(int id)
     {
-        Debug.Log(asteroidInUse.Count);
         if (!asteroidInUse.Remove(id)) 
             Debug.Log("Problem there is no asteroid with the id : " + id);
     }

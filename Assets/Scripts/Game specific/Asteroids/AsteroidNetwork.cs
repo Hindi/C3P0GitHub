@@ -11,6 +11,8 @@ public class AsteroidNetwork : MonoBehaviour {
     private AsteroidsManager asteroidsManager;
 
    
+    // TO DO il faudra peut être rajouter la vitesse de l'astéroid
+
     public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
     {
         // TO DO remettre l'appel au rpc
@@ -19,7 +21,6 @@ public class AsteroidNetwork : MonoBehaviour {
     }
 
 
-    // 
     [RPC]
     private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id)
     {
@@ -48,7 +49,6 @@ public class AsteroidNetwork : MonoBehaviour {
         // TO DO remettre l'appel au rpc
         //networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
         asteroidsManager.hit(id);
-        Debug.Log("je suis dans le network");
     }
 
     [RPC]

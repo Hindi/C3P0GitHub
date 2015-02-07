@@ -17,6 +17,9 @@ public class PlayerAsteroid : MonoBehaviour {
     [SerializeField]
     private AsteroidNetwork asteroidNetwork;
 
+    [SerializeField]
+    private GameObject viseur;
+
     public float mouseSensitivity;
 
     float upDownRange;
@@ -73,12 +76,9 @@ public class PlayerAsteroid : MonoBehaviour {
         Physics.Raycast(ray, out hit, 1500);
         if (hit.transform !=null)
         {
-            if(hit.transform.CompareTag("Asteroid"))
+            if (hit.transform.CompareTag("Asteroid"))
             {
-                // TO DO Envoyer à tout le monde qu'on a touché tel asteroid pour qu'il fasse la synchro 
-                // On accède à l'astéroid avec le code en dessus (plus ou moins)
-                //asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponent<Asteroid>().id);
-                asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponent<Asteroid>().id);
+                asteroidNetwork.hitAsteroid(hit.transform.gameObject.GetComponentInParent<Asteroid>().id);
             }
         }
         else
@@ -91,13 +91,13 @@ public class PlayerAsteroid : MonoBehaviour {
     {
         if (Time.time - timeSinceLastShoot > cdShoot)
         {
-            Ray ray;
+            Ray ray= new Ray();
 
             // The ratio we use are calculated with the relative position of the target in the cockpit image. 
             // TO DO modifier ça avec le resize
-            ray = playerCamera.ScreenPointToRay(new Vector3(0.5022583559168925f * Screen.width, 0.6112600536193029f * Screen.height, 0f));
-
-            Debug.Log(Input.mousePosition);
+            ray.origin = playerCamera.transform.position;
+            Vector3 dir = viseur.transform.position - playerCamera.transform.position;
+            ray.direction = dir;
             rayCast(ray);
             timeSinceLastShoot = Time.time;
         }
