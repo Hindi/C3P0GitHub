@@ -16,7 +16,6 @@ public class FirstPersonController : MonoBehaviour
     
     private Animator anim;
     private float verticalVelocity = 0;
-    private bool sliding = false;
     private bool jumping = false;
     private bool moving = false;
     private bool facingRight = true;
@@ -38,6 +37,8 @@ public class FirstPersonController : MonoBehaviour
 
     CharacterController characterController;
     float sideSpeed;
+
+    int dir = 1;
 
     // Use this for initialization
     void Start()
@@ -97,7 +98,6 @@ public class FirstPersonController : MonoBehaviour
             {
                 jumping = false;
             }
-            sliding = false;
 
            /* if (characterController.isGrounded && Input.GetButton("Jump"))
             {
@@ -121,7 +121,6 @@ public class FirstPersonController : MonoBehaviour
             }
 
             anim.SetBool("moving", moving);
-            //anim.SetBool ("sliding", sliding);
             anim.SetBool("jumping", jumping);
 
             characterController.Move(speed * Time.deltaTime);
@@ -148,6 +147,7 @@ public class FirstPersonController : MonoBehaviour
                 flip();
             moving = true;
             move();
+            dir = 1;
         }
         else
             stop();
@@ -159,6 +159,7 @@ public class FirstPersonController : MonoBehaviour
         {
             if (facingRight)
                 flip();
+            dir = -1;
             move();
         }
         else
@@ -168,11 +169,12 @@ public class FirstPersonController : MonoBehaviour
     void move()
     {
         moving = true;
-        sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+        sideSpeed = dir * movementSpeed;
     }
 
     public void stop()
     {
+        dir = 0;
         sideSpeed = 0;
     }
 

@@ -5,9 +5,6 @@ using System.Collections;
 /// <summary>State where the client will connect to the server.</summary>
 public class ConnectionState : State
 {
-    /// <summary>True if level is loaded.</summary>
-    protected bool loaded;
-
     /// <summary>The UI displayed during this state.</summary>
     private ConnectionMenu connectionMenu;
 

@@ -9,7 +9,14 @@ using System.Collections;
 public class SpaceWarScript : MonoBehaviour {
 
     [SerializeField]
-    private GameObject playerShip, enemyShip, playerProjectile, enemyProjectile;
+    private GameObject playerShip;
+    [SerializeField]
+    private GameObject enemyShip;
+    [SerializeField]
+    private GameObject playerProjectile;
+    [SerializeField]
+    private GameObject enemyProjectile;
+
     [SerializeField]
     private Text scoreText;
     private Vector3 basePlayerPos, baseEnemyPos, basePPPos, baseEPPos;

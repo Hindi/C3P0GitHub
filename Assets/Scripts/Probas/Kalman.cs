@@ -196,7 +196,6 @@ public class Kalman {
         K = (Matrix)(Pkminus1 * H.Transpose() * S.Inverse());
 
         // P(k|k) = (I - KH) * P(k| k-1)
-        Matrix debugMat = (Matrix)(I - K * H);
         P =(Matrix)((I - K * H) * Pkminus1);
 
         // n(k|k) = n(k|k-1) + K(y - H*n(k|k-1))

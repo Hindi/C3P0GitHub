@@ -48,10 +48,14 @@ public class MiniGameController : MonoBehaviour {
 	/// </summary>
 	bool miniGame = false;
 
-	/// <summary>
-	/// True if the game is over
-	/// </summary>
-	bool gameOver = false;
+	bool frightenMode = false;
+
+	float frightenDelay = 5f;
+
+	float frightenTimer = 0f;
+
+	bool isGhost = false;
+
 
 	/// <summary>
 	/// Called when the mini-game is over
@@ -60,20 +64,12 @@ public class MiniGameController : MonoBehaviour {
 		isTarget = false;
 		gotHit = false;
 		miniGame = false;
+		isGhost = false;
 	}
 
-	/// <summary>
-	/// Called when the game is over
-	/// </summary>
-	void onGameOver(){
-		gameOver = true;
-	}
-
-	/// <summary>
-	/// Called when the player restart the game
-	/// </summary>
-	void onRestart(){
-		gameOver = false;
+	void frightened(){
+		frightenMode = true;
+		frightenTimer = Time.time;
 	}
 
 	/// <summary>
@@ -89,8 +85,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.AddListener (EnumEvent.RESTARTSTATE, onRestart);
-		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
+		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 	}
 
 	/// <summary>
@@ -99,6 +94,9 @@ public class MiniGameController : MonoBehaviour {
 	/// <param name="ghost">The object the player encounters.</param>
 	public void moveTo(GameObject ghost){
 		if (!gotHit){
+			if (ghost.tag != "Energizer"){
+				isGhost = true;
+			}
 			targetPosition = ghost.transform.position;
 			col = ghost.renderer.material.color;
 			isTarget = true;
@@ -109,7 +107,10 @@ public class MiniGameController : MonoBehaviour {
 
 	/// Called at each frame
 	void Update () {
-		if (isTarget){
+		if (isGhost && frightenMode){
+			EventManager.Raise(EnumEvent.MINIGAME_WIN);
+			}
+		else if (isTarget){
 			EventManager<bool>.Raise(EnumEvent.MOVING, false);
 			transform.LookAt(targetPosition);
 			if(Vector3.Distance(transform.position, pocman.transform.position) > 0.5f){
@@ -133,7 +134,10 @@ public class MiniGameController : MonoBehaviour {
 			if (Vector3.Distance(transform.position, startingPosition) < 0.5f){
 				EventManager<bool>.Raise(EnumEvent.MOVING,true);
 			}
-		}	
+		}
+		if (Time.time - frightenTimer > frightenDelay){
+			frightenMode = false;
+		}
 	}
 
 	/// <summary>
@@ -144,7 +148,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestart);
-		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
+		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+
 	}
 }

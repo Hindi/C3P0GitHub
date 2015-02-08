@@ -4,10 +4,8 @@ using System.Collections;
 public class QuestionAnswerState : State
 {
     private Canvas questionMenu;
-    private Canvas scoreMenu;
     private QuestionAnswerMenu QAMenu;
 
-    protected bool loaded;
     private UI ui;
 
     private bool isThereAQuestion;
@@ -29,7 +27,6 @@ public class QuestionAnswerState : State
         loaded = true;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         questionMenu = ui.QuestionCanvas;
-        scoreMenu = ui.ScoreMenu;
         QAMenu = questionMenu.GetComponent<QuestionAnswerMenu>();
     }
 

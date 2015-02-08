@@ -41,7 +41,7 @@ public class ClodeMove : MonoBehaviour {
 	void frightened(){
 		frightenMode = true;
 		frightenTimer = 0f;
-		renderer.material.color = Color.blue;
+		renderer.material.color = new Color(0,0,255, 0);
 	}
 
 	/*
@@ -154,6 +154,7 @@ public class ClodeMove : MonoBehaviour {
 	void chase(){
 
 		if (frightenMode){
+			renderer.enabled = true;	
 			int x = (int) Random.Range(0f,27f);
 			int y = (int) Random.Range(0f, 30f);
 			clodeTarget = new Vector3((float) x, 0, (float) y);
@@ -178,6 +179,7 @@ public class ClodeMove : MonoBehaviour {
 
 
 	void sentenceWin(string tag){
+		renderer.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -194,12 +196,18 @@ public class ClodeMove : MonoBehaviour {
 	}
 	
 	void sentenceTO(string tag){
+		renderer.enabled = true;	
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
+
+	void sentenceLost(string tag){
+		renderer.enabled = true;	
+	}
+
 
 	void onRestartGame(){
 		scatterMode = false;
@@ -211,6 +219,10 @@ public class ClodeMove : MonoBehaviour {
 		transform.position = new Vector3(16, 0, -14);
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
+	}
+
+	void onStartMiniGame(){
+		renderer.enabled = false;
 	}
 
 	void Start () {
@@ -260,10 +272,12 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
 		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
+		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
@@ -277,8 +291,10 @@ public class ClodeMove : MonoBehaviour {
 
 		if (isMoving && !inHouse){
 			chase();
+			if (isMoving){
 			scatterTimer += Time.deltaTime;
 			frightenTimer += Time.deltaTime;
+			}
 		}
 		if (scatterMode && scatterTimer > scatterDelay){
 			scatterMode = false;
@@ -299,10 +315,13 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
+
 
 	}
 }

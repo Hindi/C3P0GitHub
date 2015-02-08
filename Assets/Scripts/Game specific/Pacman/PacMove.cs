@@ -117,32 +117,21 @@ public class PacMove : MonoBehaviour {
 	/// Called when the player loses the mini-game
 	/// </summary>
 	void onMiniGameLost(){
-		if (obj.tag != "Energizer")
-		{
 			EventManager<string>.Raise(EnumEvent.SENTENCE_LOST, obj.tag);
-		}
 	}
 
 	/// <summary>
 	/// Called when the player wins the mini-game
 	/// </summary>
 	void onMiniGameWin(){
-		if(obj.tag == "Energizer"){
-			Destroy(obj);
-		}
-		else{
 			EventManager<string>.Raise(EnumEvent.SENTENCE_WIN, obj.tag);
-		}
 	}
 
 	/// <summary>
 	/// Called when the player takes to much time in the mini-game
 	/// </summary>
 	void onMiniGameTO(){
-		if(obj.tag != "Energizer")
-		{
 			EventManager<string>.Raise(EnumEvent.SENTENCE_TO, obj.tag);
-		}
 	}
 
 	/// <summary>

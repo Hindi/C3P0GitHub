@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour {
     public float goalRotation;
 
     private bool onOrthographicFollow = false;
-    private PlayerBehaviour playerScript;
     private int sign;
 
     private bool cameraMovement = false;
@@ -24,7 +23,6 @@ public class CameraController : MonoBehaviour {
         turnedRight = false;
         turnedLeft = false;
         orthographicFollow();
-        playerScript = player.GetComponent<PlayerBehaviour>();
         transform.position = player.transform.position;
         goalRotation = (int)transform.rotation.y;
 	}

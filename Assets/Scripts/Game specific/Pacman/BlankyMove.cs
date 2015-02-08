@@ -150,7 +150,7 @@ public class BlankyMove : MonoBehaviour {
 	void frightened(){
 		frightenMode = true;
 		frightenTimer = 0f;
-		renderer.material.color = Color.blue;
+		renderer.material.color = new Color(0,0,255,0);
 	}
 
 
@@ -308,6 +308,7 @@ public class BlankyMove : MonoBehaviour {
 	/// </summary>
 	/// <param name="tag">The tage of the encounter.</param>
 	void sentenceWin(string tag){
+		renderer.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -328,12 +329,18 @@ public class BlankyMove : MonoBehaviour {
 	/// </summary>
 	/// <param name="tag">The tag of the encounter.</param>
 	void sentenceTO(string tag){
+		renderer.enabled = true;
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
+
+	void sentenceLost(string tag){
+		renderer.enabled = true;	
+	}
+
 
 	/// <summary>
 	/// Called when the player restarts the game.
@@ -348,6 +355,10 @@ public class BlankyMove : MonoBehaviour {
 		transform.position = new Vector3(13, 0, -11);
 		curDir = Vector3.right;
 		nextDir = Vector3.right;
+	}
+
+	void onStartMiniGame(){
+		renderer.enabled = false;
 	}
 
 	/// <summary>
@@ -391,10 +402,12 @@ public class BlankyMove : MonoBehaviour {
 		EventManager<bool, string>.AddListener(EnumEvent.MOVING, moving);
 		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
+		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
@@ -415,12 +428,12 @@ public class BlankyMove : MonoBehaviour {
 			scatterTimer += Time.deltaTime;
 			frightenTimer += Time.deltaTime;
 		}
-			if (scatterMode && scatterTimer > scatterDelay){
+		if (scatterMode && scatterTimer > scatterDelay){
 				scatterMode = false;
 			}
-			if (frightenMode && frightenTimer > frightenDelay){
-				frightenMode = false;
-				renderer.material.color = defaultColor;
+		if (frightenMode && frightenTimer > frightenDelay){
+			frightenMode = false;
+			renderer.material.color = defaultColor;
 			}
 			if (Vector3.Distance(transform.position, homeTarget) < 1f){
 				eaten = false;
@@ -437,8 +450,10 @@ public class BlankyMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 	}
 }

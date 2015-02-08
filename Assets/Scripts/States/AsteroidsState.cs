@@ -3,8 +3,6 @@ using System.Collections;
 
 public class AsteroidsState : GameState
 {
-    private int paramId;
-
     private PlayerAsteroid playerScript_;
 
     private GameObject player_;

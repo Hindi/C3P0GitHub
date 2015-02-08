@@ -6,7 +6,9 @@ public class EnemySpaceWar : Spaceship {
     /// Player and player's projectile GameObjects
     /// </summary>
     [SerializeField]
-    private GameObject player, playerProjectile;
+    private GameObject player;
+    [SerializeField]
+    private GameObject playerProjectile;
 
     /// <summary>
     /// GameObject used to graphically show the Kalman
@@ -109,7 +111,7 @@ public class EnemySpaceWar : Spaceship {
     }
 	
 	// Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
         if(p != null && p.id != 0) kalman.addObservation(new Vector4(player.transform.position.x, 0, player.transform.position.y, 0));
@@ -211,6 +213,7 @@ public class EnemySpaceWar : Spaceship {
     public void setParameter(Parameter param)
     {
         p = param;
+        onRestart();
     }
 
     /// <summary>

@@ -21,7 +21,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
     private ProgressBar timeBar;
 
     private int lastAnswerId;
-    private int lastGoodAnswerId;
 
     private int score;
 
@@ -89,7 +88,6 @@ public class QuestionAnswerMenu : MonoBehaviour {
     public void onResultRecieved(string rep, int resultId)
     {
         timeBar.gameObject.SetActive(false);
-        lastGoodAnswerId = resultId;
         //setQuestionText("");
         if (answered)
             buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();

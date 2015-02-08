@@ -11,9 +11,6 @@ public class MarioState : GameState
     private MarioScoreManager scoreManager;
     private MarioSpawner spawner;
 
-    /// <summary>The current parameter id.</summary>
-    private int paramId;
-
     /// <summary>Called when the lobby scene from Unity is loaded.</summary>
     /// <param name="lvl">Id of the level loaded.</param>
     /// <returns>void</returns>
@@ -107,7 +104,7 @@ public class MarioState : GameState
             {
                 if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
                 {
-                    if(t.position.y < Screen.height / 2)
+                    if (t.position.y < Screen.height / 2)
                     {
                         if (t.position.x > Screen.width / 2)
                             playerScript_.moveRight();
@@ -117,6 +114,9 @@ public class MarioState : GameState
                     else
                         playerScript_.jump();
                 }
+                else if (t.phase == TouchPhase.Canceled || t.phase == TouchPhase.Ended)
+                    if (t.position.y < Screen.height / 2)
+                        playerScript_.stop();
             }
         }
     }
