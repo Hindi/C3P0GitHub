@@ -211,6 +211,7 @@ public class EnemySpaceWar : Spaceship {
     public void setParameter(Parameter param)
     {
         p = param;
+        onRestart();
     }
 
     /// <summary>
