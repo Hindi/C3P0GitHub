@@ -94,6 +94,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void resetAfterLanding()
     {
+        resetForce();
         gratzText.gameObject.SetActive(false);
         if (lastPlatformLanded)
             lastPlatformLanded.lightDown();
