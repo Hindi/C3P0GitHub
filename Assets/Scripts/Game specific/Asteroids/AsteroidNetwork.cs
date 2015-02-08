@@ -30,7 +30,7 @@ public class AsteroidNetwork : MonoBehaviour {
 
     public void destroyAsteroid(int id)
     {
-        //networkView.RPC("destroyAsteroidRPC", RPCMode.All, id);
+        //networkView.RPC("destroyAsteroidRPC", RPCMode.Others, id);
         asteroidsManager.remove(id);
     }
 
@@ -76,5 +76,9 @@ public class AsteroidNetwork : MonoBehaviour {
 	    
 	}
 
+    public bool isServer()
+    {
+        return Network.isServer;
+    }
 
 }

@@ -71,9 +71,15 @@ public class AsteroidsManager : MonoBehaviour {
     /// <returns>void</returns>
     public void remove(int id)
     {
-        asteroidInUse[id].destroy();
-        if (!asteroidInUse.Remove(id)) 
-            Debug.Log("Problem there is no asteroid with the id : " + id);
+        if (asteroidNetwork.isServer())
+            asteroidNetwork.destroyAsteroid(id);
+        if(asteroidInUse.ContainsKey(id))
+        {
+            asteroidInUse[id].destroy();
+            if (!asteroidInUse.Remove(id))
+                Debug.Log("Problem there is no asteroid with the id : " + id);
+        }
+        
     }
 
     public void hit(int id)

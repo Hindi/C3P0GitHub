@@ -57,15 +57,10 @@ public class Asteroid : MonoBehaviour {
         hp--;
         if (hp <= 0)
         {
-            isUsed = false;
             //gameObject.renderer.enabled = false;
-            // We suppress this asteroid from the used asteroid dictionary
             // Calls a RPC that does that for everyone
-            asteroidManager.remove(this.id);
 
-            // Now we add it to the unuse asteroid stack
-            // Factry disables the gameobject 
-            AsteroidFactory._factory.push(this);
+            asteroidManager.remove(this.id);
         }
     }
 
@@ -90,7 +85,10 @@ public class Asteroid : MonoBehaviour {
     public void destroy()
     {
         gameObject.SetActive(false);
-        AsteroidFactory._factory.asteroidNotInUse.Push(this);
+        // Now we add it to the unuse asteroid stack
+        // Factry disables the gameobject 
+        AsteroidFactory._factory.push(this);
+        isUsed = false;
     }
 
     public void setColor(EnumColor color)
