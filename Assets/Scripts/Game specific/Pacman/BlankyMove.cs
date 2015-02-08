@@ -71,27 +71,27 @@ public class BlankyMove : MonoBehaviour {
 	bool eaten = false;
 
 	/// <summary>
-	/// The current direction.
+	/// The current direction
 	/// </summary>
 	Vector3 curDir = Vector3.right;
 
 	/// <summary>
-	/// The next direction.
+	/// The next direction
 	/// </summary>
 	Vector3 nextDir = Vector3.right;
 
 	/// <summary>
 	/// The tile representation of the maze.
+	/// </summary>
 	/// [i, j] is the tile located on the ith row (from top to bottom) and jth column (from left to right).
 	/// For the game graphics, a tile i a 1x1 square and and its coordinates are (j, -i)
 	/// Each number represents a tile :
 	/// - 0 is a dead tile, neither the player nor the enemy AIs can be located in a dead tile at any time.
 	/// - 1 or higher is a legal tile, both players and enemies can travel between those tiles.
-	/// </summary>
 	int[,] pacGrid;
 
 	/// <summary>
-	/// The x coordinate of the tile this enemy is.
+	/// The x coordinate of the tile this enemy is
 	/// </summary>
 	int curTileX;
 
@@ -101,7 +101,7 @@ public class BlankyMove : MonoBehaviour {
 	int curTileY;
 
 	/// <summary>
-	/// True if this enemy is allowed to move.
+	/// True if this enemy is allowed to move
 	/// </summary>
 	bool isMoving = false;
 
@@ -115,7 +115,8 @@ public class BlankyMove : MonoBehaviour {
 	 **/
 
 	/// <summary>
-	/// True is this enemy is allowed to move.	/// </summary>
+	/// Allows moovement
+	/// </summary>
 	/// <param name="real">True if the enemy is allowed to move.</param>
 	/// <param name="tag">The tag of the GameObject.</param>
 	/// <returns>void</returns>
@@ -126,7 +127,7 @@ public class BlankyMove : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// True is this enemy is allowed to move..
+	/// Allows Movement.
 	/// </summary>
 	/// <param name="real">If set to <c>true</c> , the enemy is allowed to move.</param>
 	void moving(bool real){
