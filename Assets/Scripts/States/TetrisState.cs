@@ -67,6 +67,7 @@ public class TetrisState : GameState {
         if (loaded)
         {
             base.onGameOver(b);
+            GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraManagerTetris>().setParamId(-1);
         }
     }
 
@@ -79,6 +80,7 @@ public class TetrisState : GameState {
         if (loaded)
         {
             base.onGameRestart();
+            GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraManagerTetris>().setParamId(paramId);
             Grid._grid.gameRestart();
         }
     }
