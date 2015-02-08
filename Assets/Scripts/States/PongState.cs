@@ -7,7 +7,7 @@ public class PongState : GameState {
     /// The script managing most of the game's mechanics
     /// </summary>
     private PongManagerScript gameScript;
-    private Parameter p;
+
     /// <summary>
     /// The player script
     /// </summary>
@@ -44,7 +44,7 @@ public class PongState : GameState {
         if (gameScript != null)
         {
             gameScript.setParameter(param);
-            p = param;
+            paramId = param.id;
         }
         else
         {

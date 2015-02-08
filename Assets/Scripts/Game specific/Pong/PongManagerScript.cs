@@ -74,9 +74,13 @@ public class PongManagerScript : MonoBehaviour {
 
     /* Spectateurs pendant le jeu */
     [SerializeField]
-    private GameObject[] spectateursGauche, spectateursDroite;
+    private GameObject[] spectateursGauche;
     [SerializeField]
-    private GameObject groupeGauche, groupeDroite;
+    private GameObject[] spectateursDroite;
+    [SerializeField]
+    private GameObject groupeGauche;
+    [SerializeField]
+    private GameObject groupeDroite;
     [SerializeField]
     private float applaudTimer;
     private float initTimerGauche, initTimerDroite;
@@ -513,40 +517,18 @@ public class PongManagerScript : MonoBehaviour {
     /// </summary>
     public void updateElementsResolution()
     {
-        float width, height, ratio;
+
+        float width, height;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
         aspectRatio = width / height;
-        ratio = width / 1024f;
-        resizeWidth = 1;//aspectRatio / (1024f/768f);
-        resizeHeight = 1; //(1024f / 768f) / aspectRatio;
 
         mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
 
+        resizeHeight = 1;
+        resizeWidth = 1;
+
         limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
         limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
-
-        groupeGauche.transform.position = new Vector3(groupeGauche.transform.position.x * resizeWidth, groupeGauche.transform.position.y * resizeHeight, 0);
-        groupeDroite.transform.position = new Vector3(groupeDroite.transform.position.x * resizeWidth, groupeDroite.transform.position.y * resizeHeight, 0);
-        spectateursFin.transform.position = new Vector3(spectateursFin.transform.position.x * resizeWidth, spectateursFin.transform.position.y * resizeHeight, 0);
-        gradins.transform.position = new Vector3(gradins.transform.position.x * resizeWidth, gradins.transform.position.y * resizeHeight, 0);
-
-        pointilles.transform.position = new Vector3(pointilles.transform.position.x * resizeWidth, pointilles.transform.position.y * resizeHeight, 0);
-
-
-        // Tous les rescale sont fait avec un rescale identique pour garder une cohérence de forme
-        float maxRescale = Math.Max(resizeWidth, resizeHeight);
-        float minRescale = Math.Min(resizeWidth, resizeHeight);
-
-        pointilles.transform.localScale = new Vector3(pointilles.transform.localScale.x * minRescale, pointilles.transform.localScale.y * minRescale, 1);
-
-        foreach (GameObject g in spectateursGauche)
-        {
-            g.transform.localScale = new Vector3(maxRescale * g.transform.localScale.x, maxRescale * g.transform.localScale.y, g.transform.localScale.z);
-        }
-        foreach (GameObject g in spectateursDroite)
-        {
-            g.transform.localScale = new Vector3(maxRescale * g.transform.localScale.x, maxRescale * g.transform.localScale.y, g.transform.localScale.z);
-        }
     }
 }

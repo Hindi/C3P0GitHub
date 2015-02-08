@@ -13,7 +13,9 @@ public class Libellule : MonoBehaviour {
     [SerializeField]
     private GameObject point;
     [SerializeField]
-    private float timer = 10, speed;
+    private float timer = 10;
+    [SerializeField]
+    private float speed;
     private float initTime;
     private Vector3 initPos;
     /// <summary>
