@@ -42,27 +42,29 @@ public class AsteroidsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (asteroidNetwork.isServer())
         {
-            Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
-            pos = mainCamera.ViewportToWorldPoint(pos);
-
-            Vector3 target = shipScript.getTarget();
-            if (nbAsteroid % 2 == 0)
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                // TO DO remove l'autr ecommentaire
-                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
-                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
+                pos = mainCamera.ViewportToWorldPoint(pos);
 
+                Vector3 target = shipScript.getTarget();
+                if (nbAsteroid % 2 == 0)
+                {
+                    // TO DO remove l'autr ecommentaire
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                    //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+
+                }
+                else
+                {
+                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+                    //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
+                }
+                nbAsteroid++;
             }
-            else
-            {
-                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
-                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
-            }
-            nbAsteroid++;
         }
-        
 	}
 
     void cameraInitialisation()
