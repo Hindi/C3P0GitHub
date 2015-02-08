@@ -25,10 +25,14 @@ public class PlayerAsteroid : MonoBehaviour {
     float upDownRange;
     float leftRightRange;
 
+
+
     public float speed;
 
     public float rotLeftRight;
     public float rotUpDown;
+
+    private EnumColor color;
 
     private float cdShoot, cdMoveHorizontal, cdMoveVertical;
     private float timeSinceLastShoot, timeSinceLastMoveHorizontal, timeSinceLastMoveVertical;
@@ -144,4 +148,11 @@ public class PlayerAsteroid : MonoBehaviour {
      * playerCamera.aspect = (float)Screen.width /(float) Screen.height
     }
      * */
+
+    public void setColor(EnumColor col)
+    {
+        color = col;
+    }
+
+
 }

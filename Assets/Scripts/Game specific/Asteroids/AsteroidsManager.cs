@@ -17,12 +17,17 @@ public class AsteroidsManager : MonoBehaviour {
 
     private static Dictionary<int, Asteroid> asteroidInUse = new Dictionary<int,Asteroid>();
     private static int nbAsteroid;
+    private static int colorChoice;
+    private static int zoneChoice;
 
     [SerializeField]
     int nbAsteroidToSpawn;
 
     [SerializeField]
     AsteroidNetwork asteroidNetwork;
+
+    [SerializeField]
+    PlayerAsteroid playerAsteroid;
 
 	// Use this for initialization
     void Start()
@@ -33,6 +38,10 @@ public class AsteroidsManager : MonoBehaviour {
         target = pos;
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
         cameraInitialisation();
+        if (!asteroidNetwork.isServer())
+        {
+            asteroidNetwork.askInitPlayer();
+        }
 	}
 	
 	// Update is called once per frame
@@ -112,5 +121,32 @@ public class AsteroidsManager : MonoBehaviour {
         {
             Debug.Log("Problem there is no asteroid with the id : " + id);
         }
+    }
+
+    public EnumColor chooseColor()
+    {
+        if (asteroidNetwork.isServer())
+        {
+            colorChoice++;
+            int colorReturn = colorChoice % 4;
+            return ((EnumColor) colorReturn);
+        }
+        return EnumColor.NONE;
+    }
+
+    public void choosePos()
+    {
+
+    }
+
+
+    public void initColor(EnumColor color)
+    {
+        playerAsteroid.setColor(color);
+    }
+
+    public void initZone()
+    {
+        //playerAsteroid.setZone();
     }
 }
