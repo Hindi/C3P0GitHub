@@ -89,6 +89,7 @@ public class PlayerAsteroid : MonoBehaviour {
 
     public void fire()
     {
+        Debug.Log("boite");
         if (Time.time - timeSinceLastShoot > cdShoot)
         {
             Ray ray= new Ray();
