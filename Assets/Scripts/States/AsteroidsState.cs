@@ -42,7 +42,7 @@ public class AsteroidsState : GameState
     {
         base.onLevelWasLoaded(lvl);
         loaded = true;
-        player_ = GameObject.FindGameObjectWithTag("player");
+        player_ = GameObject.FindGameObjectWithTag("Player");
         playerScript_ = player_.GetComponent<PlayerAsteroid>();
         GameObject.FindGameObjectWithTag("UI").GetComponent<UI>().closeMenus();
         applyPause(false);
