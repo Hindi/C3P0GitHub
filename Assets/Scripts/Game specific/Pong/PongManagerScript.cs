@@ -3,6 +3,9 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// The main script of Pong that manages everything
+/// </summary>
 public class PongManagerScript : MonoBehaviour {
 
     [SerializeField]
@@ -10,7 +13,9 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject ball;
     [SerializeField]
-    private GameObject textCanvas, perduCanvas;
+    private GameObject textCanvas;
+    [SerializeField]
+    private GameObject perduCanvas;
     [SerializeField]
     private Text[] texts;
     [SerializeField]
@@ -18,17 +23,25 @@ public class PongManagerScript : MonoBehaviour {
     [SerializeField]
     private GameObject arrow;
     [SerializeField]
-    private GameObject playerPaddle, enemyPaddle;
+    private GameObject playerPaddle;
     [SerializeField]
-    private Sprite origBall, specialBall;
+    private GameObject enemyPaddle;
+    [SerializeField]
+    private Sprite origBall;
+    [SerializeField]
+    private Sprite specialBall;
     [SerializeField]
     private GameObject pointilles;
 
     [SerializeField]
-    private float upScreen, downScreen;
+    private float upScreen;
+    [SerializeField]
+    private float downScreen;
 
     [NonSerialized]
-    public float resizeHeight, resizeWidth;
+    public float resizeHeight;
+    [NonSerialized]
+    public float resizeWidth;
     private float aspectRatio;
 
 
@@ -73,7 +86,9 @@ public class PongManagerScript : MonoBehaviour {
     /* Fin du jeu */
     /* Victoire */
     [SerializeField]
-    private GameObject spectateursFin, gradins;
+    private GameObject spectateursFin;
+    [SerializeField]
+    private GameObject gradins;
     private bool gameOver = false, gameLost = false;
     private Matrix4x4 initCameraMatrix;
     private Vector3 lookAtTarget = new Vector3(0, 0, 0);
@@ -102,6 +117,9 @@ public class PongManagerScript : MonoBehaviour {
         private set {}
     }
 
+    /// <summary>
+    /// Full restart of the game
+    /// </summary>
     public void onRestart()
     {
         gameOver = false;
@@ -171,6 +189,9 @@ public class PongManagerScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+    /// <summary>
+    /// Checks if a player scored, special shot and animations
+    /// </summary>
     void Update()
     {
         if (gameOver)
@@ -254,6 +275,10 @@ public class PongManagerScript : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Makes a player get a point
+    /// </summary>
+    /// <param name="player">-1 if left player scored, 1 if right player</param>
     private void onScore(int player)
     {
         texts[((player == 1) ? 0 : 1)].text = (int.Parse( texts[((player == 1) ? 0 : 1)].text ) + 1).ToString();
@@ -294,6 +319,10 @@ public class PongManagerScript : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Resets the round after a player scored
+    /// </summary>
+    /// <param name="player">-1 if left player scored, 1 if right player</param>
     private void reset(int player)
     {
         initTime = Time.time;
@@ -315,6 +344,10 @@ public class PongManagerScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activates a special shot, stores the speed before the special shot
+    /// </summary>
+    /// <param name="oldSpeed"></param>
     public void activateCoupSpecial(Vector2 oldSpeed)
     {
         afficheCoupSpecial.SetActive(false);
@@ -328,11 +361,18 @@ public class PongManagerScript : MonoBehaviour {
             enemyPaddle.GetComponent<SuperBasicIA>().getCoupSpecial(this);
     }
 
+    /// <summary>
+    /// Sets the current game parameter
+    /// </summary>
+    /// <param name="p">The new parameter</param>
     public void setParameter(Parameter p)
     {
         param = p;
     }
 
+    /// <summary>
+    /// Starts the special shot animation
+    /// </summary>
     private void startCoupSpecialAnimation()
     {
         System.Random rand = new System.Random();
@@ -343,6 +383,10 @@ public class PongManagerScript : MonoBehaviour {
         animationEnded = false;
     }
 
+    /// <summary>
+    /// Starts the actual shot instead of having the ball stuck on the paddle
+    /// </summary>
+    /// <param name="p">The player who shoots</param>
     public void launchCoupSpecial(int p)
     {
         if (!coupSpecial || p != player)
@@ -356,6 +400,9 @@ public class PongManagerScript : MonoBehaviour {
         arrow.SetActive(false);
     }
 
+    /// <summary>
+    /// Checks if the special shot charging animation needs to be rendered and makes the animation
+    /// </summary>
     private void checkCoupSpecial()
     {
         if (animationEnded)
@@ -413,12 +460,18 @@ public class PongManagerScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Changes the charging animation's side
+    /// </summary>
     private void changeColorSide()
     {
         colorSide = (colorSide == -1) ? 1 : -1;
     }
 
     private bool firstTimeTurning;
+    /// <summary>
+    /// Animation chen the player wins
+    /// </summary>
     private void onGameEnd()
     {
         if (Vector3.Distance(mainCamera.transform.position, new Vector3(0, 0, 0)) > 0.5f)
@@ -441,6 +494,9 @@ public class PongManagerScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activates the animation when the player has lost
+    /// </summary>
     private void onGameLost()
     {
         gameLost = true;
@@ -452,6 +508,9 @@ public class PongManagerScript : MonoBehaviour {
         libellule.GetComponent<Libellule>().activate();
     }
 
+    /// <summary>
+    /// Changes the camera size to ajust to screen size. In game element size not changed anymore
+    /// </summary>
     public void updateElementsResolution()
     {
         float width, height, ratio;

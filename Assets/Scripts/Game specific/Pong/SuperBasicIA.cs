@@ -26,11 +26,28 @@ public class SuperBasicIA : MonoBehaviour {
     /// </summary>
     private Vector3 originalScale;
 
+    /// <summary>
+    /// True if the special shot has been given to this player
+    /// </summary>
     private bool coupSpecial = false;
+    /// <summary>
+    /// Timer after which this player shoots the special shot
+    /// </summary>
     private float timer;
+    /// <summary>
+    /// The beginning of the time when the player gets the shot
+    /// </summary>
     private float initTimer;
+    /// <summary>
+    /// The manager script
+    /// </summary>
     private PongManagerScript pms;
 
+    /// <summary>
+    /// Called when the round is over
+    /// </summary>
+    /// <param name="resizeWidth">always 1, deprecated</param>
+    /// <param name="resizeHeight">always 1, deprecated</param>
     public void onRestart(float resizeWidth, float resizeHeight)
     {
         transform.position = new Vector3(defaultPos.x * resizeWidth, defaultPos.y * resizeHeight, 0);
@@ -47,6 +64,9 @@ public class SuperBasicIA : MonoBehaviour {
     }
 	
 	// Update is called once per frame
+    /// <summary>
+    /// Trues to always stay at the same y position as the ball
+    /// </summary>
 	void Update () {
         if (Math.Abs(transform.position.y - ball.transform.position.y) <= 0.1)
         {
@@ -70,6 +90,10 @@ public class SuperBasicIA : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Initiates the special shot to this player
+    /// </summary>
+    /// <param name="s">The pong script</param>
     public void getCoupSpecial(PongManagerScript s)
     {
         pms = s;
