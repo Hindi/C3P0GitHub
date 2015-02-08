@@ -22,6 +22,7 @@ public class PankyMove : MonoBehaviour {
 	bool isMoving = false;
 	bool inHouse = true;
 	Color defaultColor;
+	Behaviour halo;
 
 
 	void moving(bool real, string tag){
@@ -43,7 +44,9 @@ public class PankyMove : MonoBehaviour {
 	void frightened(){
 		frightenMode = true;
 		frightenTimer = 0f;
-		renderer.material.color = new Color(0,0,255, 0);
+		renderer.material.color = Color.blue;
+		renderer.enabled = true;
+		halo.enabled = false;
 	}
 
 
@@ -176,7 +179,8 @@ public class PankyMove : MonoBehaviour {
 	}
 
 	void sentenceWin(string tag){
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -184,6 +188,7 @@ public class PankyMove : MonoBehaviour {
 				renderer.material.color = defaultColor;
 				collider.enabled = false;
 				renderer.enabled = false;
+				halo.enabled = false;
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
@@ -193,7 +198,8 @@ public class PankyMove : MonoBehaviour {
 	}
 	
 	void sentenceTO(string tag){
-		renderer.enabled = true;	
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
@@ -202,7 +208,8 @@ public class PankyMove : MonoBehaviour {
 	}
 
 	void sentenceLost(string tag){
-		renderer.enabled = true;	
+		renderer.enabled = false;	
+		halo.enabled = true;
 	}
 
 
@@ -212,14 +219,17 @@ public class PankyMove : MonoBehaviour {
 		renderer.material.color = defaultColor;
 		eaten = false;
 		collider.enabled = true;
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		transform.position = new Vector3(13.5f, 0, -14f);
+		inHouse = false;
 		curDir = Vector3.right;
 		nextDir = Vector3.right;
 	}
 
 	void onStartMiniGame(){
 		renderer.enabled = false;
+		halo.enabled = false;
 	}
 
 	void Start () {
@@ -279,6 +289,7 @@ public class PankyMove : MonoBehaviour {
 		pacman = GameObject.FindGameObjectWithTag("Player");
 		pacMove = pacman.GetComponent<PacMove>();
 		pankyTarget = pacman.transform.position + 4 * pacMove.getCurDir();
+		halo = GetComponent("Halo") as Behaviour;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
 		defaultColor = renderer.material.color;
@@ -303,8 +314,13 @@ public class PankyMove : MonoBehaviour {
 			}
 			if (Vector3.Distance(transform.position, homeTarget) < 1f){
 				eaten = false;
+			if(!frightenMode)
+			{
+				renderer.material.color = defaultColor;
 				collider.enabled = true;
-				renderer.enabled = true;
+				renderer.enabled = false;
+				halo.enabled = true;
+			}
 			}
 	}
 	void OnDestroy(){

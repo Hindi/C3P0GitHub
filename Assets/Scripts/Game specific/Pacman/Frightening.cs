@@ -7,6 +7,8 @@ public class Frightening : MonoBehaviour {
 	/// True if the game is over
 	/// </summary>
 	bool gameOver = false;
+	Behaviour halo;
+
 
 	/// <summary>
 	/// Called when the game is over
@@ -20,7 +22,7 @@ public class Frightening : MonoBehaviour {
 	/// </summary>
 	/// <param name="tag">The tage of the encounter.</param>
 	void sentenceWin(string tag){
-		renderer.enabled = true;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			Destroy(gameObject);
 		}
@@ -31,15 +33,15 @@ public class Frightening : MonoBehaviour {
 	/// </summary>
 	/// <param name="tag">The tag of the encounter.</param>
 	void sentenceTO(string tag){
-		renderer.enabled = true;
+		halo.enabled = true;
 	}
 	
 	void sentenceLost(string tag){
-		renderer.enabled = true;	
+		halo.enabled = true;	
 	}
 
 	void onStartMiniGame(){
-		renderer.enabled = false;
+		halo.enabled = false;
 	}
 
 	/// <summary>
@@ -51,6 +53,7 @@ public class Frightening : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
+		halo = GetComponent("Halo") as Behaviour;
 	}
 
 	///<summary>
