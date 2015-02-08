@@ -46,6 +46,7 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
+            Debug.Log(prefabId);
             ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, EnumColor.NONE);
         }
     }
@@ -59,6 +60,7 @@ public class AsteroidFactory : MonoBehaviour {
         else
         {
             // Instantiate a new Asteroid so it gets the start phase and initialise it after
+            Debug.Log(prefabId);
             ((GameObject)Instantiate(asteroidsPrefabList[prefabId])).GetComponent<Asteroid>().init(pos, target, hp, id, color);
         }
     }
