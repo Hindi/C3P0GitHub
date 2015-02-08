@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Script making dots self destruct after some time
+/// </summary>
 public class Point : MonoBehaviour {
 
 	// Use this for initialization

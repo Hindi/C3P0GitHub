@@ -2,13 +2,28 @@
 using System;
 using System.Collections;
 
+/// <summary>
+/// The script moving the opponent paddle
+/// </summary>
 public class SuperBasicIA : MonoBehaviour {
 
+    /// <summary>
+    /// Reference to the ball
+    /// </summary>
     [SerializeField]
     private GameObject ball;
+    /// <summary>
+    /// Fixed value setting the maximum speed
+    /// </summary>
     [SerializeField]
     private float speed;
+    /// <summary>
+    /// The position after a restart
+    /// </summary>
     private Vector3 defaultPos;
+    /// <summary>
+    /// The original size. Deprecated, should be 1
+    /// </summary>
     private Vector3 originalScale;
 
     private bool coupSpecial = false;
