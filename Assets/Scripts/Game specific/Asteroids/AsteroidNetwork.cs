@@ -28,12 +28,16 @@ public class AsteroidNetwork : MonoBehaviour {
         AsteroidFactory._factory.createAsteroid(pos, target, hp, id,prefabId, color);
     }
 
-
+    public void destroyAsteroid(int id)
+    {
+        //networkView.RPC("destroyAsteroidRPC", RPCMode.All, id);
+        asteroidsManager.remove(id);
+    }
 
     public void hitAsteroid(int id)
     {
         // TO DO remettre l'appel au rpc
-        //networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
+        //networkView.RPC("hitAsteroidRPC", RPCMode.Server, id);
         asteroidsManager.hit(id);
     }
 
