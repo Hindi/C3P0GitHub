@@ -33,9 +33,6 @@ public class AsteroidsManager : MonoBehaviour {
     void Start()
     {
         asteroidInUse = new Dictionary<int, Asteroid>();
-        Vector3 pos, target;
-        pos = new Vector3(0, 0, 0);
-        target = pos;
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
         cameraInitialisation();
         if (!asteroidNetwork.isServer())
@@ -54,11 +51,15 @@ public class AsteroidsManager : MonoBehaviour {
             Vector3 target = shipScript.getTarget();
             if (nbAsteroid % 2 == 0)
             {
-                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.RED);
+                // TO DO remettre en réseau
+                //asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+
             }
             else
             {
-                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+                //asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+                AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
             }
             nbAsteroid++;
             timeSinceLastSpawn = Time.time;

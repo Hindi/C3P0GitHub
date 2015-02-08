@@ -21,12 +21,7 @@ public class Asteroid : MonoBehaviour {
     GameObject blenderObject;
     [SerializeField]
     GameObject radarDisplay;
-    [SerializeField]
-    private Material blueMat;
-    [SerializeField]
-    private Material greenMat;
-    [SerializeField]
-    private Material redMat;
+
 
     [SerializeField]
     private Material[] matChoice;
@@ -96,25 +91,7 @@ public class Asteroid : MonoBehaviour {
 
     public void setColor(EnumColor color)
     {
-        switch(color)
-        {
-            case EnumColor.NONE :
-                break;
-            case EnumColor.GREEN :
-                blenderObject.renderer.material = greenMat;
-                radarDisplay.renderer.material.color = Color.green;
-                break;
-            case EnumColor.BLUE:
-                blenderObject.renderer.material = blueMat;
-                radarDisplay.renderer.material.color = Color.blue;
-                break;
-            case EnumColor.RED:
-                blenderObject.renderer.material = redMat;
-                radarDisplay.renderer.material.color = Color.red;
-                break;
-            default :
-                Debug.Log("Forgot to had this color " + color + " in the switch setColor");
-                break;
-        }
+        blenderObject.renderer.material = matChoice[(int)color];
+        radarDisplay.renderer.material = matChoice[(int)color];
     }
 }
