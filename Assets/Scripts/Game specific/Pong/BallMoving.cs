@@ -180,6 +180,7 @@ public class BallMoving : MonoBehaviour {
     /// <param name="posX">The position to respawn at on X axis</param>
     public void onScore(float posX)
     {
+        speed = new Vector2(defaultSpeed.x * -1 * posX/Mathf.Abs(posX), defaultSpeed.y);
         transform.position = new Vector3(posX, transform.position.y, transform.position.z);
         restartTimer = Time.time;
     }
