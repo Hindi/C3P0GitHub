@@ -6,14 +6,12 @@ using System.Collections;
 /// </summary>
 public class PanelCapSize : MonoBehaviour {
 
-    private static float ratio;
     private RectTransform rect;
     private Vector2 originalSize;
     private float originalRatio;
 
 	// Use this for initialization
 	void Start () {
-        ratio = (float) Screen.width / Screen.height;
         rect = gameObject.GetComponent<RectTransform>();
         originalSize = rect.sizeDelta;
         originalRatio = rect.sizeDelta.x / rect.sizeDelta.y;

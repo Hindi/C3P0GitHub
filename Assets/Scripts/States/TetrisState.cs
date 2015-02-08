@@ -9,12 +9,6 @@ using System.Collections;
 public class TetrisState : GameState {
 
 
-    /// <summary>
-    /// Int that represents the parameter chosen.
-    /// </summary>
-    private int paramId;
-
-
     private Grid gridScript;
 
     /// <summary>

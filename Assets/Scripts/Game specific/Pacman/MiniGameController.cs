@@ -48,11 +48,6 @@ public class MiniGameController : MonoBehaviour {
 	/// </summary>
 	bool miniGame = false;
 
-	/// <summary>
-	/// True if the game is over
-	/// </summary>
-	bool gameOver = false;
-
 	bool frightenMode = false;
 
 	float frightenDelay = 5f;
@@ -70,20 +65,6 @@ public class MiniGameController : MonoBehaviour {
 		gotHit = false;
 		miniGame = false;
 		isGhost = false;
-	}
-
-	/// <summary>
-	/// Called when the game is over
-	/// </summary>
-	void onGameOver(){
-		gameOver = true;
-	}
-
-	/// <summary>
-	/// Called when the player restart the game
-	/// </summary>
-	void onRestart(){
-		gameOver = false;
 	}
 
 	void frightened(){
@@ -104,8 +85,6 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.AddListener (EnumEvent.RESTARTSTATE, onRestart);
-		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
 	}
 
@@ -169,8 +148,6 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestart);
-		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 
 	}

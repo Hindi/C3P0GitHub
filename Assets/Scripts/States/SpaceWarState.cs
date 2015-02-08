@@ -14,7 +14,6 @@ public class SpaceWarState : GameState {
     /// The player script
     /// </summary>
     private PlayerSpaceWar player;
-    private Parameter p;
 
     /// <summary>
     /// Called when the lobby scene from Unity is loaded, sets the Game ID
@@ -47,7 +46,6 @@ public class SpaceWarState : GameState {
         if (gameScript != null)
         {
             gameScript.setParameter(param);
-            p = param;
         }
         else
         {

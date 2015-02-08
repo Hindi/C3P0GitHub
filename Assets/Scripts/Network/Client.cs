@@ -217,7 +217,7 @@ public class Client
 
     public void saveGameStats(EnumGame gameEnum)
     {
-        if(null != gameEnum && gameStats.Count != 0)
+        if(gameStats.Count != 0)
             XmlHelpers.SaveToXML<List<GameStat>>("Assets/Resources/Xml/gameStats/" + gameEnum + "/" + login + ".xml", gameStats);
     }
 
