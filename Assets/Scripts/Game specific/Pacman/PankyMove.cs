@@ -176,6 +176,7 @@ public class PankyMove : MonoBehaviour {
 	}
 
 	void sentenceWin(string tag){
+		renderer.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -192,6 +193,7 @@ public class PankyMove : MonoBehaviour {
 	}
 	
 	void sentenceTO(string tag){
+		renderer.enabled = true;	
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
@@ -272,7 +274,7 @@ public class PankyMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
-
+		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
 		pacMove = pacman.GetComponent<PacMove>();
@@ -309,10 +311,13 @@ public class PankyMove : MonoBehaviour {
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
+
 
 	}
 }

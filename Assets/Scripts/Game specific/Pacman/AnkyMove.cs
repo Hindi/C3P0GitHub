@@ -416,9 +416,7 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
-
-
-
+		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 	}
 	
 	void FixedUpdate () {
@@ -448,9 +446,12 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
+
 	}
 }

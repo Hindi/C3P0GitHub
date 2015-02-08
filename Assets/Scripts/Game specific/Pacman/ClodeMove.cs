@@ -154,6 +154,7 @@ public class ClodeMove : MonoBehaviour {
 	void chase(){
 
 		if (frightenMode){
+			renderer.enabled = true;	
 			int x = (int) Random.Range(0f,27f);
 			int y = (int) Random.Range(0f, 30f);
 			clodeTarget = new Vector3((float) x, 0, (float) y);
@@ -178,6 +179,7 @@ public class ClodeMove : MonoBehaviour {
 
 
 	void sentenceWin(string tag){
+		renderer.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -194,6 +196,7 @@ public class ClodeMove : MonoBehaviour {
 	}
 	
 	void sentenceTO(string tag){
+		renderer.enabled = true;	
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
@@ -274,6 +277,7 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
+		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
@@ -311,10 +315,13 @@ public class ClodeMove : MonoBehaviour {
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
+		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
+
 
 	}
 }

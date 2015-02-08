@@ -450,6 +450,7 @@ public class BlankyMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
