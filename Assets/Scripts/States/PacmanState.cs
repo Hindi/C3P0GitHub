@@ -94,6 +94,7 @@ class PacmanState : GameState
             ((GameObject)GameObject.FindGameObjectWithTag("MainCamera")).GetComponent<Camera>().projectionMatrix = Matrix4x4.Perspective(60 * 1 / ratio, ratio, 0.3f, 50);
             circleCamera.GetComponent<Camera>().aspect = ratio;
         }
+        setParameter(new Parameter());
 	}
 	
 	/// <summary>Called on start.</summary>

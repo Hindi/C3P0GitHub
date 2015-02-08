@@ -47,6 +47,7 @@ public class CameraManagerTetris : MonoBehaviour {
             main.transform.position = new Vector3(4.5f, 10f, -10);
         blur = main.GetComponent<Blur>() as Blur;
         noise = main.GetComponent<NoiseEffect>() as NoiseEffect;
+        setParamId(0);
 
     }
 

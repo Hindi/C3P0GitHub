@@ -60,6 +60,7 @@ class SpaceInvaderState : GameState
         playerScript_ = player_.GetComponent<Player>();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         ui.setParamCanvas(gameId);
+        setParameter(new Parameter());
 
         if(Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
