@@ -213,7 +213,7 @@ public class ServerMenu : MonoBehaviour {
         switch(courseId)
         {
             case 1:
-                levelName = "SpaceInvader";
+                levelName = "Mario";
                 break;
             case 2:
                 levelName = "Tetris";
