@@ -24,7 +24,7 @@ public class PlayerSpaceWar : Spaceship {
             if (Time.time - initEndTimer >= 2)
             {
                 isEnd = false;
-                EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, true);
+                EventManager<bool, int>.Raise(EnumEvent.SPACESHIPDESTROYED, true, -1 * scoreMult);
             }
         }
 	}

@@ -23,7 +23,7 @@ public class SpaceWarScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        EventManager<bool>.AddListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
+        EventManager<bool, int>.AddListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
         basePlayerPos = playerShip.transform.position;
         baseEnemyPos = enemyShip.transform.position;
         basePPPos = playerProjectile.transform.position;
@@ -32,7 +32,7 @@ public class SpaceWarScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        EventManager<bool>.RemoveListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
+        EventManager<bool, int>.RemoveListener(EnumEvent.SPACESHIPDESTROYED, spaceShipDestroyed);
     }
 	
 	// Update is called once per frame
@@ -77,16 +77,16 @@ public class SpaceWarScript : MonoBehaviour {
     /// Delegate called when one of the ships is destroyed
     /// </summary>
     /// <param name="b">True if player ship, false otherwise</param>
-    public void spaceShipDestroyed(bool b)
+    public void spaceShipDestroyed(bool b, int deltaScore)
     {
+        score += deltaScore;
+        scoreText.text = score.ToString();
         if (b) // the player has been destroyed
         {
             EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
         }
         else
         {
-            score++;
-            scoreText.text = score.ToString();
             onRestart(false);
         }
     }

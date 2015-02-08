@@ -120,7 +120,7 @@ public class EnemySpaceWar : Spaceship {
             if(Time.time - initEndTimer >= 2)
             {
                 isEnd = false;
-                EventManager<bool>.Raise(EnumEvent.SPACESHIPDESTROYED, false);
+                EventManager<bool, int>.Raise(EnumEvent.SPACESHIPDESTROYED, false, 5 * scoreMult);
             }
         }
 
