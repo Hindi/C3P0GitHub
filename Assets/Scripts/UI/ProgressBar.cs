@@ -30,6 +30,6 @@ public class ProgressBar : MonoBehaviour
         currentValue = v;
         if (currentValue > maximumValue)
             currentValue = maximumValue;
-        front.rectTransform.sizeDelta = new Vector2(size.x * fillFactor(), size.y);
+        front.rectTransform.sizeDelta = new Vector2(size.x * fillFactor(), front.rectTransform.sizeDelta.y);
     }
 }
