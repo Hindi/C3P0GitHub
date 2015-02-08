@@ -32,7 +32,7 @@ public class CircleReduction : MonoBehaviour {
 	/// Called at each frame
 	/// </summary>
 	void Update () {
-		transform.localScale -= new Vector3 (.5f, .5f, .5f) * Time.deltaTime;
+		transform.localScale -= new Vector3 (1f, 1f, 1f) * Time.deltaTime;
 		if(Time.time - timer > 1){
 			Destroy(gameObject);
 		}
