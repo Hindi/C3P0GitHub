@@ -50,15 +50,15 @@ public class AsteroidsManager : MonoBehaviour {
             Vector3 target = shipScript.getTarget();
             if (nbAsteroid % 2 == 0)
             {
-                // TO DO remettre en réseau
-                //asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
-                AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                // TO DO remove l'autr ecommentaire
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
 
             }
             else
             {
-                //asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
-                AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
+                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
             }
             nbAsteroid++;
         }
