@@ -28,6 +28,9 @@ public class Asteroid : MonoBehaviour {
     [SerializeField]
     private Material redMat;
 
+    [SerializeField]
+    private Material[] matChoice;
+
 	// Use this for initialization
 	void Start () {
 	}

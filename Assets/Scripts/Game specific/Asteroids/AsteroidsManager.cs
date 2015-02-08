@@ -46,23 +46,23 @@ public class AsteroidsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
-                pos = mainCamera.ViewportToWorldPoint(pos);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
+            pos = mainCamera.ViewportToWorldPoint(pos);
 
-                Vector3 target = shipScript.getTarget();
-                if (nbAsteroid % 2 == 0)
-                {
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.RED);
-                }
-                else
-                {
-                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
-                }
-                nbAsteroid++;
-                timeSinceLastSpawn = Time.time;
+            Vector3 target = shipScript.getTarget();
+            if (nbAsteroid % 2 == 0)
+            {
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.RED);
             }
+            else
+            {
+                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+            }
+            nbAsteroid++;
+            timeSinceLastSpawn = Time.time;
+        }
         
 	}
 
