@@ -9,6 +9,9 @@ public class AsteroidsManager : MonoBehaviour {
     [SerializeField]
     Camera mainCamera;
 
+    [SerializeField]
+    Camera playerCamera;
+
     private AsteroidShip shipScript;
 
 
@@ -29,7 +32,7 @@ public class AsteroidsManager : MonoBehaviour {
         pos = new Vector3(0, 0, 0);
         target = pos;
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-
+        cameraInitialisation();
 	}
 	
 	// Update is called once per frame
@@ -54,6 +57,20 @@ public class AsteroidsManager : MonoBehaviour {
             }
         
 	}
+
+    void cameraInitialisation()
+    {
+        if(asteroidNetwork.isServer())
+        {
+            playerCamera.gameObject.SetActive(false);
+            mainCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            playerCamera.gameObject.SetActive(true);
+            mainCamera.gameObject.SetActive(false);
+        }
+    }
 
     /// <summary>
     /// Add an element to the dictionary
