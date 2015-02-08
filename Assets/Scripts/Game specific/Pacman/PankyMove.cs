@@ -43,7 +43,7 @@ public class PankyMove : MonoBehaviour {
 	void frightened(){
 		frightenMode = true;
 		frightenTimer = 0f;
-		renderer.material.color = Color.blue;
+		renderer.material.color = new Color(0,0,255, 0);
 	}
 
 
@@ -199,6 +199,11 @@ public class PankyMove : MonoBehaviour {
 		}
 	}
 
+	void sentenceLost(string tag){
+		renderer.enabled = true;	
+	}
+
+
 	void onRestartGame(){
 		scatterMode = false;
 		frightenMode = false;
@@ -209,6 +214,10 @@ public class PankyMove : MonoBehaviour {
 		transform.position = new Vector3(13.5f, 0, -14f);
 		curDir = Vector3.right;
 		nextDir = Vector3.right;
+	}
+
+	void onStartMiniGame(){
+		renderer.enabled = false;
 	}
 
 	void Start () {
@@ -259,6 +268,7 @@ public class PankyMove : MonoBehaviour {
 		EventManager<bool>.AddListener(EnumEvent.MOVING,moving);
 		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
 		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
 		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
@@ -277,8 +287,10 @@ public class PankyMove : MonoBehaviour {
 
 		if (isMoving && !inHouse){
 			chase();
-			scatterTimer += Time.deltaTime;
-			frightenTimer += Time.deltaTime;
+			if (isMoving){
+				scatterTimer += Time.deltaTime;
+				frightenTimer += Time.deltaTime;
+			}
 		}
 			if (scatterMode && scatterTimer > scatterDelay){
 				scatterMode = false;
