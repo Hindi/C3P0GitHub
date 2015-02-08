@@ -46,7 +46,6 @@ public class AsteroidsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(asteroidNetwork.isServer())
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
