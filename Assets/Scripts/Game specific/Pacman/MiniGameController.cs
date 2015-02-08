@@ -2,37 +2,83 @@
 using System.Collections;
 
 public class MiniGameController : MonoBehaviour {
+
+	/// <summary>
+	/// The player's GameObject
+	/// </summary>
 	GameObject pocman;
 
+	/// <summary>
+	/// The random number generator
+	/// </summary>
 	Randomizer rand;
 
+	/// <summary>
+	/// The position after the scene is being loaded
+	/// </summary>
 	Vector3 startingPosition;
+
+	/// <summary>
+	/// The forward vector of the object after the scene is being loaded
+	/// </summary>
 	Vector3 startingForward;
+
+	/// <summary>
+	/// The position of the target
+	/// </summary>
 	Vector3 targetPosition;
 
+	/// <summary>
+	/// True if a target has been hit
+	/// </summary>
 	bool isTarget = false;
+
+	/// <summary>
+	/// The color of the target
+	/// </summary>
 	Color col;
+
+	/// <summary>
+	/// True if the player encountered an enemy or a bonus
+	/// </summary>
 	bool gotHit = false;
+
+	/// <summary>
+	/// True is the mini-game has started
+	/// </summary>
 	bool miniGame = false;
+
+	/// <summary>
+	/// True if the game is over
+	/// </summary>
 	bool gameOver = false;
 
-
-
+	/// <summary>
+	/// Called when the mini-game is over
+	/// </summary>
 	void niceShot(){
 		isTarget = false;
 		gotHit = false;
 		miniGame = false;
 	}
 
+	/// <summary>
+	/// Called when the game is over
+	/// </summary>
 	void onGameOver(){
 		gameOver = true;
 	}
 
+	/// <summary>
+	/// Called when the player restart the game
+	/// </summary>
 	void onRestart(){
 		gameOver = false;
 	}
 
-	// Use this for initialization
+	/// <summary>
+	/// Called when the scene is loaded
+	/// </summary>
 	void Start () {
 		pocman = GameObject.FindGameObjectWithTag("Player");
 		rand = GetComponentInChildren<Randomizer>();
@@ -47,7 +93,10 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
 	}
 
-
+	/// <summary>
+	/// Makes the object move toward the ghost
+	/// </summary>
+	/// <param name="ghost">The object the player encounters.</param>
 	public void moveTo(GameObject ghost){
 		if (!gotHit){
 			targetPosition = ghost.transform.position;
@@ -58,7 +107,7 @@ public class MiniGameController : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
+	/// Called at each frame
 	void Update () {
 		if (isTarget){
 			EventManager<bool>.Raise(EnumEvent.MOVING, false);
@@ -87,6 +136,9 @@ public class MiniGameController : MonoBehaviour {
 		}	
 	}
 
+	/// <summary>
+	/// Called when this script is destroyed
+	/// </summary>
 	void OnDestroy(){
 		EventManager<GameObject>.RemoveListener(EnumEvent.ENCOUNTER, moveTo);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
