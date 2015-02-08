@@ -211,7 +211,6 @@ public class PlayerLunarLander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -1), -Vector2.up*10);
         if (hit.collider != null && (hit.transform.tag == "Terrain" || hit.transform.tag == "Platform"))
         {
@@ -265,7 +264,7 @@ public class PlayerLunarLander : MonoBehaviour {
         if(!landed)
         {
             restartTimerStart = Time.time;
-            if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f)
+            if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f && Mathf.Abs(transform.rotation.eulerAngles.z) < 20)
             {
                 timeBeforeRestart = 3;
                 score += 10;
