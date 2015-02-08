@@ -55,7 +55,7 @@ public class ProjectileSpaceWar : MonoBehaviour {
     {
         try
         {
-            if (collider.transform.tag == "Enemy" || collider.transform.tag == "player")
+            if (collider.transform.tag == "Enemy" || collider.transform.tag == "Player")
             {
                 collider.gameObject.GetComponent<Spaceship>().onHit();
                 rigidbody2D.isKinematic = false;
