@@ -1,25 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Script attached to the ball in Pong
+/// </summary>
 public class BallMoving : MonoBehaviour {
 
+    /// <summary>
+    /// The size of the screen, not used anymore
+    /// </summary>
     private float upScreen, downScreen;
+    /// <summary>
+    /// The ball's speed
+    /// </summary>
     [SerializeField]
     public Vector2 speed;
 
+    /// <summary>
+    /// The Pong Manager gameobject, that contains the PongManagerScript
+    /// </summary>
     [SerializeField]
     private GameObject manager;
+    /// <summary>
+    /// The manager script to interact with for the special shot
+    /// </summary>
     private PongManagerScript managerScript;
 
+    /// <summary>
+    /// True if the special shot is granted to a player, so the ball has to stop on his pallet
+    /// </summary>
     private bool coupSpecial = false;
+    /// <summary>
+    /// -1 if special shot is to be granted to left player, 1 if right player
+    /// </summary>
     private int coupPlayer;
+    /// <summary>
+    /// True if the current form of the ball is a fireball
+    /// </summary>
     private bool fireBall;
 
+    /// <summary>
+    /// The position at the beginning of the game
+    /// </summary>
     private Vector3 defaultPos;
+    /// <summary>
+    /// The speed at the beginning of the game
+    /// </summary>
     private Vector2 defaultSpeed;
 
+    /// <summary>
+    /// Timer to restart moving when the ball is reset
+    /// </summary>
     private float restartTimer;
 
+    /// <summary>
+    /// Called when the game restarts
+    /// </summary>
     public void onRestart()
     {
         restartTimer = 3;
@@ -28,6 +64,12 @@ public class BallMoving : MonoBehaviour {
         cancelCoupSpecial();
     }
 
+    /// <summary>
+    /// Sets the screen size in Unity's measures.<br/>
+    /// Used to be used to resize neatly, do not use anymore
+    /// </summary>
+    /// <param name="uScreen"></param>
+    /// <param name="dScreen"></param>
     public void setScreenSize(float uScreen, float dScreen)
     {
         upScreen = uScreen;
@@ -45,6 +87,9 @@ public class BallMoving : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+    /// <summary>
+    /// Checks if the ball is going out of screen vertically, and applies speed
+    /// </summary>
 	void Update () {
         if (Time.time - restartTimer <= 3)
         {
@@ -75,6 +120,9 @@ public class BallMoving : MonoBehaviour {
      * When the ball hits a Pallet and goes back
      * This is where the whole "random" collision has to be made
      **/
+    /// <summary>
+    /// Called when the ball hits a pallet
+    /// </summary>
     void OnTriggerEnter2D(Collider2D obstacle)
     {
         PongManagerScript managerScript = manager.GetComponent<PongManagerScript>();
@@ -126,23 +174,38 @@ public class BallMoving : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// Called when a player gets a point
+    /// </summary>
+    /// <param name="posX">The position to respawn at on X axis</param>
     public void onScore(float posX)
     {
         transform.position = new Vector3(posX, transform.position.y, transform.position.z);
         restartTimer = Time.time;
     }
 
+    /// <summary>
+    /// Activates a special shot and sets the player that has it
+    /// </summary>
+    /// <param name="player">-1 if left player, 1 if right player</param>
     public void OnCoupSpecialStart(int player)
     {
         coupSpecial = true;
         coupPlayer = player;
     }
 
+    /// <summary>
+    /// Cancels a special shot that had already been granted
+    /// </summary>
     public void cancelCoupSpecial()
     {
         coupSpecial = false;
     }
 
+    /// <summary>
+    /// Sets if the fireball mode is activated
+    /// </summary>
+    /// <param name="arg">True if fireball is activated, false otherwise</param>
     public void setFireBall(bool arg)
     {
         fireBall = arg;

@@ -48,6 +48,7 @@ class LunarLanderState : GameState
         playerScript_ = player_.GetComponent<PlayerLunarLander>();
         if (Application.isMobilePlatform)
             Screen.orientation = ScreenOrientation.Landscape;
+        setParameter(new Parameter());
     }
 
     /// <summary>Called on start.</summary>

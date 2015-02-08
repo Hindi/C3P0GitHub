@@ -68,6 +68,7 @@ public class SpaceWarState : GameState {
             Screen.orientation = ScreenOrientation.Landscape;
         gameScript.onRestart();
         gameScript.updateElementsResolution();
+        setParameter(new Parameter());
     }
 
     /// <summary>

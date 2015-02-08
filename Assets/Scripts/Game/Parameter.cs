@@ -6,5 +6,5 @@ using System.Collections;
 /// the player can modify the values in the parameters).
 /// </summary>
 public class Parameter {
-    public int id;
+    public int id = 0;
 }
