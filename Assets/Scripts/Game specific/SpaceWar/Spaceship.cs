@@ -53,6 +53,10 @@ public class Spaceship : MonoBehaviour
     /// Bool used to prevent actions once killed
     /// </summary>
     protected bool isEnd;
+    /// <summary>
+    /// Value to multiply the score delta when destroyed
+    /// </summary>
+    protected int scoreMult = 1;
 
     /// <summary>
     /// Rotates the ship according to rotationSpeed
@@ -121,6 +125,7 @@ public class Spaceship : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) <= 0.4)
         {
+            scoreMult = 10;
             onHit();
         }
         if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) >= 4.5)
@@ -136,6 +141,7 @@ public class Spaceship : MonoBehaviour
     {
         if (!isEnd)
         {
+            if(scoreMult == 1) scoreMult = 100;
             GameObject explo = (GameObject)GameObject.Instantiate(explosion);
             explo.transform.position = transform.position;
             renderer.enabled = false;
@@ -152,5 +158,6 @@ public class Spaceship : MonoBehaviour
         isEnd = false;
         renderer.enabled = true;
         GetComponent<PolygonCollider2D>().enabled = true;
+        scoreMult = 1;
     }
 }
