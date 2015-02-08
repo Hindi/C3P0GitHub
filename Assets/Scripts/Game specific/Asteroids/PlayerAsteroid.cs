@@ -72,8 +72,7 @@ public class PlayerAsteroid : MonoBehaviour {
             if (hit.transform.CompareTag("Asteroid"))
             {
                 Asteroid ast = hit.transform.gameObject.GetComponentInParent<Asteroid>();
-                if (ast.getColor() == color)
-                    asteroidNetwork.hitAsteroid(ast.id);
+                asteroidNetwork.hitAsteroid(ast.id);
             }
         }
         else
