@@ -46,6 +46,7 @@ public class SpaceWarState : GameState {
         if (gameScript != null)
         {
             gameScript.setParameter(param);
+            paramId = param.id;
         }
         else
         {

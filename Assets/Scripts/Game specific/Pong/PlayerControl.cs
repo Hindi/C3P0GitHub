@@ -15,7 +15,9 @@ public class PlayerControl : MonoBehaviour {
     /// The size of the screen
     /// </summary>
     [SerializeField]
-    private float upScreen, downScreen;
+    private float upScreen;
+    [SerializeField]
+    private float downScreen;
     /// <summary>
     /// The pong script to get resize values
     /// </summary>
