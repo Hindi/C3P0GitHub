@@ -517,9 +517,18 @@ public class PongManagerScript : MonoBehaviour {
     /// </summary>
     public void updateElementsResolution()
     {
+
+        float width, height;
+        width = Math.Max(Screen.width, Screen.height);
+        height = Math.Min(Screen.width, Screen.height);
+        aspectRatio = width / height;
+
+        mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
+
         resizeHeight = 1;
         resizeWidth = 1;
-        aspectRatio = (float) Screen.width / Screen.height;
-        mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
+
+        limits[0].transform.position = new Vector3(0, resizeHeight * upScreen + 0.5f, 0);
+        limits[1].transform.position = new Vector3(0, resizeHeight * downScreen * -1 - 0.4f, 0);
     }
 }
