@@ -16,10 +16,11 @@ public class Asteroid : MonoBehaviour {
 
     private AsteroidShip shipScript;
     private AsteroidsManager asteroidManager;
-    private Behaviour halo;
 
     [SerializeField]
     GameObject blenderObject;
+    [SerializeField]
+    GameObject radarDisplay;
     [SerializeField]
     private Material blueMat;
     [SerializeField]
@@ -35,7 +36,6 @@ public class Asteroid : MonoBehaviour {
     {
         asteroidManager = GameObject.FindGameObjectWithTag("asteroidManager").GetComponent<AsteroidsManager>();
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
-        halo = (Behaviour) gameObject.GetComponent("Halo");
     }
 
 	// Update is called once per frame
@@ -57,21 +57,16 @@ public class Asteroid : MonoBehaviour {
         hp--;
         if (hp <= 0)
         {
-            isUsed = false;
             //gameObject.renderer.enabled = false;
-            // We suppress this asteroid from the used asteroid dictionary
             // Calls a RPC that does that for everyone
-            asteroidManager.remove(this.id);
 
-            // Now we add it to the unuse asteroid stack
-            // Factry disables the gameobject 
-            AsteroidFactory._factory.push(this);
+            asteroidManager.remove(this.id);
         }
     }
 
 
     // bool b indicates if it is activated or not
-    public void initAsteroid(Vector3 posSpawn, Vector3 cible, int health, int id, EnumColor color)
+    public void init(Vector3 posSpawn, Vector3 cible, int health, int id, EnumColor color)
     {
         target = cible;
         transform.position = posSpawn;
@@ -80,11 +75,20 @@ public class Asteroid : MonoBehaviour {
         this.id = id;
         //gameObject.renderer.enabled = true;
 
-        //setColor(color);
+        setColor(color);
 
         // We activate the asteroid and add it to use asteroid
         gameObject.SetActive(true);
-        asteroidManager.add(this.id, this);
+        asteroidManager.add(id, this);
+    }
+
+    public void destroy()
+    {
+        gameObject.SetActive(false);
+        // Now we add it to the unuse asteroid stack
+        // Factry disables the gameobject 
+        AsteroidFactory._factory.push(this);
+        isUsed = false;
     }
 
     public void setColor(EnumColor color)
@@ -92,16 +96,18 @@ public class Asteroid : MonoBehaviour {
         switch(color)
         {
             case EnumColor.NONE :
-                (halo.GetType().GetProperty("enabled")).SetValue(halo, false, null); // it disables the halo
                 break;
             case EnumColor.GREEN :
                 blenderObject.renderer.material = greenMat;
+                radarDisplay.renderer.material.color = Color.green;
                 break;
             case EnumColor.BLUE:
                 blenderObject.renderer.material = blueMat;
+                radarDisplay.renderer.material.color = Color.blue;
                 break;
             case EnumColor.RED:
                 blenderObject.renderer.material = redMat;
+                radarDisplay.renderer.material.color = Color.red;
                 break;
             default :
                 Debug.Log("Forgot to had this color " + color + " in the switch setColor");

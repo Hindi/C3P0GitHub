@@ -10,45 +10,35 @@ public class AsteroidNetwork : MonoBehaviour {
 
     private AsteroidsManager asteroidsManager;
 
-   
-    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id)
+
+    public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
     {
         // TO DO remettre l'appel au rpc
-        //networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id);
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, EnumColor.NONE);
+        networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id, prefabId);
+        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
     }
 
 
-    // 
-    [RPC]
-    private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id)
-    {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, EnumColor.NONE);
-    }
 
 
-    public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, EnumColor color)
+    public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, int prefabId, EnumColor color)
     {
         // TO DO remettre l'appel au rpc
-        //networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, (int) color);
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, color);
+        networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, prefabId, (int) color);
+        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id,prefabId, color);
     }
 
-
-
-    [RPC]
-    private void createAsteroidColorRPC(Vector3 pos, Vector3 target, int hp, int id, int color)
+    public void destroyAsteroid(int id)
     {
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, (EnumColor) color);
+        networkView.RPC("destroyAsteroidRPC", RPCMode.Others, id);
+        //asteroidsManager.remove(id);
     }
-
 
     public void hitAsteroid(int id)
     {
         // TO DO remettre l'appel au rpc
-        //networkView.RPC("hitAsteroidRPC", RPCMode.All, id);
-        asteroidsManager.hit(id);
-        Debug.Log("je suis dans le network");
+        networkView.RPC("hitAsteroidRPC", RPCMode.Server, id);
+        //asteroidsManager.hit(id);
     }
 
     [RPC]
@@ -57,7 +47,23 @@ public class AsteroidNetwork : MonoBehaviour {
         asteroidsManager.hit(id);
     }
 
+    [RPC]
+    private void destroyAsteroidRPC(int id)
+    {
+        asteroidsManager.remove(id);
+    }
 
+    [RPC]
+    private void createAsteroidRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
+    }
+
+    [RPC]
+    private void createAsteroidColorRPC(Vector3 pos, Vector3 target, int hp, int id, int prefabId, int color)
+    {
+        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId, (EnumColor)color);
+    }
    
 
 	// Use this for initialization
@@ -70,5 +76,9 @@ public class AsteroidNetwork : MonoBehaviour {
 	    
 	}
 
+    public bool isServer()
+    {
+        return Network.isServer;
+    }
 
 }

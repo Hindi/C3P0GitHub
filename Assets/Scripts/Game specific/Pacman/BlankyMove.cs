@@ -125,6 +125,10 @@ public class BlankyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// True is this enemy is allowed to move..
+	/// </summary>
+	/// <param name="real">If set to <c>true</c> , the enemy is allowed to move.</param>
 	void moving(bool real){
 		isMoving = real;
 	}
@@ -298,7 +302,10 @@ public class BlankyMove : MonoBehaviour {
 		move();
 	}
 	
-
+	/// <summary>
+	/// Called when the player wins the mini-game and this ghost is his encounter
+	/// </summary>
+	/// <param name="tag">The tage of the encounter.</param>
 	void sentenceWin(string tag){
 		if (tag == gameObject.tag){
 			if (frightenMode){
@@ -314,7 +321,11 @@ public class BlankyMove : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	/// <summary>
+	/// Called when the time is over and this ghost is his encounter
+	/// </summary>
+	/// <param name="tag">The tag of the encounter.</param>
 	void sentenceTO(string tag){
 		if (tag == gameObject.tag){
 			if (!frightenMode){
@@ -323,6 +334,9 @@ public class BlankyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the player restarts the game.
+	/// </summary>
 	void onRestartGame(){
 		scatterMode = false;
 		frightenMode = false;
@@ -391,7 +405,7 @@ public class BlankyMove : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Updates the statuts of each mode as well as the enemy's target.
+	/// Called after a specific delay
 	/// </summary>
 	/// <returns>void</returns>
 	void FixedUpdate () {
@@ -413,6 +427,10 @@ public class BlankyMove : MonoBehaviour {
 				renderer.enabled = true;
 			}
 	}
+
+	/// <summary>
+	/// Called when this script is destroyed
+	/// </summary>
 	void OnDestroy(){
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
