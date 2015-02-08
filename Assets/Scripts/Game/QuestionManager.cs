@@ -157,7 +157,6 @@ public class QuestionManager {
             questionBuffer = new QuestionKeeper(questionList[currentQuestionNb]);
             oldQuestions.Add(new QuestionKeeper(questionBuffer));
             C3PONetworkManager.Instance.sendQuestion(questionBuffer);
-            currentQuestionNb++;
         }
     }
 
@@ -344,6 +343,7 @@ public class QuestionManager {
                 answers[e.Value.lastAnswer().rep]++;
         }
 
+        currentQuestionNb++;
         HtmlHelpers.createAnswerStatPage("Course " + courseId + " Question " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
     }
 
