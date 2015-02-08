@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AsteroidsManager : MonoBehaviour {
-
-    private float timeSinceLastSpawn;
+    
 
     [SerializeField]
     Camera mainCamera;
@@ -62,7 +61,6 @@ public class AsteroidsManager : MonoBehaviour {
                 AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
             }
             nbAsteroid++;
-            timeSinceLastSpawn = Time.time;
         }
         
 	}

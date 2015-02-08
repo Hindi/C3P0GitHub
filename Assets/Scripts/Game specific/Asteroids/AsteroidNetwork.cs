@@ -85,7 +85,7 @@ public class AsteroidNetwork : MonoBehaviour {
     {
         //zone = asteroidsManager.choosePos();
         EnumColor col = asteroidsManager.chooseColor();
-        //networkView.RPC("initPlayerRPC",info.sender,(int) col, zone);
+        networkView.RPC("initPlayerRPC",info.sender,(int) col, new Vector3(0,0,0));
     }
 
     [RPC]

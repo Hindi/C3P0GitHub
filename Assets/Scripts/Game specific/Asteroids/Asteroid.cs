@@ -7,20 +7,18 @@ public class Asteroid : MonoBehaviour {
     private Vector3 target;
     public int hp;
     public bool isUsed;
-
+    private EnumColor color;
 
 
     [SerializeField]
     private float speed;
 
-
-    private AsteroidShip shipScript;
     private AsteroidsManager asteroidManager;
 
     [SerializeField]
     GameObject blenderObject;
     [SerializeField]
-    GameObject radarDisplay;
+    GameObject radarDisplay; 
 
 
     [SerializeField]
@@ -33,7 +31,6 @@ public class Asteroid : MonoBehaviour {
     void Awake()
     {
         asteroidManager = GameObject.FindGameObjectWithTag("asteroidManager").GetComponent<AsteroidsManager>();
-        shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
     }
 
 	// Update is called once per frame
@@ -91,7 +88,13 @@ public class Asteroid : MonoBehaviour {
 
     public void setColor(EnumColor color)
     {
+        this.color = color;
         blenderObject.renderer.material = matChoice[(int)color];
         radarDisplay.renderer.material = matChoice[(int)color];
+    }
+
+    public EnumColor getColor()
+    {
+        return color;
     }
 }
