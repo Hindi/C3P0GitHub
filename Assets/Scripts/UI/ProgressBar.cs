@@ -7,7 +7,6 @@ public class ProgressBar : MonoBehaviour
     private float currentValue;
     private float maximumValue;
 
-    [SerializeField]
     private Vector2 size;
 
     [SerializeField]

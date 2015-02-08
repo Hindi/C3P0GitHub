@@ -43,11 +43,11 @@ public class AsteroidsManager : MonoBehaviour {
                 Vector3 target = shipScript.getTarget();
                 if (nbAsteroid % 2 == 0)
                 {
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 0, EnumColor.RED);
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.RED);
                 }
                 else
                 {
-                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), 1, nbAsteroid);
+                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
                 }
                 nbAsteroid++;
                 timeSinceLastSpawn = Time.time;
