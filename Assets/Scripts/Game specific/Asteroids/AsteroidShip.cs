@@ -21,7 +21,7 @@ public class AsteroidShip : MonoBehaviour {
 
     public Vector3 getTarget()
     {
-        return asteroidsTargetList[(int)Random.Range(0, asteroidsTargetList.Count)].position;
+        return asteroidsTargetList[(int)Random.Range(0, asteroidsTargetList.Count -1)].position;
     }
 
     [RPC]

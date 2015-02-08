@@ -121,6 +121,8 @@ public class AnkyMove : MonoBehaviour {
 	/// </summary>
 	Color defaultColor;
 
+	Behaviour halo;
+
 
 	/// <summary>
 	/// Allows movement
@@ -157,7 +159,9 @@ public class AnkyMove : MonoBehaviour {
 		if(!eaten){
 			frightenMode = true;
 			frightenTimer = 0f;
-			renderer.material.color = new Color(0, 0, 255, 0);
+			renderer.material.color = Color.blue;
+			renderer.enabled = true;
+			halo.enabled = false;
 		}
 	}
 	
@@ -310,7 +314,8 @@ public class AnkyMove : MonoBehaviour {
 
 
 	void sentenceWin(string tag){
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -327,7 +332,8 @@ public class AnkyMove : MonoBehaviour {
 	}
 
 	void sentenceTO(string tag){
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
@@ -336,11 +342,13 @@ public class AnkyMove : MonoBehaviour {
 	}
 
 	void sentenceLost(string tag){
-		renderer.enabled = true;	
+		renderer.enabled = false;
+		halo.enabled = true;
 	}
 
 	void onStartMiniGame(){
 		renderer.enabled = false;
+		halo.enabled = false;
 	}
 
 	void onRestartGame(){
@@ -349,7 +357,8 @@ public class AnkyMove : MonoBehaviour {
 		renderer.material.color = defaultColor;
 		eaten = false;
 		collider.enabled = true;
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		transform.position = new Vector3(11, 0, -14);
 		inHouse = true;
 		curDir = Vector3.left;
@@ -404,6 +413,7 @@ public class AnkyMove : MonoBehaviour {
 		blanky = GameObject.FindGameObjectWithTag("Blanky");
 		pacMove = pacman.GetComponent<PacMove>();
 		ankyTarget = (pacman.transform.position + 2 * pacMove.getCurDir()) + (pacman.transform.position + 2 * pacMove.getCurDir() - blanky.transform.position);
+		halo = GetComponent("Halo") as Behaviour;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
 		defaultColor = renderer.material.color;
@@ -437,8 +447,13 @@ public class AnkyMove : MonoBehaviour {
 			}
 			if (Vector3.Distance(transform.position, homeTarget) < 1f){
 				eaten = false;
+			if(!frightenMode)
+			{
+				renderer.material.color = defaultColor;
 				collider.enabled = true;
-				renderer.enabled = true;
+				renderer.enabled = false;
+				halo.enabled = true;
+			}
 			}
 	}
 

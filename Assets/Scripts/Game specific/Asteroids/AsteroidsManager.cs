@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AsteroidsManager : MonoBehaviour {
-
-    private float timeSinceLastSpawn;
+    
 
     [SerializeField]
     Camera mainCamera;
@@ -17,6 +16,8 @@ public class AsteroidsManager : MonoBehaviour {
 
     private static Dictionary<int, Asteroid> asteroidInUse = new Dictionary<int,Asteroid>();
     private static int nbAsteroid;
+    private static int colorChoice;
+    private static int zoneChoice;
 
     [SerializeField]
     int nbAsteroidToSpawn;
@@ -24,37 +25,43 @@ public class AsteroidsManager : MonoBehaviour {
     [SerializeField]
     AsteroidNetwork asteroidNetwork;
 
+    [SerializeField]
+    PlayerAsteroid playerAsteroid;
+
 	// Use this for initialization
     void Start()
     {
         asteroidInUse = new Dictionary<int, Asteroid>();
-        Vector3 pos, target;
-        pos = new Vector3(0, 0, 0);
-        target = pos;
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
         cameraInitialisation();
+        if (!asteroidNetwork.isServer())
+        {
+            asteroidNetwork.askInitPlayer();
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(asteroidNetwork.isServer())
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
-                pos = mainCamera.ViewportToWorldPoint(pos);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
+            pos = mainCamera.ViewportToWorldPoint(pos);
 
-                Vector3 target = shipScript.getTarget();
-                if (nbAsteroid % 2 == 0)
-                {
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.RED);
-                }
-                else
-                {
-                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
-                }
-                nbAsteroid++;
-                timeSinceLastSpawn = Time.time;
+            Vector3 target = shipScript.getTarget();
+            if (nbAsteroid % 2 == 0)
+            {
+                // TO DO remove l'autr ecommentaire
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
+
             }
+            else
+            {
+                asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
+                //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
+            }
+            nbAsteroid++;
+        }
         
 	}
 
@@ -112,5 +119,32 @@ public class AsteroidsManager : MonoBehaviour {
         {
             Debug.Log("Problem there is no asteroid with the id : " + id);
         }
+    }
+
+    public EnumColor chooseColor()
+    {
+        if (asteroidNetwork.isServer())
+        {
+            colorChoice++;
+            int colorReturn = colorChoice % 4;
+            return ((EnumColor) colorReturn);
+        }
+        return EnumColor.NONE;
+    }
+
+    public void choosePos()
+    {
+
+    }
+
+
+    public void initColor(EnumColor color)
+    {
+        playerAsteroid.setColor(color);
+    }
+
+    public void initZone()
+    {
+        //playerAsteroid.setZone();
     }
 }

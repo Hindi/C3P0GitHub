@@ -21,6 +21,7 @@ public class ClodeMove : MonoBehaviour {
 	bool isMoving = false;
 	bool inHouse = true;
 	Color defaultColor;
+	Behaviour halo;
 
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
@@ -41,7 +42,9 @@ public class ClodeMove : MonoBehaviour {
 	void frightened(){
 		frightenMode = true;
 		frightenTimer = 0f;
-		renderer.material.color = new Color(0,0,255, 0);
+		renderer.material.color = Color.blue;
+		renderer.enabled = true;
+		halo.enabled = false;
 	}
 
 	/*
@@ -179,7 +182,8 @@ public class ClodeMove : MonoBehaviour {
 
 
 	void sentenceWin(string tag){
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (frightenMode){
 				eaten = true;
@@ -187,6 +191,7 @@ public class ClodeMove : MonoBehaviour {
 				renderer.material.color = defaultColor;
 				collider.enabled = false;
 				renderer.enabled = false;
+				halo.enabled = false;
 				EventManager.Raise(EnumEvent.GHOST_EATEN);
 			}
 			else{
@@ -196,7 +201,8 @@ public class ClodeMove : MonoBehaviour {
 	}
 	
 	void sentenceTO(string tag){
-		renderer.enabled = true;	
+		renderer.enabled = false;
+		halo.enabled = true;
 		if (tag == gameObject.tag){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
@@ -205,7 +211,8 @@ public class ClodeMove : MonoBehaviour {
 	}
 
 	void sentenceLost(string tag){
-		renderer.enabled = true;	
+		renderer.enabled = false;
+		halo.enabled = true;
 	}
 
 
@@ -215,7 +222,8 @@ public class ClodeMove : MonoBehaviour {
 		renderer.material.color = defaultColor;
 		eaten = false;
 		collider.enabled = true;
-		renderer.enabled = true;
+		renderer.enabled = false;
+		halo.enabled = true;
 		transform.position = new Vector3(16, 0, -14);
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
@@ -223,6 +231,7 @@ public class ClodeMove : MonoBehaviour {
 
 	void onStartMiniGame(){
 		renderer.enabled = false;
+		halo.enabled = false;
 	}
 
 	void Start () {
@@ -282,6 +291,7 @@ public class ClodeMove : MonoBehaviour {
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
 		clodeTarget = pacman.transform.position;
+		halo = GetComponent("Halo") as Behaviour;
 		curTileX = Mathf.RoundToInt(transform.position.x);
 		curTileY = Mathf.RoundToInt(- transform.position.z);
 		defaultColor = renderer.material.color;
@@ -305,9 +315,13 @@ public class ClodeMove : MonoBehaviour {
 		}
 		if (Vector3.Distance(transform.position, homeTarget) < 1f){
 			eaten = false;
-			renderer.material.color = defaultColor;
-			collider.enabled = true;
-			renderer.enabled = true;
+			if(!frightenMode)
+			{
+				renderer.material.color = defaultColor;
+				collider.enabled = true;
+				renderer.enabled = false;
+				halo.enabled = true;
+			}
 		}
 	}
 
