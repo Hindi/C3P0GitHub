@@ -74,6 +74,35 @@ static class IdConverter
         }
     }
 
+    public static string courseToLevel(int id)
+    {
+        switch (id)
+        {
+            case 1:
+                return "SpaceWar";
+            case 2:
+                return "Pong";
+            case 3:
+                return "LunarLander";
+            case 4:
+                return "SpaceInvader";
+            case 5:
+                return "Tetris";
+            case 6:
+                return "MoonPatrol";
+            case 7:
+                return "Asteroids";
+            case 8:
+                return "Pacman";
+            case 9:
+                return "Mario";
+            case 10:
+                return "Zelda";
+            default:
+                return "";
+        }
+    }
+
     /// <summary>
     /// Converts a level name into a StateEnum.
     /// </summary>

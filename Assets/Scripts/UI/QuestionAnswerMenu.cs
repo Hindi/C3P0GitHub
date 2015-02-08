@@ -90,7 +90,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
     {
         timeBar.gameObject.SetActive(false);
         lastGoodAnswerId = resultId;
-        setQuestionText("");
+        //setQuestionText("");
         if (answered)
             buttons[lastAnswerId - 1].GetComponent<AnswerButton>().setWrong();
         buttons[resultId - 1].GetComponent<AnswerButton>().setRight();
