@@ -55,9 +55,12 @@ public class ProjectileSpaceWar : MonoBehaviour {
     {
         try
         {
-            collider.gameObject.GetComponent<Spaceship>().onHit(); 
-            rigidbody2D.isKinematic = false;
-            gameObject.SetActive(false);
+            if (collider.transform.tag == "Enemy" || collider.transform.tag == "player")
+            {
+                collider.gameObject.GetComponent<Spaceship>().onHit();
+                rigidbody2D.isKinematic = false;
+                gameObject.SetActive(false);
+            }
         }
         catch(System.NullReferenceException e)
         {
