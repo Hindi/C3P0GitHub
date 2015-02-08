@@ -1,29 +1,132 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/**
+ * AnkyMove is a class which determines how the Blue enemy will move
+ **/
+
+/// <summary>
+/// AnkyMove is a class which determines how the red enemy will move.
+/// </summary>
+/// 
 public class AnkyMove : MonoBehaviour {
+	/// <summary>
+	/// The player's GameObject
+	/// </summary>
 	GameObject pacman;
+
+	/// <summary>
+	/// The red ghost GameObject
+	/// </summary>
 	GameObject blanky;
+
+	/// <summary>
+	/// The player's script
+	/// </summary>
 	PacMove pacMove;
+
+	/// <summary>
+	/// The target during normal mode
+	/// </summary>
 	Vector3 ankyTarget;
+
+	/// <summary>
+	/// The target of the red ghost
+	/// </summary>
 	Vector3 ankyScatterTarget = new Vector3(28,0,-32);
+
+	/// <summary>
+	/// The target once defeated
+	/// </summary>
 	Vector3 homeTarget = new Vector3(13, 0, -11);
+
+	/// <summary>
+	/// True if in scatter
+	/// </summary>
 	bool scatterMode = false;
+
+	/// <summary>
+	/// The duration of the scatter mode
+	/// </summary>
 	float scatterDelay = 10.0f;
+
+	/// <summary>
+	/// How long the scatter mode already lasted
+	/// </summary>
 	float scatterTimer;
+
+	/// <summary>
+	/// True if in frighten mode
+	/// </summary>
 	bool frightenMode = false;
+
+	/// <summary>
+	/// The duration of frighten mode
+	/// </summary>
 	float frightenDelay = 5.0f;
+
+	/// <summary>
+	/// How long the frighten mode has already lasted
+	/// </summary>
 	float frightenTimer;
+
+	/// <summary>
+	/// True if defeated
+	/// </summary>
 	bool eaten = false;
+
+	/// <summary>
+	/// The current direction
+	/// </summary>
 	Vector3 curDir = Vector3.right;
+
+	/// <summary>
+	/// The next direction
+	/// </summary>
 	Vector3 nextDir = Vector3.right;
+
+	/// <summary>
+	/// The tile representation of the maze.
+	/// </summary>
+	/// [i, j] is the tile located on the ith row (from top to bottom) and jth column (from left to right).
+	/// For the game graphics, a tile i a 1x1 square and and its coordinates are (j, -i)
+	/// Each number represents a tile :
+	/// - 0 is a dead tile, neither the player nor the enemy AIs can be located in a dead tile at any time.
+	/// - 1 or higher is a legal tile, both players and enemies can travel between those tiles.
 	int[,] pacGrid;
+
+	/// <summary>
+	/// The x coordinate of the tile this enemy is
+	/// </summary>
 	int curTileX;
+
+	/// <summary>
+	/// The y coordinate of the tile this enemy is
+	/// </summary>
 	int curTileY;
+
+	/// <summary>
+	/// True if movement is allowed
+	/// </summary>
 	bool isMoving = false;
+
+	/// <summary>
+	/// True if inside the spawn zone
+	/// </summary>
 	bool inHouse = true;
+
+	/// <summary>
+	/// The default color
+	/// </summary>
 	Color defaultColor;
-	
+
+
+	/// <summary>
+	/// Allows movement
+	/// </summary>
+	/// <param name="real">If set to <c>true</c>, movement is allowed.</param>
+	/// <param name="tag">The tage of the GameObject.</param>
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
 			isMoving = real;
@@ -31,15 +134,25 @@ public class AnkyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Allows movement
+	/// </summary>
+	/// <param name="res">If set to <c>true</c>, movement is allowed.</param>
 	void moving(bool res){
 		isMoving = res;
 	}
 
+	/// <summary>
+	/// Starts scatter mode.
+	/// </summary>
 	void scatter(){
 		scatterMode = true;
 		scatterTimer = 0f;
 	}
-	
+
+	/// <summary>
+	/// Starts frighten mode.
+	/// </summary>
 	void frightened(){
 		if(!eaten){
 			frightenMode = true;
@@ -54,7 +167,11 @@ public class AnkyMove : MonoBehaviour {
 	 * Unlike pacman, the ghosts can't make a u-turn.
 	 * If one of the valid direction would cause a ghost to make a u-turn te direction will be invalidated.
 	 */
-	
+	/// <summary>
+	/// Check if next is a valid direction.
+	/// </summary>
+	/// <returns><c>true</c>, if next is a valid direction, <c>false</c> otherwise.</returns>
+	/// <param name="next">The next direction.</param>
 	bool isValid (Vector3 next){
 		Vector3 predicted = transform.position + next;
 		int predX = Mathf.RoundToInt(predicted.x);
@@ -75,6 +192,10 @@ public class AnkyMove : MonoBehaviour {
 	 *  - The third is for down
 	 *  - And the fourth is for right
 	 */
+	/// <summary>
+	/// Gives the possible directions.
+	/// </summary>
+	/// <returns>The array of possible directions.</returns>
 	Vector3[] validDir(){
 		Vector3[] validDirs = new Vector3[4];
 		validDirs[0] = Vector3.zero;
@@ -106,6 +227,10 @@ public class AnkyMove : MonoBehaviour {
 	/* After checking the valid directions, we choose the one that will make the ghost go closer to Pacman.
 	 * If no direction has already been chosen, the first valid direction is picked.
 	 * If there is already a chosen direction, we check if the next valid one is a better solution, if it is */
+	/// <summary>
+	/// Get the next possible direction.
+	/// </summary>
+	/// <returns>The next dir.</returns>
 	Vector3 getNextDir(){
 		Vector3[] possibleDirs = validDir();
 		Vector3 possibleDir = Vector3.zero;
@@ -127,6 +252,9 @@ public class AnkyMove : MonoBehaviour {
 	 * The ghost will only move if it reached the next tile.
 	 * The ghost can only change its direction once pet tile but can't make a u-turn
 	 */
+	/// <summary>
+	/// Makes the blue ghost moving
+	/// </summary>
 	void move()
 	{
 		if (Vector3.Distance(new Vector3(curTileX, 0, -curTileY), transform.position) <= 0.9f){
@@ -147,7 +275,7 @@ public class AnkyMove : MonoBehaviour {
 	
 	
 	/*
-	 * The ghost uses the Blinky behaviour : when chasing Pacman, its target point is the following : 
+	 * The ghost uses the Inky behaviour : when chasing Pacman, its target point is the following : 
 	 *  - We must first establish an intermediate offset two tiles in front of Pac-Man in the direction he is moving
 	 *  - Now imagine drawing a vector from the center of Blanky's current tile to the center of the offset tile
 	 *  - Then double the vector length by extending it out just as far again beyond the offset tile.
@@ -157,7 +285,9 @@ public class AnkyMove : MonoBehaviour {
 	 * If only one direction is valid, it will follow it.
 	 * If multiples direction are available, it check which direction will make him go closer to its target.
 	 * Then he moves*/
-	
+	/// <summary>
+	/// Updates the ankyTarget
+	/// </summary>
 	void chase(){
 
 		if (frightenMode){
