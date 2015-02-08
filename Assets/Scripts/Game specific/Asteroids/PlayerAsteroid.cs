@@ -51,17 +51,6 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            this.fire();
-        if (Input.GetKey(KeyCode.LeftArrow))
-            moveRight(false);
-        if (Input.GetKey(KeyCode.RightArrow))
-            moveRight(true);
-        if (Input.GetKey(KeyCode.UpArrow))
-            moveUp(true);
-        if (Input.GetKey(KeyCode.DownArrow))
-            moveUp(false);
-
         setRotation();
 	}
 
