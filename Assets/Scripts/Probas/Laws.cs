@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine;
 using System.Collections.Generic;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.LinearAlgebra.Factorization;

@@ -46,7 +46,7 @@ public class PlayerLunarLander : MonoBehaviour {
     private TerrainLunarLander terrain;
 
     [SerializeField]
-    private CameraLunarLander camera;
+    private CameraLunarLander cameraLL;
     [SerializeField]
     private Text gratzText;
 
@@ -111,7 +111,7 @@ public class PlayerLunarLander : MonoBehaviour {
 
     private void resetCamera()
     {
-        camera.resetCameraPosition(new Vector3(transform.position.x, 4, Camera.main.transform.position.z));
+        cameraLL.resetCameraPosition(new Vector3(transform.position.x, 4, Camera.main.transform.position.z));
     }
 
     void OnDestroy()
@@ -217,7 +217,7 @@ public class PlayerLunarLander : MonoBehaviour {
             float distance = Vector2.Distance(transform.position, hit.point);
             altitudeBar.updateValue(distance);
             if (distance < 5)
-                camera.Zooming = true;
+                cameraLL.Zooming = true;
         }
 
         if (landed)

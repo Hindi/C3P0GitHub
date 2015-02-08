@@ -6,17 +6,15 @@ using System.Collections;
 /// </summary>
 public class PlayerSpaceWar : Spaceship {
 
-    private Vector3 basePos;
-
 	// Use this for initialization
     void Start()
     {
-        basePos = transform.position;
+
 	}
 
 	
 	// Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
         if (isEnd)

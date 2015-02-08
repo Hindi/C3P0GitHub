@@ -18,8 +18,6 @@ public class Player : MonoBehaviour
     float lastTimeChangeSize;
     float goalScale;
 
-    private int currentSpeed;
-
     [SerializeField]
     GUIStyle guiStyle;
 
@@ -56,22 +54,9 @@ public class Player : MonoBehaviour
         recallProjectile();
     }
 
-    public void setDirection(bool right)
-    {
-        if (right)
-            currentSpeed = speed;
-        else
-            currentSpeed = -speed;
-    }
-
     public void setParamId(int id)
     {
         paramId = id;
-    }
-
-    public void stop()
-    {
-        currentSpeed = 0;
     }
 
 	private bool canFire()

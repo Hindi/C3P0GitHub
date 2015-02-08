@@ -61,7 +61,7 @@ public class ProjectileSpaceWar : MonoBehaviour {
         }
         catch(System.NullReferenceException e)
         {
-
+            Debug.Log(e);
         }
     }
 }

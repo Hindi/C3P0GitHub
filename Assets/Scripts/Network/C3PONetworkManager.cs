@@ -169,11 +169,11 @@ public class C3PONetworkManager : MonoBehaviour {
     /// <summary>Load the client game stats for the current game. Also initialise the currentGameEnum variable.</summary>
     /// <param name="stateEnum">The enum of the current game.</param>
     /// <returns>void</returns>
-    private void loadPlayersGameStats(EnumGame stateEnum)
+    private void loadPlayersGameStats(EnumGame gameEnum)
     {
-        currentGameEnum = stateEnum;
+        currentGameEnum = gameEnum;
         foreach (KeyValuePair<string, Client> e in clientsInfos)
-            e.Value.loadGameStats((EnumGame)stateEnum);
+            e.Value.loadGameStats(gameEnum);
     }
 
     /// <summary>Kick a specific client.</summary>

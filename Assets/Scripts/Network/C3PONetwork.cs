@@ -54,9 +54,6 @@ public class C3PONetwork : MonoBehaviour {
     [SerializeField]
     public bool IS_SERVER;
 
-    // <summary>The IP/Hostname of the Unity MasterServer to connect to (has to exist on the Teacher's computer.</summary>
-	private string masterHostname = null;
-
     // <summary>Can be used to know if the server connected to is the teacher or not.</summary>
 	private bool isConnectedToTeacher = false;
     public bool IsConnectedToTeacher

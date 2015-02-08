@@ -82,6 +82,7 @@ class LunarLanderState : GameState
     {
         if (loaded)
         {
+            base.noticeInput(key, inputs);
             foreach (var t in inputs)
             {
                 if (t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
@@ -115,18 +116,15 @@ class LunarLanderState : GameState
     {
         if (loaded)
         {
-            if (!Application.isMobilePlatform)
-            {
-                base.noticeInput(key);
-                if (key == EnumInput.UPDOWN)
-                playerScript_.increaseReactorState();
-                if (key == EnumInput.DOWNDOWN)
-                    playerScript_.decreaseReactorState();
-                if (key == EnumInput.LEFT)
-                    playerScript_.rotate(1);
-                if (key == EnumInput.RIGHT)
-                    playerScript_.rotate(-1);
-            }
+            base.noticeInput(key);
+            if (key == EnumInput.UPDOWN)
+            playerScript_.increaseReactorState();
+            if (key == EnumInput.DOWNDOWN)
+                playerScript_.decreaseReactorState();
+            if (key == EnumInput.LEFT)
+                playerScript_.rotate(1);
+            if (key == EnumInput.RIGHT)
+                playerScript_.rotate(-1);
         }
     }
 }

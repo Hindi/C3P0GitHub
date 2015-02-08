@@ -15,11 +15,9 @@ public class MarioScoreManager : MonoBehaviour {
     [SerializeField]
     private GameObject invisBorder;
 
-    bool inPlace;
-
 	// Use this for initialization
 	void Start () {
-        inPlace = false;
+
 	}
 	
 	// Update is called once per frame
@@ -30,7 +28,6 @@ public class MarioScoreManager : MonoBehaviour {
     public void restart()
     {
         pipeManager.restart();
-        inPlace = false;
         score = 0;
     }
 

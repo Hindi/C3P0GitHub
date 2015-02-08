@@ -7,7 +7,7 @@ public class MushroomBehaviour : MonoBehaviour {
 
     private bool bounce = false;
     private bool goingOut = true;
-    private Vector3 startPosition;
+    //private Vector3 startPosition;
     private Vector3 direction = Vector3.right;
 
     double triggerTime = 0;
@@ -15,7 +15,7 @@ public class MushroomBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        startPosition = transform.position;
+        //startPosition = transform.position;
         rigidbody.useGravity = false;
         collider.enabled = false;
         EventManager.AddListener(EnumEvent.RESTARTGAME, onGameRestart);
