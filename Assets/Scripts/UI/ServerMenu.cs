@@ -208,23 +208,12 @@ public class ServerMenu : MonoBehaviour {
     {
         previousButton.SetActive(false);
         gameLaunched = true;
-        string levelName= "";
-        
-        switch(courseId)
-        {
-            case 1:
-                levelName = "SpaceInvader";
-                break;
-            case 2:
-                levelName = "Tetris";
-                break;
-            case 3:
-                levelName = "Asteroids";
-                break;
-        }
+
+        string levelName = IdConverter.courseToLevel(courseId);
 
         if (levelName == "Asteroids")
             EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Asteroids");
+
         C3PONetworkManager.Instance.loadLevel(levelName);
         C3PONetworkManager.Instance.unlockGame(levelName);
     }
