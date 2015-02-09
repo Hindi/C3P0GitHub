@@ -48,12 +48,14 @@ public class MiniGameController : MonoBehaviour {
 	/// </summary>
 	bool miniGame = false;
 
+	/// <summary>
+	/// True if in frighten mode
+	/// </summary>
 	bool frightenMode = false;
 
-	float frightenDelay = 5f;
-
-	float frightenTimer = 0f;
-
+	/// <summary>
+	/// True if the encounter is a ghost
+	/// </summary>
 	bool isGhost = false;
 
 
@@ -67,9 +69,12 @@ public class MiniGameController : MonoBehaviour {
 		isGhost = false;
 	}
 
-	void frightened(){
-		frightenMode = true;
-		frightenTimer = Time.time;
+	/// <summary>
+	/// Called when the Event FRIGHTENED is caught
+	/// </summary>
+	/// <param name="res">If set to <c>true</c>, activates frightenMode.</param>
+	void frightened(bool res){
+		frightenMode = res;
 	}
 
 	/// <summary>
@@ -85,7 +90,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, frightened);
 	}
 
 	/// <summary>
@@ -135,9 +140,6 @@ public class MiniGameController : MonoBehaviour {
 				EventManager<bool>.Raise(EnumEvent.MOVING,true);
 			}
 		}
-		if (Time.time - frightenTimer > frightenDelay){
-			frightenMode = false;
-		}
 	}
 
 	/// <summary>
@@ -148,7 +150,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<bool>.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 
 	}
 }

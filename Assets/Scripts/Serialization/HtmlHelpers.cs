@@ -58,9 +58,9 @@ public class HtmlHelpers {
                 </body>"
             + foot;
 
-        string path = @"Assets/Resources/html/"+ filename + ".html";
+        string path = Application.dataPath + @"/Resources/html/" + filename + ".html";
         writeFile(path, page);
-        path = @"Assets/Resources/html/lastQuestionStat.html";
+        path = Application.dataPath +  @"/Resources/html/lastQuestionStat.html";
         writeFile(path, page);
     }
 

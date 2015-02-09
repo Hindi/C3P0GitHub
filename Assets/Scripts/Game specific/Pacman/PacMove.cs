@@ -63,21 +63,10 @@ public class PacMove : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// True if under effects of a power up
-	/// </summary>
-	bool powerUp = false;
-
-	/// <summary>
 	/// How long the power up lasted.
 	/// </summary>
 	float powerTimer;
-
-	/// <summary>
-	/// The duration of the power up
-	/// </summary>
-	[SerializeField]
-	float powerUpDelay = 5f;
-
+	
 
 	/// <summary>
 	/// Gets the current direction the player is heading.
@@ -117,21 +106,21 @@ public class PacMove : MonoBehaviour {
 	/// Called when the player loses the mini-game
 	/// </summary>
 	void onMiniGameLost(){
-			EventManager<string>.Raise(EnumEvent.SENTENCE_LOST, obj.tag);
+			EventManager<GameObject>.Raise(EnumEvent.SENTENCE_LOST, obj);
 	}
 
 	/// <summary>
 	/// Called when the player wins the mini-game
 	/// </summary>
 	void onMiniGameWin(){
-			EventManager<string>.Raise(EnumEvent.SENTENCE_WIN, obj.tag);
+		EventManager<GameObject>.Raise(EnumEvent.SENTENCE_WIN, obj);
 	}
 
 	/// <summary>
 	/// Called when the player takes to much time in the mini-game
 	/// </summary>
 	void onMiniGameTO(){
-			EventManager<string>.Raise(EnumEvent.SENTENCE_TO, obj.tag);
+		EventManager<GameObject>.Raise(EnumEvent.SENTENCE_TO, obj);
 	}
 
 	/// <summary>
@@ -146,10 +135,13 @@ public class PacMove : MonoBehaviour {
 	/// <summary>
 	/// Caled when a power up is piked up
 	/// </summary>
-	void onPowerUp(){
-		powerUp = true;
-		powerTimer = 0f;
-		(GetComponent("Halo") as Behaviour).enabled = true;
+	void onPowerUp(bool res){
+		if(res){
+			(GetComponent("Halo") as Behaviour).enabled = true;
+		}
+		else{
+			(GetComponent("Halo") as Behaviour).enabled = false;
+		}
 	}
 
 	/// <summary>
@@ -196,7 +188,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, onPowerUp);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, onPowerUp);
 
 	}
 
@@ -255,10 +247,6 @@ public class PacMove : MonoBehaviour {
 	void FixedUpdate () {
 		if(isMoving){
 			powerTimer += Time.deltaTime;
-			if (powerUp && powerTimer > powerUpDelay){
-				(GetComponent("Halo") as Behaviour).enabled = false;
-				powerUp = false;
-			}
 			move ();
 		}
 		else{
@@ -290,7 +278,7 @@ public class PacMove : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, onMiniGameTO);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, onPowerUp);
+		EventManager<bool>.RemoveListener(EnumEvent.FRIGHTENED, onPowerUp);
 
 	}
 }

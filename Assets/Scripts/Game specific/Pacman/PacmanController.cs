@@ -17,9 +17,38 @@ public class PacmanController : MonoBehaviour {
 	int remainingDots = 0;
 
 	/// <summary>
-	/// The timer for the scatter cycle.
+	/// The duration of the scatterMode
 	/// </summary>
-	float timer;
+	[SerializeField]
+	float scatterDuration = 10f;
+
+	/// <summary>
+	/// How long scatter mode lasted
+	/// </summary>
+	float scatterDurationTimer = 0f;
+
+	/// <summary>
+	/// The delay between two scatter modes
+	/// </summary>
+	[SerializeField]
+	float scatterDelay = 40f;
+
+	/// <summary>
+	/// How much time passed until last scatter mode
+	/// </summary>
+	float scatterDelayTimer = 0f;
+
+	/// <summary>
+	/// How long frighten mode lasted
+	/// </summary>
+	float frightenTimer = 0f;
+
+	/// <summary>
+	/// The duration of frighten mode
+	/// </summary>
+	[SerializeField]
+	float frightenDuration = 5f;
+
 
 	/// <summary>
 	/// The player's score.
@@ -96,7 +125,7 @@ public class PacmanController : MonoBehaviour {
 	/// Called when this script is destroyed
 	/// </summary>
 	void OnDestroy(){
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, enerEaten);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.RemoveListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.RemoveListener(EnumEvent.GHOST_EATEN, ghostEaten);
 	}
@@ -135,9 +164,8 @@ public class PacmanController : MonoBehaviour {
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
-		timer = Time.time;
 		createDots();
-		EventManager.AddListener(EnumEvent.FRIGHTENED, enerEaten);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, enerEaten);
 		EventManager.AddListener(EnumEvent.DOT_EATEN, dotEaten);
 		EventManager.AddListener(EnumEvent.GHOST_EATEN, ghostEaten);
 	}
@@ -157,12 +185,15 @@ public class PacmanController : MonoBehaviour {
 	/// <summary>
 	/// Called when a player gets an energizer.
 	/// </summary>
-	void enerEaten(){
+	void enerEaten(bool res){
+		if (res){
 		--remainingDots;
 		score += 50;
+			frightenTimer = 0f;
 		EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
 		if (remainingDots == 0){
 			EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
+		}
 		}
 	}
 
@@ -178,12 +209,22 @@ public class PacmanController : MonoBehaviour {
 	/// Called at each frame.
 	/// </summary>
 	void Update () {
-		if (Time.time - timer > 40f)
-		{
-			timer = Time.time;
-			EventManager.Raise(EnumEvent.SCATTERMODE);
+			scatterDelayTimer += Time.deltaTime;
+			frightenTimer += Time.deltaTime;
+			scatterDurationTimer += Time.deltaTime;
+		if (scatterDelayTimer > scatterDelay)
+			{
+			scatterDurationTimer = 0f;
+			EventManager<bool>.Raise(EnumEvent.SCATTERMODE, true);
+			if (scatterDurationTimer > scatterDuration){
+				EventManager<bool>.Raise(EnumEvent.SCATTERMODE, false);
+				scatterDurationTimer = 0f;
+				scatterDelayTimer = 0f;
+			}
 		}
-
+		if(frightenTimer > frightenDuration)
+		{
+			EventManager<bool>.Raise(EnumEvent.FRIGHTENED, false);
+		}
 	}
-
 }
