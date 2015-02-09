@@ -15,6 +15,9 @@ public class PlayerAsteroid : MonoBehaviour {
     private Camera playerCamera;
 
     [SerializeField]
+    private Camera radarCamera;
+
+    [SerializeField]
     private AsteroidNetwork asteroidNetwork;
 
     [SerializeField]
@@ -39,8 +42,8 @@ public class PlayerAsteroid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        upDownRange = 15f;
-        leftRightRange = 25f;
+        upDownRange = 60f;
+        leftRightRange = 70f;
         mouseSensitivity = 1f;
         cdShoot = 1f;
         cdMoveHorizontal = 1f / 60f;
@@ -55,6 +58,8 @@ public class PlayerAsteroid : MonoBehaviour {
 	void Update () {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        radarCamera.transform.EulerAngles = new Vector3(radarCamera.transform.rotation.x, rotLeftRight, radarCamera.transform.rotation.z);
         // TO DO remove les input locales
         if (Input.GetKeyDown(KeyCode.Space))
             fire();
@@ -76,7 +81,7 @@ public class PlayerAsteroid : MonoBehaviour {
             {
                 Asteroid ast = hit.transform.gameObject.GetComponentInParent<Asteroid>();
                 //asteroidNetwork.hitAsteroid(ast.id);
-                if (ast.getColor() == color)
+                if (ast.getColor() == color || ast.getColor() == EnumColor.NONE)
                 {
                     asteroidNetwork.hitAsteroid(ast.id);
                 }
@@ -154,6 +159,7 @@ public class PlayerAsteroid : MonoBehaviour {
 
     public void setColor(EnumColor col)
     {
+        Debug.Log("Je suis de couleur : " + col);
         color = col;
     }
 
