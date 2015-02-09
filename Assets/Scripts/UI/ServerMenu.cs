@@ -55,12 +55,6 @@ public class ServerMenu : MonoBehaviour {
     //Answer stats
     [SerializeField]
     private GameObject stats;
-    [SerializeField]
-    private Text statsBonnesReponses;
-    [SerializeField]
-    private Text statsMauvaisesReponses;
-    [SerializeField]
-    private Text statsAucuneReponses;
 
     [SerializeField]
     private Text ipLabel;
