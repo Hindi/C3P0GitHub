@@ -48,13 +48,16 @@ public class PlayerAsteroid : MonoBehaviour {
         timeSinceLastShoot = 0;
         timeSinceLastMoveVertical = 0;
         timeSinceLastMoveHorizontal = 0;
+        color = EnumColor.NONE;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
-
+        // TO DO remove les input locales
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    fire();
         setRotation();
 	}
 
@@ -66,13 +69,28 @@ public class PlayerAsteroid : MonoBehaviour {
     public void rayCast(Ray ray)
     {
         RaycastHit hit;
-        Physics.Raycast(ray, out hit, 1500);
+        Physics.Raycast(ray, out hit, 1500, playerCamera.cullingMask);
         if (hit.transform !=null)
         {
             if (hit.transform.CompareTag("Asteroid"))
             {
                 Asteroid ast = hit.transform.gameObject.GetComponentInParent<Asteroid>();
+                Debug.Log(ast.getColor());
                 asteroidNetwork.hitAsteroid(ast.id);
+                if (ast.getColor() == color)
+                {
+                    asteroidNetwork.hitAsteroid(ast.id);
+                    Debug.Log("J'ai touché un asteroid de la même couleur que moi");
+                }
+                else
+                {
+                    Debug.Log("J'ai pas touché la bonne couleur");
+                }
+            }
+            else
+            {
+                Debug.Log("Je sais pas ce que j'ai touché");
+                Debug.Log(hit.transform.gameObject);
             }
         }
         else
@@ -83,7 +101,6 @@ public class PlayerAsteroid : MonoBehaviour {
 
     public void fire()
     {
-        Debug.Log("boite");
         if (Time.time - timeSinceLastShoot > cdShoot)
         {
             Ray ray= new Ray();
@@ -93,6 +110,7 @@ public class PlayerAsteroid : MonoBehaviour {
             ray.origin = playerCamera.transform.position;
             Vector3 dir = viseur.transform.position - playerCamera.transform.position;
             ray.direction = dir;
+            Debug.Log("boite");
             rayCast(ray);
             timeSinceLastShoot = Time.time;
         }
@@ -152,6 +170,7 @@ public class PlayerAsteroid : MonoBehaviour {
 
     public void setColor(EnumColor col)
     {
+        Debug.Log("Je suis de couleur : " + col);
         color = col;
     }
 
