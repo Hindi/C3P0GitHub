@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>Player's projectile.</summary>
 public class Projectile : MonoBehaviour {
 
     [SerializeField]
