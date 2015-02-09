@@ -157,6 +157,7 @@ public class QuestionManager {
             questionBuffer = new QuestionKeeper(questionList[currentQuestionNb]);
             oldQuestions.Add(new QuestionKeeper(questionBuffer));
             C3PONetworkManager.Instance.sendQuestion(questionBuffer);
+            currentQuestionNb++;
         }
     }
 
@@ -172,6 +173,14 @@ public class QuestionManager {
     public string getQuestionTxt()
     {
         return questionList[currentQuestionNb].question;
+    }
+
+    public string getNextQuestionTxt()
+    {
+        if (questionList.Count > currentQuestionNb + 1)
+            return questionList[currentQuestionNb + 1].question;
+        else
+            return "";
     }
 
     /// <summary>This function sets the previous question as current.</summary>
@@ -329,7 +338,7 @@ public class QuestionManager {
 
         foreach (KeyValuePair<string, Client> e in C3PONetworkManager.Instance.ClientsInfos)
         {
-            i = questionList[currentQuestionNb].bonneReponse;
+            i = questionList[currentQuestionNb - 1].bonneReponse;
             C3PONetworkManager.Instance.sendResult(e.Value.NetworkPlayer, explication, i);
             C3PONetworkManager.Instance.setScore(e.Value.NetworkPlayer, e.Value.Score);
             questionId = e.Value.lastAnswer().question.id;
@@ -341,7 +350,6 @@ public class QuestionManager {
                 answers[e.Value.lastAnswer().rep]++;
         }
 
-        currentQuestionNb++;
         HtmlHelpers.createAnswerStatPage("Course " + courseId + " Question " + questionId, answers[1], answers[2], answers[3], answers[4], answers[0]);
     }
 

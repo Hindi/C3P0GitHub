@@ -54,7 +54,7 @@ public class ConnectionMenu : MonoBehaviour {
     /// <summary>Called on start. Initialises the variables</summary>
     void Start()
     {
-        ipLabel.Select();
+        //ipLabel.Select();
         onForm = false;
         serverFound = false;
         unityConnected = false;
@@ -87,16 +87,19 @@ public class ConnectionMenu : MonoBehaviour {
     /// <returns>void</returns>
     public void switchUiSelect()
     {
-        if (ipLabel.isFocused)
+        if (onForm)
         {
-            loginLabel.Select();
+            if (ipLabel.isFocused)
+            {
+                loginLabel.Select();
+            }
+            else if (loginLabel.isFocused)
+            {
+                passwordLabel.Select();
+            }
+            else
+                ipLabel.Select();
         }
-        else if (loginLabel.isFocused)
-        {
-            passwordLabel.Select();
-        }
-        else
-            ipLabel.Select();
     }
 
     /// <summary>Called if the authentication failed.</summary>
@@ -132,17 +135,6 @@ public class ConnectionMenu : MonoBehaviour {
         {
             onServerIpRecieved(C3PONetwork.Instance.getServerIp());
             serverFound = true;
-        }
-        if (onForm)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                onConnectionStartClick();
-            }
-            else if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                switchUiSelect();
-            }
         }
 	}
 
@@ -194,15 +186,18 @@ public class ConnectionMenu : MonoBehaviour {
     /// <returns>void</returns>
     public void onConnectionStartClick()
     {
-        connectionAnswerLabel.text = "";
-        try
+        if (onForm)
         {
-            connect();
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log(e);
-            onConnectionQuitClick();
+            connectionAnswerLabel.text = "";
+            try
+            {
+                connect();
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log(e);
+                onConnectionQuitClick();
+            }
         }
     }
 
