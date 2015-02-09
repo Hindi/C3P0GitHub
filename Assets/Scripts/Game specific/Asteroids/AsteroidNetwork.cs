@@ -104,7 +104,7 @@ public class AsteroidNetwork : MonoBehaviour {
     private void gameOverRPC()
     {
         // TO DO implements gameOver
-        // asteroidsManager.gameOver();
+        asteroidsManager.gameOver();
     }
 
 	// Use this for initialization

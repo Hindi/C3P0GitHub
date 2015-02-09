@@ -10,10 +10,12 @@ public class AsteroidShip : MonoBehaviour {
     [SerializeField]
     private AsteroidNetwork asteroidNetwork;
 
+    private int hp;
+
     // Use this for initialization
     void Start()
     {
-
+        hp = 3;
     }
 
     // Update is called once per frame
@@ -29,16 +31,22 @@ public class AsteroidShip : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Je suis mourru");
         if (asteroidNetwork.isServer())
         {
-            this.gameOver();
-            asteroidNetwork.gameOver();
+            this.hit();
+            //asteroidNetwork.gameOver();
         }
+        // Bouger l'écran
     }
 
-    public void gameOver()
-    {
 
+    public void hit()
+    {
+        hp--;
+        if (hp <= 0)
+        {
+            asteroidNetwork.gameOver();
+        }
+        // Changer le sprite pour fissurer l'écran
     }
 }

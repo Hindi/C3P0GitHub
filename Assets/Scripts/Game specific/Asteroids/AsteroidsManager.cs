@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AsteroidsManager : MonoBehaviour {
-    
+
+    private float timeSinceLastSpawn;
+    private float cdSpawnAsteroid;
 
     [SerializeField]
     Camera mainCamera;
@@ -18,7 +20,10 @@ public class AsteroidsManager : MonoBehaviour {
     private static int nbAsteroid;
     private static int colorChoice;
     private static int zoneChoice;
-    private int nbColor; 
+    private int nbColor;
+    private bool isColor;
+
+    private bool spawn;
 
     [SerializeField]
     int nbAsteroidToSpawn;
@@ -28,6 +33,9 @@ public class AsteroidsManager : MonoBehaviour {
 
     [SerializeField]
     PlayerAsteroid playerAsteroid;
+
+    [SerializeField]
+    GameObject canvas;
 
 	// Use this for initialization
     void Start()
@@ -39,7 +47,14 @@ public class AsteroidsManager : MonoBehaviour {
         if (!asteroidNetwork.isServer())
         {
             asteroidNetwork.askInitPlayer();
+            canvas.SetActive(false);
         }
+        else
+            canvas.SetActive(true);
+        timeSinceLastSpawn = Time.time;
+        cdSpawnAsteroid = 1.0f;
+        isColor = false;
+        spawn = false;
 	}
 	
 	// Update is called once per frame
@@ -62,8 +77,33 @@ public class AsteroidsManager : MonoBehaviour {
                 }
                 nbAsteroid++;
             }
+            spawnAsteroid(isColor);
         //}
 	}
+
+    void spawnAsteroid(bool isColor)
+    {
+        if (spawn)
+        {
+            EnumColor col;
+            if (isColor)
+            {
+                col = (EnumColor)((nbAsteroid % nbColor) + 1);
+            }
+            else
+                col = EnumColor.NONE;
+            if (Time.time - timeSinceLastSpawn > cdSpawnAsteroid)
+            {
+                Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
+                pos = mainCamera.ViewportToWorldPoint(pos);
+                Vector3 target = shipScript.getTarget();
+                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, col);
+                nbAsteroid++;
+                cdSpawnAsteroid = (cdSpawnAsteroid + 200f) / (float)(nbAsteroid + 199);
+                timeSinceLastSpawn = Time.time;
+            }
+        }
+    }
 
     void cameraInitialisation()
     {
@@ -123,21 +163,11 @@ public class AsteroidsManager : MonoBehaviour {
 
     public EnumColor chooseColor()
     {
-        if (asteroidNetwork.isServer())
-        {
-            colorChoice++;
-            int colorReturn = (colorChoice % nbColor) + 1; // return a number from 1 to 5
-            // TO DO remove
-            Debug.Log((EnumColor) colorReturn);
-            return ((EnumColor) colorReturn);
-        }
-        return EnumColor.NONE;
+        colorChoice++;
+        int colorReturn = (colorChoice % nbColor) + 1; // return a number from 1 to 5
+        return ((EnumColor) colorReturn);
     }
 
-    public void choosePos()
-    {
-
-    }
 
 
     public void initColor(EnumColor color)
@@ -145,8 +175,26 @@ public class AsteroidsManager : MonoBehaviour {
         playerAsteroid.setColor(color);
     }
 
-    public void initZone()
+    public void gameOver()
     {
-        //playerAsteroid.setZone();
+        foreach(KeyValuePair<int, Asteroid> p in asteroidInUse)
+        {
+            p.Value.destroy();
+        }
+        spawn = false;
+        if (!asteroidNetwork.isServer())
+            canvas.SetActive(false);
+        else
+            canvas.SetActive(true);
     }
+
+    public void launchColor(bool b)
+    {
+        timeSinceLastSpawn = Time.time;
+        cdSpawnAsteroid = 1.0f;
+        isColor = b;
+        spawn = true;
+        canvas.SetActive(false);
+    }
+
 }
