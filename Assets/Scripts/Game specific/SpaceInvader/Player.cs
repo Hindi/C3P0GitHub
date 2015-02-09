@@ -191,6 +191,10 @@ public class Player : MonoBehaviour
             float delta = transform.position.x - collision.transform.position.x;
             collision.rigidbody.AddForce(new Vector3(calcBouncingForce(delta), 0, 0));
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            hit();
+        }
     }
 
     void OnGUI()
