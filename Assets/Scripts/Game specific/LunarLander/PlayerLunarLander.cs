@@ -220,11 +220,17 @@ public class PlayerLunarLander : MonoBehaviour {
                 cameraLL.Zooming = true;
         }
 
+        fuelLabel.text = "Fuel " + fuel.ToString();
+        scoreLabel.text = "Score " + score.ToString();
+	}
+
+    void FixedUpdate()
+    {
         if (landed)
         {
             if (Time.time - restartTimerStart > timeBeforeRestart)
                 resetAfterLanding();
-            if(fuel <= 0)
+            if (fuel <= 0)
                 EventManager<bool>.Raise(EnumEvent.GAMEOVER, true);
         }
         else
@@ -241,10 +247,7 @@ public class PlayerLunarLander : MonoBehaviour {
                 }
             }
         }
-
-        fuelLabel.text = "Fuel " + fuel.ToString();
-        scoreLabel.text = "Score " + score.ToString();
-	}
+    }
 
     void OnBecameInvisible()
     {
@@ -264,7 +267,7 @@ public class PlayerLunarLander : MonoBehaviour {
         if(!landed)
         {
             restartTimerStart = Time.time;
-            if (collision.collider.tag == "Platform" && collision.relativeVelocity.y > -0.3f && collision.relativeVelocity.x > -0.2f && Mathf.Abs(transform.rotation.eulerAngles.z) < 20)
+            if (collision.collider.tag == "Platform" && Mathf.Abs(collision.relativeVelocity.y) < 0.4f && Mathf.Abs(collision.relativeVelocity.x) < 0.4f && (Mathf.Abs(transform.rotation.eulerAngles.z) < 20 || Mathf.Abs(transform.rotation.eulerAngles.z) > 340))
             {
                 timeBeforeRestart = 3;
                 score += 10;
