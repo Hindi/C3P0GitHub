@@ -1,21 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>Wall.</summary>
 public class WallScript : MonoBehaviour {
 
+    /// <summary>Reference to the alien manager.</summary>
     [SerializeField]
     private AliensManager alienManager;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    /// <summary>Reverse aliens dirrection when one of them collide.</summary>
     void OnTriggerEnter(Collider other)
     {
 		if (other.tag == "Enemy") 
