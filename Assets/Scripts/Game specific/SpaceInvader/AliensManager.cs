@@ -1,71 +1,109 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Stores and update the Aliens.
+/// </summary>
 public class AliensManager : MonoBehaviour {
 
 
+    /// <summary>Reference to the player script.</summary>
     [SerializeField]
     Player player;
 
+    /// <summary>Reference to the ball (breakout mode).</summary>
     [SerializeField]
     GameObject ball;
 
+    /// <summary>Prefab of the first alien.</summary>
     [SerializeField]
     private GameObject alien1;
 
+    /// <summary>Prefab of the second alien.</summary>
     [SerializeField]
     private GameObject alien2;
-    
+
+    /// <summary>Prefab of the third alien.</summary>
     [SerializeField]
     private GameObject alien3;
 
+    /// <summary>Alien move cooldown.</summary>
     [SerializeField]
     private float coolDown;
+
+    /// <summary>X position of the first alien at start.</summary>
     [SerializeField]
     private int startX;
+
+    /// <summary>Y position of the first alien at start.</summary>
     [SerializeField]
     private int startZ;
+
+    /// <summary>Space between aliens (X axis).</summary>
     [SerializeField]
     private int spaceBetweenAliens;
+
+    /// <summary>Space between aliens (Y axis).</summary>
     [SerializeField]
     private int spaceBetweenLines;
+
+    /// <summary>Alien count per line.</summary>
     [SerializeField]
 	private int aliensPerLine;
+
+    /// <summary>Alien fire cooldown.</summary>
 	[SerializeField]
 	private float fireCooldown;
 
+    /// <summary>STime before and between breakout mode.</summary>
     [SerializeField]
     private float breakOutCooldown;
+
+    /// <summary>Time reference to check if it's beakout time.</summary>
     private float breakOutStartTime;
 
-	
+    /// <summary>Direction of the aliens.</summary>
     private int direction;
+
+    /// <summary>True if we need to change direction.</summary>
     private bool changeDirection;
 
+    /// <summary>True if we're in breakout mode.</summary>
     private bool breakOutMode;
 
+    /// <summary>Time when alien moved the last time.</summary>
     private float lastMoveTime;
 
+    /// <summary>WAlien death count.</summary>
 	private int deathCount;
+
+    /// <summaryAlien count.</summary>
 	private int alienCount;
+
+    /// <summary>Victory count.</summary>
 	private int victoryCount;
+
+    /// <summary>Last time an alien fired.</summary>
 	private float lastFireTime;
-	
-	// Use this for initialization
+
+    /// <summary>Spawn the aliens and register callbacks for events.</summary>
+    /// <returns>void</returns>
 	void Start () {
         start();
-        EventManager.AddListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
+        EventManager.AddListener(EnumEvent.ENEMYDEATH, onAlienDeath);
         EventManager.AddListener(EnumEvent.RESTARTGAME, onRestartGame);
-		EventManager<bool>.AddListener (EnumEvent.GAMEOVER, onGameOver);
 	}
 
+    /// <summary>Unregister callbacks for events.</summary>
+    /// <returns>void</returns>
     void OnDestroy()
     {
-        EventManager.RemoveListener(EnumEvent.ENEMYDEATH, onEnemyDeath);
+        EventManager.RemoveListener(EnumEvent.ENEMYDEATH, onAlienDeath);
         EventManager.RemoveListener(EnumEvent.RESTARTGAME, onRestartGame);
-        EventManager<bool>.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
     }
 
+    /// <summary>Spawn the aliens and init timers.</summary>
+    /// <returns>void</returns>
     void start()
     {
         spawnAliens();
@@ -80,6 +118,8 @@ public class AliensManager : MonoBehaviour {
         lastMoveTime = Time.time;
     }
 
+    /// <summary>Switch to normal mode and destroy the aliens.</summary>
+    /// <returns>void</returns>
     void end()
     {
         switchBackToNormal();
@@ -89,17 +129,23 @@ public class AliensManager : MonoBehaviour {
             Destroy(o.gameObject);
         }
     }
-	
+
+    /// <summary>Check if aliens can fire.</summary>
+    /// <returns>True if can fire</returns>
 	bool canFire()
 	{
 		return (Time.time - lastFireTime > fireCooldown / (2+victoryCount));
 	}
 
+    /// <summary>Check if it's time to switch to breakout mode.</summary>
+    /// <returns>True if it's time</returns>
     bool isBreakOutTime()
     {
         return (Time.time - breakOutStartTime > breakOutCooldown && !breakOutMode);
     }
-	
+
+    /// <summary>Spawn the aliens.</summary>
+    /// <returns>void</returns>
 	private void spawnAliens()
 	{
 		summonLine(0, alien1);
@@ -108,26 +154,29 @@ public class AliensManager : MonoBehaviour {
 		//summonLine(spaceBetweenLines * 3, alien2);
 		summonLine(spaceBetweenLines * 3, alien3);
 	}
-	
-	public void onEnemyDeath()
+
+    /// <summary>Called when an alien dies. Increase the counts and check for victory.</summary>
+    /// <returns>void</returns>
+	public void onAlienDeath()
 	{
 		deathCount++;
 		if (deathCount == alienCount)
+        {
             EventManager<bool>.Raise(EnumEvent.RESTARTGAME, true);
-        victoryCount++;
+            victoryCount++;
+        }
 	}
 
+    /// <summary>Calls end and start when it's time to restart.</summary>
+    /// <returns>void</returns>
     public void onRestartGame()
     {
         end();
         start();
     }
-	
-	public void onGameOver(bool b)
-	{
 
-	}
-
+    /// <summary>Spawn a line of alien.</summary>
+    /// <returns>void</returns>
     private void summonLine(int z, GameObject prefab)
     {
         GameObject temp;
@@ -138,11 +187,15 @@ public class AliensManager : MonoBehaviour {
         }
     }
 
+    /// <summary>Called when an alien reaches the border of the terrain. Start eh change direction process.</summary>
+    /// <returns>void</returns>
     public void reverseDirection()
     {
         changeDirection = true;
     }
 
+    /// <summary>Update the aliens position.</summary>
+    /// <returns>void</returns>
     private void moveAliens()
     {
         Vector3 deltaPos = new Vector3(direction * spaceBetweenAliens / 3, 0, 0);
@@ -161,6 +214,8 @@ public class AliensManager : MonoBehaviour {
         }
     }
 
+    /// <summary>Pick random alien to shoot.</summary>
+    /// <returns>void</returns>
     private void alienFire()
     {
 		if (canFire()) 
@@ -170,8 +225,9 @@ public class AliensManager : MonoBehaviour {
                 lastFireTime = Time.time;
             }
     }
-	
-	// Update is called once per frame
+
+    /// <summary>Check for breakout, fire, move, etc and start the necessary processes.</summary>
+    /// <returns>void</returns>
     void Update()
 	{
         alienFire();
@@ -191,7 +247,9 @@ public class AliensManager : MonoBehaviour {
         if (isBreakOutTime())
             switchToBreakout();
 	}
-	
+
+    /// <summary>Switch to breakout mode : stop the aliens and activate the ball.</summary>
+    /// <returns>void</returns>
 	void switchToBreakout()
     {
         breakOutMode = true;
@@ -200,6 +258,8 @@ public class AliensManager : MonoBehaviour {
         ball.GetComponent<Ball>().switchToBreakOut();
     }
 
+    /// <summary>Switch to normal mode : The aliens start moving again and the ball is disactivated.</summary>
+    /// <returns>void</returns>
     void switchBackToNormal()
     {
         breakOutStartTime = Time.time;
