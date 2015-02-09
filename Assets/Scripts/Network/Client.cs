@@ -218,19 +218,17 @@ public class Client
     public void saveGameStats(EnumGame gameEnum)
     {
         if(gameStats.Count != 0)
-            XmlHelpers.SaveToXML<List<GameStat>>("Assets/Resources/Xml/gameStats/" + gameEnum + "/" + login + ".xml", gameStats);
+            XmlHelpers.SaveToXML<List<GameStat>>(Application.dataPath + "/Resources/Xml/gameStats/" + gameEnum + "/" + login + ".xml", gameStats);
     }
 
     public void loadGameStats(EnumGame gameEnum)
     {
-        Debug.Log("Xml/gameStats/" + gameEnum + "/" + login + ".xml");
         if(null != gameEnum)
         {
             try
             {
-                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("Xml/gameStats/" + gameEnum + "/" + login);
-                gameStats = XmlHelpers.LoadFromTextAsset<GameStat>(statsFile, "ArrayOfGameStat");
-                Debug.Log("loaded : " + gameStats.Count);
+                gameStats = XmlHelpers.loadFromXML<List<GameStat>>(Application.dataPath + "/Resources/xml//gameStats/" + gameEnum + "/" + login + ".xml", "ArrayOfGameStat");
+                
             }
             catch
             {
@@ -250,7 +248,7 @@ public class Client
                 stats.Add(new Answer(a.question.id, a.rep, a.result, a.answerTime));
             }
 
-            XmlHelpers.SaveToXML<List<Answer>>("Assets/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
+            XmlHelpers.SaveToXML<List<Answer>>(Application.dataPath + "/Resources/Xml/answers/" + currentCourseId + "/" + login + ".xml", stats);
         }
     }
 
@@ -261,8 +259,7 @@ public class Client
             currentCourseStatsId = currentCourseId;
             try
             {
-                TextAsset statsFile = (TextAsset)UnityEngine.Resources.Load("xml/answers/" + currentCourseId + "/" + login);
-                List<Answer> stats = XmlHelpers.LoadFromTextAsset<Answer>(statsFile, "ArrayOfAnswer");
+                List<Answer> stats = XmlHelpers.loadFromXML<List<Answer>>(Application.dataPath + "/Resources/xml/answers/" + currentCourseId + "/" + login + ".xml", "ArrayOfAnswer");
                 QuestionManager.AnswerKeeper answerKeeper;
                 foreach (Answer a in stats)
                 {

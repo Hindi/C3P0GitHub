@@ -65,10 +65,21 @@ public class XmlHelpers
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         using (StreamWriter stream = new StreamWriter(path, false, new UTF8Encoding(false)))
         {
-            Debug.Log(stream.ToString());
-
             serializer.Serialize(stream, objectToSerialize);
             stream.Close();
+        }
+    }
+
+    public static T loadFromXML<T>(string path, string root = "Datatable")
+    {
+        XmlRootAttribute xRoot = new XmlRootAttribute();
+        xRoot.ElementName = root;
+        xRoot.IsNullable = true;
+        XmlSerializer serializer = new XmlSerializer(typeof(T),xRoot);
+        using (TextReader reader = new StreamReader(path, new UTF8Encoding(false)))
+        {
+            T datas = (T)serializer.Deserialize(reader);
+            return datas;
         }
     }
 

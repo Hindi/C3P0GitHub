@@ -200,9 +200,7 @@ public class QuestionManager {
     public void loadXml(int id)
     {
         courseId = id;
-        TextAsset questionFile;
-        questionFile = (TextAsset)UnityEngine.Resources.Load("xml/cours" + id);
-        questionList = XmlHelpers.LoadFromTextAsset<QuestionManager.QuestionKeeper>(questionFile);
+        questionList = XmlHelpers.loadFromXML<List<QuestionManager.QuestionKeeper>>(Application.dataPath + "/Resources/xml/cours" + id + ".xml");
 
         for (int i = 0; i < questionList.Count; ++i)
             questionList[i].id = i;
