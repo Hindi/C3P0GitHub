@@ -56,8 +56,8 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
         // TO DO remove les input locales
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    fire();
+        if (Input.GetKeyDown(KeyCode.Space))
+            fire();
         setRotation();
 	}
 
@@ -75,27 +75,13 @@ public class PlayerAsteroid : MonoBehaviour {
             if (hit.transform.CompareTag("Asteroid"))
             {
                 Asteroid ast = hit.transform.gameObject.GetComponentInParent<Asteroid>();
-                Debug.Log(ast.getColor());
                 asteroidNetwork.hitAsteroid(ast.id);
                 if (ast.getColor() == color)
                 {
-                    asteroidNetwork.hitAsteroid(ast.id);
-                    Debug.Log("J'ai touché un asteroid de la même couleur que moi");
-                }
-                else
-                {
-                    Debug.Log("J'ai pas touché la bonne couleur");
+                    // TO DO use it when color system ok
+                    //asteroidNetwork.hitAsteroid(ast.id);
                 }
             }
-            else
-            {
-                Debug.Log("Je sais pas ce que j'ai touché");
-                Debug.Log(hit.transform.gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("j'ai raté");
         }
     }
 
@@ -110,7 +96,6 @@ public class PlayerAsteroid : MonoBehaviour {
             ray.origin = playerCamera.transform.position;
             Vector3 dir = viseur.transform.position - playerCamera.transform.position;
             ray.direction = dir;
-            Debug.Log("boite");
             rayCast(ray);
             timeSinceLastShoot = Time.time;
         }

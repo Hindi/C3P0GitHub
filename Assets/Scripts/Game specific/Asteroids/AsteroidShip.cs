@@ -7,6 +7,9 @@ public class AsteroidShip : MonoBehaviour {
     [SerializeField]
     private List<Transform> asteroidsTargetList;
 
+    [SerializeField]
+    private AsteroidNetwork asteroidNetwork;
+
     // Use this for initialization
     void Start()
     {
@@ -21,11 +24,20 @@ public class AsteroidShip : MonoBehaviour {
 
     public Vector3 getTarget()
     {
-        return asteroidsTargetList[(int)Random.Range(0, asteroidsTargetList.Count -1)].position;
+        return asteroidsTargetList[(int)Random.Range(0, asteroidsTargetList.Count)].position;
     }
 
-    [RPC]
-    void voteForTarget(int id)
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Je suis mourru");
+        if (asteroidNetwork.isServer())
+        {
+            this.gameOver();
+            asteroidNetwork.gameOver();
+        }
+    }
+
+    public void gameOver()
     {
 
     }
