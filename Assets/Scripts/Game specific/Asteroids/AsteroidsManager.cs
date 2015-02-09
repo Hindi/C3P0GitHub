@@ -44,8 +44,8 @@ public class AsteroidsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (asteroidNetwork.isServer())
-        {
+      //  if (asteroidNetwork.isServer())
+        //{
             if (Input.GetKeyDown(KeyCode.A))
             {
                 Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
@@ -54,15 +54,15 @@ public class AsteroidsManager : MonoBehaviour {
                 Vector3 target = shipScript.getTarget();
                 if (nbAsteroid % 2 == 0)
                 {
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.JAUNE);
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.NONE);
                 }
                 else
                 {
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.ROUGE);
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.NONE);
                 }
                 nbAsteroid++;
             }
-        }
+        //}
 	}
 
     void cameraInitialisation()

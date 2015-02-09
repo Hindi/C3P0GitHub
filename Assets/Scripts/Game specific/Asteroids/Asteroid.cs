@@ -97,4 +97,9 @@ public class Asteroid : MonoBehaviour {
     {
         return color;
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        destroy();
+    }
 }

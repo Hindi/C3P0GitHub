@@ -51,8 +51,10 @@ public class ServerMenu : MonoBehaviour {
     private GameObject nextButtons;
     [SerializeField]
     private GameObject startGameButton;
+
+    //Answer stats
     [SerializeField]
-    private GameObject statsButton;
+    private GameObject stats;
 
     [SerializeField]
     private Text ipLabel;
@@ -134,7 +136,7 @@ public class ServerMenu : MonoBehaviour {
         sendButtons.SetActive(true);
         nextButtons.SetActive(true);
         startGameButton.SetActive(false);
-        statsButton.SetActive(false);
+        stats.SetActive(false);
         startGame = false;
         loadquestionText();
     }
@@ -145,7 +147,6 @@ public class ServerMenu : MonoBehaviour {
         coursButtons.SetActive(false);
         sendButtons.SetActive(false);
         nextButtons.SetActive(false);
-        scoreTopList.gameObject.SetActive(true);
         startGameButton.SetActive(true);
         startGame = true;
     }
@@ -176,7 +177,7 @@ public class ServerMenu : MonoBehaviour {
 
     public void sendQuestion()
     {
-        statsButton.SetActive(true);
+        stats.SetActive(true);
         QuestionManager.Instance.sendQuestion();
         if (QuestionManager.Instance.isQuestionTimeOver())
         {
@@ -206,6 +207,8 @@ public class ServerMenu : MonoBehaviour {
 
     public void launchGame()
     {
+        stats.SetActive(false);
+        scoreTopList.gameObject.SetActive(true);
         previousButton.SetActive(false);
         gameLaunched = true;
 

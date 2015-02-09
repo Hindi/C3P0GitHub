@@ -54,23 +54,52 @@ static class IdConverter
             case 2:
                 return EnumGame.PONG;
             case 3:
-                return EnumGame.LUNARLANDER;
-            case 4:
                 return EnumGame.SPACEINVADER;
+            case 4:
+                return EnumGame.ASTEROIDS;
             case 5:
-                return EnumGame.TETRIS;
+                return EnumGame.LUNARLANDER;
             case 6:
                 return EnumGame.MOONPATROL;
             case 7:
-                return EnumGame.ASTEROIDS;
-            case 8:
                 return EnumGame.PACMAN;
+            case 8:
+                return EnumGame.TETRIS;
             case 9:
                 return EnumGame.MARIO;
             case 10:
                 return EnumGame.ZELDA;
             default:
                 return (EnumGame)(-1);
+        }
+    }
+
+    public static int gameToID(EnumGame game)
+    {
+        switch (game)
+        {
+            case EnumGame.SPACEWAR:
+                return 1;
+            case EnumGame.PONG:
+                return 2;
+            case EnumGame.SPACEINVADER:
+                return 3;
+            case EnumGame.ASTEROIDS:
+                return 4;
+            case EnumGame.LUNARLANDER:
+                return 5;
+            case EnumGame.MOONPATROL:
+                return 6;
+            case EnumGame.PACMAN:
+                return 7;
+            case EnumGame.TETRIS:
+                return 8;
+            case EnumGame.MARIO:
+                return 9;
+            case EnumGame.ZELDA:
+                return 10;
+            default:
+                return -1;
         }
     }
 
@@ -83,17 +112,17 @@ static class IdConverter
             case 2:
                 return "Pong";
             case 3:
-                return "LunarLander";
-            case 4:
                 return "SpaceInvader";
+            case 4:
+                return "Asteroids";
             case 5:
-                return "Tetris";
+                return "LunarLander";
             case 6:
                 return "MoonPatrol";
             case 7:
-                return "Asteroids";
-            case 8:
                 return "Pacman";
+            case 8:
+                return "Tetris";
             case 9:
                 return "Mario";
             case 10:
