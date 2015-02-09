@@ -75,6 +75,7 @@ public class ParamMenu : MonoBehaviour {
 
     public void onQuestionMarkClick(string s)
     {
+        GetComponent<GraphicRaycaster>().enabled = false;
         explanationObj.SetActive(true);
         if (s != "")
         {
@@ -84,11 +85,13 @@ public class ParamMenu : MonoBehaviour {
 
     public void onCloseExplanationClick()
     {
+        GetComponent<GraphicRaycaster>().enabled = true;
         explanationObj.SetActive(false);
     }
 
     public void onKeyInfoClick(bool b)
     {
+        GetComponent<GraphicRaycaster>().enabled = !b;
         if (Application.isMobilePlatform)
         {
             mobileInput.SetActive(b);
