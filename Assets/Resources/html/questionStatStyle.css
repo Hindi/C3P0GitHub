@@ -2,7 +2,7 @@
     width: 378px;
     height: 207px;
     position: relative;
-    background: url("../../Sprites/html pages/g_backbar.png") no-repeat;
+    background: url("images/g_backbar.png") no-repeat;
 }
 
 #vertgraph ul {
@@ -19,7 +19,7 @@
     bottom: 28px;
     padding: 0 !important;
     margin: 0 !important;
-    background: url("../../Sprites/html pages/g_colorbar3.png") no-repeat !important;
+    background: url("images/g_colorbar3.png") no-repeat !important;
     text-align: center;
     font-weight: bold;
     color: black;
