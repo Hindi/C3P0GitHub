@@ -40,29 +40,9 @@ public class BlankyMove : MonoBehaviour {
 	bool scatterMode = false;
 
 	/// <summary>
-	/// The duration of scatter mode
-	/// </summary>
-	float scatterDelay = 10.0f;
-
-	/// <summary>
-	/// The time when the current scatter mode started
-	/// </summary>
-	float scatterTimer;
-
-	/// <summary>
 	/// True if this enemy is in frighten mode
 	/// </summary>
 	bool frightenMode = false;
-
-	/// <summary>
-	/// The duration of the frighten mode
-	/// </summary>
-	float frightenDelay = 5.0f;
-
-	/// <summary>
-	/// The time when the current frighten mode started
-	/// </summary>
-	float frightenTimer;
 
 
 	/// <summary>
@@ -141,21 +121,29 @@ public class BlankyMove : MonoBehaviour {
 	/// Activates the scatter mode
 	/// </summary>
 	/// <returns>void</returns>
-	void scatter(){
-		scatterMode = true;
-		scatterTimer = 0f;
+	void scatter(bool res){
+		scatterMode = res;
 	}
 
 	/// <summary>
 	/// Activates the frighten mode
 	/// </summary>
 	/// <returns>void</returns>
-	void frightened(){
-		frightenMode = true;
-		frightenTimer = 0f;
-		renderer.material.color = Color.blue;
-		renderer.enabled = true;
-		halo.enabled = false;
+	void frightened(bool res){
+		if(!eaten){
+				if (res){
+				frightenMode = true;
+				renderer.material.color = Color.blue;
+				renderer.enabled = true;
+				halo.enabled = false;
+			}
+				else {
+					frightenMode = false;
+					renderer.material.color = defaultColor;
+					renderer.enabled = false;
+					halo.enabled = true;
+				}			
+		}
 	}
 
 
@@ -312,10 +300,15 @@ public class BlankyMove : MonoBehaviour {
 	/// Called when the player wins the mini-game and this ghost is his encounter
 	/// </summary>
 	/// <param name="tag">The tage of the encounter.</param>
-	void sentenceWin(string tag){
-		renderer.enabled = false;
-		halo.enabled = false;
-		if (tag == gameObject.tag){
+	void sentenceWin(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			renderer.enabled = false;
+			halo.enabled = true;
+		}
+		if (obj == gameObject){
 			if (frightenMode){
 				eaten = true;
 				frightenMode = false;
@@ -335,19 +328,31 @@ public class BlankyMove : MonoBehaviour {
 	/// Called when the time is over and this ghost is his encounter
 	/// </summary>
 	/// <param name="tag">The tag of the encounter.</param>
-	void sentenceTO(string tag){
-		renderer.enabled = false;
-		halo.enabled = true;
-		if (tag == gameObject.tag){
+	void sentenceTO(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			renderer.enabled = false;
+			halo.enabled = true;
+		};
+		if (obj == gameObject){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
 
-	void sentenceLost(string tag){
-		renderer.enabled = false;	
-		halo.enabled = true;
+	void sentenceLost(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			frightenMode = false;
+			renderer.material.color = defaultColor;
+			renderer.enabled = false;
+			halo.enabled = true;
+		}
 	}
 
 
@@ -411,11 +416,11 @@ public class BlankyMove : MonoBehaviour {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
 		EventManager<bool, string>.AddListener(EnumEvent.MOVING, moving);
-		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<bool>.AddListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
@@ -437,26 +442,17 @@ public class BlankyMove : MonoBehaviour {
 	void FixedUpdate () {
 		if (isMoving){
 			chase();
-			scatterTimer += Time.deltaTime;
-			frightenTimer += Time.deltaTime;
 		}
-		if (scatterMode && scatterTimer > scatterDelay){
-				scatterMode = false;
-			}
-		if (frightenMode && frightenTimer > frightenDelay){
-			frightenMode = false;
-			renderer.material.color = defaultColor;
-			}
-			if (Vector3.Distance(transform.position, homeTarget) < 1f){
+		if (Vector3.Distance(transform.position, homeTarget) < 1f){
+			if(eaten){
 				eaten = false;
-			if(!frightenMode)
-			{
 				renderer.material.color = defaultColor;
 				collider.enabled = true;
 				renderer.enabled = false;
 				halo.enabled = true;
+				frightened(false);
 			}
-			}
+		}
 	}
 
 	/// <summary>
@@ -464,11 +460,11 @@ public class BlankyMove : MonoBehaviour {
 	/// </summary>
 	void OnDestroy(){
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
-		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<bool>.RemoveListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager<bool>.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
