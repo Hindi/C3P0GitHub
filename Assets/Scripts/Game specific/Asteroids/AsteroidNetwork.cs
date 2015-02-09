@@ -13,7 +13,7 @@ public class AsteroidNetwork : MonoBehaviour {
 
     public void gameOver()
     {
-        networkView.RPC("gameOverRPC", RPCMode.Others);
+        networkView.RPC("gameOverRPC", RPCMode.All);
     }
 
     /// <summary>
