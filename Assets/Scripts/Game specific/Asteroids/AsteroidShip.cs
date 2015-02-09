@@ -34,7 +34,6 @@ public class AsteroidShip : MonoBehaviour {
         if (asteroidNetwork.isServer())
         {
             this.hit();
-            //asteroidNetwork.gameOver();
         }
         // Bouger l'écran
     }
@@ -46,6 +45,7 @@ public class AsteroidShip : MonoBehaviour {
         if (hp <= 0)
         {
             asteroidNetwork.gameOver();
+            hp = 3;
         }
         // Changer le sprite pour fissurer l'écran
     }

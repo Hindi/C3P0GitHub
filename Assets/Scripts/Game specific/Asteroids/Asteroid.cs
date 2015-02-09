@@ -54,7 +54,6 @@ public class Asteroid : MonoBehaviour {
         {
             //gameObject.renderer.enabled = false;
             // Calls a RPC that does that for everyone
-
             asteroidManager.remove(this.id);
         }
     }
@@ -80,8 +79,9 @@ public class Asteroid : MonoBehaviour {
     public void destroy()
     {
         gameObject.SetActive(false);
+        asteroidManager.remove(this.id);
         // Now we add it to the unuse asteroid stack
-        // Factry disables the gameobject 
+        // Factory disables the gameobject
         AsteroidFactory._factory.push(this);
         isUsed = false;
     }
