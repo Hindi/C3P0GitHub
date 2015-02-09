@@ -59,7 +59,6 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotUpDown += -Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        radarCamera.transform.EulerAngles = new Vector3(radarCamera.transform.rotation.x, rotLeftRight, radarCamera.transform.rotation.z);
         // TO DO remove les input locales
         if (Input.GetKeyDown(KeyCode.Space))
             fire();
@@ -140,6 +139,7 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight = Mathf.Clamp(rotLeftRight, -leftRightRange, leftRightRange);
         rotUpDown = Mathf.Clamp(rotUpDown, -upDownRange, upDownRange);
         transform.eulerAngles = new Vector3(rotUpDown, rotLeftRight, 0);
+        radarCamera.transform.eulerAngles = new Vector3(radarCamera.transform.rotation.x, rotLeftRight, radarCamera.transform.rotation.z);
     }
 
     /*
