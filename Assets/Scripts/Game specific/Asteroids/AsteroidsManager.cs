@@ -18,6 +18,7 @@ public class AsteroidsManager : MonoBehaviour {
     private static int nbAsteroid;
     private static int colorChoice;
     private static int zoneChoice;
+    private int nbColor; 
 
     [SerializeField]
     int nbAsteroidToSpawn;
@@ -31,6 +32,7 @@ public class AsteroidsManager : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        nbColor = 5; // Bleu, Vert, Rouge, Jaune, Violet
         asteroidInUse = new Dictionary<int, Asteroid>();
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
         cameraInitialisation();
@@ -52,15 +54,11 @@ public class AsteroidsManager : MonoBehaviour {
                 Vector3 target = shipScript.getTarget();
                 if (nbAsteroid % 2 == 0)
                 {
-                    // TO DO remove l'autr ecommentaire
-                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
-                    //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.ROUGE);
-
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, EnumColor.JAUNE);
                 }
                 else
                 {
-                    asteroidNetwork.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1);
-                    //AsteroidFactory._factory.createAsteroid(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.VIOLET);
+                    asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 1, EnumColor.ROUGE);
                 }
                 nbAsteroid++;
             }
@@ -128,7 +126,9 @@ public class AsteroidsManager : MonoBehaviour {
         if (asteroidNetwork.isServer())
         {
             colorChoice++;
-            int colorReturn = colorChoice % 4;
+            int colorReturn = (colorChoice % nbColor) + 1; // return a number from 1 to 5
+            // TO DO remove
+            Debug.Log((EnumColor) colorReturn);
             return ((EnumColor) colorReturn);
         }
         return EnumColor.NONE;
