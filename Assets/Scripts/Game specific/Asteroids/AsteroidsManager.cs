@@ -180,6 +180,7 @@ public class AsteroidsManager : MonoBehaviour {
         foreach(KeyValuePair<int, Asteroid> p in asteroidInUse)
         {
             p.Value.destroy();
+            asteroidInUse.Remove(p.Key);                
         }
         spawn = false;
         if (!asteroidNetwork.isServer())
