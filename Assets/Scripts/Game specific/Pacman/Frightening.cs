@@ -18,9 +18,9 @@ public class Frightening : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Called when the player wins the mini-game and this ghost is his encounter
+	/// Called when the player wins the mini-game
 	/// </summary>
-	/// <param name="tag">The tage of the encounter.</param>
+	/// <param name="tag">The gameObject of the encounter.</param>
 	void sentenceWin(GameObject obj){
 		halo.enabled = true;
 		if (obj == gameObject){
@@ -29,17 +29,24 @@ public class Frightening : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Called when the time is over and this ghost is his encounter
+	/// Called when the time of mini-game is over
 	/// </summary>
-	/// <param name="tag">The tag of the encounter.</param>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceTO(GameObject obj){
 		halo.enabled = true;
 	}
-	
+
+	/// <summary>
+	/// Called when the player loses the minigame
+	/// </summary>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceLost(GameObject obj){
 		halo.enabled = true;	
 	}
 
+	/// <summary>
+	/// Called when the mini-game starts
+	/// </summary>
 	void onStartMiniGame(){
 		halo.enabled = false;
 	}

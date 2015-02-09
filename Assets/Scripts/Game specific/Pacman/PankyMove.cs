@@ -2,25 +2,104 @@
 using System.Collections;
 
 public class PankyMove : MonoBehaviour {
+	
+	/// <summary>
+	/// The player's GameObject
+	/// </summary>
 	GameObject pacman;
+
+	/// <summary>
+	/// The player's script
+	/// </summary>
 	PacMove pacMove;
+
+	/// <summary>
+	/// The target during normal mode
+	/// </summary>
 	Vector3 pankyTarget;
+
+	/// <summary>
+	/// The target during scatter mode
+	/// </summary>
 	Vector3 pankyScatterTarget = new Vector3(28,0,2);
+
+	/// <summary>
+	/// The target once defeated
+	/// </summary>
 	Vector3 homeTarget = new Vector3(13, 0, -11);
+
+	/// <summary>
+	/// True is this enemy is in scatter mode
+	/// </summary>
 	bool scatterMode = false;
+
+	/// <summary>
+	/// True if this enemy is in frighten mode
+	/// </summary>
 	bool frightenMode = false;
+
+	/// <summary>
+	/// True if this enemy has been defeated
+	/// </summary>
 	bool eaten = false;
+
+	/// <summary>
+	/// The current direction
+	/// </summary>
 	Vector3 curDir = Vector3.right;
+
+	/// <summary>
+	/// The next direction
+	/// </summary>
 	Vector3 nextDir = Vector3.right;
+
+	/// <summary>
+	/// The tile representation of the maze.
+	/// </summary>
+	/// [i, j] is the tile located on the ith row (from top to bottom) and jth column (from left to right).
+	/// For the game graphics, a tile i a 1x1 square and and its coordinates are (j, -i)
+	/// Each number represents a tile :
+	/// - 0 is a dead tile, neither the player nor the enemy AIs can be located in a dead tile at any time.
+	/// - 1 or higher is a legal tile, both players and enemies can travel between those tiles.
 	int[,] pacGrid;
+
+	/// <summary>
+	/// The x coordinate of the tile this enemy is
+	/// </summary>
 	int curTileX;
+
+	/// <summary>
+	/// The y coordinate of the tile this enemy is
+	/// </summary>
 	int curTileY;
+
+	/// <summary>
+	/// True if this enemy is allowed to move
+	/// </summary>
 	bool isMoving = false;
+
+	/// <summary>
+	/// True if inside the spawn zone
+	/// </summary>	
 	bool inHouse = true;
+
+	/// <summary>
+	/// The default color of this enemy
+	/// </summary>
 	Color defaultColor;
+
+	/// <summary>
+	/// The halo of the object
+	/// </summary>
 	Behaviour halo;
 
-
+	
+	/// <summary>
+	/// Allows moovement
+	/// </summary>
+	/// <param name="real">True if the enemy is allowed to move.</param>
+	/// <param name="tag">The tag of the GameObject.</param>
+	/// <returns>void</returns>
 	void moving(bool real, string tag){
 		if (tag == gameObject.tag){
 			isMoving = real;
@@ -28,6 +107,10 @@ public class PankyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Allows Movement.
+	/// </summary>
+	/// <param name="real">If set to <c>true</c> , the enemy is allowed to move.</param>
 	void moving(bool real){
 		isMoving = real;
 	}
@@ -65,7 +148,11 @@ public class PankyMove : MonoBehaviour {
 	 * Unlike pacman, the ghosts can't make a u-turn.
 	 * If one of the valid direction would cause a ghost to make a u-turn te direction will be invalidated.
 	 */
-	
+	/// <summary>
+	/// Check if next is a valid direction.
+	/// </summary>
+	/// <returns><c>true</c>, if next is a valid direction, <c>false</c> otherwise.</returns>
+	/// <param name="next">The next direction.</param>
 	bool isValid (Vector3 next){
 		Vector3 predicted = transform.position + next;
 		int predX = Mathf.RoundToInt(predicted.x);
@@ -86,6 +173,10 @@ public class PankyMove : MonoBehaviour {
 	 *  - The third is for down
 	 *  - And the fourth is for right
 	 */
+	/// <summary>
+	/// Gives the possible directions.
+	/// </summary>
+	/// <returns>The array of possible directions.</returns>
 	Vector3[] validDir(){
 		Vector3[] validDirs = new Vector3[4];
 		validDirs[0] = Vector3.zero;
@@ -117,6 +208,10 @@ public class PankyMove : MonoBehaviour {
 	/* After checking the valid directions, we choose the one that will make the ghost go closer to Pacman.
 	 * If no direction has already been chosen, the first valid direction is picked.
 	 * If there is already a chosen direction, we check if the next valid one is a better solution, if it is */
+	/// <summary>
+	/// Get the next possible direction.
+	/// </summary>
+	/// <returns>The next dir.</returns>
 	Vector3 getNextDir(){
 		Vector3[] possibleDirs = validDir();
 		Vector3 possibleDir = Vector3.zero;
@@ -138,6 +233,9 @@ public class PankyMove : MonoBehaviour {
 	 * The ghost will only move if it reached the next tile.
 	 * The ghost can only change its direction once pet tile but can't make a u-turn
 	 */
+	/// <summary>
+	/// Makes the blue ghost moving
+	/// </summary>
 	void move()
 	{
 		if (Vector3.Distance(new Vector3(curTileX, 0, -curTileY), transform.position) <= 0.9f){
@@ -160,13 +258,15 @@ public class PankyMove : MonoBehaviour {
 	
 	
 	/*
-	 * The ghost uses the Blinky behaviour : when chasing Pacman, its target point is the tile where pacman is WITH an offset four tile away in the direction Pacman is moving.
+	 * The ghost uses the Pinky behaviour : when chasing Pacman, its target point is the tile where pacman is WITH an offset four tile away in the direction Pacman is moving.
 	 * When moving, the ghost is looking a tile ahead.
 	 * It checks which direction is available for the next tile.
 	 * If only one direction is valid, it will follow it.
 	 * If multiples direction are available, it check which direction will make him go closer to its target.
 	 * Then he moves*/
-	
+	/// <summary>
+	/// Updates the pankyTarget
+	/// </summary>
 	void chase(){
 
 		if (frightenMode){
@@ -233,7 +333,10 @@ public class PankyMove : MonoBehaviour {
 			}
 		}
 	}
-	
+	/// <summary>
+	/// Called when the player loses the mini-game and this ghost is his encounter
+	/// </summary>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceLost(GameObject obj){
 		if (frightenMode){
 			renderer.enabled = true;
@@ -246,12 +349,17 @@ public class PankyMove : MonoBehaviour {
 		}
 	}
 
-	
+	/// <summary>
+	/// Called when the mini-game starts
+	/// </summary>
 	void onStartMiniGame(){
 		renderer.enabled = false;
 		halo.enabled = true;
 	}
-	
+
+	/// <summary>
+	/// Called when the game restarts
+	/// </summary>
 	void onRestartGame(){
 		scatterMode = false;
 		frightenMode = false;
@@ -265,6 +373,10 @@ public class PankyMove : MonoBehaviour {
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
 	}
+
+	/// <summary>
+	/// Called when the scene loads
+	/// </summary>
 	void Start () {
 		
 		/*
@@ -328,9 +440,11 @@ public class PankyMove : MonoBehaviour {
 		defaultColor = renderer.material.color;
 
 	}
-	
-	void FixedUpdate () {
 
+	/// <summary>
+	/// Caled after a fixed amount of time
+	/// </summary>
+	void FixedUpdate () {
 		if (isMoving && !inHouse){
 			chase();
 			if (isMoving){
@@ -347,6 +461,10 @@ public class PankyMove : MonoBehaviour {
 			}
 		}
 	}
+
+	/// <summary>
+	/// Called when this scrip is destroyed
+	/// </summary>
 	void OnDestroy(){
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 		EventManager<bool>.RemoveListener(EnumEvent.SCATTERMODE, scatter);

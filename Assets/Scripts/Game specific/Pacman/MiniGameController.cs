@@ -48,8 +48,14 @@ public class MiniGameController : MonoBehaviour {
 	/// </summary>
 	bool miniGame = false;
 
+	/// <summary>
+	/// True if in frighten mode
+	/// </summary>
 	bool frightenMode = false;
 
+	/// <summary>
+	/// True if the encounter is a ghost
+	/// </summary>
 	bool isGhost = false;
 
 
@@ -63,6 +69,10 @@ public class MiniGameController : MonoBehaviour {
 		isGhost = false;
 	}
 
+	/// <summary>
+	/// Called when the Event FRIGHTENED is caught
+	/// </summary>
+	/// <param name="res">If set to <c>true</c>, activates frightenMode.</param>
 	void frightened(bool res){
 		frightenMode = res;
 	}
