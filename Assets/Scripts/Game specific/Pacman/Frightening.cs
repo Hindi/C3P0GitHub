@@ -21,9 +21,9 @@ public class Frightening : MonoBehaviour {
 	/// Called when the player wins the mini-game and this ghost is his encounter
 	/// </summary>
 	/// <param name="tag">The tage of the encounter.</param>
-	void sentenceWin(string tag){
+	void sentenceWin(GameObject obj){
 		halo.enabled = true;
-		if (tag == gameObject.tag){
+		if (obj == gameObject){
 			Destroy(gameObject);
 		}
 	}
@@ -32,11 +32,11 @@ public class Frightening : MonoBehaviour {
 	/// Called when the time is over and this ghost is his encounter
 	/// </summary>
 	/// <param name="tag">The tag of the encounter.</param>
-	void sentenceTO(string tag){
+	void sentenceTO(GameObject obj){
 		halo.enabled = true;
 	}
 	
-	void sentenceLost(string tag){
+	void sentenceLost(GameObject obj){
 		halo.enabled = true;	
 	}
 
@@ -49,9 +49,9 @@ public class Frightening : MonoBehaviour {
 	/// </summary>
 	void Start(){
 		EventManager.AddListener(EnumEvent.GAMEOVER, onGameOver);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 		halo = GetComponent("Halo") as Behaviour;
 	}
@@ -61,12 +61,12 @@ public class Frightening : MonoBehaviour {
 	/// </summary>
 	void OnDestroy(){
 		if(!gameOver){
-			EventManager.Raise(EnumEvent.FRIGHTENED);
+			EventManager<bool>.Raise(EnumEvent.FRIGHTENED, true);
 		}
 		EventManager.RemoveListener(EnumEvent.GAMEOVER, onGameOver);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 
 	}

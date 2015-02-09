@@ -50,10 +50,6 @@ public class MiniGameController : MonoBehaviour {
 
 	bool frightenMode = false;
 
-	float frightenDelay = 5f;
-
-	float frightenTimer = 0f;
-
 	bool isGhost = false;
 
 
@@ -67,9 +63,8 @@ public class MiniGameController : MonoBehaviour {
 		isGhost = false;
 	}
 
-	void frightened(){
-		frightenMode = true;
-		frightenTimer = Time.time;
+	void frightened(bool res){
+		frightenMode = res;
 	}
 
 	/// <summary>
@@ -85,7 +80,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.AddListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.AddListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, frightened);
 	}
 
 	/// <summary>
@@ -135,9 +130,6 @@ public class MiniGameController : MonoBehaviour {
 				EventManager<bool>.Raise(EnumEvent.MOVING,true);
 			}
 		}
-		if (Time.time - frightenTimer > frightenDelay){
-			frightenMode = false;
-		}
 	}
 
 	/// <summary>
@@ -148,7 +140,7 @@ public class MiniGameController : MonoBehaviour {
 		EventManager.RemoveListener(EnumEvent.MINIGAME_LOST, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_WIN, niceShot);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_TO, niceShot);
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<bool>.RemoveListener(EnumEvent.FRIGHTENED, frightened);
 
 	}
 }

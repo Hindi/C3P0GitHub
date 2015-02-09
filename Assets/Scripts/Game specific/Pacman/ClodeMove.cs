@@ -7,11 +7,7 @@ public class ClodeMove : MonoBehaviour {
 	Vector3 clodeScatterTarget = new Vector3(0,0,-32);
 	Vector3 homeTarget = new Vector3(13, 0, -11);
 	bool scatterMode = false;
-	float scatterDelay = 10.0f;
-	float scatterTimer;
 	bool frightenMode = false;
-	float frightenDelay = 5.0f;
-	float frightenTimer;
 	bool eaten = false;
 	Vector3 curDir = Vector3.right;
 	Vector3 nextDir = Vector3.right;
@@ -34,17 +30,30 @@ public class ClodeMove : MonoBehaviour {
 		isMoving = real;
 	}
 
-	void scatter(){
-		scatterMode = true;
-		scatterTimer = 0f;
+	/// <summary>
+	/// Starts scatter mode.
+	/// </summary>
+	void scatter(bool res){
+		scatterMode = res;
 	}
-	
-	void frightened(){
-		frightenMode = true;
-		frightenTimer = 0f;
-		renderer.material.color = Color.blue;
-		renderer.enabled = true;
-		halo.enabled = false;
+	/// <summary>
+	/// Starts frighten mode.
+	/// </summary>
+	void frightened(bool res){
+		if(!eaten){
+			if (res){
+				frightenMode = res;
+				renderer.material.color = Color.blue;
+				renderer.enabled = true;
+				halo.enabled = false;
+			}
+			else {
+				frightenMode = false;
+				renderer.material.color = defaultColor;
+				renderer.enabled = false;
+				halo.enabled = true;
+			}
+		}
 	}
 
 	/*
@@ -181,10 +190,19 @@ public class ClodeMove : MonoBehaviour {
 	}
 
 
-	void sentenceWin(string tag){
-		renderer.enabled = false;
-		halo.enabled = true;
-		if (tag == gameObject.tag){
+	/// <summary>
+	/// Called when the player wins the mini-game and this ghost is his encounter
+	/// </summary>
+	/// <param name="tag">The tage of the encounter.</param>
+	void sentenceWin(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			renderer.enabled = false;
+			halo.enabled = true;
+		}
+		if (obj == gameObject){
 			if (frightenMode){
 				eaten = true;
 				frightenMode = false;
@@ -200,22 +218,43 @@ public class ClodeMove : MonoBehaviour {
 		}
 	}
 	
-	void sentenceTO(string tag){
-		renderer.enabled = false;
-		halo.enabled = true;
-		if (tag == gameObject.tag){
+	/// <summary>
+	/// Called when the time is over and this ghost is his encounter
+	/// </summary>
+	/// <param name="tag">The tag of the encounter.</param>
+	void sentenceTO(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			renderer.enabled = false;
+			halo.enabled = true;
+		};
+		if (obj == gameObject){
 			if (!frightenMode){
 				EventManager<bool>.Raise(EnumEvent.GAMEOVER, false);
 			}
 		}
 	}
+	
+	void sentenceLost(GameObject obj){
+		if (frightenMode){
+			renderer.enabled = true;
+		}
+		else {
+			frightenMode = false;
+			renderer.material.color = defaultColor;
+			renderer.enabled = false;
+			halo.enabled = true;
+		}
+	}
 
-	void sentenceLost(string tag){
+	
+	void onStartMiniGame(){
 		renderer.enabled = false;
 		halo.enabled = true;
 	}
-
-
+	
 	void onRestartGame(){
 		scatterMode = false;
 		frightenMode = false;
@@ -224,14 +263,10 @@ public class ClodeMove : MonoBehaviour {
 		collider.enabled = true;
 		renderer.enabled = false;
 		halo.enabled = true;
-		transform.position = new Vector3(16, 0, -14);
+		transform.position = new Vector3(13.5F, 0, -14);
+		inHouse = true;
 		curDir = Vector3.left;
 		nextDir = Vector3.left;
-	}
-
-	void onStartMiniGame(){
-		renderer.enabled = false;
-		halo.enabled = false;
 	}
 
 	void Start () {
@@ -278,16 +313,15 @@ public class ClodeMove : MonoBehaviour {
 			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
-		EventManager<bool, string>.AddListener(EnumEvent.MOVING,moving);
-		EventManager.AddListener(EnumEvent.SCATTERMODE, scatter);
-		EventManager.AddListener(EnumEvent.FRIGHTENED, frightened);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<bool, string>.AddListener(EnumEvent.MOVING, moving);
+		EventManager<bool>.AddListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager<bool>.AddListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.AddListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.AddListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
-
 
 		pacman = GameObject.FindGameObjectWithTag("Player");
 		clodeTarget = pacman.transform.position;
@@ -302,40 +336,29 @@ public class ClodeMove : MonoBehaviour {
 		if (isMoving && !inHouse){
 			chase();
 			if (isMoving){
-			scatterTimer += Time.deltaTime;
-			frightenTimer += Time.deltaTime;
 			}
 		}
-		if (scatterMode && scatterTimer > scatterDelay){
-			scatterMode = false;
-		}
-		if (frightenMode && frightenTimer > frightenDelay){
-			frightenMode = false;
-			renderer.material.color = defaultColor;
-		}
 		if (Vector3.Distance(transform.position, homeTarget) < 1f){
-			eaten = false;
-			if(!frightenMode)
-			{
+			if(eaten){
+				eaten = false;
 				renderer.material.color = defaultColor;
 				collider.enabled = true;
 				renderer.enabled = false;
 				halo.enabled = true;
+				frightened(false);
 			}
 		}
 	}
 
 	void OnDestroy(){
 		EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
-		EventManager.RemoveListener(EnumEvent.SCATTERMODE, scatter);
-		EventManager.RemoveListener(EnumEvent.FRIGHTENED, frightened);
-		EventManager<string>.AddListener(EnumEvent.SENTENCE_LOST, sentenceLost);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
-		EventManager<string>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
+		EventManager<bool>.RemoveListener(EnumEvent.SCATTERMODE, scatter);
+		EventManager<bool>.RemoveListener(EnumEvent.FRIGHTENED, frightened);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_LOST, sentenceLost);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_TO, sentenceTO);
+		EventManager<GameObject>.RemoveListener(EnumEvent.SENTENCE_WIN, sentenceWin);
 		EventManager.RemoveListener(EnumEvent.RESTARTSTATE, onRestartGame);
 		EventManager<bool>.RemoveListener(EnumEvent.MOVING, moving);
 		EventManager.RemoveListener(EnumEvent.MINIGAME_START, onStartMiniGame);
-
-
 	}
 }
