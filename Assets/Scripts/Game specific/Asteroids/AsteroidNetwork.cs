@@ -28,8 +28,8 @@ public class AsteroidNetwork : MonoBehaviour {
     public void createAsteroid(Vector3 pos, Vector3 target, int hp, int id, int prefabId)
     {
         // TO DO remove test local
-        //networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id, prefabId);
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
+        networkView.RPC("createAsteroidRPC", RPCMode.All, pos, target, hp, id, prefabId);
+        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id, prefabId);
     }
 
 
@@ -38,22 +38,22 @@ public class AsteroidNetwork : MonoBehaviour {
     public void createAsteroidColor(Vector3 pos, Vector3 target, int hp, int id, int prefabId, EnumColor color)
     {
         // TO DO remove test local
-        //networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, prefabId, (int) color);
-        AsteroidFactory._factory.createAsteroid(pos, target, hp, id,prefabId, color);
+        networkView.RPC("createAsteroidColorRPC", RPCMode.All, pos, target, hp, id, prefabId, (int) color);
+        //AsteroidFactory._factory.createAsteroid(pos, target, hp, id,prefabId, color);
     }
 
     public void destroyAsteroid(int id)
     {
         // TO DO remove test local
-        //networkView.RPC("destroyAsteroidRPC", RPCMode.Others, id);
-        asteroidsManager.remove(id);
+        networkView.RPC("destroyAsteroidRPC", RPCMode.Others, id);
+        //asteroidsManager.remove(id);
     }
 
     public void hitAsteroid(int id)
     {
         // TO DO remove test local
-        //networkView.RPC("hitAsteroidRPC", RPCMode.Server, id);
-        asteroidsManager.hit(id);
+        networkView.RPC("hitAsteroidRPC", RPCMode.Server, id);
+        //asteroidsManager.hit(id);
     }
 
     [RPC]
@@ -89,14 +89,14 @@ public class AsteroidNetwork : MonoBehaviour {
     public void askInitPlayerRPC(NetworkMessageInfo info)
     {
         //zone = asteroidsManager.choosePos();
-        //EnumColor col = asteroidsManager.chooseColor();
-        //networkView.RPC("initPlayerRPC",info.sender,(int) col, new Vector3(0,0,0));
+        EnumColor col = asteroidsManager.chooseColor();
+        networkView.RPC("initPlayerRPC",info.sender,(int) col, new Vector3(0,0,0));
     }
 
     [RPC]
     private void initPlayerRPC(int color, Vector3 zone)
     {
-        //asteroidsManager.initColor((EnumColor) color);
+        asteroidsManager.initColor((EnumColor) color);
         //asteroidsManager.initZone(zone);
     }
 
