@@ -75,11 +75,10 @@ public class PlayerAsteroid : MonoBehaviour {
             if (hit.transform.CompareTag("Asteroid"))
             {
                 Asteroid ast = hit.transform.gameObject.GetComponentInParent<Asteroid>();
-                asteroidNetwork.hitAsteroid(ast.id);
+                //asteroidNetwork.hitAsteroid(ast.id);
                 if (ast.getColor() == color)
                 {
-                    // TO DO use it when color system ok
-                    //asteroidNetwork.hitAsteroid(ast.id);
+                    asteroidNetwork.hitAsteroid(ast.id);
                 }
             }
         }
@@ -155,7 +154,6 @@ public class PlayerAsteroid : MonoBehaviour {
 
     public void setColor(EnumColor col)
     {
-        Debug.Log("Je suis de couleur : " + col);
         color = col;
     }
 
