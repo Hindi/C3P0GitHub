@@ -179,9 +179,10 @@ public class AsteroidsManager : MonoBehaviour {
     {
         foreach(KeyValuePair<int, Asteroid> p in asteroidInUse)
         {
-            p.Value.destroy();
-            asteroidInUse.Remove(p.Key);                
+            // Give the asteroid to the factory
+            p.Value.destroy();              
         }
+        asteroidInUse = new Dictionary<int, Asteroid>();
         spawn = false;
         if (!asteroidNetwork.isServer())
             canvas.SetActive(false);
