@@ -7,7 +7,7 @@ using System.Collections;
  **/
 
 /// <summary>
-/// AnkyMove is a class which determines how the red enemy will move.
+/// AnkyMove is a class which determines how the blue enemy will move.
 /// </summary>
 /// 
 public class AnkyMove : MonoBehaviour {
@@ -45,7 +45,10 @@ public class AnkyMove : MonoBehaviour {
 	/// True if in scatter
 	/// </summary>
 	bool scatterMode = false;
-	
+
+	/// <summary>
+	/// True if in frighten mode
+	/// </summary>
 	bool frightenMode = false;
 
 	/// <summary>
@@ -98,6 +101,9 @@ public class AnkyMove : MonoBehaviour {
 	/// </summary>
 	Color defaultColor;
 
+	/// <summary>
+	/// The halo of the object
+	/// </summary>
 	Behaviour halo;
 
 
@@ -298,7 +304,7 @@ public class AnkyMove : MonoBehaviour {
 	/// <summary>
 	/// Called when the player wins the mini-game and this ghost is his encounter
 	/// </summary>
-	/// <param name="tag">The tage of the encounter.</param>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceWin(GameObject obj){
 		if (frightenMode){
 			renderer.enabled = true;
@@ -326,7 +332,7 @@ public class AnkyMove : MonoBehaviour {
 	/// <summary>
 	/// Called when the time is over and this ghost is his encounter
 	/// </summary>
-	/// <param name="tag">The tag of the encounter.</param>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceTO(GameObject obj){
 		if (frightenMode){
 			renderer.enabled = true;
@@ -341,7 +347,11 @@ public class AnkyMove : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	/// <summary>
+	/// Called when the player loses the mini-game and this ghost is his encounter
+	/// </summary>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceLost(GameObject obj){
 		if (frightenMode){
 			renderer.enabled = true;
@@ -354,12 +364,17 @@ public class AnkyMove : MonoBehaviour {
 		}
 	}
 
-
+	/// <summary>
+	/// Called when the mini-game starts
+	/// </summary>
 	void onStartMiniGame(){
 		renderer.enabled = false;
 		halo.enabled = true;
 	}
 
+	/// <summary>
+	/// Called when the game restarts
+	/// </summary>
 	void onRestartGame(){
 		scatterMode = false;
 		frightenMode = false;
@@ -374,6 +389,9 @@ public class AnkyMove : MonoBehaviour {
 		nextDir = Vector3.left;
 	}
 
+	/// <summary>
+	/// Called when the scene loads
+	/// </summary>
 	void Start () {
 		
 		/*
@@ -437,7 +455,10 @@ public class AnkyMove : MonoBehaviour {
 		EventManager<bool>.AddListener(EnumEvent.MOVING, moving);
 		EventManager.AddListener(EnumEvent.MINIGAME_START, onStartMiniGame);
 	}
-	
+
+	/// <summary>
+	/// Caled after a fixed amount of time
+	/// </summary>
 	void FixedUpdate () {
 		if (isMoving && !inHouse){
 			chase();
@@ -456,6 +477,9 @@ public class AnkyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when this scrip is destroyed
+	/// </summary>
 	void OnDestroy(){
 			EventManager<bool, string>.RemoveListener(EnumEvent.MOVING,moving);
 			EventManager<bool>.RemoveListener(EnumEvent.SCATTERMODE, scatter);

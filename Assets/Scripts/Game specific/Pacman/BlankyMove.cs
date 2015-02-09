@@ -19,7 +19,7 @@ public class BlankyMove : MonoBehaviour {
 	/// </summary>
 	GameObject pacman;
 
-	/// <summary>
+		/// <summary>
 	/// The target during normal mode
 	/// </summary>
 	Vector3 blankyTarget;
@@ -90,6 +90,9 @@ public class BlankyMove : MonoBehaviour {
 	/// </summary>
 	Color defaultColor;
 
+	/// <summary>
+	/// The halo of the object
+	/// </summary>
 	Behaviour halo;
 
 
@@ -343,6 +346,10 @@ public class BlankyMove : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called when the player loses the mini-game and this ghost is his encounter
+	/// </summary>
+	/// <param name="obj">The gameObject of the encounter.</param>
 	void sentenceLost(GameObject obj){
 		if (frightenMode){
 			renderer.enabled = true;
@@ -372,15 +379,17 @@ public class BlankyMove : MonoBehaviour {
 		nextDir = Vector3.right;
 	}
 
+	/// <summary>
+	/// Called when the mini-game starts
+	/// </summary>
 	void onStartMiniGame(){
 		renderer.enabled = false;
 		halo.enabled = false;
 	}
 
 	/// <summary>
-	/// This is where attributes are initialised
+	/// Called when the scene loads
 	/// </summary>
-	/// <returns>void</returns>
 	void Start () {
 		pacGrid =new int[31,28]{
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

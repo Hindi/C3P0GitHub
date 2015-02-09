@@ -17,15 +17,36 @@ public class PacmanController : MonoBehaviour {
 	int remainingDots = 0;
 
 	/// <summary>
-	/// The timer for the scatter cycle.
+	/// The duration of the scatterMode
 	/// </summary>
+	[SerializeField]
 	float scatterDuration = 10f;
+
+	/// <summary>
+	/// How long scatter mode lasted
+	/// </summary>
 	float scatterDurationTimer = 0f;
 
+	/// <summary>
+	/// The delay between two scatter modes
+	/// </summary>
+	[SerializeField]
 	float scatterDelay = 40f;
+
+	/// <summary>
+	/// How much time passed until last scatter mode
+	/// </summary>
 	float scatterDelayTimer = 0f;
 
+	/// <summary>
+	/// How long frighten mode lasted
+	/// </summary>
 	float frightenTimer = 0f;
+
+	/// <summary>
+	/// The duration of frighten mode
+	/// </summary>
+	[SerializeField]
 	float frightenDuration = 5f;
 
 
