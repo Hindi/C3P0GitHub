@@ -103,10 +103,13 @@ public class SpaceWarScript : MonoBehaviour {
     /// </summary>
     public void updateElementsResolution()
     {
+        return;
+        /*
         float width, height;
         width = Math.Max(Screen.width, Screen.height);
         height = Math.Min(Screen.width, Screen.height);
-        aspectRatio = width / height;
+        aspectRatio = 16f/9;
         mainCamera.GetComponent<Camera>().projectionMatrix = Matrix4x4.Ortho(-5.0f * aspectRatio, 5.0f * aspectRatio, -5.0f, 5.0f, 0.3f, 1000f);
+         * */
     }
 }
