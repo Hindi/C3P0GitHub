@@ -346,5 +346,9 @@ public class C3PONetwork : MonoBehaviour {
 		}
 	}
 
+    public void disconect()
+    {
+        Network.Disconnect();
+    }
 
 }

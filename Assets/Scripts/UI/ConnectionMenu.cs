@@ -175,7 +175,7 @@ public class ConnectionMenu : MonoBehaviour {
         }
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
-            if (!C3PONetwork.Instance.IsConnectedToTeacher)
+            if (!unityConnected)
                 C3PONetworkManager.Instance.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
             else if (!authed)
                 C3PONetworkManager.Instance.tryTologIn(LoginLabel, passwordLabel.text);

@@ -135,6 +135,7 @@ public class UI : MonoBehaviour {
     /// <returns>void</returns>
     public void goToMainMenu()
     {
+        C3PONetwork.Instance.disconect();
         EventManager<string>.Raise(EnumEvent.LOADLEVEL, "Connection");
     }
 
