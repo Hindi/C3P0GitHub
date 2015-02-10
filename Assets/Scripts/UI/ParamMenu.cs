@@ -117,7 +117,6 @@ public class ParamMenu : MonoBehaviour {
     /// <param name="s">Optional explanation text if we want to make sure explanation is never empty</param>
     public void onQuestionMarkClick(string s)
     {
-        GetComponent<GraphicRaycaster>().enabled = false;
         explanationObj.SetActive(true);
         if (s != "")
         {
@@ -130,7 +129,6 @@ public class ParamMenu : MonoBehaviour {
     /// </summary>
     public void onCloseExplanationClick()
     {
-        GetComponent<GraphicRaycaster>().enabled = true;
         explanationObj.SetActive(false);
     }
 
@@ -140,6 +138,7 @@ public class ParamMenu : MonoBehaviour {
     /// <param name="b">True if opening, false if closing</param>
     public void onKeyInfoClick(bool b)
     {
+        GetComponent<GraphicRaycaster>().enabled = !b;
         if (Application.isMobilePlatform)
         {
             mobileInput.SetActive(b);
