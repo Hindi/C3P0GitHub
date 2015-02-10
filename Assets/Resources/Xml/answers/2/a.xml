@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAnswer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Answer questionId="1" response="1" result="true" answerTime="2.12983322" />
-  <Answer questionId="2" response="2" result="true" answerTime="1.488266" />
-  <Answer questionId="3" response="1" result="false" answerTime="0.872262955" />
-  <Answer questionId="0" response="1" result="true" answerTime="1.32980156" />
   <Answer questionId="0" response="1" result="true" answerTime="2.40909576" />
+  <Answer questionId="0" response="2" result="false" answerTime="1.673233" />
+  <Answer questionId="1" response="1" result="true" answerTime="2.004568" />
+  <Answer questionId="2" response="3" result="false" answerTime="1.52413177" />
+  <Answer questionId="3" response="2" result="false" answerTime="1.44130325" />
 </ArrayOfAnswer>

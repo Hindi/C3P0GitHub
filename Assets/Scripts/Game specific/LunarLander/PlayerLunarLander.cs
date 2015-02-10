@@ -271,6 +271,7 @@ public class PlayerLunarLander : MonoBehaviour {
             {
                 timeBeforeRestart = 3;
                 score += 10;
+                EventManager<int>.Raise(EnumEvent.UPDATEGAMESCORE, score);
                 lastPlatformLanded = collision.collider.gameObject.GetComponent<PlatformLunarLander>();
                 lastPlatformLanded.lightUp();
                 gratzText.gameObject.SetActive(true);
