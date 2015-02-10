@@ -49,6 +49,9 @@ public class PacmanController : MonoBehaviour {
 	[SerializeField]
 	float frightenDuration = 5f;
 
+	/// <summary>
+	/// True if in scatterMode
+	/// </summary>
 	bool scatterMode = false;
 
 	/// <summary>
