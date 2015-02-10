@@ -139,7 +139,7 @@ public class PlayerAsteroid : MonoBehaviour {
         rotLeftRight = Mathf.Clamp(rotLeftRight, -leftRightRange, leftRightRange);
         rotUpDown = Mathf.Clamp(rotUpDown, -upDownRange, upDownRange);
         transform.eulerAngles = new Vector3(rotUpDown, rotLeftRight, 0);
-        radarCamera.transform.eulerAngles = new Vector3(radarCamera.transform.rotation.x, rotLeftRight, radarCamera.transform.rotation.z);
+        radarCamera.transform.eulerAngles = new Vector3(-radarCamera.transform.rotation.x, 0, 0);
     }
 
     /*

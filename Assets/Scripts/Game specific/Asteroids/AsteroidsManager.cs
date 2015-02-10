@@ -92,7 +92,7 @@ public class AsteroidsManager : MonoBehaviour {
             EnumColor col;
             if (isColor)
             {
-                col = (EnumColor)((nbAsteroid % colorChoice) + 1);
+                col = (EnumColor)((nbAsteroid % colorChoice) + 2);
             }
             else
                 col = EnumColor.NONE;
