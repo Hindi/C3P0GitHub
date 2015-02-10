@@ -163,7 +163,7 @@ public class AliensManager : MonoBehaviour {
 		if (deathCount == alienCount)
         {
             EventManager<bool>.Raise(EnumEvent.RESTARTGAME, true);
-            victoryCount++;
+            victoryCount += 2;
         }
 	}
 

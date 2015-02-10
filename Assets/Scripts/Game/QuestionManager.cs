@@ -380,7 +380,7 @@ public class QuestionManager {
     {
         if(waitForAnswers)
         {
-            if(Time.time - questionSendTime > 5)
+            if(Time.time - questionSendTime > 15)
             {
                 checkClientsAnswers();
                 sendResults();

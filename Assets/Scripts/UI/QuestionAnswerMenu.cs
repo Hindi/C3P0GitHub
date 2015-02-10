@@ -29,7 +29,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     bool answered;
     private float startTime;
-    private const float questionTime = 5;
+    private const float questionTime = 15;
 
     public void setQuestionText(string q)
     {

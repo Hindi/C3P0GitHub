@@ -212,7 +212,7 @@ public class C3PONetwork : MonoBehaviour {
 	public void createTeacherServer()
 	{
 		/* Launch MasterServer */
-        System.Diagnostics.Process.Start(Application.dataPath + @"\MasterServer\MasterServer.exe");
+        System.Diagnostics.Process.Start(Application.dataPath + @"\Resources\MasterServer\MasterServer.exe");
 
         /* Bind to it */
 		MasterServer.port = masterPort;
