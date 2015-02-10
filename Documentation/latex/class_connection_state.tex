@@ -1,0 +1,197 @@
+\hypertarget{class_connection_state}{\section{Connection\-State Class Reference}
+\label{class_connection_state}\index{Connection\-State@{Connection\-State}}
+}
+
+
+\hyperlink{class_state}{State} where the client will connect to the server. 
+
+
+
+
+Inherits \hyperlink{class_state}{State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_connection_state_a4f95634e3b0b45fde7526175e5b455e8}{Connection\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+void \hyperlink{class_connection_state_a88fab17e1d21ee2defb1b1821a461b5d}{on\-Connected\-To\-Teacher} ()
+\begin{DoxyCompactList}\small\item\em Called when the client is connected to the teacher. It includes T\-C\-P connection + authentication\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a3c29bedcc621b52075b9e7ee29f27816}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a4ea67162393d9c6ef29aca7807bc9035}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a684dee54c5a99baecc475eba5417e21b}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a0d9aca312df95ad6d10b6b6382b0e456}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a66e0365f815d1ad50fa66f79e2f5ff32}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_connection_state_a3aef2f7c0725ed67797053aac80a3fc7}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_state}{State} where the client will connect to the server.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_connection_state_a4f95634e3b0b45fde7526175e5b455e8}{\index{Connection\-State@{Connection\-State}!Connection\-State@{Connection\-State}}
+\index{Connection\-State@{Connection\-State}!ConnectionState@{Connection\-State}}
+\subsubsection[{Connection\-State}]{\setlength{\rightskip}{0pt plus 5cm}Connection\-State.\-Connection\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_connection_state_a4f95634e3b0b45fde7526175e5b455e8}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_connection_state_a684dee54c5a99baecc475eba5417e21b}{\index{Connection\-State@{Connection\-State}!end@{end}}
+\index{end@{end}!ConnectionState@{Connection\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a684dee54c5a99baecc475eba5417e21b}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{State}.
+
+\hypertarget{class_connection_state_a66e0365f815d1ad50fa66f79e2f5ff32}{\index{Connection\-State@{Connection\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!ConnectionState@{Connection\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a66e0365f815d1ad50fa66f79e2f5ff32}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{State}.
+
+\hypertarget{class_connection_state_a3aef2f7c0725ed67797053aac80a3fc7}{\index{Connection\-State@{Connection\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!ConnectionState@{Connection\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a3aef2f7c0725ed67797053aac80a3fc7}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{State}.
+
+\hypertarget{class_connection_state_a88fab17e1d21ee2defb1b1821a461b5d}{\index{Connection\-State@{Connection\-State}!on\-Connected\-To\-Teacher@{on\-Connected\-To\-Teacher}}
+\index{on\-Connected\-To\-Teacher@{on\-Connected\-To\-Teacher}!ConnectionState@{Connection\-State}}
+\subsubsection[{on\-Connected\-To\-Teacher}]{\setlength{\rightskip}{0pt plus 5cm}void Connection\-State.\-on\-Connected\-To\-Teacher (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_connection_state_a88fab17e1d21ee2defb1b1821a461b5d}
+
+
+Called when the client is connected to the teacher. It includes T\-C\-P connection + authentication
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_connection_state_a3c29bedcc621b52075b9e7ee29f27816}{\index{Connection\-State@{Connection\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!ConnectionState@{Connection\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a3c29bedcc621b52075b9e7ee29f27816}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{State}.
+
+\hypertarget{class_connection_state_a4ea67162393d9c6ef29aca7807bc9035}{\index{Connection\-State@{Connection\-State}!start@{start}}
+\index{start@{start}!ConnectionState@{Connection\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a4ea67162393d9c6ef29aca7807bc9035}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{State}.
+
+\hypertarget{class_connection_state_a0d9aca312df95ad6d10b6b6382b0e456}{\index{Connection\-State@{Connection\-State}!update@{update}}
+\index{update@{update}!ConnectionState@{Connection\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Connection\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_connection_state_a0d9aca312df95ad6d10b6b6382b0e456}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Connection\-State.\-cs\end{DoxyCompactItemize}

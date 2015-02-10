@@ -1,0 +1,139 @@
+\hypertarget{class_c3_p_o_network}{\section{C3\-P\-O\-Network Class Reference}
+\label{class_c3_p_o_network}\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}}
+}
+
+
+\hyperlink{class_c3_p_o_network}{C3\-P\-O\-Network} is a class facilitating network communication for the C3\-P\-O project. Only basic networking is managed here. This class is built against the singleton model 
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_c3_p_o_network_1_1_connection_manager}{Connection\-Manager}
+\item 
+class \hyperlink{class_c3_p_o_network_1_1_sender}{Sender}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_c3_p_o_network_a9f9646b001c7dc501400f5730ad3a55e}{create\-Teacher\-Server} ()
+\begin{DoxyCompactList}\small\item\em Function to be called on the teacher version of the C3\-P\-O program. Launch and initialize the master server and register the server.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_a51a93ce25aa817be86c006c54129ec98}{connect\-Teacher\-Server} (string ip)
+\begin{DoxyCompactList}\small\item\em Connects to the Master\-Server to find the teacher's game server and connects to it.\end{DoxyCompactList}\item 
+string \hyperlink{class_c3_p_o_network_a5549ef59a1c5f6d556944789a3ca7cf8}{get\-My\-Ip} ()
+\begin{DoxyCompactList}\small\item\em Get the ip address of the machine.\end{DoxyCompactList}\item 
+string \hyperlink{class_c3_p_o_network_a978ce2299004d011f67e1f5b2fd6f977}{get\-Server\-Ip} ()
+\begin{DoxyCompactList}\small\item\em Get the ip address of the server.\end{DoxyCompactList}\item 
+\hypertarget{class_c3_p_o_network_a0c76492ff602b73cdac11e31170090d7}{void {\bfseries disconect} ()}\label{class_c3_p_o_network_a0c76492ff602b73cdac11e31170090d7}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_c3_p_o_network_a2fd6f3b169659bd58cf47a159c8d38a8}{I\-S\-\_\-\-S\-E\-R\-V\-E\-R}
+\begin{DoxyCompactList}\small\item\em Set to true or false in Unity before compiling.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_c3_p_o_network_a566ebbaf499e3f637670a2b7afdf705d}{static \hyperlink{class_c3_p_o_network}{C3\-P\-O\-Network} {\bfseries Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_c3_p_o_network_a566ebbaf499e3f637670a2b7afdf705d}
+
+\item 
+\hypertarget{class_c3_p_o_network_afeaebe624fbc6716f9c592193f9433e0}{bool {\bfseries Is\-Connected\-To\-Teacher}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_c3_p_o_network_afeaebe624fbc6716f9c592193f9433e0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_c3_p_o_network}{C3\-P\-O\-Network} is a class facilitating network communication for the C3\-P\-O project. Only basic networking is managed here. This class is built against the singleton model
+
+\hyperlink{class_c3_p_o_network}{C3\-P\-O\-Network} is a class facilitating network communication for the C3\-P\-O project. Only basic networking is managed here.
+
+Basic operations are\-:
+\begin{DoxyItemize}
+\item Create and connecting to the teacher server (which also holds a Unity Master\-Server)
+\item Create and connecting to game servers for multi-\/player
+\end{DoxyItemize}
+
+This class is built against the singleton model 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_c3_p_o_network_a51a93ce25aa817be86c006c54129ec98}{\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}!connect\-Teacher\-Server@{connect\-Teacher\-Server}}
+\index{connect\-Teacher\-Server@{connect\-Teacher\-Server}!C3PONetwork@{C3\-P\-O\-Network}}
+\subsubsection[{connect\-Teacher\-Server}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network.\-connect\-Teacher\-Server (
+\begin{DoxyParamCaption}
+\item[{string}]{ip}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_a51a93ce25aa817be86c006c54129ec98}
+
+
+Connects to the Master\-Server to find the teacher's game server and connects to it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & The ip of the server.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_a9f9646b001c7dc501400f5730ad3a55e}{\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}!create\-Teacher\-Server@{create\-Teacher\-Server}}
+\index{create\-Teacher\-Server@{create\-Teacher\-Server}!C3PONetwork@{C3\-P\-O\-Network}}
+\subsubsection[{create\-Teacher\-Server}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network.\-create\-Teacher\-Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_a9f9646b001c7dc501400f5730ad3a55e}
+
+
+Function to be called on the teacher version of the C3\-P\-O program. Launch and initialize the master server and register the server.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_a5549ef59a1c5f6d556944789a3ca7cf8}{\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}!get\-My\-Ip@{get\-My\-Ip}}
+\index{get\-My\-Ip@{get\-My\-Ip}!C3PONetwork@{C3\-P\-O\-Network}}
+\subsubsection[{get\-My\-Ip}]{\setlength{\rightskip}{0pt plus 5cm}string C3\-P\-O\-Network.\-get\-My\-Ip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_a5549ef59a1c5f6d556944789a3ca7cf8}
+
+
+Get the ip address of the machine.
+
+\begin{DoxyReturn}{Returns}
+string \-: the ip address
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_a978ce2299004d011f67e1f5b2fd6f977}{\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}!get\-Server\-Ip@{get\-Server\-Ip}}
+\index{get\-Server\-Ip@{get\-Server\-Ip}!C3PONetwork@{C3\-P\-O\-Network}}
+\subsubsection[{get\-Server\-Ip}]{\setlength{\rightskip}{0pt plus 5cm}string C3\-P\-O\-Network.\-get\-Server\-Ip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_a978ce2299004d011f67e1f5b2fd6f977}
+
+
+Get the ip address of the server.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_c3_p_o_network_a2fd6f3b169659bd58cf47a159c8d38a8}{\index{C3\-P\-O\-Network@{C3\-P\-O\-Network}!I\-S\-\_\-\-S\-E\-R\-V\-E\-R@{I\-S\-\_\-\-S\-E\-R\-V\-E\-R}}
+\index{I\-S\-\_\-\-S\-E\-R\-V\-E\-R@{I\-S\-\_\-\-S\-E\-R\-V\-E\-R}!C3PONetwork@{C3\-P\-O\-Network}}
+\subsubsection[{I\-S\-\_\-\-S\-E\-R\-V\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}bool C3\-P\-O\-Network.\-I\-S\-\_\-\-S\-E\-R\-V\-E\-R}}\label{class_c3_p_o_network_a2fd6f3b169659bd58cf47a159c8d38a8}
+
+
+Set to true or false in Unity before compiling.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Network/C3\-P\-O\-Network.\-cs\end{DoxyCompactItemize}

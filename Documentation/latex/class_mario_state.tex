@@ -1,0 +1,249 @@
+\hypertarget{class_mario_state}{\section{Mario\-State Class Reference}
+\label{class_mario_state}\index{Mario\-State@{Mario\-State}}
+}
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mario_state_a7a11ee84dab9ee6b16657aaa7acb1f70}{Mario\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_ada0965a69800c3203f0f2df27ab20b14}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_a2df561a80f05a8b25dbdda8ae9ec2e96}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the player lose or win.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_a279888e7b0863e82d5bff9a75aef04aa}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Defines which function will influence the size of the player.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_a9725076b267e50eec3262c8a0f471ffb}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_add64e32059bde1e198a44add0370228a}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_a41ddb5c1438090d67d909974638f3e65}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_a329bb4d1bfbb5bbbfdbda5840e591d39}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_aee1af11d577666abe34366c11547331d}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_mario_state_ae4090f8424028536a32a00945092ee33}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_mario_state_a7a11ee84dab9ee6b16657aaa7acb1f70}{\index{Mario\-State@{Mario\-State}!Mario\-State@{Mario\-State}}
+\index{Mario\-State@{Mario\-State}!MarioState@{Mario\-State}}
+\subsubsection[{Mario\-State}]{\setlength{\rightskip}{0pt plus 5cm}Mario\-State.\-Mario\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_mario_state_a7a11ee84dab9ee6b16657aaa7acb1f70}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_mario_state_a41ddb5c1438090d67d909974638f3e65}{\index{Mario\-State@{Mario\-State}!end@{end}}
+\index{end@{end}!MarioState@{Mario\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_a41ddb5c1438090d67d909974638f3e65}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}.
+
+\hypertarget{class_mario_state_aee1af11d577666abe34366c11547331d}{\index{Mario\-State@{Mario\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!MarioState@{Mario\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_aee1af11d577666abe34366c11547331d}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}.
+
+\hypertarget{class_mario_state_ae4090f8424028536a32a00945092ee33}{\index{Mario\-State@{Mario\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!MarioState@{Mario\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_ae4090f8424028536a32a00945092ee33}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}.
+
+\hypertarget{class_mario_state_a2df561a80f05a8b25dbdda8ae9ec2e96}{\index{Mario\-State@{Mario\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!MarioState@{Mario\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_a2df561a80f05a8b25dbdda8ae9ec2e96}
+
+
+Called when the player lose or win.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the player won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{Game\-State}.
+
+\hypertarget{class_mario_state_ada0965a69800c3203f0f2df27ab20b14}{\index{Mario\-State@{Mario\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!MarioState@{Mario\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_ada0965a69800c3203f0f2df27ab20b14}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_mario_state_a9725076b267e50eec3262c8a0f471ffb}{\index{Mario\-State@{Mario\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!MarioState@{Mario\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_a9725076b267e50eec3262c8a0f471ffb}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}.
+
+\hypertarget{class_mario_state_a279888e7b0863e82d5bff9a75aef04aa}{\index{Mario\-State@{Mario\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!MarioState@{Mario\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_a279888e7b0863e82d5bff9a75aef04aa}
+
+
+Defines which function will influence the size of the player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_mario_state_add64e32059bde1e198a44add0370228a}{\index{Mario\-State@{Mario\-State}!start@{start}}
+\index{start@{start}!MarioState@{Mario\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_add64e32059bde1e198a44add0370228a}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}.
+
+\hypertarget{class_mario_state_a329bb4d1bfbb5bbbfdbda5840e591d39}{\index{Mario\-State@{Mario\-State}!update@{update}}
+\index{update@{update}!MarioState@{Mario\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Mario\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_mario_state_a329bb4d1bfbb5bbbfdbda5840e591d39}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Mario\-State.\-cs\end{DoxyCompactItemize}

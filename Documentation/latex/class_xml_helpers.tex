@@ -1,0 +1,129 @@
+\hypertarget{class_xml_helpers}{\section{Xml\-Helpers Class Reference}
+\label{class_xml_helpers}\index{Xml\-Helpers@{Xml\-Helpers}}
+}
+
+
+Serialize and deserialize the datas from and to xml. 
+
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ T $>$ \hyperlink{class_xml_helpers_abba18899056ac494e095d059603a13a5}{Load\-From\-Text\-Asset$<$ T $>$} (Text\-Asset text\-Asset, string root=\char`\"{}Datatable\char`\"{})
+\begin{DoxyCompactList}\small\item\em Use a text\-Asset to load datas.\end{DoxyCompactList}\item 
+static void \hyperlink{class_xml_helpers_a1aaa77054366a2bf78bebae8ab3653c0}{Save\-To\-X\-M\-L$<$ T $>$} (string path, T object\-To\-Serialize)
+\begin{DoxyCompactList}\small\item\em Save datas contained on the serializabe object in an xml file.\end{DoxyCompactList}\item 
+\hypertarget{class_xml_helpers_a20dd95341881821cc75de8fc2a8ccd82}{static T {\bfseries load\-From\-X\-M\-L$<$ T $>$} (string path, string root=\char`\"{}Datatable\char`\"{})}\label{class_xml_helpers_a20dd95341881821cc75de8fc2a8ccd82}
+
+\item 
+static Dictionary$<$ string, string $>$ \hyperlink{class_xml_helpers_a02588698e9def0f90871650f0a6c9384}{load\-Credentials} (Text\-Asset asset)
+\begin{DoxyCompactList}\small\item\em Load the credential file.\end{DoxyCompactList}\item 
+static void \hyperlink{class_xml_helpers_a9534034c0c9b736d03ec4191e887cacd}{save\-Credentials} (string path, Dictionary$<$ string, string $>$ dict)
+\begin{DoxyCompactList}\small\item\em Save the credential in a file.\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Serialize and deserialize the datas from and to xml.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_xml_helpers_a02588698e9def0f90871650f0a6c9384}{\index{Xml\-Helpers@{Xml\-Helpers}!load\-Credentials@{load\-Credentials}}
+\index{load\-Credentials@{load\-Credentials}!XmlHelpers@{Xml\-Helpers}}
+\subsubsection[{load\-Credentials}]{\setlength{\rightskip}{0pt plus 5cm}static Dictionary$<$string, string$>$ Xml\-Helpers.\-load\-Credentials (
+\begin{DoxyParamCaption}
+\item[{Text\-Asset}]{asset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_xml_helpers_a02588698e9def0f90871650f0a6c9384}
+
+
+Load the credential file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em asset} & The text\-Asset where the credential file is.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A dictionnary containing the credentials.
+\end{DoxyReturn}
+\hypertarget{class_xml_helpers_abba18899056ac494e095d059603a13a5}{\index{Xml\-Helpers@{Xml\-Helpers}!Load\-From\-Text\-Asset$<$ T $>$@{Load\-From\-Text\-Asset$<$ T $>$}}
+\index{Load\-From\-Text\-Asset$<$ T $>$@{Load\-From\-Text\-Asset$<$ T $>$}!XmlHelpers@{Xml\-Helpers}}
+\subsubsection[{Load\-From\-Text\-Asset$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}static List$<$T$>$ Xml\-Helpers.\-Load\-From\-Text\-Asset$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{Text\-Asset}]{text\-Asset, }
+\item[{string}]{root = {\ttfamily \char`\"{}Datatable\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_xml_helpers_abba18899056ac494e095d059603a13a5}
+
+
+Use a text\-Asset to load datas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em text\-Asset} & The text\-Asset\\
+\hline
+{\em root} & The root node in the xml. Default is \char`\"{}\-Datatable\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\end{DoxyReturn}
+\hypertarget{class_xml_helpers_a9534034c0c9b736d03ec4191e887cacd}{\index{Xml\-Helpers@{Xml\-Helpers}!save\-Credentials@{save\-Credentials}}
+\index{save\-Credentials@{save\-Credentials}!XmlHelpers@{Xml\-Helpers}}
+\subsubsection[{save\-Credentials}]{\setlength{\rightskip}{0pt plus 5cm}static void Xml\-Helpers.\-save\-Credentials (
+\begin{DoxyParamCaption}
+\item[{string}]{path, }
+\item[{Dictionary$<$ string, string $>$}]{dict}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_xml_helpers_a9534034c0c9b736d03ec4191e887cacd}
+
+
+Save the credential in a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path (including the name) of the xml file.\\
+\hline
+{\em dict} & The dictionnary containing the credentials.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_xml_helpers_a1aaa77054366a2bf78bebae8ab3653c0}{\index{Xml\-Helpers@{Xml\-Helpers}!Save\-To\-X\-M\-L$<$ T $>$@{Save\-To\-X\-M\-L$<$ T $>$}}
+\index{Save\-To\-X\-M\-L$<$ T $>$@{Save\-To\-X\-M\-L$<$ T $>$}!XmlHelpers@{Xml\-Helpers}}
+\subsubsection[{Save\-To\-X\-M\-L$<$ T $>$}]{\setlength{\rightskip}{0pt plus 5cm}static void Xml\-Helpers.\-Save\-To\-X\-M\-L$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{string}]{path, }
+\item[{T}]{object\-To\-Serialize}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_xml_helpers_a1aaa77054366a2bf78bebae8ab3653c0}
+
+
+Save datas contained on the serializabe object in an xml file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path (including the name) of the xml file.\\
+\hline
+{\em object\-To\-Serialize} & The object to be saved.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Serialization/Xml\-Helpers.\-cs\end{DoxyCompactItemize}

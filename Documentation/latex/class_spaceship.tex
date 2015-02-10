@@ -1,0 +1,215 @@
+\hypertarget{class_spaceship}{\section{Spaceship Class Reference}
+\label{class_spaceship}\index{Spaceship@{Spaceship}}
+}
+
+
+Inherits Mono\-Behaviour.
+
+
+
+Inherited by \hyperlink{class_enemy_space_war}{Enemy\-Space\-War}, and \hyperlink{class_player_space_war}{Player\-Space\-War}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_spaceship_a4e3a2e25845bc231d3a044838a53b6bc}{rotate} (float speed\-Factor)
+\begin{DoxyCompactList}\small\item\em Rotates the ship according to rotation\-Speed \end{DoxyCompactList}\item 
+void \hyperlink{class_spaceship_abfcf9a39a1e43f873495100e9bb3c6fe}{go\-Forward} ()
+\begin{DoxyCompactList}\small\item\em Adds forward momentum according to linear\-Speed \end{DoxyCompactList}\item 
+void \hyperlink{class_spaceship_a0cf6944029fc2dc9bf58c19e3dc5d488}{exit\-Zone} ()
+\begin{DoxyCompactList}\small\item\em Called when exiting the screen \end{DoxyCompactList}\item 
+void \hyperlink{class_spaceship_a00d89258e92c05f994e45dd18711cfb9}{fire} ()
+\begin{DoxyCompactList}\small\item\em Tries to fire a new projectile \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_spaceship_a5b6f4b560e58b817007ec58c1378f653}{on\-Hit} ()
+\begin{DoxyCompactList}\small\item\em Called when the ship is destroyed \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_spaceship_af4c57554f662d9843c815272dffd3625}{on\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the round restarts to reset attributes \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_spaceship_a2be0a354de8e97d2597cf2e39fb21710}{virtual void {\bfseries Update} ()}\label{class_spaceship_a2be0a354de8e97d2597cf2e39fb21710}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Game\-Object \hyperlink{class_spaceship_adbf95f3b338830d88ec225679d253ebb}{spiral}
+\begin{DoxyCompactList}\small\item\em The object marking the center of the screen \end{DoxyCompactList}\item 
+Game\-Object \hyperlink{class_spaceship_aa7814313026fe06a08a7d799e6830b28}{projectile}
+\begin{DoxyCompactList}\small\item\em This ship's projectile \end{DoxyCompactList}\item 
+float \hyperlink{class_spaceship_ad30837a682fd018a634b8310a121b7b4}{rotation\-Speed}
+\begin{DoxyCompactList}\small\item\em The factor by which this ship can alter its rotating speed \end{DoxyCompactList}\item 
+float \hyperlink{class_spaceship_ab6ef069fb7cb9ab6f07849ccac8bdc00}{linear\-Speed}
+\begin{DoxyCompactList}\small\item\em The factor by which this ship can alter its moving speed \end{DoxyCompactList}\item 
+Transform \hyperlink{class_spaceship_a842c5e6d86de86ffadd4175309855bfb}{projectile\-Start\-Position}
+\begin{DoxyCompactList}\small\item\em Game\-Object marking the position at which this ship's projectile starts when fired \end{DoxyCompactList}\item 
+float \hyperlink{class_spaceship_a55ee9bdbc21eb16afce5f0b08a751f5c}{max\-Speed}
+\begin{DoxyCompactList}\small\item\em This ship's maximum speed \end{DoxyCompactList}\item 
+Game\-Object \hyperlink{class_spaceship_aa89ee76c43fa52238800b91698531d1c}{explosion}
+\begin{DoxyCompactList}\small\item\em A prefab used to create an explosion when killed \end{DoxyCompactList}\item 
+float \hyperlink{class_spaceship_aaad205217e2e88aabfaa4a99ed92f47c}{init\-End\-Timer}
+\begin{DoxyCompactList}\small\item\em Timer used to count to game restart once killed \end{DoxyCompactList}\item 
+bool \hyperlink{class_spaceship_a36accc415393ff514bdc8180b3b8adb2}{is\-End}
+\begin{DoxyCompactList}\small\item\em Bool used to prevent actions once killed \end{DoxyCompactList}\item 
+int \hyperlink{class_spaceship_a0ff708552628020c926e4aeb70c97654}{score\-Mult} = 1
+\begin{DoxyCompactList}\small\item\em Value to multiply the score delta when destroyed \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_spaceship_a0cf6944029fc2dc9bf58c19e3dc5d488}{\index{Spaceship@{Spaceship}!exit\-Zone@{exit\-Zone}}
+\index{exit\-Zone@{exit\-Zone}!Spaceship@{Spaceship}}
+\subsubsection[{exit\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}void Spaceship.\-exit\-Zone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_spaceship_a0cf6944029fc2dc9bf58c19e3dc5d488}
+
+
+Called when exiting the screen 
+
+\hypertarget{class_spaceship_a00d89258e92c05f994e45dd18711cfb9}{\index{Spaceship@{Spaceship}!fire@{fire}}
+\index{fire@{fire}!Spaceship@{Spaceship}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}void Spaceship.\-fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_spaceship_a00d89258e92c05f994e45dd18711cfb9}
+
+
+Tries to fire a new projectile 
+
+\hypertarget{class_spaceship_abfcf9a39a1e43f873495100e9bb3c6fe}{\index{Spaceship@{Spaceship}!go\-Forward@{go\-Forward}}
+\index{go\-Forward@{go\-Forward}!Spaceship@{Spaceship}}
+\subsubsection[{go\-Forward}]{\setlength{\rightskip}{0pt plus 5cm}void Spaceship.\-go\-Forward (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_spaceship_abfcf9a39a1e43f873495100e9bb3c6fe}
+
+
+Adds forward momentum according to linear\-Speed 
+
+\hypertarget{class_spaceship_a5b6f4b560e58b817007ec58c1378f653}{\index{Spaceship@{Spaceship}!on\-Hit@{on\-Hit}}
+\index{on\-Hit@{on\-Hit}!Spaceship@{Spaceship}}
+\subsubsection[{on\-Hit}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Spaceship.\-on\-Hit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_spaceship_a5b6f4b560e58b817007ec58c1378f653}
+
+
+Called when the ship is destroyed 
+
+
+
+Reimplemented in \hyperlink{class_enemy_space_war_a37191344bd21999e039e7aa4bd24c770}{Enemy\-Space\-War}, and \hyperlink{class_player_space_war_a559ee4c4f5c7813ccb4c3e159e8db6f9}{Player\-Space\-War}.
+
+\hypertarget{class_spaceship_af4c57554f662d9843c815272dffd3625}{\index{Spaceship@{Spaceship}!on\-Restart@{on\-Restart}}
+\index{on\-Restart@{on\-Restart}!Spaceship@{Spaceship}}
+\subsubsection[{on\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Spaceship.\-on\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_spaceship_af4c57554f662d9843c815272dffd3625}
+
+
+Called when the round restarts to reset attributes 
+
+
+
+Reimplemented in \hyperlink{class_enemy_space_war_afc11d4a24d2900cebce2386006926f52}{Enemy\-Space\-War}, and \hyperlink{class_player_space_war_acfc8f5a98face5c04f40e8f65dd924e4}{Player\-Space\-War}.
+
+\hypertarget{class_spaceship_a4e3a2e25845bc231d3a044838a53b6bc}{\index{Spaceship@{Spaceship}!rotate@{rotate}}
+\index{rotate@{rotate}!Spaceship@{Spaceship}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}void Spaceship.\-rotate (
+\begin{DoxyParamCaption}
+\item[{float}]{speed\-Factor}
+\end{DoxyParamCaption}
+)}}\label{class_spaceship_a4e3a2e25845bc231d3a044838a53b6bc}
+
+
+Rotates the ship according to rotation\-Speed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed\-Factor} & 1 or -\/1 to turn left or right\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_spaceship_aa89ee76c43fa52238800b91698531d1c}{\index{Spaceship@{Spaceship}!explosion@{explosion}}
+\index{explosion@{explosion}!Spaceship@{Spaceship}}
+\subsubsection[{explosion}]{\setlength{\rightskip}{0pt plus 5cm}Game\-Object Spaceship.\-explosion\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_aa89ee76c43fa52238800b91698531d1c}
+
+
+A prefab used to create an explosion when killed 
+
+\hypertarget{class_spaceship_aaad205217e2e88aabfaa4a99ed92f47c}{\index{Spaceship@{Spaceship}!init\-End\-Timer@{init\-End\-Timer}}
+\index{init\-End\-Timer@{init\-End\-Timer}!Spaceship@{Spaceship}}
+\subsubsection[{init\-End\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}float Spaceship.\-init\-End\-Timer\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_aaad205217e2e88aabfaa4a99ed92f47c}
+
+
+Timer used to count to game restart once killed 
+
+\hypertarget{class_spaceship_a36accc415393ff514bdc8180b3b8adb2}{\index{Spaceship@{Spaceship}!is\-End@{is\-End}}
+\index{is\-End@{is\-End}!Spaceship@{Spaceship}}
+\subsubsection[{is\-End}]{\setlength{\rightskip}{0pt plus 5cm}bool Spaceship.\-is\-End\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_a36accc415393ff514bdc8180b3b8adb2}
+
+
+Bool used to prevent actions once killed 
+
+\hypertarget{class_spaceship_ab6ef069fb7cb9ab6f07849ccac8bdc00}{\index{Spaceship@{Spaceship}!linear\-Speed@{linear\-Speed}}
+\index{linear\-Speed@{linear\-Speed}!Spaceship@{Spaceship}}
+\subsubsection[{linear\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}float Spaceship.\-linear\-Speed\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_ab6ef069fb7cb9ab6f07849ccac8bdc00}
+
+
+The factor by which this ship can alter its moving speed 
+
+\hypertarget{class_spaceship_a55ee9bdbc21eb16afce5f0b08a751f5c}{\index{Spaceship@{Spaceship}!max\-Speed@{max\-Speed}}
+\index{max\-Speed@{max\-Speed}!Spaceship@{Spaceship}}
+\subsubsection[{max\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}float Spaceship.\-max\-Speed\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_a55ee9bdbc21eb16afce5f0b08a751f5c}
+
+
+This ship's maximum speed 
+
+\hypertarget{class_spaceship_aa7814313026fe06a08a7d799e6830b28}{\index{Spaceship@{Spaceship}!projectile@{projectile}}
+\index{projectile@{projectile}!Spaceship@{Spaceship}}
+\subsubsection[{projectile}]{\setlength{\rightskip}{0pt plus 5cm}Game\-Object Spaceship.\-projectile\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_aa7814313026fe06a08a7d799e6830b28}
+
+
+This ship's projectile 
+
+\hypertarget{class_spaceship_a842c5e6d86de86ffadd4175309855bfb}{\index{Spaceship@{Spaceship}!projectile\-Start\-Position@{projectile\-Start\-Position}}
+\index{projectile\-Start\-Position@{projectile\-Start\-Position}!Spaceship@{Spaceship}}
+\subsubsection[{projectile\-Start\-Position}]{\setlength{\rightskip}{0pt plus 5cm}Transform Spaceship.\-projectile\-Start\-Position\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_a842c5e6d86de86ffadd4175309855bfb}
+
+
+Game\-Object marking the position at which this ship's projectile starts when fired 
+
+\hypertarget{class_spaceship_ad30837a682fd018a634b8310a121b7b4}{\index{Spaceship@{Spaceship}!rotation\-Speed@{rotation\-Speed}}
+\index{rotation\-Speed@{rotation\-Speed}!Spaceship@{Spaceship}}
+\subsubsection[{rotation\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}float Spaceship.\-rotation\-Speed\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_ad30837a682fd018a634b8310a121b7b4}
+
+
+The factor by which this ship can alter its rotating speed 
+
+\hypertarget{class_spaceship_a0ff708552628020c926e4aeb70c97654}{\index{Spaceship@{Spaceship}!score\-Mult@{score\-Mult}}
+\index{score\-Mult@{score\-Mult}!Spaceship@{Spaceship}}
+\subsubsection[{score\-Mult}]{\setlength{\rightskip}{0pt plus 5cm}int Spaceship.\-score\-Mult = 1\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_a0ff708552628020c926e4aeb70c97654}
+
+
+Value to multiply the score delta when destroyed 
+
+\hypertarget{class_spaceship_adbf95f3b338830d88ec225679d253ebb}{\index{Spaceship@{Spaceship}!spiral@{spiral}}
+\index{spiral@{spiral}!Spaceship@{Spaceship}}
+\subsubsection[{spiral}]{\setlength{\rightskip}{0pt plus 5cm}Game\-Object Spaceship.\-spiral\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_spaceship_adbf95f3b338830d88ec225679d253ebb}
+
+
+The object marking the center of the screen 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Space\-War/Spaceship.\-cs\end{DoxyCompactItemize}

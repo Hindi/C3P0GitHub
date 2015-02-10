@@ -1,0 +1,146 @@
+\hypertarget{class_ball_moving}{\section{Ball\-Moving Class Reference}
+\label{class_ball_moving}\index{Ball\-Moving@{Ball\-Moving}}
+}
+
+
+Script attached to the ball in Pong  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_ball_moving_a921de446155584e6102d31b159420239}{on\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the game restarts \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_moving_a7244395d1df380f26c718101e035066c}{set\-Screen\-Size} (float u\-Screen, float d\-Screen)
+\begin{DoxyCompactList}\small\item\em Sets the screen size in Unity's measures.\par
+ Used to be used to resize neatly, do not use anymore \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_moving_acd2f41c4b1f8b756bed2c8a606239f13}{on\-Score} (float pos\-X)
+\begin{DoxyCompactList}\small\item\em Called when a player gets a point \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_moving_a5a60e1e1cccd04ac820899233f5b54e6}{On\-Coup\-Special\-Start} (int player)
+\begin{DoxyCompactList}\small\item\em Activates a special shot and sets the player that has it \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_moving_ab4ce11468ced82cc6e3fab25bd496c57}{cancel\-Coup\-Special} ()
+\begin{DoxyCompactList}\small\item\em Cancels a special shot that had already been granted \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_moving_a9590dbee6358d043bccf7264194043ce}{set\-Fire\-Ball} (bool arg)
+\begin{DoxyCompactList}\small\item\em Sets if the fireball mode is activated \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \hyperlink{class_ball_moving_a66cd57be6736f3019c2ddb6ece3022d8}{speed}
+\begin{DoxyCompactList}\small\item\em The ball's speed \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Script attached to the ball in Pong 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ball_moving_ab4ce11468ced82cc6e3fab25bd496c57}{\index{Ball\-Moving@{Ball\-Moving}!cancel\-Coup\-Special@{cancel\-Coup\-Special}}
+\index{cancel\-Coup\-Special@{cancel\-Coup\-Special}!BallMoving@{Ball\-Moving}}
+\subsubsection[{cancel\-Coup\-Special}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-cancel\-Coup\-Special (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_ab4ce11468ced82cc6e3fab25bd496c57}
+
+
+Cancels a special shot that had already been granted 
+
+\hypertarget{class_ball_moving_a5a60e1e1cccd04ac820899233f5b54e6}{\index{Ball\-Moving@{Ball\-Moving}!On\-Coup\-Special\-Start@{On\-Coup\-Special\-Start}}
+\index{On\-Coup\-Special\-Start@{On\-Coup\-Special\-Start}!BallMoving@{Ball\-Moving}}
+\subsubsection[{On\-Coup\-Special\-Start}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-On\-Coup\-Special\-Start (
+\begin{DoxyParamCaption}
+\item[{int}]{player}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_a5a60e1e1cccd04ac820899233f5b54e6}
+
+
+Activates a special shot and sets the player that has it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & -\/1 if left player, 1 if right player\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_moving_a921de446155584e6102d31b159420239}{\index{Ball\-Moving@{Ball\-Moving}!on\-Restart@{on\-Restart}}
+\index{on\-Restart@{on\-Restart}!BallMoving@{Ball\-Moving}}
+\subsubsection[{on\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-on\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_a921de446155584e6102d31b159420239}
+
+
+Called when the game restarts 
+
+\hypertarget{class_ball_moving_acd2f41c4b1f8b756bed2c8a606239f13}{\index{Ball\-Moving@{Ball\-Moving}!on\-Score@{on\-Score}}
+\index{on\-Score@{on\-Score}!BallMoving@{Ball\-Moving}}
+\subsubsection[{on\-Score}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-on\-Score (
+\begin{DoxyParamCaption}
+\item[{float}]{pos\-X}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_acd2f41c4b1f8b756bed2c8a606239f13}
+
+
+Called when a player gets a point 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos\-X} & The position to respawn at on X axis\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_moving_a9590dbee6358d043bccf7264194043ce}{\index{Ball\-Moving@{Ball\-Moving}!set\-Fire\-Ball@{set\-Fire\-Ball}}
+\index{set\-Fire\-Ball@{set\-Fire\-Ball}!BallMoving@{Ball\-Moving}}
+\subsubsection[{set\-Fire\-Ball}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-set\-Fire\-Ball (
+\begin{DoxyParamCaption}
+\item[{bool}]{arg}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_a9590dbee6358d043bccf7264194043ce}
+
+
+Sets if the fireball mode is activated 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arg} & True if fireball is activated, false otherwise\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_moving_a7244395d1df380f26c718101e035066c}{\index{Ball\-Moving@{Ball\-Moving}!set\-Screen\-Size@{set\-Screen\-Size}}
+\index{set\-Screen\-Size@{set\-Screen\-Size}!BallMoving@{Ball\-Moving}}
+\subsubsection[{set\-Screen\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\-Moving.\-set\-Screen\-Size (
+\begin{DoxyParamCaption}
+\item[{float}]{u\-Screen, }
+\item[{float}]{d\-Screen}
+\end{DoxyParamCaption}
+)}}\label{class_ball_moving_a7244395d1df380f26c718101e035066c}
+
+
+Sets the screen size in Unity's measures.\par
+ Used to be used to resize neatly, do not use anymore 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u\-Screen} & \\
+\hline
+{\em d\-Screen} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_ball_moving_a66cd57be6736f3019c2ddb6ece3022d8}{\index{Ball\-Moving@{Ball\-Moving}!speed@{speed}}
+\index{speed@{speed}!BallMoving@{Ball\-Moving}}
+\subsubsection[{speed}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Ball\-Moving.\-speed}}\label{class_ball_moving_a66cd57be6736f3019c2ddb6ece3022d8}
+
+
+The ball's speed 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Pong/Ball\-Moving.\-cs\end{DoxyCompactItemize}

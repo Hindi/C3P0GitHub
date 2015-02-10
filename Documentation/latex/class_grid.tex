@@ -1,0 +1,278 @@
+\hypertarget{class_grid}{\section{Grid Class Reference}
+\label{class_grid}\index{Grid@{Grid}}
+}
+
+
+\hyperlink{class_grid}{Grid} is meant to save and update almost all the data of the tetris game (score, lines, the block's position...).  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \hyperlink{class_grid_a45b43ba6729ec8a08fa2006be2d7f0f3}{round\-Vec2} (Vector2 v)
+\begin{DoxyCompactList}\small\item\em A helper function that is used to round positions (cause rotations might create some small errors that could stack. \end{DoxyCompactList}\item 
+bool \hyperlink{class_grid_adee55783f61f7589ef9f3700c7e0b80e}{is\-Inside\-Borders} (Vector2 pos)
+\begin{DoxyCompactList}\small\item\em Called at every movement of a tetromino to determine if it is inside the borders. It checks if the tetrominos is inside the borders. \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_a9d521f59279e37e5a006a25292bc81db}{delete\-Row} (int y)
+\begin{DoxyCompactList}\small\item\em Called when we want to delete a row. Mostly when the row is full and has to be deleted. \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_a98d4a9ef585d3b518cf5c4d75767b48d}{game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called on restart \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_aace872cc2de2a1a6f3e744ed46c6e50e}{decrease\-Row} (int y)
+\begin{DoxyCompactList}\small\item\em Called when a row has been deleted. Decrease the row number y by one. \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_aed150a3b5937bd6bfbfcf914bd30c86c}{decrease\-Rows\-Above} (int p)
+\begin{DoxyCompactList}\small\item\em When a row is deleted we have to move down all the blocks above by one. \end{DoxyCompactList}\item 
+bool \hyperlink{class_grid_aa053a372e295b34c7bfd44414d31eec6}{is\-Row\-Full} (int y)
+\begin{DoxyCompactList}\small\item\em Called to check if the row number y is full. \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_a14b06c1a036c2742e6ddc67bc6dbd8cf}{delete\-Full\-Rows\-From} (int y)
+\begin{DoxyCompactList}\small\item\em Function called when a tetromino has been placed at height y (his highest part is at height y). We delete the full rows he might have completed (so we only have to check the 4 rows below) . If some are deleted we move down the rows above. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_grid_a66f83d135d340250e07d80e25ef727c6}{w}
+\begin{DoxyCompactList}\small\item\em The number of coloms of the tetris board grid. \end{DoxyCompactList}\item 
+int \hyperlink{class_grid_a639069cb7876f736d27f2bc37563f8fb}{h}
+\begin{DoxyCompactList}\small\item\em The number of rows of the tetris board grid. \end{DoxyCompactList}\item 
+int \hyperlink{class_grid_aaecc1ecaff3fce790af5bb4c30e875cb}{level}
+\begin{DoxyCompactList}\small\item\em Level of the game that defines the falling speed and points multiplicator. \end{DoxyCompactList}\item 
+int \hyperlink{class_grid_a3c8ccfb19a0a98bc8b9614e680bf57cb}{nb\-Lines}
+\begin{DoxyCompactList}\small\item\em Number of lines done this party. \end{DoxyCompactList}\item 
+int \hyperlink{class_grid_abe3bc085c9b1b24a21eb7aae3d50ecf2}{score}
+\begin{DoxyCompactList}\small\item\em Total score of the player this party. \end{DoxyCompactList}\item 
+int \hyperlink{class_grid_ac6d14039537f2afaf05248771dcf4255}{fast\-Fall\-Score}
+\begin{DoxyCompactList}\small\item\em Save the bonus score obtained when we fast fall a tetromino. \end{DoxyCompactList}\item 
+float \hyperlink{class_grid_a0fbf74559ec1e8015a6a2ad71d40847c}{x\-Scale}
+\begin{DoxyCompactList}\small\item\em Floats that represent the resizing ratio for the current resolution. \end{DoxyCompactList}\item 
+Transform\mbox{[},\mbox{]} \hyperlink{class_grid_a018870cf72623dd6c95a6b18f496e2fd}{grid}
+\begin{DoxyCompactList}\small\item\em The grid that stocks all blocks positions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_grid}{Grid} \hyperlink{class_grid_ae60955cc5e7232207df7ef2aa080f9f4}{\-\_\-grid}
+\begin{DoxyCompactList}\small\item\em \-\_\-grid is used to make a singleton. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_grid}{Grid} is meant to save and update almost all the data of the tetris game (score, lines, the block's position...). 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_grid_aace872cc2de2a1a6f3e744ed46c6e50e}{\index{Grid@{Grid}!decrease\-Row@{decrease\-Row}}
+\index{decrease\-Row@{decrease\-Row}!Grid@{Grid}}
+\subsubsection[{decrease\-Row}]{\setlength{\rightskip}{0pt plus 5cm}void Grid.\-decrease\-Row (
+\begin{DoxyParamCaption}
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{class_grid_aace872cc2de2a1a6f3e744ed46c6e50e}
+
+
+Called when a row has been deleted. Decrease the row number y by one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Number of the row from which we want to decrease\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_grid_aed150a3b5937bd6bfbfcf914bd30c86c}{\index{Grid@{Grid}!decrease\-Rows\-Above@{decrease\-Rows\-Above}}
+\index{decrease\-Rows\-Above@{decrease\-Rows\-Above}!Grid@{Grid}}
+\subsubsection[{decrease\-Rows\-Above}]{\setlength{\rightskip}{0pt plus 5cm}void Grid.\-decrease\-Rows\-Above (
+\begin{DoxyParamCaption}
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_grid_aed150a3b5937bd6bfbfcf914bd30c86c}
+
+
+When a row is deleted we have to move down all the blocks above by one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & We decrease all the row above p by one (p included)\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_grid_a14b06c1a036c2742e6ddc67bc6dbd8cf}{\index{Grid@{Grid}!delete\-Full\-Rows\-From@{delete\-Full\-Rows\-From}}
+\index{delete\-Full\-Rows\-From@{delete\-Full\-Rows\-From}!Grid@{Grid}}
+\subsubsection[{delete\-Full\-Rows\-From}]{\setlength{\rightskip}{0pt plus 5cm}void Grid.\-delete\-Full\-Rows\-From (
+\begin{DoxyParamCaption}
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{class_grid_a14b06c1a036c2742e6ddc67bc6dbd8cf}
+
+
+Function called when a tetromino has been placed at height y (his highest part is at height y). We delete the full rows he might have completed (so we only have to check the 4 rows below) . If some are deleted we move down the rows above. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Highest row from where we check if we have to delete this row.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_grid_a9d521f59279e37e5a006a25292bc81db}{\index{Grid@{Grid}!delete\-Row@{delete\-Row}}
+\index{delete\-Row@{delete\-Row}!Grid@{Grid}}
+\subsubsection[{delete\-Row}]{\setlength{\rightskip}{0pt plus 5cm}void Grid.\-delete\-Row (
+\begin{DoxyParamCaption}
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{class_grid_a9d521f59279e37e5a006a25292bc81db}
+
+
+Called when we want to delete a row. Mostly when the row is full and has to be deleted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The number of the row we want to delete. 0 is the bottom of the grid. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_grid_a98d4a9ef585d3b518cf5c4d75767b48d}{\index{Grid@{Grid}!game\-Restart@{game\-Restart}}
+\index{game\-Restart@{game\-Restart}!Grid@{Grid}}
+\subsubsection[{game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}void Grid.\-game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_grid_a98d4a9ef585d3b518cf5c4d75767b48d}
+
+
+Called on restart 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_grid_adee55783f61f7589ef9f3700c7e0b80e}{\index{Grid@{Grid}!is\-Inside\-Borders@{is\-Inside\-Borders}}
+\index{is\-Inside\-Borders@{is\-Inside\-Borders}!Grid@{Grid}}
+\subsubsection[{is\-Inside\-Borders}]{\setlength{\rightskip}{0pt plus 5cm}bool Grid.\-is\-Inside\-Borders (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_grid_adee55783f61f7589ef9f3700c7e0b80e}
+
+
+Called at every movement of a tetromino to determine if it is inside the borders. It checks if the tetrominos is inside the borders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position we check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean True if the tetromino is still inside the board boarders False otherwise. 
+\end{DoxyReturn}
+\hypertarget{class_grid_aa053a372e295b34c7bfd44414d31eec6}{\index{Grid@{Grid}!is\-Row\-Full@{is\-Row\-Full}}
+\index{is\-Row\-Full@{is\-Row\-Full}!Grid@{Grid}}
+\subsubsection[{is\-Row\-Full}]{\setlength{\rightskip}{0pt plus 5cm}bool Grid.\-is\-Row\-Full (
+\begin{DoxyParamCaption}
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{class_grid_aa053a372e295b34c7bfd44414d31eec6}
+
+
+Called to check if the row number y is full. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Number of the row we want to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean true if the row is full false otherwise.
+\end{DoxyReturn}
+\hypertarget{class_grid_a45b43ba6729ec8a08fa2006be2d7f0f3}{\index{Grid@{Grid}!round\-Vec2@{round\-Vec2}}
+\index{round\-Vec2@{round\-Vec2}!Grid@{Grid}}
+\subsubsection[{round\-Vec2}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Grid.\-round\-Vec2 (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{v}
+\end{DoxyParamCaption}
+)}}\label{class_grid_a45b43ba6729ec8a08fa2006be2d7f0f3}
+
+
+A helper function that is used to round positions (cause rotations might create some small errors that could stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The position (Vector 2) we want to round.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector2
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_grid_ae60955cc5e7232207df7ef2aa080f9f4}{\index{Grid@{Grid}!\-\_\-grid@{\-\_\-grid}}
+\index{\-\_\-grid@{\-\_\-grid}!Grid@{Grid}}
+\subsubsection[{\-\_\-grid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grid} Grid.\-\_\-grid\hspace{0.3cm}{\ttfamily [static]}}}\label{class_grid_ae60955cc5e7232207df7ef2aa080f9f4}
+
+
+\-\_\-grid is used to make a singleton. 
+
+\hypertarget{class_grid_ac6d14039537f2afaf05248771dcf4255}{\index{Grid@{Grid}!fast\-Fall\-Score@{fast\-Fall\-Score}}
+\index{fast\-Fall\-Score@{fast\-Fall\-Score}!Grid@{Grid}}
+\subsubsection[{fast\-Fall\-Score}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-fast\-Fall\-Score}}\label{class_grid_ac6d14039537f2afaf05248771dcf4255}
+
+
+Save the bonus score obtained when we fast fall a tetromino. 
+
+\hypertarget{class_grid_a018870cf72623dd6c95a6b18f496e2fd}{\index{Grid@{Grid}!grid@{grid}}
+\index{grid@{grid}!Grid@{Grid}}
+\subsubsection[{grid}]{\setlength{\rightskip}{0pt plus 5cm}Transform \mbox{[},\mbox{]} Grid.\-grid}}\label{class_grid_a018870cf72623dd6c95a6b18f496e2fd}
+
+
+The grid that stocks all blocks positions. 
+
+\hypertarget{class_grid_a639069cb7876f736d27f2bc37563f8fb}{\index{Grid@{Grid}!h@{h}}
+\index{h@{h}!Grid@{Grid}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-h}}\label{class_grid_a639069cb7876f736d27f2bc37563f8fb}
+
+
+The number of rows of the tetris board grid. 
+
+\hypertarget{class_grid_aaecc1ecaff3fce790af5bb4c30e875cb}{\index{Grid@{Grid}!level@{level}}
+\index{level@{level}!Grid@{Grid}}
+\subsubsection[{level}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-level}}\label{class_grid_aaecc1ecaff3fce790af5bb4c30e875cb}
+
+
+Level of the game that defines the falling speed and points multiplicator. 
+
+\hypertarget{class_grid_a3c8ccfb19a0a98bc8b9614e680bf57cb}{\index{Grid@{Grid}!nb\-Lines@{nb\-Lines}}
+\index{nb\-Lines@{nb\-Lines}!Grid@{Grid}}
+\subsubsection[{nb\-Lines}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-nb\-Lines}}\label{class_grid_a3c8ccfb19a0a98bc8b9614e680bf57cb}
+
+
+Number of lines done this party. 
+
+\hypertarget{class_grid_abe3bc085c9b1b24a21eb7aae3d50ecf2}{\index{Grid@{Grid}!score@{score}}
+\index{score@{score}!Grid@{Grid}}
+\subsubsection[{score}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-score}}\label{class_grid_abe3bc085c9b1b24a21eb7aae3d50ecf2}
+
+
+Total score of the player this party. 
+
+\hypertarget{class_grid_a66f83d135d340250e07d80e25ef727c6}{\index{Grid@{Grid}!w@{w}}
+\index{w@{w}!Grid@{Grid}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}int Grid.\-w}}\label{class_grid_a66f83d135d340250e07d80e25ef727c6}
+
+
+The number of coloms of the tetris board grid. 
+
+\hypertarget{class_grid_a0fbf74559ec1e8015a6a2ad71d40847c}{\index{Grid@{Grid}!x\-Scale@{x\-Scale}}
+\index{x\-Scale@{x\-Scale}!Grid@{Grid}}
+\subsubsection[{x\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}float Grid.\-x\-Scale}}\label{class_grid_a0fbf74559ec1e8015a6a2ad71d40847c}
+
+
+Floats that represent the resizing ratio for the current resolution. 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Tetris/Grid.\-cs\end{DoxyCompactItemize}

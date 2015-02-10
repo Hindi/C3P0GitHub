@@ -1,0 +1,231 @@
+\hypertarget{class_space_war_state}{\section{Space\-War\-State Class Reference}
+\label{class_space_war_state}\index{Space\-War\-State@{Space\-War\-State}}
+}
+
+
+A\-I script for the enemy in Space\-War  
+
+
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_space_war_state_ad684be48c3453d8f98c1d4cb4d4ea087}{Space\-War\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded, sets the Game I\-D \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_a1a5b24ade519794138827f4a8912f202}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Delegate called when the game needs to (re)start \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_a7852c522f077254d78fa46ef82662ad7}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Sets the parameter used in game when selected from the menu \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_ac965e3936108a8fea8055e4e250d66bd}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Delegate called when the game scene is done loading. \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_afbedfd935854568d8d34c540bb6de67b}{start} ()
+\begin{DoxyCompactList}\small\item\em Similar to Unity's Start delegate, called when the state starts \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_ae411bb8b76dc8e3eb4f41e60b68306c8}{end} ()
+\begin{DoxyCompactList}\small\item\em Similar to Unity's On\-Destroy delegate, called when the state stops \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_a1359aae13f67fb97de75307349b8ee81}{update} ()
+\begin{DoxyCompactList}\small\item\em Similar to Unity's Update delegate, called each frame to advance in game \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_a9297a9e552fd452d35af06e1e57749dc}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Delegate called when the game is over \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_a3eabccff86c38c3a66fbd94ed1080ac4}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Called by the Input Manager to notify a key is being pressed \end{DoxyCompactList}\item 
+override void \hyperlink{class_space_war_state_ad7a98786e6a5e801bc8342b0c8c5da94}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Called by the Input Manager to notify a key/touch screen action going on \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A\-I script for the enemy in Space\-War 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_space_war_state_ad684be48c3453d8f98c1d4cb4d4ea087}{\index{Space\-War\-State@{Space\-War\-State}!Space\-War\-State@{Space\-War\-State}}
+\index{Space\-War\-State@{Space\-War\-State}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{Space\-War\-State}]{\setlength{\rightskip}{0pt plus 5cm}Space\-War\-State.\-Space\-War\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_space_war_state_ad684be48c3453d8f98c1d4cb4d4ea087}
+
+
+Called when the lobby scene from Unity is loaded, sets the Game I\-D 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\-Manager} & The instance managing all the states\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_space_war_state_ae411bb8b76dc8e3eb4f41e60b68306c8}{\index{Space\-War\-State@{Space\-War\-State}!end@{end}}
+\index{end@{end}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_ae411bb8b76dc8e3eb4f41e60b68306c8}
+
+
+Similar to Unity's On\-Destroy delegate, called when the state stops 
+
+
+
+Reimplemented from \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}.
+
+\hypertarget{class_space_war_state_a3eabccff86c38c3a66fbd94ed1080ac4}{\index{Space\-War\-State@{Space\-War\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_a3eabccff86c38c3a66fbd94ed1080ac4}
+
+
+Called by the Input Manager to notify a key is being pressed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key being pressed\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}.
+
+\hypertarget{class_space_war_state_ad7a98786e6a5e801bc8342b0c8c5da94}{\index{Space\-War\-State@{Space\-War\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_ad7a98786e6a5e801bc8342b0c8c5da94}
+
+
+Called by the Input Manager to notify a key/touch screen action going on 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key being pressed\\
+\hline
+{\em inputs} & A touch screen action\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}.
+
+\hypertarget{class_space_war_state_a9297a9e552fd452d35af06e1e57749dc}{\index{Space\-War\-State@{Space\-War\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_a9297a9e552fd452d35af06e1e57749dc}
+
+
+Delegate called when the game is over 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if player won\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{Game\-State}.
+
+\hypertarget{class_space_war_state_a1a5b24ade519794138827f4a8912f202}{\index{Space\-War\-State@{Space\-War\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_a1a5b24ade519794138827f4a8912f202}
+
+
+Delegate called when the game needs to (re)start 
+
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_space_war_state_ac965e3936108a8fea8055e4e250d66bd}{\index{Space\-War\-State@{Space\-War\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_ac965e3936108a8fea8055e4e250d66bd}
+
+
+Delegate called when the game scene is done loading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & The game's level done loading\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}.
+
+\hypertarget{class_space_war_state_a7852c522f077254d78fa46ef82662ad7}{\index{Space\-War\-State@{Space\-War\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_a7852c522f077254d78fa46ef82662ad7}
+
+
+Sets the parameter used in game when selected from the menu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter that should be used in game forward\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_space_war_state_afbedfd935854568d8d34c540bb6de67b}{\index{Space\-War\-State@{Space\-War\-State}!start@{start}}
+\index{start@{start}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_afbedfd935854568d8d34c540bb6de67b}
+
+
+Similar to Unity's Start delegate, called when the state starts 
+
+
+
+Reimplemented from \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}.
+
+\hypertarget{class_space_war_state_a1359aae13f67fb97de75307349b8ee81}{\index{Space\-War\-State@{Space\-War\-State}!update@{update}}
+\index{update@{update}!SpaceWarState@{Space\-War\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-War\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_war_state_a1359aae13f67fb97de75307349b8ee81}
+
+
+Similar to Unity's Update delegate, called each frame to advance in game 
+
+
+
+Reimplemented from \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Space\-War\-State.\-cs\end{DoxyCompactItemize}

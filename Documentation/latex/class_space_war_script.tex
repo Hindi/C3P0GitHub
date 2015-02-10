@@ -1,0 +1,87 @@
+\hypertarget{class_space_war_script}{\section{Space\-War\-Script Class Reference}
+\label{class_space_war_script}\index{Space\-War\-Script@{Space\-War\-Script}}
+}
+
+
+Game\-Manager for Space\-War. Mostly manages restarts and score.  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_space_war_script_a4ecffd489f433ce9a9eff4b4ef40cd70}{void {\bfseries on\-Restart} (bool score\-Reset=true)}\label{class_space_war_script_a4ecffd489f433ce9a9eff4b4ef40cd70}
+
+\item 
+void \hyperlink{class_space_war_script_add8402d3fb82b35e28353374036133fc}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} p)
+\begin{DoxyCompactList}\small\item\em Called by the state to set the A\-I's parameter \end{DoxyCompactList}\item 
+void \hyperlink{class_space_war_script_a96c8e9efa64630e61bbd418fe629aea9}{space\-Ship\-Destroyed} (bool b, int delta\-Score)
+\begin{DoxyCompactList}\small\item\em Delegate called when one of the ships is destroyed \end{DoxyCompactList}\item 
+void \hyperlink{class_space_war_script_a98597e04185ed14283c441a90c00e1c0}{update\-Elements\-Resolution} ()
+\begin{DoxyCompactList}\small\item\em Used to change the camera's size according to screen size ratio to keep consistent across all platforms \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_space_war_script_acc55edd5813205e1eeac4846320d4ea5}{int {\bfseries Score}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_space_war_script_acc55edd5813205e1eeac4846320d4ea5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Game\-Manager for Space\-War. Mostly manages restarts and score. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_space_war_script_add8402d3fb82b35e28353374036133fc}{\index{Space\-War\-Script@{Space\-War\-Script}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!SpaceWarScript@{Space\-War\-Script}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}void Space\-War\-Script.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_space_war_script_add8402d3fb82b35e28353374036133fc}
+
+
+Called by the state to set the A\-I's parameter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The new parameter\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_space_war_script_a96c8e9efa64630e61bbd418fe629aea9}{\index{Space\-War\-Script@{Space\-War\-Script}!space\-Ship\-Destroyed@{space\-Ship\-Destroyed}}
+\index{space\-Ship\-Destroyed@{space\-Ship\-Destroyed}!SpaceWarScript@{Space\-War\-Script}}
+\subsubsection[{space\-Ship\-Destroyed}]{\setlength{\rightskip}{0pt plus 5cm}void Space\-War\-Script.\-space\-Ship\-Destroyed (
+\begin{DoxyParamCaption}
+\item[{bool}]{b, }
+\item[{int}]{delta\-Score}
+\end{DoxyParamCaption}
+)}}\label{class_space_war_script_a96c8e9efa64630e61bbd418fe629aea9}
+
+
+Delegate called when one of the ships is destroyed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if player ship, false otherwise\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_space_war_script_a98597e04185ed14283c441a90c00e1c0}{\index{Space\-War\-Script@{Space\-War\-Script}!update\-Elements\-Resolution@{update\-Elements\-Resolution}}
+\index{update\-Elements\-Resolution@{update\-Elements\-Resolution}!SpaceWarScript@{Space\-War\-Script}}
+\subsubsection[{update\-Elements\-Resolution}]{\setlength{\rightskip}{0pt plus 5cm}void Space\-War\-Script.\-update\-Elements\-Resolution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_space_war_script_a98597e04185ed14283c441a90c00e1c0}
+
+
+Used to change the camera's size according to screen size ratio to keep consistent across all platforms 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Space\-War/Space\-War\-Script.\-cs\end{DoxyCompactItemize}

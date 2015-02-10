@@ -1,0 +1,80 @@
+\hypertarget{class_asteroid_network}{\section{Asteroid\-Network Class Reference}
+\label{class_asteroid_network}\index{Asteroid\-Network@{Asteroid\-Network}}
+}
+
+
+Class that contains all the R\-P\-C needed for \hyperlink{class_asteroid}{Asteroid}  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_asteroid_network_a5175fb92924d8a38a2cbfe3e6f645028}{void {\bfseries game\-Over} ()}\label{class_asteroid_network_a5175fb92924d8a38a2cbfe3e6f645028}
+
+\item 
+void \hyperlink{class_asteroid_network_a81680a1ea0bf0e606b10ed348156bbc8}{ask\-Init\-Player} ()
+\begin{DoxyCompactList}\small\item\em Called by a player to ask his color \end{DoxyCompactList}\item 
+\hypertarget{class_asteroid_network_ac7235c93ef7d02f74d7034c0b914a648}{void {\bfseries create\-Asteroid} (Vector3 pos, Vector3 target, int hp, int id, int prefab\-Id)}\label{class_asteroid_network_ac7235c93ef7d02f74d7034c0b914a648}
+
+\item 
+\hypertarget{class_asteroid_network_ab957b92871eb1ea2f5e97ce7798d514c}{void {\bfseries create\-Asteroid\-Color} (Vector3 pos, Vector3 target, int hp, int id, int prefab\-Id, Enum\-Color color)}\label{class_asteroid_network_ab957b92871eb1ea2f5e97ce7798d514c}
+
+\item 
+\hypertarget{class_asteroid_network_ae6016e269d3e1f0d96dcabe12eab3b86}{void {\bfseries destroy\-Asteroid} (int id)}\label{class_asteroid_network_ae6016e269d3e1f0d96dcabe12eab3b86}
+
+\item 
+\hypertarget{class_asteroid_network_a48ce64796b075ce41ab38f9dad0ca626}{void {\bfseries hit\-Asteroid} (int id)}\label{class_asteroid_network_a48ce64796b075ce41ab38f9dad0ca626}
+
+\item 
+void \hyperlink{class_asteroid_network_a26c398dc32c914a98f1a3cb4dfe8586a}{ask\-Init\-Player\-R\-P\-C} (Network\-Message\-Info info)
+\begin{DoxyCompactList}\small\item\em Called by a player, only server do this function. \end{DoxyCompactList}\item 
+\hypertarget{class_asteroid_network_a5d5bb023129fd9db950096e7736969ed}{bool {\bfseries is\-Server} ()}\label{class_asteroid_network_a5d5bb023129fd9db950096e7736969ed}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that contains all the R\-P\-C needed for \hyperlink{class_asteroid}{Asteroid} 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_asteroid_network_a81680a1ea0bf0e606b10ed348156bbc8}{\index{Asteroid\-Network@{Asteroid\-Network}!ask\-Init\-Player@{ask\-Init\-Player}}
+\index{ask\-Init\-Player@{ask\-Init\-Player}!AsteroidNetwork@{Asteroid\-Network}}
+\subsubsection[{ask\-Init\-Player}]{\setlength{\rightskip}{0pt plus 5cm}void Asteroid\-Network.\-ask\-Init\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_asteroid_network_a81680a1ea0bf0e606b10ed348156bbc8}
+
+
+Called by a player to ask his color 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_asteroid_network_a26c398dc32c914a98f1a3cb4dfe8586a}{\index{Asteroid\-Network@{Asteroid\-Network}!ask\-Init\-Player\-R\-P\-C@{ask\-Init\-Player\-R\-P\-C}}
+\index{ask\-Init\-Player\-R\-P\-C@{ask\-Init\-Player\-R\-P\-C}!AsteroidNetwork@{Asteroid\-Network}}
+\subsubsection[{ask\-Init\-Player\-R\-P\-C}]{\setlength{\rightskip}{0pt plus 5cm}void Asteroid\-Network.\-ask\-Init\-Player\-R\-P\-C (
+\begin{DoxyParamCaption}
+\item[{Network\-Message\-Info}]{info}
+\end{DoxyParamCaption}
+)}}\label{class_asteroid_network_a26c398dc32c914a98f1a3cb4dfe8586a}
+
+
+Called by a player, only server do this function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & A way to have the sender informations.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Asteroids/Asteroid\-Network.\-cs\end{DoxyCompactItemize}

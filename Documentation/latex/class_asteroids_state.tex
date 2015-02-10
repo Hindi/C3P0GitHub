@@ -1,0 +1,228 @@
+\hypertarget{class_asteroids_state}{\section{Asteroids\-State Class Reference}
+\label{class_asteroids_state}\index{Asteroids\-State@{Asteroids\-State}}
+}
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_asteroids_state_ac8409f9cf7c6d986eedc3dfe52b1d835}{{\bfseries Asteroids\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)}\label{class_asteroids_state_ac8409f9cf7c6d986eedc3dfe52b1d835}
+
+\item 
+override void \hyperlink{class_asteroids_state_a884ff5871f16a9444fcb460657f764ba}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_aa2ea00ce9ba4a4254ff4898ee06316e6}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the player lose or win.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_aaa602dee6d06851906e5db870f0e46d3}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Abstract function specific for each game. It is called when the player chose a parameter\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_a921b0118ddb492399752bceb82ec3c89}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_ad4866919e63dc9c1062524d78be2654a}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_ab24d69dd1f613038cc9ddabdc8893f4d}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_a7ba222181b3a3d597af0818866c69dda}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_a4e36725d9196683c5af198604d98ca2f}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_asteroids_state_aa451b09624a4d1aeb3ce004001582c3c}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_asteroids_state_ab24d69dd1f613038cc9ddabdc8893f4d}{\index{Asteroids\-State@{Asteroids\-State}!end@{end}}
+\index{end@{end}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_ab24d69dd1f613038cc9ddabdc8893f4d}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{State}.
+
+\hypertarget{class_asteroids_state_a4e36725d9196683c5af198604d98ca2f}{\index{Asteroids\-State@{Asteroids\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_a4e36725d9196683c5af198604d98ca2f}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{State}.
+
+\hypertarget{class_asteroids_state_aa451b09624a4d1aeb3ce004001582c3c}{\index{Asteroids\-State@{Asteroids\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_aa451b09624a4d1aeb3ce004001582c3c}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{State}.
+
+\hypertarget{class_asteroids_state_aa2ea00ce9ba4a4254ff4898ee06316e6}{\index{Asteroids\-State@{Asteroids\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_aa2ea00ce9ba4a4254ff4898ee06316e6}
+
+
+Called when the player lose or win.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the player won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{Game\-State}.
+
+\hypertarget{class_asteroids_state_a884ff5871f16a9444fcb460657f764ba}{\index{Asteroids\-State@{Asteroids\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_a884ff5871f16a9444fcb460657f764ba}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_asteroids_state_a921b0118ddb492399752bceb82ec3c89}{\index{Asteroids\-State@{Asteroids\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_a921b0118ddb492399752bceb82ec3c89}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{State}.
+
+\hypertarget{class_asteroids_state_aaa602dee6d06851906e5db870f0e46d3}{\index{Asteroids\-State@{Asteroids\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_aaa602dee6d06851906e5db870f0e46d3}
+
+
+Abstract function specific for each game. It is called when the player chose a parameter
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_asteroids_state_ad4866919e63dc9c1062524d78be2654a}{\index{Asteroids\-State@{Asteroids\-State}!start@{start}}
+\index{start@{start}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_ad4866919e63dc9c1062524d78be2654a}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{State}.
+
+\hypertarget{class_asteroids_state_a7ba222181b3a3d597af0818866c69dda}{\index{Asteroids\-State@{Asteroids\-State}!update@{update}}
+\index{update@{update}!AsteroidsState@{Asteroids\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Asteroids\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_asteroids_state_a7ba222181b3a3d597af0818866c69dda}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Asteroids\-State.\-cs\end{DoxyCompactItemize}

@@ -1,0 +1,259 @@
+\hypertarget{class_space_invader_state}{\section{Space\-Invader\-State Class Reference}
+\label{class_space_invader_state}\index{Space\-Invader\-State@{Space\-Invader\-State}}
+}
+
+
+This state is active when the player plays Space \hyperlink{class_invader}{Invader}. 
+
+
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_space_invader_state_a0dd267e6c77643e39ccc6b8e90639fe5}{Space\-Invader\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a573f37d8d8d67b76729211b0f0b53bc9}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a0dbf1355f74cc72d3c88de04ed4b0850}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the player lose or win.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a76aea6ddbecbc48831eaf643074dc218}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Defines which function will influence the size of the player.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a4682e573bfed319344164f0c2ac92c0e}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a2b839470ff8344a6f090aa68df1cfa5b}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a2f0ea75c238c2e42f790e6f4ad8780ae}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a2514e1cc361e663348bf190bacda343f}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_a9d787fe40541a10e25ac96029254b9c7}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_space_invader_state_aefd9b0488dfd4d515e4ef394e8f9bb36}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This state is active when the player plays Space \hyperlink{class_invader}{Invader}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_space_invader_state_a0dd267e6c77643e39ccc6b8e90639fe5}{\index{Space\-Invader\-State@{Space\-Invader\-State}!Space\-Invader\-State@{Space\-Invader\-State}}
+\index{Space\-Invader\-State@{Space\-Invader\-State}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{Space\-Invader\-State}]{\setlength{\rightskip}{0pt plus 5cm}Space\-Invader\-State.\-Space\-Invader\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_space_invader_state_a0dd267e6c77643e39ccc6b8e90639fe5}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_space_invader_state_a2f0ea75c238c2e42f790e6f4ad8780ae}{\index{Space\-Invader\-State@{Space\-Invader\-State}!end@{end}}
+\index{end@{end}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a2f0ea75c238c2e42f790e6f4ad8780ae}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a9d787fe40541a10e25ac96029254b9c7}{\index{Space\-Invader\-State@{Space\-Invader\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a9d787fe40541a10e25ac96029254b9c7}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}.
+
+\hypertarget{class_space_invader_state_aefd9b0488dfd4d515e4ef394e8f9bb36}{\index{Space\-Invader\-State@{Space\-Invader\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_aefd9b0488dfd4d515e4ef394e8f9bb36}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a0dbf1355f74cc72d3c88de04ed4b0850}{\index{Space\-Invader\-State@{Space\-Invader\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a0dbf1355f74cc72d3c88de04ed4b0850}
+
+
+Called when the player lose or win.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the player won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a573f37d8d8d67b76729211b0f0b53bc9}{\index{Space\-Invader\-State@{Space\-Invader\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a573f37d8d8d67b76729211b0f0b53bc9}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a4682e573bfed319344164f0c2ac92c0e}{\index{Space\-Invader\-State@{Space\-Invader\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a4682e573bfed319344164f0c2ac92c0e}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a76aea6ddbecbc48831eaf643074dc218}{\index{Space\-Invader\-State@{Space\-Invader\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a76aea6ddbecbc48831eaf643074dc218}
+
+
+Defines which function will influence the size of the player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a2b839470ff8344a6f090aa68df1cfa5b}{\index{Space\-Invader\-State@{Space\-Invader\-State}!start@{start}}
+\index{start@{start}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a2b839470ff8344a6f090aa68df1cfa5b}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}.
+
+\hypertarget{class_space_invader_state_a2514e1cc361e663348bf190bacda343f}{\index{Space\-Invader\-State@{Space\-Invader\-State}!update@{update}}
+\index{update@{update}!SpaceInvaderState@{Space\-Invader\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Space\-Invader\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_space_invader_state_a2514e1cc361e663348bf190bacda343f}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Space\-Invader\-State.\-cs\end{DoxyCompactItemize}

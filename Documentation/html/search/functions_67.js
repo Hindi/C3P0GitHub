@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['gamelist',['GameList',['../class_game_list.html#a8276643f5abe53141a215432f6d56a2c',1,'GameList']]],
+  ['gamerestart',['gameRestart',['../class_grid.html#a98d4a9ef585d3b518cf5c4d75767b48d',1,'Grid']]],
+  ['gamestate',['GameState',['../class_game_state.html#af49ddbcc92ea9d0ceb8c80a784689ae7',1,'GameState']]],
+  ['getcoupspecial',['getCoupSpecial',['../class_super_basic_i_a.html#aa4082adcb9f1fac7379060f9c64c781b',1,'SuperBasicIA']]],
+  ['getcurdir',['getCurDir',['../class_pac_move.html#ac5f9ee7e29ccec155c96f455084fd657',1,'PacMove']]],
+  ['getcurrentcanvas',['getcurrentCanvas',['../class_u_i.html#ae51febf7bdea895d39cb661a16f5f2da',1,'UI']]],
+  ['getmyip',['getMyIp',['../class_c3_p_o_network.html#a5549ef59a1c5f6d556944789a3ca7cf8',1,'C3PONetwork']]],
+  ['getquestiontxt',['getQuestionTxt',['../class_question_manager.html#a5ebb18be24aecd9db9bc2434c2e888d8',1,'QuestionManager']]],
+  ['getserverip',['getServerIp',['../class_c3_p_o_network.html#a978ce2299004d011f67e1f5b2fd6f977',1,'C3PONetwork']]],
+  ['godown',['goDown',['../class_pac_move.html#ad70639e8a6bf24a83deb5f9500f248fd',1,'PacMove.goDown()'],['../class_player_control.html#ab0dcc4e0a963300fc25fb4b527d6b981',1,'PlayerControl.goDown()'],['../class_tetromino.html#ab194ca105c3659a908bda68a82690748',1,'Tetromino.goDown()']]],
+  ['goforward',['goForward',['../class_spaceship.html#abfcf9a39a1e43f873495100e9bb3c6fe',1,'Spaceship']]],
+  ['goleft',['goLeft',['../class_pac_move.html#a41e79a9a69c2d98461523cbbc1b0a130',1,'PacMove']]],
+  ['goright',['goRight',['../class_pac_move.html#aba622a9707ec3e12625e74a90ab33190',1,'PacMove']]],
+  ['gotomainmenu',['goToMainMenu',['../class_u_i.html#a6fb1ac66925d006ea5d8943722c7a276',1,'UI']]],
+  ['gotonextquestion',['goToNextQuestion',['../class_question_manager.html#ad951c82ca60e66a5e088aeaf84436b74',1,'QuestionManager']]],
+  ['gotopreviousquestion',['goToPreviousQuestion',['../class_question_manager.html#a0c8730b4ca5eb183f828f0dad9524b08',1,'QuestionManager']]],
+  ['goup',['goUp',['../class_pac_move.html#acd95ac0f1076e9b20c3bc2f6cc046a7c',1,'PacMove.goUp()'],['../class_player_control.html#ae54eeabcd57fc019af3ad8f05775acd3',1,'PlayerControl.goUp()']]]
+];

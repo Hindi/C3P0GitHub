@@ -1,0 +1,125 @@
+\hypertarget{class_kalman}{\section{Kalman Class Reference}
+\label{class_kalman}\index{Kalman@{Kalman}}
+}
+
+
+Applies a \hyperlink{class_kalman}{Kalman} filter (position + speed) on a 2\-Dimentional object  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_kalman_a63b79b011d0e7dc543204856c0dfa302}{Kalman} (Vector4 init\-Vector, double noise\-Variance, double imprecision\-Variance)
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_kalman}{Kalman} filter for the object \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_kalman_a159b7586f0a79a2837f20d8baa9db302}{interpolation} (int nb\-Frames)
+\begin{DoxyCompactList}\small\item\em Tries to predict the object's position in nb\-Frames units of time.\par
+ Currently does a pretty poor job at it. \end{DoxyCompactList}\item 
+void \hyperlink{class_kalman_a761d50207689b40a0ff6ca95f924f9f0}{add\-Observation} (Vector4 obs)
+\begin{DoxyCompactList}\small\item\em Takes a sensor-\/perfect observation as entry for a \hyperlink{class_kalman}{Kalman} filter iteration, adds realistic sensor imperfection and updates the internal state accordingly \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \hyperlink{class_kalman_a50ea03a2599d8c543a7c7b9a6bc3a5a4}{Pos\-Bruit}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Position of the object as modelled by the noise Q, may be used for graphical feedback \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_kalman_a0a29646a2e1fddee8d46c928b6c7ce78}{Pos\-Interp}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Contains the position interpreted by the \hyperlink{class_kalman}{Kalman} filter \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_kalman_a46fb936710eedfd2cf4596325a63f56f}{Pos\-Imprecise}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Position of the object after sensor imprecision, may be used for graphical feedback \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Applies a \hyperlink{class_kalman}{Kalman} filter (position + speed) on a 2\-Dimentional object 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_kalman_a63b79b011d0e7dc543204856c0dfa302}{\index{Kalman@{Kalman}!Kalman@{Kalman}}
+\index{Kalman@{Kalman}!Kalman@{Kalman}}
+\subsubsection[{Kalman}]{\setlength{\rightskip}{0pt plus 5cm}Kalman.\-Kalman (
+\begin{DoxyParamCaption}
+\item[{Vector4}]{init\-Vector, }
+\item[{double}]{noise\-Variance, }
+\item[{double}]{imprecision\-Variance}
+\end{DoxyParamCaption}
+)}}\label{class_kalman_a63b79b011d0e7dc543204856c0dfa302}
+
+
+Creates a \hyperlink{class_kalman}{Kalman} filter for the object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em init\-Vector} & Initial position of the object\\
+\hline
+{\em noise\-Variance} & Variance used for Q, trajectory noise model\\
+\hline
+{\em imprecision\-Variance} & Variance used for R, sensor imprecision model\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_kalman_a761d50207689b40a0ff6ca95f924f9f0}{\index{Kalman@{Kalman}!add\-Observation@{add\-Observation}}
+\index{add\-Observation@{add\-Observation}!Kalman@{Kalman}}
+\subsubsection[{add\-Observation}]{\setlength{\rightskip}{0pt plus 5cm}void Kalman.\-add\-Observation (
+\begin{DoxyParamCaption}
+\item[{Vector4}]{obs}
+\end{DoxyParamCaption}
+)}}\label{class_kalman_a761d50207689b40a0ff6ca95f924f9f0}
+
+
+Takes a sensor-\/perfect observation as entry for a \hyperlink{class_kalman}{Kalman} filter iteration, adds realistic sensor imperfection and updates the internal state accordingly 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obs} & A noised sensor-\/perfect position+speed observation\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_kalman_a159b7586f0a79a2837f20d8baa9db302}{\index{Kalman@{Kalman}!interpolation@{interpolation}}
+\index{interpolation@{interpolation}!Kalman@{Kalman}}
+\subsubsection[{interpolation}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Kalman.\-interpolation (
+\begin{DoxyParamCaption}
+\item[{int}]{nb\-Frames}
+\end{DoxyParamCaption}
+)}}\label{class_kalman_a159b7586f0a79a2837f20d8baa9db302}
+
+
+Tries to predict the object's position in nb\-Frames units of time.\par
+ Currently does a pretty poor job at it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Frames} & The number of units of time ahead we want to know the object's position\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A position vector
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_kalman_a50ea03a2599d8c543a7c7b9a6bc3a5a4}{\index{Kalman@{Kalman}!Pos\-Bruit@{Pos\-Bruit}}
+\index{Pos\-Bruit@{Pos\-Bruit}!Kalman@{Kalman}}
+\subsubsection[{Pos\-Bruit}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Kalman.\-Pos\-Bruit\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_kalman_a50ea03a2599d8c543a7c7b9a6bc3a5a4}
+
+
+Position of the object as modelled by the noise Q, may be used for graphical feedback 
+
+\hypertarget{class_kalman_a46fb936710eedfd2cf4596325a63f56f}{\index{Kalman@{Kalman}!Pos\-Imprecise@{Pos\-Imprecise}}
+\index{Pos\-Imprecise@{Pos\-Imprecise}!Kalman@{Kalman}}
+\subsubsection[{Pos\-Imprecise}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Kalman.\-Pos\-Imprecise\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_kalman_a46fb936710eedfd2cf4596325a63f56f}
+
+
+Position of the object after sensor imprecision, may be used for graphical feedback 
+
+\hypertarget{class_kalman_a0a29646a2e1fddee8d46c928b6c7ce78}{\index{Kalman@{Kalman}!Pos\-Interp@{Pos\-Interp}}
+\index{Pos\-Interp@{Pos\-Interp}!Kalman@{Kalman}}
+\subsubsection[{Pos\-Interp}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Kalman.\-Pos\-Interp\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_kalman_a0a29646a2e1fddee8d46c928b6c7ce78}
+
+
+Contains the position interpreted by the \hyperlink{class_kalman}{Kalman} filter 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Probas/Kalman.\-cs\end{DoxyCompactItemize}

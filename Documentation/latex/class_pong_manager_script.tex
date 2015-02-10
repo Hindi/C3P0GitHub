@@ -1,0 +1,129 @@
+\hypertarget{class_pong_manager_script}{\section{Pong\-Manager\-Script Class Reference}
+\label{class_pong_manager_script}\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}}
+}
+
+
+The main script of Pong that manages everything  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_pong_manager_script_a796d6a8a65c1b47f89e0fd19141a4064}{on\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Full restart of the game \end{DoxyCompactList}\item 
+void \hyperlink{class_pong_manager_script_a4b5b4644d603637563df3d69c9a158fc}{activate\-Coup\-Special} (Vector2 old\-Speed)
+\begin{DoxyCompactList}\small\item\em Activates a special shot, stores the speed before the special shot \end{DoxyCompactList}\item 
+void \hyperlink{class_pong_manager_script_a94ac020e95a8df42e50927ef08467197}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} p)
+\begin{DoxyCompactList}\small\item\em Sets the current game parameter \end{DoxyCompactList}\item 
+void \hyperlink{class_pong_manager_script_a9d2a0621b5d133f7c2c9deb5aa1a6b20}{launch\-Coup\-Special} (int p)
+\begin{DoxyCompactList}\small\item\em Starts the actual shot instead of having the ball stuck on the paddle \end{DoxyCompactList}\item 
+void \hyperlink{class_pong_manager_script_a9998658fca22660c988d4acc459c7570}{update\-Elements\-Resolution} ()
+\begin{DoxyCompactList}\small\item\em Changes the camera size to ajust to screen size. In game element size not changed anymore \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_pong_manager_script_a55593ecdefaf33258fa1299d79da1908}{float {\bfseries resize\-Height}}\label{class_pong_manager_script_a55593ecdefaf33258fa1299d79da1908}
+
+\item 
+\hypertarget{class_pong_manager_script_a9e5c66d830ac0c59cdb60399395468e8}{float {\bfseries resize\-Width}}\label{class_pong_manager_script_a9e5c66d830ac0c59cdb60399395468e8}
+
+\item 
+\hypertarget{class_pong_manager_script_acb8353081df4087e1d62bc27477641c2}{\hyperlink{class_parameter}{Parameter} {\bfseries param}}\label{class_pong_manager_script_acb8353081df4087e1d62bc27477641c2}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_pong_manager_script_a35ff52e03c34e978f27739997dfbe673}{int {\bfseries player\-Score}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_pong_manager_script_a35ff52e03c34e978f27739997dfbe673}
+
+\item 
+\hypertarget{class_pong_manager_script_a3f73117317002dab104bbe8633b1f302}{int {\bfseries enemy\-Score}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_pong_manager_script_a3f73117317002dab104bbe8633b1f302}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main script of Pong that manages everything 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_pong_manager_script_a4b5b4644d603637563df3d69c9a158fc}{\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}!activate\-Coup\-Special@{activate\-Coup\-Special}}
+\index{activate\-Coup\-Special@{activate\-Coup\-Special}!PongManagerScript@{Pong\-Manager\-Script}}
+\subsubsection[{activate\-Coup\-Special}]{\setlength{\rightskip}{0pt plus 5cm}void Pong\-Manager\-Script.\-activate\-Coup\-Special (
+\begin{DoxyParamCaption}
+\item[{Vector2}]{old\-Speed}
+\end{DoxyParamCaption}
+)}}\label{class_pong_manager_script_a4b5b4644d603637563df3d69c9a158fc}
+
+
+Activates a special shot, stores the speed before the special shot 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\-Speed} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_pong_manager_script_a9d2a0621b5d133f7c2c9deb5aa1a6b20}{\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}!launch\-Coup\-Special@{launch\-Coup\-Special}}
+\index{launch\-Coup\-Special@{launch\-Coup\-Special}!PongManagerScript@{Pong\-Manager\-Script}}
+\subsubsection[{launch\-Coup\-Special}]{\setlength{\rightskip}{0pt plus 5cm}void Pong\-Manager\-Script.\-launch\-Coup\-Special (
+\begin{DoxyParamCaption}
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_pong_manager_script_a9d2a0621b5d133f7c2c9deb5aa1a6b20}
+
+
+Starts the actual shot instead of having the ball stuck on the paddle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The player who shoots\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_pong_manager_script_a796d6a8a65c1b47f89e0fd19141a4064}{\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}!on\-Restart@{on\-Restart}}
+\index{on\-Restart@{on\-Restart}!PongManagerScript@{Pong\-Manager\-Script}}
+\subsubsection[{on\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}void Pong\-Manager\-Script.\-on\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_pong_manager_script_a796d6a8a65c1b47f89e0fd19141a4064}
+
+
+Full restart of the game 
+
+\hypertarget{class_pong_manager_script_a94ac020e95a8df42e50927ef08467197}{\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!PongManagerScript@{Pong\-Manager\-Script}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}void Pong\-Manager\-Script.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_pong_manager_script_a94ac020e95a8df42e50927ef08467197}
+
+
+Sets the current game parameter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The new parameter\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_pong_manager_script_a9998658fca22660c988d4acc459c7570}{\index{Pong\-Manager\-Script@{Pong\-Manager\-Script}!update\-Elements\-Resolution@{update\-Elements\-Resolution}}
+\index{update\-Elements\-Resolution@{update\-Elements\-Resolution}!PongManagerScript@{Pong\-Manager\-Script}}
+\subsubsection[{update\-Elements\-Resolution}]{\setlength{\rightskip}{0pt plus 5cm}void Pong\-Manager\-Script.\-update\-Elements\-Resolution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_pong_manager_script_a9998658fca22660c988d4acc459c7570}
+
+
+Changes the camera size to ajust to screen size. In game element size not changed anymore 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Pong/Pong\-Manager\-Script.\-cs\end{DoxyCompactItemize}

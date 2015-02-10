@@ -1,0 +1,430 @@
+\hypertarget{class_game_state}{\section{Game\-State Class Reference}
+\label{class_game_state}\index{Game\-State@{Game\-State}}
+}
+
+
+Abstract class inherited once for each game. 
+
+
+
+
+Inherits \hyperlink{class_state}{State}.
+
+
+
+Inherited by \hyperlink{class_asteroids_state}{Asteroids\-State}, \hyperlink{class_lunar_lander_state}{Lunar\-Lander\-State}, \hyperlink{class_mario_state}{Mario\-State}, \hyperlink{class_pacman_state}{Pacman\-State}, \hyperlink{class_pong_state}{Pong\-State}, \hyperlink{class_space_invader_state}{Space\-Invader\-State}, \hyperlink{class_space_war_state}{Space\-War\-State}, and \hyperlink{class_tetris_state}{Tetris\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_state_af49ddbcc92ea9d0ceb8c80a784689ae7}{Game\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+override void \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the player lose or win.\end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a23d5c1bb67a10cee5d6609355beb335a}{on\-Game\-Paused} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the game is paused or unpaused.\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Abstract function specific for each game. It is called when the player chose a parameter\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_game_state_a36e34651a05cd9abe442fa8c3f372f6f}{pause\-Game} (bool b)
+\begin{DoxyCompactList}\small\item\em Pause or unpause the game.\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_game_state_a699c7b8e64c3dd7956c7247c8b410d26}{toggle\-Pause\-Game} ()
+\begin{DoxyCompactList}\small\item\em Toggle between pause and unpause.\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_game_state_a4a2c8854f43da06b04ca4681cf69a2fb}{change\-Param} ()
+\begin{DoxyCompactList}\small\item\em Called when the player wants to change the parameter.\end{DoxyCompactList}\item 
+override void \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+\hypertarget{class_game_state_a77d87aefceace9c569b75b445ef4b50d}{void {\bfseries on\-Score\-Update} (int s)}\label{class_game_state_a77d87aefceace9c569b75b445ef4b50d}
+
+\item 
+override void \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+\hypertarget{class_game_state_a2dcd5df80a5046e6016ce219cbc3e19c}{void {\bfseries good\-Answer\-Ratio} (float r)}\label{class_game_state_a2dcd5df80a5046e6016ce219cbc3e19c}
+
+\item 
+override void \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_game_state_aeda2b0d0f9e178d7a46f4740dadc450d}{apply\-Pause} (bool b)
+\begin{DoxyCompactList}\small\item\em Set paused to the value of the given parameter and apply the pause or unpause.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_game_state_adf311d7d919e9b18af99cfb91060b325}{paused}
+\begin{DoxyCompactList}\small\item\em True if the game is paused.\end{DoxyCompactList}\item 
+\hyperlink{class_u_i}{U\-I} \hyperlink{class_game_state_a60e73f2ff4aa85124129d5ab6331a0c4}{ui}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_u_i}{U\-I} class that contains all the ui.\end{DoxyCompactList}\item 
+Enum\-Game \hyperlink{class_game_state_ad7d6224b63a573579b940b0767e996b4}{game\-Id}
+\begin{DoxyCompactList}\small\item\em The current game id.\end{DoxyCompactList}\item 
+\hypertarget{class_game_state_a4fe4a8e031245467b1e5fb655ae5cf50}{int {\bfseries score} = 0}\label{class_game_state_a4fe4a8e031245467b1e5fb655ae5cf50}
+
+\item 
+\hypertarget{class_game_state_a3e08b2fcdc571afd95e5aa8022000225}{bool {\bfseries score\-Changed}}\label{class_game_state_a3e08b2fcdc571afd95e5aa8022000225}
+
+\item 
+int \hyperlink{class_game_state_abac5b81af203197b6e336ef57dd1e6f1}{param\-Id} = 0
+\begin{DoxyCompactList}\small\item\em The current parameter id.\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class inherited once for each game.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_state_af49ddbcc92ea9d0ceb8c80a784689ae7}{\index{Game\-State@{Game\-State}!Game\-State@{Game\-State}}
+\index{Game\-State@{Game\-State}!GameState@{Game\-State}}
+\subsubsection[{Game\-State}]{\setlength{\rightskip}{0pt plus 5cm}Game\-State.\-Game\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_game_state_af49ddbcc92ea9d0ceb8c80a784689ae7}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_state_aeda2b0d0f9e178d7a46f4740dadc450d}{\index{Game\-State@{Game\-State}!apply\-Pause@{apply\-Pause}}
+\index{apply\-Pause@{apply\-Pause}!GameState@{Game\-State}}
+\subsubsection[{apply\-Pause}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-State.\-apply\-Pause (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_game_state_aeda2b0d0f9e178d7a46f4740dadc450d}
+
+
+Set paused to the value of the given parameter and apply the pause or unpause.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the game needs to be paused.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_game_state_a4a2c8854f43da06b04ca4681cf69a2fb}{\index{Game\-State@{Game\-State}!change\-Param@{change\-Param}}
+\index{change\-Param@{change\-Param}!GameState@{Game\-State}}
+\subsubsection[{change\-Param}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-State.\-change\-Param (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a4a2c8854f43da06b04ca4681cf69a2fb}
+
+
+Called when the player wants to change the parameter.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_game_state_a78fd33460f64d49851bbfbb183547e83}{\index{Game\-State@{Game\-State}!end@{end}}
+\index{end@{end}!GameState@{Game\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a78fd33460f64d49851bbfbb183547e83}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{State}.
+
+
+
+Reimplemented in \hyperlink{class_tetris_state_a65439e531d3d0d1b7c5d9bd17b28beb5}{Tetris\-State}, \hyperlink{class_pacman_state_a9355f6774387872a0f54d74e064a5aa6}{Pacman\-State}, \hyperlink{class_space_war_state_ae411bb8b76dc8e3eb4f41e60b68306c8}{Space\-War\-State}, \hyperlink{class_pong_state_a42a9c70d3723cd5beefb35a68220d698}{Pong\-State}, \hyperlink{class_mario_state_a41ddb5c1438090d67d909974638f3e65}{Mario\-State}, \hyperlink{class_space_invader_state_a2f0ea75c238c2e42f790e6f4ad8780ae}{Space\-Invader\-State}, and \hyperlink{class_lunar_lander_state_a5b82951660f1ca37735c7f6ac5f29e2b}{Lunar\-Lander\-State}.
+
+\hypertarget{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{\index{Game\-State@{Game\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!GameState@{Game\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{State}.
+
+
+
+Reimplemented in \hyperlink{class_space_war_state_ad7a98786e6a5e801bc8342b0c8c5da94}{Space\-War\-State}, \hyperlink{class_pacman_state_aced74f286f73da4816511fc78de7b88b}{Pacman\-State}, \hyperlink{class_mario_state_ae4090f8424028536a32a00945092ee33}{Mario\-State}, \hyperlink{class_pong_state_ab83b5eac1628c5eb417f07c4e19dd74f}{Pong\-State}, \hyperlink{class_space_invader_state_aefd9b0488dfd4d515e4ef394e8f9bb36}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a7e4530c7f30e019c3ab8d9e8d7d3b673}{Tetris\-State}, and \hyperlink{class_lunar_lander_state_a22d43edbc96d9c4bd591bc119399a78e}{Lunar\-Lander\-State}.
+
+\hypertarget{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{\index{Game\-State@{Game\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!GameState@{Game\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{State}.
+
+
+
+Reimplemented in \hyperlink{class_pong_state_a11e43e8c96e4c6a49763c1757f3fe42c}{Pong\-State}, \hyperlink{class_pacman_state_aa2bd54c78c9e8fa9bd7bbbaeb88fc203}{Pacman\-State}, \hyperlink{class_space_war_state_a3eabccff86c38c3a66fbd94ed1080ac4}{Space\-War\-State}, \hyperlink{class_mario_state_aee1af11d577666abe34366c11547331d}{Mario\-State}, \hyperlink{class_space_invader_state_a9d787fe40541a10e25ac96029254b9c7}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a28374d970db4eb1f849030fcc866210e}{Tetris\-State}, and \hyperlink{class_lunar_lander_state_acb0c202b105ce74341f0026aea9e34b0}{Lunar\-Lander\-State}.
+
+\hypertarget{class_game_state_abda5b28f6a91641e7a958e958349abde}{\index{Game\-State@{Game\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!GameState@{Game\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_abda5b28f6a91641e7a958e958349abde}
+
+
+Called when the player lose or win.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the player won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_space_war_state_a9297a9e552fd452d35af06e1e57749dc}{Space\-War\-State}, \hyperlink{class_pong_state_a6e2df744392f72cb3d9896e3035a01b6}{Pong\-State}, \hyperlink{class_tetris_state_ab48517c445c4aa9f0bb53d5ee65e74dc}{Tetris\-State}, \hyperlink{class_pacman_state_a96bdcf9e030e2ecf5bc2d9b1307c5d81}{Pacman\-State}, \hyperlink{class_mario_state_a2df561a80f05a8b25dbdda8ae9ec2e96}{Mario\-State}, \hyperlink{class_space_invader_state_a0dbf1355f74cc72d3c88de04ed4b0850}{Space\-Invader\-State}, and \hyperlink{class_asteroids_state_aa2ea00ce9ba4a4254ff4898ee06316e6}{Asteroids\-State}.
+
+\hypertarget{class_game_state_a23d5c1bb67a10cee5d6609355beb335a}{\index{Game\-State@{Game\-State}!on\-Game\-Paused@{on\-Game\-Paused}}
+\index{on\-Game\-Paused@{on\-Game\-Paused}!GameState@{Game\-State}}
+\subsubsection[{on\-Game\-Paused}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-State.\-on\-Game\-Paused (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}}\label{class_game_state_a23d5c1bb67a10cee5d6609355beb335a}
+
+
+Called when the game is paused or unpaused.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if paused\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_game_state_ac596022cb9b545666b26e17aee3f080b}{\index{Game\-State@{Game\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!GameState@{Game\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_ac596022cb9b545666b26e17aee3f080b}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_tetris_state_a52ef3d1b0242151158a7894739b5e53e}{Tetris\-State}, \hyperlink{class_pacman_state_ae35ff219ed10e129d3c9e4f984b2c783}{Pacman\-State}, \hyperlink{class_space_war_state_a1a5b24ade519794138827f4a8912f202}{Space\-War\-State}, \hyperlink{class_pong_state_a8c5095bec45db7cc14f884b86cdd67b4}{Pong\-State}, \hyperlink{class_lunar_lander_state_aaae12c9c7ab7ead591e8445d6752f0a7}{Lunar\-Lander\-State}, \hyperlink{class_space_invader_state_a573f37d8d8d67b76729211b0f0b53bc9}{Space\-Invader\-State}, \hyperlink{class_mario_state_ada0965a69800c3203f0f2df27ab20b14}{Mario\-State}, and \hyperlink{class_asteroids_state_a884ff5871f16a9444fcb460657f764ba}{Asteroids\-State}.
+
+\hypertarget{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{\index{Game\-State@{Game\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!GameState@{Game\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{State}.
+
+
+
+Reimplemented in \hyperlink{class_pacman_state_a84279e9d0ad1d9b60c8e2d737fd732f3}{Pacman\-State}, \hyperlink{class_space_war_state_ac965e3936108a8fea8055e4e250d66bd}{Space\-War\-State}, \hyperlink{class_pong_state_aa4d7e05bf27dc9f37118d2651ea8c10f}{Pong\-State}, \hyperlink{class_mario_state_a9725076b267e50eec3262c8a0f471ffb}{Mario\-State}, \hyperlink{class_space_invader_state_a4682e573bfed319344164f0c2ac92c0e}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a3ad8b0d661a1c465ac3733dae9271d96}{Tetris\-State}, and \hyperlink{class_lunar_lander_state_a048d7449e1d9429bbe14652d35ae9dec}{Lunar\-Lander\-State}.
+
+\hypertarget{class_game_state_a36e34651a05cd9abe442fa8c3f372f6f}{\index{Game\-State@{Game\-State}!pause\-Game@{pause\-Game}}
+\index{pause\-Game@{pause\-Game}!GameState@{Game\-State}}
+\subsubsection[{pause\-Game}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-State.\-pause\-Game (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a36e34651a05cd9abe442fa8c3f372f6f}
+
+
+Pause or unpause the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if paused.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{\index{Game\-State@{Game\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!GameState@{Game\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}abstract void Game\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}
+
+
+Abstract function specific for each game. It is called when the player chose a parameter
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_pacman_state_a3aff55fbc007a6f89dc5b344ab661124}{Pacman\-State}, \hyperlink{class_mario_state_a279888e7b0863e82d5bff9a75aef04aa}{Mario\-State}, \hyperlink{class_space_invader_state_a76aea6ddbecbc48831eaf643074dc218}{Space\-Invader\-State}, \hyperlink{class_space_war_state_a7852c522f077254d78fa46ef82662ad7}{Space\-War\-State}, \hyperlink{class_pong_state_a09c1f355ea003160b60653795bac33ea}{Pong\-State}, \hyperlink{class_asteroids_state_aaa602dee6d06851906e5db870f0e46d3}{Asteroids\-State}, \hyperlink{class_lunar_lander_state_a4692ec796046e9d058e1ec63b2d82f50}{Lunar\-Lander\-State}, and \hyperlink{class_tetris_state_a4ee0712b5e803b4087534987c3f3d9b1}{Tetris\-State}.
+
+\hypertarget{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{\index{Game\-State@{Game\-State}!start@{start}}
+\index{start@{start}!GameState@{Game\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{State}.
+
+
+
+Reimplemented in \hyperlink{class_tetris_state_a1e02603c08500919b3d47917396ffed8}{Tetris\-State}, \hyperlink{class_pacman_state_ab3f48dc99037d2a3b43909bfd4e67268}{Pacman\-State}, \hyperlink{class_space_war_state_afbedfd935854568d8d34c540bb6de67b}{Space\-War\-State}, \hyperlink{class_pong_state_aac21df44a9352b2fe77ae3635a2374a7}{Pong\-State}, \hyperlink{class_mario_state_add64e32059bde1e198a44add0370228a}{Mario\-State}, \hyperlink{class_space_invader_state_a2b839470ff8344a6f090aa68df1cfa5b}{Space\-Invader\-State}, and \hyperlink{class_lunar_lander_state_a9aa6e9fab93a7566b6727971eca0a225}{Lunar\-Lander\-State}.
+
+\hypertarget{class_game_state_a699c7b8e64c3dd7956c7247c8b410d26}{\index{Game\-State@{Game\-State}!toggle\-Pause\-Game@{toggle\-Pause\-Game}}
+\index{toggle\-Pause\-Game@{toggle\-Pause\-Game}!GameState@{Game\-State}}
+\subsubsection[{toggle\-Pause\-Game}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-State.\-toggle\-Pause\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_a699c7b8e64c3dd7956c7247c8b410d26}
+
+
+Toggle between pause and unpause.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{\index{Game\-State@{Game\-State}!update@{update}}
+\index{update@{update}!GameState@{Game\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Game\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{State}.
+
+
+
+Reimplemented in \hyperlink{class_tetris_state_aa522101ff32603e24c232141799ef6f1}{Tetris\-State}, \hyperlink{class_pacman_state_a7a5922c97a9ccb7380094ef02f3d1022}{Pacman\-State}, \hyperlink{class_space_war_state_a1359aae13f67fb97de75307349b8ee81}{Space\-War\-State}, \hyperlink{class_pong_state_aab539dacd758f2c5a55e24e6eb388ed4}{Pong\-State}, \hyperlink{class_mario_state_a329bb4d1bfbb5bbbfdbda5840e591d39}{Mario\-State}, \hyperlink{class_space_invader_state_a2514e1cc361e663348bf190bacda343f}{Space\-Invader\-State}, and \hyperlink{class_lunar_lander_state_ac266f36c49863e79753fb87d2498f32d}{Lunar\-Lander\-State}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_game_state_ad7d6224b63a573579b940b0767e996b4}{\index{Game\-State@{Game\-State}!game\-Id@{game\-Id}}
+\index{game\-Id@{game\-Id}!GameState@{Game\-State}}
+\subsubsection[{game\-Id}]{\setlength{\rightskip}{0pt plus 5cm}Enum\-Game Game\-State.\-game\-Id\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_game_state_ad7d6224b63a573579b940b0767e996b4}
+
+
+The current game id.
+
+\hypertarget{class_game_state_abac5b81af203197b6e336ef57dd1e6f1}{\index{Game\-State@{Game\-State}!param\-Id@{param\-Id}}
+\index{param\-Id@{param\-Id}!GameState@{Game\-State}}
+\subsubsection[{param\-Id}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-State.\-param\-Id = 0\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_game_state_abac5b81af203197b6e336ef57dd1e6f1}
+
+
+The current parameter id.
+
+\hypertarget{class_game_state_adf311d7d919e9b18af99cfb91060b325}{\index{Game\-State@{Game\-State}!paused@{paused}}
+\index{paused@{paused}!GameState@{Game\-State}}
+\subsubsection[{paused}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-State.\-paused\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_game_state_adf311d7d919e9b18af99cfb91060b325}
+
+
+True if the game is paused.
+
+\hypertarget{class_game_state_a60e73f2ff4aa85124129d5ab6331a0c4}{\index{Game\-State@{Game\-State}!ui@{ui}}
+\index{ui@{ui}!GameState@{Game\-State}}
+\subsubsection[{ui}]{\setlength{\rightskip}{0pt plus 5cm}{\bf U\-I} Game\-State.\-ui\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_game_state_a60e73f2ff4aa85124129d5ab6331a0c4}
+
+
+The \hyperlink{class_u_i}{U\-I} class that contains all the ui.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Game\-State.\-cs\end{DoxyCompactItemize}

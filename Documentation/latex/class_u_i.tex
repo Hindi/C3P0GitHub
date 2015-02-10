@@ -1,0 +1,236 @@
+\hypertarget{class_u_i}{\section{U\-I Class Reference}
+\label{class_u_i}\index{U\-I@{U\-I}}
+}
+
+
+The main \hyperlink{class_u_i}{U\-I} script. 
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_u_i_a175cc333147530da7ff67fa4605a7e8e}{on\-Close\-Menu} ()
+\begin{DoxyCompactList}\small\item\em Callback called to close all the menus.\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_a35e47ccba6a7038fc37435692775ffa1}{on\-Connection\-State} ()
+\begin{DoxyCompactList}\small\item\em Called on connection.\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_ae6e969c28d9e2f5e57db40a1a3e0edb0}{set\-Param\-Canvas} (Enum\-Game game\-Id)
+\begin{DoxyCompactList}\small\item\em Display the correct parameter canvas.\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_a6fb1ac66925d006ea5d8943722c7a276}{go\-To\-Main\-Menu} ()
+\begin{DoxyCompactList}\small\item\em Go back to the main menu (state \& unity scene).\end{DoxyCompactList}\item 
+Canvas \hyperlink{class_u_i_ae51febf7bdea895d39cb661a16f5f2da}{getcurrent\-Canvas} ()
+\begin{DoxyCompactList}\small\item\em Getter for the current canvas.\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_ac7ebb4a32a8726ed4cfc5ae5ef1b5e8e}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called on game over. Dispay the game over canvas\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_aa21043b31d464b1db1710ebb553650af}{on\-Game\-Paused} (bool b)
+\begin{DoxyCompactList}\small\item\em Called on pause. Dispay or hide the pause canvas\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_abf4d14bfb26297856c38b0abc2712eb4}{on\-Change\-Param} (float ratio)
+\begin{DoxyCompactList}\small\item\em Called on change parameter. Dispay parameter canvas\end{DoxyCompactList}\item 
+void \hyperlink{class_u_i_a44fedb78ec880cf6ddbec26d99ed9daf}{on\-Server\-Start} ()
+\begin{DoxyCompactList}\small\item\em Called on server start. Dispay the server canvas\end{DoxyCompactList}\item 
+\hypertarget{class_u_i_a06d9a6a254e8ebc40a53efb66474922f}{void {\bfseries switch\-To\-Param} ()}\label{class_u_i_a06d9a6a254e8ebc40a53efb66474922f}
+
+\item 
+\hypertarget{class_u_i_a01eed516e5a54b24a0fde23914424eb0}{void {\bfseries update\-Current\-Canvas} (Canvas new\-Canvas)}\label{class_u_i_a01eed516e5a54b24a0fde23914424eb0}
+
+\item 
+\hypertarget{class_u_i_a5137ba7cd568f596078e9a59fe5d559f}{void {\bfseries close\-Menus} ()}\label{class_u_i_a5137ba7cd568f596078e9a59fe5d559f}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \hyperlink{class_u_i_a25e765d3967a10fde8a8becc5522551e}{clean\-String} (string s)
+\begin{DoxyCompactList}\small\item\em Clean a string (keep letters and digits.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_u_i_aa89e799722a828f9ff88ed793b5a57d5}{Canvas {\bfseries Question\-Canvas}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_u_i_aa89e799722a828f9ff88ed793b5a57d5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main \hyperlink{class_u_i}{U\-I} script.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_u_i_a25e765d3967a10fde8a8becc5522551e}{\index{U\-I@{U\-I}!clean\-String@{clean\-String}}
+\index{clean\-String@{clean\-String}!UI@{U\-I}}
+\subsubsection[{clean\-String}]{\setlength{\rightskip}{0pt plus 5cm}static string U\-I.\-clean\-String (
+\begin{DoxyParamCaption}
+\item[{string}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_u_i_a25e765d3967a10fde8a8becc5522551e}
+
+
+Clean a string (keep letters and digits.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The string to be cleaned.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string \-: The cleaned string
+\end{DoxyReturn}
+\hypertarget{class_u_i_ae51febf7bdea895d39cb661a16f5f2da}{\index{U\-I@{U\-I}!getcurrent\-Canvas@{getcurrent\-Canvas}}
+\index{getcurrent\-Canvas@{getcurrent\-Canvas}!UI@{U\-I}}
+\subsubsection[{getcurrent\-Canvas}]{\setlength{\rightskip}{0pt plus 5cm}Canvas U\-I.\-getcurrent\-Canvas (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_ae51febf7bdea895d39cb661a16f5f2da}
+
+
+Getter for the current canvas.
+
+\begin{DoxyReturn}{Returns}
+Canvas \-: the current canvas
+\end{DoxyReturn}
+\hypertarget{class_u_i_a6fb1ac66925d006ea5d8943722c7a276}{\index{U\-I@{U\-I}!go\-To\-Main\-Menu@{go\-To\-Main\-Menu}}
+\index{go\-To\-Main\-Menu@{go\-To\-Main\-Menu}!UI@{U\-I}}
+\subsubsection[{go\-To\-Main\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-go\-To\-Main\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_a6fb1ac66925d006ea5d8943722c7a276}
+
+
+Go back to the main menu (state \& unity scene).
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_abf4d14bfb26297856c38b0abc2712eb4}{\index{U\-I@{U\-I}!on\-Change\-Param@{on\-Change\-Param}}
+\index{on\-Change\-Param@{on\-Change\-Param}!UI@{U\-I}}
+\subsubsection[{on\-Change\-Param}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Change\-Param (
+\begin{DoxyParamCaption}
+\item[{float}]{ratio}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_abf4d14bfb26297856c38b0abc2712eb4}
+
+
+Called on change parameter. Dispay parameter canvas
+
+
+\begin{DoxyParams}{Parameters}
+{\em ratio} & Float \-: the good answer ratio.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_a175cc333147530da7ff67fa4605a7e8e}{\index{U\-I@{U\-I}!on\-Close\-Menu@{on\-Close\-Menu}}
+\index{on\-Close\-Menu@{on\-Close\-Menu}!UI@{U\-I}}
+\subsubsection[{on\-Close\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Close\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_a175cc333147530da7ff67fa4605a7e8e}
+
+
+Callback called to close all the menus.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_a35e47ccba6a7038fc37435692775ffa1}{\index{U\-I@{U\-I}!on\-Connection\-State@{on\-Connection\-State}}
+\index{on\-Connection\-State@{on\-Connection\-State}!UI@{U\-I}}
+\subsubsection[{on\-Connection\-State}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Connection\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_a35e47ccba6a7038fc37435692775ffa1}
+
+
+Called on connection.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_ac7ebb4a32a8726ed4cfc5ae5ef1b5e8e}{\index{U\-I@{U\-I}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!UI@{U\-I}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_ac7ebb4a32a8726ed4cfc5ae5ef1b5e8e}
+
+
+Called on game over. Dispay the game over canvas
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if win.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_aa21043b31d464b1db1710ebb553650af}{\index{U\-I@{U\-I}!on\-Game\-Paused@{on\-Game\-Paused}}
+\index{on\-Game\-Paused@{on\-Game\-Paused}!UI@{U\-I}}
+\subsubsection[{on\-Game\-Paused}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Game\-Paused (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_aa21043b31d464b1db1710ebb553650af}
+
+
+Called on pause. Dispay or hide the pause canvas
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True to display.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_a44fedb78ec880cf6ddbec26d99ed9daf}{\index{U\-I@{U\-I}!on\-Server\-Start@{on\-Server\-Start}}
+\index{on\-Server\-Start@{on\-Server\-Start}!UI@{U\-I}}
+\subsubsection[{on\-Server\-Start}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-on\-Server\-Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_a44fedb78ec880cf6ddbec26d99ed9daf}
+
+
+Called on server start. Dispay the server canvas
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True to display.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_u_i_ae6e969c28d9e2f5e57db40a1a3e0edb0}{\index{U\-I@{U\-I}!set\-Param\-Canvas@{set\-Param\-Canvas}}
+\index{set\-Param\-Canvas@{set\-Param\-Canvas}!UI@{U\-I}}
+\subsubsection[{set\-Param\-Canvas}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I.\-set\-Param\-Canvas (
+\begin{DoxyParamCaption}
+\item[{Enum\-Game}]{game\-Id}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_ae6e969c28d9e2f5e57db40a1a3e0edb0}
+
+
+Display the correct parameter canvas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Id} & Enum of the current game.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-U\-I/U\-I.\-cs\end{DoxyCompactItemize}

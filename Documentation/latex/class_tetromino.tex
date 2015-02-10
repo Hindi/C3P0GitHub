@@ -1,0 +1,132 @@
+\hypertarget{class_tetromino}{\section{Tetromino Class Reference}
+\label{class_tetromino}\index{Tetromino@{Tetromino}}
+}
+
+
+Class that handles Tetrominos (scale, position, movements).  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_tetromino_a46575dc5360648e14dc57756e0380ba5}{move\-Left} ()
+\begin{DoxyCompactList}\small\item\em Move the tetromino to the left if allowed. Note \-: called only for the falling tetromino. \end{DoxyCompactList}\item 
+void \hyperlink{class_tetromino_a4f71befb0ffddf95b9179afc379b812a}{move\-Right} ()
+\begin{DoxyCompactList}\small\item\em Move the tetromino to the right if allowed. Note \-: called only for the falling tetromino. \end{DoxyCompactList}\item 
+void \hyperlink{class_tetromino_ab194ca105c3659a908bda68a82690748}{go\-Down} ()
+\begin{DoxyCompactList}\small\item\em Move the tetromino down by one if allowed. If the movement can't be done. The tetromino is set and the next one begins to fall (rows are deleted if necessary and grid is updated). Note \-: called only for the falling tetromino. \end{DoxyCompactList}\item 
+void \hyperlink{class_tetromino_a8ce24f9c3b4ae53e918724f9c730b03d}{move\-Down} ()
+\begin{DoxyCompactList}\small\item\em Called when the player activates the fast fall (pressing down arrow on computer for example) \end{DoxyCompactList}\item 
+void \hyperlink{class_tetromino_af342c1199b7047af4f0844aea50c0869}{rotate} ()
+\begin{DoxyCompactList}\small\item\em Called when the player rotates the falling tetromino. Makes the falling tetromino rotates by 90°. If the tetromino rotation should be invalid, try to move the tetromino to the left or the right to rotate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_tetromino}{Tetromino} \hyperlink{class_tetromino_a9281c215513797b6c3675427218c74bf}{falling\-Tetromino} = null
+\begin{DoxyCompactList}\small\item\em Reference to the falling tetromino. \end{DoxyCompactList}\item 
+static \hyperlink{class_tetromino}{Tetromino} \hyperlink{class_tetromino_a1f687502f0920e2f815328c3edc2583f}{fore\-Seen\-Tetromino} = null
+\begin{DoxyCompactList}\small\item\em Reference to the foreseen tetromino. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that handles Tetrominos (scale, position, movements). 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tetromino_ab194ca105c3659a908bda68a82690748}{\index{Tetromino@{Tetromino}!go\-Down@{go\-Down}}
+\index{go\-Down@{go\-Down}!Tetromino@{Tetromino}}
+\subsubsection[{go\-Down}]{\setlength{\rightskip}{0pt plus 5cm}void Tetromino.\-go\-Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tetromino_ab194ca105c3659a908bda68a82690748}
+
+
+Move the tetromino down by one if allowed. If the movement can't be done. The tetromino is set and the next one begins to fall (rows are deleted if necessary and grid is updated). Note \-: called only for the falling tetromino. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_tetromino_a8ce24f9c3b4ae53e918724f9c730b03d}{\index{Tetromino@{Tetromino}!move\-Down@{move\-Down}}
+\index{move\-Down@{move\-Down}!Tetromino@{Tetromino}}
+\subsubsection[{move\-Down}]{\setlength{\rightskip}{0pt plus 5cm}void Tetromino.\-move\-Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tetromino_a8ce24f9c3b4ae53e918724f9c730b03d}
+
+
+Called when the player activates the fast fall (pressing down arrow on computer for example) 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_tetromino_a46575dc5360648e14dc57756e0380ba5}{\index{Tetromino@{Tetromino}!move\-Left@{move\-Left}}
+\index{move\-Left@{move\-Left}!Tetromino@{Tetromino}}
+\subsubsection[{move\-Left}]{\setlength{\rightskip}{0pt plus 5cm}void Tetromino.\-move\-Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tetromino_a46575dc5360648e14dc57756e0380ba5}
+
+
+Move the tetromino to the left if allowed. Note \-: called only for the falling tetromino. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_tetromino_a4f71befb0ffddf95b9179afc379b812a}{\index{Tetromino@{Tetromino}!move\-Right@{move\-Right}}
+\index{move\-Right@{move\-Right}!Tetromino@{Tetromino}}
+\subsubsection[{move\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void Tetromino.\-move\-Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tetromino_a4f71befb0ffddf95b9179afc379b812a}
+
+
+Move the tetromino to the right if allowed. Note \-: called only for the falling tetromino. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_tetromino_af342c1199b7047af4f0844aea50c0869}{\index{Tetromino@{Tetromino}!rotate@{rotate}}
+\index{rotate@{rotate}!Tetromino@{Tetromino}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}void Tetromino.\-rotate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tetromino_af342c1199b7047af4f0844aea50c0869}
+
+
+Called when the player rotates the falling tetromino. Makes the falling tetromino rotates by 90°. If the tetromino rotation should be invalid, try to move the tetromino to the left or the right to rotate. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tetromino_a9281c215513797b6c3675427218c74bf}{\index{Tetromino@{Tetromino}!falling\-Tetromino@{falling\-Tetromino}}
+\index{falling\-Tetromino@{falling\-Tetromino}!Tetromino@{Tetromino}}
+\subsubsection[{falling\-Tetromino}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tetromino} Tetromino.\-falling\-Tetromino = null\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tetromino_a9281c215513797b6c3675427218c74bf}
+
+
+Reference to the falling tetromino. 
+
+\hypertarget{class_tetromino_a1f687502f0920e2f815328c3edc2583f}{\index{Tetromino@{Tetromino}!fore\-Seen\-Tetromino@{fore\-Seen\-Tetromino}}
+\index{fore\-Seen\-Tetromino@{fore\-Seen\-Tetromino}!Tetromino@{Tetromino}}
+\subsubsection[{fore\-Seen\-Tetromino}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tetromino} Tetromino.\-fore\-Seen\-Tetromino = null\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tetromino_a1f687502f0920e2f815328c3edc2583f}
+
+
+Reference to the foreseen tetromino. 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game specific/\-Tetris/Tetromino.\-cs\end{DoxyCompactItemize}

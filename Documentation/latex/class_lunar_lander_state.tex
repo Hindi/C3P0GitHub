@@ -1,0 +1,226 @@
+\hypertarget{class_lunar_lander_state}{\section{Lunar\-Lander\-State Class Reference}
+\label{class_lunar_lander_state}\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}}
+}
+
+
+This state is active when the player plays lunar lander. 
+
+
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_lunar_lander_state_abc2df347c44af99680c6bc9f7e62bd97}{Lunar\-Lander\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_aaae12c9c7ab7ead591e8445d6752f0a7}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_a4692ec796046e9d058e1ec63b2d82f50}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Define the active terrain depending on the id given in parameter.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_a048d7449e1d9429bbe14652d35ae9dec}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_a9aa6e9fab93a7566b6727971eca0a225}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_a5b82951660f1ca37735c7f6ac5f29e2b}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_ac266f36c49863e79753fb87d2498f32d}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_acb0c202b105ce74341f0026aea9e34b0}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_lunar_lander_state_a22d43edbc96d9c4bd591bc119399a78e}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This state is active when the player plays lunar lander.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_lunar_lander_state_abc2df347c44af99680c6bc9f7e62bd97}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!Lunar\-Lander\-State@{Lunar\-Lander\-State}}
+\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{Lunar\-Lander\-State}]{\setlength{\rightskip}{0pt plus 5cm}Lunar\-Lander\-State.\-Lunar\-Lander\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_lunar_lander_state_abc2df347c44af99680c6bc9f7e62bd97}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_lunar_lander_state_a5b82951660f1ca37735c7f6ac5f29e2b}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!end@{end}}
+\index{end@{end}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_a5b82951660f1ca37735c7f6ac5f29e2b}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_acb0c202b105ce74341f0026aea9e34b0}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_acb0c202b105ce74341f0026aea9e34b0}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_a22d43edbc96d9c4bd591bc119399a78e}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_a22d43edbc96d9c4bd591bc119399a78e}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_aaae12c9c7ab7ead591e8445d6752f0a7}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_aaae12c9c7ab7ead591e8445d6752f0a7}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_a048d7449e1d9429bbe14652d35ae9dec}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_a048d7449e1d9429bbe14652d35ae9dec}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_a4692ec796046e9d058e1ec63b2d82f50}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_a4692ec796046e9d058e1ec63b2d82f50}
+
+
+Define the active terrain depending on the id given in parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_a9aa6e9fab93a7566b6727971eca0a225}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!start@{start}}
+\index{start@{start}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_a9aa6e9fab93a7566b6727971eca0a225}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}.
+
+\hypertarget{class_lunar_lander_state_ac266f36c49863e79753fb87d2498f32d}{\index{Lunar\-Lander\-State@{Lunar\-Lander\-State}!update@{update}}
+\index{update@{update}!LunarLanderState@{Lunar\-Lander\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Lunar\-Lander\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_lunar_lander_state_ac266f36c49863e79753fb87d2498f32d}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Lunar\-Lander\-State.\-cs\end{DoxyCompactItemize}

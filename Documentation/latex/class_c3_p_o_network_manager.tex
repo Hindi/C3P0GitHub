@@ -1,0 +1,546 @@
+\hypertarget{class_c3_p_o_network_manager}{\section{C3\-P\-O\-Network\-Manager Class Reference}
+\label{class_c3_p_o_network_manager}\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}}
+}
+
+
+\hyperlink{class_c3_p_o_network_manager}{C3\-P\-O\-Network\-Manager} is the class managing application-\/level connexion between students and the teacher. It contains the authentication and all the rpcs. This class is built against the singleton model. 
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_c3_p_o_network_manager_ad927800dc6dd34c4bcb03cfbefda049f}{connect\-To\-Teacher} (string ip, string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login}, string \hyperlink{class_c3_p_o_network_manager_af87fc918b29f6aed9fe932a9244e53ac}{password})
+\begin{DoxyCompactList}\small\item\em Functions used to connect to the teacher server application-\/wise .\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_aace6542fc83c5705a34b7a9db6d66819}{try\-Tolog\-In} (string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login}, string \hyperlink{class_c3_p_o_network_manager_af87fc918b29f6aed9fe932a9244e53ac}{password})
+\begin{DoxyCompactList}\small\item\em Functions used to sign in on the server.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a133638de9fb32fc8d2cf9d5db805692c}{try\-Tolog\-In} ()
+\begin{DoxyCompactList}\small\item\em Functions used to connect to the teacher server application-\/wise .\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_aaa2126ad45ede934c23780375ce0604d}{on\-Failed\-Auth} (string reason)
+\begin{DoxyCompactList}\small\item\em Called when the authentication failed and broadcast the reason with the event manager.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_ae02b97ba9d918673d50742baf4664f1c}{load\-Client\-Stats} (int course\-Id)
+\begin{DoxyCompactList}\small\item\em Load the client stats for the current course. Also initialise the course\-Id variable.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a01ff64266117fb6e1d7080beb7a1dffb}{save\-Clients\-Game\-Stats} ()
+\begin{DoxyCompactList}\small\item\em Save the client game stats for the current game.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a49489d58ccbae0c90d713368f28fea59}{save\-Clients\-Stats} ()
+\begin{DoxyCompactList}\small\item\em Save the client stats for the current course.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a33c2ad0b2b842b0b2d4ee0e8659fb3a6}{kick\-Client} (string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login})
+\begin{DoxyCompactList}\small\item\em Kick a specific client.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a5e40d1b7ec87c36b5c2b4df3a5ae10d2}{kick\-Client} ()
+\begin{DoxyCompactList}\small\item\em Kick all the connected clients.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a06b5aed3626f1aeef8cc14eb4bfde62a}{reset\-Password} ()
+\begin{DoxyCompactList}\small\item\em Reset the password of all the connected clients.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_abcce9f6114ed883cc0a1d39d549c4f77}{reset\-Password} (string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login})
+\begin{DoxyCompactList}\small\item\em Reset the password of a specific client.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a531d05f78aa99cd87b6a61cd4488fd57}{send\-Question} (\hyperlink{class_question_manager_1_1_question_keeper}{Question\-Manager.\-Question\-Keeper} question)
+\begin{DoxyCompactList}\small\item\em Functions used to send a question by the server. Calls the correct R\-P\-C (we can't overload R\-P\-C...)\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a63c323fb07667c3216f0aa11d4672b25}{send\-Answer} (int rep)
+\begin{DoxyCompactList}\small\item\em Functions used to send an answer to the server.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_af5500ddb7ecaba2c27c1cca8c2ff1f20}{send\-Result} (Network\-Player net\-Player, string rep, int id)
+\begin{DoxyCompactList}\small\item\em Functions used to send a result to the client.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_af2281ca9381f84544434ba6e0d7295a4}{load\-Level} (string name)
+\begin{DoxyCompactList}\small\item\em Functions used to broadcast to all the client the order to load a unity scene.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a69918ea3508ed121916882d4c29343e9}{unlock\-Game} (string name)
+\begin{DoxyCompactList}\small\item\em Functions used to broadcast to all the client the order to unlock agame.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_ab455f5c674444cb5a29daf5a7a4b4529}{send\-Notify\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Functions used to notify the server that a player won or lost his game.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_af54380461ce5e59d88494a78e2158524}{send\-Notify\-Wrong\-Login} (Network\-Player net\-Player, string name)
+\begin{DoxyCompactList}\small\item\em Functions used to notify a specific client that the login he uses does not exists.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_ac42bd12dd8b220def2264f0812c8059a}{send\-Notify\-Wrong\-Password} (Network\-Player net\-Player, string name)
+\begin{DoxyCompactList}\small\item\em Functions used to notify a specific client that the password he uses is not correct.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_ab179f1b5fbab4267231dcaba8068cf7b}{send\-Notify\-Login\-In\-Use} (Network\-Player net\-Player, string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login})
+\begin{DoxyCompactList}\small\item\em Functions used to notify a specific client that the login he use is already used.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a2201721623e9b5b9448c97ede484f295}{set\-Score} (Network\-Player net\-Player, int score)
+\begin{DoxyCompactList}\small\item\em Functions used to update the score of a specific client.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a554dd83d4b25f17be83ea7f315da4c8c}{send\-Request\-Score} ()
+\begin{DoxyCompactList}\small\item\em Functions used to by the client to askfor its score.\end{DoxyCompactList}\item 
+void \hyperlink{class_c3_p_o_network_manager_a3e62c99eb728143e919671d6feaf6574}{send\-Game\-Stats} (int param\-Id, int score)
+\begin{DoxyCompactList}\small\item\em Functions used by the client to send the game stats to the server.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{login}
+\begin{DoxyCompactList}\small\item\em The login of the client.\end{DoxyCompactList}\item 
+string \hyperlink{class_c3_p_o_network_manager_af87fc918b29f6aed9fe932a9244e53ac}{password}
+\begin{DoxyCompactList}\small\item\em The password of the client.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_c3_p_o_network_manager_a48ec303306e6dfbf51f155a05d59984f}{static \hyperlink{class_c3_p_o_network_manager}{C3\-P\-O\-Network\-Manager} {\bfseries Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_c3_p_o_network_manager_a48ec303306e6dfbf51f155a05d59984f}
+
+\item 
+\hypertarget{class_c3_p_o_network_manager_ac5f5f135513accc5a9415f6949b0feed}{Dictionary$<$ string, \hyperlink{class_client}{Client} $>$ {\bfseries Clients\-Infos}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}}\label{class_c3_p_o_network_manager_ac5f5f135513accc5a9415f6949b0feed}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_c3_p_o_network_manager}{C3\-P\-O\-Network\-Manager} is the class managing application-\/level connexion between students and the teacher. It contains the authentication and all the rpcs. This class is built against the singleton model.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_c3_p_o_network_manager_ad927800dc6dd34c4bcb03cfbefda049f}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!connect\-To\-Teacher@{connect\-To\-Teacher}}
+\index{connect\-To\-Teacher@{connect\-To\-Teacher}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{connect\-To\-Teacher}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-connect\-To\-Teacher (
+\begin{DoxyParamCaption}
+\item[{string}]{ip, }
+\item[{string}]{login, }
+\item[{string}]{password}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_ad927800dc6dd34c4bcb03cfbefda049f}
+
+
+Functions used to connect to the teacher server application-\/wise .
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & The ip of the server.\\
+\hline
+{\em login} & The login of the client.\\
+\hline
+{\em password} & The password of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a33c2ad0b2b842b0b2d4ee0e8659fb3a6}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!kick\-Client@{kick\-Client}}
+\index{kick\-Client@{kick\-Client}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{kick\-Client}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-kick\-Client (
+\begin{DoxyParamCaption}
+\item[{string}]{login}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a33c2ad0b2b842b0b2d4ee0e8659fb3a6}
+
+
+Kick a specific client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & The login of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a5e40d1b7ec87c36b5c2b4df3a5ae10d2}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!kick\-Client@{kick\-Client}}
+\index{kick\-Client@{kick\-Client}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{kick\-Client}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-kick\-Client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a5e40d1b7ec87c36b5c2b4df3a5ae10d2}
+
+
+Kick all the connected clients.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_ae02b97ba9d918673d50742baf4664f1c}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!load\-Client\-Stats@{load\-Client\-Stats}}
+\index{load\-Client\-Stats@{load\-Client\-Stats}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{load\-Client\-Stats}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-load\-Client\-Stats (
+\begin{DoxyParamCaption}
+\item[{int}]{course\-Id}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_ae02b97ba9d918673d50742baf4664f1c}
+
+
+Load the client stats for the current course. Also initialise the course\-Id variable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em course\-Id} & The id of the current course.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_af2281ca9381f84544434ba6e0d7295a4}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!load\-Level@{load\-Level}}
+\index{load\-Level@{load\-Level}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{load\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-load\-Level (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_af2281ca9381f84544434ba6e0d7295a4}
+
+
+Functions used to broadcast to all the client the order to load a unity scene.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the scene.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_aaa2126ad45ede934c23780375ce0604d}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!on\-Failed\-Auth@{on\-Failed\-Auth}}
+\index{on\-Failed\-Auth@{on\-Failed\-Auth}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{on\-Failed\-Auth}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-on\-Failed\-Auth (
+\begin{DoxyParamCaption}
+\item[{string}]{reason}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_aaa2126ad45ede934c23780375ce0604d}
+
+
+Called when the authentication failed and broadcast the reason with the event manager.
+
+
+\begin{DoxyParams}{Parameters}
+{\em reason} & The reason why the authentication failed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a06b5aed3626f1aeef8cc14eb4bfde62a}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!reset\-Password@{reset\-Password}}
+\index{reset\-Password@{reset\-Password}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{reset\-Password}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-reset\-Password (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a06b5aed3626f1aeef8cc14eb4bfde62a}
+
+
+Reset the password of all the connected clients.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_abcce9f6114ed883cc0a1d39d549c4f77}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!reset\-Password@{reset\-Password}}
+\index{reset\-Password@{reset\-Password}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{reset\-Password}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-reset\-Password (
+\begin{DoxyParamCaption}
+\item[{string}]{login}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_abcce9f6114ed883cc0a1d39d549c4f77}
+
+
+Reset the password of a specific client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & The login of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a01ff64266117fb6e1d7080beb7a1dffb}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!save\-Clients\-Game\-Stats@{save\-Clients\-Game\-Stats}}
+\index{save\-Clients\-Game\-Stats@{save\-Clients\-Game\-Stats}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{save\-Clients\-Game\-Stats}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-save\-Clients\-Game\-Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a01ff64266117fb6e1d7080beb7a1dffb}
+
+
+Save the client game stats for the current game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a49489d58ccbae0c90d713368f28fea59}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!save\-Clients\-Stats@{save\-Clients\-Stats}}
+\index{save\-Clients\-Stats@{save\-Clients\-Stats}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{save\-Clients\-Stats}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-save\-Clients\-Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a49489d58ccbae0c90d713368f28fea59}
+
+
+Save the client stats for the current course.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a63c323fb07667c3216f0aa11d4672b25}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Answer@{send\-Answer}}
+\index{send\-Answer@{send\-Answer}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Answer}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Answer (
+\begin{DoxyParamCaption}
+\item[{int}]{rep}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a63c323fb07667c3216f0aa11d4672b25}
+
+
+Functions used to send an answer to the server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rep} & The id of the answer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a3e62c99eb728143e919671d6feaf6574}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Game\-Stats@{send\-Game\-Stats}}
+\index{send\-Game\-Stats@{send\-Game\-Stats}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Game\-Stats}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Game\-Stats (
+\begin{DoxyParamCaption}
+\item[{int}]{param\-Id, }
+\item[{int}]{score}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a3e62c99eb728143e919671d6feaf6574}
+
+
+Functions used by the client to send the game stats to the server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Id} & The id of the current game.\\
+\hline
+{\em param\-Id} & The id of the current parameter used by the client.\\
+\hline
+{\em score} & The score the client achieved during this game.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_ab455f5c674444cb5a29daf5a7a4b4529}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Notify\-Game\-Over@{send\-Notify\-Game\-Over}}
+\index{send\-Notify\-Game\-Over@{send\-Notify\-Game\-Over}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Notify\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Notify\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_ab455f5c674444cb5a29daf5a7a4b4529}
+
+
+Functions used to notify the server that a player won or lost his game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_ab179f1b5fbab4267231dcaba8068cf7b}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Notify\-Login\-In\-Use@{send\-Notify\-Login\-In\-Use}}
+\index{send\-Notify\-Login\-In\-Use@{send\-Notify\-Login\-In\-Use}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Notify\-Login\-In\-Use}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Notify\-Login\-In\-Use (
+\begin{DoxyParamCaption}
+\item[{Network\-Player}]{net\-Player, }
+\item[{string}]{login}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_ab179f1b5fbab4267231dcaba8068cf7b}
+
+
+Functions used to notify a specific client that the login he use is already used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net\-Player} & Unity object containing the client's info (used by the R\-P\-C).\\
+\hline
+{\em name} & The login.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_af54380461ce5e59d88494a78e2158524}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Notify\-Wrong\-Login@{send\-Notify\-Wrong\-Login}}
+\index{send\-Notify\-Wrong\-Login@{send\-Notify\-Wrong\-Login}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Notify\-Wrong\-Login}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Notify\-Wrong\-Login (
+\begin{DoxyParamCaption}
+\item[{Network\-Player}]{net\-Player, }
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_af54380461ce5e59d88494a78e2158524}
+
+
+Functions used to notify a specific client that the login he uses does not exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net\-Player} & Unity object containing the client's info (used by the R\-P\-C).\\
+\hline
+{\em name} & The login.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_ac42bd12dd8b220def2264f0812c8059a}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Notify\-Wrong\-Password@{send\-Notify\-Wrong\-Password}}
+\index{send\-Notify\-Wrong\-Password@{send\-Notify\-Wrong\-Password}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Notify\-Wrong\-Password}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Notify\-Wrong\-Password (
+\begin{DoxyParamCaption}
+\item[{Network\-Player}]{net\-Player, }
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_ac42bd12dd8b220def2264f0812c8059a}
+
+
+Functions used to notify a specific client that the password he uses is not correct.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net\-Player} & Unity object containing the client's info (used by the R\-P\-C).\\
+\hline
+{\em name} & The login.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a531d05f78aa99cd87b6a61cd4488fd57}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Question@{send\-Question}}
+\index{send\-Question@{send\-Question}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Question (
+\begin{DoxyParamCaption}
+\item[{{\bf Question\-Manager.\-Question\-Keeper}}]{question}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a531d05f78aa99cd87b6a61cd4488fd57}
+
+
+Functions used to send a question by the server. Calls the correct R\-P\-C (we can't overload R\-P\-C...)
+
+
+\begin{DoxyParams}{Parameters}
+{\em question} & The question object to be sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a554dd83d4b25f17be83ea7f315da4c8c}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Request\-Score@{send\-Request\-Score}}
+\index{send\-Request\-Score@{send\-Request\-Score}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Request\-Score}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Request\-Score (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a554dd83d4b25f17be83ea7f315da4c8c}
+
+
+Functions used to by the client to askfor its score.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_af5500ddb7ecaba2c27c1cca8c2ff1f20}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!send\-Result@{send\-Result}}
+\index{send\-Result@{send\-Result}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{send\-Result}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-send\-Result (
+\begin{DoxyParamCaption}
+\item[{Network\-Player}]{net\-Player, }
+\item[{string}]{rep, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_af5500ddb7ecaba2c27c1cca8c2ff1f20}
+
+
+Functions used to send a result to the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net\-Player} & Unity object containing the client's info (used by the R\-P\-C).\\
+\hline
+{\em id} & The id ofthe answer.\\
+\hline
+{\em rep} & The explanation to be displayed for the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a2201721623e9b5b9448c97ede484f295}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!set\-Score@{set\-Score}}
+\index{set\-Score@{set\-Score}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{set\-Score}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-set\-Score (
+\begin{DoxyParamCaption}
+\item[{Network\-Player}]{net\-Player, }
+\item[{int}]{score}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a2201721623e9b5b9448c97ede484f295}
+
+
+Functions used to update the score of a specific client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net\-Player} & Unity object containing the client's info (used by the R\-P\-C).\\
+\hline
+{\em score} & The score.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_aace6542fc83c5705a34b7a9db6d66819}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!try\-Tolog\-In@{try\-Tolog\-In}}
+\index{try\-Tolog\-In@{try\-Tolog\-In}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{try\-Tolog\-In}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-try\-Tolog\-In (
+\begin{DoxyParamCaption}
+\item[{string}]{login, }
+\item[{string}]{password}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_aace6542fc83c5705a34b7a9db6d66819}
+
+
+Functions used to sign in on the server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & The login of the client.\\
+\hline
+{\em password} & The password of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a133638de9fb32fc8d2cf9d5db805692c}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!try\-Tolog\-In@{try\-Tolog\-In}}
+\index{try\-Tolog\-In@{try\-Tolog\-In}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{try\-Tolog\-In}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-try\-Tolog\-In (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a133638de9fb32fc8d2cf9d5db805692c}
+
+
+Functions used to connect to the teacher server application-\/wise .
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_c3_p_o_network_manager_a69918ea3508ed121916882d4c29343e9}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!unlock\-Game@{unlock\-Game}}
+\index{unlock\-Game@{unlock\-Game}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{unlock\-Game}]{\setlength{\rightskip}{0pt plus 5cm}void C3\-P\-O\-Network\-Manager.\-unlock\-Game (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_c3_p_o_network_manager_a69918ea3508ed121916882d4c29343e9}
+
+
+Functions used to broadcast to all the client the order to unlock agame.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of game.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!login@{login}}
+\index{login@{login}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{login}]{\setlength{\rightskip}{0pt plus 5cm}string C3\-P\-O\-Network\-Manager.\-login}}\label{class_c3_p_o_network_manager_a24278174f3f3777ab191c1d174dccd8f}
+
+
+The login of the client.
+
+\hypertarget{class_c3_p_o_network_manager_af87fc918b29f6aed9fe932a9244e53ac}{\index{C3\-P\-O\-Network\-Manager@{C3\-P\-O\-Network\-Manager}!password@{password}}
+\index{password@{password}!C3PONetworkManager@{C3\-P\-O\-Network\-Manager}}
+\subsubsection[{password}]{\setlength{\rightskip}{0pt plus 5cm}string C3\-P\-O\-Network\-Manager.\-password}}\label{class_c3_p_o_network_manager_af87fc918b29f6aed9fe932a9244e53ac}
+
+
+The password of the client.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Network/C3\-P\-O\-Network\-Manager.\-cs\end{DoxyCompactItemize}

@@ -1,0 +1,259 @@
+\hypertarget{class_pacman_state}{\section{Pacman\-State Class Reference}
+\label{class_pacman_state}\index{Pacman\-State@{Pacman\-State}}
+}
+
+
+This state is active when the player plays Pacman. 
+
+
+
+
+Inherits \hyperlink{class_game_state}{Game\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_pacman_state_aff25890a3619944f39d765b4366c0f3d}{Pacman\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_ae35ff219ed10e129d3c9e4f984b2c783}{on\-Game\-Restart} ()
+\begin{DoxyCompactList}\small\item\em Called when the player restart the game.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_a96bdcf9e030e2ecf5bc2d9b1307c5d81}{on\-Game\-Over} (bool b)
+\begin{DoxyCompactList}\small\item\em Called when the player lose or win.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_a3aff55fbc007a6f89dc5b344ab661124}{set\-Parameter} (\hyperlink{class_parameter}{Parameter} param)
+\begin{DoxyCompactList}\small\item\em Defines which function will influence the size of the player.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_a84279e9d0ad1d9b60c8e2d737fd732f3}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_ab3f48dc99037d2a3b43909bfd4e67268}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_a9355f6774387872a0f54d74e064a5aa6}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_a7a5922c97a9ccb7380094ef02f3d1022}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_aa2bd54c78c9e8fa9bd7bbbaeb88fc203}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_pacman_state_aced74f286f73da4816511fc78de7b88b}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This state is active when the player plays Pacman.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_pacman_state_aff25890a3619944f39d765b4366c0f3d}{\index{Pacman\-State@{Pacman\-State}!Pacman\-State@{Pacman\-State}}
+\index{Pacman\-State@{Pacman\-State}!PacmanState@{Pacman\-State}}
+\subsubsection[{Pacman\-State}]{\setlength{\rightskip}{0pt plus 5cm}Pacman\-State.\-Pacman\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_pacman_state_aff25890a3619944f39d765b4366c0f3d}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_pacman_state_a9355f6774387872a0f54d74e064a5aa6}{\index{Pacman\-State@{Pacman\-State}!end@{end}}
+\index{end@{end}!PacmanState@{Pacman\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_a9355f6774387872a0f54d74e064a5aa6}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}.
+
+\hypertarget{class_pacman_state_aa2bd54c78c9e8fa9bd7bbbaeb88fc203}{\index{Pacman\-State@{Pacman\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!PacmanState@{Pacman\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_aa2bd54c78c9e8fa9bd7bbbaeb88fc203}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}.
+
+\hypertarget{class_pacman_state_aced74f286f73da4816511fc78de7b88b}{\index{Pacman\-State@{Pacman\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!PacmanState@{Pacman\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_aced74f286f73da4816511fc78de7b88b}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}.
+
+\hypertarget{class_pacman_state_a96bdcf9e030e2ecf5bc2d9b1307c5d81}{\index{Pacman\-State@{Pacman\-State}!on\-Game\-Over@{on\-Game\-Over}}
+\index{on\-Game\-Over@{on\-Game\-Over}!PacmanState@{Pacman\-State}}
+\subsubsection[{on\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-on\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_a96bdcf9e030e2ecf5bc2d9b1307c5d81}
+
+
+Called when the player lose or win.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & True if the player won.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_abda5b28f6a91641e7a958e958349abde}{Game\-State}.
+
+\hypertarget{class_pacman_state_ae35ff219ed10e129d3c9e4f984b2c783}{\index{Pacman\-State@{Pacman\-State}!on\-Game\-Restart@{on\-Game\-Restart}}
+\index{on\-Game\-Restart@{on\-Game\-Restart}!PacmanState@{Pacman\-State}}
+\subsubsection[{on\-Game\-Restart}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-on\-Game\-Restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_ae35ff219ed10e129d3c9e4f984b2c783}
+
+
+Called when the player restart the game.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac596022cb9b545666b26e17aee3f080b}{Game\-State}.
+
+\hypertarget{class_pacman_state_a84279e9d0ad1d9b60c8e2d737fd732f3}{\index{Pacman\-State@{Pacman\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!PacmanState@{Pacman\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_a84279e9d0ad1d9b60c8e2d737fd732f3}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}.
+
+\hypertarget{class_pacman_state_a3aff55fbc007a6f89dc5b344ab661124}{\index{Pacman\-State@{Pacman\-State}!set\-Parameter@{set\-Parameter}}
+\index{set\-Parameter@{set\-Parameter}!PacmanState@{Pacman\-State}}
+\subsubsection[{set\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-set\-Parameter (
+\begin{DoxyParamCaption}
+\item[{{\bf Parameter}}]{param}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_a3aff55fbc007a6f89dc5b344ab661124}
+
+
+Defines which function will influence the size of the player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The parameter the player chose.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_game_state_a8e97b9fe8964321bfa0882bfb5b7e98e}{Game\-State}.
+
+\hypertarget{class_pacman_state_ab3f48dc99037d2a3b43909bfd4e67268}{\index{Pacman\-State@{Pacman\-State}!start@{start}}
+\index{start@{start}!PacmanState@{Pacman\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_ab3f48dc99037d2a3b43909bfd4e67268}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}.
+
+\hypertarget{class_pacman_state_a7a5922c97a9ccb7380094ef02f3d1022}{\index{Pacman\-State@{Pacman\-State}!update@{update}}
+\index{update@{update}!PacmanState@{Pacman\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Pacman\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_pacman_state_a7a5922c97a9ccb7380094ef02f3d1022}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Pacman\-State.\-cs\end{DoxyCompactItemize}

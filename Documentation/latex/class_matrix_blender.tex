@@ -1,0 +1,82 @@
+\hypertarget{class_matrix_blender}{\section{Matrix\-Blender Class Reference}
+\label{class_matrix_blender}\index{Matrix\-Blender@{Matrix\-Blender}}
+}
+
+
+Provides a Coroutine to change a Camera's matrix smoothly  
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Coroutine \hyperlink{class_matrix_blender_a7c627113d44005629981b2503c36c9d7}{Blend\-To\-Matrix} (Matrix4x4 target\-Matrix, float duration)
+\begin{DoxyCompactList}\small\item\em Starts a coroutine changing the camera's matrix to move it to destination \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Matrix4x4 \hyperlink{class_matrix_blender_a78b84eeed383e15ebf58376e8c764332}{Matrix\-Lerp} (Matrix4x4 from, Matrix4x4 to, float time)
+\begin{DoxyCompactList}\small\item\em Calculate the next matrix for the camera \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides a Coroutine to change a Camera's matrix smoothly 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_matrix_blender_a7c627113d44005629981b2503c36c9d7}{\index{Matrix\-Blender@{Matrix\-Blender}!Blend\-To\-Matrix@{Blend\-To\-Matrix}}
+\index{Blend\-To\-Matrix@{Blend\-To\-Matrix}!MatrixBlender@{Matrix\-Blender}}
+\subsubsection[{Blend\-To\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}Coroutine Matrix\-Blender.\-Blend\-To\-Matrix (
+\begin{DoxyParamCaption}
+\item[{Matrix4x4}]{target\-Matrix, }
+\item[{float}]{duration}
+\end{DoxyParamCaption}
+)}}\label{class_matrix_blender_a7c627113d44005629981b2503c36c9d7}
+
+
+Starts a coroutine changing the camera's matrix to move it to destination 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\-Matrix} & Matrix desired at the end of the transition\\
+\hline
+{\em duration} & The transition's duration\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The started coroutine
+\end{DoxyReturn}
+\hypertarget{class_matrix_blender_a78b84eeed383e15ebf58376e8c764332}{\index{Matrix\-Blender@{Matrix\-Blender}!Matrix\-Lerp@{Matrix\-Lerp}}
+\index{Matrix\-Lerp@{Matrix\-Lerp}!MatrixBlender@{Matrix\-Blender}}
+\subsubsection[{Matrix\-Lerp}]{\setlength{\rightskip}{0pt plus 5cm}static Matrix4x4 Matrix\-Blender.\-Matrix\-Lerp (
+\begin{DoxyParamCaption}
+\item[{Matrix4x4}]{from, }
+\item[{Matrix4x4}]{to, }
+\item[{float}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_matrix_blender_a78b84eeed383e15ebf58376e8c764332}
+
+
+Calculate the next matrix for the camera 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & Current matrix\\
+\hline
+{\em to} & Goal matrix\\
+\hline
+{\em time} & Time used in Lerp\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New camera matrix
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Camera/Matrix\-Blender.\-cs\end{DoxyCompactItemize}

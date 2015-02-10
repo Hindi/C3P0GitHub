@@ -1,0 +1,64 @@
+\hypertarget{class_level_loader}{\section{Level\-Loader Class Reference}
+\label{class_level_loader}\index{Level\-Loader@{Level\-Loader}}
+}
+
+
+Class that load unity scenes. 
+
+
+
+
+Inherits Mono\-Behaviour.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_level_loader_aa32210cbd059ccd6ee588e4f07dea2a1}{on\-Level\-Load} (string level\-Name)
+\begin{DoxyCompactList}\small\item\em Callback called when the L\-O\-A\-D\-L\-E\-V\-E\-L event is triggered.\end{DoxyCompactList}\item 
+void \hyperlink{class_level_loader_aa2ab78bf3b97fe2c359b49ba138a6d42}{load\-Level} (string level\-Name)
+\begin{DoxyCompactList}\small\item\em Starts the coroutine that loads a scene. Also notify the \hyperlink{class_state_manager}{State\-Manager} to load the corresponding state.\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that load unity scenes.
+
+Classe qui gère le chargement de niveau via le réseau. A tester une fois le réseau fonctionnel. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_level_loader_aa2ab78bf3b97fe2c359b49ba138a6d42}{\index{Level\-Loader@{Level\-Loader}!load\-Level@{load\-Level}}
+\index{load\-Level@{load\-Level}!LevelLoader@{Level\-Loader}}
+\subsubsection[{load\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void Level\-Loader.\-load\-Level (
+\begin{DoxyParamCaption}
+\item[{string}]{level\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_level_loader_aa2ab78bf3b97fe2c359b49ba138a6d42}
+
+
+Starts the coroutine that loads a scene. Also notify the \hyperlink{class_state_manager}{State\-Manager} to load the corresponding state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\-Name} & The name of the level.\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_level_loader_aa32210cbd059ccd6ee588e4f07dea2a1}{\index{Level\-Loader@{Level\-Loader}!on\-Level\-Load@{on\-Level\-Load}}
+\index{on\-Level\-Load@{on\-Level\-Load}!LevelLoader@{Level\-Loader}}
+\subsubsection[{on\-Level\-Load}]{\setlength{\rightskip}{0pt plus 5cm}void Level\-Loader.\-on\-Level\-Load (
+\begin{DoxyParamCaption}
+\item[{string}]{level\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_level_loader_aa32210cbd059ccd6ee588e4f07dea2a1}
+
+
+Callback called when the L\-O\-A\-D\-L\-E\-V\-E\-L event is triggered.
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\-Name} & The name of the level.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Level/Level\-Loader.\-cs\end{DoxyCompactItemize}

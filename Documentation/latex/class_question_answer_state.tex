@@ -1,0 +1,229 @@
+\hypertarget{class_question_answer_state}{\section{Question\-Answer\-State Class Reference}
+\label{class_question_answer_state}\index{Question\-Answer\-State@{Question\-Answer\-State}}
+}
+
+
+Inherits \hyperlink{class_state}{State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_question_answer_state_aaa4c9ebbc85591128de07018f4021b7a}{Question\-Answer\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_a412ceb42ff866a69f4d7c0c5f64b63e6}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_answer_state_a87ef00fb4d3a2b3b53929863e8215490}{on\-Disconnected\-From\-Unity} ()
+\begin{DoxyCompactList}\small\item\em Called when the client is disconnected from the server.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_answer_state_a195aebf2f3a31d5602d7fa5f9f45ad12}{on\-Answer\-Selected} (int id)
+\begin{DoxyCompactList}\small\item\em Called when the client selects an answer.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_answer_state_ac7a6adbb459814a9811a56f9e797e815}{on\-Question\-Recieved} (\hyperlink{class_question_manager_1_1_question_keeper}{Question\-Manager.\-Question\-Keeper} keeper)
+\begin{DoxyCompactList}\small\item\em Called when a new question is recieved.\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_a2cb854458483bf4fe6ddaba5efdf8134}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_aea342312e39094cb91d042ad983b4a27}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_a919922a15f00b00f994f6d95d6d7e97f}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_af51e9367e0517cd7165e344ce9329f16}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_question_answer_state_ab1296d7593684b08a520b7b4964a21b5}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_question_answer_state_aaa4c9ebbc85591128de07018f4021b7a}{\index{Question\-Answer\-State@{Question\-Answer\-State}!Question\-Answer\-State@{Question\-Answer\-State}}
+\index{Question\-Answer\-State@{Question\-Answer\-State}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{Question\-Answer\-State}]{\setlength{\rightskip}{0pt plus 5cm}Question\-Answer\-State.\-Question\-Answer\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_question_answer_state_aaa4c9ebbc85591128de07018f4021b7a}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_question_answer_state_aea342312e39094cb91d042ad983b4a27}{\index{Question\-Answer\-State@{Question\-Answer\-State}!end@{end}}
+\index{end@{end}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_aea342312e39094cb91d042ad983b4a27}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{State}.
+
+\hypertarget{class_question_answer_state_af51e9367e0517cd7165e344ce9329f16}{\index{Question\-Answer\-State@{Question\-Answer\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_af51e9367e0517cd7165e344ce9329f16}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{State}.
+
+\hypertarget{class_question_answer_state_ab1296d7593684b08a520b7b4964a21b5}{\index{Question\-Answer\-State@{Question\-Answer\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_ab1296d7593684b08a520b7b4964a21b5}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{State}.
+
+\hypertarget{class_question_answer_state_a195aebf2f3a31d5602d7fa5f9f45ad12}{\index{Question\-Answer\-State@{Question\-Answer\-State}!on\-Answer\-Selected@{on\-Answer\-Selected}}
+\index{on\-Answer\-Selected@{on\-Answer\-Selected}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{on\-Answer\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Answer\-State.\-on\-Answer\-Selected (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_question_answer_state_a195aebf2f3a31d5602d7fa5f9f45ad12}
+
+
+Called when the client selects an answer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the selected answer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_answer_state_a87ef00fb4d3a2b3b53929863e8215490}{\index{Question\-Answer\-State@{Question\-Answer\-State}!on\-Disconnected\-From\-Unity@{on\-Disconnected\-From\-Unity}}
+\index{on\-Disconnected\-From\-Unity@{on\-Disconnected\-From\-Unity}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{on\-Disconnected\-From\-Unity}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Answer\-State.\-on\-Disconnected\-From\-Unity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_answer_state_a87ef00fb4d3a2b3b53929863e8215490}
+
+
+Called when the client is disconnected from the server.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_answer_state_a412ceb42ff866a69f4d7c0c5f64b63e6}{\index{Question\-Answer\-State@{Question\-Answer\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_a412ceb42ff866a69f4d7c0c5f64b63e6}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{State}.
+
+\hypertarget{class_question_answer_state_ac7a6adbb459814a9811a56f9e797e815}{\index{Question\-Answer\-State@{Question\-Answer\-State}!on\-Question\-Recieved@{on\-Question\-Recieved}}
+\index{on\-Question\-Recieved@{on\-Question\-Recieved}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{on\-Question\-Recieved}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Answer\-State.\-on\-Question\-Recieved (
+\begin{DoxyParamCaption}
+\item[{{\bf Question\-Manager.\-Question\-Keeper}}]{keeper}
+\end{DoxyParamCaption}
+)}}\label{class_question_answer_state_ac7a6adbb459814a9811a56f9e797e815}
+
+
+Called when a new question is recieved.
+
+
+\begin{DoxyParams}{Parameters}
+{\em keeper} & The question\-Keeper object with all of the datas related to the new question.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_answer_state_a2cb854458483bf4fe6ddaba5efdf8134}{\index{Question\-Answer\-State@{Question\-Answer\-State}!start@{start}}
+\index{start@{start}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_a2cb854458483bf4fe6ddaba5efdf8134}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{State}.
+
+\hypertarget{class_question_answer_state_a919922a15f00b00f994f6d95d6d7e97f}{\index{Question\-Answer\-State@{Question\-Answer\-State}!update@{update}}
+\index{update@{update}!QuestionAnswerState@{Question\-Answer\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Question\-Answer\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_question_answer_state_a919922a15f00b00f994f6d95d6d7e97f}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Question\-Answer\-State.\-cs\end{DoxyCompactItemize}

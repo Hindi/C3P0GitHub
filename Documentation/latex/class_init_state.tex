@@ -1,0 +1,183 @@
+\hypertarget{class_init_state}{\section{Init\-State Class Reference}
+\label{class_init_state}\index{Init\-State@{Init\-State}}
+}
+
+
+This state is reached only when the game starts. It is used for initialisation. 
+
+
+
+
+Inherits \hyperlink{class_state}{State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_init_state_a15507078e0f4ab3564c434cd189c30d5}{Init\-State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_a03fa89130035b32e64bab0e22551dadf}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_a1e50dcaa5fbf65b0e839a2ec6c6cd3f5}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_a0715cfa091be8a4fb1cec405350ad396}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_aa0853b211a3c150ec00aaea4c2198249}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_a90b13c1d9ccc9c9f5e13329d303d4177}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+override void \hyperlink{class_init_state_a7022ada0d97866310487284f5db3b99e}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (touchscreen \& mobile phone buttons).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This state is reached only when the game starts. It is used for initialisation.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_init_state_a15507078e0f4ab3564c434cd189c30d5}{\index{Init\-State@{Init\-State}!Init\-State@{Init\-State}}
+\index{Init\-State@{Init\-State}!InitState@{Init\-State}}
+\subsubsection[{Init\-State}]{\setlength{\rightskip}{0pt plus 5cm}Init\-State.\-Init\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_init_state_a15507078e0f4ab3564c434cd189c30d5}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_init_state_a1e50dcaa5fbf65b0e839a2ec6c6cd3f5}{\index{Init\-State@{Init\-State}!end@{end}}
+\index{end@{end}!InitState@{Init\-State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_a1e50dcaa5fbf65b0e839a2ec6c6cd3f5}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{State}.
+
+\hypertarget{class_init_state_a90b13c1d9ccc9c9f5e13329d303d4177}{\index{Init\-State@{Init\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!InitState@{Init\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_a90b13c1d9ccc9c9f5e13329d303d4177}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{State}.
+
+\hypertarget{class_init_state_a7022ada0d97866310487284f5db3b99e}{\index{Init\-State@{Init\-State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!InitState@{Init\-State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_a7022ada0d97866310487284f5db3b99e}
+
+
+Recieves all the necessary inputs (touchscreen \& mobile phone buttons).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+{\em inputs} & Array containing the touch inputs.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{State}.
+
+\hypertarget{class_init_state_aa0853b211a3c150ec00aaea4c2198249}{\index{Init\-State@{Init\-State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!InitState@{Init\-State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_aa0853b211a3c150ec00aaea4c2198249}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{State}.
+
+\hypertarget{class_init_state_a03fa89130035b32e64bab0e22551dadf}{\index{Init\-State@{Init\-State}!start@{start}}
+\index{start@{start}!InitState@{Init\-State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_a03fa89130035b32e64bab0e22551dadf}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{State}.
+
+\hypertarget{class_init_state_a0715cfa091be8a4fb1cec405350ad396}{\index{Init\-State@{Init\-State}!update@{update}}
+\index{update@{update}!InitState@{Init\-State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}override void Init\-State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_init_state_a0715cfa091be8a4fb1cec405350ad396}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{State}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/Init\-State.\-cs\end{DoxyCompactItemize}

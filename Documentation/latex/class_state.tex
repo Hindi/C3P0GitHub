@@ -1,0 +1,212 @@
+\hypertarget{class_state}{\section{State Class Reference}
+\label{class_state}\index{State@{State}}
+}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse). 
+
+
+
+
+Inherited by \hyperlink{class_connection_state}{Connection\-State}, \hyperlink{class_game_state}{Game\-State}, \hyperlink{class_init_state}{Init\-State}, \hyperlink{class_lobby_state}{Lobby\-State}, and \hyperlink{class_question_answer_state}{Question\-Answer\-State}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \hyperlink{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{start} ()
+\begin{DoxyCompactList}\small\item\em Called on start.\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_state_a49c5d76957d7d737c345cb8b563d318b}{end} ()
+\begin{DoxyCompactList}\small\item\em Called when leaving this state.\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_state_a953d2122c47b590fd72a4be8a98124f9}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame.\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_state_a93317fb33262a8ded9f91b8d0cf472db}{on\-Level\-Was\-Loaded} (int lvl)
+\begin{DoxyCompactList}\small\item\em Called when the lobby scene from Unity is loaded.\end{DoxyCompactList}\item 
+\hyperlink{class_state_a9bd2264300507466600b8ed0105741b6}{State} (\hyperlink{class_state_manager}{State\-Manager} state\-Manager)
+\begin{DoxyCompactList}\small\item\em Constructor.\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_state_ae5137278ec92501b5623c8f4d8f1c784}{notice\-Input} (Enum\-Input key)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\item 
+abstract void \hyperlink{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{notice\-Input} (Enum\-Input key, Touch\mbox{[}$\,$\mbox{]} inputs)
+\begin{DoxyCompactList}\small\item\em Recieves all the necessary inputs (keyboard, gamepad and mouse).\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_state_ad33df21d389a2b7023c7825fba8938f3}{loaded}
+\begin{DoxyCompactList}\small\item\em True if the level is loaded.\end{DoxyCompactList}\item 
+\hyperlink{class_state_manager}{State\-Manager} \hyperlink{class_state_aae3bd29dddcbe7d41cd54473acf57c83}{state\-Manager\-\_\-}
+\begin{DoxyCompactList}\small\item\em Reference to the state manager.\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_state_a9bd2264300507466600b8ed0105741b6}{\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection[{State}]{\setlength{\rightskip}{0pt plus 5cm}State.\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State\-Manager}}]{state\-Manager}
+\end{DoxyParamCaption}
+)}}\label{class_state_a9bd2264300507466600b8ed0105741b6}
+
+
+Constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_state_a49c5d76957d7d737c345cb8b563d318b}{\index{State@{State}!end@{end}}
+\index{end@{end}!State@{State}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_a49c5d76957d7d737c345cb8b563d318b}
+
+
+Called when leaving this state.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_tetris_state_a65439e531d3d0d1b7c5d9bd17b28beb5}{Tetris\-State}, \hyperlink{class_game_state_a78fd33460f64d49851bbfbb183547e83}{Game\-State}, \hyperlink{class_pacman_state_a9355f6774387872a0f54d74e064a5aa6}{Pacman\-State}, \hyperlink{class_space_war_state_ae411bb8b76dc8e3eb4f41e60b68306c8}{Space\-War\-State}, \hyperlink{class_pong_state_a42a9c70d3723cd5beefb35a68220d698}{Pong\-State}, \hyperlink{class_mario_state_a41ddb5c1438090d67d909974638f3e65}{Mario\-State}, \hyperlink{class_space_invader_state_a2f0ea75c238c2e42f790e6f4ad8780ae}{Space\-Invader\-State}, \hyperlink{class_question_answer_state_aea342312e39094cb91d042ad983b4a27}{Question\-Answer\-State}, \hyperlink{class_lunar_lander_state_a5b82951660f1ca37735c7f6ac5f29e2b}{Lunar\-Lander\-State}, \hyperlink{class_asteroids_state_ab24d69dd1f613038cc9ddabdc8893f4d}{Asteroids\-State}, \hyperlink{class_connection_state_a684dee54c5a99baecc475eba5417e21b}{Connection\-State}, \hyperlink{class_lobby_state_ab73776a43f5851a75019c6b845856e6e}{Lobby\-State}, and \hyperlink{class_init_state_a1e50dcaa5fbf65b0e839a2ec6c6cd3f5}{Init\-State}.
+
+\hypertarget{class_state_ae5137278ec92501b5623c8f4d8f1c784}{\index{State@{State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!State@{State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_ae5137278ec92501b5623c8f4d8f1c784}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_game_state_a03f1715d6352805a05e94b1a59c3d95e}{Game\-State}, \hyperlink{class_space_war_state_ad7a98786e6a5e801bc8342b0c8c5da94}{Space\-War\-State}, \hyperlink{class_pacman_state_aced74f286f73da4816511fc78de7b88b}{Pacman\-State}, \hyperlink{class_mario_state_ae4090f8424028536a32a00945092ee33}{Mario\-State}, \hyperlink{class_pong_state_ab83b5eac1628c5eb417f07c4e19dd74f}{Pong\-State}, \hyperlink{class_space_invader_state_aefd9b0488dfd4d515e4ef394e8f9bb36}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a7e4530c7f30e019c3ab8d9e8d7d3b673}{Tetris\-State}, \hyperlink{class_lunar_lander_state_a22d43edbc96d9c4bd591bc119399a78e}{Lunar\-Lander\-State}, \hyperlink{class_asteroids_state_aa451b09624a4d1aeb3ce004001582c3c}{Asteroids\-State}, \hyperlink{class_question_answer_state_af51e9367e0517cd7165e344ce9329f16}{Question\-Answer\-State}, \hyperlink{class_connection_state_a66e0365f815d1ad50fa66f79e2f5ff32}{Connection\-State}, \hyperlink{class_init_state_a90b13c1d9ccc9c9f5e13329d303d4177}{Init\-State}, and \hyperlink{class_lobby_state_a47d46b2a5c8766d7c802304dccc4ad10}{Lobby\-State}.
+
+\hypertarget{class_state_aaff2d4ba964e7b6d5277067ac63419c8}{\index{State@{State}!notice\-Input@{notice\-Input}}
+\index{notice\-Input@{notice\-Input}!State@{State}}
+\subsubsection[{notice\-Input}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-notice\-Input (
+\begin{DoxyParamCaption}
+\item[{Enum\-Input}]{key, }
+\item[{Touch\mbox{[}$\,$\mbox{]}}]{inputs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_aaff2d4ba964e7b6d5277067ac63419c8}
+
+
+Recieves all the necessary inputs (keyboard, gamepad and mouse).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The input sent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_game_state_a55cb05db4d18ad0fbfd0baa5f9be9170}{Game\-State}, \hyperlink{class_pong_state_a11e43e8c96e4c6a49763c1757f3fe42c}{Pong\-State}, \hyperlink{class_pacman_state_aa2bd54c78c9e8fa9bd7bbbaeb88fc203}{Pacman\-State}, \hyperlink{class_space_war_state_a3eabccff86c38c3a66fbd94ed1080ac4}{Space\-War\-State}, \hyperlink{class_mario_state_aee1af11d577666abe34366c11547331d}{Mario\-State}, \hyperlink{class_question_answer_state_ab1296d7593684b08a520b7b4964a21b5}{Question\-Answer\-State}, \hyperlink{class_space_invader_state_a9d787fe40541a10e25ac96029254b9c7}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a28374d970db4eb1f849030fcc866210e}{Tetris\-State}, \hyperlink{class_lunar_lander_state_acb0c202b105ce74341f0026aea9e34b0}{Lunar\-Lander\-State}, \hyperlink{class_connection_state_a3aef2f7c0725ed67797053aac80a3fc7}{Connection\-State}, \hyperlink{class_asteroids_state_a4e36725d9196683c5af198604d98ca2f}{Asteroids\-State}, \hyperlink{class_lobby_state_ae88b55304c563ebc709ccc2458bf4aa7}{Lobby\-State}, and \hyperlink{class_init_state_a7022ada0d97866310487284f5db3b99e}{Init\-State}.
+
+\hypertarget{class_state_a93317fb33262a8ded9f91b8d0cf472db}{\index{State@{State}!on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}}
+\index{on\-Level\-Was\-Loaded@{on\-Level\-Was\-Loaded}!State@{State}}
+\subsubsection[{on\-Level\-Was\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-on\-Level\-Was\-Loaded (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_a93317fb33262a8ded9f91b8d0cf472db}
+
+
+Called when the lobby scene from Unity is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lvl} & Id of the level loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_pacman_state_a84279e9d0ad1d9b60c8e2d737fd732f3}{Pacman\-State}, \hyperlink{class_space_war_state_ac965e3936108a8fea8055e4e250d66bd}{Space\-War\-State}, \hyperlink{class_pong_state_aa4d7e05bf27dc9f37118d2651ea8c10f}{Pong\-State}, \hyperlink{class_mario_state_a9725076b267e50eec3262c8a0f471ffb}{Mario\-State}, \hyperlink{class_space_invader_state_a4682e573bfed319344164f0c2ac92c0e}{Space\-Invader\-State}, \hyperlink{class_tetris_state_a3ad8b0d661a1c465ac3733dae9271d96}{Tetris\-State}, \hyperlink{class_init_state_aa0853b211a3c150ec00aaea4c2198249}{Init\-State}, \hyperlink{class_lunar_lander_state_a048d7449e1d9429bbe14652d35ae9dec}{Lunar\-Lander\-State}, \hyperlink{class_asteroids_state_a921b0118ddb492399752bceb82ec3c89}{Asteroids\-State}, \hyperlink{class_game_state_ac06d5f671d7c46ffcdf76c827fb0f7fc}{Game\-State}, \hyperlink{class_connection_state_a3c29bedcc621b52075b9e7ee29f27816}{Connection\-State}, \hyperlink{class_question_answer_state_a412ceb42ff866a69f4d7c0c5f64b63e6}{Question\-Answer\-State}, and \hyperlink{class_lobby_state_abc60bf813e23a727a151aecf58be3b41}{Lobby\-State}.
+
+\hypertarget{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}{\index{State@{State}!start@{start}}
+\index{start@{start}!State@{State}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_ad68a2a8c10c96ef3a1c7d4bd07468fbf}
+
+
+Called on start.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_tetris_state_a1e02603c08500919b3d47917396ffed8}{Tetris\-State}, \hyperlink{class_game_state_ab3f0f0322d48250cb81325a08b8110c0}{Game\-State}, \hyperlink{class_pacman_state_ab3f48dc99037d2a3b43909bfd4e67268}{Pacman\-State}, \hyperlink{class_space_war_state_afbedfd935854568d8d34c540bb6de67b}{Space\-War\-State}, \hyperlink{class_pong_state_aac21df44a9352b2fe77ae3635a2374a7}{Pong\-State}, \hyperlink{class_mario_state_add64e32059bde1e198a44add0370228a}{Mario\-State}, \hyperlink{class_space_invader_state_a2b839470ff8344a6f090aa68df1cfa5b}{Space\-Invader\-State}, \hyperlink{class_question_answer_state_a2cb854458483bf4fe6ddaba5efdf8134}{Question\-Answer\-State}, \hyperlink{class_asteroids_state_ad4866919e63dc9c1062524d78be2654a}{Asteroids\-State}, \hyperlink{class_lunar_lander_state_a9aa6e9fab93a7566b6727971eca0a225}{Lunar\-Lander\-State}, \hyperlink{class_connection_state_a4ea67162393d9c6ef29aca7807bc9035}{Connection\-State}, \hyperlink{class_lobby_state_a85edd8fa8fa077fac18b47a6cff2c4b6}{Lobby\-State}, and \hyperlink{class_init_state_a03fa89130035b32e64bab0e22551dadf}{Init\-State}.
+
+\hypertarget{class_state_a953d2122c47b590fd72a4be8a98124f9}{\index{State@{State}!update@{update}}
+\index{update@{update}!State@{State}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}abstract void State.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_state_a953d2122c47b590fd72a4be8a98124f9}
+
+
+Called each frame.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_game_state_ae89bf9e6ab333a6def5c7f231970622a}{Game\-State}, \hyperlink{class_tetris_state_aa522101ff32603e24c232141799ef6f1}{Tetris\-State}, \hyperlink{class_pacman_state_a7a5922c97a9ccb7380094ef02f3d1022}{Pacman\-State}, \hyperlink{class_space_war_state_a1359aae13f67fb97de75307349b8ee81}{Space\-War\-State}, \hyperlink{class_pong_state_aab539dacd758f2c5a55e24e6eb388ed4}{Pong\-State}, \hyperlink{class_mario_state_a329bb4d1bfbb5bbbfdbda5840e591d39}{Mario\-State}, \hyperlink{class_space_invader_state_a2514e1cc361e663348bf190bacda343f}{Space\-Invader\-State}, \hyperlink{class_question_answer_state_a919922a15f00b00f994f6d95d6d7e97f}{Question\-Answer\-State}, \hyperlink{class_lunar_lander_state_ac266f36c49863e79753fb87d2498f32d}{Lunar\-Lander\-State}, \hyperlink{class_asteroids_state_a7ba222181b3a3d597af0818866c69dda}{Asteroids\-State}, \hyperlink{class_connection_state_a0d9aca312df95ad6d10b6b6382b0e456}{Connection\-State}, \hyperlink{class_lobby_state_a9d397dd0ec4eb121101208d67e1bd55a}{Lobby\-State}, and \hyperlink{class_init_state_a0715cfa091be8a4fb1cec405350ad396}{Init\-State}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_state_ad33df21d389a2b7023c7825fba8938f3}{\index{State@{State}!loaded@{loaded}}
+\index{loaded@{loaded}!State@{State}}
+\subsubsection[{loaded}]{\setlength{\rightskip}{0pt plus 5cm}bool State.\-loaded\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_state_ad33df21d389a2b7023c7825fba8938f3}
+
+
+True if the level is loaded.
+
+\hypertarget{class_state_aae3bd29dddcbe7d41cd54473acf57c83}{\index{State@{State}!state\-Manager\-\_\-@{state\-Manager\-\_\-}}
+\index{state\-Manager\-\_\-@{state\-Manager\-\_\-}!State@{State}}
+\subsubsection[{state\-Manager\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\-Manager} State.\-state\-Manager\-\_\-\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_state_aae3bd29dddcbe7d41cd54473acf57c83}
+
+
+Reference to the state manager.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-States/State.\-cs\end{DoxyCompactItemize}

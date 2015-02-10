@@ -1,0 +1,342 @@
+\hypertarget{class_question_manager}{\section{Question\-Manager Class Reference}
+\label{class_question_manager}\index{Question\-Manager@{Question\-Manager}}
+}
+
+
+Manages all of the questions and answers.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_question_manager_1_1_answer_keeper}{Answer\-Keeper}
+\begin{DoxyCompactList}\small\item\em T\-This class represents an answer sent by a client.\end{DoxyCompactList}\item 
+class \hyperlink{class_question_manager_1_1_question_keeper}{Question\-Keeper}
+\begin{DoxyCompactList}\small\item\em Innher class that represents the question. It contains all of its datas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_question_manager_ae8d76463fb5637cc18a61a7f7f431e6e}{send\-Question} ()
+\begin{DoxyCompactList}\small\item\em This function sends the question to the clients.\end{DoxyCompactList}\item 
+bool \hyperlink{class_question_manager_ade5600a5b8885321c3dd6b03cfa2baab}{is\-Question\-Time\-Over} ()
+\begin{DoxyCompactList}\small\item\em This function checks if the time allowed for the quesiton is over.\end{DoxyCompactList}\item 
+string \hyperlink{class_question_manager_a5ebb18be24aecd9db9bc2434c2e888d8}{get\-Question\-Txt} ()
+\begin{DoxyCompactList}\small\item\em This function access the question string displayed on clients.\end{DoxyCompactList}\item 
+\hypertarget{class_question_manager_ada8a1aaea794720a6002c3361cbb13d2}{string {\bfseries get\-Next\-Question\-Txt} ()}\label{class_question_manager_ada8a1aaea794720a6002c3361cbb13d2}
+
+\item 
+void \hyperlink{class_question_manager_a0c8730b4ca5eb183f828f0dad9524b08}{go\-To\-Previous\-Question} ()
+\begin{DoxyCompactList}\small\item\em This function sets the previous question as current.\end{DoxyCompactList}\item 
+bool \hyperlink{class_question_manager_ad951c82ca60e66a5e088aeaf84436b74}{go\-To\-Next\-Question} ()
+\begin{DoxyCompactList}\small\item\em This function sets the next question as current.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a315479a75a155fd8627ec81c87dfc644}{load\-Xml} (int id)
+\begin{DoxyCompactList}\small\item\em Load the questions for the current course from the xml file and add them to the question\-List.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a6f660949810e7aa48511cef50d093e72}{unload\-Xml} ()
+\begin{DoxyCompactList}\small\item\em Clears the question list.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a3fd0fdb36b5ea2337c4aa82d1380a0c7}{rcv\-Question} (string squestion, string rep1, string rep2)
+\begin{DoxyCompactList}\small\item\em Triggers the event that displays the question menu on the client.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a6a83b29e2b2bcba856c58ced4a28c539}{rcv\-Question} (string squestion, string rep1, string rep2, string rep3)
+\begin{DoxyCompactList}\small\item\em Triggers the event that displays the question menu on the client.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a9470261df43c527c54f760cba2f02968}{rcv\-Question} (string squestion, string rep1, string rep2, string rep3, string rep4)
+\begin{DoxyCompactList}\small\item\em Triggers the event that displays the question menu on the client.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a9a9a2d06e109f932443fbdfa3968294e}{rcv\-Answer} (ref \hyperlink{class_client}{Client} c, int rep)
+\begin{DoxyCompactList}\small\item\em Called when a client send an answer.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_a788ad59986cf955cee459d199515e283}{send\-Answer} (int rep)
+\begin{DoxyCompactList}\small\item\em Called by the client to send an answer to the server.\end{DoxyCompactList}\item 
+\hyperlink{class_question_manager_abc78201457e6f5386990434f08d46672}{Question\-Manager} ()
+\begin{DoxyCompactList}\small\item\em Public constructor.\end{DoxyCompactList}\item 
+void \hyperlink{class_question_manager_aa87d5ffda73d08883db83555400a9987}{update} ()
+\begin{DoxyCompactList}\small\item\em Called each frame, as soon as the quesiton time is over, check the answers ans send the results.\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_question_manager}{Question\-Manager} \hyperlink{class_question_manager_a96dda0e2445bf92325df364298864be9}{Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em This class is a singleton, get its instance with this function.\end{DoxyCompactList}\item 
+\hypertarget{class_question_manager_a76ec948fc64a6311d594a86ed65ad2c2}{float {\bfseries Answer\-Ratio}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_question_manager_a76ec948fc64a6311d594a86ed65ad2c2}
+
+\item 
+\hypertarget{class_question_manager_a150f4e4d28c687240399a64611670e91}{int {\bfseries Current\-Question\-Nb}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}}\label{class_question_manager_a150f4e4d28c687240399a64611670e91}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages all of the questions and answers. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_question_manager_abc78201457e6f5386990434f08d46672}{\index{Question\-Manager@{Question\-Manager}!Question\-Manager@{Question\-Manager}}
+\index{Question\-Manager@{Question\-Manager}!QuestionManager@{Question\-Manager}}
+\subsubsection[{Question\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Question\-Manager.\-Question\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_abc78201457e6f5386990434f08d46672}
+
+
+Public constructor.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_question_manager_a5ebb18be24aecd9db9bc2434c2e888d8}{\index{Question\-Manager@{Question\-Manager}!get\-Question\-Txt@{get\-Question\-Txt}}
+\index{get\-Question\-Txt@{get\-Question\-Txt}!QuestionManager@{Question\-Manager}}
+\subsubsection[{get\-Question\-Txt}]{\setlength{\rightskip}{0pt plus 5cm}string Question\-Manager.\-get\-Question\-Txt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a5ebb18be24aecd9db9bc2434c2e888d8}
+
+
+This function access the question string displayed on clients.
+
+\begin{DoxyReturn}{Returns}
+string
+\end{DoxyReturn}
+\hypertarget{class_question_manager_ad951c82ca60e66a5e088aeaf84436b74}{\index{Question\-Manager@{Question\-Manager}!go\-To\-Next\-Question@{go\-To\-Next\-Question}}
+\index{go\-To\-Next\-Question@{go\-To\-Next\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{go\-To\-Next\-Question}]{\setlength{\rightskip}{0pt plus 5cm}bool Question\-Manager.\-go\-To\-Next\-Question (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_ad951c82ca60e66a5e088aeaf84436b74}
+
+
+This function sets the next question as current.
+
+\begin{DoxyReturn}{Returns}
+Bool \-:false if the current qestion is the last of the list.
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a0c8730b4ca5eb183f828f0dad9524b08}{\index{Question\-Manager@{Question\-Manager}!go\-To\-Previous\-Question@{go\-To\-Previous\-Question}}
+\index{go\-To\-Previous\-Question@{go\-To\-Previous\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{go\-To\-Previous\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-go\-To\-Previous\-Question (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a0c8730b4ca5eb183f828f0dad9524b08}
+
+
+This function sets the previous question as current.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_ade5600a5b8885321c3dd6b03cfa2baab}{\index{Question\-Manager@{Question\-Manager}!is\-Question\-Time\-Over@{is\-Question\-Time\-Over}}
+\index{is\-Question\-Time\-Over@{is\-Question\-Time\-Over}!QuestionManager@{Question\-Manager}}
+\subsubsection[{is\-Question\-Time\-Over}]{\setlength{\rightskip}{0pt plus 5cm}bool Question\-Manager.\-is\-Question\-Time\-Over (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_ade5600a5b8885321c3dd6b03cfa2baab}
+
+
+This function checks if the time allowed for the quesiton is over.
+
+\begin{DoxyReturn}{Returns}
+bool \-: True if the time passed.
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a315479a75a155fd8627ec81c87dfc644}{\index{Question\-Manager@{Question\-Manager}!load\-Xml@{load\-Xml}}
+\index{load\-Xml@{load\-Xml}!QuestionManager@{Question\-Manager}}
+\subsubsection[{load\-Xml}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-load\-Xml (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a315479a75a155fd8627ec81c87dfc644}
+
+
+Load the questions for the current course from the xml file and add them to the question\-List.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the current course\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a9a9a2d06e109f932443fbdfa3968294e}{\index{Question\-Manager@{Question\-Manager}!rcv\-Answer@{rcv\-Answer}}
+\index{rcv\-Answer@{rcv\-Answer}!QuestionManager@{Question\-Manager}}
+\subsubsection[{rcv\-Answer}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-rcv\-Answer (
+\begin{DoxyParamCaption}
+\item[{ref {\bf Client}}]{c, }
+\item[{int}]{rep}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a9a9a2d06e109f932443fbdfa3968294e}
+
+
+Called when a client send an answer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The client that sent the answer.\\
+\hline
+{\em rep} & The id of the response.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a3fd0fdb36b5ea2337c4aa82d1380a0c7}{\index{Question\-Manager@{Question\-Manager}!rcv\-Question@{rcv\-Question}}
+\index{rcv\-Question@{rcv\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{rcv\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-rcv\-Question (
+\begin{DoxyParamCaption}
+\item[{string}]{squestion, }
+\item[{string}]{rep1, }
+\item[{string}]{rep2}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a3fd0fdb36b5ea2337c4aa82d1380a0c7}
+
+
+Triggers the event that displays the question menu on the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em squestion} & The string displayed, the actual question.\\
+\hline
+{\em rep1} & A possible response.\\
+\hline
+{\em rep2} & A possible response.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a6a83b29e2b2bcba856c58ced4a28c539}{\index{Question\-Manager@{Question\-Manager}!rcv\-Question@{rcv\-Question}}
+\index{rcv\-Question@{rcv\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{rcv\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-rcv\-Question (
+\begin{DoxyParamCaption}
+\item[{string}]{squestion, }
+\item[{string}]{rep1, }
+\item[{string}]{rep2, }
+\item[{string}]{rep3}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a6a83b29e2b2bcba856c58ced4a28c539}
+
+
+Triggers the event that displays the question menu on the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em squestion} & The string displayed, the actual question.\\
+\hline
+{\em rep1} & A possible response.\\
+\hline
+{\em rep2} & A possible response.\\
+\hline
+{\em rep3} & A possible response.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a9470261df43c527c54f760cba2f02968}{\index{Question\-Manager@{Question\-Manager}!rcv\-Question@{rcv\-Question}}
+\index{rcv\-Question@{rcv\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{rcv\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-rcv\-Question (
+\begin{DoxyParamCaption}
+\item[{string}]{squestion, }
+\item[{string}]{rep1, }
+\item[{string}]{rep2, }
+\item[{string}]{rep3, }
+\item[{string}]{rep4}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a9470261df43c527c54f760cba2f02968}
+
+
+Triggers the event that displays the question menu on the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em squestion} & The string displayed, the actual question.\\
+\hline
+{\em rep1} & A possible response.\\
+\hline
+{\em rep2} & A possible response.\\
+\hline
+{\em rep3} & A possible response.\\
+\hline
+{\em rep4} & A possible response.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a788ad59986cf955cee459d199515e283}{\index{Question\-Manager@{Question\-Manager}!send\-Answer@{send\-Answer}}
+\index{send\-Answer@{send\-Answer}!QuestionManager@{Question\-Manager}}
+\subsubsection[{send\-Answer}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-send\-Answer (
+\begin{DoxyParamCaption}
+\item[{int}]{rep}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a788ad59986cf955cee459d199515e283}
+
+
+Called by the client to send an answer to the server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rep} & The id of the response.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_ae8d76463fb5637cc18a61a7f7f431e6e}{\index{Question\-Manager@{Question\-Manager}!send\-Question@{send\-Question}}
+\index{send\-Question@{send\-Question}!QuestionManager@{Question\-Manager}}
+\subsubsection[{send\-Question}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-send\-Question (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_ae8d76463fb5637cc18a61a7f7f431e6e}
+
+
+This function sends the question to the clients.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_a6f660949810e7aa48511cef50d093e72}{\index{Question\-Manager@{Question\-Manager}!unload\-Xml@{unload\-Xml}}
+\index{unload\-Xml@{unload\-Xml}!QuestionManager@{Question\-Manager}}
+\subsubsection[{unload\-Xml}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-unload\-Xml (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_a6f660949810e7aa48511cef50d093e72}
+
+
+Clears the question list.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\hypertarget{class_question_manager_aa87d5ffda73d08883db83555400a9987}{\index{Question\-Manager@{Question\-Manager}!update@{update}}
+\index{update@{update}!QuestionManager@{Question\-Manager}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Question\-Manager.\-update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_question_manager_aa87d5ffda73d08883db83555400a9987}
+
+
+Called each frame, as soon as the quesiton time is over, check the answers ans send the results.
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_question_manager_a96dda0e2445bf92325df364298864be9}{\index{Question\-Manager@{Question\-Manager}!Instance@{Instance}}
+\index{Instance@{Instance}!QuestionManager@{Question\-Manager}}
+\subsubsection[{Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Question\-Manager} Question\-Manager.\-Instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}, {\ttfamily [set]}}}\label{class_question_manager_a96dda0e2445bf92325df364298864be9}
+
+
+This class is a singleton, get its instance with this function.
+
+\begin{DoxyReturn}{Returns}
+The instance of \hyperlink{class_question_manager}{Question\-Manager}.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Assets/\-Scripts/\-Game/Question\-Manager.\-cs\end{DoxyCompactItemize}
