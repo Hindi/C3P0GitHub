@@ -12,7 +12,7 @@ public class HtmlHelpers {
             <html>
                 <head>
                     <title>Answers</title>
-                    <link rel='stylesheet' href='mystyle.css'>
+                    <link rel='stylesheet' href='questionStatStyle.css'>
                 </head>";
 
     /// <summary>Generic html footer.</summary>
