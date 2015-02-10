@@ -4,7 +4,6 @@ Build/
 Builds/
 build/
 obj/
-MasterServer/
 *.sln
 *.csproj
 *.suo
@@ -14,5 +13,3 @@ MasterServer/
 C3P0GitHub.userprefs
 Assets/Resources/data.dat
 /Assets/Resources/data.dat
-/Assets/MasterServer/MasterServer.exe
-/Assets/MasterServer/MasterServer.exe.meta
