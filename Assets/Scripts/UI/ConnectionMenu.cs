@@ -39,6 +39,9 @@ public class ConnectionMenu : MonoBehaviour {
     [SerializeField]
     private Text connectionAnswerLabel;
 
+    [SerializeField]
+    private GameObject c3poLogoBienvenu;
+
     /// <summary>True if the client is connected on unity.</summary>
     private bool unityConnected;
 
@@ -117,6 +120,7 @@ public class ConnectionMenu : MonoBehaviour {
     void onConnectedToUnity()
     {
         unityConnected = true;
+        c3poLogoBienvenu.SetActive(true);
     }
 
     /// <summary>Called when the client is disconnected from the server.</summary>

@@ -20,6 +20,9 @@ public class QuestionAnswerMenu : MonoBehaviour {
     [SerializeField]
     private ProgressBar timeBar;
 
+    [SerializeField]
+    private GameObject c3poLogoBienvenu;
+
     private int lastAnswerId;
 
     private int score;
@@ -63,6 +66,7 @@ public class QuestionAnswerMenu : MonoBehaviour {
 
     public void startQuestion()
     {
+        c3poLogoBienvenu.SetActive(false);
         reset();
         startTime = Time.time;
         C3PONetworkManager.Instance.sendRequestScore();
