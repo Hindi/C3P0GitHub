@@ -140,7 +140,6 @@ public class ParamMenu : MonoBehaviour {
     /// <param name="b">True if opening, false if closing</param>
     public void onKeyInfoClick(bool b)
     {
-        GetComponent<GraphicRaycaster>().enabled = !b;
         if (Application.isMobilePlatform)
         {
             mobileInput.SetActive(b);
