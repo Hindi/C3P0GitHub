@@ -106,7 +106,7 @@ public class AsteroidsState : GameState
     {
         if (loaded)
         {
-            base.noticeInput(key);
+            //base.noticeInput(key);
             if (key == EnumInput.SPACE)
                 playerScript_.fire();
             if (key == EnumInput.LEFT)
