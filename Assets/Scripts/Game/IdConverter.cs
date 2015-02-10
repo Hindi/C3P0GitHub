@@ -45,6 +45,11 @@ static class IdConverter
         return stateToGame(levelToState(lvlname));
     }
 
+    /// <summary>
+    /// Converts a course ID to a game
+    /// </summary>
+    /// <param name="id">The number of the course</param>
+    /// <returns>The game associated to this ID</returns>
     public static EnumGame courseToGame(int id)
     {
         switch(id)
@@ -74,6 +79,11 @@ static class IdConverter
         }
     }
 
+    /// <summary>
+    /// Returns the ID to which a game is associated
+    /// </summary>
+    /// <param name="game">The game we want to know the course ID of</param>
+    /// <returns>The course ID</returns>
     public static int gameToID(EnumGame game)
     {
         switch (game)
