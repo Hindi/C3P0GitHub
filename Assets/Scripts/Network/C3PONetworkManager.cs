@@ -260,7 +260,8 @@ public class C3PONetworkManager : MonoBehaviour {
         {
             if(questionCount != 0)
                 goodAnswerRatio = (float)((float)p.Value.Score / (float)questionCount);
-            goodAnswerRatio = 0;
+            else
+                goodAnswerRatio = 0;
             networkView.RPC("rpcLoadLevel", p.Value.NetworkPlayer, name, goodAnswerRatio);
         }
     }

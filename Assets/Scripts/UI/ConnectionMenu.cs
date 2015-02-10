@@ -175,10 +175,12 @@ public class ConnectionMenu : MonoBehaviour {
         }
         if (loginLabel.text != "" && passwordLabel.text != "")
         {
-            if (!unityConnected)
+            if (!C3PONetwork.Instance.IsConnectedToTeacher)
                 C3PONetworkManager.Instance.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
             else if (!authed)
                 C3PONetworkManager.Instance.tryTologIn(LoginLabel, passwordLabel.text);
+            else
+                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "QuestionAnswer");
         }
     }
 
