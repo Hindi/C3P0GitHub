@@ -90,6 +90,7 @@ public class AsteroidNetwork : MonoBehaviour {
     {
         //zone = asteroidsManager.choosePos();
         EnumColor col = asteroidsManager.chooseColor();
+        asteroidsManager.nbPlayerConnected++;
         networkView.RPC("initPlayerRPC",info.sender,(int) col, new Vector3(0,0,0));
     }
 

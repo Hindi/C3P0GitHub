@@ -18,10 +18,12 @@ public class AsteroidsManager : MonoBehaviour {
 
     private static Dictionary<int, Asteroid> asteroidInUse = new Dictionary<int,Asteroid>();
     private static int nbAsteroid;
-    private static int colorChoice;
+    private int colorChoice;
     private static int zoneChoice;
     private int nbColor;
     private bool isColor;
+    public int nbPlayerConnected;
+
 
     private bool spawn;
 
@@ -40,6 +42,8 @@ public class AsteroidsManager : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        nbPlayerConnected = 0;
+        colorChoice = 0;
         nbColor = 5; // Bleu, Vert, Rouge, Jaune, Violet
         asteroidInUse = new Dictionary<int, Asteroid>();
         shipScript = GameObject.FindGameObjectWithTag("Ship").GetComponent<AsteroidShip>();
@@ -88,7 +92,7 @@ public class AsteroidsManager : MonoBehaviour {
             EnumColor col;
             if (isColor)
             {
-                col = (EnumColor)((nbAsteroid % nbColor) + 1);
+                col = (EnumColor)((nbAsteroid % colorChoice) + 1);
             }
             else
                 col = EnumColor.NONE;
@@ -97,7 +101,7 @@ public class AsteroidsManager : MonoBehaviour {
                 Vector3 pos = new Vector3(Random.value, Random.value, Random.Range(200, 500));
                 pos = mainCamera.ViewportToWorldPoint(pos);
                 Vector3 target = shipScript.getTarget();
-                asteroidNetwork.createAsteroidColor(pos, target, Random.Range(1, 2), nbAsteroid, 2, col);
+                asteroidNetwork.createAsteroidColor(pos, target, (nbPlayerConnected / 5) + Random.Range(1, 3), nbAsteroid, 2, col);
                 nbAsteroid++;
                 cdSpawnAsteroid = (cdSpawnAsteroid + 200f) / (float)(nbAsteroid + 199);
                 timeSinceLastSpawn = Time.time;
