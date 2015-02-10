@@ -179,8 +179,6 @@ public class ConnectionMenu : MonoBehaviour {
                 C3PONetworkManager.Instance.connectToTeacher(ipLabel.text, LoginLabel, passwordLabel.text);
             else if (!authed)
                 C3PONetworkManager.Instance.tryTologIn(LoginLabel, passwordLabel.text);
-            else
-                EventManager<string>.Raise(EnumEvent.LOADLEVEL, "QuestionAnswer");
         }
     }
 
