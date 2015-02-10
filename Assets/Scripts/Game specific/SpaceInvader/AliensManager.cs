@@ -204,7 +204,7 @@ public class AliensManager : MonoBehaviour {
         {
             direction = -direction;
             deltaPos.x = 0;
-            deltaPos.z = spaceBetweenLines/3;
+            deltaPos.z = spaceBetweenLines/1.5f;
             changeDirection = false;
         }
 
