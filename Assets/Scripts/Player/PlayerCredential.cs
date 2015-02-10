@@ -81,7 +81,7 @@ public class PlayerCredential
                 if (loginInfos[name] == "")
                 {
                     loginInfos[name] = Crypto.encryptMd5(pass);
-                    XmlHelpers.saveCredentials("Assets/Resources/xml/liste des eleves.xml", loginInfos);
+                    XmlHelpers.saveCredentials("Assets/Resources/xml/credentials.xml", loginInfos);
                     return true;
                 }
                 else
@@ -94,7 +94,7 @@ public class PlayerCredential
         {
             C3PONetworkManager.Instance.sendNotifyWrongLogin(player, name);
             loginInfos.Add(name, Crypto.encryptMd5(pass));
-            XmlHelpers.saveCredentials(Application.dataPath + "/Resources/xml/liste des eleves.xml", loginInfos);
+            XmlHelpers.saveCredentials(Application.dataPath + "/Resources/xml/credentials.xml", loginInfos);
             return true;
         }
     }
