@@ -212,10 +212,9 @@ public class C3PONetwork : MonoBehaviour {
 	public void createTeacherServer()
 	{
 		/* Launch MasterServer */
-		/*string path = Application.dataPath;
-		System.Diagnostics.Process.Start(path + @"\MasterServer\MasterServer.exe");*/
-		
-		/* Bind to it */
+        System.Diagnostics.Process.Start(Application.dataPath + @"\MasterServer\MasterServer.exe");
+
+        /* Bind to it */
 		MasterServer.port = masterPort;
         MasterServer.ipAddress = getMyIp(); /* We're on the teacher computer so the master server is right there */
 		Network.InitializeServer(1000,gamePort,false);
