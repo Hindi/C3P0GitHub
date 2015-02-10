@@ -49,6 +49,7 @@ public class PacmanController : MonoBehaviour {
 	[SerializeField]
 	float frightenDuration = 5f;
 
+	bool scatterMode = false;
 
 	/// <summary>
 	/// The player's score.
@@ -214,13 +215,16 @@ public class PacmanController : MonoBehaviour {
 			scatterDurationTimer += Time.deltaTime;
 		if (scatterDelayTimer > scatterDelay)
 			{
-			scatterDurationTimer = 0f;
 			EventManager<bool>.Raise(EnumEvent.SCATTERMODE, true);
-			if (scatterDurationTimer > scatterDuration){
+			scatterMode = true;
+			scatterDelayTimer = 0f;
+			scatterDurationTimer = 0f;
+		}
+		if (scatterMode && scatterDurationTimer > scatterDuration){
 				EventManager<bool>.Raise(EnumEvent.SCATTERMODE, false);
+			scatterMode = false;
 				scatterDurationTimer = 0f;
 				scatterDelayTimer = 0f;
-			}
 		}
 		if(frightenTimer > frightenDuration)
 		{
