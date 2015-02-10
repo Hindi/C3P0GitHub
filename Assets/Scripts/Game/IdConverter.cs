@@ -65,11 +65,11 @@ static class IdConverter
             case 5:
                 return EnumGame.LUNARLANDER;
             case 6:
-                return EnumGame.MOONPATROL;
-            case 7:
                 return EnumGame.PACMAN;
-            case 8:
+            case 7:
                 return EnumGame.TETRIS;
+            case 8:
+                return EnumGame.MOONPATROL;
             case 9:
                 return EnumGame.MARIO;
             case 10:
@@ -99,11 +99,11 @@ static class IdConverter
             case EnumGame.LUNARLANDER:
                 return 5;
             case EnumGame.MOONPATROL:
-                return 6;
-            case EnumGame.PACMAN:
-                return 7;
-            case EnumGame.TETRIS:
                 return 8;
+            case EnumGame.PACMAN:
+                return 6;
+            case EnumGame.TETRIS:
+                return 7;
             case EnumGame.MARIO:
                 return 9;
             case EnumGame.ZELDA:
