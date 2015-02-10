@@ -128,11 +128,11 @@ static class IdConverter
             case 5:
                 return "LunarLander";
             case 6:
-                return "MoonPatrol";
-            case 7:
                 return "Pacman";
-            case 8:
+            case 7:
                 return "Tetris";
+            case 8:
+                return "MoonPatrol";
             case 9:
                 return "Mario";
             case 10:
