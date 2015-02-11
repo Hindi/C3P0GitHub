@@ -1,44 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<QuestionKeeper>
-		<question>Question 1</question>
+		<question>Comment trouvez-vous C3PO ?</question>
 		<reponses>
-			<r> Ceci est la reponse 1</r>
-			<r> Ceci est la reponse 2</r>
+			<r>Excellent</r>
+			<r>Bof, les probas c'est nul de toute façon.</r>
 		</reponses>
 		<bonneReponse>1</bonneReponse>
-		<explication>Explication 1</explication>
+		<explication>C'est excellent, bien sur !</explication>
 	</QuestionKeeper>
 	<QuestionKeeper>
-		<question>Question 2</question>
+		<question>A vaincre sans péril...</question>
 		<reponses>
-			<r> Ceci est la reponse 1</r>
-			<r> Ceci est la reponse 2</r>
-			<r> Ceci est la reponse 3</r>
-		</reponses>
-		<bonneReponse>1</bonneReponse>
-		<explication>Explication 2</explication>
-	</QuestionKeeper>
-	<QuestionKeeper>
-		<question>Question 3</question>
-		<reponses>
-			<r> Ceci est la reponse 1</r>
-			<r> Ceci est la reponse 2</r>
-			<r> Ceci est la reponse 3</r>
-			<r> Ceci est la reponse 4</r>
-		</reponses>
-		<bonneReponse>2</bonneReponse>
-		<explication>Explication 3</explication>
-	</QuestionKeeper>
-	<QuestionKeeper>
-		<question>Question 4</question>
-		<reponses>
-			<r> Ceci est la reponse 1</r>
-			<r> Ceci est la reponse 2</r>
-			<r> Ceci est la reponse 3</r>
-			<r> Ceci est la reponse 4</r>
+			<r>on évite les ennuis.</r>
+			<r>on triomphe sans boire.</r>
+			<r>on triomphe sans gloire.</r>
 		</reponses>
 		<bonneReponse>3</bonneReponse>
-		<explication>Explication 4</explication>
+		<explication>À vaincre sans péril on triomphe sans gloire (Le Cid, II 2)</explication>
+	</QuestionKeeper>
+	<QuestionKeeper>
+		<question>On tire au hasard une carte dans un jeu de 32 cartes. Quelle est la probabilité de ne pas tirer un carreau ?</question>
+		<reponses>
+			<r>0,25</r>
+			<r>0,75</r>
+			<r>0,5</r>
+			<r>Aucune des réponses précédentes</r>
+		</reponses>
+		<bonneReponse>2</bonneReponse>
+		<explication>il y a quatre couleurs en tout et une seulement ne doit pas être tirée.</explication>
 	</QuestionKeeper>
 </Datatable>
